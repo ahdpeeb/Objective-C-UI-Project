@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ANSLableView : UIView
+@property (nonatomic, strong) IBOutlet UILabel *lable;
 
 @end
