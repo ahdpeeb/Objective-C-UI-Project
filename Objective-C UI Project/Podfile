@@ -1,0 +1,3 @@
+target ‘Objective-C UI ProjectUITests’ do
+  pod ‘Kiwi’, '~> 2.3’
+end
