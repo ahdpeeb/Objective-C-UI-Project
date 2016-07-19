@@ -18,6 +18,11 @@
 @implementation ANSViewControllerFirstTask
 
 #pragma mark -
+#pragma mark Initializations and dealocations
+
+
+
+#pragma mark -
 #pragma mark Accsessors
 
 - (ANSLableView *)lableView {
