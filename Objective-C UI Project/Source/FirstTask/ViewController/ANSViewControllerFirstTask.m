@@ -43,5 +43,18 @@
 #pragma mark -
 #pragma mark Buttons 
 
+- (IBAction)onTransition:(id)sender {
+    ANSAnimatedView *view = self.mainView.view;
+    [view startAnimation];
+}
+
+- (IBAction)offTransition:(id)sender {
+    ANSAnimatedView *view = self.mainView.view;
+    [view stopAnimation];
+}
+
+- (IBAction)nextTransition:(id)sender {
+    
+}
 
 @end
