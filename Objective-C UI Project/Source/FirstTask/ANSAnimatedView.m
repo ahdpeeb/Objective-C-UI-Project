@@ -12,7 +12,8 @@ static const NSTimeInterval kANSInterval = 1.5f;
 static const NSTimeInterval kANSDelay = 0;
 
 @interface ANSAnimatedView ()
-@property (nonatomic, assign) ANSViewPosition wiewPosition;
+@property (nonatomic, assign) ANSViewPosition   wiewPosition;
+@property (nonatomic, strong) UIImageView       *animation;
 
 // returns new cutted CGRect from superView rect
 - (CGRect)cuttedSuperRect;
@@ -29,6 +30,9 @@ static const NSTimeInterval kANSDelay = 0;
 @implementation ANSAnimatedView
 
 #pragma mark -
+#pragma mark
+
+#pragma mark -
 #pragma mark Accsessors 
     //_______________________________
 - (void)setWiewPosition:(ANSViewPosition)wiewPosition {
@@ -40,7 +44,7 @@ static const NSTimeInterval kANSDelay = 0;
     NSLog(@"%@", NSStringFromCGPoint(point));
     self.center = point;
 }
-    //_______________________________
+    //____________________________________________________________
 - (void)setWiewPosition:(ANSViewPosition)wiewPosition
          isAnimated:(BOOL)value
 {
@@ -52,7 +56,7 @@ static const NSTimeInterval kANSDelay = 0;
         self.wiewPosition = wiewPosition;
     }];
 }
-    //_______________________________
+    //______________________________________________________________
 - (void)setWiewPosition:(ANSViewPosition)wiewPosition
          isAnimated:(BOOL)value
                with:(ANSCompletionHandler)block
@@ -73,6 +77,8 @@ static const NSTimeInterval kANSDelay = 0;
 #pragma mark Public methods
 
 - (void)startAnimation {
+    [self.animation startAnimating];
+    
     ANSViewPosition current = self.wiewPosition;
     
    __weak ANSAnimatedView *weakSelf = self;
@@ -82,9 +88,8 @@ static const NSTimeInterval kANSDelay = 0;
             if (self.wiewPosition == ANSDefaultPosition) {
                 return;
             }
-            
             __strong ANSAnimatedView *strongSelf = weakSelf;
-            strongSelf.transform = CGAffineTransformMakeRotation(M_PI_2);
+//            strongSelf.transform = CGAffineTransformMakeRotation(M_PI_2);
             [strongSelf startAnimation];
         }
     }];
@@ -92,6 +97,7 @@ static const NSTimeInterval kANSDelay = 0;
 
 - (void)stopAnimation {
     self.wiewPosition = ANSDefaultPosition;
+    [self.animation stopAnimating];
 }
 
 - (void)nextPosition {
@@ -134,6 +140,26 @@ static const NSTimeInterval kANSDelay = 0;
     CGFloat halfheight = CGRectGetHeight(self.frame) / 2;
     
    return CGRectInset(superRect, halfWidth, halfheight);
+}
+
+- (void)initDancer {
+    NSArray *imageNames = @[@"1.png", @"2.png", @"3.png", @"4.png",
+                            @"5.png", @"6.png", @"7.png", @"8.png",
+                            @"9.png", @"10.png", @"11.png", @"12.png",
+                            @"13.png", @"14.png", @"15.png", @"16.png"];
+    
+    NSMutableArray *animations = [[NSMutableArray alloc] init];
+    for (int indexx = 0; indexx < [imageNames count]; indexx++) {
+        [animations addObject:[UIImage imageNamed:[imageNames objectAtIndex:indexx]]];
+    }
+    
+    UIImageView *view = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 86, 193)];
+    self.animation = view;
+    
+    view.animationImages = animations;
+    view.animationDuration = 0.5;
+    
+    [self addSubview:view];
 }
 
 @end

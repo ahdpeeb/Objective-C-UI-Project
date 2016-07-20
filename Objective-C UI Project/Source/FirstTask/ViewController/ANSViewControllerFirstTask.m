@@ -8,14 +8,13 @@
 
 #import "ANSViewControllerFirstTask.h"
 
-#include "ANSMainView.h"
-
 @interface ANSViewControllerFirstTask ()
-@property (nonatomic, readonly) ANSMainView *mainView;
 
 @end
 
 @implementation ANSViewControllerFirstTask
+
+@dynamic mainView;
 
 #pragma mark -
 #pragma mark Accsessors
@@ -32,6 +31,8 @@
 #pragma mark View LifeCycle
 
 - (void)viewDidLoad {
+    ANSAnimatedView *view = self.mainView.view;
+    [view initDancer];
     [super viewDidLoad];
 }
 
@@ -45,16 +46,13 @@
 
 - (IBAction)onTransition:(id)sender {
     ANSAnimatedView *view = self.mainView.view;
+    [self.mainView bringSubviewToFront:view];
     [view startAnimation];
 }
 
 - (IBAction)offTransition:(id)sender {
     ANSAnimatedView *view = self.mainView.view;
     [view stopAnimation];
-}
-
-- (IBAction)nextTransition:(id)sender {
-    
 }
 
 @end

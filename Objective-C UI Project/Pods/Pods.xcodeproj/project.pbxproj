@@ -320,6 +320,22 @@
 		90EB9A263AFBB9559040301C6759E144 /* NSObject+KiwiVerifierAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+KiwiVerifierAdditions.h"; path = "Classes/Core/NSObject+KiwiVerifierAdditions.h"; sourceTree = "<group>"; };
 		915E6D6D3BFB111B3A5A9E3F593BDB55 /* KWChangeMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWChangeMatcher.h; path = Classes/Matchers/KWChangeMatcher.h; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93C5A57A1D3FDEF1002FBCA8 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		93C5A57B1D3FDEF1002FBCA8 /* 10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10.png; sourceTree = "<group>"; };
+		93C5A57C1D3FDEF1002FBCA8 /* 11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 11.png; sourceTree = "<group>"; };
+		93C5A57D1D3FDEF1002FBCA8 /* 12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 12.png; sourceTree = "<group>"; };
+		93C5A57E1D3FDEF1002FBCA8 /* 13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 13.png; sourceTree = "<group>"; };
+		93C5A57F1D3FDEF1002FBCA8 /* 14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 14.png; sourceTree = "<group>"; };
+		93C5A5801D3FDEF1002FBCA8 /* 15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 15.png; sourceTree = "<group>"; };
+		93C5A5811D3FDEF1002FBCA8 /* 16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 16.png; sourceTree = "<group>"; };
+		93C5A5821D3FDEF1002FBCA8 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		93C5A5831D3FDEF1002FBCA8 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
+		93C5A5841D3FDEF1002FBCA8 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
+		93C5A5851D3FDEF1002FBCA8 /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
+		93C5A5861D3FDEF1002FBCA8 /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6.png; sourceTree = "<group>"; };
+		93C5A5871D3FDEF1002FBCA8 /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
+		93C5A5881D3FDEF1002FBCA8 /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
+		93C5A5891D3FDEF1002FBCA8 /* 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9.png; sourceTree = "<group>"; };
 		960022756941A5E398880955F4D438DF /* KWStringUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWStringUtilities.h; path = Classes/Core/KWStringUtilities.h; sourceTree = "<group>"; };
 		9948FEC5DCDE74E61874DCACA88586AA /* KWUserDefinedMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KWUserDefinedMatcher.h; path = Classes/Matchers/KWUserDefinedMatcher.h; sourceTree = "<group>"; };
 		9A41FF8DF86986A50957B4B5EBFE1F64 /* KiwiBlockMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KiwiBlockMacros.h; path = Classes/Core/KiwiBlockMacros.h; sourceTree = "<group>"; };
@@ -459,6 +475,7 @@
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
+				93C5A5791D3FDEF1002FBCA8 /* imagesDancer */,
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
 				7108F56D84041611FE9B454DB0C5D033 /* Pods */,
@@ -657,6 +674,30 @@
 				BD076810A50A5C6DA0B8C7A97CE92B90 /* Support Files */,
 			);
 			path = Kiwi;
+			sourceTree = "<group>";
+		};
+		93C5A5791D3FDEF1002FBCA8 /* imagesDancer */ = {
+			isa = PBXGroup;
+			children = (
+				93C5A57A1D3FDEF1002FBCA8 /* 1.png */,
+				93C5A57B1D3FDEF1002FBCA8 /* 10.png */,
+				93C5A57C1D3FDEF1002FBCA8 /* 11.png */,
+				93C5A57D1D3FDEF1002FBCA8 /* 12.png */,
+				93C5A57E1D3FDEF1002FBCA8 /* 13.png */,
+				93C5A57F1D3FDEF1002FBCA8 /* 14.png */,
+				93C5A5801D3FDEF1002FBCA8 /* 15.png */,
+				93C5A5811D3FDEF1002FBCA8 /* 16.png */,
+				93C5A5821D3FDEF1002FBCA8 /* 2.png */,
+				93C5A5831D3FDEF1002FBCA8 /* 3.png */,
+				93C5A5841D3FDEF1002FBCA8 /* 4.png */,
+				93C5A5851D3FDEF1002FBCA8 /* 5.png */,
+				93C5A5861D3FDEF1002FBCA8 /* 6.png */,
+				93C5A5871D3FDEF1002FBCA8 /* 7.png */,
+				93C5A5881D3FDEF1002FBCA8 /* 8.png */,
+				93C5A5891D3FDEF1002FBCA8 /* 9.png */,
+			);
+			name = imagesDancer;
+			path = ../imagesDancer;
 			sourceTree = "<group>";
 		};
 		BD076810A50A5C6DA0B8C7A97CE92B90 /* Support Files */ = {

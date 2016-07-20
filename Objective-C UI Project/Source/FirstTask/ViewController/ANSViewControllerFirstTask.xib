@@ -17,9 +17,9 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ju4-Er-EBw" customClass="ANSAnimatedView">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <color key="backgroundColor" red="0.97659140825271606" green="0.15578532218933105" blue="0.0028559823986142874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.98273247480392456" green="0.9532817006111145" blue="0.93962675333023071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="150" y="250" width="100" height="100"/>
+                        <rect key="frame" x="150" y="250" width="86" height="193"/>
                     </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0r-SF-ZX9">
@@ -28,7 +28,7 @@
                     <state key="normal" title="  Start  "/>
                     <variation key="widthClass=compact" fixedFrame="YES">
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                        <rect key="frame" x="130" y="516" width="50" height="30"/>
+                        <rect key="frame" x="146" y="562" width="50" height="30"/>
                     </variation>
                     <connections>
                         <action selector="onTransition:" destination="-1" eventType="touchUpInside" id="XIp-IH-bSs"/>
@@ -40,23 +40,10 @@
                     <state key="normal" title="Stop"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                        <rect key="frame" x="178" y="516" width="46" height="30"/>
+                        <rect key="frame" x="194" y="562" width="46" height="30"/>
                     </variation>
                     <connections>
                         <action selector="offTransition:" destination="-1" eventType="touchUpInside" id="5LM-u5-ghW"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Bh-pe-bKQ">
-                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                    <color key="backgroundColor" red="0.99239009618759155" green="0.97653394937515259" blue="0.024961378425359726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <state key="normal" title=" Next ">
-                        <color key="titleShadowColor" red="0.0023332103155553341" green="0.0265524722635746" blue="0.9997982382774353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="223" y="516" width="46" height="30"/>
-                    </variation>
-                    <connections>
-                        <action selector="onTransition:" destination="-1" eventType="touchUpInside" id="bFC-sP-Jhw"/>
                     </connections>
                 </button>
             </subviews>
@@ -66,7 +53,6 @@
                     <exclude reference="ju4-Er-EBw"/>
                     <exclude reference="c0r-SF-ZX9"/>
                     <exclude reference="yju-Up-AVR"/>
-                    <exclude reference="1Bh-pe-bKQ"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
@@ -74,11 +60,9 @@
                     <include reference="ju4-Er-EBw"/>
                     <include reference="c0r-SF-ZX9"/>
                     <include reference="yju-Up-AVR"/>
-                    <include reference="1Bh-pe-bKQ"/>
                 </mask>
             </variation>
             <connections>
-                <outlet property="nextButton" destination="1Bh-pe-bKQ" id="TPC-e3-Mfj"/>
                 <outlet property="startButton" destination="c0r-SF-ZX9" id="zDm-lR-wFo"/>
                 <outlet property="stopButton" destination="yju-Up-AVR" id="AaV-iC-XYG"/>
                 <outlet property="view" destination="ju4-Er-EBw" id="7eY-Zu-YW0"/>
