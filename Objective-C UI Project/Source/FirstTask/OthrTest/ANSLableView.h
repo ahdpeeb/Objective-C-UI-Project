@@ -10,5 +10,8 @@
 
 @interface ANSLableView : UIView
 @property (nonatomic, strong) IBOutlet UILabel *lable;
+@property (nonatomic, strong) IBOutlet UIButton *rotate;
+
+- (void)rotateLabel; 
 
 @end

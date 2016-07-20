@@ -14,10 +14,10 @@
 		93C084371D3E380D0077A81C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C084341D3E380D0077A81C /* main.m */; };
 		93C0843C1D3E381F0077A81C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93C084391D3E381F0077A81C /* Assets.xcassets */; };
 		93C0843D1D3E381F0077A81C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93C0843A1D3E381F0077A81C /* LaunchScreen.storyboard */; };
-		93C5A53E1D3E3F6E002FBCA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93C5A53D1D3E3F6E002FBCA8 /* Main.storyboard */; };
-		93C5A5411D3E490B002FBCA8 /* ANSLableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C5A5401D3E490B002FBCA8 /* ANSLableView.m */; };
 		93C5A5461D3E4938002FBCA8 /* ANSViewControllerFirstTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C5A5441D3E4938002FBCA8 /* ANSViewControllerFirstTask.m */; };
 		93C5A5471D3E4938002FBCA8 /* ANSViewControllerFirstTask.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93C5A5451D3E4938002FBCA8 /* ANSViewControllerFirstTask.xib */; };
+		93C5A5511D3F86CC002FBCA8 /* ANSMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C5A5501D3F86CC002FBCA8 /* ANSMainView.m */; };
+		93C5A5571D3F8727002FBCA8 /* ANSAnimaterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C5A5561D3F8727002FBCA8 /* ANSAnimaterView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,12 +42,13 @@
 		93C084341D3E380D0077A81C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		93C084391D3E381F0077A81C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93C0843B1D3E381F0077A81C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		93C5A53D1D3E3F6E002FBCA8 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		93C5A53F1D3E490B002FBCA8 /* ANSLableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLableView.h; sourceTree = "<group>"; };
-		93C5A5401D3E490B002FBCA8 /* ANSLableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSLableView.m; sourceTree = "<group>"; };
 		93C5A5431D3E4938002FBCA8 /* ANSViewControllerFirstTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSViewControllerFirstTask.h; sourceTree = "<group>"; };
 		93C5A5441D3E4938002FBCA8 /* ANSViewControllerFirstTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSViewControllerFirstTask.m; sourceTree = "<group>"; };
 		93C5A5451D3E4938002FBCA8 /* ANSViewControllerFirstTask.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSViewControllerFirstTask.xib; sourceTree = "<group>"; };
+		93C5A54F1D3F86CC002FBCA8 /* ANSMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSMainView.h; sourceTree = "<group>"; };
+		93C5A5501D3F86CC002FBCA8 /* ANSMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSMainView.m; sourceTree = "<group>"; };
+		93C5A5551D3F8727002FBCA8 /* ANSAnimaterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSAnimaterView.h; sourceTree = "<group>"; };
+		93C5A5561D3F8727002FBCA8 /* ANSAnimaterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSAnimaterView.m; sourceTree = "<group>"; };
 		B5E0F054CF32267BB37C7D7E /* Pods-Objective-C UI ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C UI ProjectUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Objective-C UI ProjectUITests/Pods-Objective-C UI ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BAFBFF2E6CE8F3654A93BDE2 /* libPods-Objective-C UI ProjectUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Objective-C UI ProjectUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F28C68C0A3FCC8C7F0409676 /* Pods-Objective-C UI ProjectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C UI ProjectUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Objective-C UI ProjectUITests/Pods-Objective-C UI ProjectUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,7 +128,6 @@
 		93C084381D3E381F0077A81C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				93C5A53D1D3E3F6E002FBCA8 /* Main.storyboard */,
 				93C0843A1D3E381F0077A81C /* LaunchScreen.storyboard */,
 				93C084391D3E381F0077A81C /* Assets.xcassets */,
 			);
@@ -146,8 +146,8 @@
 			isa = PBXGroup;
 			children = (
 				93C5A5421D3E4938002FBCA8 /* ViewController */,
-				93C5A53F1D3E490B002FBCA8 /* ANSLableView.h */,
-				93C5A5401D3E490B002FBCA8 /* ANSLableView.m */,
+				93C5A5551D3F8727002FBCA8 /* ANSAnimaterView.h */,
+				93C5A5561D3F8727002FBCA8 /* ANSAnimaterView.m */,
 			);
 			path = FirstTask;
 			sourceTree = "<group>";
@@ -158,6 +158,8 @@
 				93C5A5431D3E4938002FBCA8 /* ANSViewControllerFirstTask.h */,
 				93C5A5441D3E4938002FBCA8 /* ANSViewControllerFirstTask.m */,
 				93C5A5451D3E4938002FBCA8 /* ANSViewControllerFirstTask.xib */,
+				93C5A54F1D3F86CC002FBCA8 /* ANSMainView.h */,
+				93C5A5501D3F86CC002FBCA8 /* ANSMainView.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -254,7 +256,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93C5A53E1D3E3F6E002FBCA8 /* Main.storyboard in Resources */,
 				93C0843D1D3E381F0077A81C /* LaunchScreen.storyboard in Resources */,
 				93C5A5471D3E4938002FBCA8 /* ANSViewControllerFirstTask.xib in Resources */,
 				93C0843C1D3E381F0077A81C /* Assets.xcassets in Resources */,
@@ -310,8 +311,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				93C084371D3E380D0077A81C /* main.m in Sources */,
+				93C5A5571D3F8727002FBCA8 /* ANSAnimaterView.m in Sources */,
 				93C084351D3E380D0077A81C /* ANSAppDelegate.m in Sources */,
-				93C5A5411D3E490B002FBCA8 /* ANSLableView.m in Sources */,
+				93C5A5511D3F86CC002FBCA8 /* ANSMainView.m in Sources */,
 				93C5A5461D3E4938002FBCA8 /* ANSViewControllerFirstTask.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

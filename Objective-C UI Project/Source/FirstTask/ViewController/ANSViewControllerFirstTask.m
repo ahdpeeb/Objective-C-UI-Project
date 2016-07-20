@@ -8,26 +8,21 @@
 
 #import "ANSViewControllerFirstTask.h"
 
-#include "ANSLableView.h"
+#include "ANSMainView.h"
 
 @interface ANSViewControllerFirstTask ()
-@property (nonatomic, readonly) ANSLableView *lableView;
+@property (nonatomic, readonly) ANSMainView *mainView;
 
 @end
 
 @implementation ANSViewControllerFirstTask
 
 #pragma mark -
-#pragma mark Initializations and dealocations
-
-
-
-#pragma mark -
 #pragma mark Accsessors
 
-- (ANSLableView *)lableView {
-    if ([self isViewLoaded] && [self.view isKindOfClass:[ANSLableView class]]) {
-        return (ANSLableView *)self.view;
+- (ANSMainView *)mainView {
+    if ([self isViewLoaded] && [self.view isKindOfClass:[ANSMainView class]]) {
+        return (ANSMainView *)self.view;
     }
     
     return nil;
@@ -38,12 +33,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.lableView.lable.text = @"blia";
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark -
+#pragma mark Buttons 
+
 
 @end
