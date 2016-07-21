@@ -30,7 +30,6 @@ typedef enum {
 
 - (void)startAnimation; 
 - (void)stopAnimation;
-- (void)nextPosition;
 
 - (void)initDancer;
 @end

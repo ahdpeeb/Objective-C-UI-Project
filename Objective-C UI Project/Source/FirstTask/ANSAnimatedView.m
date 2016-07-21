@@ -96,14 +96,11 @@ static const NSTimeInterval kANSDelay = 0;
 }
 
 - (void)stopAnimation {
+    [self.layer removeAllAnimations];
     self.wiewPosition = ANSDefaultPosition;
     [self.animation stopAnimating];
 }
-
-- (void)nextPosition {
-
-}
-
+    
 #pragma mark -
 #pragma mark Ptivate methods
 
@@ -111,13 +108,13 @@ static const NSTimeInterval kANSDelay = 0;
     CGRect rect = [self cuttedSuperRect];
     switch (position) {
         case ANSFirsPosition:
-           return CGPointMake(CGRectGetMinX(rect), CGRectGetMaxY(rect));
+           return CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect));
         case ANSSecondPosition:
-            return CGPointMake(CGRectGetMaxX(rect), CGRectGetMaxY(rect));
-        case ANSThirdPosition:
             return CGPointMake(CGRectGetMaxX(rect), CGRectGetMinY(rect));
+        case ANSThirdPosition:
+            return CGPointMake(CGRectGetMaxX(rect), CGRectGetMaxY(rect));
         case ANSFourthPosition:
-            return CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect));
+            return CGPointMake(CGRectGetMinX(rect), CGRectGetMaxY(rect));
         default:
             return CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
     }
@@ -152,7 +149,7 @@ static const NSTimeInterval kANSDelay = 0;
     for (int indexx = 0; indexx < [imageNames count]; indexx++) {
         [animations addObject:[UIImage imageNamed:[imageNames objectAtIndex:indexx]]];
     }
-    
+    CGRect rect = self.bounds;
     UIImageView *view = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 86, 193)];
     self.animation = view;
     

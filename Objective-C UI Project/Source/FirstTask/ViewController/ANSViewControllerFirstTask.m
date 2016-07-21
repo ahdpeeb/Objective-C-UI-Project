@@ -31,9 +31,10 @@
 #pragma mark View LifeCycle
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
+    
     ANSAnimatedView *view = self.mainView.view;
     [view initDancer];
-    [super viewDidLoad];
 }
 
 - (void)didReceiveMemoryWarning {

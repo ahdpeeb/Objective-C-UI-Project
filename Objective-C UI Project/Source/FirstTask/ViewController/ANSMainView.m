@@ -10,4 +10,8 @@
 
 @implementation ANSMainView
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+}
+
 @end
