@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#include "ANSMainView.h"
+
 @interface ANSViewControllerFirstTask : UIViewController
+@property (nonatomic, readonly) ANSMainView *mainView;
 
 @end

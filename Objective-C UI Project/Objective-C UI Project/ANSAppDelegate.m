@@ -20,6 +20,7 @@
     UIWindow *window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window = window;
     window.rootViewController = [ANSViewControllerFirstTask new];
+    [window makeKeyAndVisible];
     
     return YES;
 }
