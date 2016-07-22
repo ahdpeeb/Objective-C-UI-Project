@@ -8,7 +8,7 @@
 
 #import "ANSAppDelegate.h"
 
-#import "ANSViewControllerMain.h"
+#import "ANSViewControllerTables.h"
 
 @interface ANSAppDelegate ()
 
@@ -19,7 +19,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     UIWindow *window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window = window;
-    window.rootViewController = [ANSViewControllerMain new];
+    
+    window.rootViewController = [ANSViewControllerTables new];
     [window makeKeyAndVisible];
     
     return YES;

@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 #import "ANSTableView.h"
+#import "ANSUser.h"
 
 @interface ANSTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
-@property (nonatomic, readonly) ANSTableView *tableView;
+
+@property (nonatomic, strong)       ANSUser         *userObject;
 
 @end

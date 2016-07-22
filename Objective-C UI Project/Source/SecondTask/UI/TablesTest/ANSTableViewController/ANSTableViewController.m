@@ -9,10 +9,12 @@
 #import "ANSTableViewController.h"
 
 #import "ANSTableView.h"
+#import "ANSUserCell.h"
 
 #import "ANSMacros.h"
 
 @interface ANSTableViewController ()
+@property (nonatomic, readonly)     ANSTableView    *tableView;
 
 @end
 
@@ -42,19 +44,23 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
 #pragma mark UITableViewDataSource protocol
     //section is a group of cells
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString * const kANSCellName = @"kANSCellName";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kANSCellName];
+    NSString * identifier = NSStringFromClass([ANSUserCell class]);
+    ANSUserCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kANSCellName];
+      //  bundle:nil => from application folder
+        UINib *nib = [UINib nibWithNibName:identifier bundle:nil];
+        NSArray *cells = [nib instantiateWithOwner:nil options:nil];
+        cell = [cells firstObject];
     }
     
-     cell.textLabel.text = @"HELLO";
+    cell.userObject = self.userObject;
     
     return cell;
+    //processing
 }
 
 @end

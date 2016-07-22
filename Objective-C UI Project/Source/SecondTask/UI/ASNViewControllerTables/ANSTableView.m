@@ -1,14 +1,14 @@
 //
-//  ANSMainView.m
+//  ANSTablesView.m
 //  Objective-C UI Project
 //
-//  Created by Nikola Andriiev on 21.07.16.
+//  Created by Nikola Andriiev on 22.07.16.
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "ANSMainView.h"
+#import "ANSTableView.h"
 
-@implementation ANSMainView
+@implementation ANSTableView
 
 /*
 // Only override drawRect: if you perform custom drawing.
