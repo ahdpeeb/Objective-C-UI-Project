@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 // You shold never expect the cell tp have the reuseIdentifier you passed during initialization 
-@interface ANSTableViewSell : UITableViewCell
+@interface ANSTableViewCell : UITableViewCell
 
 @end

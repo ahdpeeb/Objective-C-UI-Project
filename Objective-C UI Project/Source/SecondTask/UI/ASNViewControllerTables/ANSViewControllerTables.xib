@@ -14,7 +14,34 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="ANSTableView">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="djj-HE-MvU">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" red="0.033932551741600037" green="0.023052006959915161" blue="0.073954395949840546" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="8" y="14" width="384" height="578"/>
+                    </variation>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="px9-KJ-Guf"/>
+                        <outlet property="delegate" destination="-1" id="Osw-w8-Xx9"/>
+                    </connections>
+                </tableView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="djj-HE-MvU"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="subviews">
+                    <include reference="djj-HE-MvU"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="tableView" destination="djj-HE-MvU" id="Ux7-PU-Lhf"/>
+            </connections>
         </view>
     </objects>
 </document>

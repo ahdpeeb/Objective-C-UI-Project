@@ -10,6 +10,6 @@
 
 #import "ANSMacros.h"
 
-@interface ANSViewControllerTables : UIViewController
+@interface ANSViewControllerTables : UIViewController <UITableViewDataSource, UITableViewDataSource>
 
 @end

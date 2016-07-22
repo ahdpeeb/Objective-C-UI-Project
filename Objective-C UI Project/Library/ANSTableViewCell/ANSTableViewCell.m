@@ -6,9 +6,9 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "ANSTableViewSell.h"
+#import "ANSTableViewCell.h"
 
-@implementation ANSTableViewSell
+@implementation ANSTableViewCell
 
 #pragma mark -
 #pragma mark Reloaded
