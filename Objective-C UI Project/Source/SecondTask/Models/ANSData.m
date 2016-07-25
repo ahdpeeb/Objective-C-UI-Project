@@ -10,20 +10,37 @@
 
 #import "NSString+ANSExtension.h"
 
+@interface ANSData ()
+@property (nonatomic, copy) NSString *mutableString;
+
+@end
+
 @implementation ANSData
 
 @dynamic string;
 @dynamic image;
 
 #pragma mark -
-#pragma mark Accsessors
+#pragma mark Initialization and deallocation 
 
-- (NSString *)getString {
-    NSString *alphabet = [NSString alphanumericAlphabet];
-    return [NSString randomStringWithLength:5 alphabet:alphabet];
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        NSString *alphabet = [NSString alphanumericAlphabet];
+        self.mutableString = [NSString randomStringWithLength:10 alphabet:alphabet];
+    }
+    
+    return self;
 }
 
-- (UIImage *)getImage {
+#pragma mark -
+#pragma mark Accsessors
+
+- (NSString *)string {
+    return self.mutableString;
+}
+
+- (UIImage *)image {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"homer_simpson31" ofType:@"jpg"];
     
     return [UIImage imageWithContentsOfFile:path];

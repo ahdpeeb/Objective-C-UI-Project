@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ANSMacros.h"
+#import "ANSDataCollection.h"
 
 @interface ANSViewControllerTables : UIViewController <UITableViewDataSource, UITableViewDataSource>
+
+@property (nonatomic, strong) ANSDataCollection *data;
 
 @end

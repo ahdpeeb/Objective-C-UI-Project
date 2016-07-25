@@ -9,6 +9,9 @@
 #import "ANSAppDelegate.h"
 
 #import "ANSViewControllerTables.h"
+#import "ANSData.h"
+
+#import "NSArray+ANSExtension.h"
 
 @interface ANSAppDelegate ()
 
@@ -19,9 +22,18 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     UIWindow *window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window = window;
+    ANSViewControllerTables *controller = [ANSViewControllerTables new];
     
-    window.rootViewController = [ANSViewControllerTables new];
+    window.rootViewController = controller;
     [window makeKeyAndVisible];
+
+    
+    NSArray *objects = [NSArray objectsWithCount:100 block:^id{
+        return [[ANSData alloc] init];
+    }];
+    
+    ANSDataCollection *data = [[ANSDataCollection alloc] initWithObjects:objects];
+    controller.data = data;
     
     return YES;
 }

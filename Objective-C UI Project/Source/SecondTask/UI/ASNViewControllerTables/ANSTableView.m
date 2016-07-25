@@ -8,14 +8,28 @@
 
 #import "ANSTableView.h"
 
+@interface ANSTableView ()
+//vertical indent for table and scrollIndicator
+- (void)hsPace:(CGFloat)top;
+
+@end
+
 @implementation ANSTableView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+#pragma mark -
+#pragma mark Initialization and dealloc 
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    [self hsPace:20];
 }
-*/
+
+- (void)hsPace:(CGFloat)top {
+    //table and scrol indicator should not cover statusBar
+    UIEdgeInsets insect = UIEdgeInsetsMake(top, 0, 0, 0);
+    self.table.contentInset = insect;
+    self.table.scrollIndicatorInsets = insect;
+}
 
 @end

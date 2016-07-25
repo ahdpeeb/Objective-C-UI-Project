@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5AEE41B75AE5AF77748B1091 /* libPods-Objective-C UI ProjectUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFBFF2E6CE8F3654A93BDE2 /* libPods-Objective-C UI ProjectUITests.a */; };
+		93026CD11D44C2BE00DFCF23 /* ANSDataCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CD01D44C2BE00DFCF23 /* ANSDataCollection.m */; };
 		93C084251D3E36800077A81C /* Objective_C_UI_ProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C084241D3E36800077A81C /* Objective_C_UI_ProjectUITests.m */; };
 		93C084301D3E36B20077A81C /* iOS Study Plan.txt in Resources */ = {isa = PBXBuildFile; fileRef = 93C0842F1D3E36B20077A81C /* iOS Study Plan.txt */; };
 		93C084351D3E380D0077A81C /* ANSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C084321D3E380D0077A81C /* ANSAppDelegate.m */; };
@@ -58,6 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		93026CCF1D44C2BD00DFCF23 /* ANSDataCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSDataCollection.h; sourceTree = "<group>"; };
+		93026CD01D44C2BE00DFCF23 /* ANSDataCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSDataCollection.m; sourceTree = "<group>"; };
 		93C084071D3E367F0077A81C /* Objective-C UI Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Objective-C UI Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C084201D3E36800077A81C /* Objective-C UI ProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Objective-C UI ProjectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C084241D3E36800077A81C /* Objective_C_UI_ProjectUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Objective_C_UI_ProjectUITests.m; sourceTree = "<group>"; };
@@ -308,6 +311,8 @@
 		93C5A6171D412D31002FBCA8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				93026CCF1D44C2BD00DFCF23 /* ANSDataCollection.h */,
+				93026CD01D44C2BE00DFCF23 /* ANSDataCollection.m */,
 				93C5A6181D412D31002FBCA8 /* ANSData.h */,
 				93C5A6191D412D31002FBCA8 /* ANSData.m */,
 			);
@@ -538,6 +543,7 @@
 				93C5A60D1D41265C002FBCA8 /* ANSTableViewCell.m in Sources */,
 				93E520971D424E30007EAD07 /* ANSTableView.m in Sources */,
 				93E520C91D427328007EAD07 /* ANSDataCell.m in Sources */,
+				93026CD11D44C2BE00DFCF23 /* ANSDataCollection.m in Sources */,
 				93C5A6091D4107DB002FBCA8 /* NSString+ANSExtension.m in Sources */,
 				93C5A61A1D412D31002FBCA8 /* ANSData.m in Sources */,
 				93C5A5F41D40DF3D002FBCA8 /* NSTimer+ANSExtension.m in Sources */,
