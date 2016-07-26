@@ -34,7 +34,7 @@
     }];
     
     ANSDataCollection *collection = [ANSDataCollection new];
-    controller.data = collection;
+    controller.collection = collection;
     
     [collection addDataObjects:objects];
     

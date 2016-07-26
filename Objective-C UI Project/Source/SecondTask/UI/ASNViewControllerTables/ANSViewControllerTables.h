@@ -12,8 +12,9 @@
 
 @interface ANSViewControllerTables : UIViewController <UITableViewDataSource, UITableViewDelegate, ANSCollectionObserver>
 
-@property (nonatomic, strong) ANSDataCollection *data;
+@property (nonatomic, strong) ANSDataCollection *collection;
 
 - (IBAction)editButton:(id)sender;
+- (IBAction)addButton:(id)sender;
 
 @end

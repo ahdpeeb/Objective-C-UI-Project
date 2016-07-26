@@ -149,7 +149,7 @@ static const NSTimeInterval kANSDelay = 0;
     for (int indexx = 0; indexx < [imageNames count]; indexx++) {
         [animations addObject:[UIImage imageNamed:[imageNames objectAtIndex:indexx]]];
     }
-    CGRect rect = self.bounds;
+    __unused CGRect rect = self.bounds;
     UIImageView *view = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 86, 193)];
     self.animation = view;
     

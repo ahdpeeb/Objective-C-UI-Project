@@ -15,9 +15,11 @@
 @protocol ANSCollectionObserver <NSObject>
 
 @optional
-- (void)collectionDidAddedData:(ANSDataCollection *)collection;
-- (void)collectionDidRemovedData:(ANSDataCollection *)collection;
-- (void)collectionDidMovedData:(ANSDataCollection *)collection;
+- (void)collection:(ANSDataCollection *)collection didAddData:(id)data;
+- (void)collection:(ANSDataCollection *)collection didRemoveData:(id)data;
+- (void)collection:(ANSDataCollection *)collection didMoveData:(id)data;
+//test
+- (void)collectionDidInit:(ANSDataCollection *)collection;
 
 @end
 

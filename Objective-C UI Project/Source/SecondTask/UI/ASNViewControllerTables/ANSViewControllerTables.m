@@ -27,11 +27,11 @@ ANSViewPropertySynthesize(ANSTableView, tableView)
 #pragma mark -
 #pragma mark Accsessors
 
-- (void)setData:(ANSDataCollection *)data {
-    if (_data != data) {
-        [_data removeObserverObject:self];
-        _data = data;
-        [_data addObserverObject:self];
+- (void)setCollection:(ANSDataCollection *)collection {
+    if (_collection != collection) {
+        [_collection removeObserverObject:self];
+        _collection = collection;
+        [_collection addObserverObject:self];
     }
 }
 
@@ -56,23 +56,32 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
 - (IBAction)editButton:(id)sender {
     UITableView *table = self.tableView.table;
     BOOL isEditing = table.editing;
-    if (isEditing) {
-        [table setEditing:NO animated:YES];
-    } else {
-        [table setEditing:YES animated:YES];
-    }
+    [sender setTitle:(isEditing) ? @"Edit" : @"Done" forState:UIControlStateNormal];
+    [table setEditing:(isEditing) ? NO : YES animated:YES];
+}
+
+- (IBAction)addButton:(id)sender {
+    ANSData *object = [ANSData new];
+    [self.collection insertData:object atIndex:0];
 }
 
 #pragma mark -
 #pragma mark UITableViewDataSource protocol
+
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (!section) {
+        return [NSString stringWithFormat:@"Homer's contact list"];
+    }
+    
+    return nil;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    NSUInteger value = self.data.count;
+    NSUInteger value = self.collection.count;
     return value;
 }
 
@@ -86,7 +95,7 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
         cell = [cells firstObject];
     }
     
-    ANSData *object = self.data[indexPath.row];
+    ANSData *object = self.collection[indexPath.row];
     
     cell.label.text =   object.string;
     cell.imageView.image = object.image;
@@ -97,46 +106,66 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
-
+    // replace rows 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     if (sourceIndexPath.section == destinationIndexPath.section) {
-        [self.data moveDataFromIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
+        [self.collection moveDataFromIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
     }
 }
-
-- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (!section) {
-        return [NSString stringWithFormat:@"Homer's contact list"];
+    //delate row (related with protocol methods editingStyleForRowAtIndexPath/ shouldIndentWhileEditingRowAtIndexPath)
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSUInteger index = indexPath.row;
+        [self.collection removeDataAtIndex:index];
     }
-    
-    return nil;
 }
 
 #pragma mark -
 #pragma mark UITableViewDelegate protocol
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return UITableViewCellEditingStyleNone;
+    return UITableViewCellEditingStyleDelete;
 }
     //should shift if (aditing = YES)
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
-    return NO;
+    return YES;
 }
 
 #pragma mark -
 #pragma mark ANSCollectionObserver protocol
 
-- (void)collectionDidAddedData:(ANSDataCollection *)collection {
-    [self.tableView.table reloadData];
+- (void)collection:(ANSDataCollection *)collection didAddData:(id)data {
+    UITableView *table = self.tableView.table;
+    NSUInteger index = [collection indexOfData:data];
+    
+    [table beginUpdates];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:index inSection:0];
+    [table insertRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationRight];
+    [table endUpdates];
+    
     NSLog(@"collectionDidAddedData, - %lu ", collection.count);
 }
-- (void)collectionDidRemovedData:(ANSDataCollection *)collection {
-    [self.tableView.table reloadData];
+
+- (void)collection:(ANSDataCollection *)collection didRemoveData:(id)data {
+    UITableView *table = self.tableView.table;
+    NSUInteger index = [collection indexOfData:data];
+    
+    [table beginUpdates];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
+    [table deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
+    [table endUpdates];
+
     NSLog(@"collectionDidRemovedData, - %lu ", collection.count);
 }
-- (void)collectionDidMovedData:(ANSDataCollection *)collection {
+
+- (void)collectionDidMoveData:(ANSDataCollection *)collection {
     [self.tableView.table reloadData];
     NSLog(@"collectionDidMovedData, - %lu ", collection.count);
+}
+
+- (void)collectionDidInit:(ANSDataCollection *)collection {
+    UITableView *table = self.tableView.table;
+    [table reloadData];
 }
 
 @end

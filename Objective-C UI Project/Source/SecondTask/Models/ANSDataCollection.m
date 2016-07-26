@@ -53,7 +53,7 @@
 }
 
 - (NSUInteger)indexOfData:(id)data {
-    if (data || [self.mutableData containsObject:data]) {
+    if (data && [self.mutableData containsObject:data]) {
         return [self.mutableData indexOfObject:data];
     }
     
@@ -63,13 +63,13 @@
 - (void)addData:(id)data {
     [self insertData:data atIndex:self.count];
 }
-
+    // нарушена логика удаления!
 - (void)removeData:(id)data {
     NSMutableArray *collection = self.mutableData;
     
     if ([collection containsObject:data]) {
         [collection removeObject:data];
-        [self notifyObserversWithSelector:@selector(collectionDidRemovedData:)];
+        [self notifyObserversWithSelector:@selector(collection:didRemoveData:) object:data]; //ret index
     }
 }
 
@@ -83,7 +83,7 @@
     
     if (![collection containsObject:data]) {
         [collection insertObject:data atIndex:index];
-        [self notifyObserversWithSelector:@selector(collectionDidAddedData:)];
+        [self notifyObserversWithSelector:@selector(collection:didAddData:) object:data];
     }
 }
 
@@ -102,13 +102,16 @@
     
     if (fromIndex != toIndex) {
         [collection exchangeObjectAtIndex:fromIndex withObjectAtIndex:toIndex];
-        [self notifyObserversWithSelector:@selector(collectionDidMovedData:)];
+          //NOT IMplemented! 
+    //    [self notifyObserversWithSelector:@selector(collection:didRemoveData:) object:<#(id)#>]
     }
 }
 
 - (void)addDataObjects:(NSArray*)objects {
     [self.mutableData addObjectsFromArray:objects];
-    [self notifyObserversWithSelector:@selector(collectionDidAddedData:)];
+    // test implementation; 
+    [self notifyObserversWithSelector:@selector(collectionDidInit:)];
+//    [self notifyObserversWithSelector:@selector(collection:didAddData:) object:objects];
 }
 
 #pragma mark -
