@@ -41,7 +41,7 @@
 }
 
 - (UIImage *)image {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"homer_simpson31" ofType:@"jpg"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Gomer_2" ofType:@"png"];
     
     return [UIImage imageWithContentsOfFile:path];
 }

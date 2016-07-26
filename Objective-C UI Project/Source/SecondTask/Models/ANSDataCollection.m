@@ -11,14 +11,12 @@
 @interface ANSDataCollection ()
 @property (nonatomic, retain) NSMutableArray *mutableData;
 
-- (id)objectAtIndexedSubscript:(NSUInteger)idx;
-
 @end
 
 @implementation ANSDataCollection
 
 @dynamic count;
-@dynamic obsject;
+@dynamic objects;
 
 #pragma mark -
 #pragma mark Initialization and deallocation
@@ -30,13 +28,6 @@
     return self;
 }
 
-- (instancetype)initWithObjects:(NSArray *)objects {
-    self = [self init];
-    self.mutableData = [NSMutableArray arrayWithArray:objects];
-    
-    return self;
-}
-
 #pragma mark -
 #pragma mark Accsessors
 
@@ -44,23 +35,80 @@
     return self.mutableData.count;
 }
 
-- (NSArray *)obsject {
+- (NSArray *)objects {
     return [self.mutableData copy];
 }
 
 #pragma mark -
 #pragma mark Public methods; 
-
+//Data / index from array
 - (id)dataAtIndex:(NSUInteger)index {
-    return [self.mutableData objectAtIndex:index];
+    NSMutableArray *collection = self.mutableData;
+    
+    if (index >= collection.count) {
+        return nil;
+    }
+    
+    return [collection objectAtIndex:index];
 }
 
 - (NSUInteger)indexOfData:(id)data {
-    return [self.mutableData indexOfObject:data];
+    if (data || [self.mutableData containsObject:data]) {
+        return [self.mutableData indexOfObject:data];
+    }
+    
+    return NSNotFound;
+}
+
+- (void)addData:(id)data {
+    [self insertData:data atIndex:self.count];
+}
+
+- (void)removeData:(id)data {
+    NSMutableArray *collection = self.mutableData;
+    
+    if ([collection containsObject:data]) {
+        [collection removeObject:data];
+        [self notifyObserversWithSelector:@selector(collectionDidRemovedData:)];
+    }
+}
+
+- (void)insertData:(id)data atIndex:(NSUInteger)index {
+    NSMutableArray *collection = self.mutableData;
+    NSUInteger count = collection.count;
+    
+    if (!data || (index > count)) {
+        return;
+    }
+    
+    if (![collection containsObject:data]) {
+        [collection insertObject:data atIndex:index];
+        [self notifyObserversWithSelector:@selector(collectionDidAddedData:)];
+    }
+}
+
+- (void)removeDataAtIndex:(NSUInteger)index {
+    id data = [self dataAtIndex:index];
+    [self removeData:data];
 }
 
 - (void)moveDataFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
-    [self.mutableData exchangeObjectAtIndex:fromIndex withObjectAtIndex:toIndex];
+    NSMutableArray *collection = self.mutableData;
+    NSUInteger count = collection.count;
+    
+    if ((fromIndex >= count) || (toIndex >= count)) {
+        return;
+    }
+    
+    if (fromIndex != toIndex) {
+        [collection exchangeObjectAtIndex:fromIndex withObjectAtIndex:toIndex];
+        [self notifyObserversWithSelector:@selector(collectionDidMovedData:)];
+    }
+}
+
+- (void)addDataObjects:(NSArray*)objects {
+    [self.mutableData addObjectsFromArray:objects];
+    [self notifyObserversWithSelector:@selector(collectionDidAddedData:)];
 }
 
 #pragma mark -

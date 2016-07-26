@@ -10,8 +10,10 @@
 
 #import "ANSDataCollection.h"
 
-@interface ANSViewControllerTables : UIViewController <UITableViewDataSource, UITableViewDataSource>
+@interface ANSViewControllerTables : UIViewController <UITableViewDataSource, UITableViewDelegate, ANSCollectionObserver>
 
 @property (nonatomic, strong) ANSDataCollection *data;
+
+- (IBAction)editButton:(id)sender;
 
 @end

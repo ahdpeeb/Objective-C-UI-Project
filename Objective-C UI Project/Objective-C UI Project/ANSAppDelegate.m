@@ -25,15 +25,18 @@
     ANSViewControllerTables *controller = [ANSViewControllerTables new];
     
     window.rootViewController = controller;
-    [window makeKeyAndVisible];
-
     
+    
+    [window makeKeyAndVisible];
+    //_____________________________________________________________________________
     NSArray *objects = [NSArray objectsWithCount:100 block:^id{
         return [[ANSData alloc] init];
     }];
     
-    ANSDataCollection *data = [[ANSDataCollection alloc] initWithObjects:objects];
-    controller.data = data;
+    ANSDataCollection *collection = [ANSDataCollection new];
+    controller.data = collection;
+    
+    [collection addDataObjects:objects];
     
     return YES;
 }

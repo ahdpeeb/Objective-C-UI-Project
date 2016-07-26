@@ -15,8 +15,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="djj-HE-MvU">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="djj-HE-MvU">
+                    <rect key="frame" x="0.0" y="49" width="320" height="519"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" red="0.033932551741600037" green="0.023052006959915161" blue="0.073954395949840546" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -25,9 +25,21 @@
                         <outlet property="delegate" destination="-1" id="Osw-w8-Xx9"/>
                     </connections>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wCY-XS-d7c">
+                    <rect key="frame" x="120" y="16" width="81" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.69131338596343994" green="0.93402737379074097" blue="0.71279889345169067" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="Edit">
+                        <color key="titleColor" red="0.11482951790094376" green="0.043837375938892365" blue="0.029098281636834145" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="editButton:" destination="-1" eventType="touchUpInside" id="Cfz-iV-1SV"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.99577277898788452" green="0.9922446608543396" blue="0.99200206995010376" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
+                <outlet property="editButton" destination="wCY-XS-d7c" id="fdD-fi-Npa"/>
                 <outlet property="table" destination="djj-HE-MvU" id="Rp5-nZ-1gL"/>
             </connections>
             <point key="canvasLocation" x="268" y="340"/>

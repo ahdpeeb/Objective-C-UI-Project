@@ -22,7 +22,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self hsPace:20];
+    [self hsPace:0];
 }
 
 - (void)hsPace:(CGFloat)top {

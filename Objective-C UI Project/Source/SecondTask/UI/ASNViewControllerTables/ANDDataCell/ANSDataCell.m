@@ -16,12 +16,13 @@
 #pragma mark Initialization and deallocation
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
+    
     self.layer.borderColor = [[UIColor blackColor] CGColor];
     self.layer.borderWidth = 1.0f;
     
     self.imageView.layer.cornerRadius = self.imageView.frame.size.height /2;
     self.imageView.layer.masksToBounds = YES;
-    self.imageView.backgroundColor = [UIColor blackColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ANSTableView : UIView
-@property (nonatomic, strong) IBOutlet UITableView *table;
+@property (nonatomic, strong) IBOutlet UITableView  *table;
 
+@property (nonatomic, strong) IBOutlet UIButton     *editButton;
 @end
