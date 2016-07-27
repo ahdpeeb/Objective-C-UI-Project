@@ -8,13 +8,26 @@
 
 #import "ANSTableViewCell.h"
 
+@interface ANSTableViewCell ()
+
+@end
+
 @implementation ANSTableViewCell
 
 #pragma mark -
-#pragma mark Reloaded
+#pragma mark Public methods
+
++ (instancetype)sellWithStyle:(UITableViewCellStyle)style {
+   return [[self alloc] initWithStyle:(style) reuseIdentifier:NSStringFromClass([self class])];
+}
+
+#pragma mark -
+#pragma mark reloaded property
 
 - (NSString *)reuseIdentifier {
     return NSStringFromClass([self class]);
 }
+
+
 
 @end

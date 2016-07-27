@@ -15,9 +15,11 @@
 
 #import "ANSMacros.h"
 #import "NSArray+ANSExtension.h"
+#import "UINib+Extension.h"
 
 @interface ANSViewControllerTables ()
 ANSViewPropertySynthesize(ANSTableView, tableView)
+@property (nonatomic, assign) NSUInteger buffer;
 
 @end
 
@@ -61,8 +63,12 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
 }
 
 - (IBAction)addButton:(id)sender {
-    ANSData *object = [ANSData new];
-    [self.collection insertData:object atIndex:0];
+    UITableView *table = self.tableView.table;
+    BOOL isEditing = table.editing;
+    if (isEditing) {
+        ANSData *object = [ANSData new];
+        [self.collection insertData:object atIndex:0];
+    }
 }
 
 #pragma mark -
@@ -90,9 +96,8 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
     
     ANSDataCell *cell = [tableView dequeueReusableCellWithIdentifier:identifire];
     if (!cell) {
-        UINib *nib = [UINib nibWithNibName:identifire bundle:nil];
-        NSArray *cells = [nib instantiateWithOwner:nil options:nil];
-        cell = [cells firstObject];
+        UINib *nib = [UINib nibWithName:[ANSDataCell class]];
+        cell = [nib elementFromNibWithClass:[ANSDataCell class]];
     }
     
     ANSData *object = self.collection[indexPath.row];
@@ -102,7 +107,7 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
 
     return cell;
 }
-
+//_____
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
@@ -112,10 +117,17 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
         [self.collection moveDataFromIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
     }
 }
+//_____
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
     //delate row (related with protocol methods editingStyleForRowAtIndexPath/ shouldIndentWhileEditingRowAtIndexPath)
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSUInteger index = indexPath.row;
+        
+        //TEST BUFFER
+         self.buffer = index;
         [self.collection removeDataAtIndex:index];
     }
 }
@@ -138,8 +150,9 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
     UITableView *table = self.tableView.table;
     NSUInteger index = [collection indexOfData:data];
     
-    [table beginUpdates];
     NSIndexPath *path = [NSIndexPath indexPathForRow:index inSection:0];
+    
+    [table beginUpdates];
     [table insertRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationRight];
     [table endUpdates];
     
@@ -148,10 +161,11 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
 
 - (void)collection:(ANSDataCollection *)collection didRemoveData:(id)data {
     UITableView *table = self.tableView.table;
-    NSUInteger index = [collection indexOfData:data];
+    NSUInteger index = self.buffer;
+    
+    NSIndexPath *path = [NSIndexPath indexPathForRow:index inSection:0];
     
     [table beginUpdates];
-    NSIndexPath *path = [NSIndexPath indexPathForRow:0 inSection:0];
     [table deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
     [table endUpdates];
 
@@ -161,11 +175,6 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
 - (void)collectionDidMoveData:(ANSDataCollection *)collection {
     [self.tableView.table reloadData];
     NSLog(@"collectionDidMovedData, - %lu ", collection.count);
-}
-
-- (void)collectionDidInit:(ANSDataCollection *)collection {
-    UITableView *table = self.tableView.table;
-    [table reloadData];
 }
 
 @end

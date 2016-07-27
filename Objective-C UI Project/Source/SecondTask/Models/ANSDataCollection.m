@@ -59,9 +59,9 @@
     
     return NSNotFound;
 }
-
+// all new data add to the head of collection
 - (void)addData:(id)data {
-    [self insertData:data atIndex:self.count];
+    [self insertData:data atIndex:0];
 }
     // нарушена логика удаления!
 - (void)removeData:(id)data {
@@ -69,7 +69,7 @@
     
     if ([collection containsObject:data]) {
         [collection removeObject:data];
-        [self notifyObserversWithSelector:@selector(collection:didRemoveData:) object:data]; //ret index
+        [self notifyObserversWithSelector:@selector(collection:didRemoveData:) object:data];
     }
 }
 
@@ -92,6 +92,12 @@
     [self removeData:data];
 }
 
+- (void)addDataObjects:(NSArray *)objects {
+    for (id object in objects) {
+        [self insertData:object atIndex:0];
+    }
+}
+
 - (void)moveDataFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
     NSMutableArray *collection = self.mutableData;
     NSUInteger count = collection.count;
@@ -105,13 +111,6 @@
           //NOT IMplemented! 
     //    [self notifyObserversWithSelector:@selector(collection:didRemoveData:) object:<#(id)#>]
     }
-}
-
-- (void)addDataObjects:(NSArray*)objects {
-    [self.mutableData addObjectsFromArray:objects];
-    // test implementation; 
-    [self notifyObserversWithSelector:@selector(collectionDidInit:)];
-//    [self notifyObserversWithSelector:@selector(collection:didAddData:) object:objects];
 }
 
 #pragma mark -

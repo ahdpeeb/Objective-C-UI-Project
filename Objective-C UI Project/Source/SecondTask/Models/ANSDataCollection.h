@@ -18,8 +18,6 @@
 - (void)collection:(ANSDataCollection *)collection didAddData:(id)data;
 - (void)collection:(ANSDataCollection *)collection didRemoveData:(id)data;
 - (void)collection:(ANSDataCollection *)collection didMoveData:(id)data;
-//test
-- (void)collectionDidInit:(ANSDataCollection *)collection;
 
 @end
 
@@ -37,9 +35,9 @@
 - (void)insertData:(id)data atIndex:(NSUInteger)index;
 - (void)removeDataAtIndex:(NSUInteger)index;
 
-- (void)moveDataFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
-
 - (void)addDataObjects:(NSArray*)objects;
+
+- (void)moveDataFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 
 // dot'n call this method directly
 - (id)objectAtIndexedSubscript:(NSUInteger)idx; 

@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-// You shold never expect the cell tp have the reuseIdentifier you passed during initialization 
+// You shold never expect the cell have the reuseIdentifier you passed during initialization 
 @interface ANSTableViewCell : UITableViewCell
+
++ (instancetype)sellWithStyle:(UITableViewCellStyle)style;
 
 @end
