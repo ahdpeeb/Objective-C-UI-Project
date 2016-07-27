@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UITableView (Extension)
-// cls should be heir of ANSTableViewCell
+// cls should be child class of ANSTableViewCell class
 - (id)reusableCellfromNibWithClass:(Class)cls;
 
 @end

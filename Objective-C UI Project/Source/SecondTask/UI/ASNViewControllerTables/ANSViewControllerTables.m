@@ -111,7 +111,7 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
-    // replace rows 
+    // replace rows
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     if (sourceIndexPath.section == destinationIndexPath.section) {
         [self.collection moveDataFromIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
