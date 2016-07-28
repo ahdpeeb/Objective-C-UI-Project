@@ -21,12 +21,12 @@
     }
 
 #define ANSViewControllerBaseViewProperty(viewControllerClass, baseViewClass, propertyName) \
-    @interface viewControllerClass (ANSPrivateBaseView) \
+    @interface viewControllerClass (__ANSPrivateBaseView) \
     ANSViewPropertySynthesize(baseViewClass, propertyName) \
     \
     @end \
     \
-    @implementation viewControllerClass (ANSPrivateBaseView) \
+    @implementation viewControllerClass (__ANSPrivateBaseView) \
     @dynamic propertyName; \
     \
     ANSViewGetterSynthesize(baseViewClass, propertyName) \

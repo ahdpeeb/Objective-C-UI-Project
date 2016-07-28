@@ -12,6 +12,8 @@
 
 @implementation ANSDataCell
 
+static const CGFloat kANSBorderWidth = 0.5;
+
 #pragma mark -
 #pragma mark Initialization and deallocation
 
@@ -21,7 +23,7 @@
     CALayer *selfLayer = self.layer;
     
     selfLayer.borderColor = [[UIColor blackColor] CGColor];
-    selfLayer.borderWidth = 0.5;
+    selfLayer.borderWidth = kANSBorderWidth;
     
     imageLayer.cornerRadius = self.imageView.frame.size.height /2;
     imageLayer.masksToBounds = YES;

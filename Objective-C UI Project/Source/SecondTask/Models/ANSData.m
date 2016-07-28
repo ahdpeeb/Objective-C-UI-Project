@@ -10,6 +10,10 @@
 
 #import "NSString+ANSExtension.h"
 
+static const NSUInteger kANSStringLength = 10;
+static NSString * const kANSImageName = @"Gomer_2";
+static NSString * const kANSImageFormat = @"png";
+
 @interface ANSData ()
 @property (nonatomic, copy) NSString *mutableString;
 
@@ -27,7 +31,7 @@
     self = [super init];
     if (self) {
         NSString *alphabet = [NSString alphanumericAlphabet];
-        self.mutableString = [NSString randomStringWithLength:10 alphabet:alphabet];
+        self.mutableString = [NSString randomStringWithLength:kANSStringLength alphabet:alphabet];
     }
     
     return self;
@@ -41,7 +45,7 @@
 }
 
 - (UIImage *)image {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"Gomer_2" ofType:@"png"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:kANSImageName ofType:kANSImageFormat];
     
     return [UIImage imageWithContentsOfFile:path];
 }
