@@ -16,6 +16,7 @@
 		93026CE41D46810900DFCF23 /* ANSViewControllerFirstTask.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93026CDE1D46810900DFCF23 /* ANSViewControllerFirstTask.xib */; };
 		93026CE51D46810900DFCF23 /* ANSAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CE11D46810900DFCF23 /* ANSAnimatedView.m */; };
 		93026CE91D47472200DFCF23 /* ANSObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CE81D47472200DFCF23 /* ANSObservableObject.m */; };
+		9388ECDF1D49FEB50082EE4B /* ANSBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9388ECDE1D49FEB50082EE4B /* ANSBuffer.m */; };
 		93C084251D3E36800077A81C /* Objective_C_UI_ProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C084241D3E36800077A81C /* Objective_C_UI_ProjectUITests.m */; };
 		93C084301D3E36B20077A81C /* iOS Study Plan.txt in Resources */ = {isa = PBXBuildFile; fileRef = 93C0842F1D3E36B20077A81C /* iOS Study Plan.txt */; };
 		93C084351D3E380D0077A81C /* ANSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C084321D3E380D0077A81C /* ANSAppDelegate.m */; };
@@ -64,6 +65,8 @@
 		93026CE11D46810900DFCF23 /* ANSAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSAnimatedView.m; sourceTree = "<group>"; };
 		93026CE71D47472200DFCF23 /* ANSObservableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSObservableObject.h; sourceTree = "<group>"; };
 		93026CE81D47472200DFCF23 /* ANSObservableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSObservableObject.m; sourceTree = "<group>"; };
+		9388ECDD1D49FEB50082EE4B /* ANSBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSBuffer.h; sourceTree = "<group>"; };
+		9388ECDE1D49FEB50082EE4B /* ANSBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSBuffer.m; sourceTree = "<group>"; };
 		93C084071D3E367F0077A81C /* Objective-C UI Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Objective-C UI Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C084201D3E36800077A81C /* Objective-C UI ProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Objective-C UI ProjectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C084241D3E36800077A81C /* Objective_C_UI_ProjectUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Objective_C_UI_ProjectUITests.m; sourceTree = "<group>"; };
@@ -348,6 +351,8 @@
 				93026CD01D44C2BE00DFCF23 /* ANSDataCollection.m */,
 				93C5A6181D412D31002FBCA8 /* ANSData.h */,
 				93C5A6191D412D31002FBCA8 /* ANSData.m */,
+				9388ECDD1D49FEB50082EE4B /* ANSBuffer.h */,
+				9388ECDE1D49FEB50082EE4B /* ANSBuffer.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -564,6 +569,7 @@
 				93C5A5F51D40DF3D002FBCA8 /* NSArray+ANSExtension.m in Sources */,
 				93EC8F651D48D9A6000624F0 /* UITableView+Extension.m in Sources */,
 				93E520931D424DAE007EAD07 /* ANSViewControllerTables.m in Sources */,
+				9388ECDF1D49FEB50082EE4B /* ANSBuffer.m in Sources */,
 				93C5A5F31D40DF3D002FBCA8 /* ANSTimerPrivate.m in Sources */,
 				93026CE21D46810900DFCF23 /* ANSMainView.m in Sources */,
 				93EC8F5E1D48CDAA000624F0 /* UINib+Extension.m in Sources */,

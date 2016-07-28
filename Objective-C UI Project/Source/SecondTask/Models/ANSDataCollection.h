@@ -15,19 +15,17 @@
 @protocol ANSCollectionObserver <NSObject>
 
 @optional
-- (void)collection:(ANSDataCollection *)collection didAddData:(id)data;
-- (void)collection:(ANSDataCollection *)collection didRemoveData:(id)data;
-- (void)collection:(ANSDataCollection *)collection didMoveData:(id)data;
+- (void)collection:(ANSDataCollection *)collection didUpdateData:(id)data;
 
 @end
 
-//_____________________________________________________________
 @interface ANSDataCollection : ANSObservableObject
 @property (nonatomic, readonly) NSUInteger  count;
 @property (nonatomic, readonly) NSArray     *objects;
 
 - (id)dataAtIndex:(NSUInteger)index;
 - (NSUInteger)indexOfData:(id)data;
+- (id)objectAtIndexedSubscript:(NSUInteger)idx;
 
 - (void)addData:(id)data;
 - (void)removeData:(id)data;
@@ -38,8 +36,5 @@
 - (void)addDataObjects:(NSArray*)objects;
 
 - (void)moveDataFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
-
-// dot'n call this method directly
-- (id)objectAtIndexedSubscript:(NSUInteger)idx; 
 
 @end

@@ -19,3 +19,17 @@
         \
         return nil; \
     }
+
+#define ANSViewControllerBaseViewProperty(viewControllerClass, baseViewClass, propertyName) \
+    @interface viewControllerClass (ANSPrivateBaseView) \
+    ANSViewPropertySynthesize(baseViewClass, propertyName) \
+    \
+    @end \
+    \
+    @implementation viewControllerClass (ANSPrivateBaseView) \
+    @dynamic propertyName; \
+    \
+    ANSViewGetterSynthesize(baseViewClass, propertyName) \
+    @end \
+    
+

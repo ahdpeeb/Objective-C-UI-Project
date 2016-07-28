@@ -28,8 +28,9 @@
 - (void)hsPace:(CGFloat)top {
     //table and scrol indicator should not cover statusBar
     UIEdgeInsets insect = UIEdgeInsetsMake(top, 0, 0, 0);
-    self.table.contentInset = insect;
-    self.table.scrollIndicatorInsets = insect;
+    UITableView *table = self.table;
+    table.contentInset = insect;
+    table.scrollIndicatorInsets = insect;
 }
 
 @end

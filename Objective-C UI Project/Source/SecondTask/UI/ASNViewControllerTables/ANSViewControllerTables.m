@@ -12,19 +12,18 @@
 #import "ANSDataCell.h"
 #import "ANSTableViewCell.h"
 #import "ANSData.h"
+#import "ANSBuffer.h"
 
 #import "ANSMacros.h"
 #import "NSArray+ANSExtension.h"
 #import "UINib+Extension.h"
 
-@interface ANSViewControllerTables ()
-ANSViewPropertySynthesize(ANSTableView, tableView)
-@property (nonatomic, assign) NSUInteger buffer;
+static NSString * const kANSEdit = @"Edit";
+static NSString * const kANSDone = @"Done";
 
-@end
+ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableView)
 
 @implementation ANSViewControllerTables;
-@dynamic tableView;
 
 #pragma mark -
 #pragma mark Accsessors
@@ -36,8 +35,6 @@ ANSViewPropertySynthesize(ANSTableView, tableView)
         [_collection addObserverObject:self];
     }
 }
-
-ANSViewGetterSynthesize(ANSTableView, tableView)
 
 #pragma mark -
 #pragma mark View life cycle
@@ -57,15 +54,13 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
 
 - (IBAction)editButton:(id)sender {
     UITableView *table = self.tableView.table;
-    BOOL isEditing = table.editing;
-    [sender setTitle:(isEditing) ? @"Edit" : @"Done" forState:UIControlStateNormal];
-    [table setEditing:(isEditing) ? NO : YES animated:YES];
+    BOOL isEditing = self.tableView.table.editing;
+    [sender setTitle:(isEditing ? kANSEdit : kANSDone) forState:UIControlStateNormal];
+    [table setEditing:(isEditing ? NO : YES) animated:YES];
 }
 
 - (IBAction)addButton:(id)sender {
-    UITableView *table = self.tableView.table;
-    BOOL isEditing = table.editing;
-    if (isEditing) {
+    if (self.tableView.table.editing) {
         ANSData *object = [ANSData new];
         [self.collection insertData:object atIndex:0];
     }
@@ -87,8 +82,7 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSUInteger value = self.collection.count;
-    return value;
+    return self.collection.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -107,7 +101,7 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
 
     return cell;
 }
-//_____
+
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
@@ -117,7 +111,7 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
         [self.collection moveDataFromIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
     }
 }
-//_____
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
@@ -126,8 +120,6 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSUInteger index = indexPath.row;
         
-        //TEST BUFFER
-         self.buffer = index;
         [self.collection removeDataAtIndex:index];
     }
 }
@@ -138,7 +130,7 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewCellEditingStyleDelete;
 }
-    //should shift if (aditing = YES)
+    //should shift leftBar if (aditing = YES)
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
@@ -146,35 +138,17 @@ ANSViewGetterSynthesize(ANSTableView, tableView)
 #pragma mark -
 #pragma mark ANSCollectionObserver protocol
 
-- (void)collection:(ANSDataCollection *)collection didAddData:(id)data {
+- (void)collection:(ANSDataCollection *)collection didUpdateData:(id)data {
+    ANSBuffer *buffer = data;
     UITableView *table = self.tableView.table;
-    NSUInteger index = [collection indexOfData:data];
     
-    NSIndexPath *path = [NSIndexPath indexPathForRow:index inSection:0];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:buffer.value inSection:0];
     
     [table beginUpdates];
-    [table insertRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationRight];
+    [table performSelector:buffer.selector withObject:@[path]];
     [table endUpdates];
     
-    NSLog(@"collectionDidAddedData, - %lu ", collection.count);
-}
-
-- (void)collection:(ANSDataCollection *)collection didRemoveData:(id)data {
-    UITableView *table = self.tableView.table;
-    NSUInteger index = self.buffer;
-    
-    NSIndexPath *path = [NSIndexPath indexPathForRow:index inSection:0];
-    
-    [table beginUpdates];
-    [table deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationLeft];
-    [table endUpdates];
-
-    NSLog(@"collectionDidRemovedData, - %lu ", collection.count);
-}
-
-- (void)collectionDidMoveData:(ANSDataCollection *)collection {
-    [self.tableView.table reloadData];
-    NSLog(@"collectionDidMovedData, - %lu ", collection.count);
+    NSLog(@"collectionDidUpdate, - %lu ", collection.count);
 }
 
 @end
