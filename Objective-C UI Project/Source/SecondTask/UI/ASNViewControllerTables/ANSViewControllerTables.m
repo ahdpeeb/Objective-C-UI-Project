@@ -21,6 +21,7 @@
 
 static NSString * const kANSEdit = @"Edit";
 static NSString * const kANSDone = @"Done";
+static NSString * const kANSTitleForHeaderSection = @"Homer's contact list";
 
 ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableView)
 
@@ -72,7 +73,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (!section) {
-        return [NSString stringWithFormat:@"Homer's contact list"];
+        return [NSString stringWithFormat:kANSTitleForHeaderSection];
     }
     
     return nil;
@@ -100,7 +101,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
-    // replace rows
+
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     if (sourceIndexPath.section == destinationIndexPath.section) {
         [self.collection moveDataFromIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
