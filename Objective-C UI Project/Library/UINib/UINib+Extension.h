@@ -10,10 +10,10 @@
 
 @interface UINib (Extension)
 
-+ (UINib *)nibWithName:(Class)cls;
++ (UINib *)nibWithClass:(Class)cls;
 
-//it returns first root emelemt with class.
-//only one root object with class from nib!
+//this method returns root performance from nib with class.
+// You are responsible for nib contains only one class as root performance
 - (id)elementFromNibWithClass:(Class)cls; 
 
 @end

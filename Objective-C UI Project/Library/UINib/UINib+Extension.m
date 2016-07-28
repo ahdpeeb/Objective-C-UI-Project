@@ -10,7 +10,7 @@
 
 @implementation UINib (Extension)
 
-+ (UINib *)nibWithName:(Class)cls {
++ (UINib *)nibWithClass:(Class)cls {
    return [self nibWithNibName:NSStringFromClass(cls) bundle:nil];
 }
 

@@ -16,7 +16,7 @@
     NSString *identifire = NSStringFromClass(cls);
     ANSTableViewCell *cell = [self dequeueReusableCellWithIdentifier:identifire];
     if (!cell) {
-        UINib *nib = [UINib nibWithName:cls];
+        UINib *nib = [UINib nibWithClass:cls];
         cell = [nib elementFromNibWithClass:[cls class]];
         
         return cell;

@@ -17,6 +17,7 @@
 #import "ANSMacros.h"
 #import "NSArray+ANSExtension.h"
 #import "UINib+Extension.h"
+#import "UITableView+Extension.h"
 
 static NSString * const kANSEdit = @"Edit";
 static NSString * const kANSDone = @"Done";
@@ -86,13 +87,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *identifire = NSStringFromClass([ANSDataCell class]);
-    
-    ANSDataCell *cell = [tableView dequeueReusableCellWithIdentifier:identifire];
-    if (!cell) {
-        UINib *nib = [UINib nibWithName:[ANSDataCell class]];
-        cell = [nib elementFromNibWithClass:[ANSDataCell class]];
-    }
+    ANSDataCell *cell = [tableView reusableCellfromNibWithClass:[ANSDataCell class]];
     
     ANSData *object = self.collection[indexPath.row];
     

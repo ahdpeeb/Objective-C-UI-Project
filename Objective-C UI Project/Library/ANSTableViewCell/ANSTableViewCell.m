@@ -22,7 +22,7 @@
 }
 
 #pragma mark -
-#pragma mark reloaded property
+#pragma mark Reloaded property
 
 - (NSString *)reuseIdentifier {
     return NSStringFromClass([self class]);
