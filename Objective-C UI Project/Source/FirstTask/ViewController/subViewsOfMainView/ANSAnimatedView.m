@@ -8,6 +8,8 @@
 
 #import "ANSAnimatedView.h"
 
+static const NSTimeInterval kANSAnimatioDuration = 0.5;
+
 static const NSTimeInterval kANSInterval = 1.5f;
 static const NSTimeInterval kANSDelay = 0;
 
@@ -145,16 +147,17 @@ static const NSTimeInterval kANSDelay = 0;
                             @"9.png", @"10.png", @"11.png", @"12.png",
                             @"13.png", @"14.png", @"15.png", @"16.png"];
     
-    NSMutableArray *animations = [[NSMutableArray alloc] init];
-    for (int indexx = 0; indexx < [imageNames count]; indexx++) {
-        [animations addObject:[UIImage imageNamed:[imageNames objectAtIndex:indexx]]];
+    NSMutableArray *animations = [NSMutableArray new];
+    for (int index = 0; index < [imageNames count]; index++) {
+        [animations addObject:[UIImage imageNamed:imageNames[index]]];
     }
-    __unused CGRect rect = self.bounds;
-    UIImageView *view = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 86, 193)];
+    
+    UIImageView *view = [[UIImageView alloc]initWithFrame:self.bounds];
+    view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.animation = view;
     
     view.animationImages = animations;
-    view.animationDuration = 0.5;
+    view.animationDuration = kANSAnimatioDuration;
     
     [self addSubview:view];
 }

@@ -14,6 +14,5 @@
 @property (nonatomic, strong) IBOutlet ANSAnimatedView  *view;
 @property (nonatomic, strong) IBOutlet UIButton         *startButton;
 @property (nonatomic, strong) IBOutlet UIButton         *stopButton;
-@property (nonatomic, strong) IBOutlet UIButton         *nextButton;
 
 @end

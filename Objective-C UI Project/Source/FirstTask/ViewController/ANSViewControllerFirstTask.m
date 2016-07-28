@@ -32,14 +32,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    ANSAnimatedView *view = self.mainView.view;
-    [view initDancer];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark -
