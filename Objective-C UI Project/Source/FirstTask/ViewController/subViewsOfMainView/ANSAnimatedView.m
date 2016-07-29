@@ -14,14 +14,15 @@ static const NSTimeInterval kANSInterval = 1.5f;
 static const NSTimeInterval kANSDelay = 0;
 
 @interface ANSAnimatedView ()
-@property (nonatomic, strong) UIImageView       *animation;
-@property (nonatomic, assign) ANSViewPosition   nexPosition;
+@property (nonatomic, assign, getter=isAnimate) BOOL                animate;
+@property (nonatomic, strong)                   UIImageView       *animationImage;
+@property (nonatomic, assign)                   ANSViewPosition   nextPosition;
 
 // returns new cutted CGRect from superView rect
 - (CGRect)newRect;
 
 // generate point from position
-- (CGPoint)position:(ANSViewPosition)position;
+- (CGPoint)pointFromPosition:(ANSViewPosition)position;
 
 @end
 
@@ -30,75 +31,95 @@ static const NSTimeInterval kANSDelay = 0;
 #pragma mark -
 #pragma mark Accsessors
 
-- (void)setViewPosition:(ANSViewPosition)viewPosition {
-    if (_viewPosition != viewPosition) {
-        _viewPosition = viewPosition;
-
-        CGPoint point = [self position:viewPosition];
+- (void)setPosition:(ANSViewPosition)position {
+    if (_position != position) {
+        _position = position;
+        
+        CGPoint point = [self pointFromPosition:position];
         NSLog(@"%@", NSStringFromCGPoint(point));
         self.center = point;
     }
 }
 
-- (void)setViewPosition:(ANSViewPosition)viewPosition
+
+- (void)setPosition:(ANSViewPosition)position
          isAnimated:(BOOL)value
-               with:(ANSCompletionHandler)block
+            withHandler:(ANSCompletionHandler)block
 {
     if (!value) {
-        self.viewPosition = viewPosition;
+        self.position = self.position; // or viewPosition.
     }
     
     [UIView animateWithDuration:kANSInterval
                           delay:kANSDelay
                         options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveLinear
                      animations:^{
-                         self.viewPosition = viewPosition;
+                         self.position = position;
                      } completion:block];
 }
 
 //____________________________________________________________
-- (void)setViewPosition:(ANSViewPosition)viewPosition
+- (void)setPosition:(ANSViewPosition)position
              isAnimated:(BOOL)value
 {
-    [self setViewPosition:viewPosition isAnimated:value with:nil];
+    [self setPosition:position isAnimated:value withHandler:nil];
 }
 
 #pragma mark -
 #pragma mark Public methods
 
 - (void)startAnimation {
-    [self.animation startAnimating];
+    self.animate = YES;
     
-    ANSViewPosition position = self.nexPosition;
+    [self.animationImage startAnimating];
+    
+    ANSViewPosition position = self.nextPosition;
     
    __weak ANSAnimatedView *weakSelf = self;
-    [self setViewPosition:position isAnimated:YES with:^(BOOL finished) {
+    [self setPosition:position isAnimated:YES withHandler:^(BOOL finished) {
         if (finished) {
-            NSLog(@"finished block");
             __strong ANSAnimatedView *strongSelf = weakSelf;
             
-            ANSViewPosition next = (strongSelf.nexPosition + 1) % 5;
-            NSLog(@"%d", next);
-            ANSViewPosition currect = strongSelf.viewPosition;
-            NSLog(@"%d", currect);
-            
-            strongSelf.nexPosition = next;
-            
+            if (!strongSelf.isAnimate) {
+                [strongSelf.animationImage stopAnimating];
+                return ;
+            }
+
+            strongSelf.nextPosition = (strongSelf.nextPosition + 1) % ANSPositionCount;
             [strongSelf startAnimation];
         }
     }];
 }
 
 - (void)stopAnimation {
-    [self.layer removeAllAnimations];
-    self.viewPosition = ANSDefaultPosition;
-    [self.animation stopAnimating];
+    self.animate = NO;
 }
+
+- (void)initDancer {
+    NSArray *imageNames = @[@"1.png", @"2.png", @"3.png", @"4.png",
+                            @"5.png", @"6.png", @"7.png", @"8.png",
+                            @"9.png", @"10.png", @"11.png", @"12.png",
+                            @"13.png", @"14.png", @"15.png", @"16.png"];
     
+    NSMutableArray *animations = [NSMutableArray new];
+    for (int index = 0; index < [imageNames count]; index++) {
+        [animations addObject:[UIImage imageNamed:imageNames[index]]];
+    }
+    
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:self.bounds];
+    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.animationImage = imageView;
+    
+    imageView.animationImages = animations;
+    imageView.animationDuration = kANSAnimatioDuration;
+    
+    [self addSubview:imageView];
+}
+
 #pragma mark -
 #pragma mark Ptivate methods
 
-- (CGPoint)position:(ANSViewPosition)position {
+- (CGPoint)pointFromPosition:(ANSViewPosition)position {
     CGRect rect = [self newRect];
     switch (position) {
         case ANSLeftTopPosition:
@@ -120,27 +141,6 @@ static const NSTimeInterval kANSDelay = 0;
     CGFloat halfheight = CGRectGetHeight(self.frame) / 2;
     
    return CGRectInset(superRect, halfWidth, halfheight);
-}
-
-- (void)initDancer {
-    NSArray *imageNames = @[@"1.png", @"2.png", @"3.png", @"4.png",
-                            @"5.png", @"6.png", @"7.png", @"8.png",
-                            @"9.png", @"10.png", @"11.png", @"12.png",
-                            @"13.png", @"14.png", @"15.png", @"16.png"];
-    
-    NSMutableArray *animations = [NSMutableArray new];
-    for (int index = 0; index < [imageNames count]; index++) {
-        [animations addObject:[UIImage imageNamed:imageNames[index]]];
-    }
-    
-    UIImageView *view = [[UIImageView alloc]initWithFrame:self.bounds];
-    view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.animation = view;
-    
-    view.animationImages = animations;
-    view.animationDuration = kANSAnimatioDuration;
-    
-    [self addSubview:view];
 }
 
 @end

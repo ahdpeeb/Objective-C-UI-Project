@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#include "ANSMainView.h"
+#include "ANSRootView.h"
 
 @interface ANSViewControllerFirstTask : UIViewController
-@property (nonatomic, readonly) ANSMainView *mainView;
+@property (nonatomic, readonly) ANSRootView *rootView;
+
+- (IBAction)onAnimation:(id)sender;
 
 @end

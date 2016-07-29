@@ -14,14 +14,14 @@
 
 @implementation ANSViewControllerFirstTask
 
-@dynamic mainView;
+@dynamic rootView;
 
 #pragma mark -
 #pragma mark Accsessors
 
-- (ANSMainView *)mainView {
-    if ([self isViewLoaded] && [self.view isKindOfClass:[ANSMainView class]]) {
-        return (ANSMainView *)self.view;
+- (ANSRootView *)rootView {
+    if ([self isViewLoaded] && [self.view isKindOfClass:[ANSRootView class]]) {
+        return (ANSRootView *)self.view;
     }
     
     return nil;
@@ -39,17 +39,11 @@
 }
 
 #pragma mark -
-#pragma mark Buttons 
+#pragma mark Buttons
 
-- (IBAction)onTransition:(id)sender {
-    ANSAnimatedView *view = self.mainView.view;
-    [self.mainView bringSubviewToFront:view];
-    [view startAnimation];
-}
-
-- (IBAction)offTransition:(id)sender {
-    ANSAnimatedView *view = self.mainView.view;
-    [view stopAnimation];
+- (IBAction)onAnimation:(id)sender {
+    ANSAnimatedView *view = self.rootView.view;
+    [sender isOn] ? [view startAnimation] : [view stopAnimation];
 }
 
 @end

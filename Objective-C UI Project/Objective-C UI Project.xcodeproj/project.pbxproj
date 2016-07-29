@@ -11,7 +11,7 @@
 		93026CD11D44C2BE00DFCF23 /* ANSDataCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CD01D44C2BE00DFCF23 /* ANSDataCollection.m */; };
 		93026CD41D464C9100DFCF23 /* Gomer_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 93026CD21D464C9100DFCF23 /* Gomer_2.png */; };
 		93026CD71D464D0900DFCF23 /* Gomer_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 93026CD61D464D0900DFCF23 /* Gomer_1.jpg */; };
-		93026CE21D46810900DFCF23 /* ANSMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CDB1D46810900DFCF23 /* ANSMainView.m */; };
+		93026CE21D46810900DFCF23 /* ANSRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CDB1D46810900DFCF23 /* ANSRootView.m */; };
 		93026CE31D46810900DFCF23 /* ANSViewControllerFirstTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CDD1D46810900DFCF23 /* ANSViewControllerFirstTask.m */; };
 		93026CE41D46810900DFCF23 /* ANSViewControllerFirstTask.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93026CDE1D46810900DFCF23 /* ANSViewControllerFirstTask.xib */; };
 		93026CE51D46810900DFCF23 /* ANSAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CE11D46810900DFCF23 /* ANSAnimatedView.m */; };
@@ -72,8 +72,8 @@
 		93026CD01D44C2BE00DFCF23 /* ANSDataCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSDataCollection.m; sourceTree = "<group>"; };
 		93026CD21D464C9100DFCF23 /* Gomer_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gomer_2.png; sourceTree = "<group>"; };
 		93026CD61D464D0900DFCF23 /* Gomer_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Gomer_1.jpg; sourceTree = "<group>"; };
-		93026CDA1D46810900DFCF23 /* ANSMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSMainView.h; sourceTree = "<group>"; };
-		93026CDB1D46810900DFCF23 /* ANSMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSMainView.m; sourceTree = "<group>"; };
+		93026CDA1D46810900DFCF23 /* ANSRootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSRootView.h; sourceTree = "<group>"; };
+		93026CDB1D46810900DFCF23 /* ANSRootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSRootView.m; sourceTree = "<group>"; };
 		93026CDC1D46810900DFCF23 /* ANSViewControllerFirstTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSViewControllerFirstTask.h; sourceTree = "<group>"; };
 		93026CDD1D46810900DFCF23 /* ANSViewControllerFirstTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSViewControllerFirstTask.m; sourceTree = "<group>"; };
 		93026CDE1D46810900DFCF23 /* ANSViewControllerFirstTask.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSViewControllerFirstTask.xib; sourceTree = "<group>"; };
@@ -187,9 +187,9 @@
 			children = (
 				93026CDC1D46810900DFCF23 /* ANSViewControllerFirstTask.h */,
 				93026CDD1D46810900DFCF23 /* ANSViewControllerFirstTask.m */,
-				93026CDA1D46810900DFCF23 /* ANSMainView.h */,
-				93026CDB1D46810900DFCF23 /* ANSMainView.m */,
 				93026CDE1D46810900DFCF23 /* ANSViewControllerFirstTask.xib */,
+				93026CDA1D46810900DFCF23 /* ANSRootView.h */,
+				93026CDB1D46810900DFCF23 /* ANSRootView.m */,
 				93026CE01D46810900DFCF23 /* ANSAnimatedView.h */,
 				93026CE11D46810900DFCF23 /* ANSAnimatedView.m */,
 			);
@@ -635,7 +635,7 @@
 				93E520931D424DAE007EAD07 /* ANSViewControllerTables.m in Sources */,
 				9388ECDF1D49FEB50082EE4B /* ANSBuffer.m in Sources */,
 				93C5A5F31D40DF3D002FBCA8 /* ANSTimerPrivate.m in Sources */,
-				93026CE21D46810900DFCF23 /* ANSMainView.m in Sources */,
+				93026CE21D46810900DFCF23 /* ANSRootView.m in Sources */,
 				93EC8F5E1D48CDAA000624F0 /* UINib+Extension.m in Sources */,
 				93C5A5F21D40DF3D002FBCA8 /* ANSRandom.m in Sources */,
 				93C5A5F11D40DF3D002FBCA8 /* ANSQueue.m in Sources */,

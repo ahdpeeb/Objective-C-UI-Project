@@ -11,60 +11,42 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="ANSMainView">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="ANSRootView">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ju4-Er-EBw" customClass="ANSAnimatedView">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <color key="backgroundColor" red="0.98273247480392456" green="0.9532817006111145" blue="0.93962675333023071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.99603289365768433" green="0.99618560075759888" blue="0.99165958166122437" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
                         <rect key="frame" x="150" y="250" width="86" height="193"/>
                     </variation>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0r-SF-ZX9">
-                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                    <color key="backgroundColor" red="0.28243497014045715" green="0.99794930219650269" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <state key="normal" title="  Start  "/>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qyd-Xe-5JR">
+                    <rect key="frame" x="-25" y="-15" width="51" height="31"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                        <rect key="frame" x="146" y="562" width="50" height="30"/>
+                        <rect key="frame" x="169" y="523" width="51" height="31"/>
                     </variation>
                     <connections>
-                        <action selector="onTransition:" destination="-1" eventType="touchUpInside" id="XIp-IH-bSs"/>
+                        <action selector="onAnimation:" destination="-1" eventType="valueChanged" id="FB8-Cd-a7i"/>
                     </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yju-Up-AVR">
-                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                    <color key="backgroundColor" red="0.95429033041000366" green="0.23287922143936157" blue="0.081028647720813751" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <state key="normal" title="Stop"/>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                        <rect key="frame" x="194" y="562" width="46" height="30"/>
-                    </variation>
-                    <connections>
-                        <action selector="offTransition:" destination="-1" eventType="touchUpInside" id="5LM-u5-ghW"/>
-                    </connections>
-                </button>
+                </switch>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <variation key="default">
                 <mask key="subviews">
                     <exclude reference="ju4-Er-EBw"/>
-                    <exclude reference="c0r-SF-ZX9"/>
-                    <exclude reference="yju-Up-AVR"/>
+                    <exclude reference="qyd-Xe-5JR"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
                 <mask key="subviews">
                     <include reference="ju4-Er-EBw"/>
-                    <include reference="c0r-SF-ZX9"/>
-                    <include reference="yju-Up-AVR"/>
+                    <include reference="qyd-Xe-5JR"/>
                 </mask>
             </variation>
             <connections>
-                <outlet property="startButton" destination="c0r-SF-ZX9" id="zDm-lR-wFo"/>
-                <outlet property="stopButton" destination="yju-Up-AVR" id="AaV-iC-XYG"/>
+                <outlet property="OnSwitch" destination="qyd-Xe-5JR" id="Rk1-XY-Te4"/>
                 <outlet property="view" destination="ju4-Er-EBw" id="7eY-Zu-YW0"/>
             </connections>
         </view>

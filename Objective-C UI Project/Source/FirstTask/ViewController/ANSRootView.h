@@ -1,5 +1,5 @@
 //
-//  ANSMainView.h
+//  ANSRootView.h
 //  Objective-C UI Project
 //
 //  Created by Nikola Andriiev on 20.07.16.
@@ -10,9 +10,8 @@
 
 #import "ANSAnimatedView.h"
 
-@interface ANSMainView : UIView
+@interface ANSRootView : UIView
 @property (nonatomic, strong) IBOutlet ANSAnimatedView  *view;
-@property (nonatomic, strong) IBOutlet UIButton         *startButton;
-@property (nonatomic, strong) IBOutlet UIButton         *stopButton;
+@property (nonatomic, strong) IBOutlet UISwitch         *OnSwitch;
 
 @end
