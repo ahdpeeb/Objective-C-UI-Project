@@ -10,9 +10,9 @@
 
 #import "NSString+ANSExtension.h"
 
-static const NSUInteger kANSStringLength = 10;
-static NSString * const kANSImageName = @"Gomer_2";
-static NSString * const kANSImageFormat = @"png";
+static const NSUInteger kANSStringLength    = 10;
+static NSString * const kANSImageName       = @"Gomer_2";
+static NSString * const kANSImageFormat     = @"png";
 
 @interface ANSData ()
 @property (nonatomic, copy) NSString *mutableString;

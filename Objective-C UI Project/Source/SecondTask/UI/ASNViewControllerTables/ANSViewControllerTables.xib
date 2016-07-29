@@ -34,7 +34,7 @@
                         <color key="titleColor" red="0.11482951790094376" green="0.043837375938892365" blue="0.029098281636834145" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
-                        <action selector="editButton:" destination="-1" eventType="touchUpInside" id="Cfz-iV-1SV"/>
+                        <action selector="onEditButton:" destination="-1" eventType="touchUpInside" id="1rP-xk-aEd"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="OqA-Tf-oM5">
@@ -46,14 +46,14 @@
                         <color key="titleColor" red="0.1148295179" green="0.043837375939999999" blue="0.029098281640000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
-                        <action selector="addButton:" destination="-1" eventType="touchUpInside" id="grF-7U-EJx"/>
+                        <action selector="onAddButton:" destination="-1" eventType="touchUpInside" id="IDJ-5l-szP"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.99577277898788452" green="0.9922446608543396" blue="0.99200206995010376" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
-                <outlet property="addButton" destination="OqA-Tf-oM5" id="6lp-1V-cgU"/>
-                <outlet property="editButton" destination="wCY-XS-d7c" id="fdD-fi-Npa"/>
+                <outlet property="addButton" destination="OqA-Tf-oM5" id="Eg3-WZ-aYI"/>
+                <outlet property="editButton" destination="wCY-XS-d7c" id="MvX-dN-pT3"/>
                 <outlet property="table" destination="djj-HE-MvU" id="Rp5-nZ-1gL"/>
             </connections>
             <point key="canvasLocation" x="268" y="340"/>

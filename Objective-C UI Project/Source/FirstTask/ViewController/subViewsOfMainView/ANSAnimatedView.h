@@ -11,20 +11,23 @@
 typedef void(^ANSCompletionHandler)(BOOL finished);
 
 typedef enum {
-    ANSDefaultPosition,
+    ANSDefaultPosition       = 0,
     
-    ANSFirsPosition,
-    ANSSecondPosition,
-    ANSThirdPosition,
-    ANSFourthPosition,
+    ANSLeftTopPosition       = 1,
+    ANSRightTopPosition      = 2,
+    ANSRightButtomPosition   = 3,
+    ANSLeftButtomPosition    = 4,
+    
+    ANSPositionCount         = 5,
 } ANSViewPosition;
 
 @interface ANSAnimatedView : UIView
+@property (nonatomic, assign) ANSViewPosition   viewPosition;
 
-- (void)setWiewPosition:(ANSViewPosition)position
+- (void)setViewPosition:(ANSViewPosition)position
              isAnimated:(BOOL)value;
 
-- (void)setWiewPosition:(ANSViewPosition)position
+- (void)setViewPosition:(ANSViewPosition)position
              isAnimated:(BOOL)value
                    with:(ANSCompletionHandler)block;
 

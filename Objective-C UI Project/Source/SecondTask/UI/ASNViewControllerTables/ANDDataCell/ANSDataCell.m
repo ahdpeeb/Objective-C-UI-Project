@@ -29,6 +29,9 @@ static const CGFloat kANSBorderWidth = 0.5;
     imageLayer.masksToBounds = YES;
 }
 
+#pragma mark -
+#pragma mark acsessors
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

@@ -14,14 +14,15 @@
 #import "ANSData.h"
 #import "ANSBuffer.h"
 
-#import "ANSMacros.h"
 #import "NSArray+ANSExtension.h"
 #import "UINib+Extension.h"
 #import "UITableView+Extension.h"
 
-static NSString * const kANSEdit = @"Edit";
-static NSString * const kANSDone = @"Done";
-static NSString * const kANSTitleForHeaderSection = @"Homer's contact list";
+#import "ANSMacros.h"
+
+static NSString * const kANSEdit                    = @"Edit";
+static NSString * const kANSDone                    = @"Done";
+static NSString * const kANSTitleForHeaderSection   = @"Homer's contact list";
 
 ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableView)
 
@@ -39,7 +40,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 }
 
 #pragma mark -
-#pragma mark View life cycle
+#pragma mark View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,16 +51,16 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 }
 
 #pragma mark -
-#pragma mark Actions
+#pragma mark IBActions
 
-- (IBAction)editButton:(id)sender {
+- (IBAction)onEditButton:(id)sender {
     UITableView *table = self.tableView.table;
     BOOL isEditing = self.tableView.table.editing;
     [sender setTitle:(isEditing ? kANSEdit : kANSDone) forState:UIControlStateNormal];
     [table setEditing:(isEditing ? NO : YES) animated:YES];
 }
 
-- (IBAction)addButton:(id)sender {
+- (IBAction)onAddButton:(id)sender {
     if (self.tableView.table.editing) {
         ANSData *object = [ANSData new];
         [self.collection insertData:object atIndex:0];

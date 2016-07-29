@@ -14,65 +14,53 @@ static const NSTimeInterval kANSInterval = 1.5f;
 static const NSTimeInterval kANSDelay = 0;
 
 @interface ANSAnimatedView ()
-@property (nonatomic, assign) ANSViewPosition   wiewPosition;
 @property (nonatomic, strong) UIImageView       *animation;
+@property (nonatomic, assign) ANSViewPosition   nexPosition;
 
 // returns new cutted CGRect from superView rect
-- (CGRect)cuttedSuperRect;
+- (CGRect)newRect;
 
 // generate point from position
 - (CGPoint)position:(ANSViewPosition)position;
 
-// get next position
-- (ANSViewPosition)nextViewPosition:(ANSViewPosition)position;
-
 @end
-
 
 @implementation ANSAnimatedView
 
 #pragma mark -
-#pragma mark
+#pragma mark Accsessors
 
-#pragma mark -
-#pragma mark Accsessors 
-    //_______________________________
-- (void)setWiewPosition:(ANSViewPosition)wiewPosition {
-    if (_wiewPosition == wiewPosition) {
-        return;
+- (void)setViewPosition:(ANSViewPosition)viewPosition {
+    if (_viewPosition != viewPosition) {
+        _viewPosition = viewPosition;
+
+        CGPoint point = [self position:viewPosition];
+        NSLog(@"%@", NSStringFromCGPoint(point));
+        self.center = point;
     }
-    _wiewPosition = wiewPosition;
-    CGPoint point = [self position:wiewPosition];
-    NSLog(@"%@", NSStringFromCGPoint(point));
-    self.center = point;
 }
-    //____________________________________________________________
-- (void)setWiewPosition:(ANSViewPosition)wiewPosition
-         isAnimated:(BOOL)value
-{
-    if (!value) {
-        self.wiewPosition = wiewPosition;
-    }
-    
-    [UIView animateWithDuration:kANSInterval animations:^{
-        self.wiewPosition = wiewPosition;
-    }];
-}
-    //______________________________________________________________
-- (void)setWiewPosition:(ANSViewPosition)wiewPosition
+
+- (void)setViewPosition:(ANSViewPosition)viewPosition
          isAnimated:(BOOL)value
                with:(ANSCompletionHandler)block
 {
     if (!value) {
-        self.wiewPosition = wiewPosition;
+        self.viewPosition = viewPosition;
     }
     
     [UIView animateWithDuration:kANSInterval
                           delay:kANSDelay
                         options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveLinear
                      animations:^{
-                         self.wiewPosition = wiewPosition;
+                         self.viewPosition = viewPosition;
                      } completion:block];
+}
+
+//____________________________________________________________
+- (void)setViewPosition:(ANSViewPosition)viewPosition
+             isAnimated:(BOOL)value
+{
+    [self setViewPosition:viewPosition isAnimated:value with:nil];
 }
 
 #pragma mark -
@@ -81,17 +69,21 @@ static const NSTimeInterval kANSDelay = 0;
 - (void)startAnimation {
     [self.animation startAnimating];
     
-    ANSViewPosition current = self.wiewPosition;
+    ANSViewPosition position = self.nexPosition;
     
    __weak ANSAnimatedView *weakSelf = self;
-    [self setWiewPosition:[self nextViewPosition:current] isAnimated:YES with:^(BOOL finished) {
+    [self setViewPosition:position isAnimated:YES with:^(BOOL finished) {
         if (finished) {
-            NSLog(@"finished");
-            if (self.wiewPosition == ANSDefaultPosition) {
-                return;
-            }
+            NSLog(@"finished block");
             __strong ANSAnimatedView *strongSelf = weakSelf;
-//            strongSelf.transform = CGAffineTransformMakeRotation(M_PI_2);
+            
+            ANSViewPosition next = (strongSelf.nexPosition + 1) % 5;
+            NSLog(@"%d", next);
+            ANSViewPosition currect = strongSelf.viewPosition;
+            NSLog(@"%d", currect);
+            
+            strongSelf.nexPosition = next;
+            
             [strongSelf startAnimation];
         }
     }];
@@ -99,7 +91,7 @@ static const NSTimeInterval kANSDelay = 0;
 
 - (void)stopAnimation {
     [self.layer removeAllAnimations];
-    self.wiewPosition = ANSDefaultPosition;
+    self.viewPosition = ANSDefaultPosition;
     [self.animation stopAnimating];
 }
     
@@ -107,33 +99,22 @@ static const NSTimeInterval kANSDelay = 0;
 #pragma mark Ptivate methods
 
 - (CGPoint)position:(ANSViewPosition)position {
-    CGRect rect = [self cuttedSuperRect];
+    CGRect rect = [self newRect];
     switch (position) {
-        case ANSFirsPosition:
+        case ANSLeftTopPosition:
            return CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect));
-        case ANSSecondPosition:
+        case ANSRightTopPosition:
             return CGPointMake(CGRectGetMaxX(rect), CGRectGetMinY(rect));
-        case ANSThirdPosition:
+        case ANSRightButtomPosition:
             return CGPointMake(CGRectGetMaxX(rect), CGRectGetMaxY(rect));
-        case ANSFourthPosition:
+        case ANSLeftButtomPosition:
             return CGPointMake(CGRectGetMinX(rect), CGRectGetMaxY(rect));
         default:
             return CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
     }
 }
 
-- (ANSViewPosition)nextViewPosition:(ANSViewPosition)position {
-    switch (position) {
-        case ANSFirsPosition:       return ANSSecondPosition;
-        case ANSSecondPosition:     return ANSThirdPosition;
-        case ANSThirdPosition:      return ANSFourthPosition;
-        case ANSFourthPosition:     return ANSFirsPosition;
-        default:
-            return ANSFirsPosition;
-    }
-}
-
-- (CGRect)cuttedSuperRect {
+- (CGRect)newRect {
     CGRect superRect = self.superview.bounds;
     CGFloat halfWidth = CGRectGetWidth(self.frame) / 2;
     CGFloat halfheight = CGRectGetHeight(self.frame) / 2;

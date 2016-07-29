@@ -25,6 +25,9 @@
     [self hsPace:0];
 }
 
+#pragma mark -
+#pragma mark Private
+
 - (void)hsPace:(CGFloat)top {
     //table and scrol indicator should not cover statusBar
     UIEdgeInsets insect = UIEdgeInsetsMake(top, 0, 0, 0);

@@ -5,12 +5,11 @@
 //  Created by Nikola Andriiev on 24.07.16.
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
+#import <UIKit/UIKit.h>
 
 #import "ANSDataCollection.h"
 
 #import "ANSBuffer.h"
-
-#import <UIKit/UIKit.h>
 
 @interface ANSDataCollection ()
 @property (nonatomic, retain) NSMutableArray *mutableDataCollection;
