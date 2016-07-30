@@ -33,6 +33,8 @@
 		9388ECFE1D4A396F0082EE4B /* 7.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECEE1D4A396F0082EE4B /* 7.png */; };
 		9388ECFF1D4A396F0082EE4B /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECEF1D4A396F0082EE4B /* 8.png */; };
 		9388ED001D4A396F0082EE4B /* 9.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECF01D4A396F0082EE4B /* 9.png */; };
+		9388ED111D4BEA220082EE4B /* ANSImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9388ED0D1D4BEA220082EE4B /* ANSImageModel.m */; };
+		9388ED121D4BEA220082EE4B /* ANSImageModelDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 9388ED101D4BEA220082EE4B /* ANSImageModelDispatcher.m */; };
 		93C084251D3E36800077A81C /* Objective_C_UI_ProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C084241D3E36800077A81C /* Objective_C_UI_ProjectUITests.m */; };
 		93C084301D3E36B20077A81C /* iOS Study Plan.txt in Resources */ = {isa = PBXBuildFile; fileRef = 93C0842F1D3E36B20077A81C /* iOS Study Plan.txt */; };
 		93C084351D3E380D0077A81C /* ANSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C084321D3E380D0077A81C /* ANSAppDelegate.m */; };
@@ -99,6 +101,10 @@
 		9388ECEE1D4A396F0082EE4B /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
 		9388ECEF1D4A396F0082EE4B /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
 		9388ECF01D4A396F0082EE4B /* 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9.png; sourceTree = "<group>"; };
+		9388ED0C1D4BEA220082EE4B /* ANSImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSImageModel.h; sourceTree = "<group>"; };
+		9388ED0D1D4BEA220082EE4B /* ANSImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSImageModel.m; sourceTree = "<group>"; };
+		9388ED0F1D4BEA220082EE4B /* ANSImageModelDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSImageModelDispatcher.h; sourceTree = "<group>"; };
+		9388ED101D4BEA220082EE4B /* ANSImageModelDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSImageModelDispatcher.m; sourceTree = "<group>"; };
 		93C084071D3E367F0077A81C /* Objective-C UI Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Objective-C UI Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C084201D3E36800077A81C /* Objective-C UI ProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Objective-C UI ProjectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C084241D3E36800077A81C /* Objective_C_UI_ProjectUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Objective_C_UI_ProjectUITests.m; sourceTree = "<group>"; };
@@ -228,6 +234,25 @@
 			path = animationDancer;
 			sourceTree = "<group>";
 		};
+		9388ED0B1D4BEA220082EE4B /* ANSImageModel */ = {
+			isa = PBXGroup;
+			children = (
+				9388ED0C1D4BEA220082EE4B /* ANSImageModel.h */,
+				9388ED0D1D4BEA220082EE4B /* ANSImageModel.m */,
+				9388ED0E1D4BEA220082EE4B /* ANSImageModelDispatcher */,
+			);
+			path = ANSImageModel;
+			sourceTree = "<group>";
+		};
+		9388ED0E1D4BEA220082EE4B /* ANSImageModelDispatcher */ = {
+			isa = PBXGroup;
+			children = (
+				9388ED0F1D4BEA220082EE4B /* ANSImageModelDispatcher.h */,
+				9388ED101D4BEA220082EE4B /* ANSImageModelDispatcher.m */,
+			);
+			path = ANSImageModelDispatcher;
+			sourceTree = "<group>";
+		};
 		93C083FE1D3E367F0077A81C = {
 			isa = PBXGroup;
 			children = (
@@ -305,15 +330,16 @@
 			children = (
 				93C5A6051D40E40B002FBCA8 /* ANSMacros */,
 				93EC8F621D48D9A6000624F0 /* UITableView */,
-				93C5A60A1D4125C2002FBCA8 /* ANSTableViewCell */,
 				93EC8F5B1D48CDAA000624F0 /* UINib */,
-				93026CE61D47472200DFCF23 /* ANSObservableObject */,
+				93C5A5DE1D40DF3D002FBCA8 /* NSArray */,
+				93C5A5E41D40DF3D002FBCA8 /* NSString */,
 				93C5A5D01D40DF3D002FBCA8 /* ANSGCD */,
 				93C5A5D61D40DF3D002FBCA8 /* ANSRandom */,
 				93C5A5D91D40DF3D002FBCA8 /* ANSTimer */,
+				93026CE61D47472200DFCF23 /* ANSObservableObject */,
+				9388ED0B1D4BEA220082EE4B /* ANSImageModel */,
+				93C5A60A1D4125C2002FBCA8 /* ANSTableViewCell */,
 				93C5A5D31D40DF3D002FBCA8 /* ANSQueue */,
-				93C5A5DE1D40DF3D002FBCA8 /* NSArray */,
-				93C5A5E41D40DF3D002FBCA8 /* NSString */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -636,9 +662,11 @@
 				9388ECDF1D49FEB50082EE4B /* ANSBuffer.m in Sources */,
 				93C5A5F31D40DF3D002FBCA8 /* ANSTimerPrivate.m in Sources */,
 				93026CE21D46810900DFCF23 /* ANSRootView.m in Sources */,
+				9388ED111D4BEA220082EE4B /* ANSImageModel.m in Sources */,
 				93EC8F5E1D48CDAA000624F0 /* UINib+Extension.m in Sources */,
 				93C5A5F21D40DF3D002FBCA8 /* ANSRandom.m in Sources */,
 				93C5A5F11D40DF3D002FBCA8 /* ANSQueue.m in Sources */,
+				9388ED121D4BEA220082EE4B /* ANSImageModelDispatcher.m in Sources */,
 				93C5A5F01D40DF3D002FBCA8 /* ANSGCD.m in Sources */,
 				93026CE51D46810900DFCF23 /* ANSAnimatedView.m in Sources */,
 				93C084371D3E380D0077A81C /* main.m in Sources */,

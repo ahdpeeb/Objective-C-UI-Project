@@ -103,11 +103,11 @@
     }
 }
 
-- (void)notifyOfState:(NSUInteger)state {
-    [self notifyOfState:state withObject:nil];
+- (void)notifyOfStateChange:(NSUInteger)state {
+    [self notifyOfStateChange:state withObject:nil];
 }
 
-- (void)notifyOfState:(NSUInteger)state withObject:(id)object {
+- (void)notifyOfStateChange:(NSUInteger)state withObject:(id)object {
     @synchronized(self) {
        SEL selector = [self selectorForState:state];
         [self notifyObserversWithSelector:selector object:object];

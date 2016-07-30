@@ -24,24 +24,24 @@
     UIWindow *window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window = window;
     
-//    ANSViewControllerTables *controller = [ANSViewControllerTables new];
-    ANSViewControllerFirstTask *controller1 = [ANSViewControllerFirstTask new];
+  ANSViewControllerTables *controller = [ANSViewControllerTables new];
+// ANSViewControllerFirstTask *controller1 = [ANSViewControllerFirstTask new];
     
-    window.rootViewController = controller1;
+    window.rootViewController = controller;
     
     [window makeKeyAndVisible];
     
 #pragma mark -
 #pragma mark Extra
     
-//    NSArray *objects = [NSArray objectsWithCount:100 block:^id{
-//        return [[ANSData alloc] init];
-//    }];
-//    
-//    ANSDataCollection *collection = [ANSDataCollection new];
-//    controller.collection = collection;
+    NSArray *objects = [NSArray objectsWithCount:100 block:^id{
+        return [[ANSData alloc] init];
+    }];
     
-//    [collection addDataObjects:objects];
+    ANSDataCollection *collection = [ANSDataCollection new];
+    controller.collection = collection;
+    
+    [collection addDataObjects:objects];
     
     return YES;
 }

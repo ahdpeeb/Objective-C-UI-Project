@@ -20,9 +20,10 @@
 - (void)removeObserverObjects:(NSArray *)objects;
 - (BOOL)isObservedByObject:(id)object;
 
-- (void)notifyOfState:(NSUInteger)state;
-- (void)notifyOfState:(NSUInteger)state withObject:(id)object;
+//This method is intended for subclasses. Never call it directly.
 
+- (void)notifyOfStateChange:(NSUInteger)state;
+- (void)notifyOfStateChange:(NSUInteger)state withObject:(id)object;
 
 //This method is intended for subclasses. Never call it directly.
 //It must be determined directly in observable object.  
