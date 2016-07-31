@@ -10,6 +10,8 @@
 
 #import "ANSImageModelDispatcher.h"
 
+#import "ANSMacros.h"
+
 @interface ANSImageModel ()
 @property (nonatomic, strong)      UIImage          *image;
 @property (nonatomic, strong)      NSURL            *url;
@@ -92,16 +94,19 @@
 #pragma mark Private methods
 
 - (NSOperation *)imageLoadingOperation {
-    __weak ANSImageModel *weakSelf = self;
+    ANSWeakify(self);
+
+  //  __weak ANSImageModel *weakSelf = self;
     NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
-        __strong ANSImageModel *strongSelf = weakSelf;
+        ANSStrongify(self);
+     //   __strong ANSImageModel *strongSelf = weakSelf;
         
-        strongSelf.image = [UIImage imageWithContentsOfFile:[strongSelf.url absoluteString]];
+        self.image = [UIImage imageWithContentsOfFile:[self.url absoluteString]];
     }];
     
     operation.completionBlock = ^{
-        __strong ANSImageModel *strongSelf = weakSelf;
-        strongSelf.state = strongSelf.image ? ANSImageModelLoaded : ANSImageModelFailedLoadin;
+        ANSStrongify(self);
+        self.state = self.image ? ANSImageModelLoaded : ANSImageModelFailedLoadin;
     };
     
     return operation;

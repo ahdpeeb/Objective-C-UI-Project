@@ -14,7 +14,11 @@
 
 #import "NSArray+ANSExtension.h"
 
+static NSString * const kANSArchive     = @"kANSArchive";
+static const NSUInteger kANSDataCount   = 3;
+
 @interface ANSAppDelegate ()
+@property (nonatomic, retain) ANSDataCollection *collection;
 
 @end
 
@@ -34,36 +38,55 @@
 #pragma mark -
 #pragma mark Extra
     
-    NSArray *objects = [NSArray objectsWithCount:100 block:^id{
+    NSArray *objects = [NSArray objectsWithCount:kANSDataCount block:^id{
         return [[ANSData alloc] init];
     }];
     
     ANSDataCollection *collection = [ANSDataCollection new];
-    controller.collection = collection;
+    self.collection = collection;
     
+    controller.collection = collection;
     [collection addDataObjects:objects];
+    
     
     return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-
+    NSLog(@"applicationWillResignActive");
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-
+    NSLog(@"applicationDidEnterBackground");
+    [self saveCollection];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-
+    NSLog(@"applicationDidEnterBackground");
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-
+    NSLog(@"applicationDidBecomeActive");
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+    NSLog(@"applicationWillTerminate");
+    [self saveCollection];
+}
 
+#pragma mark -
+#pragma mark Save and loading
+
+- (void)saveCollection {
+    NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:self.collection];
+    [[NSUserDefaults standardUserDefaults] setObject:archive forKey:kANSArchive];
+}
+
+- (void)loadCollection {
+    NSData *archive = [[NSUserDefaults standardUserDefaults] objectForKey:kANSArchive];
+    if (archive) {
+        [NSKeyedUnarchiver unarchiveObjectWithData:archive];
+    }
 }
 
 @end

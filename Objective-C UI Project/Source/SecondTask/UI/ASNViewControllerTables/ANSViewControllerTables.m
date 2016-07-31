@@ -44,6 +44,10 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //_____________________________________________________________________________
+   __unused id object = [[NSUserDefaults standardUserDefaults] objectForKey:@"collection"];
+    
+    [self.tableView.table reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -31,5 +31,22 @@
     \
     ANSViewGetterSynthesize(baseViewClass, propertyName) \
     @end \
-    
+
+//Weakify and Strongify object before using in block
+#define ANSWeakify(object) \
+    __weak __typeof(object) __ANSWeekified_##object = object \
+
+//you should call this method after you called ANSWeakify for the same object
+#define ANSStrongify(object) \
+    __strong __typeof(object) object = __ANSWeekified_##object \
+
+#define ANSStrongifyAndReturnNil(object) \
+    ANSStrongify(object) \
+    if(!object) { \
+        return nil; \
+    } \
+
+
+
+
 

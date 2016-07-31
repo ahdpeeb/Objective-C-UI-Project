@@ -12,7 +12,7 @@
 
 @class ANSDataCollection;
 
-@protocol ANSCollectionObserver <NSObject>
+@protocol ANSCollectionObserver <NSObject, NSCoding>
 
 @optional
 - (void)collection:(ANSDataCollection *)collection didUpdateData:(id)data;

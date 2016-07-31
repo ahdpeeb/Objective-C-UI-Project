@@ -11,6 +11,8 @@
 
 #import "ANSBuffer.h"
 
+static NSString * const kANSkey = @"mutableDataCollection";
+
 @interface ANSDataCollection ()
 @property (nonatomic, retain) NSMutableArray *mutableDataCollection;
 
@@ -137,6 +139,23 @@
     @synchronized(self) {
         return [self.mutableDataCollection objectAtIndex:idx];
     }
+}
+
+#pragma mark -
+#pragma mark NSCoding protocol
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.mutableDataCollection forKey:kANSkey];
+}
+
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        NSArray *archive = [aDecoder decodeObjectForKey:kANSkey];
+        self.mutableDataCollection = [[NSMutableArray alloc] initWithArray:archive copyItems:YES];
+    }
+    
+    return self;
 }
 
 @end

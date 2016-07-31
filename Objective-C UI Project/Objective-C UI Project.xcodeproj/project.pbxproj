@@ -16,6 +16,7 @@
 		93026CE41D46810900DFCF23 /* ANSViewControllerFirstTask.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93026CDE1D46810900DFCF23 /* ANSViewControllerFirstTask.xib */; };
 		93026CE51D46810900DFCF23 /* ANSAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CE11D46810900DFCF23 /* ANSAnimatedView.m */; };
 		93026CE91D47472200DFCF23 /* ANSObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CE81D47472200DFCF23 /* ANSObservableObject.m */; };
+		93052AE11D4CF2370007D20C /* ANSImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93052AE01D4CF2370007D20C /* ANSImageView.m */; };
 		9388ECDF1D49FEB50082EE4B /* ANSBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9388ECDE1D49FEB50082EE4B /* ANSBuffer.m */; };
 		9388ECF11D4A396F0082EE4B /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE11D4A396F0082EE4B /* 1.png */; };
 		9388ECF21D4A396F0082EE4B /* 10.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE21D4A396F0082EE4B /* 10.png */; };
@@ -83,6 +84,8 @@
 		93026CE11D46810900DFCF23 /* ANSAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSAnimatedView.m; path = subViewsOfMainView/ANSAnimatedView.m; sourceTree = "<group>"; };
 		93026CE71D47472200DFCF23 /* ANSObservableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSObservableObject.h; sourceTree = "<group>"; };
 		93026CE81D47472200DFCF23 /* ANSObservableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSObservableObject.m; sourceTree = "<group>"; };
+		93052ADF1D4CF2370007D20C /* ANSImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSImageView.h; sourceTree = "<group>"; };
+		93052AE01D4CF2370007D20C /* ANSImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSImageView.m; sourceTree = "<group>"; };
 		9388ECDD1D49FEB50082EE4B /* ANSBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSBuffer.h; sourceTree = "<group>"; };
 		9388ECDE1D49FEB50082EE4B /* ANSBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSBuffer.m; sourceTree = "<group>"; };
 		9388ECE11D4A396F0082EE4B /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
@@ -211,6 +214,15 @@
 			path = ANSObservableObject;
 			sourceTree = "<group>";
 		};
+		93052ADE1D4CF2370007D20C /* ANSImageView */ = {
+			isa = PBXGroup;
+			children = (
+				93052ADF1D4CF2370007D20C /* ANSImageView.h */,
+				93052AE01D4CF2370007D20C /* ANSImageView.m */,
+			);
+			path = ANSImageView;
+			sourceTree = "<group>";
+		};
 		9388ECE01D4A396F0082EE4B /* animationDancer */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,6 +349,7 @@
 				93C5A5D61D40DF3D002FBCA8 /* ANSRandom */,
 				93C5A5D91D40DF3D002FBCA8 /* ANSTimer */,
 				93026CE61D47472200DFCF23 /* ANSObservableObject */,
+				93052ADE1D4CF2370007D20C /* ANSImageView */,
 				9388ED0B1D4BEA220082EE4B /* ANSImageModel */,
 				93C5A60A1D4125C2002FBCA8 /* ANSTableViewCell */,
 				93C5A5D31D40DF3D002FBCA8 /* ANSQueue */,
@@ -660,6 +673,7 @@
 				93EC8F651D48D9A6000624F0 /* UITableView+Extension.m in Sources */,
 				93E520931D424DAE007EAD07 /* ANSViewControllerTables.m in Sources */,
 				9388ECDF1D49FEB50082EE4B /* ANSBuffer.m in Sources */,
+				93052AE11D4CF2370007D20C /* ANSImageView.m in Sources */,
 				93C5A5F31D40DF3D002FBCA8 /* ANSTimerPrivate.m in Sources */,
 				93026CE21D46810900DFCF23 /* ANSRootView.m in Sources */,
 				9388ED111D4BEA220082EE4B /* ANSImageModel.m in Sources */,
