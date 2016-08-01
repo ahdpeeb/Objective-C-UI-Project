@@ -149,10 +149,8 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 + (id)loadState {
     NSData *archive = [[NSUserDefaults standardUserDefaults] objectForKey:kANSArchiveKey];
     if (archive) {
-        id object = [NSKeyedUnarchiver unarchiveObjectWithData:archive];
         NSLog(@"loadState");
-        
-        return object;
+        return [NSKeyedUnarchiver unarchiveObjectWithData:archive];
     }
     
     return nil;

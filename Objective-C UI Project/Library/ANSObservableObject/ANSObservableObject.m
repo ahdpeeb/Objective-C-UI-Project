@@ -103,26 +103,11 @@
     }
 }
 
-- (void)notifyOfStateChange:(NSUInteger)state {
-    [self notifyOfStateChange:state withObject:nil];
-}
-
-- (void)notifyOfStateChange:(NSUInteger)state withObject:(id)object {
-    @synchronized(self) {
-       SEL selector = [self selectorForState:state];
-        [self notifyObserversWithSelector:selector object:object];
-    }
-}
-
 #pragma mark -
 #pragma mark Private methods
 
 - (SEL)selectorForState:(NSUInteger)state {
     return NULL;
-}
-
-- (void)notifyObserversWithSelector:(SEL)selector {
-    [self notifyObserversWithSelector:selector object:self];
 }
 
 - (void)notifyObserversWithSelector:(SEL)selector object:(id)object {
@@ -134,6 +119,21 @@
             }
         }
     }
+}
+
+- (void)notifyObserversWithSelector:(SEL)selector {
+    [self notifyObserversWithSelector:selector object:self];
+}
+
+- (void)notifyOfStateChange:(NSUInteger)state withObject:(id)object {
+    @synchronized(self) {
+        SEL selector = [self selectorForState:state];
+        [self notifyObserversWithSelector:selector object:object];
+    }
+}
+
+- (void)notifyOfStateChange:(NSUInteger)state {
+    [self notifyOfStateChange:state withObject:nil];
 }
 
 @end

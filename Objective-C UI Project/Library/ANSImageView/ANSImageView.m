@@ -17,8 +17,7 @@
     self.contentImageView = nil;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self initSubviews];
@@ -28,10 +27,22 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
     if (self.contentImageView) {
         [self initSubviews];
     }
+}
+
+- (void)initSubviews {
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+    imageView.autoresizingMask =  UIViewAutoresizingFlexibleWidth
+                                | UIViewAutoresizingFlexibleHeight
+                                | UIViewAutoresizingFlexibleLeftMargin
+                                | UIViewAutoresizingFlexibleRightMargin
+                                | UIViewAutoresizingFlexibleTopMargin
+                                | UIViewAutoresizingFlexibleBottomMargin;
     
+    self.contentImageView = imageView;
 }
 
 #pragma mark -
@@ -45,22 +56,16 @@
     }
 }
 
+- (void)setImageModel:(ANSImageModel *)imageModel {
+    if(_imageModel != imageModel) {
+        _imageModel = imageModel;
+    }
+}
+
 #pragma mark -
 #pragma mark View lifecycle
 
 #pragma mark -
 #pragma mark Private
-
-- (void)initSubviews {
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
-    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth
-                                |UIViewAutoresizingFlexibleHeight
-                                | UIViewAutoresizingFlexibleLeftMargin
-                                | UIViewAutoresizingFlexibleRightMargin
-                                | UIViewAutoresizingFlexibleTopMargin
-                                | UIViewAutoresizingFlexibleBottomMargin;
-    
-    self.contentImageView = imageView;
-}
 
 @end

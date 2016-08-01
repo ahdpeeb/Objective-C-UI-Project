@@ -72,7 +72,4 @@ static const NSUInteger kANSDataCount   = 0;
     NSLog(@"applicationWillTerminate");
 }
 
-#pragma mark -
-#pragma mark Private methods
-
 @end
