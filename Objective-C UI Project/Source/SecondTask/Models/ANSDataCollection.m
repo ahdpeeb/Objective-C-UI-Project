@@ -11,7 +11,7 @@
 
 #import "ANSBuffer.h"
 
-static NSString * const kANSArchiveKey              = @"kANSArchive";
+static NSString * const kANSArchiveKey              = @"kANSArchiveKey";
 static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 @interface ANSDataCollection ()
@@ -28,7 +28,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 #pragma mark Initialization and deallocation
 
 - (void)dealloc {
-    NSLog(@"collection model deallocatin");
+    NSLog(@"collection model deallocated");
 }
 
 - (instancetype)init {
@@ -138,6 +138,27 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 }
 
 #pragma mark -
+#pragma mark Save and loading (Public methods)
+
+- (void)saveState {
+    NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:self];
+    [[NSUserDefaults standardUserDefaults] setObject:archive forKey:kANSArchiveKey];
+    NSLog(@"saveState");
+}
+
++ (id)loadState {
+    NSData *archive = [[NSUserDefaults standardUserDefaults] objectForKey:kANSArchiveKey];
+    if (archive) {
+        id object = [NSKeyedUnarchiver unarchiveObjectWithData:archive];
+        NSLog(@"loadState");
+        
+        return object;
+    }
+    
+    return nil;
+}
+
+#pragma mark -
 #pragma mark Reloaded methods
 
 - (id)objectAtIndexedSubscript:(NSUInteger)idx {
@@ -164,25 +185,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 }
 
 #pragma mark -
-#pragma mark Save and loading
-
-+ (void)saveState {
-    NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:self];
-    [[NSUserDefaults standardUserDefaults] setObject:archive forKey:kANSArchiveKey];
-    NSLog(@"saveState");
-}
-
-+ (id)loadState {
-    NSData *archive = [[NSUserDefaults standardUserDefaults] objectForKey:kANSArchiveKey];
-    if (archive) {
-       id object = [NSKeyedUnarchiver unarchiveObjectWithData:archive];
-        NSLog(@"loadState");
-        
-        return object;
-    }
-    
-    return nil;
-}
+#pragma mark NSCopying protocol
 
 - (id)copyWithZone:(NSZone *)zone {
     id copy = [[self class] new];

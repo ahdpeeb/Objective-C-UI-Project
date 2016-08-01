@@ -55,7 +55,7 @@ static const NSUInteger kANSDataCount   = 0;
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    [ANSDataCollection saveState];
+    [self.collection saveState];
     NSLog(@"applicationDidEnterBackground");
 }
 
@@ -68,7 +68,7 @@ static const NSUInteger kANSDataCount   = 0;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [ANSDataCollection saveState];
+    [self.collection saveState];
     NSLog(@"applicationWillTerminate");
 }
 

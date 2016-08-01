@@ -12,14 +12,14 @@
 
 @class ANSDataCollection;
 
-@protocol ANSCollectionObserver <NSObject, NSCoding>
+@protocol ANSCollectionObserver <NSObject>
 
 @optional
 - (void)collection:(ANSDataCollection *)collection didUpdateData:(id)data;
 
 @end
 
-@interface ANSDataCollection : ANSObservableObject
+@interface ANSDataCollection : ANSObservableObject <NSCoding, NSCopying>
 @property (nonatomic, readonly) NSUInteger  count;
 @property (nonatomic, readonly) NSArray     *objects;
 
@@ -38,7 +38,7 @@
 - (void)moveDataFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 
 // this methods intended for save and load currect state of data collection;
-+ (void)saveState;
+- (void)saveState;
 + (id)loadState;
 
 @end

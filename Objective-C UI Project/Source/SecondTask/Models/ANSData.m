@@ -14,8 +14,8 @@ static const NSUInteger kANSStringLength    = 10;
 static NSString * const kANSImageName       = @"Gomer_2";
 static NSString * const kANSImageFormat     = @"png";
 
-static NSString * const kANSString          = @"kANSString";
-static NSString * const kANSImage           = @"kANSImage";
+static NSString * const kANSStringKey          = @"kANSStringKey";
+static NSString * const kANSImageKey           = @"kANSImageKey";
 
 @interface ANSData ()
 @property (nonatomic, copy)     NSString *mutableString;
@@ -37,7 +37,8 @@ static NSString * const kANSImage           = @"kANSImage";
         NSString *alphabet = [NSString alphanumericAlphabet];
         self.mutableString = [NSString randomStringWithLength:kANSStringLength alphabet:alphabet];
         
-        self.mutableImage = nil;
+        NSString *path = [[NSBundle mainBundle] pathForResource:kANSImageName ofType:kANSImageFormat];
+        self.mutableImage = [UIImage imageWithContentsOfFile:path];
     }
     
     return self;
@@ -45,15 +46,6 @@ static NSString * const kANSImage           = @"kANSImage";
 
 #pragma mark -
 #pragma mark Accsessors
-
-    //this method will instal default image;
-- (void)setMutableImage:(UIImage *)mutableImage {
-    if (_mutableImage != mutableImage || !_mutableImage) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:kANSImageName ofType:kANSImageFormat];
-        
-        _mutableImage = [UIImage imageWithContentsOfFile:path];
-    }
-}
 
 - (NSString *)string {
     return self.mutableString;
@@ -67,15 +59,15 @@ static NSString * const kANSImage           = @"kANSImage";
 #pragma mark NSCoding protocol
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.string forKey:kANSString];
-    [aCoder encodeObject:self.image forKey:kANSImage];
+    [aCoder encodeObject:self.string forKey:kANSStringKey];
+    [aCoder encodeObject:self.image forKey:kANSImageKey];
 }
 
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
-        self.mutableString = [aDecoder decodeObjectForKey:kANSString];
-        self.mutableImage = [aDecoder decodeObjectForKey:kANSImage];
+        self.mutableString = [aDecoder decodeObjectForKey:kANSStringKey];
+        self.mutableImage = [aDecoder decodeObjectForKey:kANSImageKey];
     }
     
     return self;
@@ -87,7 +79,8 @@ static NSString * const kANSImage           = @"kANSImage";
 - (id)copyWithZone:(NSZone *)zone {
     id copy = [[self class] new];
     if (copy) {
-        [copy setMutableString:[self.mutableString copyWithZone:zone]];
+        [copy setMutableString:self.mutableString];
+        [copy setMutableImage:self.mutableImage];
     }
     
     return copy;
