@@ -11,7 +11,8 @@
 
 #import "ANSBuffer.h"
 
-static NSString * const kANSkey = @"mutableDataCollection";
+static NSString * const kANSArchiveKey              = @"kANSArchive";
+static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 @interface ANSDataCollection ()
 @property (nonatomic, retain) NSMutableArray *mutableDataCollection;
@@ -25,6 +26,10 @@ static NSString * const kANSkey = @"mutableDataCollection";
 
 #pragma mark -
 #pragma mark Initialization and deallocation
+
+- (void)dealloc {
+    NSLog(@"collection model deallocatin");
+}
 
 - (instancetype)init {
     self = [super init];
@@ -145,17 +150,47 @@ static NSString * const kANSkey = @"mutableDataCollection";
 #pragma mark NSCoding protocol
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.mutableDataCollection forKey:kANSkey];
+    [aCoder encodeObject:self.mutableDataCollection forKey:kANSCollectionKey];
 }
 
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
-        NSArray *archive = [aDecoder decodeObjectForKey:kANSkey];
+        NSArray *archive = [aDecoder decodeObjectForKey:kANSCollectionKey];
         self.mutableDataCollection = [[NSMutableArray alloc] initWithArray:archive copyItems:YES];
     }
     
     return self;
+}
+
+#pragma mark -
+#pragma mark Save and loading
+
++ (void)saveState {
+    NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:self];
+    [[NSUserDefaults standardUserDefaults] setObject:archive forKey:kANSArchiveKey];
+    NSLog(@"saveState");
+}
+
++ (id)loadState {
+    NSData *archive = [[NSUserDefaults standardUserDefaults] objectForKey:kANSArchiveKey];
+    if (archive) {
+       id object = [NSKeyedUnarchiver unarchiveObjectWithData:archive];
+        NSLog(@"loadState");
+        
+        return object;
+    }
+    
+    return nil;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    id copy = [[self class] new];
+    if (copy) {
+        [copy setMutableDataCollection:[self.mutableDataCollection copyWithZone:zone]];
+    }
+    
+    return copy;
 }
 
 @end

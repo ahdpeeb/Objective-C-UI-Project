@@ -81,4 +81,16 @@ static NSString * const kANSImage           = @"kANSImage";
     return self;
 }
 
+#pragma mark -
+#pragma mark NSCopying protocol
+
+- (id)copyWithZone:(NSZone *)zone {
+    id copy = [[self class] new];
+    if (copy) {
+        [copy setMutableString:[self.mutableString copyWithZone:zone]];
+    }
+    
+    return copy;
+}
+
 @end

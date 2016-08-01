@@ -37,4 +37,8 @@
 
 - (void)moveDataFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 
+// this methods intended for save and load currect state of data collection;
++ (void)saveState;
++ (id)loadState;
+
 @end

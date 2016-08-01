@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface ANSData : NSObject
+@interface ANSData : NSObject <NSCoding, NSCopying>
 @property (nonatomic, readonly) NSString *string;
 @property (nonatomic, readonly) UIImage  *image;
 

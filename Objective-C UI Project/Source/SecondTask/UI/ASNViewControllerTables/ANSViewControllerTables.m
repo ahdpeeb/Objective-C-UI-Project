@@ -36,6 +36,8 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
         [_collection removeObserverObject:self];
         _collection = collection;
         [_collection addObserverObject:self];
+        
+        [self.tableView.table reloadData];
     }
 }
 
@@ -44,9 +46,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //_____________________________________________________________________________
-   __unused id object = [[NSUserDefaults standardUserDefaults] objectForKey:@"collection"];
-    
+
     [self.tableView.table reloadData];
 }
 
