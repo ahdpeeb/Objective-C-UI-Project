@@ -15,8 +15,11 @@
 		93026CE31D46810900DFCF23 /* ANSViewControllerFirstTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CDD1D46810900DFCF23 /* ANSViewControllerFirstTask.m */; };
 		93026CE41D46810900DFCF23 /* ANSViewControllerFirstTask.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93026CDE1D46810900DFCF23 /* ANSViewControllerFirstTask.xib */; };
 		93026CE51D46810900DFCF23 /* ANSAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CE11D46810900DFCF23 /* ANSAnimatedView.m */; };
-		93026CE91D47472200DFCF23 /* ANSObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CE81D47472200DFCF23 /* ANSObservableObject.m */; };
 		93052AE11D4CF2370007D20C /* ANSImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93052AE01D4CF2370007D20C /* ANSImageView.m */; };
+		933C74641D50908100A423B9 /* ANSObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C745A1D50908100A423B9 /* ANSObservableObject.m */; };
+		933C74651D50908100A423B9 /* ANSBlockObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C745D1D50908100A423B9 /* ANSBlockObservationController.m */; };
+		933C74661D50908100A423B9 /* ANSObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C745F1D50908100A423B9 /* ANSObservationController.m */; };
+		933C74671D50908100A423B9 /* ANSProtocolObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C74611D50908100A423B9 /* ANSProtocolObservationController.m */; };
 		9388ECDF1D49FEB50082EE4B /* ANSBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9388ECDE1D49FEB50082EE4B /* ANSBuffer.m */; };
 		9388ECF11D4A396F0082EE4B /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE11D4A396F0082EE4B /* 1.png */; };
 		9388ECF21D4A396F0082EE4B /* 10.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE21D4A396F0082EE4B /* 10.png */; };
@@ -82,10 +85,18 @@
 		93026CDE1D46810900DFCF23 /* ANSViewControllerFirstTask.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSViewControllerFirstTask.xib; sourceTree = "<group>"; };
 		93026CE01D46810900DFCF23 /* ANSAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSAnimatedView.h; path = subViewsOfMainView/ANSAnimatedView.h; sourceTree = "<group>"; };
 		93026CE11D46810900DFCF23 /* ANSAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSAnimatedView.m; path = subViewsOfMainView/ANSAnimatedView.m; sourceTree = "<group>"; };
-		93026CE71D47472200DFCF23 /* ANSObservableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSObservableObject.h; sourceTree = "<group>"; };
-		93026CE81D47472200DFCF23 /* ANSObservableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSObservableObject.m; sourceTree = "<group>"; };
 		93052ADF1D4CF2370007D20C /* ANSImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSImageView.h; sourceTree = "<group>"; };
 		93052AE01D4CF2370007D20C /* ANSImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSImageView.m; sourceTree = "<group>"; };
+		933C74591D50908100A423B9 /* ANSObservableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSObservableObject.h; sourceTree = "<group>"; };
+		933C745A1D50908100A423B9 /* ANSObservableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSObservableObject.m; sourceTree = "<group>"; };
+		933C745C1D50908100A423B9 /* ANSBlockObservationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSBlockObservationController.h; sourceTree = "<group>"; };
+		933C745D1D50908100A423B9 /* ANSBlockObservationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSBlockObservationController.m; sourceTree = "<group>"; };
+		933C745E1D50908100A423B9 /* ANSObservationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSObservationController.h; sourceTree = "<group>"; };
+		933C745F1D50908100A423B9 /* ANSObservationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSObservationController.m; sourceTree = "<group>"; };
+		933C74601D50908100A423B9 /* ANSProtocolObservationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSProtocolObservationController.h; sourceTree = "<group>"; };
+		933C74611D50908100A423B9 /* ANSProtocolObservationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSProtocolObservationController.m; sourceTree = "<group>"; };
+		933C74631D50908100A423B9 /* ANSObservationController+ANSPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANSObservationController+ANSPrivate.h"; sourceTree = "<group>"; };
+		933C74681D50A22700A423B9 /* ANSObservableObject+ANSPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANSObservableObject+ANSPrivate.h"; sourceTree = "<group>"; };
 		9388ECDD1D49FEB50082EE4B /* ANSBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSBuffer.h; sourceTree = "<group>"; };
 		9388ECDE1D49FEB50082EE4B /* ANSBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSBuffer.m; sourceTree = "<group>"; };
 		9388ECE11D4A396F0082EE4B /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
@@ -205,15 +216,6 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		93026CE61D47472200DFCF23 /* ANSObservableObject */ = {
-			isa = PBXGroup;
-			children = (
-				93026CE71D47472200DFCF23 /* ANSObservableObject.h */,
-				93026CE81D47472200DFCF23 /* ANSObservableObject.m */,
-			);
-			path = ANSObservableObject;
-			sourceTree = "<group>";
-		};
 		93052ADE1D4CF2370007D20C /* ANSImageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +223,39 @@
 				93052AE01D4CF2370007D20C /* ANSImageView.m */,
 			);
 			path = ANSImageView;
+			sourceTree = "<group>";
+		};
+		933C74581D50908000A423B9 /* ANSObservableObject */ = {
+			isa = PBXGroup;
+			children = (
+				933C74591D50908100A423B9 /* ANSObservableObject.h */,
+				933C745A1D50908100A423B9 /* ANSObservableObject.m */,
+				933C745B1D50908100A423B9 /* ObservationController */,
+			);
+			path = ANSObservableObject;
+			sourceTree = "<group>";
+		};
+		933C745B1D50908100A423B9 /* ObservationController */ = {
+			isa = PBXGroup;
+			children = (
+				933C745E1D50908100A423B9 /* ANSObservationController.h */,
+				933C745F1D50908100A423B9 /* ANSObservationController.m */,
+				933C745C1D50908100A423B9 /* ANSBlockObservationController.h */,
+				933C745D1D50908100A423B9 /* ANSBlockObservationController.m */,
+				933C74601D50908100A423B9 /* ANSProtocolObservationController.h */,
+				933C74611D50908100A423B9 /* ANSProtocolObservationController.m */,
+				933C74621D50908100A423B9 /* PrivatExtension */,
+			);
+			path = ObservationController;
+			sourceTree = "<group>";
+		};
+		933C74621D50908100A423B9 /* PrivatExtension */ = {
+			isa = PBXGroup;
+			children = (
+				933C74631D50908100A423B9 /* ANSObservationController+ANSPrivate.h */,
+				933C74681D50A22700A423B9 /* ANSObservableObject+ANSPrivate.h */,
+			);
+			path = PrivatExtension;
 			sourceTree = "<group>";
 		};
 		9388ECE01D4A396F0082EE4B /* animationDancer */ = {
@@ -340,6 +375,7 @@
 		93C5A5CF1D40DF3D002FBCA8 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				933C74581D50908000A423B9 /* ANSObservableObject */,
 				93C5A6051D40E40B002FBCA8 /* ANSMacros */,
 				93EC8F621D48D9A6000624F0 /* UITableView */,
 				93EC8F5B1D48CDAA000624F0 /* UINib */,
@@ -348,7 +384,6 @@
 				93C5A5D01D40DF3D002FBCA8 /* ANSGCD */,
 				93C5A5D61D40DF3D002FBCA8 /* ANSRandom */,
 				93C5A5D91D40DF3D002FBCA8 /* ANSTimer */,
-				93026CE61D47472200DFCF23 /* ANSObservableObject */,
 				93052ADE1D4CF2370007D20C /* ANSImageView */,
 				9388ED0B1D4BEA220082EE4B /* ANSImageModel */,
 				93C5A60A1D4125C2002FBCA8 /* ANSTableViewCell */,
@@ -671,10 +706,13 @@
 				93C5A5F41D40DF3D002FBCA8 /* NSTimer+ANSExtension.m in Sources */,
 				93C5A5F51D40DF3D002FBCA8 /* NSArray+ANSExtension.m in Sources */,
 				93EC8F651D48D9A6000624F0 /* UITableView+Extension.m in Sources */,
+				933C74671D50908100A423B9 /* ANSProtocolObservationController.m in Sources */,
 				93E520931D424DAE007EAD07 /* ANSViewControllerTables.m in Sources */,
 				9388ECDF1D49FEB50082EE4B /* ANSBuffer.m in Sources */,
+				933C74651D50908100A423B9 /* ANSBlockObservationController.m in Sources */,
 				93052AE11D4CF2370007D20C /* ANSImageView.m in Sources */,
 				93C5A5F31D40DF3D002FBCA8 /* ANSTimerPrivate.m in Sources */,
+				933C74641D50908100A423B9 /* ANSObservableObject.m in Sources */,
 				93026CE21D46810900DFCF23 /* ANSRootView.m in Sources */,
 				9388ED111D4BEA220082EE4B /* ANSImageModel.m in Sources */,
 				93EC8F5E1D48CDAA000624F0 /* UINib+Extension.m in Sources */,
@@ -685,8 +723,8 @@
 				93026CE51D46810900DFCF23 /* ANSAnimatedView.m in Sources */,
 				93C084371D3E380D0077A81C /* main.m in Sources */,
 				93C084351D3E380D0077A81C /* ANSAppDelegate.m in Sources */,
-				93026CE91D47472200DFCF23 /* ANSObservableObject.m in Sources */,
 				93026CE31D46810900DFCF23 /* ANSViewControllerFirstTask.m in Sources */,
+				933C74661D50908100A423B9 /* ANSObservationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^ANSStateChangeBlock)(id observableObject, id observer);
+typedef void(^ANSStateChangeBlock)(id observer, id observableObject);
 
 @interface ANSObservableObject : NSObject
 @property (atomic, assign)          NSUInteger    state;
@@ -33,10 +33,27 @@ typedef void(^ANSStateChangeBlock)(id observableObject, id observer);
 - (void)notifyObserversWithSelector:(SEL)selector;
 - (void)notifyObserversWithSelector:(SEL)selector object:(id)object;
 
-//block observation methods
+#pragma mark -
+#pragma mark Block observation methods
 
-- (void)addObserverObject:(id)object withBlock:(ANSStateChangeBlock)block;
-- (void)removeObserverObject:(id)object withBlock:(ANSStateChangeBlock)block;
+//block calls for all states
+- (void)addObserverObject:(id)object
+                withBlock:(ANSStateChangeBlock)block;
+
+//block calls for particular state
+- (void)addObserverObject:(id)object
+                 forState:(NSUInteger)state
+                withBlock:(ANSStateChangeBlock)block;
+
+//block calls for some states
+- (void)addObserverObject:(id)object
+         forStatesInRange:(NSUInteger)stateCount 
+                withBlock:(ANSStateChangeBlock)block;
+
+// remove observer for particular state
+- (void)removeObserverObject:(id)object
+                    forState:(NSUInteger)state
+                   withBlock:(ANSStateChangeBlock)block;
 
 - (void)addStateChangeBlock:(ANSStateChangeBlock)block;
 - (void)removeStateChangeBlock:(ANSStateChangeBlock)block;

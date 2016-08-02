@@ -61,7 +61,7 @@
 }
 
 #pragma mark -
-#pragma mark Public methods
+#pragma mark Public methods (protocol observation)
 
 - (void)addObserverObject:(id)object {
     @synchronized(self) {
@@ -104,6 +104,29 @@
 }
 
 #pragma mark -
+#pragma mark Public methods (block observation)
+
+- (void)addObserverObject:(id)object
+                withBlock:(ANSStateChangeBlock)block
+{
+
+}
+
+- (void)addObserverObject:(id)object
+                withBlock:(ANSStateChangeBlock)block
+                 forState:(NSUInteger)state
+{
+
+}
+
+- (void)removeObserverObject:(id)object
+                   withBlock:(ANSStateChangeBlock)block
+                    forState:(NSUInteger)state
+{
+    
+}
+
+#pragma mark -
 #pragma mark Private methods
 
 - (SEL)selectorForState:(NSUInteger)state {
@@ -120,7 +143,7 @@
         }
     }
 }
-
+    
 - (void)notifyObserversWithSelector:(SEL)selector {
     [self notifyObserversWithSelector:selector object:self];
 }
