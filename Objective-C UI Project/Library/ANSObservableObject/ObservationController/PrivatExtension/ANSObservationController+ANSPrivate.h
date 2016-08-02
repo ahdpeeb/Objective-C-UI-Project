@@ -10,7 +10,7 @@
 
 @interface ANSObservationController ()
 
-- (void)notifyWithState:(NSUInteger)state;
-- (void)notifyWithState:(NSUInteger)state withObject:(id)object;
+- (void)notifyOfStateChange:(NSUInteger)state;
+- (void)notifyOfStateChange:(NSUInteger)state withObject:(id)object;
 
 @end

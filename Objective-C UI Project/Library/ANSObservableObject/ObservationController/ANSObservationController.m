@@ -35,6 +35,10 @@ static NSString * const kANSAllocationException = @"You never should create Obse
 #pragma mark -
 #pragma mark Initialization and deallocation
 
+- (void)dealloc {
+   [_observableObject invalidateController:self];
+}
+
 - (instancetype)initWithObserver:(id)observer
                 observableObject:(ANSObservableObject *)observableObject
 {
@@ -51,7 +55,7 @@ static NSString * const kANSAllocationException = @"You never should create Obse
 }
 
 - (instancetype)init {
-    NSAssert([self class] != [ANSObservationController class], kANSAllocationException );
+    NSAssert([self class] != [ANSObservationController class], kANSAllocationException);
     
     self = [super init];
 
@@ -102,18 +106,14 @@ static NSString * const kANSAllocationException = @"You never should create Obse
     return NO;
 }
 
-- (BOOL)isEqualToObservationState:(ANSObservationController *)controller {
-    return controller.observer == self.observer && controller.observer == self.observableObject;
-}
-
 #pragma mark -
 #pragma mark ANSObservationController+ANSPrivateExtension.h
 
-- (void)notifyWithState:(NSUInteger)state {
+- (void)notifyOfStateChange:(NSUInteger)state {
     [self doesNotRecognizeSelector:_cmd];
 }
 
-- (void)notifyWithState:(NSUInteger)state withObject:(id)object {
+- (void)notifyOfStateChange:(NSUInteger)state withObject:(id)object {
     [self doesNotRecognizeSelector:_cmd];
 }
 

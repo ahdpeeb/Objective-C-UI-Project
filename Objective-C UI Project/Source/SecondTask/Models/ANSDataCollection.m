@@ -11,15 +11,24 @@
 
 #import "ANSBuffer.h"
 
+typedef NS_ENUM(NSUInteger, ANSCollectionAction) {
+    ANSCollectionAddData,
+    ANSCollectionRemoveData,
+    ANSCollectionMoveData
+};
+
 static NSString * const kANSArchiveKey              = @"kANSArchiveKey";
 static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 @interface ANSDataCollection ()
 @property (nonatomic, retain) NSMutableArray *mutableDataCollection;
+@property (nonatomic, retain) ANSBuffer *tempBuffer;
 
 @end
 
 @implementation ANSDataCollection
+
+@synthesize state = _state;
 
 @dynamic count;
 @dynamic objects;
@@ -40,6 +49,14 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 #pragma mark -
 #pragma mark Accsessors
+
+- (void)setState:(NSUInteger)state withObject:(id)object {
+    @synchronized(self) {
+        _state = state;
+            
+        [self notifyOfStateChange:state withObject:object];
+    }
+}
 
 - (NSUInteger)count {
     @synchronized(self) {
@@ -96,7 +113,8 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
             
             [collection insertObject:data atIndex:index];
             
-            [self notifyObserversWithSelector:@selector(collection:didUpdateData:) object:buffer];
+            [self setState:ANSCollectionRemoveData withObject:buffer];
+//          [self notifyObserversWithSelector:@selector(collection:didUpdateData:) object:buffer];
         }
     }
 }
@@ -107,8 +125,11 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
         if (object) {
             ANSBuffer *buffer = [ANSBuffer allocWithObject:object value:index];
             buffer.selector = @selector(deleteRowsAtIndexPaths:withRowAnimation:);
+            
             [self.mutableDataCollection removeObjectAtIndex:index];
-            [self notifyObserversWithSelector:@selector(collection:didUpdateData:) object:buffer];
+            
+            [self setState:ANSCollectionRemoveData withObject:buffer];
+//          [self notifyObserversWithSelector:@selector(collection:didUpdateData:) object:buffer];
         }
     }
 }
@@ -163,6 +184,10 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     @synchronized(self) {
         return [self.mutableDataCollection objectAtIndex:idx];
     }
+}
+
+- (SEL)selectorForState:(NSUInteger)state {
+    return @selector(collection:didUpdateData:);
 }
 
 #pragma mark -

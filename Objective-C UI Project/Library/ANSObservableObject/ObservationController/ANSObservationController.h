@@ -10,11 +10,6 @@
 
 #import "ANSObservableObject.h"
 
-typedef NS_ENUM(uint16_t, ANSObservationType) {
-    ANSProtocolObservation,
-    ANSBlockObservation
-};
-
 @interface ANSObservationController : NSObject
 @property (nonatomic, readonly)                 id                  observer;
 @property (nonatomic, readonly)                 ANSObservableObject *observableObject;

@@ -12,6 +12,6 @@
 
 @interface ANSObservableObject ()
 
-- (void)invalidateController:(ANSObservationController*)controller; 
+- (void)invalidateController:(ANSObservationController *)controller;
 
 @end

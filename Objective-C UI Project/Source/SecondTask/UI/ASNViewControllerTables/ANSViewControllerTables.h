@@ -15,6 +15,7 @@ UITableViewDataSource,
 UITableViewDelegate,
 ANSCollectionObserver
 >
+
 @property (nonatomic, strong) ANSDataCollection *collection;
 
 - (IBAction)onEditButton:(id)sender;

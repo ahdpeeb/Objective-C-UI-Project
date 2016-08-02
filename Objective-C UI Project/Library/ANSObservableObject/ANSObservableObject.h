@@ -8,55 +8,36 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^ANSStateChangeBlock)(id observer, id observableObject);
+@class ANSProtocolObservationController;
+@class ANSBlockObservationController;
 
 @interface ANSObservableObject : NSObject
-@property (atomic, assign)          NSUInteger    state;
-@property (nonatomic, readonly)     NSSet         *observersSet;
+@property (nonatomic, assign)  NSUInteger state;
+
+//Use this methods for set observation with protocol.
+/*Observable object will create ObservationController (for each observer), which will notify
+    observer about state changes in observable object*/
+//in you subclass you need to define "selectorForState" method
+- (ANSProtocolObservationController *)protocolControllerWithObserver:(id)observer;
+
+//Use this methods for set observation with block.
+/*Observable object will create ObservationController (for each observer), which will notify
+ observer about state changes in observable object*/
+- (ANSBlockObservationController *)blockControllerWithObserver:(id)observer;
 
 - (void)setState:(NSUInteger)state withObject:(id)object;
 
-- (void)addObserverObject:(id)object;
-- (void)addObserverObjects:(NSArray *)objects;
-- (void)removeObserverObject:(id)object;
-- (void)removeObserverObjects:(NSArray *)objects;
 - (BOOL)isObservedByObject:(id)object;
+
+#pragma mark -
+#pragma mark Private declaration
+
+//It must be determined directly in observable object.  
+//This method is intended for subclasses. Never call it directly.
+- (SEL)selectorForState:(NSUInteger)state;
 
 //This method is intended for subclasses. Never call it directly.
 - (void)notifyOfStateChange:(NSUInteger)state;
 - (void)notifyOfStateChange:(NSUInteger)state withObject:(id)object;
-
-//This method is intended for subclasses. Never call it directly.
-//It must be determined directly in observable object.  
-- (SEL)selectorForState:(NSUInteger)state;
-
-- (void)notifyObserversWithSelector:(SEL)selector;
-- (void)notifyObserversWithSelector:(SEL)selector object:(id)object;
-
-#pragma mark -
-#pragma mark Block observation methods
-
-//block calls for all states
-- (void)addObserverObject:(id)object
-                withBlock:(ANSStateChangeBlock)block;
-
-//block calls for particular state
-- (void)addObserverObject:(id)object
-                 forState:(NSUInteger)state
-                withBlock:(ANSStateChangeBlock)block;
-
-//block calls for some states
-- (void)addObserverObject:(id)object
-         forStatesInRange:(NSUInteger)stateCount 
-                withBlock:(ANSStateChangeBlock)block;
-
-// remove observer for particular state
-- (void)removeObserverObject:(id)object
-                    forState:(NSUInteger)state
-                   withBlock:(ANSStateChangeBlock)block;
-
-- (void)addStateChangeBlock:(ANSStateChangeBlock)block;
-- (void)removeStateChangeBlock:(ANSStateChangeBlock)block;
-- (void)isObserveByBlock:(ANSStateChangeBlock)block;
 
 @end

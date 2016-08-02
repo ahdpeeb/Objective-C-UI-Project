@@ -240,10 +240,10 @@
 			children = (
 				933C745E1D50908100A423B9 /* ANSObservationController.h */,
 				933C745F1D50908100A423B9 /* ANSObservationController.m */,
-				933C745C1D50908100A423B9 /* ANSBlockObservationController.h */,
-				933C745D1D50908100A423B9 /* ANSBlockObservationController.m */,
 				933C74601D50908100A423B9 /* ANSProtocolObservationController.h */,
 				933C74611D50908100A423B9 /* ANSProtocolObservationController.m */,
+				933C745C1D50908100A423B9 /* ANSBlockObservationController.h */,
+				933C745D1D50908100A423B9 /* ANSBlockObservationController.m */,
 				933C74621D50908100A423B9 /* PrivatExtension */,
 			);
 			path = ObservationController;

@@ -33,9 +33,10 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 
 - (void)setCollection:(ANSDataCollection *)collection {
     if (_collection != collection) {
-        [_collection removeObserverObject:self];
+    //  [_collection removeObserverObject:self];
         _collection = collection;
-        [_collection addObserverObject:self];
+        
+        [_collection protocolControllerWithObserver:self];
         
         [self.tableView.table reloadData];
     }
