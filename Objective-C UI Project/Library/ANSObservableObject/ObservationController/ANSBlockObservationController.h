@@ -13,11 +13,10 @@ typedef void(^ANSStateChangeBlock)(id observer, id observableObject);
 @interface ANSBlockObservationController : ANSObservationController
 
 - (void)setBlock:(ANSStateChangeBlock)block forState:(NSUInteger)state;
-- (void)remove:(ANSStateChangeBlock)block forState:(NSUInteger)state;
-
-- (ANSStateChangeBlock)blockForState:(NSUInteger)state;
+- (void)removeBlock:(ANSStateChangeBlock)block forState:(NSUInteger)state;
 
 - (BOOL)containsBlockForState:(NSUInteger)state;
+- (ANSStateChangeBlock)blockForState:(NSUInteger)state;
 
 #pragma mark -
 #pragma mark Block observation methods
@@ -44,5 +43,8 @@ typedef void(^ANSStateChangeBlock)(id observer, id observableObject);
 - (void)addStateChangeBlock:(ANSStateChangeBlock)block;
 - (void)removeStateChangeBlock:(ANSStateChangeBlock)block;
 - (void)isObserveByBlock:(ANSStateChangeBlock)block;
+
+- (ANSStateChangeBlock)objectAtIndexedSubscript:(NSUInteger)index;
+- (void)setObject:(ANSStateChangeBlock)object atIndexedSubscript:(NSUInteger)index;
 
 @end

@@ -113,7 +113,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
             
             [collection insertObject:data atIndex:index];
             
-            [self setState:ANSCollectionRemoveData withObject:buffer];
+            [self setState:ANSCollectionAddData withObject:buffer];
 //          [self notifyObserversWithSelector:@selector(collection:didUpdateData:) object:buffer];
         }
     }
@@ -129,7 +129,6 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
             [self.mutableDataCollection removeObjectAtIndex:index];
             
             [self setState:ANSCollectionRemoveData withObject:buffer];
-//          [self notifyObserversWithSelector:@selector(collection:didUpdateData:) object:buffer];
         }
     }
 }

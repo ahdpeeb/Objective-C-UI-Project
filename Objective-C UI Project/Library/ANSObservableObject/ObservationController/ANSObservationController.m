@@ -11,7 +11,7 @@
 #import "ANSObservationController+ANSPrivate.h"
 #import "ANSObservableObject+ANSPrivate.h"
 
-static NSString * const kANSAllocationException = @"You never should create ObservationController object";
+static NSString * const kANSAllocationException = @"You never should create observationController object";
 
 @interface ANSObservationController ()
 @property (nonatomic, assign) id                  observer;
@@ -39,6 +39,14 @@ static NSString * const kANSAllocationException = @"You never should create Obse
    [_observableObject invalidateController:self];
 }
 
+- (instancetype)init {
+    NSAssert([self class] != [ANSObservationController class], kANSAllocationException);
+    
+    self = [super init];
+    
+    return self;
+}
+
 - (instancetype)initWithObserver:(id)observer
                 observableObject:(ANSObservableObject *)observableObject
 {
@@ -51,14 +59,6 @@ static NSString * const kANSAllocationException = @"You never should create Obse
         self.observableObject = observableObject;
     }
     
-    return self;
-}
-
-- (instancetype)init {
-    NSAssert([self class] != [ANSObservationController class], kANSAllocationException);
-    
-    self = [super init];
-
     return self;
 }
 

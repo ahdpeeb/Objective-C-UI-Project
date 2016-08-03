@@ -68,20 +68,6 @@
     return NULL;
 }
 
-- (void)notifyOfStateChange:(NSUInteger)state withObject:(id)object {
-    @synchronized(self) {
-        for (ANSObservationController *controller in self.controllerHashTable) {
-            [controller notifyOfStateChange:state withObject:object];
-        }
-    }
-}
-
-- (void)notifyOfStateChange:(NSUInteger)state {
-    @synchronized(self) {
-        [self notifyOfStateChange:state withObject:nil];
-    }
-}
-
 - (void)invalidateController:(ANSObservationController *)controller {
     @synchronized(self) {
         [self.controllerHashTable removeObject:controller];
@@ -96,6 +82,37 @@
         [self.controllerHashTable addObject:controller];
         
         return controller;
+    }
+}
+
+- (void)notifyOfStateChange:(NSUInteger)state {
+    @synchronized(self) {
+        [self notifyOfStateChange:state withObject:nil];
+    }
+}
+
+
+- (void)notifyOfStateChange:(NSUInteger)state withObject:(id)object {
+    @synchronized(self) {
+        [self notifyOfStateChange:(state)
+                        withBlock:^(ANSObservationController *controller) {
+                            [controller notifyOfStateChange:state withObject:object];
+                        }];
+    }
+}
+
+
+- (void)notifyOfStateChange:(NSUInteger)state
+                  withBlock:(ANSControllerNotificationBlock)block
+{
+    @synchronized(self) {
+        if (!block) {
+            return;
+        }
+        
+        for (ANSObservationController *controller in self.controllerHashTable) {
+            block(controller);
+        }
     }
 }
 
@@ -129,17 +146,22 @@
 }
 
 - (ANSProtocolObservationController *)protocolControllerWithObserver:(id)observer {
-    @synchronized(self) {
-        return [self controllerWithClass:[ANSProtocolObservationController class]
-                                observer:observer];
+    Class resultClass = [ANSProtocolObservationController class];
+    for (ANSObservationController *controler in self.controllerHashTable) {
+        if (controler.observer == observer && [controler isMemberOfClass:resultClass]) {
+            return (ANSProtocolObservationController *)controler;
+        }
     }
+    
+    return [self controllerWithClass:[ANSProtocolObservationController class]
+                                observer:observer];
 }
 
 - (ANSBlockObservationController *)blockControllerWithObserver:(id)observer {
-    @synchronized(self) {
-        return [self controllerWithClass:[ANSBlockObservationController class]
+
+    
+    return [self controllerWithClass:[ANSBlockObservationController class]
                                 observer:observer];
-    }
 }
 
 @end
