@@ -22,12 +22,12 @@
 #pragma mark -
 #pragma mark Private Methods
 
-- (void)notifyOfStateChange:(NSUInteger)state withObject:(id)object {
-    [self notifyObserversWithSelector:[self.observableObject selectorForState:state] object:object];
+- (void)notifyOfStateChange:(NSUInteger)state withUserInfo:(id)userInfo {
+    [self notifyObserversWithSelector:[self.observableObject selectorForState:state] object:userInfo];
 }
 
 - (void)notifyOfStateChange:(NSUInteger)state {
-    [self notifyOfStateChange:state withObject:nil];
+    [self notifyOfStateChange:state withUserInfo:nil];
 }
 
 - (void)notifyObserversWithSelector:(SEL)selector object:(id)object {

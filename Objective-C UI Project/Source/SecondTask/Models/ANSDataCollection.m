@@ -50,11 +50,11 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 #pragma mark -
 #pragma mark Accsessors
 
-- (void)setState:(NSUInteger)state withObject:(id)object {
+- (void)setState:(NSUInteger)state withUserInfo:(id)userInfo {
     @synchronized(self) {
         _state = state;
             
-        [self notifyOfStateChange:state withObject:object];
+        [self notifyOfStateChange:state withUserInfo:userInfo];
     }
 }
 
@@ -113,7 +113,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
             
             [collection insertObject:data atIndex:index];
             
-            [self setState:ANSCollectionAddData withObject:buffer];
+            [self setState:ANSCollectionAddData withUserInfo:buffer];
 //          [self notifyObserversWithSelector:@selector(collection:didUpdateData:) object:buffer];
         }
     }
@@ -128,7 +128,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
             
             [self.mutableDataCollection removeObjectAtIndex:index];
             
-            [self setState:ANSCollectionRemoveData withObject:buffer];
+            [self setState:ANSCollectionRemoveData withUserInfo:buffer];
         }
     }
 }

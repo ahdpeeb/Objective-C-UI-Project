@@ -8,6 +8,9 @@
 
 #import "ANSBlockObservationController.h"
 
+#import "ANSObservableObject+ANSPrivate.h"
+#import "ANSObservationController+ANSPrivate.h"
+
 @interface ANSBlockObservationController ()
 @property (nonatomic, strong) NSMutableDictionary *stateDictionary;
 
@@ -27,6 +30,21 @@
     }
     
     return self;
+}
+
+#pragma mark -
+#pragma mark Private methods
+
+- (void)notifyOfStateChange:(NSUInteger)state withUserInfo:(id)userInfo {
+    ANSStateChangeBlock block = [self blockForState:state];
+    if (block) {
+        block(self.observer, self.observableObject, userInfo);
+    }
+    
+}
+
+- (void)notifyOfStateChange:(NSUInteger)state {
+    [self notifyOfStateChange:state withUserInfo:nil];
 }
 
 #pragma mark -
@@ -51,7 +69,7 @@
 
 - (BOOL)containsBlockForState:(NSUInteger)state {
     return nil != [self blockForState:state];
-}
+}  
 
 - (ANSStateChangeBlock)objectAtIndexedSubscript:(NSUInteger)index {
     return [self blockForState:index];

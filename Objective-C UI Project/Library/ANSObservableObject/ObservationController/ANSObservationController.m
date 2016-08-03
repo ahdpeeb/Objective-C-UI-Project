@@ -113,7 +113,7 @@ static NSString * const kANSAllocationException = @"You never should create obse
     [self doesNotRecognizeSelector:_cmd];
 }
 
-- (void)notifyOfStateChange:(NSUInteger)state withObject:(id)object {
+- (void)notifyOfStateChange:(NSUInteger)state withUserInfo:(id)UserInfo {
     [self doesNotRecognizeSelector:_cmd];
 }
 

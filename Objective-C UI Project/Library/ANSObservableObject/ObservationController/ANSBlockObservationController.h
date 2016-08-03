@@ -8,7 +8,7 @@
 
 #import "ANSObservationController.h"
 
-typedef void(^ANSStateChangeBlock)(id observer, id observableObject);
+typedef void(^ANSStateChangeBlock)(id observer, ANSObservableObject *observableObject, id userInfo);
 
 @interface ANSBlockObservationController : ANSObservationController
 
@@ -19,30 +19,7 @@ typedef void(^ANSStateChangeBlock)(id observer, id observableObject);
 - (ANSStateChangeBlock)blockForState:(NSUInteger)state;
 
 #pragma mark -
-#pragma mark Block observation methods
-
-//block calls for all states
-- (void)addObserverObject:(id)object
-                withBlock:(ANSStateChangeBlock)block;
-
-//block calls for particular state
-- (void)addObserverObject:(id)object
-                 forState:(NSUInteger)state
-                withBlock:(ANSStateChangeBlock)block;
-
-//block calls for some states
-- (void)addObserverObject:(id)object
-         forStatesInRange:(NSUInteger)stateCount
-                withBlock:(ANSStateChangeBlock)block;
-
-// remove observer for particular state
-- (void)removeObserverObject:(id)object
-                    forState:(NSUInteger)state
-                   withBlock:(ANSStateChangeBlock)block;
-
-- (void)addStateChangeBlock:(ANSStateChangeBlock)block;
-- (void)removeStateChangeBlock:(ANSStateChangeBlock)block;
-- (void)isObserveByBlock:(ANSStateChangeBlock)block;
+#pragma mark Addtional
 
 - (ANSStateChangeBlock)objectAtIndexedSubscript:(NSUInteger)index;
 - (void)setObject:(ANSStateChangeBlock)object atIndexedSubscript:(NSUInteger)index;

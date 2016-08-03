@@ -12,12 +12,10 @@
 @class ANSProtocolObservationController;
 @class ANSBlockObservationController;
 
-typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controller);
-
 @interface ANSObservableObject : NSObject
 @property (nonatomic, assign)  NSUInteger state;
 
-- (void)setState:(NSUInteger)state withObject:(id)object;
+- (void)setState:(NSUInteger)state withUserInfo:(id)UserInfo;
 
 //Use this methods for set observation with protocol.
 /*Observable object will create ObservationController (for each observer), which will notify
@@ -41,9 +39,6 @@ typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controll
 
 //This method is intended for subclasses. Never call it directly.
 - (void)notifyOfStateChange:(NSUInteger)state;
-- (void)notifyOfStateChange:(NSUInteger)state withObject:(id)object;
-
-- (void)notifyOfStateChange:(NSUInteger)state
-                withBlock:(ANSControllerNotificationBlock)block;
+- (void)notifyOfStateChange:(NSUInteger)state withUserInfo:(id)UserInfo;
 
 @end

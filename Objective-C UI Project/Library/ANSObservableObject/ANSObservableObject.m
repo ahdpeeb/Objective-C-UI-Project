@@ -13,11 +13,14 @@
 #import "ANSProtocolObservationController.h"
 #import "ANSObservationController+ANSPrivate.h"
 
+typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controller);
+
 @interface ANSObservableObject ()
 @property (nonatomic, retain) NSHashTable *controllerHashTable;
 
 - (id)controllerWithClass:(Class)cls observer:(id)observer;
-
+- (void)notifyOfStateChange:(NSUInteger)state
+                  withBlock:(ANSControllerNotificationBlock)block;
 @end
 
 @implementation ANSObservableObject
@@ -37,19 +40,19 @@
 #pragma mark -
 #pragma mark Accessors
 
-- (void)setState:(NSUInteger)state withObject:(id)object {
+- (void)setState:(NSUInteger)state withUserInfo:(id)UserInfo {
     @synchronized(self) {
         if (_state != state) {
             _state = state;
             
-            [self notifyOfStateChange:state withObject:object];
+            [self notifyOfStateChange:state withUserInfo:UserInfo];
         }
     }
 }
 
 - (void)setState:(NSUInteger)state {
     @synchronized(self) {
-        [self setState:state withObject:self];
+        [self setState:state withUserInfo:self];
     }
 }
 
@@ -87,16 +90,16 @@
 
 - (void)notifyOfStateChange:(NSUInteger)state {
     @synchronized(self) {
-        [self notifyOfStateChange:state withObject:nil];
+        [self notifyOfStateChange:state withUserInfo:nil];
     }
 }
 
 
-- (void)notifyOfStateChange:(NSUInteger)state withObject:(id)object {
+- (void)notifyOfStateChange:(NSUInteger)state withUserInfo:(id)UserInfo {
     @synchronized(self) {
         [self notifyOfStateChange:(state)
                         withBlock:^(ANSObservationController *controller) {
-                            [controller notifyOfStateChange:state withObject:object];
+                            [controller notifyOfStateChange:state withUserInfo:UserInfo];
                         }];
     }
 }
