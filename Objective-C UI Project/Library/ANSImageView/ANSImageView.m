@@ -8,6 +8,18 @@
 
 #import "ANSImageView.h"
 
+#import "ANSImageModel.h"
+#import "ANSBlockObservationController.h"
+#import "ANSGCD.h"
+#import "ANSMacros.h"
+
+@interface ANSImageView ()
+@property (nonatomic, strong) ANSBlockObservationController *controller;
+
+- (void)prepareController:(ANSBlockObservationController *)controller;
+
+@end
+
 @implementation ANSImageView
 
 #pragma mark -
@@ -59,13 +71,44 @@
 - (void)setImageModel:(ANSImageModel *)imageModel {
     if(_imageModel != imageModel) {
         _imageModel = imageModel;
+        
+        self.controller = [_imageModel blockControllerWithObserver:self];
+    }
+}
+
+- (void)setController:(ANSBlockObservationController *)controller {
+    if (_controller != controller) {
+        _controller = controller;
+        
+        [self prepareController:controller];
     }
 }
 
 #pragma mark -
-#pragma mark View lifecycle
-
-#pragma mark -
 #pragma mark Private
+
+- (void)prepareController:(ANSBlockObservationController *)controller {
+    ANSWeakify(self);
+    
+    ANSStateChangeBlock block = ^(ANSBlockObservationController *controller, id userInfo) {
+        ANSPerformInMainQueue(dispatch_sync, ^{
+            ANSStrongify(self);
+            
+            ANSImageModel *model = controller.observableObject;
+            self.contentImageView.image = model.image;
+        });
+    };
+    
+    [controller setBlock:block forState:ANSImageModelLoaded];
+    [controller setBlock:block forState:ANSImageModelUnloaded];
+    
+    block = ^(ANSBlockObservationController *controller, id userInfo) {
+        ANSStrongify(self);
+        
+        [self.imageModel load];
+    };
+    
+    [controller setBlock:block forState:ANSImageModelFailedLoadin];
+}
 
 @end

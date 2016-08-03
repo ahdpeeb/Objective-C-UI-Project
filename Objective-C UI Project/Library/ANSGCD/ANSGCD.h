@@ -43,7 +43,7 @@ void ANSPerformInAsyncQueue(ANSPriorityType type, ANSGCDBlock block);
 void ANSPerformInSyncQueue(ANSPriorityType type, ANSGCDBlock block);
 
 //  Perform block in main thread.
-//  Functios must take ONLY "dispatch_async", "dispatch_async".
+//  Functios "timing" argument must be ONLY "dispatch_async" or "dispatch_sync".
 void ANSPerformInMainQueue(ANSDispatch timing, ANSGCDBlock block);
 
 //  Perform block after deley in main thread. 
