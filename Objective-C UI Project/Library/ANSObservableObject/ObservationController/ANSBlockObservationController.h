@@ -8,11 +8,14 @@
 
 #import "ANSObservationController.h"
 
-typedef void(^ANSStateChangeBlock)(id observer, ANSObservableObject *observableObject, id userInfo);
+typedef void(^ANSStateChangeBlock)(ANSBlockObservationController *controller, id userInfo);
 
 @interface ANSBlockObservationController : ANSObservationController
 
 - (void)setBlock:(ANSStateChangeBlock)block forState:(NSUInteger)state;
+
+//state requie termination with -1 to NSUIntegerMax
+- (void)setBlock:(ANSStateChangeBlock)block forStates:(NSUInteger)state, ...; 
 - (void)removeBlock:(ANSStateChangeBlock)block forState:(NSUInteger)state;
 
 - (BOOL)containsBlockForState:(NSUInteger)state;
@@ -21,7 +24,7 @@ typedef void(^ANSStateChangeBlock)(id observer, ANSObservableObject *observableO
 #pragma mark -
 #pragma mark Addtional
 
-- (ANSStateChangeBlock)objectAtIndexedSubscript:(NSUInteger)index;
-- (void)setObject:(ANSStateChangeBlock)object atIndexedSubscript:(NSUInteger)index;
+- (id)objectAtIndexedSubscript:(NSUInteger)index;
+- (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index;
 
 @end

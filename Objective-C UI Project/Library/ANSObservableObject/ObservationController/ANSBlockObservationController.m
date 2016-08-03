@@ -11,6 +11,8 @@
 #import "ANSObservableObject+ANSPrivate.h"
 #import "ANSObservationController+ANSPrivate.h"
 
+#import <stdarg.h>
+
 @interface ANSBlockObservationController ()
 @property (nonatomic, strong) NSMutableDictionary *stateDictionary;
 
@@ -38,7 +40,7 @@
 - (void)notifyOfStateChange:(NSUInteger)state withUserInfo:(id)userInfo {
     ANSStateChangeBlock block = [self blockForState:state];
     if (block) {
-        block(self.observer, self.observableObject, userInfo);
+        block(self, userInfo);
     }
     
 }
@@ -59,6 +61,23 @@
                              forKey:@(state)];
 }
 
+//state requie termination with -1 to NSUIntegerMax
+- (void)setBlock:(ANSStateChangeBlock)block forStates:(NSUInteger)state, ... {
+    if (!block) {
+        return;
+    }
+    
+    va_list argumenList;
+    va_start(argumenList, state);
+    
+    while (NSUIntegerMax != state) {
+        self[state] = block;
+        state = va_arg(argumenList, NSUInteger);
+    }
+
+    va_end(argumenList);
+}
+
 - (void)removeBlock:(ANSStateChangeBlock)block forState:(NSUInteger)state {
     [self.stateDictionary removeObjectForKey:@(state)];
 }
@@ -71,11 +90,11 @@
     return nil != [self blockForState:state];
 }  
 
-- (ANSStateChangeBlock)objectAtIndexedSubscript:(NSUInteger)index {
+- (id)objectAtIndexedSubscript:(NSUInteger)index {
     return [self blockForState:index];
 }
 
-- (void)setObject:(ANSStateChangeBlock)object atIndexedSubscript:(NSUInteger)index {
+- (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index {
     return [self setBlock:object forState:index];
 }
 

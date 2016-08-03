@@ -94,7 +94,6 @@ typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controll
     }
 }
 
-
 - (void)notifyOfStateChange:(NSUInteger)state withUserInfo:(id)UserInfo {
     @synchronized(self) {
         [self notifyOfStateChange:(state)
@@ -103,7 +102,6 @@ typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controll
                         }];
     }
 }
-
 
 - (void)notifyOfStateChange:(NSUInteger)state
                   withBlock:(ANSControllerNotificationBlock)block

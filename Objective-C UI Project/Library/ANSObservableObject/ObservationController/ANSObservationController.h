@@ -10,8 +10,6 @@
 
 #import "ANSObservableObject.h"
 
-
-
 @interface ANSObservationController : NSObject
 @property (nonatomic, readonly)                 id                  observer;
 @property (nonatomic, readonly)                 ANSObservableObject *observableObject;
