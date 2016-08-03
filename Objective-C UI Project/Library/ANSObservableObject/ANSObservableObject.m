@@ -32,7 +32,7 @@ typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controll
 
 - (instancetype)init {
     self = [super init];
-    self.controllerHashTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsStrongMemory];
+    self.controllerHashTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
     
     return self;
 }

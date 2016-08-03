@@ -24,6 +24,11 @@ static NSString * const kANSEdit                    = @"Edit";
 static NSString * const kANSDone                    = @"Done";
 static NSString * const kANSTitleForHeaderSection   = @"Homer's contact list";
 
+@interface ANSViewControllerTables ()
+@property (nonatomic, strong) ANSProtocolObservationController *controller;
+
+@end
+
 ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableView)
 
 @implementation ANSViewControllerTables;
@@ -36,7 +41,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     //  [_collection removeObserverObject:self];
         _collection = collection;
         
-        [_collection protocolControllerWithObserver:self];
+        self.controller = [_collection protocolControllerWithObserver:self];
         
         [self.tableView.table reloadData];
     }
