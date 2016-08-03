@@ -88,9 +88,17 @@ typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controll
     }
 }
 
-- (void)notifyOfStateChange:(NSUInteger)state {
+- (void)notifyOfStateChange:(NSUInteger)state
+                  withBlock:(ANSControllerNotificationBlock)block
+{
     @synchronized(self) {
-        [self notifyOfStateChange:state withUserInfo:nil];
+        if (!block) {
+            return;
+        }
+        
+        for (ANSObservationController *controller in self.controllerHashTable) {
+            block(controller);
+        }
     }
 }
 
@@ -103,17 +111,9 @@ typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controll
     }
 }
 
-- (void)notifyOfStateChange:(NSUInteger)state
-                  withBlock:(ANSControllerNotificationBlock)block
-{
+- (void)notifyOfStateChange:(NSUInteger)state {
     @synchronized(self) {
-        if (!block) {
-            return;
-        }
-        
-        for (ANSObservationController *controller in self.controllerHashTable) {
-            block(controller);
-        }
+        [self notifyOfStateChange:state withUserInfo:nil];
     }
 }
 
