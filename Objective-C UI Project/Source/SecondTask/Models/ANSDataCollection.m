@@ -114,7 +114,6 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
             [collection insertObject:data atIndex:index];
             
             [self setState:ANSCollectionAddData withUserInfo:buffer];
-//          [self notifyObserversWithSelector:@selector(collection:didUpdateData:) object:buffer];
         }
     }
 }

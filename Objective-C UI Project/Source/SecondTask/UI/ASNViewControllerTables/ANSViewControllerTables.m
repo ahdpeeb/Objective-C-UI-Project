@@ -80,7 +80,9 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 #pragma mark -
 #pragma mark UITableViewDataSource protocol
 
-- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (nullable NSString *)tableView:(UITableView *)tableView
+         titleForHeaderInSection:(NSInteger)section
+{
     if (!section) {
         return [NSString stringWithFormat:kANSTitleForHeaderSection];
     }
@@ -92,13 +94,16 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)   tableView:(UITableView *)tableView
+    numberOfRowsInSection:(NSInteger)section
+{
     return self.collection.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     ANSDataCell *cell = [tableView reusableCellfromNibWithClass:[ANSDataCell class]];
-    
     ANSData *object = self.collection[indexPath.row];
     
     cell.label.text =   object.string;
@@ -107,21 +112,31 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     return cell;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)        tableView:(UITableView *)tableView
+    canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+- (void)    tableView:(UITableView *)tableView
+   moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
+          toIndexPath:(NSIndexPath *)destinationIndexPath
+{
     if (sourceIndexPath.section == destinationIndexPath.section) {
         [self.collection moveDataFromIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
     }
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)        tableView:(UITableView *)tableView
+    canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return YES;
 }
     //delate row (related with protocol methods editingStyleForRowAtIndexPath/ shouldIndentWhileEditingRowAtIndexPath)
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)    tableView:(UITableView *)tableView
+    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+    forRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSUInteger index = indexPath.row;
         
@@ -132,11 +147,15 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 #pragma mark -
 #pragma mark UITableViewDelegate protocol
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView
+           editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return UITableViewCellEditingStyleDelete;
 }
     //should shift leftBar if (aditing = YES)
-- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)                        tableView:(UITableView *)tableView
+   shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return YES;
 }
 

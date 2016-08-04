@@ -14,7 +14,7 @@
 #import "ANSMacros.h"
 
 @interface ANSImageView ()
-@property (nonatomic, strong) ANSBlockObservationController *controller;
+@property (nonatomic, strong) ANSBlockObservationController *observerionController;
 
 - (void)prepareController:(ANSBlockObservationController *)controller;
 
@@ -63,6 +63,7 @@
 - (void)setContentImageView:(UIImageView *)contentImageView {
     if (_contentImageView != contentImageView) {
         [_contentImageView removeFromSuperview];
+        
         _contentImageView = contentImageView;
         [self addSubview:contentImageView];
     }
@@ -70,17 +71,19 @@
 
 - (void)setImageModel:(ANSImageModel *)imageModel {
     if(_imageModel != imageModel) {
+        [_imageModel dump];
         _imageModel = imageModel;
         
-        self.controller = [_imageModel blockControllerWithObserver:self];
+        self.observerionController = [_imageModel blockControllerWithObserver:self];
+        [imageModel load];
     }
 }
 
-- (void)setController:(ANSBlockObservationController *)controller {
-    if (_controller != controller) {
-        _controller = controller;
+- (void)setObserverionController:(ANSBlockObservationController *)observerionController {
+    if (_observerionController != observerionController) {
+        _observerionController = observerionController;
         
-        [self prepareController:controller];
+        [self prepareController:observerionController];
     }
 }
 

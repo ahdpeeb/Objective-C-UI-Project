@@ -61,7 +61,6 @@
             ANSImageModelDispatcher *dispatcher = [ANSImageModelDispatcher new];
             [[dispatcher queue] addOperation:operation];
         }
-
     }
 }
 
@@ -71,6 +70,7 @@
 - (void)load {
     @synchronized(self) {
         if (self.state == ANSImageModelLoading) {
+            [self notifyOfStateChange:ANSImageModelLoading];
             return;
         }
         
@@ -101,7 +101,7 @@
         ANSStrongify(self);
      //   __strong ANSImageModel *strongSelf = weakSelf;
         
-        self.image = [UIImage imageWithContentsOfFile:[self.url absoluteString]];
+        self.image = [UIImage imageWithContentsOfFile:[self.url path]];
     }];
     
     operation.completionBlock = ^{
