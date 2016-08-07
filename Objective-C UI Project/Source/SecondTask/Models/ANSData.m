@@ -18,8 +18,8 @@ static NSString * const kANSStringKey          = @"kANSStringKey";
 static NSString * const kANSImageKey           = @"kANSImageKey";
 
 @interface ANSData ()
-@property (nonatomic, copy)     NSString *mutableString;
-@property (nonatomic, strong)   UIImage  *mutableImage;
+@property (nonatomic, copy)     NSString        *mutableString;
+@property (nonatomic, strong)   ANSImageModel   *imageModel;
 
 @end
 
@@ -37,8 +37,10 @@ static NSString * const kANSImageKey           = @"kANSImageKey";
         NSString *alphabet = [NSString alphanumericAlphabet];
         self.mutableString = [NSString randomStringWithLength:kANSStringLength alphabet:alphabet];
         
-        NSString *path = [[NSBundle mainBundle] pathForResource:kANSImageName ofType:kANSImageFormat];
-        self.mutableImage = [UIImage imageWithContentsOfFile:path];
+        NSURL *ulr = [[NSBundle mainBundle] URLForResource:kANSImageName withExtension:kANSImageFormat];
+        ANSImageModel *image = [ANSImageModel imageFromURL:ulr];
+        [image load];
+        self.imageModel = image;
     }
     
     return self;
@@ -52,7 +54,7 @@ static NSString * const kANSImageKey           = @"kANSImageKey";
 }
 
 - (UIImage *)image {
-    return self.mutableImage;
+    return self.imageModel.image;
 }
 
 #pragma mark -
@@ -67,7 +69,7 @@ static NSString * const kANSImageKey           = @"kANSImageKey";
     self = [super init];
     if (self) {
         self.mutableString = [aDecoder decodeObjectForKey:kANSStringKey];
-        self.mutableImage = [aDecoder decodeObjectForKey:kANSImageKey];
+        self.imageModel = [aDecoder decodeObjectForKey:kANSImageKey];
     }
     
     return self;
@@ -80,7 +82,7 @@ static NSString * const kANSImageKey           = @"kANSImageKey";
     id copy = [[self class] new];
     if (copy) {
         [copy setMutableString:self.mutableString];
-        [copy setMutableImage:self.mutableImage];
+        [copy setImageModel:self.imageModel];
     }
     
     return copy;

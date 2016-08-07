@@ -58,8 +58,10 @@
         _operation = operation;
         
         if (operation) {
-            ANSImageModelDispatcher *dispatcher = [ANSImageModelDispatcher new];
+            ANSImageModelDispatcher *dispatcher = [ANSImageModelDispatcher sharedDispatcher];
             [[dispatcher queue] addOperation:operation];
+            NSUInteger count = [dispatcher.queue operationCount];
+            NSLog(@"count = %lu",count);
         }
     }
 }
@@ -78,7 +80,7 @@
             [self notifyOfStateChange:ANSImageModelLoaded];
         }
         
-        self.state =ANSImageModelLoading;
+        self.state = ANSImageModelLoading;
     }
     
     self.operation = [self imageLoadingOperation];
@@ -96,10 +98,8 @@
 - (NSOperation *)imageLoadingOperation {
     ANSWeakify(self);
 
-  //  __weak ANSImageModel *weakSelf = self;
     NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
         ANSStrongify(self);
-     //   __strong ANSImageModel *strongSelf = weakSelf;
         
         self.image = [UIImage imageWithContentsOfFile:[self.url path]];
     }];
@@ -107,6 +107,8 @@
     operation.completionBlock = ^{
         ANSStrongify(self);
         self.state = self.image ? ANSImageModelLoaded : ANSImageModelFailedLoadin;
+        
+        NSLog(@"%lu", (unsigned long)self.state);
     };
     
     return operation;

@@ -52,7 +52,11 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    self.navigationItem.title = @"Gomer's contacts";
+    [self initLeftBarButtonItem];
+    [self initRightBarButtonItem];
+    
     [self.tableView.table reloadData];
 }
 
@@ -61,20 +65,34 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 }
 
 #pragma mark -
-#pragma mark IBActions
+#pragma mark UIBarButtonItem
 
-- (IBAction)onEditButton:(id)sender {
-    UITableView *table = self.tableView.table;
-    BOOL isEditing = self.tableView.table.editing;
-    [sender setTitle:(isEditing ? kANSEdit : kANSDone) forState:UIControlStateNormal];
-    [table setEditing:(isEditing ? NO : YES) animated:YES];
+- (void)initLeftBarButtonItem {
+    UIBarButtonItem *buttom = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(leftBarAction:)];
+    [self.navigationItem setLeftBarButtonItem:buttom animated:YES];
 }
 
-- (IBAction)onAddButton:(id)sender {
+- (void)initRightBarButtonItem {
+    UIBarButtonItem *buttom = [[UIBarButtonItem alloc] initWithTitle:kANSEdit style:UIBarButtonItemStyleDone target:self action:@selector(rightBarAction:)];
+    [self.navigationItem setRightBarButtonItem:buttom animated:YES];
+}
+
+#pragma mark -
+#pragma mark IBActions
+
+- (void)leftBarAction:(UIBarButtonItem *)sender {
     if (self.tableView.table.editing) {
-        ANSData *object = [ANSData new];
+        ANSData *object = [[ANSData alloc] init];
         [self.collection insertData:object atIndex:0];
     }
+}
+
+- (void)rightBarAction:(UIBarButtonItem *)sender {
+    UITableView *table = self.tableView.table;
+    BOOL isEditing = self.tableView.table.editing;
+    
+    [sender setTitle:(isEditing ? kANSEdit : kANSDone)];
+    [table setEditing:(isEditing ? NO : YES) animated:YES];
 }
 
 #pragma mark -

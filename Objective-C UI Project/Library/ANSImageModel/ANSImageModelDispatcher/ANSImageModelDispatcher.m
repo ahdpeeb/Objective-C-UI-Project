@@ -24,7 +24,7 @@
     static id dispatcher = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        dispatcher = [self new];
+        dispatcher = [[self alloc] init];
     });
     
     return dispatcher;
@@ -33,33 +33,24 @@
 #pragma mark -
 #pragma mark Initialization and deallocation
 
-- (void)dealloc {
-    self.queue = nil;
-}
-
-static id dispatcher = nil;
-
-+ (instancetype)allocWithZone:(struct _NSZone *)zone {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        dispatcher = [self allocWithZone:zone];
-    });
-    
-    return dispatcher;
-}
+//static id dispatcher = nil;
+//
+//+ (instancetype)allocWithZone:(struct _NSZone *)zone {
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        dispatcher = [self allocWithZone:zone];
+//    });
+//    
+//    return dispatcher;
+//}
 
 - (instancetype)init {
-    __block id object = self;
+    self = [super init];
+    if (self) {
+        [self initQueue];
+    }
     
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        object = [super init];
-        if (object) {
-            [object initQueue];
-        }
-    });
-    
-    return object;
+    return self;
 }
 
 - (void)initQueue {
@@ -77,6 +68,7 @@ static id dispatcher = nil;
         [_queue cancelAllOperations];
         
         _queue = queue;
+
     }
 }
 

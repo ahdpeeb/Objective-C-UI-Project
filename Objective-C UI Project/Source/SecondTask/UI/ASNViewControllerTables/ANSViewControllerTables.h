@@ -18,7 +18,5 @@ ANSCollectionObserver
 
 @property (nonatomic, strong) ANSDataCollection *collection;
 
-- (IBAction)onEditButton:(id)sender;
-- (IBAction)onAddButton:(id)sender;
 
 @end

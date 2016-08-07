@@ -28,10 +28,11 @@ static const NSUInteger kANSDataCount   = 0;
     UIWindow *window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window = window;
     
-  ANSViewControllerTables *controller = [ANSViewControllerTables new];
+    ANSViewControllerTables *controller = [ANSViewControllerTables new];
 // ANSViewControllerFirstTask *controller1 = [ANSViewControllerFirstTask new];
     
-    window.rootViewController = controller;
+    UINavigationController *nv = [[UINavigationController alloc] initWithRootViewController:controller];
+    window.rootViewController = nv;
     
     [window makeKeyAndVisible];
     
@@ -42,8 +43,9 @@ static const NSUInteger kANSDataCount   = 0;
    __unused NSArray *objects = [NSArray objectsWithCount:kANSDataCount block:^id{
         return [[ANSData alloc] init];
     }];
-    
-    ANSDataCollection *collection = [ANSDataCollection loadState] ? : [ANSDataCollection new];
+ //   [ANSDataCollection loadState] ? : [ANSDataCollection new];
+    ANSDataCollection *collection = [ANSDataCollection new];
+
     self.collection = collection;
     controller.collection = collection;
 

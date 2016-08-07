@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="djj-HE-MvU">
-                    <rect key="frame" x="0.0" y="49" width="320" height="519"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" red="0.033932551741600037" green="0.023052006959915161" blue="0.073954395949840546" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -25,35 +25,9 @@
                         <outlet property="delegate" destination="-1" id="Osw-w8-Xx9"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wCY-XS-d7c">
-                    <rect key="frame" x="250" y="20" width="70" height="26"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.69131338596343994" green="0.93402737379074097" blue="0.71279889345169067" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                    <state key="normal" title="Edit">
-                        <color key="titleColor" red="0.11482951790094376" green="0.043837375938892365" blue="0.029098281636834145" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="onEditButton:" destination="-1" eventType="touchUpInside" id="1rP-xk-aEd"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="OqA-Tf-oM5">
-                    <rect key="frame" x="8" y="20" width="70" height="26"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.69131338600000003" green="0.9340273738" blue="0.71279889350000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                    <state key="normal" title="Add">
-                        <color key="titleColor" red="0.1148295179" green="0.043837375939999999" blue="0.029098281640000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="onAddButton:" destination="-1" eventType="touchUpInside" id="IDJ-5l-szP"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" red="0.99577277898788452" green="0.9922446608543396" blue="0.99200206995010376" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
-                <outlet property="addButton" destination="OqA-Tf-oM5" id="Eg3-WZ-aYI"/>
-                <outlet property="editButton" destination="wCY-XS-d7c" id="MvX-dN-pT3"/>
                 <outlet property="table" destination="djj-HE-MvU" id="Rp5-nZ-1gL"/>
             </connections>
             <point key="canvasLocation" x="268" y="340"/>

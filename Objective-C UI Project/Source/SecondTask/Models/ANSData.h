@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#import "ANSImageModel.h"
+
 @interface ANSData : NSObject <NSCoding, NSCopying>
-@property (nonatomic, readonly) NSString *string;
-@property (nonatomic, readonly) UIImage  *image;
+@property (nonatomic, readonly) NSString        *string;
+@property (nonatomic, readonly) UIImage         *image;
 
 @end

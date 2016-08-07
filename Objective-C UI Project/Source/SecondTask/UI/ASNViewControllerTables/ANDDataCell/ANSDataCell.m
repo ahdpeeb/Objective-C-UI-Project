@@ -34,7 +34,6 @@ static const CGFloat kANSBorderWidth = 0.5;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
 }
 
 @end
