@@ -33,17 +33,6 @@
 #pragma mark -
 #pragma mark Initialization and deallocation
 
-//static id dispatcher = nil;
-//
-//+ (instancetype)allocWithZone:(struct _NSZone *)zone {
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        dispatcher = [self allocWithZone:zone];
-//    });
-//    
-//    return dispatcher;
-//}
-
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -68,7 +57,6 @@
         [_queue cancelAllOperations];
         
         _queue = queue;
-
     }
 }
 

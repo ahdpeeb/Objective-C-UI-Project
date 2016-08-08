@@ -9,24 +9,16 @@
 
 
 #import "ANSDataCell.h"
+#import "ANSImageView.h"
 
 @implementation ANSDataCell
-
-static const CGFloat kANSBorderWidth = 0.5;
 
 #pragma mark -
 #pragma mark Initialization and deallocation
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    CALayer *imageLayer = self.imageView.layer;
-    CALayer *selfLayer = self.layer;
     
-    selfLayer.borderColor = [[UIColor blackColor] CGColor];
-    selfLayer.borderWidth = kANSBorderWidth;
-    
-    imageLayer.cornerRadius = self.imageView.frame.size.height /2;
-    imageLayer.masksToBounds = YES;
 }
 
 #pragma mark -
@@ -34,6 +26,28 @@ static const CGFloat kANSBorderWidth = 0.5;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+}
+
+#pragma mark -
+#pragma mark Private methods
+
+- (void)roundUserPicture {
+    UIImageView *picture = self.userImageView.contentImageView;
+    
+    picture.layer.cornerRadius = picture.frame.size.height /2;
+    picture.layer.masksToBounds = YES;
+    
+    self.userImageView.backgroundColor = self.backgroundColor;
+}
+
+#pragma mark -
+#pragma mark Public methods
+
+- (void)fillInfoFromObject:(ANSData *)object {
+    self.label.text = object.string;
+    self.userImageView.imageModel = object.imageModel;
+    
+    [self roundUserPicture];
 }
 
 @end

@@ -41,12 +41,16 @@
     __strong __typeof(object) object = __ANSWeekified_##object \
 
 #define ANSStrongifyAndReturnNil(object) \
-    ANSStrongify(object) \
+    ANSStrongify(object); \
     if(!object) { \
         return nil; \
     } \
 
-
+#define ANSStrongifyAndReturn(object) \
+    ANSStrongify(object); \
+    if(!object) { \
+        return; \
+    } \
 
 
 

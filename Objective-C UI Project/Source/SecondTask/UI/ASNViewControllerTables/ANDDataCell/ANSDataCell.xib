@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -15,25 +15,25 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DuU-vV-Szy">
-                        <rect key="frame" x="80" y="0.0" width="238" height="79"/>
+                        <rect key="frame" x="88" y="0.0" width="230" height="79"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="V8e-Cn-13p">
-                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.11482951790094376" green="0.043837375938892365" blue="0.029098281636834145" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </imageView>
+                    <view contentMode="scaleToFill" id="LyH-NG-GwF" customClass="ANSImageView">
+                        <rect key="frame" x="0.0" y="0.0" width="79" height="79"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.19436320662498474" green="0.81301844120025635" blue="0.91241949796676636" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
-                <outlet property="imageView" destination="V8e-Cn-13p" id="HDE-O6-Fyx"/>
                 <outlet property="label" destination="DuU-vV-Szy" id="idb-X6-033"/>
+                <outlet property="userImageView" destination="LyH-NG-GwF" id="2U1-XR-SNm"/>
             </connections>
-            <point key="canvasLocation" x="164" y="96.5"/>
+            <point key="canvasLocation" x="164" y="96"/>
         </tableViewCell>
     </objects>
 </document>

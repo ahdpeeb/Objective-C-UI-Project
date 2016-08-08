@@ -43,9 +43,9 @@ static const NSUInteger kANSDataCount   = 0;
    __unused NSArray *objects = [NSArray objectsWithCount:kANSDataCount block:^id{
         return [[ANSData alloc] init];
     }];
- //   [ANSDataCollection loadState] ? : [ANSDataCollection new];
-    ANSDataCollection *collection = [ANSDataCollection new];
-
+   
+    ANSDataCollection *collection =[ANSDataCollection loadState] ? : [ANSDataCollection new];
+    // [ANSDataCollection loadState] ? :
     self.collection = collection;
     controller.collection = collection;
 

@@ -12,10 +12,14 @@
 
 #import "ANSMacros.h"
 
+static NSString * const kANSImage       =     @"kANSImage";
+static NSString * const kANSURL         =     @"kANSURL";
+static NSString * const kANSOperation   =     @"kANSImage";
+
 @interface ANSImageModel ()
-@property (nonatomic, strong)      UIImage          *image;
-@property (nonatomic, strong)      NSURL            *url;
-@property (nonatomic, strong)      NSOperation      *operation;
+@property (nonatomic, strong)       UIImage          *image;
+@property (nonatomic, strong)       NSURL            *url;
+@property (nonatomic, strong)       NSOperation      *operation;
 
 @property (nonatomic, assign, getter=isLoaded) BOOL loaded;
 
@@ -53,15 +57,11 @@
 
 - (void)setOperation:(NSOperation *)operation {
     if (_operation != operation) {
-        [operation cancel];
         
         _operation = operation;
-        
         if (operation) {
             ANSImageModelDispatcher *dispatcher = [ANSImageModelDispatcher sharedDispatcher];
             [[dispatcher queue] addOperation:operation];
-            NSUInteger count = [dispatcher.queue operationCount];
-            NSLog(@"count = %lu",count);
         }
     }
 }
@@ -97,21 +97,43 @@
 
 - (NSOperation *)imageLoadingOperation {
     ANSWeakify(self);
-
+    
     NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
-        ANSStrongify(self);
+        ANSStrongifyAndReturn(self);
         
-        self.image = [UIImage imageWithContentsOfFile:[self.url path]];
-    }];
+        NSString *path = self.url.path;
+        UIImage *image = [UIImage imageWithContentsOfFile:path]; 
+        (image) ? NSLog(@"загружено удачно") : NSLog(@"неудачно");
+        
+        self.image = image;
+        }];
     
     operation.completionBlock = ^{
-        ANSStrongify(self);
-        self.state = self.image ? ANSImageModelLoaded : ANSImageModelFailedLoadin;
+        ANSStrongifyAndReturn(self);
+        if (!self) {
+            return;
+        }
         
-        NSLog(@"%lu", (unsigned long)self.state);
+        self.state = self.image ? ANSImageModelLoaded : ANSImageModelFailedLoadin;
     };
-    
+
     return operation;
+}
+
+#pragma mark -
+#pragma mark NSCoding protocol
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.url       forKey:kANSURL];
+}
+
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        self.url = [aDecoder decodeObjectForKey:kANSURL];
+    }
+    
+    return self;
 }
 
 @end

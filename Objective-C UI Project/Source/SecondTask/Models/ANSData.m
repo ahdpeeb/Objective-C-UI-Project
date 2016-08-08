@@ -15,11 +15,11 @@ static NSString * const kANSImageName       = @"Gomer_2";
 static NSString * const kANSImageFormat     = @"png";
 
 static NSString * const kANSStringKey          = @"kANSStringKey";
-static NSString * const kANSImageKey           = @"kANSImageKey";
+static NSString * const kANSImageModelKey           = @"kANSImageModelKey";
+
 
 @interface ANSData ()
-@property (nonatomic, copy)     NSString        *mutableString;
-@property (nonatomic, strong)   ANSImageModel   *imageModel;
+@property (nonatomic, copy) NSString *mutableString;
 
 @end
 
@@ -38,9 +38,7 @@ static NSString * const kANSImageKey           = @"kANSImageKey";
         self.mutableString = [NSString randomStringWithLength:kANSStringLength alphabet:alphabet];
         
         NSURL *ulr = [[NSBundle mainBundle] URLForResource:kANSImageName withExtension:kANSImageFormat];
-        ANSImageModel *image = [ANSImageModel imageFromURL:ulr];
-        [image load];
-        self.imageModel = image;
+        self.imageModel = [ANSImageModel imageFromURL:ulr];;
     }
     
     return self;
@@ -62,14 +60,14 @@ static NSString * const kANSImageKey           = @"kANSImageKey";
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:self.string forKey:kANSStringKey];
-    [aCoder encodeObject:self.image forKey:kANSImageKey];
+    [aCoder encodeObject:self.imageModel forKey:kANSImageModelKey];
 }
 
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
         self.mutableString = [aDecoder decodeObjectForKey:kANSStringKey];
-        self.imageModel = [aDecoder decodeObjectForKey:kANSImageKey];
+        self.imageModel = [aDecoder decodeObjectForKey:kANSImageModelKey];
     }
     
     return self;

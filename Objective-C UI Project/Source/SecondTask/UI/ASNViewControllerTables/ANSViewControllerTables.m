@@ -13,6 +13,8 @@
 #import "ANSTableViewCell.h"
 #import "ANSData.h"
 #import "ANSBuffer.h"
+#import "ANSImageModel.h"
+#import "ANSImageView.h"
 
 #import "NSArray+ANSExtension.h"
 #import "UINib+Extension.h"
@@ -73,7 +75,8 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 }
 
 - (void)initRightBarButtonItem {
-    UIBarButtonItem *buttom = [[UIBarButtonItem alloc] initWithTitle:kANSEdit style:UIBarButtonItemStyleDone target:self action:@selector(rightBarAction:)];
+    UIBarButtonItem *buttom = [[UIBarButtonItem alloc] initWithTitle:kANSEdit
+                                                               style:UIBarButtonItemStyleDone target:self action:@selector(rightBarAction:)];
     [self.navigationItem setRightBarButtonItem:buttom animated:YES];
 }
 
@@ -124,8 +127,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     ANSDataCell *cell = [tableView reusableCellfromNibWithClass:[ANSDataCell class]];
     ANSData *object = self.collection[indexPath.row];
     
-    cell.label.text =   object.string;
-    cell.imageView.image = object.image;
+    [cell fillInfoFromObject:object];
 
     return cell;
 }
@@ -141,7 +143,8 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
           toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     if (sourceIndexPath.section == destinationIndexPath.section) {
-        [self.collection moveDataFromIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
+        [self.collection moveDataFromIndex:sourceIndexPath.row
+                                   toIndex:destinationIndexPath.row];
     }
 }
 

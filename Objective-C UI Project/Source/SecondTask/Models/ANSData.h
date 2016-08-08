@@ -15,4 +15,5 @@
 @property (nonatomic, readonly) NSString        *string;
 @property (nonatomic, readonly) UIImage         *image;
 
+@property (nonatomic, strong)   ANSImageModel   *imageModel;
 @end

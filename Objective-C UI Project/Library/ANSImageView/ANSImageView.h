@@ -11,7 +11,7 @@
 @class ANSImageModel;
 
 @interface ANSImageView : UIView
-@property (nonatomic, retain) IBOutlet  UIImageView     *contentImageView;
-@property (nonatomic, retain)           ANSImageModel   *imageModel;
+@property (nonatomic, strong) IBOutlet  UIImageView     *contentImageView;
+@property (nonatomic, strong)           ANSImageModel   *imageModel;
 
 @end

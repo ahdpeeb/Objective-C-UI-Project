@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, ANSImageModelState) {
     ANSImageModelFailedLoadin
 };
 
-@interface ANSImageModel : ANSObservableObject
+@interface ANSImageModel : ANSObservableObject <NSCoding>
 @property (nonatomic, readonly)                  UIImage *image;
 @property (nonatomic, readonly)                  NSURL *url;
 

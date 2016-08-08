@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+#import "ANSData.h"
+
+@class ANSImageView;
+
 @interface ANSDataCell : UITableViewCell
-@property (nonatomic, strong) IBOutlet UILabel      *label;
-@property (nonatomic, strong) IBOutlet UIImageView  *imageView;
+@property (nonatomic, strong) IBOutlet UILabel          *label;
+@property (nonatomic, strong) IBOutlet ANSImageView     *userImageView; 
+
+- (void)fillInfoFromObject:(ANSData *)object; 
+
 @end

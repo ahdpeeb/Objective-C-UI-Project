@@ -25,22 +25,19 @@
 #pragma mark -
 #pragma mark Initialization and deallocation
 
-- (void)dealloc {
-    self.contentImageView = nil;
-}
-
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self initSubviews];
     }
+    
     return self;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    if (self.contentImageView) {
+    if (!self.contentImageView) {
         [self initSubviews];
     }
 }
@@ -95,7 +92,7 @@
     
     ANSStateChangeBlock block = ^(ANSBlockObservationController *controller, id userInfo) {
         ANSPerformInMainQueue(dispatch_sync, ^{
-            ANSStrongify(self);
+            ANSStrongifyAndReturn(self);
             
             ANSImageModel *model = controller.observableObject;
             self.contentImageView.image = model.image;
@@ -106,7 +103,7 @@
     [controller setBlock:block forState:ANSImageModelUnloaded];
     
     block = ^(ANSBlockObservationController *controller, id userInfo) {
-        ANSStrongify(self);
+        ANSStrongifyAndReturn(self);
         
         [self.imageModel load];
     };
