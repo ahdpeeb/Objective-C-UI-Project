@@ -149,9 +149,11 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
         }
         
         if (fromIndex != toIndex) {
-            id data = [self dataAtIndex:fromIndex];
-            [self removeDataAtIndex:fromIndex];
-            [self insertData:data atIndex:toIndex];
+            [self.mutableDataCollection exchangeObjectAtIndex:fromIndex withObjectAtIndex:toIndex];
+            
+            id object = self[fromIndex];
+            ANSBuffer *buffer = [ANSBuffer allocWithObject:object value:toIndex];
+            buffer.selector = @selector(reloadRowsAtIndexPaths:withRowAnimation:);
         }
     }
 }
