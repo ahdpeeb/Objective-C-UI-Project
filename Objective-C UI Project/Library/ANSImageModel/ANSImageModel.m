@@ -12,11 +12,10 @@
 
 #import "ANSMacros.h"
 
-static NSString * const kANSImage       =     @"kANSImage";
-static NSString * const kANSURL         =     @"kANSURL";
-static NSString * const kANSOperation   =     @"kANSImage";
+static NSString * const kANSImageName         =     @"kANSImageName";
 
 @interface ANSImageModel ()
+@property (nonatomic, strong)       NSString         *imageName;
 @property (nonatomic, strong)       UIImage          *image;
 @property (nonatomic, strong)       NSURL            *url;
 @property (nonatomic, strong)       NSOperation      *operation;
@@ -101,18 +100,12 @@ static NSString * const kANSOperation   =     @"kANSImage";
     NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
         ANSStrongifyAndReturn(self);
         
-        NSString *path = self.url.path;
-        UIImage *image = [UIImage imageWithContentsOfFile:path]; 
-        (image) ? NSLog(@"загружено удачно") : NSLog(@"неудачно");
-        
+        UIImage *image = [UIImage imageWithContentsOfFile:self.url.path];
         self.image = image;
         }];
     
     operation.completionBlock = ^{
         ANSStrongifyAndReturn(self);
-        if (!self) {
-            return;
-        }
         
         self.state = self.image ? ANSImageModelLoaded : ANSImageModelFailedLoadin;
     };
@@ -122,15 +115,18 @@ static NSString * const kANSOperation   =     @"kANSImage";
 
 #pragma mark -
 #pragma mark NSCoding protocol
-
+//saving name of image
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.url       forKey:kANSURL];
+    self.imageName = self.url.path.lastPathComponent;
+    [aCoder encodeObject:self.imageName forKey:kANSImageName];
 }
-
+//restore image from mainBundle after backup using image name;
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
-        self.url = [aDecoder decodeObjectForKey:kANSURL];
+        NSString *imageName = [aDecoder decodeObjectForKey:kANSImageName];
+        NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:imageName];
+        self.url = [NSURL fileURLWithPath:imagePath isDirectory:YES];
     }
     
     return self;

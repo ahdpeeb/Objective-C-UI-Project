@@ -31,6 +31,10 @@ static NSString * const kANSImageModelKey           = @"kANSImageModelKey";
 #pragma mark -
 #pragma mark Initialization and deallocation 
 
+- (void)dealloc {
+    self.imageModel = nil;
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
