@@ -20,6 +20,11 @@
 		933C74651D50908100A423B9 /* ANSBlockObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C745D1D50908100A423B9 /* ANSBlockObservationController.m */; };
 		933C74661D50908100A423B9 /* ANSObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C745F1D50908100A423B9 /* ANSObservationController.m */; };
 		933C74671D50908100A423B9 /* ANSProtocolObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C74611D50908100A423B9 /* ANSProtocolObservationController.m */; };
+		936727D71D591D25007A796F /* ANSDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C51D591D25007A796F /* ANSDataCell.m */; };
+		936727D81D591D25007A796F /* ANSDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936727C61D591D25007A796F /* ANSDataCell.xib */; };
+		936727D91D591D25007A796F /* ANSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C81D591D25007A796F /* ANSTableView.m */; };
+		936727DA1D591D25007A796F /* ANSViewControllerTables.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727CA1D591D25007A796F /* ANSViewControllerTables.m */; };
+		936727DB1D591D25007A796F /* ANSViewControllerTables.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936727CB1D591D25007A796F /* ANSViewControllerTables.xib */; };
 		9388ECDF1D49FEB50082EE4B /* ANSBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9388ECDE1D49FEB50082EE4B /* ANSBuffer.m */; };
 		9388ECF11D4A396F0082EE4B /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE11D4A396F0082EE4B /* 1.png */; };
 		9388ECF21D4A396F0082EE4B /* 10.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE21D4A396F0082EE4B /* 10.png */; };
@@ -54,11 +59,6 @@
 		93C5A6091D4107DB002FBCA8 /* NSString+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C5A6081D4107DB002FBCA8 /* NSString+ANSExtension.m */; };
 		93C5A60D1D41265C002FBCA8 /* ANSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C5A60C1D41265C002FBCA8 /* ANSTableViewCell.m */; };
 		93C5A61A1D412D31002FBCA8 /* ANSData.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C5A6191D412D31002FBCA8 /* ANSData.m */; };
-		93E520931D424DAE007EAD07 /* ANSViewControllerTables.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E520911D424DAE007EAD07 /* ANSViewControllerTables.m */; };
-		93E520941D424DAE007EAD07 /* ANSViewControllerTables.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93E520921D424DAE007EAD07 /* ANSViewControllerTables.xib */; };
-		93E520971D424E30007EAD07 /* ANSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E520961D424E30007EAD07 /* ANSTableView.m */; };
-		93E520C91D427328007EAD07 /* ANSDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E520C71D427328007EAD07 /* ANSDataCell.m */; };
-		93E520CA1D427328007EAD07 /* ANSDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93E520C81D427328007EAD07 /* ANSDataCell.xib */; };
 		93EC8F5E1D48CDAA000624F0 /* UINib+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EC8F5D1D48CDAA000624F0 /* UINib+Extension.m */; };
 		93EC8F651D48D9A6000624F0 /* UITableView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EC8F641D48D9A6000624F0 /* UITableView+Extension.m */; };
 /* End PBXBuildFile section */
@@ -97,6 +97,14 @@
 		933C74611D50908100A423B9 /* ANSProtocolObservationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSProtocolObservationController.m; sourceTree = "<group>"; };
 		933C74631D50908100A423B9 /* ANSObservationController+ANSPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANSObservationController+ANSPrivate.h"; sourceTree = "<group>"; };
 		933C74681D50A22700A423B9 /* ANSObservableObject+ANSPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANSObservableObject+ANSPrivate.h"; sourceTree = "<group>"; };
+		936727C41D591D25007A796F /* ANSDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSDataCell.h; sourceTree = "<group>"; };
+		936727C51D591D25007A796F /* ANSDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSDataCell.m; sourceTree = "<group>"; };
+		936727C61D591D25007A796F /* ANSDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSDataCell.xib; sourceTree = "<group>"; };
+		936727C71D591D25007A796F /* ANSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSTableView.h; sourceTree = "<group>"; };
+		936727C81D591D25007A796F /* ANSTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSTableView.m; sourceTree = "<group>"; };
+		936727C91D591D25007A796F /* ANSViewControllerTables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSViewControllerTables.h; sourceTree = "<group>"; };
+		936727CA1D591D25007A796F /* ANSViewControllerTables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSViewControllerTables.m; sourceTree = "<group>"; };
+		936727CB1D591D25007A796F /* ANSViewControllerTables.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSViewControllerTables.xib; sourceTree = "<group>"; };
 		9388ECDD1D49FEB50082EE4B /* ANSBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSBuffer.h; sourceTree = "<group>"; };
 		9388ECDE1D49FEB50082EE4B /* ANSBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSBuffer.m; sourceTree = "<group>"; };
 		9388ECE11D4A396F0082EE4B /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
@@ -149,14 +157,6 @@
 		93C5A60C1D41265C002FBCA8 /* ANSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSTableViewCell.m; path = ANSTableViewCell/ANSTableViewCell.m; sourceTree = "<group>"; };
 		93C5A6181D412D31002FBCA8 /* ANSData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSData.h; sourceTree = "<group>"; };
 		93C5A6191D412D31002FBCA8 /* ANSData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSData.m; sourceTree = "<group>"; };
-		93E520901D424DAE007EAD07 /* ANSViewControllerTables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSViewControllerTables.h; sourceTree = "<group>"; };
-		93E520911D424DAE007EAD07 /* ANSViewControllerTables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSViewControllerTables.m; sourceTree = "<group>"; };
-		93E520921D424DAE007EAD07 /* ANSViewControllerTables.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSViewControllerTables.xib; sourceTree = "<group>"; };
-		93E520951D424E30007EAD07 /* ANSTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSTableView.h; sourceTree = "<group>"; };
-		93E520961D424E30007EAD07 /* ANSTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSTableView.m; sourceTree = "<group>"; };
-		93E520C61D427328007EAD07 /* ANSDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSDataCell.h; sourceTree = "<group>"; };
-		93E520C71D427328007EAD07 /* ANSDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSDataCell.m; sourceTree = "<group>"; };
-		93E520C81D427328007EAD07 /* ANSDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSDataCell.xib; sourceTree = "<group>"; };
 		93EC8F5C1D48CDAA000624F0 /* UINib+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINib+Extension.h"; sourceTree = "<group>"; };
 		93EC8F5D1D48CDAA000624F0 /* UINib+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINib+Extension.m"; sourceTree = "<group>"; };
 		93EC8F631D48D9A6000624F0 /* UITableView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Extension.h"; sourceTree = "<group>"; };
@@ -256,6 +256,45 @@
 				933C74681D50A22700A423B9 /* ANSObservableObject+ANSPrivate.h */,
 			);
 			path = PrivatExtension;
+			sourceTree = "<group>";
+		};
+		936727C01D591D25007A796F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				936727C21D591D25007A796F /* ASNViewControllerTables */,
+				936727C11D591D25007A796F /* ANSUserInfoController */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		936727C11D591D25007A796F /* ANSUserInfoController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ANSUserInfoController;
+			sourceTree = "<group>";
+		};
+		936727C21D591D25007A796F /* ASNViewControllerTables */ = {
+			isa = PBXGroup;
+			children = (
+				936727C91D591D25007A796F /* ANSViewControllerTables.h */,
+				936727CA1D591D25007A796F /* ANSViewControllerTables.m */,
+				936727CB1D591D25007A796F /* ANSViewControllerTables.xib */,
+				936727C71D591D25007A796F /* ANSTableView.h */,
+				936727C81D591D25007A796F /* ANSTableView.m */,
+				936727C31D591D25007A796F /* ANDDataCell */,
+			);
+			path = ASNViewControllerTables;
+			sourceTree = "<group>";
+		};
+		936727C31D591D25007A796F /* ANDDataCell */ = {
+			isa = PBXGroup;
+			children = (
+				936727C41D591D25007A796F /* ANSDataCell.h */,
+				936727C51D591D25007A796F /* ANSDataCell.m */,
+				936727C61D591D25007A796F /* ANSDataCell.xib */,
+			);
+			path = ANDDataCell;
 			sourceTree = "<group>";
 		};
 		9388ECE01D4A396F0082EE4B /* animationDancer */ = {
@@ -366,7 +405,7 @@
 		93C5A5B81D40DB2C002FBCA8 /* SecondTask */ = {
 			isa = PBXGroup;
 			children = (
-				93E5208F1D424DAE007EAD07 /* ASNViewControllerTables */,
+				936727C01D591D25007A796F /* UI */,
 				93C5A6171D412D31002FBCA8 /* Models */,
 			);
 			path = SecondTask;
@@ -478,20 +517,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		93E5208F1D424DAE007EAD07 /* ASNViewControllerTables */ = {
-			isa = PBXGroup;
-			children = (
-				93E520901D424DAE007EAD07 /* ANSViewControllerTables.h */,
-				93E520911D424DAE007EAD07 /* ANSViewControllerTables.m */,
-				93E520921D424DAE007EAD07 /* ANSViewControllerTables.xib */,
-				93E520951D424E30007EAD07 /* ANSTableView.h */,
-				93E520961D424E30007EAD07 /* ANSTableView.m */,
-				93E520C51D427328007EAD07 /* ANDDataCell */,
-			);
-			name = ASNViewControllerTables;
-			path = Source/SecondTask/UI/ASNViewControllerTables;
-			sourceTree = SOURCE_ROOT;
-		};
 		93E520981D4250AC007EAD07 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -501,16 +526,6 @@
 			);
 			name = Images;
 			path = Resources/Images;
-			sourceTree = "<group>";
-		};
-		93E520C51D427328007EAD07 /* ANDDataCell */ = {
-			isa = PBXGroup;
-			children = (
-				93E520C61D427328007EAD07 /* ANSDataCell.h */,
-				93E520C71D427328007EAD07 /* ANSDataCell.m */,
-				93E520C81D427328007EAD07 /* ANSDataCell.xib */,
-			);
-			path = ANDDataCell;
 			sourceTree = "<group>";
 		};
 		93EC8F5B1D48CDAA000624F0 /* UINib */ = {
@@ -627,9 +642,11 @@
 				9388ECFD1D4A396F0082EE4B /* 6.png in Resources */,
 				9388ECF81D4A396F0082EE4B /* 16.png in Resources */,
 				9388ECFC1D4A396F0082EE4B /* 5.png in Resources */,
+				936727D81D591D25007A796F /* ANSDataCell.xib in Resources */,
 				9388ECF71D4A396F0082EE4B /* 15.png in Resources */,
 				9388ECF91D4A396F0082EE4B /* 2.png in Resources */,
 				9388ECFA1D4A396F0082EE4B /* 3.png in Resources */,
+				936727DB1D591D25007A796F /* ANSViewControllerTables.xib in Resources */,
 				9388ECF51D4A396F0082EE4B /* 13.png in Resources */,
 				9388ECF41D4A396F0082EE4B /* 12.png in Resources */,
 				9388ED001D4A396F0082EE4B /* 9.png in Resources */,
@@ -639,13 +656,11 @@
 				9388ECFE1D4A396F0082EE4B /* 7.png in Resources */,
 				93C0843D1D3E381F0077A81C /* LaunchScreen.storyboard in Resources */,
 				93026CD71D464D0900DFCF23 /* Gomer_1.jpg in Resources */,
-				93E520941D424DAE007EAD07 /* ANSViewControllerTables.xib in Resources */,
 				93026CE41D46810900DFCF23 /* ANSViewControllerFirstTask.xib in Resources */,
 				9388ECFB1D4A396F0082EE4B /* 4.png in Resources */,
 				93C0843C1D3E381F0077A81C /* Assets.xcassets in Resources */,
 				9388ECF61D4A396F0082EE4B /* 14.png in Resources */,
 				93026CD41D464C9100DFCF23 /* Gomer_2.png in Resources */,
-				93E520CA1D427328007EAD07 /* ANSDataCell.xib in Resources */,
 				93C084301D3E36B20077A81C /* iOS Study Plan.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -698,16 +713,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				93C5A60D1D41265C002FBCA8 /* ANSTableViewCell.m in Sources */,
-				93E520971D424E30007EAD07 /* ANSTableView.m in Sources */,
-				93E520C91D427328007EAD07 /* ANSDataCell.m in Sources */,
 				93026CD11D44C2BE00DFCF23 /* ANSDataCollection.m in Sources */,
 				93C5A6091D4107DB002FBCA8 /* NSString+ANSExtension.m in Sources */,
+				936727D91D591D25007A796F /* ANSTableView.m in Sources */,
 				93C5A61A1D412D31002FBCA8 /* ANSData.m in Sources */,
 				93C5A5F41D40DF3D002FBCA8 /* NSTimer+ANSExtension.m in Sources */,
 				93C5A5F51D40DF3D002FBCA8 /* NSArray+ANSExtension.m in Sources */,
 				93EC8F651D48D9A6000624F0 /* UITableView+Extension.m in Sources */,
 				933C74671D50908100A423B9 /* ANSProtocolObservationController.m in Sources */,
-				93E520931D424DAE007EAD07 /* ANSViewControllerTables.m in Sources */,
 				9388ECDF1D49FEB50082EE4B /* ANSBuffer.m in Sources */,
 				933C74651D50908100A423B9 /* ANSBlockObservationController.m in Sources */,
 				93052AE11D4CF2370007D20C /* ANSImageView.m in Sources */,
@@ -722,6 +735,8 @@
 				93C5A5F01D40DF3D002FBCA8 /* ANSGCD.m in Sources */,
 				93026CE51D46810900DFCF23 /* ANSAnimatedView.m in Sources */,
 				93C084371D3E380D0077A81C /* main.m in Sources */,
+				936727D71D591D25007A796F /* ANSDataCell.m in Sources */,
+				936727DA1D591D25007A796F /* ANSViewControllerTables.m in Sources */,
 				93C084351D3E380D0077A81C /* ANSAppDelegate.m in Sources */,
 				93026CE31D46810900DFCF23 /* ANSViewControllerFirstTask.m in Sources */,
 				933C74661D50908100A423B9 /* ANSObservationController.m in Sources */,

@@ -51,6 +51,9 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 
 #pragma mark -
 #pragma mark View lifecycle
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -190,7 +193,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     NSIndexPath *path = [NSIndexPath indexPathForRow:buffer.value inSection:0];
     
     [table beginUpdates];
-    [table performSelector:buffer.selector withObject:@[path]];
+    [table performSelector:buffer.selector withObject:@[path] withObject:nil];
     [table endUpdates];
     
     NSLog(@"collectionDidUpdate, - %lu ", collection.count);
