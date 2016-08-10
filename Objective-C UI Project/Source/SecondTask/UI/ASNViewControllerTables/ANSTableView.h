@@ -10,5 +10,6 @@
 
 @interface ANSTableView : UIView
 @property (nonatomic, strong) IBOutlet UITableView  *table;
+@property (nonatomic, strong) IBOutlet UISearchBar  *searchBar;
 
 @end

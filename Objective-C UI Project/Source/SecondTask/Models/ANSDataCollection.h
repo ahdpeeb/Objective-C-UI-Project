@@ -19,7 +19,11 @@
 
 @end
 
-@interface ANSDataCollection : ANSObservableObject <NSCoding, NSCopying>
+@interface ANSDataCollection : ANSObservableObject <
+NSCoding,
+NSCopying,
+NSFastEnumeration
+>
 @property (nonatomic, readonly) NSUInteger  count;
 @property (nonatomic, readonly) NSArray     *objects;
 
@@ -36,6 +40,8 @@
 - (void)addDataObjects:(NSArray*)objects;
 
 - (void)moveDataFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
+
+- (void)sortArray;
 
 // this methods intended for save and load currect state of data collection;
 - (void)saveState;

@@ -21,14 +21,23 @@
 #import "UITableView+Extension.h"
 
 #import "ANSMacros.h"
+#import "ANSGCD.h"
 
 static NSString * const kANSEdit                    = @"Edit";
 static NSString * const kANSDone                    = @"Done";
 static NSString * const kANSTitleForHeaderSection   = @"Homer's contact list";
+static const NSUInteger kANSSectionsCount           = 1;
 
 @interface ANSViewControllerTables ()
-@property (nonatomic, strong) ANSProtocolObservationController *controller;
+@property (nonatomic, strong) ANSProtocolObservationController  *controller;
+@property (nonatomic, strong) ANSDataCollection                 *filteredCollection;
 
+@property (nonatomic, strong) NSOperation                       *operation;
+@property (nonatomic, strong) NSOperationQueue                  *operationsQueue;
+
+- (ANSDataCollection *)sortedCollection:(ANSDataCollection *)collection
+                       withFilterString:(NSString *)filterStirng;
+- (void)resignSearchBar; 
 @end
 
 ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableView)
@@ -37,6 +46,21 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 
 #pragma mark -
 #pragma mark Accsessors
+
+- (void)setOperation:(NSOperation *)operation {
+    if (_operation != operation) {
+        [_operation cancel];
+        
+        _operation = operation;
+        
+        NSOperationQueue *queue = self.operationsQueue;
+        if (!queue) {
+            queue = [NSOperationQueue new];
+        }
+        
+        [queue addOperation:operation];
+    }
+}
 
 - (void)setCollection:(ANSDataCollection *)collection {
     if (_collection != collection) {
@@ -51,9 +75,6 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 
 #pragma mark -
 #pragma mark View lifecycle
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -61,12 +82,52 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     self.navigationItem.title = @"Gomer's contacts";
     [self initLeftBarButtonItem];
     [self initRightBarButtonItem];
-    
-    [self.tableView.table reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark -
+#pragma mark Private methods
+
+- (ANSDataCollection *)sortedCollection:(ANSDataCollection *)collection
+                       withFilterString:(NSString *)filterStirng {
+    
+    ANSDataCollection *newCollection = [ANSDataCollection new];
+    for (ANSData *data in collection) {
+        if (filterStirng.length > 0
+                && ![data.string containsString:filterStirng]) {
+            continue; 
+        } else {
+            [newCollection addData:data];
+        }
+    }
+    
+    return newCollection;
+}
+
+- (void)sortedCollectionInBackground:(ANSDataCollection *)collection
+                    withFilterString:(NSString *)filterStirng {
+    ANSWeakify(self);
+    self.operation = [NSBlockOperation blockOperationWithBlock:^{
+        ANSStrongify(self);
+      self.filteredCollection = [self sortedCollection:collection withFilterString:filterStirng];
+    }];
+
+    self.operation.completionBlock = ^{
+        ANSPerformInMainQueue(dispatch_sync, ^{
+            ANSStrongify(self);
+            [self.tableView.table reloadData];
+        });
+    };
+}
+
+- (void)resignSearchBar {
+    UISearchBar *searchBar = self.tableView.searchBar;
+    if (searchBar.isFirstResponder) {
+        [self searchBarCancelButtonClicked:searchBar];
+    }
 }
 
 #pragma mark -
@@ -84,10 +145,14 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 }
 
 #pragma mark -
-#pragma mark IBActions
+#pragma mark UIBarButtonItem actions
 
 - (void)leftBarAction:(UIBarButtonItem *)sender {
-    if (self.tableView.table.editing) {
+    UITableView *table = self.tableView.table;
+    
+    [self resignSearchBar];
+    
+    if (table.editing) {
         ANSData *object = [[ANSData alloc] init];
         [self.collection insertData:object atIndex:0];
     }
@@ -95,7 +160,10 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 
 - (void)rightBarAction:(UIBarButtonItem *)sender {
     UITableView *table = self.tableView.table;
-    BOOL isEditing = self.tableView.table.editing;
+    
+    [self resignSearchBar];
+    
+    BOOL isEditing = table.editing;
     
     [sender setTitle:(isEditing ? kANSEdit : kANSDone)];
     [table setEditing:(isEditing ? NO : YES) animated:YES];
@@ -115,13 +183,17 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return kANSSectionsCount;
 }
 
 - (NSInteger)   tableView:(UITableView *)tableView
     numberOfRowsInSection:(NSInteger)section
 {
-    return self.collection.count;
+    if (self.tableView.searchBar.isFirstResponder) {
+        return self.filteredCollection.count;
+    }  else {
+        return self.collection.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -184,11 +256,38 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 }
 
 #pragma mark -
+#pragma mark UISearchBarDelegate protocol
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+    [searchBar setShowsCancelButton:NO animated:YES];
+    
+    [self.tableView.table reloadData];
+}
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    UITableView *table = self.tableView.table;
+    if (table.isEditing) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [self sortedCollectionInBackground:self.collection withFilterString:searchText];
+}
+
+#pragma mark -
 #pragma mark ANSCollectionObserver protocol
 
 - (void)collection:(ANSDataCollection *)collection didUpdateData:(id)data {
-    ANSBuffer *buffer = data;
     UITableView *table = self.tableView.table;
+    ANSBuffer *buffer = data;
     
     NSIndexPath *path = [NSIndexPath indexPathForRow:buffer.value inSection:0];
     

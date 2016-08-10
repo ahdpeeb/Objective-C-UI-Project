@@ -13,6 +13,7 @@
 @interface ANSViewControllerTables : UIViewController <
 UITableViewDataSource,
 UITableViewDelegate,
+UISearchBarDelegate,
 ANSCollectionObserver
 >
 
