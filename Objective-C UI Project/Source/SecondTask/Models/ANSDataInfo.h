@@ -8,12 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ANSBuffer : NSObject
+@interface ANSDataInfo : NSObject
 @property (nonatomic, strong) id                object;
 @property (nonatomic, assign) NSUInteger        value;
 
 @property (nonatomic, assign) SEL               selector;;
-
 
 + (instancetype)allocWithObject:(id)object
                           value:(NSUInteger)value; 

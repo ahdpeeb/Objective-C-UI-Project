@@ -19,5 +19,4 @@ ANSCollectionObserver
 
 @property (nonatomic, strong) ANSDataCollection *collection;
 
-
 @end

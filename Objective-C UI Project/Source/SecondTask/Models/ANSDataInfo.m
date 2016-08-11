@@ -6,9 +6,9 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "ANSBuffer.h"
+#import "ANSDataInfo.h"
 
-@implementation ANSBuffer
+@implementation ANSDataInfo
 
 #pragma mark -
 #pragma mark Initialization and deallocations 

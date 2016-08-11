@@ -12,7 +12,7 @@
 #import "ANSDataCell.h"
 #import "ANSTableViewCell.h"
 #import "ANSData.h"
-#import "ANSBuffer.h"
+#import "ANSDataInfo.h"
 #import "ANSImageModel.h"
 #import "ANSImageView.h"
 
@@ -37,7 +37,12 @@ static const NSUInteger kANSSectionsCount           = 1;
 
 - (ANSDataCollection *)sortedCollection:(ANSDataCollection *)collection
                        withFilterString:(NSString *)filterStirng;
-- (void)resignSearchBar; 
+
+- (void)sortCollectionInBackground:(ANSDataCollection *)collection
+                  withFilterString:(NSString *)filterStirng;
+
+- (void)resignSearchBar;
+
 @end
 
 ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableView)
@@ -55,7 +60,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
         
         NSOperationQueue *queue = self.operationsQueue;
         if (!queue) {
-            queue = [NSOperationQueue new];
+            self.operationsQueue = [NSOperationQueue new];
         }
         
         [queue addOperation:operation];
@@ -79,7 +84,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"Gomer's contacts";
+    self.navigationItem.title = kANSTitleForHeaderSection;
     [self initLeftBarButtonItem];
     [self initRightBarButtonItem];
 }
@@ -93,11 +98,13 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 
 - (ANSDataCollection *)sortedCollection:(ANSDataCollection *)collection
                        withFilterString:(NSString *)filterStirng {
+    if (!filterStirng.length) {
+        return nil;
+    }
     
     ANSDataCollection *newCollection = [ANSDataCollection new];
     for (ANSData *data in collection) {
-        if (filterStirng.length > 0
-                && ![data.string containsString:filterStirng]) {
+        if ([data.string rangeOfString:filterStirng options:NSCaseInsensitiveSearch].location == NSNotFound) {
             continue; 
         } else {
             [newCollection addData:data];
@@ -107,8 +114,9 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     return newCollection;
 }
 
-- (void)sortedCollectionInBackground:(ANSDataCollection *)collection
-                    withFilterString:(NSString *)filterStirng {
+- (void)sortCollectionInBackground:(ANSDataCollection *)collection
+                    withFilterString:(NSString *)filterStirng
+{
     ANSWeakify(self);
     self.operation = [NSBlockOperation blockOperationWithBlock:^{
         ANSStrongify(self);
@@ -131,7 +139,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 }
 
 #pragma mark -
-#pragma mark UIBarButtonItem
+#pragma mark UIBarButtonItems
 
 - (void)initLeftBarButtonItem {
     UIBarButtonItem *buttom = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(leftBarAction:)];
@@ -175,7 +183,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 - (nullable NSString *)tableView:(UITableView *)tableView
          titleForHeaderInSection:(NSInteger)section
 {
-    if (!section) {
+    if (section == 0) {
         return [NSString stringWithFormat:kANSTitleForHeaderSection];
     }
     
@@ -223,20 +231,13 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     }
 }
 
-- (BOOL)        tableView:(UITableView *)tableView
-    canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
     //delate row (related with protocol methods editingStyleForRowAtIndexPath/ shouldIndentWhileEditingRowAtIndexPath)
 - (void)    tableView:(UITableView *)tableView
     commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSUInteger index = indexPath.row;
-        
-        [self.collection removeDataAtIndex:index];
+        [self.collection removeDataAtIndex:indexPath.row];
     }
 }
 
@@ -279,7 +280,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [self sortedCollectionInBackground:self.collection withFilterString:searchText];
+    [self sortCollectionInBackground:self.collection withFilterString:searchText];
 }
 
 #pragma mark -
@@ -287,7 +288,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 
 - (void)collection:(ANSDataCollection *)collection didUpdateData:(id)data {
     UITableView *table = self.tableView.table;
-    ANSBuffer *buffer = data;
+    ANSDataInfo *buffer = data;
     
     NSIndexPath *path = [NSIndexPath indexPathForRow:buffer.value inSection:0];
     

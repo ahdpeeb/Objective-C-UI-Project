@@ -36,5 +36,4 @@
     table.scrollIndicatorInsets = insect;
 }
 
-
 @end

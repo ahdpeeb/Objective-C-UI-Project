@@ -25,7 +25,7 @@
 		936727D91D591D25007A796F /* ANSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C81D591D25007A796F /* ANSTableView.m */; };
 		936727DA1D591D25007A796F /* ANSViewControllerTables.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727CA1D591D25007A796F /* ANSViewControllerTables.m */; };
 		936727DB1D591D25007A796F /* ANSViewControllerTables.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936727CB1D591D25007A796F /* ANSViewControllerTables.xib */; };
-		9388ECDF1D49FEB50082EE4B /* ANSBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9388ECDE1D49FEB50082EE4B /* ANSBuffer.m */; };
+		9388ECDF1D49FEB50082EE4B /* ANSDataInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9388ECDE1D49FEB50082EE4B /* ANSDataInfo.m */; };
 		9388ECF11D4A396F0082EE4B /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE11D4A396F0082EE4B /* 1.png */; };
 		9388ECF21D4A396F0082EE4B /* 10.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE21D4A396F0082EE4B /* 10.png */; };
 		9388ECF31D4A396F0082EE4B /* 11.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE31D4A396F0082EE4B /* 11.png */; };
@@ -105,8 +105,8 @@
 		936727C91D591D25007A796F /* ANSViewControllerTables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSViewControllerTables.h; sourceTree = "<group>"; };
 		936727CA1D591D25007A796F /* ANSViewControllerTables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSViewControllerTables.m; sourceTree = "<group>"; };
 		936727CB1D591D25007A796F /* ANSViewControllerTables.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSViewControllerTables.xib; sourceTree = "<group>"; };
-		9388ECDD1D49FEB50082EE4B /* ANSBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSBuffer.h; sourceTree = "<group>"; };
-		9388ECDE1D49FEB50082EE4B /* ANSBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSBuffer.m; sourceTree = "<group>"; };
+		9388ECDD1D49FEB50082EE4B /* ANSDataInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSDataInfo.h; sourceTree = "<group>"; };
+		9388ECDE1D49FEB50082EE4B /* ANSDataInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSDataInfo.m; sourceTree = "<group>"; };
 		9388ECE11D4A396F0082EE4B /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		9388ECE21D4A396F0082EE4B /* 10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10.png; sourceTree = "<group>"; };
 		9388ECE31D4A396F0082EE4B /* 11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 11.png; sourceTree = "<group>"; };
@@ -511,8 +511,8 @@
 				93026CD01D44C2BE00DFCF23 /* ANSDataCollection.m */,
 				93C5A6181D412D31002FBCA8 /* ANSData.h */,
 				93C5A6191D412D31002FBCA8 /* ANSData.m */,
-				9388ECDD1D49FEB50082EE4B /* ANSBuffer.h */,
-				9388ECDE1D49FEB50082EE4B /* ANSBuffer.m */,
+				9388ECDD1D49FEB50082EE4B /* ANSDataInfo.h */,
+				9388ECDE1D49FEB50082EE4B /* ANSDataInfo.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -721,7 +721,7 @@
 				93C5A5F51D40DF3D002FBCA8 /* NSArray+ANSExtension.m in Sources */,
 				93EC8F651D48D9A6000624F0 /* UITableView+Extension.m in Sources */,
 				933C74671D50908100A423B9 /* ANSProtocolObservationController.m in Sources */,
-				9388ECDF1D49FEB50082EE4B /* ANSBuffer.m in Sources */,
+				9388ECDF1D49FEB50082EE4B /* ANSDataInfo.m in Sources */,
 				933C74651D50908100A423B9 /* ANSBlockObservationController.m in Sources */,
 				93052AE11D4CF2370007D20C /* ANSImageView.m in Sources */,
 				93C5A5F31D40DF3D002FBCA8 /* ANSTimerPrivate.m in Sources */,

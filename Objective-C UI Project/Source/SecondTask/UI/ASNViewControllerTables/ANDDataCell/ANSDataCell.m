@@ -7,9 +7,15 @@
 // UILabel      *label;
 // UIImageView  *imageView;
 
-
 #import "ANSDataCell.h"
+
 #import "ANSImageView.h"
+
+@interface ANSDataCell ()
+
+- (void)customizeUserPicture;
+
+@end
 
 @implementation ANSDataCell
 
@@ -22,7 +28,7 @@
 }
 
 #pragma mark -
-#pragma mark acsessors
+#pragma mark Acsessors
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -31,7 +37,7 @@
 #pragma mark -
 #pragma mark Private methods
 
-- (void)roundUserPicture {
+- (void)customizeUserPicture {
     UIImageView *picture = self.userImageView.contentImageView;
     
     picture.layer.cornerRadius = picture.frame.size.height /2;
@@ -47,7 +53,7 @@
     self.label.text = object.string;
     self.userImageView.imageModel = object.imageModel;
     
-    [self roundUserPicture];
+    [self customizeUserPicture];
 }
 
 @end

@@ -9,7 +9,7 @@
 
 #import "ANSDataCollection.h"
 
-#import "ANSBuffer.h"
+#import "ANSDataInfo.h"
 #import "ANSData.h"
 
 typedef NS_ENUM(NSUInteger, ANSCollectionAction) {
@@ -23,7 +23,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 @interface ANSDataCollection ()
 @property (nonatomic, retain) NSMutableArray *mutableDataCollection;
-@property (nonatomic, retain) ANSBuffer *tempBuffer;
+@property (nonatomic, retain) ANSDataInfo *tempBuffer;
 
 @end
 
@@ -111,7 +111,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
         }
         
         if (![collection containsObject:data]) {
-            ANSBuffer *buffer = [ANSBuffer allocWithObject:data value:index];
+            ANSDataInfo *buffer = [ANSDataInfo allocWithObject:data value:index];
             buffer.selector = @selector(insertRowsAtIndexPaths:withRowAnimation:);
             
             [collection insertObject:data atIndex:index];
@@ -125,7 +125,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     @synchronized(self) {
         id object = [self dataAtIndex:index];
         if (object) {
-            ANSBuffer *buffer = [ANSBuffer allocWithObject:object value:index];
+            ANSDataInfo *buffer = [ANSDataInfo allocWithObject:object value:index];
             buffer.selector = @selector(deleteRowsAtIndexPaths:withRowAnimation:);
             
             [self.mutableDataCollection removeObjectAtIndex:index];
