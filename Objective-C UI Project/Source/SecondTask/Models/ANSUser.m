@@ -41,8 +41,8 @@ static NSString * const kANSImageModelKey    = @"kANSImageModelKey";
         NSString *alphabet = [NSString alphanumericAlphabet];
         self.mutableString = [NSString randomStringWithLength:kANSStringLength alphabet:alphabet];
         
-        NSURL *ulr = [[NSBundle mainBundle] URLForResource:kANSImageName withExtension:kANSImageFormat];
-        self.imageModel = [ANSImageModel imageFromURL:ulr];;
+        NSURL *url = [[NSBundle mainBundle] URLForResource:kANSImageName withExtension:kANSImageFormat];
+        self.imageModel = [ANSImageModel imageFromURL:url];;
     }
     
     return self;

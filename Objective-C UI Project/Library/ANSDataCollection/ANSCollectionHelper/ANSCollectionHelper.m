@@ -25,9 +25,7 @@
 
 - (instancetype)init {
     if ([self class] == [ANSCollectionHelper class]) {
-        [NSException raise:@"Invalid identifire" format:@"You should never call init method for ANSCollectionHelper"];
-         
-         return nil;
+        [NSException raise:@"Invalid identifier" format:@"You should never call init method for ANSCollectionHelper"];
     }
     
     self = [super init];

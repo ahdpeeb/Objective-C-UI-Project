@@ -11,6 +11,8 @@
 #import "ANSViewControllerTables.h"
 #import "ANSViewControllerFirstTask.h"
 #import "ANSUser.h"
+#import "ANSCollectionHelper.h"
+
 
 #import "NSArray+ANSExtension.h"
 
@@ -30,7 +32,6 @@ static const NSUInteger kANSDataCount   = 0;
     
     ANSViewControllerTables *controller = [ANSViewControllerTables new];
  //   ANSViewControllerFirstTask *controller1 = [ANSViewControllerFirstTask new];
-    
     UINavigationController *nv = [[UINavigationController alloc] initWithRootViewController:controller];
     window.rootViewController = nv;
     
