@@ -6,7 +6,7 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "ANSAnimatedView.h"
+#import "ANSAnimationView.h"
 
 static const NSTimeInterval kANSAnimatioDuration = 0.5;
 
@@ -16,96 +16,95 @@ static const NSTimeInterval kANSDelay = 0;
 static NSString * const kANSImageFormat = @".png";
 static const NSUInteger KANSImageCount = 16;
 
-@interface ANSAnimatedView ()
-@property (nonatomic, assign, getter=isAnimate) BOOL                animate;
-@property (nonatomic, strong)                   UIImageView       *animationImage;
-@property (nonatomic, assign)                   ANSViewPosition   nextPosition;
+@interface ANSAnimationView ()
+@property (nonatomic, assign, getter=isAnimating)   BOOL          animating;
+@property (nonatomic, strong)                       UIImageView   *animationImage;
 
 // returns new cutted CGRect from superView rect
 - (CGRect)newRect;
 
 // generate point from position
 - (CGPoint)pointFromPosition:(ANSViewPosition)position;
+- (ANSViewPosition)nextPosition;
 
 @end
 
-@implementation ANSAnimatedView
+@implementation ANSAnimationView
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    [self initDancer];
+}
 
 #pragma mark -
 #pragma mark Accsessors
 
 - (void)setPosition:(ANSViewPosition)position {
-    if (_position != position) {
-        _position = position;
-        
-        CGPoint point = [self pointFromPosition:position];
-        NSLog(@"%@", NSStringFromCGPoint(point));
-        self.center = point;
-    }
+    [self setPosition:position animated:YES];
 }
 
+- (void)setPosition:(ANSViewPosition)position
+           animated:(BOOL)animatad
+{
+    [self setPosition:position animated:animatad completion:nil];
+}
 
 - (void)setPosition:(ANSViewPosition)position
-         isAnimated:(BOOL)value
-            withHandler:(ANSCompletionHandler)block
+           animated:(BOOL)animatad
+         completion:(ANSCompletionHandler)block
 {
-    if (!value) {
-        self.position = self.position; // or viewPosition.
+    if (_position == position) {
+        return;
     }
     
-    [UIView animateWithDuration:kANSInterval
+    [UIView animateWithDuration:animatad ? kANSInterval : 0
                           delay:kANSDelay
                         options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveLinear
                      animations:^{
-                         self.position = position;
-                     } completion:block];
-}
-
-- (void)setPosition:(ANSViewPosition)position
-             isAnimated:(BOOL)value
-{
-    [self setPosition:position isAnimated:value withHandler:nil];
+                         self.center = [self pointFromPosition:position];
+                     } completion:^(BOOL finished){
+                         _position = position;
+                         
+                         if (block) {
+                             block(finished);
+                         }
+                     }];
 }
 
 #pragma mark -
 #pragma mark Public methods
 
 - (void)startAnimation {
-    self.animate = YES;
+    self.animating = YES;
     
     [self.animationImage startAnimating];
     
-    ANSViewPosition position = self.nextPosition;
-    
-   __weak ANSAnimatedView *weakSelf = self;
-    [self setPosition:position isAnimated:YES withHandler:^(BOOL finished) {
+    __weak ANSAnimationView *weakSelf = self;
+    [self setPosition:[self nextPosition] animated:YES completion:^(BOOL finished) {
         if (finished) {
-            __strong ANSAnimatedView *strongSelf = weakSelf;
+            __strong ANSAnimationView *strongSelf = weakSelf;
             
-            if (!strongSelf.isAnimate) {
+            if (!strongSelf.animating) {
                 [strongSelf.animationImage stopAnimating];
                 return ;
             }
 
-            strongSelf.nextPosition = (strongSelf.nextPosition + 1) % ANSPositionCount;
             [strongSelf startAnimation];
         }
     }];
 }
 
 - (void)stopAnimation {
-    self.animate = NO;
+    self.animating = NO;
 }
 
 - (void)initDancer {
     NSMutableArray *animations = [NSMutableArray new];
     for (int index = 0; index < KANSImageCount; index++) {
         
-        NSString *stirng = [NSString stringWithFormat:@"%d", index + 1];
-        NSString *path = [[NSBundle mainBundle] pathForResource:stirng ofType:kANSImageFormat];
-        [UIImage imageWithContentsOfFile:path];
-        
-        [animations addObject:[UIImage imageNamed:stirng]];
+        NSString *name = [NSString stringWithFormat:@"%d", index + 1];
+        [animations addObject:[UIImage imageNamed:name]];
     }
     
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:self.bounds];
@@ -123,18 +122,29 @@ static const NSUInteger KANSImageCount = 16;
 
 - (CGPoint)pointFromPosition:(ANSViewPosition)position {
     CGRect rect = [self newRect];
+    
+    CGPoint point = CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect));
+    CGPoint maxPoint = CGPointMake(CGRectGetMaxX(rect), CGRectGetMaxY(rect));
+    
     switch (position) {
         case ANSLeftTopPosition:
-           return CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect));
+            point = point;
+            break;
         case ANSRightTopPosition:
-            return CGPointMake(CGRectGetMaxX(rect), CGRectGetMinY(rect));
+            point.x = maxPoint.x;
+            break;
         case ANSRightButtomPosition:
-            return CGPointMake(CGRectGetMaxX(rect), CGRectGetMaxY(rect));
+            point = maxPoint;
+            break;
         case ANSLeftButtomPosition:
-            return CGPointMake(CGRectGetMinX(rect), CGRectGetMaxY(rect));
+            point.y = maxPoint.y;
+            break;
         default:
-            return CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
+            point = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect));
+            break;
     }
+    
+    return point;
 }
 
 - (CGRect)newRect {
@@ -143,6 +153,10 @@ static const NSUInteger KANSImageCount = 16;
     CGFloat halfheight = CGRectGetHeight(self.frame) / 2;
     
    return CGRectInset(superRect, halfWidth, halfheight);
+}
+
+- (ANSViewPosition)nextPosition {
+   return (self.position + 1) % ANSPositionCount;
 }
 
 @end

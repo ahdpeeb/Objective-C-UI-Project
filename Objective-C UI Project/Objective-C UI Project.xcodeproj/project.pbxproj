@@ -14,7 +14,7 @@
 		93026CE21D46810900DFCF23 /* ANSRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CDB1D46810900DFCF23 /* ANSRootView.m */; };
 		93026CE31D46810900DFCF23 /* ANSViewControllerFirstTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CDD1D46810900DFCF23 /* ANSViewControllerFirstTask.m */; };
 		93026CE41D46810900DFCF23 /* ANSViewControllerFirstTask.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93026CDE1D46810900DFCF23 /* ANSViewControllerFirstTask.xib */; };
-		93026CE51D46810900DFCF23 /* ANSAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CE11D46810900DFCF23 /* ANSAnimatedView.m */; };
+		93026CE51D46810900DFCF23 /* ANSAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CE11D46810900DFCF23 /* ANSAnimationView.m */; };
 		93052AE11D4CF2370007D20C /* ANSImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93052AE01D4CF2370007D20C /* ANSImageView.m */; };
 		933C74641D50908100A423B9 /* ANSObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C745A1D50908100A423B9 /* ANSObservableObject.m */; };
 		933C74651D50908100A423B9 /* ANSBlockObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C745D1D50908100A423B9 /* ANSBlockObservationController.m */; };
@@ -83,8 +83,8 @@
 		93026CDC1D46810900DFCF23 /* ANSViewControllerFirstTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSViewControllerFirstTask.h; sourceTree = "<group>"; };
 		93026CDD1D46810900DFCF23 /* ANSViewControllerFirstTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSViewControllerFirstTask.m; sourceTree = "<group>"; };
 		93026CDE1D46810900DFCF23 /* ANSViewControllerFirstTask.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSViewControllerFirstTask.xib; sourceTree = "<group>"; };
-		93026CE01D46810900DFCF23 /* ANSAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSAnimatedView.h; path = subViewsOfMainView/ANSAnimatedView.h; sourceTree = "<group>"; };
-		93026CE11D46810900DFCF23 /* ANSAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSAnimatedView.m; path = subViewsOfMainView/ANSAnimatedView.m; sourceTree = "<group>"; };
+		93026CE01D46810900DFCF23 /* ANSAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSAnimationView.h; path = subViewsOfMainView/ANSAnimationView.h; sourceTree = "<group>"; };
+		93026CE11D46810900DFCF23 /* ANSAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSAnimationView.m; path = subViewsOfMainView/ANSAnimationView.m; sourceTree = "<group>"; };
 		93052ADF1D4CF2370007D20C /* ANSImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSImageView.h; sourceTree = "<group>"; };
 		93052AE01D4CF2370007D20C /* ANSImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSImageView.m; sourceTree = "<group>"; };
 		933C74591D50908100A423B9 /* ANSObservableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSObservableObject.h; sourceTree = "<group>"; };
@@ -210,8 +210,8 @@
 				93026CDE1D46810900DFCF23 /* ANSViewControllerFirstTask.xib */,
 				93026CDA1D46810900DFCF23 /* ANSRootView.h */,
 				93026CDB1D46810900DFCF23 /* ANSRootView.m */,
-				93026CE01D46810900DFCF23 /* ANSAnimatedView.h */,
-				93026CE11D46810900DFCF23 /* ANSAnimatedView.m */,
+				93026CE01D46810900DFCF23 /* ANSAnimationView.h */,
+				93026CE11D46810900DFCF23 /* ANSAnimationView.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -733,7 +733,7 @@
 				93C5A5F11D40DF3D002FBCA8 /* ANSQueue.m in Sources */,
 				9388ED121D4BEA220082EE4B /* ANSImageModelDispatcher.m in Sources */,
 				93C5A5F01D40DF3D002FBCA8 /* ANSGCD.m in Sources */,
-				93026CE51D46810900DFCF23 /* ANSAnimatedView.m in Sources */,
+				93026CE51D46810900DFCF23 /* ANSAnimationView.m in Sources */,
 				93C084371D3E380D0077A81C /* main.m in Sources */,
 				936727D71D591D25007A796F /* ANSDataCell.m in Sources */,
 				936727DA1D591D25007A796F /* ANSViewControllerTables.m in Sources */,

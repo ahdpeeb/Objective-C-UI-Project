@@ -95,7 +95,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 
 #pragma mark -
 #pragma mark Private methods
-
+    //ANSDataCollection method
 - (ANSDataCollection *)sortedCollection:(ANSDataCollection *)collection
                        withFilterString:(NSString *)filterStirng {
     if (!filterStirng.length) {
@@ -113,7 +113,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     
     return newCollection;
 }
-
+    //TableView Method
 - (void)sortCollectionInBackground:(ANSDataCollection *)collection
                     withFilterString:(NSString *)filterStirng
 {
@@ -140,12 +140,12 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 
 #pragma mark -
 #pragma mark UIBarButtonItems
-
+    //TableView Method
 - (void)initLeftBarButtonItem {
     UIBarButtonItem *buttom = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(leftBarAction:)];
     [self.navigationItem setLeftBarButtonItem:buttom animated:YES];
 }
-
+    //TableView Method
 - (void)initRightBarButtonItem {
     UIBarButtonItem *buttom = [[UIBarButtonItem alloc] initWithTitle:kANSEdit
                                                                style:UIBarButtonItemStyleDone target:self action:@selector(rightBarAction:)];
