@@ -10,14 +10,14 @@
 
 #import "ANSViewControllerTables.h"
 #import "ANSViewControllerFirstTask.h"
-#import "ANSData.h"
+#import "ANSUser.h"
 
 #import "NSArray+ANSExtension.h"
 
 static const NSUInteger kANSDataCount   = 0;
 
 @interface ANSAppDelegate ()
-@property (nonatomic, retain) ANSDataCollection *collection;
+@property (nonatomic, retain) ANSUsersCollection *collection;
 
 @end
 
@@ -28,10 +28,10 @@ static const NSUInteger kANSDataCount   = 0;
     UIWindow *window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window = window;
     
-//    ANSViewControllerTables *controller = [ANSViewControllerTables new];
-    ANSViewControllerFirstTask *controller1 = [ANSViewControllerFirstTask new];
+    ANSViewControllerTables *controller = [ANSViewControllerTables new];
+ //   ANSViewControllerFirstTask *controller1 = [ANSViewControllerFirstTask new];
     
-    UINavigationController *nv = [[UINavigationController alloc] initWithRootViewController:controller1];
+    UINavigationController *nv = [[UINavigationController alloc] initWithRootViewController:controller];
     window.rootViewController = nv;
     
     [window makeKeyAndVisible];
@@ -41,13 +41,13 @@ static const NSUInteger kANSDataCount   = 0;
     
     //test objects
    __unused NSArray *objects = [NSArray objectsWithCount:kANSDataCount block:^id{
-        return [[ANSData alloc] init];
+        return [[ANSUser alloc] init];
     }];
    
-    ANSDataCollection *collection =[ANSDataCollection loadState] ? : [ANSDataCollection new];
+    ANSUsersCollection *collection = [ANSUsersCollection new];
     // [ANSDataCollection loadState] ? :
     self.collection = collection;
-//    controller.collection = collection;
+    controller.collection = collection;
 
     return YES;
 }

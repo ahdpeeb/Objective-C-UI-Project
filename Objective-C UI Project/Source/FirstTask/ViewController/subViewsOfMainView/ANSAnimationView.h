@@ -33,6 +33,6 @@ typedef enum {
 - (void)startAnimation;
 - (void)stopAnimation;
 
-- (void)initDancer;
+- (void)initAnimationImage;
 
 @end

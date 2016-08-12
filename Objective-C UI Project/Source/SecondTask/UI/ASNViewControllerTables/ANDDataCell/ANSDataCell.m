@@ -49,7 +49,7 @@
 #pragma mark -
 #pragma mark Public methods
 
-- (void)fillInfoFromObject:(ANSData *)object {
+- (void)fillInfoFromObject:(ANSUser *)object {
     self.label.text = object.string;
     self.userImageView.imageModel = object.imageModel;
     

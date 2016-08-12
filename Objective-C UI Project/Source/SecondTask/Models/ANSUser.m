@@ -6,7 +6,7 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "ANSData.h"
+#import "ANSUser.h"
 
 #import "NSString+ANSExtension.h"
 
@@ -14,16 +14,16 @@ static const NSUInteger kANSStringLength    = 10;
 static NSString * const kANSImageName       = @"Gomer_2";
 static NSString * const kANSImageFormat     = @"png";
 
-static NSString * const kANSStringKey          = @"kANSStringKey";
-static NSString * const kANSImageModelKey           = @"kANSImageModelKey";
+static NSString * const kANSStringKey        = @"kANSStringKey";
+static NSString * const kANSImageModelKey    = @"kANSImageModelKey";
 
 
-@interface ANSData ()
+@interface ANSUser ()
 @property (nonatomic, copy) NSString *mutableString;
 
 @end
 
-@implementation ANSData
+@implementation ANSUser
 
 @dynamic string;
 @dynamic image;
@@ -80,8 +80,8 @@ static NSString * const kANSImageModelKey           = @"kANSImageModelKey";
 #pragma mark -
 #pragma mark NSCopying protocol
 
-- (id)copyWithZone:(NSZone *)zone {
-    id copy = [[self class] new];
+- (ANSUser *)copyWithZone:(NSZone *)zone {
+    ANSUser * copy = [[self class] new];
     if (copy) {
         [copy setMutableString:self.mutableString];
         [copy setImageModel:self.imageModel];

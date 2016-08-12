@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ANSDataCollection.h"
+#import "ANSUsersCollection.h"
 
 @interface ANSViewControllerTables : UIViewController <
-UITableViewDataSource,
-UITableViewDelegate,
-UISearchBarDelegate,
-ANSCollectionObserver
+    UITableViewDataSource,
+    UITableViewDelegate,
+    UISearchBarDelegate,
+    ANSCollectionObserver
 >
 
-@property (nonatomic, strong) ANSDataCollection *collection;
+@property (nonatomic, strong) ANSUsersCollection *collection;
 
 @end

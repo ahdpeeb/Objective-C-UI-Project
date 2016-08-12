@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ANSDataCollection.h"
+#import "ANSUsersCollection.h"
 
 @interface ANSAppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;

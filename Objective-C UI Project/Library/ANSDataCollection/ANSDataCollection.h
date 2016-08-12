@@ -11,19 +11,28 @@
 #import "ANSObservableObject.h"
 
 @class ANSDataCollection;
+@class ANSCollectionHelper;
 
 @protocol ANSCollectionObserver <NSObject>
 
 @optional
-- (void)collection:(ANSDataCollection *)collection didUpdateData:(id)data;
+- (void)       collection:(ANSDataCollection *)collection
+    didChangeWithHelper:(ANSCollectionHelper *)helper;
 
 @end
 
+typedef NS_ENUM(NSUInteger, ANSCollectionAction) {
+    ANSCollectionAddData,
+    ANSCollectionRemoveData,
+    ANSCollectionMoveData
+};
+
 @interface ANSDataCollection : ANSObservableObject <
-NSCoding,
-NSCopying,
-NSFastEnumeration
+    NSCoding,
+    NSCopying,
+    NSFastEnumeration
 >
+
 @property (nonatomic, readonly) NSUInteger  count;
 @property (nonatomic, readonly) NSArray     *objects;
 
@@ -40,8 +49,6 @@ NSFastEnumeration
 - (void)addDataObjects:(NSArray*)objects;
 
 - (void)moveDataFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
-
-- (void)sortArray;
 
 // this methods intended for save and load currect state of data collection;
 - (void)saveState;

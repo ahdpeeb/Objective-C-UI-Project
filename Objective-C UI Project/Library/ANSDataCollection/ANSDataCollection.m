@@ -10,13 +10,7 @@
 #import "ANSDataCollection.h"
 
 #import "ANSDataInfo.h"
-#import "ANSData.h"
-
-typedef NS_ENUM(NSUInteger, ANSCollectionAction) {
-    ANSCollectionAddData,
-    ANSCollectionRemoveData,
-    ANSCollectionMoveData
-};
+#import "ANSCollectionHelper.h"
 
 static NSString * const kANSArchiveKey              = @"kANSArchiveKey";
 static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
@@ -160,19 +154,6 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 }
 
 #pragma mark -
-#pragma mark sorting ANSData by name
-
-- (void)sortArray {
-    [self.mutableDataCollection sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        if ([obj1 isKindOfClass:[ANSData class]] && [obj2 isKindOfClass:[ANSData class]]) {
-             return [[obj1 string] compare:[obj2 string]];
-        }
-        
-        return (NSComparisonResult)NSOrderedSame;
-    }];
-}
-
-#pragma mark -
 #pragma mark Save and loading (Public methods)
 
 - (void)saveState {
@@ -201,7 +182,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 }
 
 - (SEL)selectorForState:(NSUInteger)state {
-    return @selector(collection:didUpdateData:);
+    return @selector(collection:didChangeWithHelper:);
 }
 
 #pragma mark -

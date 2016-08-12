@@ -11,7 +11,7 @@
 #import "ANSTableView.h"
 #import "ANSDataCell.h"
 #import "ANSTableViewCell.h"
-#import "ANSData.h"
+#import "ANSUser.h"
 #import "ANSDataInfo.h"
 #import "ANSImageModel.h"
 #import "ANSImageView.h"
@@ -30,15 +30,12 @@ static const NSUInteger kANSSectionsCount           = 1;
 
 @interface ANSViewControllerTables ()
 @property (nonatomic, strong) ANSProtocolObservationController  *controller;
-@property (nonatomic, strong) ANSDataCollection                 *filteredCollection;
+@property (nonatomic, strong) ANSUsersCollection                *filteredCollection;
 
 @property (nonatomic, strong) NSOperation                       *operation;
 @property (nonatomic, strong) NSOperationQueue                  *operationsQueue;
 
-- (ANSDataCollection *)sortedCollection:(ANSDataCollection *)collection
-                       withFilterString:(NSString *)filterStirng;
-
-- (void)sortCollectionInBackground:(ANSDataCollection *)collection
+- (void)sortCollectionInBackground:(ANSUsersCollection *)collection
                   withFilterString:(NSString *)filterStirng;
 
 - (void)resignSearchBar;
@@ -67,7 +64,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     }
 }
 
-- (void)setCollection:(ANSDataCollection *)collection {
+- (void)setCollection:(ANSUsersCollection *)collection {
     if (_collection != collection) {
     //  [_collection removeObserverObject:self];
         _collection = collection;
@@ -95,32 +92,15 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 
 #pragma mark -
 #pragma mark Private methods
-    //ANSDataCollection method
-- (ANSDataCollection *)sortedCollection:(ANSDataCollection *)collection
-                       withFilterString:(NSString *)filterStirng {
-    if (!filterStirng.length) {
-        return nil;
-    }
-    
-    ANSDataCollection *newCollection = [ANSDataCollection new];
-    for (ANSData *data in collection) {
-        if ([data.string rangeOfString:filterStirng options:NSCaseInsensitiveSearch].location == NSNotFound) {
-            continue; 
-        } else {
-            [newCollection addData:data];
-        }
-    }
-    
-    return newCollection;
-}
     //TableView Method
-- (void)sortCollectionInBackground:(ANSDataCollection *)collection
+- (void)sortCollectionInBackground:(ANSUsersCollection *)collection
                     withFilterString:(NSString *)filterStirng
 {
     ANSWeakify(self);
     self.operation = [NSBlockOperation blockOperationWithBlock:^{
         ANSStrongify(self);
-      self.filteredCollection = [self sortedCollection:collection withFilterString:filterStirng];
+      self.filteredCollection = [self.collection sortedCollection:collection
+                                                 withFilterString:filterStirng];
     }];
 
     self.operation.completionBlock = ^{
@@ -148,7 +128,10 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     //TableView Method
 - (void)initRightBarButtonItem {
     UIBarButtonItem *buttom = [[UIBarButtonItem alloc] initWithTitle:kANSEdit
-                                                               style:UIBarButtonItemStyleDone target:self action:@selector(rightBarAction:)];
+                                                               style:UIBarButtonItemStyleDone
+                                                              target:self
+                                                              action:@selector(rightBarAction:)];
+    
     [self.navigationItem setRightBarButtonItem:buttom animated:YES];
 }
 
@@ -161,7 +144,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     [self resignSearchBar];
     
     if (table.editing) {
-        ANSData *object = [[ANSData alloc] init];
+        ANSUser *object = [[ANSUser alloc] init];
         [self.collection insertData:object atIndex:0];
     }
 }
@@ -208,7 +191,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ANSDataCell *cell = [tableView reusableCellfromNibWithClass:[ANSDataCell class]];
-    ANSData *object = self.collection[indexPath.row];
+    ANSUser *object = self.collection[indexPath.row];
     
     [cell fillInfoFromObject:object];
 
@@ -286,9 +269,10 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 #pragma mark -
 #pragma mark ANSCollectionObserver protocol
 
-- (void)collection:(ANSDataCollection *)collection didUpdateData:(id)data {
+- (void)        collection:(ANSDataCollection *)collection
+       didChangeWithHelper:(ANSCollectionHelper *)helper {
     UITableView *table = self.tableView.table;
-    ANSDataInfo *buffer = data;
+    ANSDataInfo *buffer = helper;
     
     NSIndexPath *path = [NSIndexPath indexPathForRow:buffer.value inSection:0];
     

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ANSData.h"
+#import "ANSUser.h"
 
 @class ANSImageView;
 
@@ -16,6 +16,6 @@
 @property (nonatomic, strong) IBOutlet UILabel          *label;
 @property (nonatomic, strong) IBOutlet ANSImageView     *userImageView; 
 
-- (void)fillInfoFromObject:(ANSData *)object; 
+- (void)fillInfoFromObject:(ANSUser *)object; 
 
 @end

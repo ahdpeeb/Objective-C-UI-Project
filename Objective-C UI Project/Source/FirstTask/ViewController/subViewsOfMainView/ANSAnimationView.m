@@ -21,7 +21,7 @@ static const NSUInteger KANSImageCount = 16;
 @property (nonatomic, strong)                       UIImageView   *animationImage;
 
 // returns new cutted CGRect from superView rect
-- (CGRect)newRect;
+- (CGRect)insectedFrame;
 
 // generate point from position
 - (CGPoint)pointFromPosition:(ANSViewPosition)position;
@@ -34,7 +34,7 @@ static const NSUInteger KANSImageCount = 16;
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self initDancer];
+    [self initAnimationImage];
 }
 
 #pragma mark -
@@ -99,7 +99,7 @@ static const NSUInteger KANSImageCount = 16;
     self.animating = NO;
 }
 
-- (void)initDancer {
+- (void)initAnimationImage {
     NSMutableArray *animations = [NSMutableArray new];
     for (int index = 0; index < KANSImageCount; index++) {
         
@@ -121,7 +121,7 @@ static const NSUInteger KANSImageCount = 16;
 #pragma mark Ptivate methods
 
 - (CGPoint)pointFromPosition:(ANSViewPosition)position {
-    CGRect rect = [self newRect];
+    CGRect rect = [self insectedFrame];
     
     CGPoint point = CGPointMake(CGRectGetMinX(rect), CGRectGetMinY(rect));
     CGPoint maxPoint = CGPointMake(CGRectGetMaxX(rect), CGRectGetMaxY(rect));
@@ -147,12 +147,12 @@ static const NSUInteger KANSImageCount = 16;
     return point;
 }
 
-- (CGRect)newRect {
-    CGRect superRect = self.superview.bounds;
+- (CGRect)insectedFrame {
+    CGRect superBounds = self.superview.bounds;
     CGFloat halfWidth = CGRectGetWidth(self.frame) / 2;
     CGFloat halfheight = CGRectGetHeight(self.frame) / 2;
     
-   return CGRectInset(superRect, halfWidth, halfheight);
+   return CGRectInset(superBounds, halfWidth, halfheight);
 }
 
 - (ANSViewPosition)nextPosition {
