@@ -17,6 +17,8 @@
 		93026CE51D46810900DFCF23 /* ANSAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CE11D46810900DFCF23 /* ANSAnimationView.m */; };
 		93052AE11D4CF2370007D20C /* ANSImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93052AE01D4CF2370007D20C /* ANSImageView.m */; };
 		933259B01D5DF0E1007E722A /* ANSDataCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 933259AF1D5DF0E1007E722A /* ANSDataCollection.m */; };
+		933B741F1D61D44F00DF3DF9 /* ANSChangeModel+UItableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 933B741E1D61D44F00DF3DF9 /* ANSChangeModel+UItableView.m */; };
+		933B74221D61E8F700DF3DF9 /* ANSChangeModel+UICollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 933B74211D61E8F700DF3DF9 /* ANSChangeModel+UICollectionView.m */; };
 		933C74641D50908100A423B9 /* ANSObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C745A1D50908100A423B9 /* ANSObservableObject.m */; };
 		933C74651D50908100A423B9 /* ANSBlockObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C745D1D50908100A423B9 /* ANSBlockObservationController.m */; };
 		933C74661D50908100A423B9 /* ANSObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C745F1D50908100A423B9 /* ANSObservationController.m */; };
@@ -26,9 +28,9 @@
 		936727D91D591D25007A796F /* ANSTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C81D591D25007A796F /* ANSTableView.m */; };
 		936727DA1D591D25007A796F /* ANSViewControllerTables.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727CA1D591D25007A796F /* ANSViewControllerTables.m */; };
 		936727DB1D591D25007A796F /* ANSViewControllerTables.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936727CB1D591D25007A796F /* ANSViewControllerTables.xib */; };
-		936ABA4B1D5E0725004D459F /* ANSCollectionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 936ABA491D5E0725004D459F /* ANSCollectionHelper.m */; };
-		936ABA4E1D5E0AAF004D459F /* ANSOneIndexHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 936ABA4D1D5E0AAF004D459F /* ANSOneIndexHelper.m */; };
-		936ABA511D5E0B56004D459F /* ANSTwoIndexHepler.m in Sources */ = {isa = PBXBuildFile; fileRef = 936ABA501D5E0B56004D459F /* ANSTwoIndexHepler.m */; };
+		936ABA4B1D5E0725004D459F /* ANSChangeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 936ABA491D5E0725004D459F /* ANSChangeModel.m */; };
+		936ABA4E1D5E0AAF004D459F /* ANSOneIndexModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 936ABA4D1D5E0AAF004D459F /* ANSOneIndexModel.m */; };
+		936ABA511D5E0B56004D459F /* ANSTwoIndexModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 936ABA501D5E0B56004D459F /* ANSTwoIndexModel.m */; };
 		9388ECDF1D49FEB50082EE4B /* ANSDataInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9388ECDE1D49FEB50082EE4B /* ANSDataInfo.m */; };
 		9388ECF11D4A396F0082EE4B /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE11D4A396F0082EE4B /* 1.png */; };
 		9388ECF21D4A396F0082EE4B /* 10.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE21D4A396F0082EE4B /* 10.png */; };
@@ -93,6 +95,10 @@
 		93052AE01D4CF2370007D20C /* ANSImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSImageView.m; sourceTree = "<group>"; };
 		933259AE1D5DF0E1007E722A /* ANSDataCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSDataCollection.h; sourceTree = "<group>"; };
 		933259AF1D5DF0E1007E722A /* ANSDataCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSDataCollection.m; sourceTree = "<group>"; };
+		933B741D1D61D44F00DF3DF9 /* ANSChangeModel+UItableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANSChangeModel+UItableView.h"; sourceTree = "<group>"; };
+		933B741E1D61D44F00DF3DF9 /* ANSChangeModel+UItableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANSChangeModel+UItableView.m"; sourceTree = "<group>"; };
+		933B74201D61E8F700DF3DF9 /* ANSChangeModel+UICollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANSChangeModel+UICollectionView.h"; sourceTree = "<group>"; };
+		933B74211D61E8F700DF3DF9 /* ANSChangeModel+UICollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANSChangeModel+UICollectionView.m"; sourceTree = "<group>"; };
 		933C74591D50908100A423B9 /* ANSObservableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSObservableObject.h; sourceTree = "<group>"; };
 		933C745A1D50908100A423B9 /* ANSObservableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSObservableObject.m; sourceTree = "<group>"; };
 		933C745C1D50908100A423B9 /* ANSBlockObservationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSBlockObservationController.h; sourceTree = "<group>"; };
@@ -111,12 +117,12 @@
 		936727C91D591D25007A796F /* ANSViewControllerTables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSViewControllerTables.h; sourceTree = "<group>"; };
 		936727CA1D591D25007A796F /* ANSViewControllerTables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSViewControllerTables.m; sourceTree = "<group>"; };
 		936727CB1D591D25007A796F /* ANSViewControllerTables.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSViewControllerTables.xib; sourceTree = "<group>"; };
-		936ABA481D5E0725004D459F /* ANSCollectionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSCollectionHelper.h; sourceTree = "<group>"; };
-		936ABA491D5E0725004D459F /* ANSCollectionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSCollectionHelper.m; sourceTree = "<group>"; };
-		936ABA4C1D5E0AAF004D459F /* ANSOneIndexHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSOneIndexHelper.h; sourceTree = "<group>"; };
-		936ABA4D1D5E0AAF004D459F /* ANSOneIndexHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSOneIndexHelper.m; sourceTree = "<group>"; };
-		936ABA4F1D5E0B56004D459F /* ANSTwoIndexHepler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSTwoIndexHepler.h; sourceTree = "<group>"; };
-		936ABA501D5E0B56004D459F /* ANSTwoIndexHepler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSTwoIndexHepler.m; sourceTree = "<group>"; };
+		936ABA481D5E0725004D459F /* ANSChangeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSChangeModel.h; sourceTree = "<group>"; };
+		936ABA491D5E0725004D459F /* ANSChangeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSChangeModel.m; sourceTree = "<group>"; };
+		936ABA4C1D5E0AAF004D459F /* ANSOneIndexModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSOneIndexModel.h; sourceTree = "<group>"; };
+		936ABA4D1D5E0AAF004D459F /* ANSOneIndexModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSOneIndexModel.m; sourceTree = "<group>"; };
+		936ABA4F1D5E0B56004D459F /* ANSTwoIndexModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSTwoIndexModel.h; sourceTree = "<group>"; };
+		936ABA501D5E0B56004D459F /* ANSTwoIndexModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSTwoIndexModel.m; sourceTree = "<group>"; };
 		9388ECDD1D49FEB50082EE4B /* ANSDataInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSDataInfo.h; sourceTree = "<group>"; };
 		9388ECDE1D49FEB50082EE4B /* ANSDataInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSDataInfo.m; sourceTree = "<group>"; };
 		9388ECE11D4A396F0082EE4B /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
@@ -314,21 +320,26 @@
 		936ABA471D5E0725004D459F /* ANSCollectionHelper */ = {
 			isa = PBXGroup;
 			children = (
-				936ABA481D5E0725004D459F /* ANSCollectionHelper.h */,
-				936ABA491D5E0725004D459F /* ANSCollectionHelper.m */,
-				936ABA4A1D5E0725004D459F /* private */,
+				936ABA481D5E0725004D459F /* ANSChangeModel.h */,
+				936ABA491D5E0725004D459F /* ANSChangeModel.m */,
+				933B741D1D61D44F00DF3DF9 /* ANSChangeModel+UItableView.h */,
+				933B741E1D61D44F00DF3DF9 /* ANSChangeModel+UItableView.m */,
+				933B74201D61E8F700DF3DF9 /* ANSChangeModel+UICollectionView.h */,
+				933B74211D61E8F700DF3DF9 /* ANSChangeModel+UICollectionView.m */,
+				936ABA4A1D5E0725004D459F /* Private */,
 			);
 			path = ANSCollectionHelper;
 			sourceTree = "<group>";
 		};
-		936ABA4A1D5E0725004D459F /* private */ = {
+		936ABA4A1D5E0725004D459F /* Private */ = {
 			isa = PBXGroup;
 			children = (
-				936ABA4C1D5E0AAF004D459F /* ANSOneIndexHelper.h */,
-				936ABA4D1D5E0AAF004D459F /* ANSOneIndexHelper.m */,
-				936ABA4F1D5E0B56004D459F /* ANSTwoIndexHepler.h */,
-				936ABA501D5E0B56004D459F /* ANSTwoIndexHepler.m */,
+				936ABA4C1D5E0AAF004D459F /* ANSOneIndexModel.h */,
+				936ABA4D1D5E0AAF004D459F /* ANSOneIndexModel.m */,
+				936ABA4F1D5E0B56004D459F /* ANSTwoIndexModel.h */,
+				936ABA501D5E0B56004D459F /* ANSTwoIndexModel.m */,
 			);
+			name = Private;
 			path = private;
 			sourceTree = "<group>";
 		};
@@ -750,7 +761,7 @@
 			files = (
 				93C5A60D1D41265C002FBCA8 /* ANSTableViewCell.m in Sources */,
 				93026CD11D44C2BE00DFCF23 /* ANSUsersCollection.m in Sources */,
-				936ABA511D5E0B56004D459F /* ANSTwoIndexHepler.m in Sources */,
+				936ABA511D5E0B56004D459F /* ANSTwoIndexModel.m in Sources */,
 				93C5A6091D4107DB002FBCA8 /* NSString+ANSExtension.m in Sources */,
 				936727D91D591D25007A796F /* ANSTableView.m in Sources */,
 				93C5A61A1D412D31002FBCA8 /* ANSUser.m in Sources */,
@@ -773,13 +784,15 @@
 				93C5A5F01D40DF3D002FBCA8 /* ANSGCD.m in Sources */,
 				93026CE51D46810900DFCF23 /* ANSAnimationView.m in Sources */,
 				93C084371D3E380D0077A81C /* main.m in Sources */,
-				936ABA4E1D5E0AAF004D459F /* ANSOneIndexHelper.m in Sources */,
+				936ABA4E1D5E0AAF004D459F /* ANSOneIndexModel.m in Sources */,
 				936727D71D591D25007A796F /* ANSDataCell.m in Sources */,
 				936727DA1D591D25007A796F /* ANSViewControllerTables.m in Sources */,
-				936ABA4B1D5E0725004D459F /* ANSCollectionHelper.m in Sources */,
+				936ABA4B1D5E0725004D459F /* ANSChangeModel.m in Sources */,
 				93C084351D3E380D0077A81C /* ANSAppDelegate.m in Sources */,
 				93026CE31D46810900DFCF23 /* ANSViewControllerFirstTask.m in Sources */,
+				933B741F1D61D44F00DF3DF9 /* ANSChangeModel+UItableView.m in Sources */,
 				933C74661D50908100A423B9 /* ANSObservationController.m in Sources */,
+				933B74221D61E8F700DF3DF9 /* ANSChangeModel+UICollectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

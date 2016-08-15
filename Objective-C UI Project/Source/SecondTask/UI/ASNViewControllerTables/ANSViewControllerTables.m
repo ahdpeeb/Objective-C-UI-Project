@@ -19,6 +19,8 @@
 #import "NSArray+ANSExtension.h"
 #import "UINib+Extension.h"
 #import "UITableView+Extension.h"
+#import "ANSChangeModel.h"
+#import "ANSChangeModel+UItableView.h"
 
 #import "ANSMacros.h"
 #import "ANSGCD.h"
@@ -99,12 +101,11 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     ANSWeakify(self);
     self.operation = [NSBlockOperation blockOperationWithBlock:^{
         ANSStrongify(self);
-      self.filteredCollection = [self.collection sortedCollection:collection
-                                                 withFilterString:filterStirng];
+      self.filteredCollection = [self.collection sortedCollectionWithString:filterStirng];
     }];
 
     self.operation.completionBlock = ^{
-        ANSPerformInMainQueue(dispatch_sync, ^{
+        ANSPerformInMainQueue(dispatch_async, ^{
             ANSStrongify(self);
             [self.tableView.table reloadData];
         });
@@ -191,7 +192,13 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ANSDataCell *cell = [tableView reusableCellfromNibWithClass:[ANSDataCell class]];
-    ANSUser *object = self.collection[indexPath.row];
+    
+    ANSUser *object = nil;
+    if (self.tableView.searchBar.isFirstResponder) {
+        object = self.filteredCollection[indexPath.row];
+    } else {
+        object = self.collection[indexPath.row];
+    }
     
     [cell fillInfoFromObject:object];
 
@@ -269,16 +276,11 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 #pragma mark -
 #pragma mark ANSCollectionObserver protocol
 
-- (void)        collection:(ANSDataCollection *)collection
-       didChangeWithHelper:(ANSCollectionHelper *)helper {
+- (void)       collection:(ANSDataCollection *)collection
+       didChangeWithModel:(ANSChangeModel *)model {
     UITableView *table = self.tableView.table;
-    ANSDataInfo *buffer = helper;
     
-    NSIndexPath *path = [NSIndexPath indexPathForRow:buffer.value inSection:0];
-    
-    [table beginUpdates];
-    [table performSelector:buffer.selector withObject:@[path] withObject:nil];
-    [table endUpdates];
+    [model applyToTableView:table];
     
     NSLog(@"collectionDidUpdate, - %lu ", collection.count);
 }

@@ -34,11 +34,10 @@
     return users;
 }
 
-- (ANSUsersCollection *)sortedCollection:(ANSUsersCollection *)collection
-                        withFilterString:(NSString *)filterStirng {
+- (ANSUsersCollection *)sortedCollectionWithString:(NSString *)filterStirng {
     
     ANSUsersCollection *newCollection = [ANSUsersCollection new];
-    for (ANSUser *data in collection) {
+    for (ANSUser *data in self) {
         if ((filterStirng.length > 0) && [data.string rangeOfString:filterStirng options:NSCaseInsensitiveSearch].location == NSNotFound) {
             continue;
         } else {

@@ -11,13 +11,13 @@
 #import "ANSObservableObject.h"
 
 @class ANSDataCollection;
-@class ANSCollectionHelper;
+@class ANSChangeModel;
 
 @protocol ANSCollectionObserver <NSObject>
 
 @optional
 - (void)       collection:(ANSDataCollection *)collection
-    didChangeWithHelper:(ANSCollectionHelper *)helper;
+    didChangeWithModel:(ANSChangeModel *)model;
 
 @end
 

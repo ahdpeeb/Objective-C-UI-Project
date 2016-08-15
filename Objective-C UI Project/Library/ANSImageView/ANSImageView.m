@@ -91,7 +91,7 @@
     ANSWeakify(self);
     
     ANSStateChangeBlock block = ^(ANSBlockObservationController *controller, id userInfo) {
-        ANSPerformInMainQueue(dispatch_sync, ^{
+        ANSPerformInMainQueue(dispatch_async, ^{
             ANSStrongifyAndReturn(self);
             
             ANSImageModel *model = controller.observableObject;

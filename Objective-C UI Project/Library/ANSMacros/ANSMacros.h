@@ -32,6 +32,9 @@
     ANSViewGetterSynthesize(baseViewClass, propertyName) \
     @end \
 
+//empty result
+#define ANSEmptyResult
+
 //Weakify and Strongify object before using in block
 #define ANSWeakify(object) \
     __weak __typeof(object) __ANSWeekified_##object = object \
@@ -40,17 +43,18 @@
 #define ANSStrongify(object) \
     __strong __typeof(object) object = __ANSWeekified_##object \
 
-#define ANSStrongifyAndReturnNil(object) \
+#define ANSStrongifyAndReturnValue(object, value) \
     ANSStrongify(object); \
     if(!object) { \
-        return nil; \
+        return value; \
     } \
 
+//you should call this method after you called ANSWeakify for the same object
+#define ANSStrongifyAndReturnNil(object) \
+    ANSStrongifyAndReturnValue(object, nil) \
+
 #define ANSStrongifyAndReturn(object) \
-    ANSStrongify(object); \
-    if(!object) { \
-        return; \
-    } \
+    ANSStrongifyAndReturnValue(object, ANSEmptyResult) \
 
 
 

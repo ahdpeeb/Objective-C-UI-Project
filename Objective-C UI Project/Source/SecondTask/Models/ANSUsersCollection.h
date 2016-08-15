@@ -14,7 +14,6 @@
 
 - (NSArray *)descendingSortedUsers; 
 
-- (ANSUsersCollection *)sortedCollection:(ANSUsersCollection *)collection
-                        withFilterString:(NSString *)filterStirng;
+- (ANSUsersCollection *)sortedCollectionWithString:(NSString *)filterStirng;
 
 @end

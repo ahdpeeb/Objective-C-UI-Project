@@ -10,7 +10,7 @@
 #import "ANSDataCollection.h"
 
 #import "ANSDataInfo.h"
-#import "ANSCollectionHelper.h"
+#import "ANSChangeModel.h"
 
 static NSString * const kANSArchiveKey              = @"kANSArchiveKey";
 static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
@@ -18,6 +18,12 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 @interface ANSDataCollection ()
 @property (nonatomic, retain) NSMutableArray *mutableDataCollection;
 @property (nonatomic, retain) ANSDataInfo *tempBuffer;
+
+- (void)notifyOfChangeWithIndex:(NSUInteger)index state:(ANSChangeState)state;
+
+- (void)notifyOfChangeWithIndex:(NSUInteger)index1
+                         index2:(NSUInteger)index2
+                          state:(ANSChangeState)state;
 
 @end
 
@@ -65,6 +71,23 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     }
 }
 
+#pragma mark -
+#pragma mark Private methods;
+
+- (void)notifyOfChangeWithIndex:(NSUInteger)index state:(ANSChangeState)state {
+    ANSChangeModel *model = [ANSChangeModel oneIndexModel:index];
+    model.state = state;
+    [self notifyOfStateChange:0 withUserInfo:model];
+}
+
+- (void)notifyOfChangeWithIndex:(NSUInteger)index1
+                         index2:(NSUInteger)index2
+                          state:(ANSChangeState)state
+{
+    ANSChangeModel *model = [ANSChangeModel twoIndexModel:index1 index2:index2];
+    model.state = state;
+    [self notifyOfStateChange:0 withUserInfo:model];
+}
 
 #pragma mark -
 #pragma mark Public methods; 
@@ -105,12 +128,9 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
         }
         
         if (![collection containsObject:data]) {
-            ANSDataInfo *buffer = [ANSDataInfo allocWithObject:data value:index];
-            buffer.selector = @selector(insertRowsAtIndexPaths:withRowAnimation:);
-            
             [collection insertObject:data atIndex:index];
             
-            [self setState:ANSCollectionAddData withUserInfo:buffer];
+            [self notifyOfChangeWithIndex:index state:ANSStateAddData];
         }
     }
 }
@@ -119,12 +139,9 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     @synchronized(self) {
         id object = [self dataAtIndex:index];
         if (object) {
-            ANSDataInfo *buffer = [ANSDataInfo allocWithObject:object value:index];
-            buffer.selector = @selector(deleteRowsAtIndexPaths:withRowAnimation:);
-            
             [self.mutableDataCollection removeObjectAtIndex:index];
             
-            [self setState:ANSCollectionRemoveData withUserInfo:buffer];
+            [self notifyOfChangeWithIndex:index state:ANSStateRemoveData];
         }
     }
 }
@@ -149,7 +166,17 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
             id data = [self dataAtIndex:fromIndex];
             [self removeData:data];
             [self insertData:data atIndex:toIndex];
+            
+            [self notifyOfChangeWithIndex:fromIndex index2:toIndex state:ANSStateMoveData];
         }
+    }
+}
+
+- (void)exchangeDataAtIndex:(NSUInteger)index1 withDataAtIndex:(NSUInteger)index2 {
+    @synchronized(self) {
+        [self.mutableDataCollection exchangeObjectAtIndex:index1 withObjectAtIndex:index2];
+        
+        [self notifyOfChangeWithIndex:index1 index2:index2 state:ANSStateExchangeData];
     }
 }
 
@@ -182,7 +209,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 }
 
 - (SEL)selectorForState:(NSUInteger)state {
-    return @selector(collection:didChangeWithHelper:);
+    return @selector(collection:didChangeWithModel:);
 }
 
 #pragma mark -

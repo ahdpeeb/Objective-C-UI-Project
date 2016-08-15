@@ -120,21 +120,6 @@ typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controll
 #pragma mark -
 #pragma mark Public methods
 
-//- (void)removeObserverObject:(id)object {
-//    @synchronized(self) {
-//        [self.observersHashTable removeObject:object];
-//    }
-//}
-//
-//- (void)removeObserverObjects:(NSArray *)objects {
-//    @synchronized(self) {
-//        NSHashTable *observers = self.observersHashTable;
-//        for (id observer in objects) {
-//            [observers removeObject:observer];
-//        }
-//    }
-//}
-
 - (BOOL)isObservedByObject:(id)object {
     @synchronized(self) {
     BOOL value = NO;
