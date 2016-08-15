@@ -21,7 +21,7 @@ typedef enum {
 
 @interface ANSAnimationView : UIView
 @property (nonatomic, assign)                        ANSViewPosition     position;
-@property (nonatomic, readonly, getter=isAnimating)  BOOL                animating;
+@property (nonatomic, assign, getter=isAnimating)    BOOL                animating;
 
 - (void)setPosition:(ANSViewPosition)position
            animated:(BOOL)animatad;
@@ -30,9 +30,6 @@ typedef enum {
            animated:(BOOL)animatad
          completion:(ANSCompletionHandler)block;
 
-- (void)startAnimation;
-- (void)stopAnimation;
 
-- (void)initAnimationImage;
 
 @end

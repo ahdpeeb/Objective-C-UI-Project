@@ -46,7 +46,11 @@
 
 - (IBAction)onAnimation:(UISwitch *)sender {
     ANSAnimationView *view = self.rootView.animationView;
-    sender.on ? [view startAnimation] : [view stopAnimation];
+    if (sender.on) {
+        view.animating = YES;
+    } else {
+        view.animating = NO; 
+    }
 }
 
 @end

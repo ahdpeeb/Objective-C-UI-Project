@@ -30,9 +30,9 @@ static const NSUInteger kANSDataCount   = 0;
     UIWindow *window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window = window;
     
-    ANSViewControllerTables *controller = [ANSViewControllerTables new];
- //   ANSViewControllerFirstTask *controller1 = [ANSViewControllerFirstTask new];
-    UINavigationController *nv = [[UINavigationController alloc] initWithRootViewController:controller];
+//    ANSViewControllerTables *controller = [ANSViewControllerTables new];
+    ANSViewControllerFirstTask *controller1 = [ANSViewControllerFirstTask new];
+    UINavigationController *nv = [[UINavigationController alloc] initWithRootViewController:controller1];
     window.rootViewController = nv;
     
     [window makeKeyAndVisible];
@@ -48,7 +48,7 @@ static const NSUInteger kANSDataCount   = 0;
     ANSUsersCollection *collection = [ANSUsersCollection new];
     // [ANSDataCollection loadState] ? :
     self.collection = collection;
-    controller.collection = collection;
+ //   controller.collection = collection;
 
     return YES;
 }

@@ -17,8 +17,8 @@ static NSString * const kANSImageFormat = @".png";
 static const NSUInteger KANSImageCount = 16;
 
 @interface ANSAnimationView ()
-@property (nonatomic, assign, getter=isAnimating)   BOOL          animating;
-@property (nonatomic, strong)                       UIImageView   *animationImage;
+@property (nonatomic, strong) UIImageView   *animationImage;
+@property (nonatomic, assign) BOOL          shouldStop;
 
 // returns new cutted CGRect from superView rect
 - (CGRect)insectedFrame;
@@ -26,10 +26,24 @@ static const NSUInteger KANSImageCount = 16;
 // generate point from position
 - (CGPoint)pointFromPosition:(ANSViewPosition)position;
 - (ANSViewPosition)nextPosition;
+- (void)startAnimation;
+- (void)initAnimationImage;
 
 @end
 
 @implementation ANSAnimationView
+
+#pragma mark -
+#pragma mark initialization and deallocation 
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self initAnimationImage];
+    }
+    
+    return self;
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -39,6 +53,22 @@ static const NSUInteger KANSImageCount = 16;
 
 #pragma mark -
 #pragma mark Accsessors
+
+-(void)setAnimating:(BOOL)animating {
+    if (_animating != animating) {
+        _animating = animating;
+        
+        if (self.shouldStop) {
+            return;
+        }
+        
+        self.shouldStop = YES;
+        
+        if (animating) {
+            [self startAnimation];
+        }
+    }
+}
 
 - (void)setPosition:(ANSViewPosition)position {
     [self setPosition:position animated:YES];
@@ -69,6 +99,7 @@ static const NSUInteger KANSImageCount = 16;
                          if (block) {
                              block(finished);
                          }
+                         
                      }];
 }
 
@@ -76,27 +107,21 @@ static const NSUInteger KANSImageCount = 16;
 #pragma mark Public methods
 
 - (void)startAnimation {
-    self.animating = YES;
-    
     [self.animationImage startAnimating];
-    
     __weak ANSAnimationView *weakSelf = self;
     [self setPosition:[self nextPosition] animated:YES completion:^(BOOL finished) {
         if (finished) {
             __strong ANSAnimationView *strongSelf = weakSelf;
-            
+            strongSelf.shouldStop = NO;
             if (!strongSelf.animating) {
                 [strongSelf.animationImage stopAnimating];
+                
                 return ;
             }
 
             [strongSelf startAnimation];
         }
     }];
-}
-
-- (void)stopAnimation {
-    self.animating = NO;
 }
 
 - (void)initAnimationImage {
@@ -128,7 +153,6 @@ static const NSUInteger KANSImageCount = 16;
     
     switch (position) {
         case ANSLeftTopPosition:
-            point = point;
             break;
         case ANSRightTopPosition:
             point.x = maxPoint.x;
@@ -158,5 +182,6 @@ static const NSUInteger KANSImageCount = 16;
 - (ANSViewPosition)nextPosition {
    return (self.position + 1) % ANSPositionCount;
 }
+
 
 @end
