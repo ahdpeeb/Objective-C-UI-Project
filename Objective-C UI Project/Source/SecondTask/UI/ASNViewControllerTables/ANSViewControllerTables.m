@@ -94,14 +94,14 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 
 #pragma mark -
 #pragma mark Private methods
-    //TableView Method
+
 - (void)sortCollectionInBackground:(ANSUsersCollection *)collection
                     withFilterString:(NSString *)filterStirng
 {
     ANSWeakify(self);
     self.operation = [NSBlockOperation blockOperationWithBlock:^{
         ANSStrongify(self);
-      self.filteredCollection = [self.collection sortedCollectionWithString:filterStirng];
+      self.filteredCollection = [self.collection sortedCollectionByString:filterStirng];
     }];
 
     self.operation.completionBlock = ^{
@@ -156,7 +156,6 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     [self resignSearchBar];
     
     BOOL isEditing = table.editing;
-    
     [sender setTitle:(isEditing ? kANSEdit : kANSDone)];
     [table setEditing:(isEditing ? NO : YES) animated:YES];
 }
@@ -221,7 +220,6 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     }
 }
 
-    //delate row (related with protocol methods editingStyleForRowAtIndexPath/ shouldIndentWhileEditingRowAtIndexPath)
 - (void)    tableView:(UITableView *)tableView
     commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     forRowAtIndexPath:(NSIndexPath *)indexPath

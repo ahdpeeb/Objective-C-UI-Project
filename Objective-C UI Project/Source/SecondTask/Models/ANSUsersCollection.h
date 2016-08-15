@@ -13,7 +13,6 @@
 @interface ANSUsersCollection : ANSDataCollection
 
 - (NSArray *)descendingSortedUsers; 
-
-- (ANSUsersCollection *)sortedCollectionWithString:(NSString *)filterStirng;
+- (ANSUsersCollection *)sortedCollectionByString:(NSString *)filterStirng;
 
 @end

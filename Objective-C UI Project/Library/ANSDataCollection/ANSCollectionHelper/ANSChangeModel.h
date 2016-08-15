@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ANSChangeModel : NSObject
-
 typedef NS_ENUM(NSUInteger, ANSChangeState) {
     ANSStateAddData,
     ANSStateRemoveData,
@@ -17,6 +15,7 @@ typedef NS_ENUM(NSUInteger, ANSChangeState) {
     ANSStateExchangeData
 };
 
+@interface ANSChangeModel : NSObject
 @property (nonatomic, assign) ANSChangeState state;
 
 + (instancetype)oneIndexModel:(NSUInteger)index; 

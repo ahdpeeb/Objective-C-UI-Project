@@ -21,12 +21,6 @@
 
 @end
 
-typedef NS_ENUM(NSUInteger, ANSCollectionAction) {
-    ANSCollectionAddData,
-    ANSCollectionRemoveData,
-    ANSCollectionMoveData
-};
-
 @interface ANSDataCollection : ANSObservableObject <
     NSCoding,
     NSCopying,

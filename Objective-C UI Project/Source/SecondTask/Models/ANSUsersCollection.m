@@ -9,12 +9,7 @@
 
 #import "ANSUsersCollection.h"
 
-#import "ANSDataInfo.h"
 #import "ANSUser.h"
-
-@interface ANSUsersCollection ()
-
-@end
 
 @implementation ANSUsersCollection
 
@@ -34,11 +29,11 @@
     return users;
 }
 
-- (ANSUsersCollection *)sortedCollectionWithString:(NSString *)filterStirng {
+- (ANSUsersCollection *)sortedCollectionByString:(NSString *)filterStrirng {
     
     ANSUsersCollection *newCollection = [ANSUsersCollection new];
     for (ANSUser *data in self) {
-        if ((filterStirng.length > 0) && [data.string rangeOfString:filterStirng options:NSCaseInsensitiveSearch].location == NSNotFound) {
+        if ((filterStrirng.length > 0) && [data.string rangeOfString:filterStrirng options:NSCaseInsensitiveSearch].location == NSNotFound) {
             continue;
         } else {
             [newCollection addData:data];
