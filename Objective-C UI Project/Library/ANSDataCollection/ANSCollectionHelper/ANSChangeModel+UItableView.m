@@ -25,24 +25,24 @@
     [tableView beginUpdates];
     
     switch (self.state) {
-        case ANSStateAddData:
+        case ANSStateAddObject:
             [tableView insertRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationFade];
             break;
             
-        case ANSStateRemoveData:
+        case ANSStateRemoveObject:
             [tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationMiddle];
             break;
             
-        case ANSStateMoveData:
+        case ANSStateMoveObject:
             [tableView reloadRowsAtIndexPaths:@[path, path2] withRowAnimation:UITableViewRowAnimationFade];
             break;
             
-        case ANSStateExchangeData:
+        case ANSStateExchangeObject:
             [tableView reloadRowsAtIndexPaths:@[path, path2] withRowAnimation:UITableViewRowAnimationFade];
             break;
             
         default:
-            [tableView reloadData]; 
+            [tableView reloadData];
             break;
     }
     

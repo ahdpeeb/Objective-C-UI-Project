@@ -146,7 +146,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     
     if (table.editing) {
         ANSUser *object = [[ANSUser alloc] init];
-        [self.collection insertData:object atIndex:0];
+        [self.collection insertObject:object atIndex:0];
     }
 }
 
@@ -215,7 +215,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
           toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     if (sourceIndexPath.section == destinationIndexPath.section) {
-        [self.collection moveDataFromIndex:sourceIndexPath.row
+        [self.collection moveObjectFromIndex:sourceIndexPath.row
                                    toIndex:destinationIndexPath.row];
     }
 }
@@ -225,7 +225,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.collection removeDataAtIndex:indexPath.row];
+        [self.collection removeObjectAtIndex:indexPath.row];
     }
 }
 
@@ -274,7 +274,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 #pragma mark -
 #pragma mark ANSCollectionObserver protocol
 
-- (void)       collection:(ANSDataCollection *)collection
+- (void)       collection:(ANSCollectionModel *)collection
        didChangeWithModel:(ANSChangeModel *)model {
     UITableView *table = self.tableView.table;
     

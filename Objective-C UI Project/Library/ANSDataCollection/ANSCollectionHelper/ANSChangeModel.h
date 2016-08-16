@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, ANSChangeState) {
-    ANSStateAddData,
-    ANSStateRemoveData,
-    ANSStateMoveData,
-    ANSStateExchangeData
+    ANSStateAddObject,
+    ANSStateRemoveObject,
+    ANSStateMoveObject,
+    ANSStateExchangeObject
 };
 
 @interface ANSChangeModel : NSObject

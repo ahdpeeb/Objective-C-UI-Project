@@ -12,7 +12,7 @@
 
 #import "ANSMacros.h"
 
-static NSString * const kANSImageName         =     @"kANSImageName";
+static NSString * const kANSImageName = @"kANSImageName";
 
 @interface ANSImageModel ()
 @property (nonatomic, strong)       NSString         *imageName;

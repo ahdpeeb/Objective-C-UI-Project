@@ -1,5 +1,5 @@
 //
-//  ANSDataCollection.m
+//  ANSCollectionModel
 //  Objective-C UI Project
 //
 //  Created by Nikola Andriiev on 24.07.16.
@@ -7,17 +7,16 @@
 //
 #import <UIKit/UIKit.h>
 
-#import "ANSDataCollection.h"
+#import "ANSCollectionModel.h"
 
-#import "ANSDataInfo.h"
 #import "ANSChangeModel.h"
+#import "NSMutableArray+ANSExtension.h"
 
 static NSString * const kANSArchiveKey              = @"kANSArchiveKey";
 static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
-@interface ANSDataCollection ()
-@property (nonatomic, retain) NSMutableArray *mutableDataCollection;
-@property (nonatomic, retain) ANSDataInfo *tempBuffer;
+@interface ANSCollectionModel ()
+@property (nonatomic, retain) NSMutableArray *mutableObjects;
 
 - (void)notifyOfChangeWithIndex:(NSUInteger)index state:(ANSChangeState)state;
 
@@ -27,7 +26,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 @end
 
-@implementation ANSDataCollection
+@implementation ANSCollectionModel
 
 @synthesize state = _state;
 
@@ -43,7 +42,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 - (instancetype)init {
     self = [super init];
-    self.mutableDataCollection = [NSMutableArray new];
+    self.mutableObjects = [NSMutableArray new];
     
     return self;
 }
@@ -61,13 +60,13 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 - (NSUInteger)count {
     @synchronized(self) {
-        return self.mutableDataCollection.count;
+        return self.mutableObjects.count;
     }
 }
 
 - (NSArray *)objects {
     @synchronized(self) {
-        return [self.mutableDataCollection copy];
+        return [self.mutableObjects copy];
     }
 }
 
@@ -92,91 +91,80 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 #pragma mark -
 #pragma mark Public methods; 
 
-//Data / index from array
-- (id)dataAtIndex:(NSUInteger)index {
+//Object / index from array
+- (id)objectAtIndex:(NSUInteger)index {
     @synchronized(self) {
-        return [self.mutableDataCollection objectAtIndex:index];
+        return [self.mutableObjects objectAtIndex:index];
     }
 }
 
-- (NSUInteger)indexOfData:(id)data {
+- (NSUInteger)indexOfObject:(id)object {
     @synchronized(self) {
-        return [self.mutableDataCollection indexOfObject:data];
+        return [self.mutableObjects indexOfObject:object];
     }
 }
 
-- (void)addData:(id)data {
+- (void)addObject:(id)object {
     @synchronized(self) {
-        [self insertData:data atIndex:0];
+        [self insertObject:object atIndex:0];
     }
 }
 
-- (void)removeData:(id)data {
+- (void)removeObject:(id)object {
     @synchronized(self) {
-        NSUInteger index = [self indexOfData:data];
-        [self removeDataAtIndex:index];
+        NSUInteger index = [self indexOfObject:object];
+        [self removeObjectAtIndex:index];
     }
 }
 
-- (void)insertData:(id)data atIndex:(NSUInteger)index {
+- (void)insertObject:(id)object atIndex:(NSUInteger)index {
     @synchronized(self) {
-        NSMutableArray *collection = self.mutableDataCollection;
+        NSMutableArray *collection = self.mutableObjects;
         NSUInteger count = collection.count;
         
-        if (!data || (index > count)) {
+        if (!object || (index > count)) {
             return;
         }
         
-        if (![collection containsObject:data]) {
-            [collection insertObject:data atIndex:index];
+        if (![collection containsObject:object]) {
+            [collection insertObject:object atIndex:index];
             
-            [self notifyOfChangeWithIndex:index state:ANSStateAddData];
+//            [self notifyOfChangeWithIndex:index state:ANSStateAddObject];
         }
     }
 }
 
-- (void)removeDataAtIndex:(NSUInteger)index {
+- (void)removeObjectAtIndex:(NSUInteger)index {
     @synchronized(self) {
-        id object = [self dataAtIndex:index];
+        id object = [self objectAtIndex:index];
         if (object) {
-            [self.mutableDataCollection removeObjectAtIndex:index];
+            [self.mutableObjects removeObjectAtIndex:index];
             
-            [self notifyOfChangeWithIndex:index state:ANSStateRemoveData];
+//            [self notifyOfChangeWithIndex:index state:ANSStateRemoveObject];
         }
     }
 }
 
-- (void)addDataObjects:(NSArray *)objects {
+- (void)addObjects:(NSArray *)objects {
     @synchronized(self) {
         for (id object in objects) {
-            [self insertData:object atIndex:self.count];
+            [self insertObject:object atIndex:self.count];
         }
     }
 }
 
-- (void)moveDataFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+- (void)moveObjectFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
     @synchronized(self) {
-        NSUInteger count = self.mutableDataCollection.count;
-        
-        if ((fromIndex >= count) || (toIndex >= count)) {
-            return;
-        }
-        
-        if (fromIndex != toIndex) {
-            id data = [self dataAtIndex:fromIndex];
-            [self removeData:data];
-            [self insertData:data atIndex:toIndex];
-            
-            [self notifyOfChangeWithIndex:fromIndex index2:toIndex state:ANSStateMoveData];
-        }
+        [self.mutableObjects moveObjectFromIndex:fromIndex toIndex:toIndex]; 
+//            [self notifyOfChangeWithIndex:fromIndex index2:toIndex state:ANSStateMoveObject];
     }
 }
 
-- (void)exchangeDataAtIndex:(NSUInteger)index1 withDataAtIndex:(NSUInteger)index2 {
+- (void)exchangeObjectAtIndex:(NSUInteger)indexOne withObjectAtIndex:(NSUInteger)indexTwo {
     @synchronized(self) {
-        [self.mutableDataCollection exchangeObjectAtIndex:index1 withObjectAtIndex:index2];
+        [self.mutableObjects exchangeObjectAtIndex:indexOne withObjectAtIndex:indexTwo];
         
-        [self notifyOfChangeWithIndex:index1 index2:index2 state:ANSStateExchangeData];
+//        [self notifyOfChangeWithIndex:index1 index2:index2 state:ANSStateExchangeObject];
     }
 }
 
@@ -204,7 +192,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 - (id)objectAtIndexedSubscript:(NSUInteger)idx {
     @synchronized(self) {
-        return [self.mutableDataCollection objectAtIndex:idx];
+        return [self.mutableObjects objectAtIndex:idx];
     }
 }
 
@@ -219,21 +207,21 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
                                   objects:(id __unsafe_unretained [])buffer
                                     count:(NSUInteger)len {
     
-   return [self.mutableDataCollection countByEnumeratingWithState:state objects:buffer count:len];
+   return [self.mutableObjects countByEnumeratingWithState:state objects:buffer count:len];
 }
 
 #pragma mark -
 #pragma mark NSCoding protocol
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.mutableDataCollection forKey:kANSCollectionKey];
+    [aCoder encodeObject:self.mutableObjects forKey:kANSCollectionKey];
 }
 
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
         NSArray *archive = [aDecoder decodeObjectForKey:kANSCollectionKey];
-        self.mutableDataCollection = [[NSMutableArray alloc] initWithArray:archive copyItems:YES];
+        self.mutableObjects = [[NSMutableArray alloc] initWithArray:archive copyItems:YES];
     }
     
     return self;
@@ -243,9 +231,9 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 #pragma mark NSCopying protocol
 
 - (id)copyWithZone:(NSZone *)zone {
-    id copy = [[self class] new];
+    ANSCollectionModel *copy = [[self class] new];
     if (copy) {
-        [copy setMutableDataCollection:[self.mutableDataCollection copyWithZone:zone]];
+        copy.mutableObjects = [self.mutableObjects copyWithZone:zone];
     }
     
     return copy;

@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ANSDataCollection.h"
+#import "ANSCollectionModel.h"
 
-@interface ANSUsersCollection : ANSDataCollection
+@interface ANSUsersCollection : ANSCollectionModel
 
 - (NSArray *)descendingSortedUsers; 
 - (ANSUsersCollection *)sortedCollectionByString:(NSString *)filterStirng;

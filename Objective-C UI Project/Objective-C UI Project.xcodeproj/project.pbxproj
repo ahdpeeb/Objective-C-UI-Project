@@ -16,9 +16,10 @@
 		93026CE41D46810900DFCF23 /* ANSViewControllerFirstTask.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93026CDE1D46810900DFCF23 /* ANSViewControllerFirstTask.xib */; };
 		93026CE51D46810900DFCF23 /* ANSAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CE11D46810900DFCF23 /* ANSAnimationView.m */; };
 		93052AE11D4CF2370007D20C /* ANSImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93052AE01D4CF2370007D20C /* ANSImageView.m */; };
-		933259B01D5DF0E1007E722A /* ANSDataCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 933259AF1D5DF0E1007E722A /* ANSDataCollection.m */; };
+		933259B01D5DF0E1007E722A /* ANSCollectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 933259AF1D5DF0E1007E722A /* ANSCollectionModel.m */; };
 		933B741F1D61D44F00DF3DF9 /* ANSChangeModel+UItableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 933B741E1D61D44F00DF3DF9 /* ANSChangeModel+UItableView.m */; };
 		933B74221D61E8F700DF3DF9 /* ANSChangeModel+UICollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 933B74211D61E8F700DF3DF9 /* ANSChangeModel+UICollectionView.m */; };
+		933B74291D63233500DF3DF9 /* NSMutableArray+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 933B74281D63233500DF3DF9 /* NSMutableArray+ANSExtension.m */; };
 		933C74641D50908100A423B9 /* ANSObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C745A1D50908100A423B9 /* ANSObservableObject.m */; };
 		933C74651D50908100A423B9 /* ANSBlockObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C745D1D50908100A423B9 /* ANSBlockObservationController.m */; };
 		933C74661D50908100A423B9 /* ANSObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C745F1D50908100A423B9 /* ANSObservationController.m */; };
@@ -93,12 +94,14 @@
 		93026CE11D46810900DFCF23 /* ANSAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSAnimationView.m; path = subViewsOfMainView/ANSAnimationView.m; sourceTree = "<group>"; };
 		93052ADF1D4CF2370007D20C /* ANSImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSImageView.h; sourceTree = "<group>"; };
 		93052AE01D4CF2370007D20C /* ANSImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSImageView.m; sourceTree = "<group>"; };
-		933259AE1D5DF0E1007E722A /* ANSDataCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSDataCollection.h; sourceTree = "<group>"; };
-		933259AF1D5DF0E1007E722A /* ANSDataCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSDataCollection.m; sourceTree = "<group>"; };
+		933259AE1D5DF0E1007E722A /* ANSCollectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSCollectionModel.h; sourceTree = "<group>"; };
+		933259AF1D5DF0E1007E722A /* ANSCollectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ANSCollectionModel.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		933B741D1D61D44F00DF3DF9 /* ANSChangeModel+UItableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANSChangeModel+UItableView.h"; sourceTree = "<group>"; };
-		933B741E1D61D44F00DF3DF9 /* ANSChangeModel+UItableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANSChangeModel+UItableView.m"; sourceTree = "<group>"; };
+		933B741E1D61D44F00DF3DF9 /* ANSChangeModel+UItableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "ANSChangeModel+UItableView.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		933B74201D61E8F700DF3DF9 /* ANSChangeModel+UICollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANSChangeModel+UICollectionView.h"; sourceTree = "<group>"; };
 		933B74211D61E8F700DF3DF9 /* ANSChangeModel+UICollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANSChangeModel+UICollectionView.m"; sourceTree = "<group>"; };
+		933B74271D63233500DF3DF9 /* NSMutableArray+ANSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+ANSExtension.h"; sourceTree = "<group>"; };
+		933B74281D63233500DF3DF9 /* NSMutableArray+ANSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+ANSExtension.m"; sourceTree = "<group>"; };
 		933C74591D50908100A423B9 /* ANSObservableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSObservableObject.h; sourceTree = "<group>"; };
 		933C745A1D50908100A423B9 /* ANSObservableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSObservableObject.m; sourceTree = "<group>"; };
 		933C745C1D50908100A423B9 /* ANSBlockObservationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSBlockObservationController.h; sourceTree = "<group>"; };
@@ -117,7 +120,7 @@
 		936727C91D591D25007A796F /* ANSViewControllerTables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSViewControllerTables.h; sourceTree = "<group>"; };
 		936727CA1D591D25007A796F /* ANSViewControllerTables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSViewControllerTables.m; sourceTree = "<group>"; };
 		936727CB1D591D25007A796F /* ANSViewControllerTables.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSViewControllerTables.xib; sourceTree = "<group>"; };
-		936ABA481D5E0725004D459F /* ANSChangeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSChangeModel.h; sourceTree = "<group>"; };
+		936ABA481D5E0725004D459F /* ANSChangeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ANSChangeModel.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		936ABA491D5E0725004D459F /* ANSChangeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSChangeModel.m; sourceTree = "<group>"; };
 		936ABA4C1D5E0AAF004D459F /* ANSOneIndexModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSOneIndexModel.h; sourceTree = "<group>"; };
 		936ABA4D1D5E0AAF004D459F /* ANSOneIndexModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSOneIndexModel.m; sourceTree = "<group>"; };
@@ -151,7 +154,7 @@
 		93C084261D3E36800077A81C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93C0842F1D3E36B20077A81C /* iOS Study Plan.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "iOS Study Plan.txt"; path = "../iOS Study Plan.txt"; sourceTree = "<group>"; };
 		93C084311D3E380D0077A81C /* ANSAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSAppDelegate.h; sourceTree = "<group>"; };
-		93C084321D3E380D0077A81C /* ANSAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSAppDelegate.m; sourceTree = "<group>"; };
+		93C084321D3E380D0077A81C /* ANSAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ANSAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		93C084331D3E380D0077A81C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93C084341D3E380D0077A81C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		93C084391D3E381F0077A81C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -246,11 +249,20 @@
 		933259AD1D5DF0E1007E722A /* ANSDataCollection */ = {
 			isa = PBXGroup;
 			children = (
-				933259AE1D5DF0E1007E722A /* ANSDataCollection.h */,
-				933259AF1D5DF0E1007E722A /* ANSDataCollection.m */,
-				936ABA471D5E0725004D459F /* ANSCollectionHelper */,
+				933259AE1D5DF0E1007E722A /* ANSCollectionModel.h */,
+				933259AF1D5DF0E1007E722A /* ANSCollectionModel.m */,
+				936ABA471D5E0725004D459F /* ANSChangeModel */,
 			);
 			path = ANSDataCollection;
+			sourceTree = "<group>";
+		};
+		933B74261D63232100DF3DF9 /* NSMutableArray */ = {
+			isa = PBXGroup;
+			children = (
+				933B74271D63233500DF3DF9 /* NSMutableArray+ANSExtension.h */,
+				933B74281D63233500DF3DF9 /* NSMutableArray+ANSExtension.m */,
+			);
+			path = NSMutableArray;
 			sourceTree = "<group>";
 		};
 		933C74581D50908000A423B9 /* ANSObservableObject */ = {
@@ -317,7 +329,7 @@
 			path = ANDDataCell;
 			sourceTree = "<group>";
 		};
-		936ABA471D5E0725004D459F /* ANSCollectionHelper */ = {
+		936ABA471D5E0725004D459F /* ANSChangeModel */ = {
 			isa = PBXGroup;
 			children = (
 				936ABA481D5E0725004D459F /* ANSChangeModel.h */,
@@ -328,6 +340,7 @@
 				933B74211D61E8F700DF3DF9 /* ANSChangeModel+UICollectionView.m */,
 				936ABA4A1D5E0725004D459F /* Private */,
 			);
+			name = ANSChangeModel;
 			path = ANSCollectionHelper;
 			sourceTree = "<group>";
 		};
@@ -465,6 +478,7 @@
 				93EC8F621D48D9A6000624F0 /* UITableView */,
 				93EC8F5B1D48CDAA000624F0 /* UINib */,
 				93C5A5DE1D40DF3D002FBCA8 /* NSArray */,
+				933B74261D63232100DF3DF9 /* NSMutableArray */,
 				93C5A5E41D40DF3D002FBCA8 /* NSString */,
 				93C5A5D01D40DF3D002FBCA8 /* ANSGCD */,
 				93C5A5D61D40DF3D002FBCA8 /* ANSRandom */,
@@ -767,11 +781,12 @@
 				93C5A61A1D412D31002FBCA8 /* ANSUser.m in Sources */,
 				93C5A5F41D40DF3D002FBCA8 /* NSTimer+ANSExtension.m in Sources */,
 				93C5A5F51D40DF3D002FBCA8 /* NSArray+ANSExtension.m in Sources */,
+				933B74291D63233500DF3DF9 /* NSMutableArray+ANSExtension.m in Sources */,
 				93EC8F651D48D9A6000624F0 /* UITableView+Extension.m in Sources */,
 				933C74671D50908100A423B9 /* ANSProtocolObservationController.m in Sources */,
 				9388ECDF1D49FEB50082EE4B /* ANSDataInfo.m in Sources */,
 				933C74651D50908100A423B9 /* ANSBlockObservationController.m in Sources */,
-				933259B01D5DF0E1007E722A /* ANSDataCollection.m in Sources */,
+				933259B01D5DF0E1007E722A /* ANSCollectionModel.m in Sources */,
 				93052AE11D4CF2370007D20C /* ANSImageView.m in Sources */,
 				93C5A5F31D40DF3D002FBCA8 /* ANSTimerPrivate.m in Sources */,
 				933C74641D50908100A423B9 /* ANSObservableObject.m in Sources */,

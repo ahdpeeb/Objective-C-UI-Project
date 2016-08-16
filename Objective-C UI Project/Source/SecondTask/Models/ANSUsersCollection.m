@@ -32,11 +32,11 @@
 - (ANSUsersCollection *)sortedCollectionByString:(NSString *)filterStrirng {
     
     ANSUsersCollection *newCollection = [ANSUsersCollection new];
-    for (ANSUser *data in self) {
-        if ((filterStrirng.length > 0) && [data.string rangeOfString:filterStrirng options:NSCaseInsensitiveSearch].location == NSNotFound) {
+    for (ANSUser *user in self) {
+        if ((filterStrirng.length > 0) && [user.string rangeOfString:filterStrirng options:NSCaseInsensitiveSearch].location == NSNotFound) {
             continue;
         } else {
-            [newCollection addData:data];
+            [newCollection addObject:user];
         }
     }
     
