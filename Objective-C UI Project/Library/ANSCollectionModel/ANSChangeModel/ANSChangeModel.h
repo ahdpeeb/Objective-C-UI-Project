@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class UITableView;
+
 typedef NS_ENUM(NSUInteger, ANSChangeState) {
     ANSStateAddObject,
     ANSStateRemoveObject,
@@ -19,9 +21,8 @@ typedef NS_ENUM(NSUInteger, ANSChangeState) {
 @property (nonatomic, assign) ANSChangeState state;
 
 + (instancetype)oneIndexModel:(NSUInteger)index; 
-+ (instancetype)twoIndexModel:(NSUInteger)index index2:(NSUInteger)index2; 
++ (instancetype)twoIndexModel:(NSUInteger)index indexTwo:(NSUInteger)indexTwo; 
 
-- (NSUInteger)index;
-- (NSUInteger)index2;
+- (void)applyToTableView:(UITableView *)tableView;
 
 @end

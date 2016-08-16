@@ -12,7 +12,6 @@
 #import "ANSDataCell.h"
 #import "ANSTableViewCell.h"
 #import "ANSUser.h"
-#import "ANSDataInfo.h"
 #import "ANSImageModel.h"
 #import "ANSImageView.h"
 
@@ -20,7 +19,6 @@
 #import "UINib+Extension.h"
 #import "UITableView+Extension.h"
 #import "ANSChangeModel.h"
-#import "ANSChangeModel+UItableView.h"
 
 #import "ANSMacros.h"
 #import "ANSGCD.h"

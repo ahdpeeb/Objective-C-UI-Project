@@ -20,8 +20,8 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 - (void)notifyOfChangeWithIndex:(NSUInteger)index state:(ANSChangeState)state;
 
-- (void)notifyOfChangeWithIndex:(NSUInteger)index1
-                         index2:(NSUInteger)index2
+- (void)notifyOfChangeWithIndex:(NSUInteger)indexOne
+                         index2:(NSUInteger)indexTwo
                           state:(ANSChangeState)state;
 
 @end
@@ -83,7 +83,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
                          index2:(NSUInteger)index2
                           state:(ANSChangeState)state
 {
-    ANSChangeModel *model = [ANSChangeModel twoIndexModel:index1 index2:index2];
+    ANSChangeModel *model = [ANSChangeModel twoIndexModel:index1 indexTwo:index2];
     model.state = state;
     [self notifyOfStateChange:0 withUserInfo:model];
 }
@@ -91,7 +91,6 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 #pragma mark -
 #pragma mark Public methods; 
 
-//Object / index from array
 - (id)objectAtIndex:(NSUInteger)index {
     @synchronized(self) {
         return [self.mutableObjects objectAtIndex:index];
@@ -128,8 +127,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
         
         if (![collection containsObject:object]) {
             [collection insertObject:object atIndex:index];
-            
-//            [self notifyOfChangeWithIndex:index state:ANSStateAddObject];
+            [self notifyOfChangeWithIndex:index state:ANSStateAddObject];
         }
     }
 }
@@ -139,8 +137,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
         id object = [self objectAtIndex:index];
         if (object) {
             [self.mutableObjects removeObjectAtIndex:index];
-            
-//            [self notifyOfChangeWithIndex:index state:ANSStateRemoveObject];
+            [self notifyOfChangeWithIndex:index state:ANSStateRemoveObject];
         }
     }
 }
@@ -156,15 +153,14 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 - (void)moveObjectFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
     @synchronized(self) {
         [self.mutableObjects moveObjectFromIndex:fromIndex toIndex:toIndex]; 
-//            [self notifyOfChangeWithIndex:fromIndex index2:toIndex state:ANSStateMoveObject];
+        [self notifyOfChangeWithIndex:fromIndex index2:toIndex state:ANSStateMoveObject];
     }
 }
 
 - (void)exchangeObjectAtIndex:(NSUInteger)indexOne withObjectAtIndex:(NSUInteger)indexTwo {
     @synchronized(self) {
         [self.mutableObjects exchangeObjectAtIndex:indexOne withObjectAtIndex:indexTwo];
-        
-//        [self notifyOfChangeWithIndex:index1 index2:index2 state:ANSStateExchangeObject];
+        [self notifyOfChangeWithIndex:indexOne index2:indexTwo state:ANSStateExchangeObject];
     }
 }
 

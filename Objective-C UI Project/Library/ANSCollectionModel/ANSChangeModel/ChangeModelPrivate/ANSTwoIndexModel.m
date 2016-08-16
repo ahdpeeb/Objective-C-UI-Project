@@ -8,18 +8,13 @@
 
 #import "ANSTwoIndexModel.h"
 
-@interface ANSTwoIndexModel ()
-//@property (nonatomic, assign) NSUInteger index2;
-
-@end
-
 @implementation ANSTwoIndexModel
 
 - (instancetype)initWithIndex:(NSUInteger)index
-                       index2:(NSUInteger)index2
+                     indexTwo:(NSUInteger)indexTwo
 {
     self = [super initWithIndex:index];
-    self.index2 = index2;
+    self.indexTwo = indexTwo;
     
     return self;
 }

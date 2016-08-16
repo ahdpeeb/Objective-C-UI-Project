@@ -19,8 +19,8 @@
     return [[ANSOneIndexModel alloc] initWithIndex:index];
 }
 
-+ (instancetype)twoIndexModel:(NSUInteger)index index2:(NSUInteger)index2 {
-    return [[ANSTwoIndexModel alloc] initWithIndex:index index2:index2];
++ (instancetype)twoIndexModel:(NSUInteger)index indexTwo:(NSUInteger)indexTwo {
+    return [[ANSTwoIndexModel alloc] initWithIndex:index indexTwo:indexTwo];
 }
 
 #pragma mark -
@@ -48,6 +48,13 @@
     [self doesNotRecognizeSelector:_cmd];
     
     return 0;
+}
+
+#pragma mark -
+#pragma Public
+
+- (void)applyToTableView:(UITableView *)tableView {
+    [self doesNotRecognizeSelector:_cmd];
 }
 
 @end

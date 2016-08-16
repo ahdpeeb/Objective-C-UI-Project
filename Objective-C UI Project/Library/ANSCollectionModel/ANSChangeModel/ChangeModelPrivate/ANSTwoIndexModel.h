@@ -11,9 +11,9 @@
 #import "ANSOneIndexModel.h"
 
 @interface ANSTwoIndexModel : ANSOneIndexModel
-@property (nonatomic, assign) NSUInteger index2;
+@property (nonatomic, assign) NSUInteger indexTwo;
 
 - (instancetype)initWithIndex:(NSUInteger)index
-                       index2:(NSUInteger)index2;
+                     indexTwo:(NSUInteger)indexTwo;
 
 @end
