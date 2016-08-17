@@ -10,11 +10,51 @@
 #import "ANSUsersCollection.h"
 
 #import "ANSUser.h"
+#import "ANSMacros.h"
+#import "ANSGCD.h"
+
+typedef NS_ENUM(NSUInteger, ANSState) {
+    ANSDefaultState,
+    ANSFilteredState,
+};
+
+@interface ANSUsersCollection ()
+@property (nonatomic, retain) NSOperation *operation;
+@property (nonatomic, retain) ANSArrayModel *filteredCollection;
+
+@end
 
 @implementation ANSUsersCollection
 
 #pragma mark -
-#pragma mark sorting ANSData by name
+#pragma mark Accsessors
+
+- (void)setOperation:(NSOperation *)operation {
+    if (_operation != operation) {
+        [_operation cancel];
+        
+        _operation = operation;
+    }
+}
+
+
+#pragma mark -
+#pragma mark Pricate methods
+
+- (SEL)selectorForState:(NSUInteger)state {
+    switch (self.state) {
+        case ANSFilteredState:
+            return @selector(collection:didFilterWithUserInfo:);
+            break;
+            
+        default:
+            return  @selector(collection:didChangeWithModel:);
+            break;
+    }
+}
+
+#pragma mark -
+#pragma mark Public methods
 
 - (NSArray *)descendingSortedUsers {
     NSMutableArray *users = [NSMutableArray arrayWithArray:self.objects];
@@ -29,9 +69,9 @@
     return users;
 }
 
-- (ANSUsersCollection *)sortedCollectionByString:(NSString *)filterStrirng {
+- (ANSArrayModel *)sortedCollectionByString:(NSString *)filterStrirng {
     
-    ANSUsersCollection *newCollection = [ANSUsersCollection new];
+    ANSArrayModel *newCollection = [ANSArrayModel new];
     for (ANSUser *user in self) {
         if ((filterStrirng.length > 0) && [user.string rangeOfString:filterStrirng options:NSCaseInsensitiveSearch].location == NSNotFound) {
             continue;
@@ -41,6 +81,25 @@
     }
     
     return newCollection;
+}
+
+- (void)sortCollectionInBackgroundByString:(NSString *)filterStirng {
+    ANSWeakify(self);
+    self.operation = [NSBlockOperation blockOperationWithBlock:^{
+        ANSStrongify(self);
+        ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
+            self.filteredCollection = [self sortedCollectionByString:filterStirng];
+        });
+    }];
+    
+    self.operation.completionBlock = ^{
+        ANSStrongify(self);
+        ANSPerformInMainQueue(dispatch_async, ^{
+            [self setState:ANSFilteredState withUserInfo:self.filteredCollection];
+        });
+    };
+    
+    [self.operation start];
 }
 
 @end

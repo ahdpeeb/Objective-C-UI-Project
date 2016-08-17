@@ -18,11 +18,11 @@ typedef NS_ENUM(NSUInteger, ANSChangeState) {
 };
 
 @interface ANSChangeModel : NSObject
+@property (nonatomic, strong) id             userInfo;
 @property (nonatomic, assign) ANSChangeState state;
 
 + (instancetype)oneIndexModel:(NSUInteger)index; 
 + (instancetype)twoIndexModel:(NSUInteger)index indexTwo:(NSUInteger)indexTwo; 
 
-- (void)applyToTableView:(UITableView *)tableView;
 
 @end

@@ -8,31 +8,34 @@
 
 #import "ANSTwoIndexModel+UITableView.h"
 
-#import <UIKit/UIKit.h>
-
 @implementation ANSTwoIndexModel (UITableView)
 
 - (void)applyToTableView:(UITableView *)tableView {
+    [self applyToTableView:tableView rowAnimation:UITableViewRowAnimationFade]; 
+}
+
+- (void)applyToTableView:(UITableView *)tableView
+            rowAnimation:(UITableViewRowAnimation)animation
+{
     NSIndexPath *path = [NSIndexPath indexPathForRow:self.index inSection:0];
     NSIndexPath *pathTwo = [NSIndexPath indexPathForRow:self.indexTwo inSection:0];
     [tableView beginUpdates];
     
     switch (self.state) {
-    case ANSStateMoveObject:
-        [tableView reloadRowsAtIndexPaths:@[path, pathTwo] withRowAnimation:UITableViewRowAnimationFade];
-        break;
-
-    case ANSStateExchangeObject:
-        [tableView reloadRowsAtIndexPaths:@[path, pathTwo] withRowAnimation:UITableViewRowAnimationFade];
-        break;
+        case ANSStateMoveObject:
+            [tableView reloadRowsAtIndexPaths:@[path, pathTwo] withRowAnimation:animation];
+            break;
             
-    default:
-        [tableView reloadData];
-        break;
+        case ANSStateExchangeObject:
+            [tableView reloadRowsAtIndexPaths:@[path, pathTwo] withRowAnimation:animation];
+            break;
+            
+        default:
+            [tableView reloadData];
+            break;
     }
     
     [tableView endUpdates];
 }
-
 
 @end

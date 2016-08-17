@@ -9,18 +9,18 @@
 
 #import "ANSObservableObject.h"
 
-@class ANSCollectionModel;
+@class ANSArrayModel;
 @class ANSChangeModel;
 
 @protocol ANSCollectionObserver <NSObject>
 
 @optional
-- (void)       collection:(ANSCollectionModel *)collection
+- (void)       collection:(ANSArrayModel *)collection
     didChangeWithModel:(ANSChangeModel *)model;
 
 @end
 
-@interface ANSCollectionModel : ANSObservableObject <
+@interface ANSArrayModel : ANSObservableObject <
     NSCoding,
     NSCopying,
     NSFastEnumeration

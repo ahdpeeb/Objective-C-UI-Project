@@ -19,6 +19,8 @@
 #import "UINib+Extension.h"
 #import "UITableView+Extension.h"
 #import "ANSChangeModel.h"
+#import "ANSChangeModel+UITableView.h"
+#import "UIViewController+ANSExtension.h"
 
 #import "ANSMacros.h"
 #import "ANSGCD.h"
@@ -35,8 +37,8 @@ static const NSUInteger kANSSectionsCount           = 1;
 @property (nonatomic, strong) NSOperation                       *operation;
 @property (nonatomic, strong) NSOperationQueue                  *operationsQueue;
 
-- (void)sortCollectionInBackground:(ANSUsersCollection *)collection
-                  withFilterString:(NSString *)filterStirng;
+//- (void)sortCollectionInBackground:(ANSUsersCollection *)collection
+//                  withFilterString:(NSString *)filterStirng;
 
 - (void)resignSearchBar;
 
@@ -84,6 +86,8 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     self.navigationItem.title = kANSTitleForHeaderSection;
     [self initLeftBarButtonItem];
     [self initRightBarButtonItem];
+    
+    [self.tableView.table reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,22 +97,22 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 #pragma mark -
 #pragma mark Private methods
 
-- (void)sortCollectionInBackground:(ANSUsersCollection *)collection
-                    withFilterString:(NSString *)filterStirng
-{
-    ANSWeakify(self);
-    self.operation = [NSBlockOperation blockOperationWithBlock:^{
-        ANSStrongify(self);
-      self.filteredCollection = [self.collection sortedCollectionByString:filterStirng];
-    }];
-
-    self.operation.completionBlock = ^{
-        ANSPerformInMainQueue(dispatch_async, ^{
-            ANSStrongify(self);
-            [self.tableView.table reloadData];
-        });
-    };
-}
+//- (void)sortCollectionInBackground:(ANSUsersCollection *)collection
+//                    withFilterString:(NSString *)filterStirng
+//{
+//    ANSWeakify(self);
+//    self.operation = [NSBlockOperation blockOperationWithBlock:^{
+//        ANSStrongify(self);
+//      self.filteredCollection = [self.collection sortedCollectionByString:filterStirng];
+//    }];
+//
+//    self.operation.completionBlock = ^{
+//        ANSPerformInMainQueue(dispatch_async, ^{
+//            ANSStrongify(self);
+//            [self.tableView.table reloadData];
+//        });
+//    };
+//}
 
 - (void)resignSearchBar {
     UISearchBar *searchBar = self.tableView.searchBar;
@@ -119,7 +123,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 
 #pragma mark -
 #pragma mark UIBarButtonItems
-    //TableView Method
+
 - (void)initLeftBarButtonItem {
     UIBarButtonItem *buttom = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(leftBarAction:)];
     [self.navigationItem setLeftBarButtonItem:buttom animated:YES];
@@ -144,7 +148,9 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     
     if (table.editing) {
         ANSUser *object = [[ANSUser alloc] init];
-        [self.collection insertObject:object atIndex:0];
+        [self.collection performBlockWithNotyfication:^{
+            [self.collection insertObject:object atIndex:0];
+        }];
     }
 }
 
@@ -156,6 +162,14 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     BOOL isEditing = table.editing;
     [sender setTitle:(isEditing ? kANSEdit : kANSDone)];
     [table setEditing:(isEditing ? NO : YES) animated:YES];
+}
+
+#pragma mark -
+#pragma mark Gestures
+
+- (IBAction)rightSwipe:(UISwipeGestureRecognizer *)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    NSLog(@"%lu",self.navigationController.viewControllers.count);
 }
 
 #pragma mark -
@@ -213,8 +227,10 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
           toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     if (sourceIndexPath.section == destinationIndexPath.section) {
-        [self.collection moveObjectFromIndex:sourceIndexPath.row
-                                   toIndex:destinationIndexPath.row];
+        [self.collection performBlockWithoutNotyfication:^{
+            [self.collection moveObjectFromIndex:sourceIndexPath.row
+                                         toIndex:destinationIndexPath.row];
+        }];
     }
 }
 
@@ -223,7 +239,9 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.collection removeObjectAtIndex:indexPath.row];
+        [self .collection performBlockWithNotyfication:^{
+            [self.collection removeObjectAtIndex:indexPath.row];
+        }];
     }
 }
 
@@ -240,6 +258,13 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
    shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+   id controller = [ANSViewControllerTables controller];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark -
@@ -266,19 +291,24 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [self sortCollectionInBackground:self.collection withFilterString:searchText];
+    [self.collection sortCollectionInBackgroundByString:searchText];
 }
 
 #pragma mark -
 #pragma mark ANSCollectionObserver protocol
 
-- (void)       collection:(ANSCollectionModel *)collection
+- (void)       collection:(ANSArrayModel *)collection
        didChangeWithModel:(ANSChangeModel *)model {
     UITableView *table = self.tableView.table;
     
     [model applyToTableView:table];
     
-    NSLog(@"collectionDidUpdate, - %lu ", collection.count);
+    NSLog(@"notyfied collectionDidUpdate, - %lu object", collection.count);
+}
+
+- (void)collection:(ANSArrayModel *)collection didFilterWithUserInfo:(id)userInfo {
+    self.filteredCollection = userInfo;
+    [self.tableView.table reloadData];
 }
 
 @end

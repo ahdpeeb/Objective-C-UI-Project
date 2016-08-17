@@ -50,11 +50,4 @@
     return 0;
 }
 
-#pragma mark -
-#pragma Public
-
-- (void)applyToTableView:(UITableView *)tableView {
-    [self doesNotRecognizeSelector:_cmd];
-}
-
 @end

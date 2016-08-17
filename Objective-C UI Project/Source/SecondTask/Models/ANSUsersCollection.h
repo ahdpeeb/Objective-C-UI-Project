@@ -8,11 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ANSCollectionModel.h"
+#import "ANSArrayModel.h"
 
-@interface ANSUsersCollection : ANSCollectionModel
+@protocol ANSCollectionObserverSpecial <ANSCollectionObserver>
+
+@optional
+
+- (void)collection:(ANSArrayModel *)collection didFilterWithUserInfo:(id)userInfo;
+
+@end
+
+@interface ANSUsersCollection : ANSArrayModel
 
 - (NSArray *)descendingSortedUsers; 
 - (ANSUsersCollection *)sortedCollectionByString:(NSString *)filterStirng;
+- (void)sortCollectionInBackgroundByString:(NSString *)filterStirng; 
 
 @end

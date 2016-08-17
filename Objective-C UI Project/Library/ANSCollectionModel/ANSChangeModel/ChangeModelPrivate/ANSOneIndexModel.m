@@ -8,6 +8,11 @@
 
 #import "ANSOneIndexModel.h"
 
+@interface ANSOneIndexModel ()
+@property (nonatomic, assign) NSUInteger index;
+
+@end
+
 @implementation ANSOneIndexModel
 
 #pragma mark -

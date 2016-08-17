@@ -30,6 +30,9 @@
 
 - (BOOL)isObservedByObject:(id)object;
 
+- (void)performBlockWithNotyfication:(void (^)(void))block;
+- (void)performBlockWithoutNotyfication:(void (^)(void))block; 
+
 #pragma mark -
 #pragma mark Private declaration
 

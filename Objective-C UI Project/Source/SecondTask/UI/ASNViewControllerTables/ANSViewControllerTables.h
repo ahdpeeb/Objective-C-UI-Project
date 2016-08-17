@@ -14,9 +14,12 @@
     UITableViewDataSource,
     UITableViewDelegate,
     UISearchBarDelegate,
-    ANSCollectionObserver
+    ANSCollectionObserverSpecial
 >
 
 @property (nonatomic, strong) ANSUsersCollection *collection;
+@property (nonatomic, strong) IBOutlet UISwipeGestureRecognizer *rightSwipeGesture;
+
+- (IBAction)rightSwipe:(UISwipeGestureRecognizer *)sender;
 
 @end

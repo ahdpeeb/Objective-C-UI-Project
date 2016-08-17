@@ -8,8 +8,13 @@
 
 #import "ANSOneIndexModel.h"
 
+#import <UIKit/UIKit.h>
+
 @interface ANSOneIndexModel (UITableView)
 
 - (void)applyToTableView:(UITableView *)tableView;
+
+- (void)applyToTableView:(UITableView *)tableView
+            rowAnimation:(UITableViewRowAnimation)animation;
 
 @end

@@ -4,8 +4,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ANSViewControllerTables">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ANSViewControllerTables" customModule="ANSViewControllerTables">
             <connections>
+                <outlet property="rightSwipeGesture" destination="klo-zq-qHs" id="TdX-cz-P0j"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,6 +19,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
                     <color key="separatorColor" red="0.033932551741600037" green="0.023052006959915161" blue="0.073954395949840546" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <searchBar key="tableHeaderView" contentMode="redraw" barStyle="black" searchBarStyle="minimal" placeholder="text for searching" id="ca3-ih-41w">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -31,6 +33,7 @@
                     <connections>
                         <outlet property="dataSource" destination="-1" id="px9-KJ-Guf"/>
                         <outlet property="delegate" destination="-1" id="Osw-w8-Xx9"/>
+                        <outletCollection property="gestureRecognizers" destination="klo-zq-qHs" appends="YES" id="uB0-pi-Gla"/>
                     </connections>
                 </tableView>
             </subviews>
@@ -41,5 +44,11 @@
             </connections>
             <point key="canvasLocation" x="143" y="302"/>
         </view>
+        <swipeGestureRecognizer direction="right" id="klo-zq-qHs">
+            <connections>
+                <action selector="rightSwipe:" destination="-1" id="PIw-s7-uJ5"/>
+                <outlet property="delegate" destination="-1" id="hx1-Mz-kuf"/>
+            </connections>
+        </swipeGestureRecognizer>
     </objects>
 </document>

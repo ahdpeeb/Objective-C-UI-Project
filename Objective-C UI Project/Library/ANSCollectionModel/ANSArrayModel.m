@@ -7,7 +7,7 @@
 //
 #import <UIKit/UIKit.h>
 
-#import "ANSCollectionModel.h"
+#import "ANSArrayModel.h"
 
 #import "ANSChangeModel.h"
 #import "NSMutableArray+ANSExtension.h"
@@ -15,7 +15,7 @@
 static NSString * const kANSArchiveKey              = @"kANSArchiveKey";
 static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
-@interface ANSCollectionModel ()
+@interface ANSArrayModel ()
 @property (nonatomic, retain) NSMutableArray *mutableObjects;
 
 - (void)notifyOfChangeWithIndex:(NSUInteger)index state:(ANSChangeState)state;
@@ -26,7 +26,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 @end
 
-@implementation ANSCollectionModel
+@implementation ANSArrayModel
 
 @synthesize state = _state;
 
@@ -152,6 +152,12 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 - (void)moveObjectFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
     @synchronized(self) {
+        NSUInteger count = self.count;
+        
+        if ((fromIndex >= count) || (toIndex >= count)) {
+            return;
+        }
+        
         [self.mutableObjects moveObjectFromIndex:fromIndex toIndex:toIndex]; 
         [self notifyOfChangeWithIndex:fromIndex index2:toIndex state:ANSStateMoveObject];
     }
@@ -227,7 +233,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 #pragma mark NSCopying protocol
 
 - (id)copyWithZone:(NSZone *)zone {
-    ANSCollectionModel *copy = [[self class] new];
+    ANSArrayModel *copy = [[self class] new];
     if (copy) {
         copy.mutableObjects = [self.mutableObjects copyWithZone:zone];
     }

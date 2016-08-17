@@ -14,7 +14,7 @@
 
 //You should never call setter to this ptoperty.
 //write mod intended for subclasses
-@property (nonatomic, assign) NSUInteger index;
+@property (nonatomic, readonly) NSUInteger index;
 
 - (instancetype)initWithIndex:(NSUInteger)index;
 

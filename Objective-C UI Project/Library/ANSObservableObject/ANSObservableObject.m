@@ -1,4 +1,4 @@
-//
+    //
 //  ANSObservableObjectTest.m
 //  Objective-c course
 //
@@ -17,10 +17,15 @@ typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controll
 
 @interface ANSObservableObject ()
 @property (nonatomic, retain) NSHashTable *controllerHashTable;
+@property (nonatomic, assign) BOOL        notification;
 
 - (id)controllerWithClass:(Class)cls observer:(id)observer;
 - (void)notifyOfStateChange:(NSUInteger)state
                   withBlock:(ANSControllerNotificationBlock)block;
+
+- (void)performBlockWithNotyfication:(void (^)(void))block;
+- (void)performBlockWithoutNotyfication:(void (^)(void))block;
+
 @end
 
 @implementation ANSObservableObject
@@ -33,6 +38,7 @@ typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controll
 - (instancetype)init {
     self = [super init];
     self.controllerHashTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
+    self.notification = YES;
     
     return self;
 }
@@ -104,10 +110,12 @@ typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controll
 
 - (void)notifyOfStateChange:(NSUInteger)state withUserInfo:(id)UserInfo {
     @synchronized(self) {
-        [self notifyOfStateChange:(state)
-                        withBlock:^(ANSObservationController *controller) {
-                            [controller notifyOfStateChange:state withUserInfo:UserInfo];
-                        }];
+        if (self.notification) {
+            [self notifyOfStateChange:(state)
+                            withBlock:^(ANSObservationController *controller) {
+                                [controller notifyOfStateChange:state withUserInfo:UserInfo];
+                            }];
+        }
     }
 }
 
@@ -148,6 +156,23 @@ typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controll
     
     return [self controllerWithClass:[ANSBlockObservationController class]
                                 observer:observer];
+}
+
+- (void)performBlockWithNotyfication:(void (^)(void))block {
+    @synchronized(self) {
+        self.notification = YES;
+        block();
+    }
+}
+
+- (void)performBlockWithoutNotyfication:(void (^)(void))block {
+    @synchronized(self) {
+        self.notification = NO;
+        block();
+        
+        [self performBlockWithNotyfication:^{
+        }];
+    }
 }
 
 @end

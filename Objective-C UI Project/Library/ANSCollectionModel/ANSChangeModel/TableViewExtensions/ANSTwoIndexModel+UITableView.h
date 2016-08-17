@@ -8,8 +8,13 @@
 
 #import "ANSTwoIndexModel.h"
 
+#import <UIKit/UIKit.h>
+
 @interface ANSTwoIndexModel (UITableView)
 
 - (void)applyToTableView:(UITableView *)tableView;
+
+- (void)applyToTableView:(UITableView *)tableView
+            rowAnimation:(UITableViewRowAnimation)animation;
 
 @end

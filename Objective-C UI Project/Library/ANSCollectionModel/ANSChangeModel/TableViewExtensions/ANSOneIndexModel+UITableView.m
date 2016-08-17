@@ -8,22 +8,26 @@
 
 #import "ANSOneIndexModel+UITableView.h"
 
-#import <UIKit/UIKit.h>
-
-@implementation ANSOneIndexModel (UTtableView)
+@implementation ANSOneIndexModel (UTTableView)
 
 - (void)applyToTableView:(UITableView *)tableView {
+    [self applyToTableView:tableView rowAnimation:UITableViewRowAnimationFade]; 
+}
+
+- (void)applyToTableView:(UITableView *)tableView
+            rowAnimation:(UITableViewRowAnimation)animation
+{
     NSIndexPath *path = [NSIndexPath indexPathForRow:self.index inSection:0];
     
     [tableView beginUpdates];
     
     switch (self.state) {
         case ANSStateAddObject:
-            [tableView insertRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:@[path] withRowAnimation:animation];
             break;
             
         case ANSStateRemoveObject:
-            [tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationMiddle];
+            [tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:animation];
             break;
             
         default:

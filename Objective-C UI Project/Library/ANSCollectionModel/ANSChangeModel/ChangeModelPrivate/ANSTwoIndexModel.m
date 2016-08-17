@@ -8,6 +8,11 @@
 
 #import "ANSTwoIndexModel.h"
 
+@interface ANSTwoIndexModel ()
+@property (nonatomic, assign) NSUInteger indexTwo;
+
+@end
+
 @implementation ANSTwoIndexModel
 
 - (instancetype)initWithIndex:(NSUInteger)index
