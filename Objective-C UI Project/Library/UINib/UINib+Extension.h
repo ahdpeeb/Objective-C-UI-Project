@@ -14,6 +14,6 @@
 
 //this method returns root performance from nib with class.
 // You are responsible for nib contains only one class as root performance
-- (id)elementFromNibWithClass:(Class)cls; 
+- (id)objectFromNibWithClass:(Class)cls; 
 
 @end

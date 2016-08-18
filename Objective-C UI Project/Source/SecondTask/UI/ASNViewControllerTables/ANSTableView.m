@@ -8,6 +8,10 @@
 
 #import "ANSTableView.h"
 
+#import "ANSLoadingView.h"
+#import "UINib+Extension.h"
+#import "NSBundle+ANSExtenison.h"
+
 @interface ANSTableView ()
 //vertical indent for table and scrollIndicator
 - (void)hsPace:(CGFloat)top;
@@ -22,7 +26,13 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self hsPace:0];
+    ANSLoadingView *view = [NSBundle objectWithClass:[ANSLoadingView class]];
+    
+//    UINib *nib = [UINib nibWithClass:[ANSLoadingView class]];
+//    ANSLoadingView *view = [nib objectFromNibWithClass:[ANSLoadingView class]];
+    self.loadingView = view;
+    [self addSubview:view];
+    [self bringSubviewToFront:view];
 }
 
 #pragma mark -

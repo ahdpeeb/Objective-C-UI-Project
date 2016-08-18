@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class ANSLoadingView;
+
 @interface ANSTableView : UIView
-@property (nonatomic, strong) IBOutlet UITableView  *table;
-@property (nonatomic, strong) IBOutlet UISearchBar  *searchBar;
+@property (nonatomic, strong) IBOutlet UITableView      *table;
+@property (nonatomic, strong) IBOutlet UISearchBar      *searchBar;
+@property (nonatomic, strong) IBOutlet ANSLoadingView   *loadingView;
 
 @end

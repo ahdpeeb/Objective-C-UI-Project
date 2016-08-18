@@ -97,23 +97,6 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 #pragma mark -
 #pragma mark Private methods
 
-//- (void)sortCollectionInBackground:(ANSUsersCollection *)collection
-//                    withFilterString:(NSString *)filterStirng
-//{
-//    ANSWeakify(self);
-//    self.operation = [NSBlockOperation blockOperationWithBlock:^{
-//        ANSStrongify(self);
-//      self.filteredCollection = [self.collection sortedCollectionByString:filterStirng];
-//    }];
-//
-//    self.operation.completionBlock = ^{
-//        ANSPerformInMainQueue(dispatch_async, ^{
-//            ANSStrongify(self);
-//            [self.tableView.table reloadData];
-//        });
-//    };
-//}
-
 - (void)resignSearchBar {
     UISearchBar *searchBar = self.tableView.searchBar;
     if (searchBar.isFirstResponder) {
