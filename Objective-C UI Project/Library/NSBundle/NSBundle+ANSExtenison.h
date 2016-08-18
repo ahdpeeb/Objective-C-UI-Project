@@ -10,7 +10,7 @@
 
 @interface NSBundle (ANSExtenison)
 
-//returns NIb View. 
+//returns main view from nib. nibName and ViewName must match. 
 + (id)objectWithClass:(Class)cls;
 
 @end

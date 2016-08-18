@@ -15,8 +15,16 @@
 @optional
 
 - (void)collection:(ANSArrayModel *)collection didFilterWithUserInfo:(id)userInfo;
+- (void)filledModelDidInit:(ANSArrayModel *)model;
 
 @end
+
+//you should not touch defauld state
+typedef NS_ENUM(NSUInteger, ANSState) {
+    ANSDefaultState,
+    ANSFilteredState,
+    ANSInitedWithObjectState,
+};
 
 @interface ANSUsersCollection : ANSArrayModel
 

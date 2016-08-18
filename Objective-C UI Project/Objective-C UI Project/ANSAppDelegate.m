@@ -14,8 +14,9 @@
 #import "ANSChangeModel.h"
 
 #import "NSArray+ANSExtension.h"
+#import "ANSGCD.h"
 
-static const NSUInteger kANSObjectCount   = 0;
+static const NSUInteger kANSObjectCount   = 100;
 
 @interface ANSAppDelegate ()
 @property (nonatomic, retain) ANSUsersCollection *collection;
@@ -29,25 +30,29 @@ static const NSUInteger kANSObjectCount   = 0;
     UIWindow *window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window = window;
     
-   ANSViewControllerTables *controller = [ANSViewControllerTables new];
- //  ANSViewControllerFirstTask *controller1 = [ANSViewControllerFirstTask new];
-    UINavigationController *nv = [[UINavigationController alloc] initWithRootViewController:controller];
-    window.rootViewController = nv;
+    ANSViewControllerTables *controller = [ANSViewControllerTables new];
+    UINavigationController *navigationController;
+    navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+    window.rootViewController = navigationController;
     
     [window makeKeyAndVisible];
     
 #pragma mark -
 #pragma mark Extra
     
-    //test objects
-   __unused NSArray *objects = [NSArray objectsWithCount:kANSObjectCount block:^id{
-        return [[ANSUser alloc] init];
-    }];
-   
-    ANSUsersCollection *collection = [ANSUsersCollection new];
-    // [ANSObjectCollection loadState] ? :
-    self.collection = collection;
-    controller.collection = collection;
+    ANSPerformInAsyncQueue(ANSPriorityDefault, ^{
+        sleep(5);
+         NSArray *objects = [NSArray objectsWithCount:kANSObjectCount block:^id{
+            return [[ANSUser alloc] init];
+        }];
+        
+        ANSUsersCollection *collection = [ANSUsersCollection new];
+        [collection addObjects:objects];
+        // [ANSObjectCollection loadState] ? :
+        ANSPerformInMainQueue(dispatch_async, ^{
+            controller.collection = collection;
+        });
+    });
 
     return YES;
 }

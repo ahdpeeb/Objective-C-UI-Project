@@ -26,10 +26,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    ANSLoadingView *view = [NSBundle objectWithClass:[ANSLoadingView class]];
-    
-//    UINib *nib = [UINib nibWithClass:[ANSLoadingView class]];
-//    ANSLoadingView *view = [nib objectFromNibWithClass:[ANSLoadingView class]];
+    ANSLoadingView *view = [NSBundle objectWithClass:[ANSLoadingView class]]; 
     self.loadingView = view;
     [self addSubview:view];
     [self bringSubviewToFront:view];

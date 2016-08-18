@@ -21,6 +21,7 @@
 #import "ANSChangeModel.h"
 #import "ANSChangeModel+UITableView.h"
 #import "UIViewController+ANSExtension.h"
+#import "ANSLoadingView.h"
 
 #import "ANSMacros.h"
 #import "ANSGCD.h"
@@ -34,12 +35,6 @@ static const NSUInteger kANSSectionsCount           = 1;
 @property (nonatomic, strong) ANSProtocolObservationController  *controller;
 @property (nonatomic, strong) ANSUsersCollection                *filteredCollection;
 
-@property (nonatomic, strong) NSOperation                       *operation;
-@property (nonatomic, strong) NSOperationQueue                  *operationsQueue;
-
-//- (void)sortCollectionInBackground:(ANSUsersCollection *)collection
-//                  withFilterString:(NSString *)filterStirng;
-
 - (void)resignSearchBar;
 
 @end
@@ -51,28 +46,14 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 #pragma mark -
 #pragma mark Accsessors
 
-- (void)setOperation:(NSOperation *)operation {
-    if (_operation != operation) {
-        [_operation cancel];
-        
-        _operation = operation;
-        
-        NSOperationQueue *queue = self.operationsQueue;
-        if (!queue) {
-            self.operationsQueue = [NSOperationQueue new];
-        }
-        
-        [queue addOperation:operation];
-    }
-}
-
 - (void)setCollection:(ANSUsersCollection *)collection {
     if (_collection != collection) {
     //  [_collection removeObserverObject:self];
         _collection = collection;
         
         self.controller = [_collection protocolControllerWithObserver:self];
-        
+        id loadingView = self.tableView.loadingView; 
+        [loadingView dissapearWithAnimation];
         [self.tableView.table reloadData];
     }
 }

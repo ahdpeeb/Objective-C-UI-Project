@@ -12,8 +12,8 @@
 
 + (UINib *)nibWithClass:(Class)cls;
 
-//this method returns root performance from nib with class.
-// You are responsible for nib contains only one class as root performance
+//this method returns root object (performance) from nib with class.
+// You are responsible for nib contains only one class as root object
 - (id)objectFromNibWithClass:(Class)cls; 
 
 @end

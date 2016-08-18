@@ -11,4 +11,6 @@
 @interface ANSLoadingView : UIView
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *indicator;
 
+- (void)dissapearWithAnimation; 
+
 @end

@@ -16,6 +16,7 @@
 typedef NS_ENUM(NSUInteger, ANSState) {
     ANSDefaultState,
     ANSFilteredState,
+    ANSInitedWithObjectState, 
 };
 
 @interface ANSUsersCollection ()
@@ -45,6 +46,10 @@ typedef NS_ENUM(NSUInteger, ANSState) {
     switch (self.state) {
         case ANSFilteredState:
             return @selector(collection:didFilterWithUserInfo:);
+            break;
+        
+        case ANSInitedWithObjectState:
+            return @selector(filledModelDidInit:);
             break;
             
         default:

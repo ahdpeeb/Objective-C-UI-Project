@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 
 #import "ANSObservableObject.h"
+#import "NSArray+ANSExtension.h"
 
 @class ANSArrayModel;
 @class ANSChangeModel;
