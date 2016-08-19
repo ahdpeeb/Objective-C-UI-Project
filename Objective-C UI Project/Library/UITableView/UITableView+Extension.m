@@ -17,7 +17,7 @@
     ANSTableViewCell *cell = [self dequeueReusableCellWithIdentifier:identifire];
     if (!cell) {
         UINib *nib = [UINib nibWithClass:cls];
-        cell = [nib objectFromNibWithClass:[cls class]];
+        cell = [nib objectWithClass:[cls class]];
         
         return cell;
     }

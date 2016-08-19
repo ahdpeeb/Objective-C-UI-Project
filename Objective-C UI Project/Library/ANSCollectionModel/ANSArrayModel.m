@@ -199,7 +199,13 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 }
 
 - (SEL)selectorForState:(NSUInteger)state {
-    return @selector(collection:didChangeWithModel:);
+    switch (state) {
+        case ANSDefaultState:
+            return @selector(collection:didChangeWithModel:);
+            
+        default:
+            return nil;
+    }
 }
 
 #pragma mark -

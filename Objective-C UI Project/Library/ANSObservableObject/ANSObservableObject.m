@@ -13,18 +13,15 @@
 #import "ANSProtocolObservationController.h"
 #import "ANSObservationController+ANSPrivate.h"
 
-typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controller);
-
 @interface ANSObservableObject ()
 @property (nonatomic, retain) NSHashTable *controllerHashTable;
-@property (nonatomic, assign) BOOL        notification;
+@property (nonatomic, assign) BOOL        shouldNotify;
 
 - (id)controllerWithClass:(Class)cls observer:(id)observer;
 - (void)notifyOfStateChange:(NSUInteger)state
                   withBlock:(ANSControllerNotificationBlock)block;
 
-- (void)performBlockWithNotyfication:(void (^)(void))block;
-- (void)performBlockWithoutNotyfication:(void (^)(void))block;
+- (void)performBlock:(ANSExecutableBlock)block shouldNotify:(BOOL)shouldNotify;
 
 @end
 
@@ -38,7 +35,7 @@ typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controll
 - (instancetype)init {
     self = [super init];
     self.controllerHashTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
-    self.notification = YES;
+    self.shouldNotify = YES; 
     
     return self;
 }
@@ -110,7 +107,7 @@ typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controll
 
 - (void)notifyOfStateChange:(NSUInteger)state withUserInfo:(id)UserInfo {
     @synchronized(self) {
-        if (self.notification) {
+        if (self.shouldNotify) {
             [self notifyOfStateChange:(state)
                             withBlock:^(ANSObservationController *controller) {
                                 [controller notifyOfStateChange:state withUserInfo:UserInfo];
@@ -125,6 +122,17 @@ typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controll
     }
 }
 
+- (void)performBlock:(ANSExecutableBlock)block shouldNotify:(BOOL)shouldNotify {
+    @synchronized(self) {
+        BOOL value = self.shouldNotify;
+        self.shouldNotify = shouldNotify;
+        
+        block();
+        
+        self.shouldNotify = value;
+    }
+}
+
 #pragma mark -
 #pragma mark Public methods
 
@@ -133,9 +141,12 @@ typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controll
     BOOL value = NO;
         for (ANSObservationController *controler in self.controllerHashTable) {
             value = [object isEqual:controler.observer];
+            
+            return YES; 
         }
 
     return value;
+        
     }
 }
 
@@ -158,20 +169,15 @@ typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controll
                                 observer:observer];
 }
 
-- (void)performBlockWithNotyfication:(void (^)(void))block {
+- (void)performBlockWithNotyfication:(ANSExecutableBlock)block {
     @synchronized(self) {
-        self.notification = YES;
-        block();
+        [self performBlock:block shouldNotify:YES];
     }
 }
 
-- (void)performBlockWithoutNotyfication:(void (^)(void))block {
+- (void)performBlockWithoutNotyfication:(ANSExecutableBlock)block {
     @synchronized(self) {
-        self.notification = NO;
-        block();
-        
-        [self performBlockWithNotyfication:^{
-        }];
+        [self performBlock:block shouldNotify:YES];
     }
 }
 

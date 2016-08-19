@@ -12,6 +12,9 @@
 @class ANSProtocolObservationController;
 @class ANSBlockObservationController;
 
+typedef void(^ANSExecutableBlock)(void);
+typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controller);
+
 @interface ANSObservableObject : NSObject
 @property (nonatomic, assign)  NSUInteger state;
 
@@ -30,8 +33,8 @@
 
 - (BOOL)isObservedByObject:(id)object;
 
-- (void)performBlockWithNotyfication:(void (^)(void))block;
-- (void)performBlockWithoutNotyfication:(void (^)(void))block; 
+- (void)performBlockWithNotyfication:(ANSExecutableBlock)block;
+- (void)performBlockWithoutNotyfication:(ANSExecutableBlock)block;
 
 #pragma mark -
 #pragma mark Private declaration

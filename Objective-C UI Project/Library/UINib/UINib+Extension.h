@@ -14,6 +14,6 @@
 
 //this method returns root object (performance) from nib with class.
 // You are responsible for nib contains only one class as root object
-- (id)objectFromNibWithClass:(Class)cls; 
+- (id)objectWithClass:(Class)cls; 
 
 @end

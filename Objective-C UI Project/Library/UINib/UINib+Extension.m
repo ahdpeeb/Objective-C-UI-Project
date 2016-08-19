@@ -14,7 +14,7 @@
    return [self nibWithNibName:NSStringFromClass(cls) bundle:nil];
 }
 
-- (id)objectFromNibWithClass:(Class)cls {
+- (id)objectWithClass:(Class)cls {
     NSArray *elements = [self instantiateWithOwner:nil options:nil];
     for (id element in elements) {
         if ([element isMemberOfClass:cls]) {

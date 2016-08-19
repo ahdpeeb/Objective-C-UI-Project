@@ -7,25 +7,19 @@
 //
 #import <UIKit/UIKit.h>
 
-#import "ANSUsersCollection.h"
+#import "ANSUsersModel.h"
 
 #import "ANSUser.h"
 #import "ANSMacros.h"
 #import "ANSGCD.h"
 
-typedef NS_ENUM(NSUInteger, ANSState) {
-    ANSDefaultState,
-    ANSFilteredState,
-    ANSInitedWithObjectState, 
-};
-
-@interface ANSUsersCollection ()
+@interface ANSUsersModel ()
 @property (nonatomic, retain) NSOperation *operation;
 @property (nonatomic, retain) ANSArrayModel *filteredCollection;
 
 @end
 
-@implementation ANSUsersCollection
+@implementation ANSUsersModel
 
 #pragma mark -
 #pragma mark Accsessors
@@ -35,26 +29,23 @@ typedef NS_ENUM(NSUInteger, ANSState) {
         [_operation cancel];
         
         _operation = operation;
+        [_operation start];
     }
 }
-
 
 #pragma mark -
 #pragma mark Pricate methods
 
 - (SEL)selectorForState:(NSUInteger)state {
-    switch (self.state) {
-        case ANSFilteredState:
-            return @selector(collection:didFilterWithUserInfo:);
-            break;
+    switch (state) {
+        case ANSUsersModelInitWithObjectState:
+ //           return @selector(collection:didFilterWithUserInfo:);
         
-        case ANSInitedWithObjectState:
-            return @selector(filledModelDidInit:);
-            break;
+        case ANSUsersModelFilterdState:
+            return @selector(model:didFilterWithUserInfo:);
             
         default:
-            return  @selector(collection:didChangeWithModel:);
-            break;
+          return [super selectorForState:state];
     }
 }
 
@@ -75,10 +66,11 @@ typedef NS_ENUM(NSUInteger, ANSState) {
 }
 
 - (ANSArrayModel *)sortedCollectionByString:(NSString *)filterStrirng {
-    
     ANSArrayModel *newCollection = [ANSArrayModel new];
     for (ANSUser *user in self) {
-        if ((filterStrirng.length > 0) && [user.string rangeOfString:filterStrirng options:NSCaseInsensitiveSearch].location == NSNotFound) {
+        if ((filterStrirng.length > 0)
+                && [user.string rangeOfString:filterStrirng
+                                      options:NSCaseInsensitiveSearch].location == NSNotFound) {
             continue;
         } else {
             [newCollection addObject:user];
@@ -90,21 +82,24 @@ typedef NS_ENUM(NSUInteger, ANSState) {
 
 - (void)sortCollectionInBackgroundByString:(NSString *)filterStirng {
     ANSWeakify(self);
-    self.operation = [NSBlockOperation blockOperationWithBlock:^{
+    NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
         ANSStrongify(self);
         ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
             self.filteredCollection = [self sortedCollectionByString:filterStirng];
         });
     }];
     
-    self.operation.completionBlock = ^{
+    operation.completionBlock = ^{
         ANSStrongify(self);
         ANSPerformInMainQueue(dispatch_async, ^{
-            [self setState:ANSFilteredState withUserInfo:self.filteredCollection];
+            [super performBlockWithNotyfication:^{
+                [self setState:ANSUsersModelFilterdState withUserInfo:self.filteredCollection];
+            }];
+            
         });
     };
     
-    [self.operation start];
+    self.operation = operation;
 }
 
 @end

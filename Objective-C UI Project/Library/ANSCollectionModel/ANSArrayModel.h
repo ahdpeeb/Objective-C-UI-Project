@@ -21,6 +21,11 @@
 
 @end
 
+typedef NS_ENUM(NSUInteger, ANSState) {
+    ANSDefaultState,
+    ANSStateCount
+};
+
 @interface ANSArrayModel : ANSObservableObject <
     NSCoding,
     NSCopying,

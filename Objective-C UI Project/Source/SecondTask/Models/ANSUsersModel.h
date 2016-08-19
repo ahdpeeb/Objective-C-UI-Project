@@ -14,22 +14,21 @@
 
 @optional
 
-- (void)collection:(ANSArrayModel *)collection didFilterWithUserInfo:(id)userInfo;
+- (void)model:(ANSArrayModel *)model didFilterWithUserInfo:(id)userInfo;
 - (void)filledModelDidInit:(ANSArrayModel *)model;
 
 @end
 
-//you should not touch defauld state
-typedef NS_ENUM(NSUInteger, ANSState) {
-    ANSDefaultState,
-    ANSFilteredState,
-    ANSInitedWithObjectState,
+typedef NS_ENUM(NSUInteger, ANSUsersModelState) {
+    ANSUsersModelInitWithObjectState = ANSStateCount,
+    ANSUsersModelFilterdState,
+    ANSUsersModelCountState
 };
 
-@interface ANSUsersCollection : ANSArrayModel
+@interface ANSUsersModel : ANSArrayModel
 
 - (NSArray *)descendingSortedUsers; 
-- (ANSUsersCollection *)sortedCollectionByString:(NSString *)filterStirng;
+- (ANSUsersModel *)sortedCollectionByString:(NSString *)filterStirng;
 - (void)sortCollectionInBackgroundByString:(NSString *)filterStirng; 
 
 @end

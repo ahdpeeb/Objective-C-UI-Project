@@ -33,7 +33,7 @@ static const NSUInteger kANSSectionsCount           = 1;
 
 @interface ANSViewControllerTables ()
 @property (nonatomic, strong) ANSProtocolObservationController  *controller;
-@property (nonatomic, strong) ANSUsersCollection                *filteredCollection;
+@property (nonatomic, strong) ANSUsersModel                *filteredCollection;
 
 - (void)resignSearchBar;
 
@@ -46,7 +46,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 #pragma mark -
 #pragma mark Accsessors
 
-- (void)setCollection:(ANSUsersCollection *)collection {
+- (void)setCollection:(ANSUsersModel *)collection {
     if (_collection != collection) {
     //  [_collection removeObserverObject:self];
         _collection = collection;
@@ -131,7 +131,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 #pragma mark -
 #pragma mark Gestures
 
-- (IBAction)rightSwipe:(UISwipeGestureRecognizer *)sender {
+- (IBAction)OnRightSwipe:(UISwipeGestureRecognizer *)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
     NSLog(@"%lu",self.navigationController.viewControllers.count);
 }
@@ -270,7 +270,8 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     NSLog(@"notyfied collectionDidUpdate, - %lu object", collection.count);
 }
 
-- (void)collection:(ANSArrayModel *)collection didFilterWithUserInfo:(id)userInfo {
+- (void)model:(ANSArrayModel *)model didFilterWithUserInfo:(id)userInfo {
+    NSLog(@"notyfied didFilterWithUserInfo - %@ ", userInfo);
     self.filteredCollection = userInfo;
     [self.tableView.table reloadData];
 }

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ANSUsersCollection.h"
+#import "ANSUsersModel.h"
 
 @interface ANSViewControllerTables : UIViewController <
     UITableViewDataSource,
@@ -17,9 +17,9 @@
     ANSCollectionObserverSpecial
 >
 
-@property (nonatomic, strong) ANSUsersCollection *collection;
+@property (nonatomic, strong) ANSUsersModel *collection;
 @property (nonatomic, strong) IBOutlet UISwipeGestureRecognizer *rightSwipeGesture;
 
-- (IBAction)rightSwipe:(UISwipeGestureRecognizer *)sender;
+- (IBAction)OnRightSwipe:(UISwipeGestureRecognizer *)sender; 
 
 @end

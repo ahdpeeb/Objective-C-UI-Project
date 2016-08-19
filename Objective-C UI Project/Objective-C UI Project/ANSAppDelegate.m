@@ -19,7 +19,7 @@
 static const NSUInteger kANSObjectCount   = 100;
 
 @interface ANSAppDelegate ()
-@property (nonatomic, retain) ANSUsersCollection *collection;
+@property (nonatomic, retain) ANSUsersModel *collection;
 
 @end
 
@@ -46,7 +46,7 @@ static const NSUInteger kANSObjectCount   = 100;
             return [[ANSUser alloc] init];
         }];
         
-        ANSUsersCollection *collection = [ANSUsersCollection new];
+        ANSUsersModel *collection = [ANSUsersModel new];
         [collection addObjects:objects];
         // [ANSObjectCollection loadState] ? :
         ANSPerformInMainQueue(dispatch_async, ^{

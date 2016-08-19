@@ -46,7 +46,7 @@
         </view>
         <swipeGestureRecognizer direction="right" id="klo-zq-qHs">
             <connections>
-                <action selector="rightSwipe:" destination="-1" id="PIw-s7-uJ5"/>
+                <action selector="OnRightSwipe:" destination="-1" id="P9u-sw-cjt"/>
                 <outlet property="delegate" destination="-1" id="hx1-Mz-kuf"/>
             </connections>
         </swipeGestureRecognizer>
