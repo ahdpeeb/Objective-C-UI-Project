@@ -33,8 +33,8 @@ typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controll
 
 - (BOOL)isObservedByObject:(id)object;
 
-- (void)performBlockWithNotyfication:(ANSExecutableBlock)block;
-- (void)performBlockWithoutNotyfication:(ANSExecutableBlock)block;
+- (void)performBlockWithNotification:(ANSExecutableBlock)block;
+- (void)performBlockWithoutNotification:(ANSExecutableBlock)block;
 
 #pragma mark -
 #pragma mark Private declaration

@@ -12,6 +12,9 @@
 #import "ANSUser.h"
 #import "ANSMacros.h"
 #import "ANSGCD.h"
+#import "NSArray+ANSExtension.h"
+
+static const NSUInteger sleepTime = 5;
 
 @interface ANSUsersModel ()
 @property (nonatomic, retain) NSOperation *operation;
@@ -23,6 +26,26 @@
 
 #pragma mark -
 #pragma mark Accsessors
+
++ (ANSUsersModel *)modelWithCount:(NSUInteger)count
+               block:(ANSObjectBlock)block  {
+    ANSUsersModel *collection = [ANSUsersModel new];
+    ANSPerformInAsyncQueue(ANSPriorityDefault, ^{
+        sleep(sleepTime);
+        NSArray *objects = [NSArray objectsWithCount:count block:^id{
+            return [[ANSUser alloc] init];
+        }];
+        
+        
+        [collection addObjects:objects];
+
+        ANSPerformInMainQueue(dispatch_async, ^{
+            collection.state = ANSUsersModelInitWithObjectState;
+        });
+    });
+    
+    return collection;
+}
 
 - (void)setOperation:(NSOperation *)operation {
     if (_operation != operation) {
@@ -51,6 +74,8 @@
 
 #pragma mark -
 #pragma mark Public methods
+
+
 
 - (NSArray *)descendingSortedUsers {
     NSMutableArray *users = [NSMutableArray arrayWithArray:self.objects];
@@ -92,10 +117,9 @@
     operation.completionBlock = ^{
         ANSStrongify(self);
         ANSPerformInMainQueue(dispatch_async, ^{
-            [super performBlockWithNotyfication:^{
+            [super performBlockWithNotification:^{
                 [self setState:ANSUsersModelFilterdState withUserInfo:self.filteredCollection];
             }];
-            
         });
     };
     

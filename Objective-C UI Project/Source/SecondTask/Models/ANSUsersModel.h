@@ -15,7 +15,7 @@
 @optional
 
 - (void)model:(ANSArrayModel *)model didFilterWithUserInfo:(id)userInfo;
-- (void)filledModelDidInit:(ANSArrayModel *)model;
+- (void)userModelDidLoad:(ANSArrayModel *)model;
 
 @end
 

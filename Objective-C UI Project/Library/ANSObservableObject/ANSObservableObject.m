@@ -169,13 +169,13 @@
                                 observer:observer];
 }
 
-- (void)performBlockWithNotyfication:(ANSExecutableBlock)block {
+- (void)performBlockWithNotification:(ANSExecutableBlock)block {
     @synchronized(self) {
         [self performBlock:block shouldNotify:YES];
     }
 }
 
-- (void)performBlockWithoutNotyfication:(ANSExecutableBlock)block {
+- (void)performBlockWithoutNotification:(ANSExecutableBlock)block {
     @synchronized(self) {
         [self performBlock:block shouldNotify:YES];
     }

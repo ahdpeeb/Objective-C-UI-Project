@@ -32,16 +32,16 @@ describe(@"ClassName", ^{
             [[observer should]respondsToSelector:@selector(didUpdate:)];
         });
         
-        it(@"should notify only states performed in performBlockWithNotyfication", ^{
-            [observableObject performBlockWithNotyfication:^{
+        it(@"should notify only states performed in performBlockWithNotification", ^{
+            [observableObject performBlockWithNotification:^{
                 observableObject.state = ANSFifthState;
                  [[observer should]receive:@selector(didUpdate:)];
                 
-                [observableObject performBlockWithoutNotyfication:^{
+                [observableObject performBlockWithoutNotification:^{
                     observableObject.state = ANSFourthState;
                     [[observer shouldNot]receive:@selector(didUpdate:)];
                     
-                    [observableObject performBlockWithNotyfication:^{
+                    [observableObject performBlockWithNotification:^{
                         observableObject.state = ANSThidsState;
                         [[observer should]receive:@selector(didUpdate:)];
                      }];

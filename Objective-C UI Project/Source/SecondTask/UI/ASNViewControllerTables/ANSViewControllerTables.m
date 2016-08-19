@@ -52,8 +52,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
         _collection = collection;
         
         self.controller = [_collection protocolControllerWithObserver:self];
-        id loadingView = self.tableView.loadingView; 
-        [loadingView dissapearWithAnimation];
+
         [self.tableView.table reloadData];
     }
 }
@@ -112,7 +111,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     
     if (table.editing) {
         ANSUser *object = [[ANSUser alloc] init];
-        [self.collection performBlockWithNotyfication:^{
+        [self.collection performBlockWithNotification:^{
             [self.collection insertObject:object atIndex:0];
         }];
     }
@@ -191,7 +190,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
           toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     if (sourceIndexPath.section == destinationIndexPath.section) {
-        [self.collection performBlockWithoutNotyfication:^{
+        [self.collection performBlockWithoutNotification:^{
             [self.collection moveObjectFromIndex:sourceIndexPath.row
                                          toIndex:destinationIndexPath.row];
         }];
@@ -203,7 +202,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self .collection performBlockWithNotyfication:^{
+        [self .collection performBlockWithNotification:^{
             [self.collection removeObjectAtIndex:indexPath.row];
         }];
     }
@@ -267,12 +266,20 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     
     [model applyToTableView:table];
     
-    NSLog(@"notyfied collectionDidUpdate, - %lu object", collection.count);
+    NSLog(@"notified collectionDidUpdate, - %lu object", collection.count);
 }
 
 - (void)model:(ANSArrayModel *)model didFilterWithUserInfo:(id)userInfo {
-    NSLog(@"notyfied didFilterWithUserInfo - %@ ", userInfo);
+    NSLog(@"notified didFilterWithUserInfo - %@ ", userInfo);
     self.filteredCollection = userInfo;
+    [self.tableView.table reloadData];
+}
+
+- (void)userModelDidLoad:(ANSArrayModel *)model {
+    NSLog(@"notified userModelDidLoad");
+    
+    id loadingView = self.tableView.loadingView;
+    [loadingView dissapearWithAnimation];
     [self.tableView.table reloadData];
 }
 
