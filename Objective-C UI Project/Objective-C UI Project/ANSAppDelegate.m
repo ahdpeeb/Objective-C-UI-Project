@@ -54,6 +54,10 @@ static const NSUInteger kANSObjectCount   = 100;
         });
     });
 
+    controller.collection = [ANSUsersModel modelWithCount:kANSObjectCount block:^id{
+        return [ANSUser new];
+    }];
+    
     return YES;
 }
 

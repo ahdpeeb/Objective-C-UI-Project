@@ -27,6 +27,9 @@ typedef NS_ENUM(NSUInteger, ANSUsersModelState) {
 
 @interface ANSUsersModel : ANSArrayModel
 
++ (ANSUsersModel *)modelWithCount:(NSUInteger)count
+                            block:(ANSObjectBlock)block; 
+
 - (NSArray *)descendingSortedUsers; 
 - (ANSUsersModel *)sortedCollectionByString:(NSString *)filterStirng;
 - (void)sortCollectionInBackgroundByString:(NSString *)filterStirng; 

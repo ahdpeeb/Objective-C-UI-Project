@@ -32,10 +32,7 @@ static const NSUInteger sleepTime = 5;
     ANSUsersModel *collection = [ANSUsersModel new];
     ANSPerformInAsyncQueue(ANSPriorityDefault, ^{
         sleep(sleepTime);
-        NSArray *objects = [NSArray objectsWithCount:count block:^id{
-            return [[ANSUser alloc] init];
-        }];
-        
+        NSArray *objects = [NSArray objectsWithCount:count block:block];
         
         [collection addObjects:objects];
 
@@ -62,8 +59,7 @@ static const NSUInteger sleepTime = 5;
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
         case ANSUsersModelInitWithObjectState:
- //           return @selector(collection:didFilterWithUserInfo:);
-        
+            return @selector(userModelDidLoad:);
         case ANSUsersModelFilterdState:
             return @selector(model:didFilterWithUserInfo:);
             
@@ -74,8 +70,6 @@ static const NSUInteger sleepTime = 5;
 
 #pragma mark -
 #pragma mark Public methods
-
-
 
 - (NSArray *)descendingSortedUsers {
     NSMutableArray *users = [NSMutableArray arrayWithArray:self.objects];

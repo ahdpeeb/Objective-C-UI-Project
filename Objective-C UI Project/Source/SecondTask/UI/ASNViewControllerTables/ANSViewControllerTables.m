@@ -33,7 +33,7 @@ static const NSUInteger kANSSectionsCount           = 1;
 
 @interface ANSViewControllerTables ()
 @property (nonatomic, strong) ANSProtocolObservationController  *controller;
-@property (nonatomic, strong) ANSUsersModel                *filteredCollection;
+@property (nonatomic, strong) ANSUsersModel                     *filteredCollection;
 
 - (void)resignSearchBar;
 
@@ -52,8 +52,6 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
         _collection = collection;
         
         self.controller = [_collection protocolControllerWithObserver:self];
-
-        [self.tableView.table reloadData];
     }
 }
 
@@ -66,8 +64,6 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     self.navigationItem.title = kANSTitleForHeaderSection;
     [self initLeftBarButtonItem];
     [self initRightBarButtonItem];
-    
-    [self.tableView.table reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
