@@ -103,6 +103,7 @@
 		93C5A6091D4107DB002FBCA8 /* NSString+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C5A6081D4107DB002FBCA8 /* NSString+ANSExtension.m */; };
 		93C5A60D1D41265C002FBCA8 /* ANSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C5A60C1D41265C002FBCA8 /* ANSTableViewCell.m */; };
 		93C5A61A1D412D31002FBCA8 /* ANSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C5A6191D412D31002FBCA8 /* ANSUser.m */; };
+		93EC01CE1D6AE6EE0032AF4E /* ANSTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EC01CD1D6AE6EE0032AF4E /* ANSTestObserver.m */; };
 		93EC8F5E1D48CDAA000624F0 /* UINib+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EC8F5D1D48CDAA000624F0 /* UINib+Extension.m */; };
 		93EC8F651D48D9A6000624F0 /* UITableView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EC8F641D48D9A6000624F0 /* UITableView+Extension.m */; };
 /* End PBXBuildFile section */
@@ -229,6 +230,8 @@
 		93C5A60C1D41265C002FBCA8 /* ANSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSTableViewCell.m; path = ANSTableViewCell/ANSTableViewCell.m; sourceTree = "<group>"; };
 		93C5A6181D412D31002FBCA8 /* ANSUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSUser.h; sourceTree = "<group>"; };
 		93C5A6191D412D31002FBCA8 /* ANSUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSUser.m; sourceTree = "<group>"; };
+		93EC01CC1D6AE6EE0032AF4E /* ANSTestObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSTestObserver.h; sourceTree = "<group>"; };
+		93EC01CD1D6AE6EE0032AF4E /* ANSTestObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSTestObserver.m; sourceTree = "<group>"; };
 		93EC8F5C1D48CDAA000624F0 /* UINib+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINib+Extension.h"; sourceTree = "<group>"; };
 		93EC8F5D1D48CDAA000624F0 /* UINib+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINib+Extension.m"; sourceTree = "<group>"; };
 		93EC8F631D48D9A6000624F0 /* UITableView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Extension.h"; sourceTree = "<group>"; };
@@ -430,8 +433,24 @@
 				934260241D670BBD00F15366 /* ANSObservationTest.m */,
 				934260211D670BA100F15366 /* ANSObservableObjectTest.h */,
 				934260221D670BA100F15366 /* ANSObservableObjectTest.m */,
+				93EC01CC1D6AE6EE0032AF4E /* ANSTestObserver.h */,
+				93EC01CD1D6AE6EE0032AF4E /* ANSTestObserver.m */,
 			);
 			path = ANSObservationTest;
+			sourceTree = "<group>";
+		};
+		934C3F151D69BB33003325A6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				933B745D1D65A8B100DF3DF9 /* UIScreen */,
+				933B744E1D648CE200DF3DF9 /* UIViewController */,
+				93EC8F5B1D48CDAA000624F0 /* UINib */,
+				93C5A5DE1D40DF3D002FBCA8 /* NSArray */,
+				933B74261D63232100DF3DF9 /* NSMutableArray */,
+				933B74681D65C48D00DF3DF9 /* NSBundle */,
+				93EC8F621D48D9A6000624F0 /* UITableView */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		936727C01D591D25007A796F /* UI */ = {
@@ -584,15 +603,9 @@
 		93C5A5CF1D40DF3D002FBCA8 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				933B745D1D65A8B100DF3DF9 /* UIScreen */,
-				933B744E1D648CE200DF3DF9 /* UIViewController */,
+				934C3F151D69BB33003325A6 /* Extensions */,
 				93C5A6051D40E40B002FBCA8 /* ANSMacros */,
 				933C74581D50908000A423B9 /* ANSObservableObject */,
-				93EC8F621D48D9A6000624F0 /* UITableView */,
-				93EC8F5B1D48CDAA000624F0 /* UINib */,
-				933B74681D65C48D00DF3DF9 /* NSBundle */,
-				93C5A5DE1D40DF3D002FBCA8 /* NSArray */,
-				933B74261D63232100DF3DF9 /* NSMutableArray */,
 				93C5A5E41D40DF3D002FBCA8 /* NSString */,
 				93C5A5D01D40DF3D002FBCA8 /* ANSGCD */,
 				93C5A5D61D40DF3D002FBCA8 /* ANSRandom */,
@@ -957,6 +970,7 @@
 				934260041D65E9E800F15366 /* ANSTableViewCell.m in Sources */,
 				93425FFB1D65E9C500F15366 /* NSMutableArray+ANSExtension.m in Sources */,
 				93425FFF1D65E9D700F15366 /* ANSTimerPrivate.m in Sources */,
+				93EC01CE1D6AE6EE0032AF4E /* ANSTestObserver.m in Sources */,
 				93425FFC1D65E9C900F15366 /* NSString+ANSExtension.m in Sources */,
 				9342600F1D65EA2F00F15366 /* ANSBlockObservationController.m in Sources */,
 				9342600D1D65EA2B00F15366 /* ANSObservationController.m in Sources */,

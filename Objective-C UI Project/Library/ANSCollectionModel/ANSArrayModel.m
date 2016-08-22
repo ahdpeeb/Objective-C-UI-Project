@@ -50,6 +50,10 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 #pragma mark -
 #pragma mark Accsessors
 
+- (void)setState:(NSUInteger)state {
+    [self setState:state withUserInfo:nil];
+}
+
 - (void)setState:(NSUInteger)state withUserInfo:(id)userInfo {
     @synchronized(self) {
         _state = state;
@@ -144,9 +148,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 - (void)addObjects:(NSArray *)objects {
     @synchronized(self) {
-        for (id object in objects) {
-            [self.mutableObjects obje]
-        }
+        [self.mutableObjects addObjectsFromArray:objects]; 
     }
 }
 
@@ -175,6 +177,8 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 - (void)saveState {
     NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:self];
+    NSFileManager 
+    
     [[NSUserDefaults standardUserDefaults] setObject:archive forKey:kANSArchiveKey];
     NSLog(@"saveState");
 }
@@ -204,7 +208,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
             return @selector(collection:didChangeWithModel:);
             
         default:
-            return nil;
+            return [super selectorForState:state];
     }
 }
 

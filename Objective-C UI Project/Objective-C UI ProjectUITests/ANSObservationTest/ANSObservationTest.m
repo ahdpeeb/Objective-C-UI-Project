@@ -9,59 +9,70 @@
 #import "Kiwi.h"
 
 #import "ANSObservableObjectTest.h"
+#import "ANSTestObserver.h"
+#import "ANSObservationController.h"
 
 SPEC_BEGIN(ANSObservationTest)
 
-describe(@"ClassName", ^{
+describe(@"ANSPbservableObject", ^{
     registerMatchers(@"BG"); // Registers BGTangentMatcher, BGConvexMatcher, etc.
     
-    __block ANSObservableObjectTest *observableObject;
-    __block NSObject *observer;
-    __block id controller; ;
-    
+    __block ANSObservableObjectTest *observableObject = nil;
+    __block ANSTestObserver *observer = nil;
+    __block id controller = nil;
+        
     context(@"a state the component is in", ^{
 
         beforeAll(^{ // Occurs once
-            observer = [NSObject new];
+            observer = [ANSTestObserver new];
             observableObject = [ANSObservableObjectTest new];
             
             controller = [observableObject protocolControllerWithObserver:observer];
         });
         
-        it(@"observer should respond", ^{
-            [[observer should]respondsToSelector:@selector(didUpdate:)];
+        it(@"objects should not be nil", ^{
+            [[observer should] beMemberOfClass:[ANSTestObserver class]];
+            [[observer shouldNot] beNil];
+            [[controller shouldNot]beNil];
+            [[observableObject shouldNot] beNil];
+        });
+        
+        it(@"observer should conformsToProtocol ANSObservationTestProtocol", ^{
+            [[observer should] conformsToProtocol:@protocol(ANSObservationTestProtocol)];
+        });
+        
+        it(@"observer should respond to selectors", ^{
+            [[observer should] respondsToSelector:@selector(didCallFirsState:)];
+            [[observer should] respondsToSelector:@selector(didCallSecondState:)];
+            [[observer should] respondsToSelector:@selector(didCallThirdState:)];
+            [[observer should] respondsToSelector:@selector(didCallFourthState:)];
+            [[observer should] respondsToSelector:@selector(didCallFiftState:)];
+            
         });
         
         it(@"should notify only states performed in performBlockWithNotification", ^{
             [observableObject performBlockWithNotification:^{
                 observableObject.state = ANSFifthState;
-                 [[observer should]receive:@selector(didUpdate:)];
+                [[observer should]receive:@selector(didCallFiftState:)];
                 
                 [observableObject performBlockWithoutNotification:^{
                     observableObject.state = ANSFourthState;
-                    [[observer shouldNot]receive:@selector(didUpdate:)];
+                    [[observer shouldNot]receive:@selector(didCallSecondState:)];
                     
                     [observableObject performBlockWithNotification:^{
                         observableObject.state = ANSThidsState;
-                        [[observer should]receive:@selector(didUpdate:)];
+                        [[observer should]receive:@selector(didCallThirdState:)];
                      }];
                     
                     observableObject.state = ANSSecondState;
-                    [[observer shouldNot]receive:@selector(didUpdate:)];
+                    [[observer shouldNot]receive:@selector(didCallFourthState:)];
                 }];
                 
                 observableObject.state = ANSFirsState;
-                [[observer should]receive:@selector(didUpdate:)];
+                [[observer should]receive:@selector(didCallFirsState:)];
             }];
         });
-        
-        it(@"controller should not be nil", ^{
-            [[controller shouldNot]beNil]; 
-        });
-        
-        it(@"observer should conformsToProtocol ANSObservationTestProtocol", ^{
-            [[observer shouldNot]conformsToProtocol:@protocol(ANSObservationTestProtocol)];
-        });
+
         
         afterAll(^{ // Occurs once
         });

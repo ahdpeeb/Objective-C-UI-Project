@@ -16,8 +16,6 @@
 #import "NSArray+ANSExtension.h"
 #import "ANSGCD.h"
 
-static const NSUInteger kANSObjectCount   = 100;
-
 @interface ANSAppDelegate ()
 @property (nonatomic, retain) ANSUsersModel *collection;
 
@@ -39,24 +37,9 @@ static const NSUInteger kANSObjectCount   = 100;
     
 #pragma mark -
 #pragma mark Extra
-    
-    ANSPerformInAsyncQueue(ANSPriorityDefault, ^{
-        sleep(5);
-         NSArray *objects = [NSArray objectsWithCount:kANSObjectCount block:^id{
-            return [[ANSUser alloc] init];
-        }];
-        
-        ANSUsersModel *collection = [ANSUsersModel new];
-        [collection addObjects:objects];
-        // [ANSObjectCollection loadState] ? :
-        ANSPerformInMainQueue(dispatch_async, ^{
-            controller.collection = collection;
-        });
-    });
 
-    controller.collection = [ANSUsersModel modelWithCount:kANSObjectCount block:^id{
-        return [ANSUser new];
-    }];
+    self.collection = [ANSUsersModel new];
+    controller.users = self.collection;
     
     return YES;
 }

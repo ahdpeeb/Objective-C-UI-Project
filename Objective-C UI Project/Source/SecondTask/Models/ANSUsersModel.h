@@ -10,28 +10,29 @@
 
 #import "ANSArrayModel.h"
 
+@class ANSUsersModel;
+
 @protocol ANSCollectionObserverSpecial <ANSCollectionObserver>
 
 @optional
 
-- (void)model:(ANSArrayModel *)model didFilterWithUserInfo:(id)userInfo;
-- (void)userModelDidLoad:(ANSArrayModel *)model;
+- (void)model:(ANSUsersModel *)model didFilterWithUserInfo:(id)userInfo;
+- (void)userModelDidLoad:(ANSUsersModel *)model;
 
 @end
 
 typedef NS_ENUM(NSUInteger, ANSUsersModelState) {
-    ANSUsersModelInitWithObjectState = ANSStateCount,
-    ANSUsersModelFilterdState,
+    ANSUsersModelDidLoad = ANSStateCount,
+    ANSUsersModelDidfilter,
     ANSUsersModelCountState
 };
 
 @interface ANSUsersModel : ANSArrayModel
 
-+ (ANSUsersModel *)modelWithCount:(NSUInteger)count
-                            block:(ANSObjectBlock)block; 
-
 - (NSArray *)descendingSortedUsers; 
-- (ANSUsersModel *)sortedCollectionByString:(NSString *)filterStirng;
-- (void)sortCollectionInBackgroundByString:(NSString *)filterStirng; 
+- (void)sortCollectionByfilterStirng:(NSString *)filterStirng;
+
+- (void)loadWithCount:(NSUInteger)count
+                block:(ANSObjectBlock)block; 
 
 @end

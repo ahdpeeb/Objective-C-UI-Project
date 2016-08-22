@@ -10,7 +10,24 @@
 
 static const NSTimeInterval kANSInterval = 1.0f;
 
+@interface ANSLoadingView ()
+@property (nonatomic, assign) ANSLoadingViewState state;
+
+- (void)action:(CGFloat)alpha shouldHide:(BOOL)value state:(ANSLoadingViewState)state;
+
+@end
+
 @implementation ANSLoadingView
+
+#pragma mark -
+#pragma mark Class methods
+
++ (void)attachToView:(id)view {
+    if ([view isKindOfClass:[UIView class]]) {
+        ANSLoadingView *view = [[ANSLoadingView alloc] initWithFrame:view.bounds];
+        [view addSubview:view];
+    }
+}
 
 #pragma mark -
 #pragma mark Initialization and deallocation
@@ -29,14 +46,29 @@ static const NSTimeInterval kANSInterval = 1.0f;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.bounds = self.superview.bounds;
 }
 
-- (void)dissapearWithAnimation {
+#pragma mark -
+#pragma mark Private methods
+
+- (void)action:(CGFloat)alpha shouldHide:(BOOL)value state:(ANSLoadingViewState)state {
     [UIView animateWithDuration:kANSInterval animations:^{
-        self.alpha = 0;
+        self.alpha = alpha;
     } completion:^(BOOL finished) {
-        [self.indicator stopAnimating];
-         self.hidden = YES;
+        self.hidden = YES;
+        self.state = state;
     }];
 }
+#pragma mark -
+#pragma mark Public method
+
+- (void)activate {
+    [self action:1 shouldHide:NO state:ANSActive];
+}
+
+- (void)deactivate {
+    [self action:0 shouldHide:YES state:ANSInactive];
+}
+
 @end

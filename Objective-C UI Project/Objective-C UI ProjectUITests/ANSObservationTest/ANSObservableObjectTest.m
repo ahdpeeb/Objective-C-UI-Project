@@ -11,21 +11,21 @@
 @implementation ANSObservableObjectTest
 
 - (SEL)selectorForState:(NSUInteger)state {
-    switch (self.state) {
+    switch (state) {
         case ANSFirsState:
-            return @selector(didUpdate:);
+            return @selector(didCallFirsState:);
             
         case ANSSecondState:
-            return @selector(didUpdate:);
+            return @selector(didCallSecondState:);
             
         case ANSThidsState:
-            return @selector(didUpdate:);
+            return @selector(didCallThirdState:);
             
         case ANSFourthState:
-            return @selector(didUpdate:);
+            return @selector(didCallFourthState:);
             
         case ANSFifthState:
-            return @selector(didUpdate:);
+            return @selector(didCallFiftState:);
             
         default:
             return [super selectorForState:state];

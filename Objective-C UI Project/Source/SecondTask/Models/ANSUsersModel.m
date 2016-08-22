@@ -18,7 +18,9 @@ static const NSUInteger sleepTime = 5;
 
 @interface ANSUsersModel ()
 @property (nonatomic, retain) NSOperation *operation;
-@property (nonatomic, retain) ANSArrayModel *filteredCollection;
+
+- (SEL)selectorForState:(NSUInteger)state;
+- (ANSUsersModel *)sortedCollectionByString:(NSString *)filterStrirng;
 
 @end
 
@@ -27,21 +29,18 @@ static const NSUInteger sleepTime = 5;
 #pragma mark -
 #pragma mark Accsessors
 
-+ (ANSUsersModel *)modelWithCount:(NSUInteger)count
-               block:(ANSObjectBlock)block  {
-    ANSUsersModel *collection = [ANSUsersModel new];
+- (void)loadWithCount:(NSUInteger)count
+                block:(ANSObjectBlock)block  {
     ANSPerformInAsyncQueue(ANSPriorityDefault, ^{
         sleep(sleepTime);
         NSArray *objects = [NSArray objectsWithCount:count block:block];
         
-        [collection addObjects:objects];
-
+        [self addObjects:objects];
+        
         ANSPerformInMainQueue(dispatch_async, ^{
-            collection.state = ANSUsersModelInitWithObjectState;
+            self.state = ANSUsersModelDidLoad;
         });
     });
-    
-    return collection;
 }
 
 - (void)setOperation:(NSOperation *)operation {
@@ -49,23 +48,46 @@ static const NSUInteger sleepTime = 5;
         [_operation cancel];
         
         _operation = operation;
-        [_operation start];
+        
+        ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
+            [operation start];
+        });
+   
     }
 }
 
 #pragma mark -
-#pragma mark Pricate methods
+#pragma mark Private methods
 
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
-        case ANSUsersModelInitWithObjectState:
+        case ANSUsersModelDidLoad:
             return @selector(userModelDidLoad:);
-        case ANSUsersModelFilterdState:
+            
+        case ANSUsersModelDidfilter:
             return @selector(model:didFilterWithUserInfo:);
             
         default:
           return [super selectorForState:state];
     }
+}
+
+
+- (ANSUsersModel *)sortedCollectionByString:(NSString *)filterStrirng {
+    ANSUsersModel *oldCollection = [self copy];
+    ANSUsersModel *newCollection = [[self class] new];
+    
+    for (ANSUser *user in oldCollection) {
+        if ((filterStrirng.length > 0)
+            && [user.string rangeOfString:filterStrirng
+                                  options:NSCaseInsensitiveSearch].location == NSNotFound) {
+                continue;
+            } else {
+                [newCollection addObject:user];
+            }
+    }
+    
+    return newCollection;
 }
 
 #pragma mark -
@@ -84,39 +106,25 @@ static const NSUInteger sleepTime = 5;
     return users;
 }
 
-- (ANSArrayModel *)sortedCollectionByString:(NSString *)filterStrirng {
-    ANSArrayModel *newCollection = [ANSArrayModel new];
-    for (ANSUser *user in self) {
-        if ((filterStrirng.length > 0)
-                && [user.string rangeOfString:filterStrirng
-                                      options:NSCaseInsensitiveSearch].location == NSNotFound) {
-            continue;
-        } else {
-            [newCollection addObject:user];
-        }
-    }
-    
-    return newCollection;
-}
-
-- (void)sortCollectionInBackgroundByString:(NSString *)filterStirng {
+- (void)sortCollectionByfilterStirng:(NSString *)filterStirng {
+   __block ANSUsersModel *filteredColllection = nil;
     ANSWeakify(self);
-    NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
+    
+    NSBlockOperation *operation= [NSBlockOperation blockOperationWithBlock:^{
         ANSStrongify(self);
-        ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
-            self.filteredCollection = [self sortedCollectionByString:filterStirng];
-        });
+        filteredColllection = [self sortedCollectionByString:filterStirng];
+        NSLog(@"have sorted");
     }];
     
     operation.completionBlock = ^{
         ANSStrongify(self);
         ANSPerformInMainQueue(dispatch_async, ^{
-            [super performBlockWithNotification:^{
-                [self setState:ANSUsersModelFilterdState withUserInfo:self.filteredCollection];
+            [self performBlockWithNotification:^{
+                [self setState:ANSUsersModelDidfilter withUserInfo:filteredColllection];
             }];
         });
     };
-    
+
     self.operation = operation;
 }
 

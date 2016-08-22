@@ -35,7 +35,7 @@
 - (instancetype)init {
     self = [super init];
     self.controllerHashTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
-    self.shouldNotify = YES; 
+    self.shouldNotify = YES;
     
     return self;
 }
@@ -69,8 +69,6 @@
 #pragma mark Private methods
 
 - (SEL)selectorForState:(NSUInteger)state {
-    [self doesNotRecognizeSelector:_cmd];
-    
     return NULL;
 }
 
@@ -170,15 +168,12 @@
 }
 
 - (void)performBlockWithNotification:(ANSExecutableBlock)block {
-    @synchronized(self) {
-        [self performBlock:block shouldNotify:YES];
-    }
+    [self performBlock:block shouldNotify:YES];
 }
 
 - (void)performBlockWithoutNotification:(ANSExecutableBlock)block {
-    @synchronized(self) {
-        [self performBlock:block shouldNotify:YES];
-    }
+    [self performBlock:block shouldNotify:NO];
+    
 }
 
 @end

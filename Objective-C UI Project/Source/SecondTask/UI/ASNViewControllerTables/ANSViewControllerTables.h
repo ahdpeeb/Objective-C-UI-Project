@@ -17,9 +17,9 @@
     ANSCollectionObserverSpecial
 >
 
-@property (nonatomic, strong) ANSUsersModel *collection;
+@property (nonatomic, strong) ANSUsersModel *users;
 @property (nonatomic, strong) IBOutlet UISwipeGestureRecognizer *rightSwipeGesture;
 
-- (IBAction)OnRightSwipe:(UISwipeGestureRecognizer *)sender; 
+- (IBAction)onRightSwipe:(UISwipeGestureRecognizer *)sender;
 
 @end

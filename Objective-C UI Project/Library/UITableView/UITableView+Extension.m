@@ -7,6 +7,7 @@
 //
 
 #import "UITableView+Extension.h"
+
 #import "UINib+Extension.h"
 #import "ANSTableViewCell.h"
 
@@ -23,6 +24,16 @@
     }
     
     return nil;
+}
+
+- (void)performAnimationBlock:(ANSAnimationBlock)block {
+    if (!block) {
+        return;
+    }
+    
+    [self beginUpdates];
+    block();
+    [self endUpdates];
 }
 
 @end

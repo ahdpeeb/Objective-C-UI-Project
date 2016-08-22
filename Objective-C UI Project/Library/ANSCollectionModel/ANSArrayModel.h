@@ -34,20 +34,30 @@ typedef NS_ENUM(NSUInteger, ANSState) {
 
 @property (nonatomic, readonly) NSUInteger  count;
 @property (nonatomic, readonly) NSArray     *objects;
+- (void)setState:(NSUInteger)state withUserInfo:(id)userInfo; 
 
 - (id)objectAtIndex:(NSUInteger)index;
 - (NSUInteger)indexOfObject:(id)object;
 - (id)objectAtIndexedSubscript:(NSUInteger)idx;
 
+//notify with ANSDefaultState state
 - (void)addObject:(id)object;
+
+//notify with ANSDefaultState state
 - (void)removeObject:(id)object;
 
+//notify with ANSDefaultState state
 - (void)insertObject:(id)object atIndex:(NSUInteger)index;
+
+//notify with ANSDefaultState state
 - (void)removeObjectAtIndex:(NSUInteger)index;
 
 - (void)addObjects:(NSArray*)objects;
 
-- (void)moveObjectFromIndex:(NSUInteger)index toIndex:(NSUInteger)index; 
+//notify with ANSDefaultState state
+- (void)moveObjectFromIndex:(NSUInteger)index toIndex:(NSUInteger)index;
+
+//notify with ANSDefaultState state
 - (void)exchangeObjectAtIndex:(NSUInteger)indexOne
             withObjectAtIndex:(NSUInteger)indexTwo;
 

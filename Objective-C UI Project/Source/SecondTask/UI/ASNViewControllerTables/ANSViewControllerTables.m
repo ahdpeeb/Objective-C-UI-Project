@@ -30,6 +30,7 @@ static NSString * const kANSEdit                    = @"Edit";
 static NSString * const kANSDone                    = @"Done";
 static NSString * const kANSTitleForHeaderSection   = @"Homer's contact list";
 static const NSUInteger kANSSectionsCount           = 1;
+static const NSUInteger kANSUsersCount              = 10; 
 
 @interface ANSViewControllerTables ()
 @property (nonatomic, strong) ANSProtocolObservationController  *controller;
@@ -46,24 +47,34 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 #pragma mark -
 #pragma mark Accsessors
 
-- (void)setCollection:(ANSUsersModel *)collection {
-    if (_collection != collection) {
-    //  [_collection removeObserverObject:self];
-        _collection = collection;
+- (void)setUsers:(ANSUsersModel *)users {
+    if (_users != users) {
+        //  [_collection removeObserverObject:self];
+        _users = users;
         
-        self.controller = [_collection protocolControllerWithObserver:self];
+        self.controller = [users protocolControllerWithObserver:self];
     }
 }
+
 
 #pragma mark -
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.navigationItem.title = kANSTitleForHeaderSection;
     [self initLeftBarButtonItem];
     [self initRightBarButtonItem];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.users loadWithCount:kANSUsersCount block:^id{
+        return [ANSUser new];
+    }];
+    
+//    if (!self.users.count) {
+//        self.users = [ANSUsersModel loadState];
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -107,8 +118,8 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     
     if (table.editing) {
         ANSUser *object = [[ANSUser alloc] init];
-        [self.collection performBlockWithNotification:^{
-            [self.collection insertObject:object atIndex:0];
+        [self.users performBlockWithNotification:^{
+            [self.users insertObject:object atIndex:0];
         }];
     }
 }
@@ -126,7 +137,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 #pragma mark -
 #pragma mark Gestures
 
-- (IBAction)OnRightSwipe:(UISwipeGestureRecognizer *)sender {
+- (IBAction)onRightSwipe:(UISwipeGestureRecognizer *)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
     NSLog(@"%lu",self.navigationController.viewControllers.count);
 }
@@ -154,7 +165,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     if (self.tableView.searchBar.isFirstResponder) {
         return self.filteredCollection.count;
     }  else {
-        return self.collection.count;
+        return self.users.count;
     }
 }
 
@@ -167,7 +178,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     if (self.tableView.searchBar.isFirstResponder) {
         object = self.filteredCollection[indexPath.row];
     } else {
-        object = self.collection[indexPath.row];
+        object = self.users[indexPath.row];
     }
     
     [cell fillInfoFromObject:object];
@@ -186,8 +197,8 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
           toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     if (sourceIndexPath.section == destinationIndexPath.section) {
-        [self.collection performBlockWithoutNotification:^{
-            [self.collection moveObjectFromIndex:sourceIndexPath.row
+        [self.users performBlockWithoutNotification:^{
+            [self.users moveObjectFromIndex:sourceIndexPath.row
                                          toIndex:destinationIndexPath.row];
         }];
     }
@@ -198,8 +209,8 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self .collection performBlockWithNotification:^{
-            [self.collection removeObjectAtIndex:indexPath.row];
+        [self.users performBlockWithNotification:^{
+            [self.users removeObjectAtIndex:indexPath.row];
         }];
     }
 }
@@ -250,7 +261,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [self.collection sortCollectionInBackgroundByString:searchText];
+    [self.users sortCollectionByfilterStirng:searchText];
 }
 
 #pragma mark -
@@ -265,17 +276,17 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
     NSLog(@"notified collectionDidUpdate, - %lu object", collection.count);
 }
 
-- (void)model:(ANSArrayModel *)model didFilterWithUserInfo:(id)userInfo {
+- (void)model:(ANSUsersModel *)model didFilterWithUserInfo:(id)userInfo {
     NSLog(@"notified didFilterWithUserInfo - %@ ", userInfo);
     self.filteredCollection = userInfo;
     [self.tableView.table reloadData];
 }
 
-- (void)userModelDidLoad:(ANSArrayModel *)model {
+- (void)userModelDidLoad:(ANSUsersModel *)model {
     NSLog(@"notified userModelDidLoad");
     
-    id loadingView = self.tableView.loadingView;
-    [loadingView dissapearWithAnimation];
+    ANSLoadingView *loadingView = self.tableView.loadingView;
+    [loadingView deactivate];
     [self.tableView.table reloadData];
 }
 

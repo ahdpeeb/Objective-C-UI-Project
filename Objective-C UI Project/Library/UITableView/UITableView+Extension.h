@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^ANSAnimationBlock)(void);
+
 @interface UITableView (Extension)
 // cls should be child class of ANSTableViewCell class
 - (id)reusableCellfromNibWithClass:(Class)cls;
+
+
+- (void)performAnimationBlock:(ANSAnimationBlock)block;
 
 @end

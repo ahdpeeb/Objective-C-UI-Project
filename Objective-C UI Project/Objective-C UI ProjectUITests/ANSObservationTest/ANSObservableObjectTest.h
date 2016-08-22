@@ -12,7 +12,12 @@
 
 @protocol ANSObservationTestProtocol <NSObject>
 
-- (void)didUpdate:(ANSObservableObjectTest *)observableObject;
+@required
+- (void)didCallFirsState:(ANSObservableObjectTest *)observableObject;
+- (void)didCallSecondState:(ANSObservableObjectTest *)observableObject;
+- (void)didCallThirdState:(ANSObservableObjectTest *)observableObject;
+- (void)didCallFourthState:(ANSObservableObjectTest *)observableObject;
+- (void)didCallFiftState:(ANSObservableObjectTest *)observableObject;
 
 @end
 

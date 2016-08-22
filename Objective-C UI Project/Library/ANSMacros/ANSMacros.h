@@ -4,7 +4,10 @@
 //
 //  Created by Nikola Andriiev on 21.07.16.
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
-//
+
+
+//empty result
+#define ANSEmptyResult
 
 // Macros generate readonly property for UIView class
 #define ANSViewPropertySynthesize(viewClass, propertyName) \
@@ -32,13 +35,11 @@
     ANSViewGetterSynthesize(baseViewClass, propertyName) \
     @end \
 
-//empty result
-#define ANSEmptyResult
 
+//# Strongify / Weakify
 //Weakify and Strongify object before using in block
 #define ANSWeakify(object) \
     __weak __typeof(object) __ANSWeekified_##object = object \
-
 //you should call this method after you called ANSWeakify for the same object
 #define ANSStrongify(object) \
     __strong __typeof(object) object = __ANSWeekified_##object \
@@ -56,5 +57,14 @@
 #define ANSStrongifyAndReturn(object) \
     ANSStrongifyAndReturnValue(object, ANSEmptyResult) \
 
+//# performBlock
+#define ANSPerformBlock(block, ...) \
+    if (block) { \
+        block(__VA_ARGS__); \
+    } \
 
+#define ANSPerformBlockWithArguments(block, ...) \
+    ANSPerformBlock(block, __VA_ARGS__) \
 
+#define ANSPerformBlockWithoutArguments(block) \
+    ANSPerformBlock(block, ANSEmptyResult) \
