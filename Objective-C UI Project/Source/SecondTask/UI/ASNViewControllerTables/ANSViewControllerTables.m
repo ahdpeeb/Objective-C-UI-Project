@@ -138,8 +138,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 #pragma mark Gestures
 
 - (IBAction)onRightSwipe:(UISwipeGestureRecognizer *)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    NSLog(@"%lu",self.navigationController.viewControllers.count);
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark -

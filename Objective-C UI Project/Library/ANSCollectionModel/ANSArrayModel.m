@@ -177,7 +177,6 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 - (void)saveState {
     NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:self];
-    NSFileManager 
     
     [[NSUserDefaults standardUserDefaults] setObject:archive forKey:kANSArchiveKey];
     NSLog(@"saveState");
