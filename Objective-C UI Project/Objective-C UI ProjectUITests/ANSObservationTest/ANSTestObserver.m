@@ -8,31 +8,31 @@
 
 #import "ANSTestObserver.h"
 
-#import "ANSObservableObjectTest.h"
+#import "ANSTestObservableObject.h"
 
-@interface ANSTestObserver () <ANSObservationTestProtocol>
+@interface ANSTestObserver () <ANSNotificationTest>
 
 @end
 
 @implementation ANSTestObserver
 
-- (void)didCallFirsState:(ANSObservableObjectTest *)observableObject {
+- (void)didCallFirsState:(ANSTestObservableObject *)observableObject {
     NSLog(@"didCallFirsState");
 }
 
-- (void)didCallSecondState:(ANSObservableObjectTest *)observableObject {
+- (void)didCallSecondState:(ANSTestObservableObject *)observableObject {
     NSLog(@"didCallSecondState");
 }
 
-- (void)didCallThirdState:(ANSObservableObjectTest *)observableObject {
+- (void)didCallThirdState:(ANSTestObservableObject *)observableObject {
     NSLog(@"didCallThirdState");
 }
 
-- (void)didCallFourthState:(ANSObservableObjectTest *)observableObject {
+- (void)didCallFourthState:(ANSTestObservableObject *)observableObject {
     NSLog(@"didCallFourthState");
 }
 
-- (void)didCallFiftState:(ANSObservableObjectTest *)observableObject {
+- (void)didCallFiftState:(ANSTestObservableObject *)observableObject {
     NSLog(@"didCallFiftState");
 }
 

@@ -6,9 +6,9 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "ANSObservableObjectTest.h"
+#import "ANSTestObservableObject.h"
 
-@implementation ANSObservableObjectTest
+@implementation ANSTestObservableObject
 
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {

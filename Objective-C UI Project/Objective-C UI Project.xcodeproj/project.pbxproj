@@ -63,7 +63,7 @@
 		9342600E1D65EA2D00F15366 /* ANSProtocolObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C74611D50908100A423B9 /* ANSProtocolObservationController.m */; };
 		9342600F1D65EA2F00F15366 /* ANSBlockObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C745D1D50908100A423B9 /* ANSBlockObservationController.m */; };
 		9342601F1D670B9A00F15366 /* ANSArrayModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9342601E1D670B9A00F15366 /* ANSArrayModelTest.m */; };
-		934260231D670BA100F15366 /* ANSObservableObjectTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 934260221D670BA100F15366 /* ANSObservableObjectTest.m */; };
+		934260231D670BA100F15366 /* ANSTestObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 934260221D670BA100F15366 /* ANSTestObservableObject.m */; };
 		934260251D670BBD00F15366 /* ANSObservationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 934260241D670BBD00F15366 /* ANSObservationTest.m */; };
 		936727D71D591D25007A796F /* ANSDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C51D591D25007A796F /* ANSDataCell.m */; };
 		936727D81D591D25007A796F /* ANSDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936727C61D591D25007A796F /* ANSDataCell.xib */; };
@@ -168,8 +168,8 @@
 		933C74631D50908100A423B9 /* ANSObservationController+ANSPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANSObservationController+ANSPrivate.h"; sourceTree = "<group>"; };
 		933C74681D50A22700A423B9 /* ANSObservableObject+ANSPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANSObservableObject+ANSPrivate.h"; sourceTree = "<group>"; };
 		9342601E1D670B9A00F15366 /* ANSArrayModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSArrayModelTest.m; path = IOSUnitTesting/ANSArrayModelTest.m; sourceTree = "<group>"; };
-		934260211D670BA100F15366 /* ANSObservableObjectTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSObservableObjectTest.h; sourceTree = "<group>"; };
-		934260221D670BA100F15366 /* ANSObservableObjectTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSObservableObjectTest.m; sourceTree = "<group>"; };
+		934260211D670BA100F15366 /* ANSTestObservableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSTestObservableObject.h; sourceTree = "<group>"; };
+		934260221D670BA100F15366 /* ANSTestObservableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSTestObservableObject.m; sourceTree = "<group>"; };
 		934260241D670BBD00F15366 /* ANSObservationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSObservationTest.m; sourceTree = "<group>"; };
 		936727C41D591D25007A796F /* ANSDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSDataCell.h; sourceTree = "<group>"; };
 		936727C51D591D25007A796F /* ANSDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSDataCell.m; sourceTree = "<group>"; };
@@ -431,8 +431,8 @@
 			isa = PBXGroup;
 			children = (
 				934260241D670BBD00F15366 /* ANSObservationTest.m */,
-				934260211D670BA100F15366 /* ANSObservableObjectTest.h */,
-				934260221D670BA100F15366 /* ANSObservableObjectTest.m */,
+				934260211D670BA100F15366 /* ANSTestObservableObject.h */,
+				934260221D670BA100F15366 /* ANSTestObservableObject.m */,
 				93EC01CC1D6AE6EE0032AF4E /* ANSTestObserver.h */,
 				93EC01CD1D6AE6EE0032AF4E /* ANSTestObserver.m */,
 			);
@@ -961,7 +961,7 @@
 				93425FFD1D65E9CF00F15366 /* ANSGCD.m in Sources */,
 				93425FF91D65E9BE00F15366 /* NSBundle+ANSExtenison.m in Sources */,
 				9342600A1D65EA0100F15366 /* ANSTwoIndexModel+UITableView.m in Sources */,
-				934260231D670BA100F15366 /* ANSObservableObjectTest.m in Sources */,
+				934260231D670BA100F15366 /* ANSTestObservableObject.m in Sources */,
 				93425FFE1D65E9D300F15366 /* ANSRandom.m in Sources */,
 				9342601F1D670B9A00F15366 /* ANSArrayModelTest.m in Sources */,
 				93425FF71D65E9B600F15366 /* UITableView+Extension.m in Sources */,
