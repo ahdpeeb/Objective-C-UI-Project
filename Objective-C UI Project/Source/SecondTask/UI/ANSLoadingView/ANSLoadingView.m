@@ -62,7 +62,7 @@ static const NSTimeInterval kANSInterval = 1.0f;
     [UIView animateWithDuration:kANSInterval animations:^{
         self.alpha = alpha;
     } completion:^(BOOL finished) {
-        self.hidden = YES;
+        self.hidden = value;
         self.state = state;
     }];
 }

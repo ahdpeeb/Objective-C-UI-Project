@@ -40,7 +40,7 @@ static const NSUInteger kANSUsersCount              = 10;
 
 @end
 
-ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, tableView)
+ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, rootView)
 
 @implementation ANSViewControllerTables;
 
@@ -79,7 +79,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, tab
 #pragma mark Private methods
 
 - (void)resignSearchBar {
-    UISearchBar *searchBar = self.tableView.searchBar;
+    UISearchBar *searchBar = self.rootView.searchBar;
     if (searchBar.isFirstResponder) {
         [self searchBarCancelButtonClicked:searchBar];
     }
@@ -106,7 +106,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, tab
 #pragma mark UIBarButtonItem actions
 
 - (void)leftBarAction:(UIBarButtonItem *)sender {
-    UITableView *table = self.tableView.table;
+    UITableView *table = self.rootView.table;
     
     [self resignSearchBar];
     
@@ -119,7 +119,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, tab
 }
 
 - (void)rightBarAction:(UIBarButtonItem *)sender {
-    UITableView *table = self.tableView.table;
+    UITableView *table = self.rootView.table;
     
     [self resignSearchBar];
     
@@ -155,7 +155,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, tab
 - (NSInteger)   tableView:(UITableView *)tableView
     numberOfRowsInSection:(NSInteger)section
 {
-    if (self.tableView.searchBar.isFirstResponder) {
+    if (self.rootView.searchBar.isFirstResponder) {
         return self.filteredCollection.count;
     }  else {
         return self.users.count;
@@ -168,7 +168,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, tab
     ANSDataCell *cell = [tableView reusableCellfromNibWithClass:[ANSDataCell class]];
     
     ANSUser *object = nil;
-    if (self.tableView.searchBar.isFirstResponder) {
+    if (self.rootView.searchBar.isFirstResponder) {
         object = self.filteredCollection[indexPath.row];
     } else {
         object = self.users[indexPath.row];
@@ -237,11 +237,11 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, tab
     [searchBar resignFirstResponder];
     [searchBar setShowsCancelButton:NO animated:YES];
     
-    [self.tableView.table reloadData];
+    [self.rootView.table reloadData];
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    UITableView *table = self.tableView.table;
+    UITableView *table = self.rootView.table;
     if (table.isEditing) {
         return NO;
     }
@@ -262,7 +262,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, tab
 
 - (void)       collection:(ANSArrayModel *)collection
        didChangeWithModel:(ANSChangeModel *)model {
-    UITableView *table = self.tableView.table;
+    UITableView *table = self.rootView.table;
     
     [model applyToTableView:table];
     
@@ -272,15 +272,15 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, tab
 - (void)model:(ANSUsersModel *)model didFilterWithUserInfo:(id)userInfo {
     NSLog(@"notified didFilterWithUserInfo - %@ ", userInfo);
     self.filteredCollection = userInfo;
-    [self.tableView.table reloadData];
+    [self.rootView.table reloadData];
 }
 
 - (void)userModelDidLoad:(ANSUsersModel *)model {
     NSLog(@"notified userModelDidLoad");
     
-    ANSLoadingView *loadingView = self.tableView.loadingView;
+    ANSLoadingView *loadingView = self.rootView.loadingView;
     [loadingView deactivate];
-    [self.tableView.table reloadData];
+    [self.rootView.table reloadData];
 }
 
 @end
