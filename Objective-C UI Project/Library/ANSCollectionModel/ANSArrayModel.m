@@ -148,7 +148,15 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 - (void)addObjects:(NSArray *)objects {
     @synchronized(self) {
-        [self.mutableObjects addObjectsFromArray:objects]; 
+       __block NSUInteger count = 0;
+        [self performBlockWithoutNotification:^{
+            for (id object in objects) {
+                count ++;
+                [self addObject:object];
+            }
+        }];
+        
+        [self notifyOfChangeWithIndex:0 index2:count state:ANSStateAddObjects];
     }
 }
 

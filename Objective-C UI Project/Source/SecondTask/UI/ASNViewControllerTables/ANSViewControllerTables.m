@@ -8,7 +8,7 @@
 
 #import "ANSViewControllerTables.h"
 
-#import "ANSTableView.h"
+#import "ANSRootTableView.h"
 #import "ANSDataCell.h"
 #import "ANSTableViewCell.h"
 #import "ANSUser.h"
@@ -40,7 +40,7 @@ static const NSUInteger kANSUsersCount              = 10;
 
 @end
 
-ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableView)
+ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, tableView)
 
 @implementation ANSViewControllerTables;
 
@@ -68,13 +68,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSTableView, tableVi
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.users loadWithCount:kANSUsersCount block:^id{
-        return [ANSUser new];
-    }];
-    
-//    if (!self.users.count) {
-//        self.users = [ANSUsersModel loadState];
-//    }
+    [self.users loadWithCount:kANSUsersCount];
 }
 
 - (void)didReceiveMemoryWarning {

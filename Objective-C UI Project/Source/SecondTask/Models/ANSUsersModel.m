@@ -29,16 +29,19 @@ static const NSUInteger sleepTime = 5;
 #pragma mark -
 #pragma mark Accsessors
 
-- (void)loadWithCount:(NSUInteger)count
-                block:(ANSObjectBlock)block  {
+- (void)loadWithCount:(NSUInteger)count {
     ANSPerformInAsyncQueue(ANSPriorityDefault, ^{
         sleep(sleepTime);
-        NSArray *objects = [NSArray objectsWithCount:count block:block];
+        NSArray *objects = [NSArray objectsWithCount:count block:^id{
+           return [ANSUser new];
+        }];
         
-        [self addObjects:objects];
+        [self performBlockWithoutNotification:^{
+            [self addObjects:objects];
+        }];
         
         ANSPerformInMainQueue(dispatch_async, ^{
-            self.state = ANSUsersModelDidLoad;
+            [self notifyOfStateChange:ANSUsersModelDidLoad];
         });
     });
 }

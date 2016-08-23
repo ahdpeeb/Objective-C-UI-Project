@@ -19,7 +19,7 @@ typedef NS_ENUM(NSUInteger, ANSLoadingViewState) {
 @property (nonatomic, readonly) ANSLoadingViewState state;
 
 //argument view must be subclass of UIView 
-+ (void)attachToView:(id)view;
++ (instancetype)attachToView:(UIView *)view; 
 
 - (void)activate;
 - (void)deactivate;

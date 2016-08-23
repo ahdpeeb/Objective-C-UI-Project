@@ -17,7 +17,7 @@
 #import "ANSGCD.h"
 
 @interface ANSAppDelegate ()
-@property (nonatomic, retain) ANSUsersModel *collection;
+@property (nonatomic, strong) ANSUsersModel *users;
 
 @end
 
@@ -38,8 +38,8 @@
 #pragma mark -
 #pragma mark Extra
 
-    self.collection = [ANSUsersModel new];
-    controller.users = self.collection;
+    self.users = [ANSUsersModel new];
+    controller.users = self.users;
     
     return YES;
 }
@@ -49,7 +49,7 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    [self.collection saveState];
+    [self.users saveState];
     NSLog(@"applicationDidEnterBackground");
 }
 
@@ -62,7 +62,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [self.collection saveState];
+    [self.users saveState];
     NSLog(@"applicationWillTerminate");
 }
 

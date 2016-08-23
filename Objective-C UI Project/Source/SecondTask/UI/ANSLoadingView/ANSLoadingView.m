@@ -22,11 +22,18 @@ static const NSTimeInterval kANSInterval = 1.0f;
 #pragma mark -
 #pragma mark Class methods
 
-+ (void)attachToView:(id)view {
-    if ([view isKindOfClass:[UIView class]]) {
-        ANSLoadingView *view = [[ANSLoadingView alloc] initWithFrame:view.bounds];
-        [view addSubview:view];
-    }
++ (instancetype)attachToView:(UIView *)view {
+    ANSLoadingView *loadingView = [[[self class] alloc] initWithFrame:view.bounds];
+    loadingView.autoresizingMask =    UIViewAutoresizingFlexibleLeftMargin
+                                    | UIViewAutoresizingFlexibleWidth
+                                    | UIViewAutoresizingFlexibleRightMargin
+                                    | UIViewAutoresizingFlexibleTopMargin
+                                    | UIViewAutoresizingFlexibleHeight
+                                    | UIViewAutoresizingFlexibleBottomMargin;
+    loadingView.backgroundColor = [UIColor grayColor];
+    [view addSubview:view];
+    
+    return loadingView;
 }
 
 #pragma mark -
@@ -46,7 +53,6 @@ static const NSTimeInterval kANSInterval = 1.0f;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.bounds = self.superview.bounds;
 }
 
 #pragma mark -
