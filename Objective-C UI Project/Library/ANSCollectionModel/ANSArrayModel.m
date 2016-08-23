@@ -23,6 +23,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 - (void)notifyOfChangeWithIndex:(NSUInteger)indexOne
                          index2:(NSUInteger)indexTwo
                           state:(ANSChangeState)state;
+- (NSString *)pathToPlist;
 
 @end
 
@@ -90,6 +91,22 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     ANSChangeModel *model = [ANSChangeModel twoIndexModel:index1 indexTwo:index2];
     model.state = state;
     [self notifyOfStateChange:0 withUserInfo:model];
+}
+
+- (NSString *)pathToPlist {
+    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths firstObject];
+    NSString *plistPath = [path stringByAppendingPathComponent:@"data.plist"];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+
+    if (![fileManager fileExistsAtPath: path]) {
+        NSString *listFromBundle =[[NSBundle mainBundle] pathForResource:@"data" ofType:@"plist"];
+        [fileManager copyItemAtPath:listFromBundle toPath: plistPath error:&error];
+    }
+    
+    return plistPath;
 }
 
 #pragma mark -
@@ -199,6 +216,16 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     }
     
     return nil;
+}
+
+- (void)saveData {
+    NSArray *objects = self.objects;
+    BOOL isSuccessfully = [NSKeyedArchiver archiveRootObject:objects toFile:[self pathToPlist]];
+    NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
+}
+
+- (id)loadData {
+    return [NSKeyedArchiver unarchiveObjectWithFile:[self pathToPlist]];
 }
 
 #pragma mark -
