@@ -184,16 +184,17 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 #pragma mark Save and loading (Public methods)
 
 - (void)saveState {
-    NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:self];
+    NSArray *objects = self.objects;
+    NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:objects];
     
     [[NSUserDefaults standardUserDefaults] setObject:archive forKey:kANSArchiveKey];
-    NSLog(@"saveState");
+    NSLog(@"saveObjects");
 }
 
-+ (id)loadState {
+- (id)loadState {
     NSData *archive = [[NSUserDefaults standardUserDefaults] objectForKey:kANSArchiveKey];
     if (archive) {
-        NSLog(@"loadState");
+        NSLog(@"loadObjects");
         return [NSKeyedUnarchiver unarchiveObjectWithData:archive];
     }
     

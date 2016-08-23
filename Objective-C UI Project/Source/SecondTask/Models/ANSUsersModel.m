@@ -32,12 +32,16 @@ static const NSUInteger sleepTime = 5;
 - (void)loadWithCount:(NSUInteger)count {
     ANSPerformInAsyncQueue(ANSPriorityDefault, ^{
         sleep(sleepTime);
-        NSArray *objects = [NSArray objectsWithCount:count block:^id{
-           return [ANSUser new];
-        }];
-        
+        NSArray *users;
+        users = [self loadState];
+        if (!users) {
+            users = [NSArray objectsWithCount:count block:^id{
+                return [ANSUser new];
+            }];
+        }
+
         [self performBlockWithoutNotification:^{
-            [self addObjects:objects];
+            [self addObjects:users];
         }];
         
         ANSPerformInMainQueue(dispatch_async, ^{
@@ -55,7 +59,6 @@ static const NSUInteger sleepTime = 5;
         ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
             [operation start];
         });
-   
     }
 }
 

@@ -63,6 +63,6 @@ typedef NS_ENUM(NSUInteger, ANSState) {
 
 // this methods intended for save and load currect collection state;
 - (void)saveState;
-+ (id)loadState;
+- (id)loadState;
 
 @end
