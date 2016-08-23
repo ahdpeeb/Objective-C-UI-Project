@@ -65,4 +65,7 @@ typedef NS_ENUM(NSUInteger, ANSState) {
 - (void)saveState;
 - (id)loadState;
 
+- (void)saveObjects;
+- (nullable id)loadObjects; 
+
 @end

@@ -218,14 +218,14 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     return nil;
 }
 
-- (void)saveData {
+- (void)saveObjects {
     NSArray *objects = self.objects;
     BOOL isSuccessfully = [NSKeyedArchiver archiveRootObject:objects toFile:[self pathToPlist]];
     NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
 }
 
-- (id)loadData {
-    return [NSKeyedArchiver unarchiveObjectWithFile:[self pathToPlist]];
+- (nullable id)loadObjects {
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:[self pathToPlist]];
 }
 
 #pragma mark -
