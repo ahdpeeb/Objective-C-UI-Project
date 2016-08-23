@@ -94,14 +94,13 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 }
 
 - (NSString *)pathToPlist {
-    NSError *error;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [paths firstObject];
-    NSString *plistPath = [path stringByAppendingPathComponent:@"data.plist"];
+    NSError *error = nil;
+     NSString *documentationPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *plistPath = [documentationPath stringByAppendingPathComponent:@"data.plist"];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
 
-    if (![fileManager fileExistsAtPath: path]) {
+    if (![fileManager fileExistsAtPath: documentationPath]) {
         NSString *listFromBundle =[[NSBundle mainBundle] pathForResource:@"data" ofType:@"plist"];
         [fileManager copyItemAtPath:listFromBundle toPath: plistPath error:&error];
     }
