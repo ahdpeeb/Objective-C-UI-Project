@@ -26,7 +26,7 @@
     return nil;
 }
 
-- (void)performAnimationBlock:(ANSAnimationBlock)block {
+- (void)updateTableWithBlock:(ANSUpdatingBlock)block {
     if (!block) {
         return;
     }

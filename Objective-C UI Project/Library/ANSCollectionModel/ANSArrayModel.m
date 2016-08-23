@@ -244,7 +244,8 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 - (id)copyWithZone:(NSZone *)zone {
     ANSArrayModel *copy = [[self class] new];
     if (copy) {
-        copy.mutableObjects = [self.mutableObjects copyWithZone:zone];
+        id objects = [self.mutableObjects copyWithZone:zone];
+        copy.mutableObjects = [NSMutableArray arrayWithArray:objects];
     }
     
     return copy;

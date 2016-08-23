@@ -20,7 +20,7 @@ static const NSUInteger sleepTime = 5;
 @property (nonatomic, retain) NSOperation *operation;
 
 - (SEL)selectorForState:(NSUInteger)state;
-- (ANSUsersModel *)sortedCollectionByString:(NSString *)filterStrirng;
+- (ANSUsersModel *)sortUsersByFilterStrirng:(NSString *)filterStrirng;
 
 @end
 
@@ -73,21 +73,19 @@ static const NSUInteger sleepTime = 5;
 }
 
 
-- (ANSUsersModel *)sortedCollectionByString:(NSString *)filterStrirng {
-    ANSUsersModel *oldCollection = [self copy];
-    ANSUsersModel *newCollection = [[self class] new];
-    
-    for (ANSUser *user in oldCollection) {
+- (ANSUsersModel *)sortUsersByFilterStrirng:(NSString *)filterStrirng {
+    ANSUsersModel * users = [ANSUsersModel new];
+    for (ANSUser *user in self) {
         if ((filterStrirng.length > 0)
             && [user.string rangeOfString:filterStrirng
                                   options:NSCaseInsensitiveSearch].location == NSNotFound) {
                 continue;
             } else {
-                [newCollection addObject:user];
+                [users addObject:user];
             }
     }
     
-    return newCollection;
+    return users;
 }
 
 #pragma mark -
@@ -107,20 +105,19 @@ static const NSUInteger sleepTime = 5;
 }
 
 - (void)sortCollectionByfilterStirng:(NSString *)filterStirng {
-   __block ANSUsersModel *filteredColllection = nil;
+   __block ANSUsersModel *users = [self copy];
     ANSWeakify(self);
     
     NSBlockOperation *operation= [NSBlockOperation blockOperationWithBlock:^{
-        ANSStrongify(self);
-        filteredColllection = [self sortedCollectionByString:filterStirng];
+       users = [users sortUsersByFilterStrirng:filterStirng];
         NSLog(@"have sorted");
     }];
     
     operation.completionBlock = ^{
-        ANSStrongify(self);
         ANSPerformInMainQueue(dispatch_async, ^{
+            ANSStrongify(self);
             [self performBlockWithNotification:^{
-                [self setState:ANSUsersModelDidfilter withUserInfo:filteredColllection];
+                [self setState:ANSUsersModelDidfilter withUserInfo:users];
             }];
         });
     };
