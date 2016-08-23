@@ -105,24 +105,21 @@ static const NSUInteger sleepTime = 5;
 }
 
 - (void)sortCollectionByfilterStirng:(NSString *)filterStirng {
-   __block ANSUsersModel *users = [self copy];
+    __block ANSUsersModel *users = nil;
     ANSWeakify(self);
     
-    NSBlockOperation *operation= [NSBlockOperation blockOperationWithBlock:^{
-       users = [users sortUsersByFilterStrirng:filterStirng];
+    ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
+        ANSStrongify(self);
+        users = [self sortUsersByFilterStrirng:filterStirng];
         NSLog(@"have sorted");
-    }];
-    
-    operation.completionBlock = ^{
+        
         ANSPerformInMainQueue(dispatch_async, ^{
             ANSStrongify(self);
             [self performBlockWithNotification:^{
-                [self setState:ANSUsersModelDidfilter withUserInfo:users];
+                [self notifyOfStateChange:ANSUsersModelDidfilter withUserInfo:users];
             }];
         });
-    };
-
-    self.operation = operation;
+    });
 }
 
 @end
