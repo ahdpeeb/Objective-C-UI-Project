@@ -12,7 +12,7 @@
 #import "ANSTestObserver.h"
 #import "ANSObservationController.h"
 
-SPEC_BEGIN(ANSObservationTest)
+SPEC_BEGIN(ANSNotificationTest)
 
 describe(@"ANSObservableObject", ^{
     registerMatchers(@"BG"); // Registers BGTangentMatcher, BGConvexMatcher, etc.
@@ -40,33 +40,33 @@ describe(@"ANSObservableObject", ^{
         });
         
         it(@"observer should respond to selectors", ^{
-            [[observer should] respondToSelector:@selector(didCallFiftState:)];
-            [[observer should] respondToSelector:@selector(didCallSecondState:)];
-            [[observer should] respondToSelector:@selector(didCallThirdState:)];
-            [[observer should] respondToSelector:@selector(didCallFourthState:)];
-            [[observer should] respondToSelector:@selector(didCallFiftState:)];
+            [[observer should] respondToSelector:@selector(didCallSelectorForState0:)];
+            [[observer should] respondToSelector:@selector(didCallSelectorForState1:)];
+            [[observer should] respondToSelector:@selector(didCallSelectorForState2:)];
+            [[observer should] respondToSelector:@selector(didCallSelectorForState3:)];
+            [[observer should] respondToSelector:@selector(didCallSelectorForState4:)];
         });
         
         it(@"should notify only states performed in performBlockWithNotification", ^{
             [observableObject performBlockWithNotification:^{
-                [[observer should] receive:@selector(didCallFirsState:)];
-                observableObject.state = ANSFifthState;
+                [[observer should] receive:@selector(didCallSelectorForState4:)];
+                observableObject.state = ANSState4;
     
                 [observableObject performBlockWithoutNotification:^{
-                    [[observer shouldNot] receive:@selector(didCallSecondState:)];
-                    observableObject.state = ANSFourthState;
+                    [[observer shouldNot] receive:@selector(didCallSelectorForState3:)];
+                    observableObject.state = ANSState3;
                     
                     [observableObject performBlockWithNotification:^{
-                        [[observer should] receive:@selector(didCallThirdState:)];
-                        observableObject.state = ANSThidsState;
+                        [[observer should] receive:@selector(didCallSelectorForState2:)];
+                        observableObject.state = ANSState2;
                      }];
                     
-                    [[observer shouldNot] receive:@selector(didCallFourthState:)];
-                    observableObject.state = ANSSecondState;
+                    [[observer shouldNot] receive:@selector(didCallSelectorForState1:)];
+                    observableObject.state = ANSState1;
                 }];
                 
-                [[observer should] receive:@selector(didCallFirsState:)];
-                observableObject.state = ANSFirsState;
+                [[observer should] receive:@selector(didCallSelectorForState0:)];
+                observableObject.state = ANSState0;
             }];
         });
 

@@ -16,7 +16,8 @@
 @protocol ANSCollectionObserver <NSObject>
 
 @optional
-- (void)       collection:(ANSArrayModel *)collection
+
+- (void)    collection:(ANSArrayModel *)collection
     didChangeWithModel:(ANSChangeModel *)model;
 
 @end

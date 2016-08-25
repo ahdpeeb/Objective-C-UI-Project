@@ -64,7 +64,7 @@
 		9342600F1D65EA2F00F15366 /* ANSBlockObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 933C745D1D50908100A423B9 /* ANSBlockObservationController.m */; };
 		9342601F1D670B9A00F15366 /* ANSArrayModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9342601E1D670B9A00F15366 /* ANSArrayModelTest.m */; };
 		934260231D670BA100F15366 /* ANSTestObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 934260221D670BA100F15366 /* ANSTestObservableObject.m */; };
-		934260251D670BBD00F15366 /* ANSObservationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 934260241D670BBD00F15366 /* ANSObservationTest.m */; };
+		934260251D670BBD00F15366 /* ANSNotificationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 934260241D670BBD00F15366 /* ANSNotificationTest.m */; };
 		936727D71D591D25007A796F /* ANSDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C51D591D25007A796F /* ANSDataCell.m */; };
 		936727D81D591D25007A796F /* ANSDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936727C61D591D25007A796F /* ANSDataCell.xib */; };
 		936727D91D591D25007A796F /* ANSRootTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C81D591D25007A796F /* ANSRootTableView.m */; };
@@ -171,7 +171,7 @@
 		9342601E1D670B9A00F15366 /* ANSArrayModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSArrayModelTest.m; path = IOSUnitTesting/ANSArrayModelTest.m; sourceTree = "<group>"; };
 		934260211D670BA100F15366 /* ANSTestObservableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSTestObservableObject.h; sourceTree = "<group>"; };
 		934260221D670BA100F15366 /* ANSTestObservableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSTestObservableObject.m; sourceTree = "<group>"; };
-		934260241D670BBD00F15366 /* ANSObservationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSObservationTest.m; sourceTree = "<group>"; };
+		934260241D670BBD00F15366 /* ANSNotificationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSNotificationTest.m; sourceTree = "<group>"; };
 		936727C41D591D25007A796F /* ANSDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSDataCell.h; sourceTree = "<group>"; };
 		936727C51D591D25007A796F /* ANSDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSDataCell.m; sourceTree = "<group>"; };
 		936727C61D591D25007A796F /* ANSDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSDataCell.xib; sourceTree = "<group>"; };
@@ -433,7 +433,7 @@
 		934260201D670BA100F15366 /* ANSObservationTest */ = {
 			isa = PBXGroup;
 			children = (
-				934260241D670BBD00F15366 /* ANSObservationTest.m */,
+				934260241D670BBD00F15366 /* ANSNotificationTest.m */,
 				934260211D670BA100F15366 /* ANSTestObservableObject.h */,
 				934260221D670BA100F15366 /* ANSTestObservableObject.m */,
 				93EC01CC1D6AE6EE0032AF4E /* ANSTestObserver.h */,
@@ -992,7 +992,7 @@
 				93425FF51D65E9AD00F15366 /* UIViewController+ANSExtension.m in Sources */,
 				934260071D65E9F900F15366 /* ANSChangeModel.m in Sources */,
 				93425FF61D65E9B200F15366 /* ANSObservableObject.m in Sources */,
-				934260251D670BBD00F15366 /* ANSObservationTest.m in Sources */,
+				934260251D670BBD00F15366 /* ANSNotificationTest.m in Sources */,
 				9342600C1D65EA0B00F15366 /* ANSTwoIndexModel.m in Sources */,
 				934260031D65E9E300F15366 /* ANSImageModelDispatcher.m in Sources */,
 			);

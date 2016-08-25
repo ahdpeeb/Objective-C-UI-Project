@@ -16,24 +16,24 @@
 
 @implementation ANSTestObserver
 
-- (void)didCallFirsState:(ANSTestObservableObject *)observableObject {
-    NSLog(@"didCallFirsState");
+- (void)didCallSelectorForState0:(ANSTestObservableObject *)observableObject {
+    NSLog(@"didCallForState0");
 }
 
-- (void)didCallSecondState:(ANSTestObservableObject *)observableObject {
-    NSLog(@"didCallSecondState");
+- (void)didCallSelectorForState1:(ANSTestObservableObject *)observableObject {
+    NSLog(@"didCallForState1");
 }
 
-- (void)didCallThirdState:(ANSTestObservableObject *)observableObject {
-    NSLog(@"didCallThirdState");
+- (void)didCallSelectorForState2:(ANSTestObservableObject *)observableObject {
+    NSLog(@"didCallForState2");
 }
 
-- (void)didCallFourthState:(ANSTestObservableObject *)observableObject {
-    NSLog(@"didCallFourthState");
+- (void)didCallSelectorForState3:(ANSTestObservableObject *)observableObject {
+    NSLog(@"didCallForState3");
 }
 
-- (void)didCallFiftState:(ANSTestObservableObject *)observableObject {
-    NSLog(@"didCallFiftState");
+- (void)didCallSelectorForState4:(ANSTestObservableObject *)observableObject {
+    NSLog(@"didCallForState4");
 }
 
 @end

@@ -12,20 +12,20 @@
 
 @protocol ANSNotificationTest <NSObject>
 
-- (void)didCallFirsState:(ANSTestObservableObject *)observableObject;
-- (void)didCallSecondState:(ANSTestObservableObject *)observableObject;
-- (void)didCallThirdState:(ANSTestObservableObject *)observableObject;
-- (void)didCallFourthState:(ANSTestObservableObject *)observableObject;
-- (void)didCallFiftState:(ANSTestObservableObject *)observableObject;
+- (void)didCallSelectorForState0:(ANSTestObservableObject *)observableObject;
+- (void)didCallSelectorForState1:(ANSTestObservableObject *)observableObject;
+- (void)didCallSelectorForState2:(ANSTestObservableObject *)observableObject;
+- (void)didCallSelectorForState3:(ANSTestObservableObject *)observableObject;
+- (void)didCallSelectorForState4:(ANSTestObservableObject *)observableObject;
 
 @end
 
 typedef NS_ENUM(NSUInteger, ANSState) {
-    ANSFirsState,
-    ANSSecondState,
-    ANSThidsState,
-    ANSFourthState,
-    ANSFifthState,
+    ANSState0,
+    ANSState1,
+    ANSState2,
+    ANSState3,
+    ANSState4,
 };
 
 @interface ANSTestObservableObject : ANSObservableObject

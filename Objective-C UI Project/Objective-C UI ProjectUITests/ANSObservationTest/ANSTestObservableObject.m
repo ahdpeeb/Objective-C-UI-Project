@@ -12,20 +12,20 @@
 
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
-        case ANSFirsState:
-            return @selector(didCallFirsState:);
+        case ANSState0:
+            return @selector(didCallSelectorForState0:);
             
-        case ANSSecondState:
-            return @selector(didCallSecondState:);
+        case ANSState1:
+            return @selector(didCallSelectorForState1:);
             
-        case ANSThidsState:
-            return @selector(didCallThirdState:);
+        case ANSState2:
+            return @selector(didCallSelectorForState2:);
+        
+        case ANSState3:
+            return @selector(didCallSelectorForState3:);
             
-        case ANSFourthState:
-            return @selector(didCallFourthState:);
-            
-        case ANSFifthState:
-            return @selector(didCallFiftState:);
+        case ANSState4:
+            return @selector(didCallSelectorForState4:);
             
         default:
             return [super selectorForState:state];

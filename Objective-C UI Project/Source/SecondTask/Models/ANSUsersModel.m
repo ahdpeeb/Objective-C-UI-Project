@@ -20,7 +20,7 @@ static const NSUInteger sleepTime = 5;
 @property (nonatomic, retain) NSOperation *operation;
 
 - (SEL)selectorForState:(NSUInteger)state;
-- (ANSUsersModel *)sortUsersByFilterStrirng:(NSString *)filterStrirng;
+- (ANSUsersModel *)sortUsersByFilterString:(NSString *)filterString;
 
 @end
 
@@ -79,11 +79,11 @@ static const NSUInteger sleepTime = 5;
 }
 
 
-- (ANSUsersModel *)sortUsersByFilterStrirng:(NSString *)filterStrirng {
+- (ANSUsersModel *)sortUsersByFilterString:(NSString *)filterString {
     ANSUsersModel * users = [ANSUsersModel new];
     for (ANSUser *user in self) {
-        if ((filterStrirng.length > 0)
-            && [user.string rangeOfString:filterStrirng
+        if ((filterString.length > 0)
+            && [user.string rangeOfString:filterString
                                   options:NSCaseInsensitiveSearch].location == NSNotFound) {
                 continue;
             } else {
@@ -116,7 +116,7 @@ static const NSUInteger sleepTime = 5;
     
     ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
         ANSStrongify(self);
-        users = [self sortUsersByFilterStrirng:filterStirng];
+        users = [self sortUsersByFilterString:filterStirng];
         NSLog(@"have sorted");
         
         ANSPerformInMainQueue(dispatch_async, ^{
