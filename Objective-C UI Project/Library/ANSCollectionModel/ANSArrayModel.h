@@ -33,8 +33,10 @@ typedef NS_ENUM(NSUInteger, ANSState) {
     NSFastEnumeration
 >
 
-@property (nonatomic, readonly) NSUInteger  count;
-@property (nonatomic, readonly) NSArray     *objects;
+@property (nonatomic, readonly)                     NSUInteger  count;
+@property (nonatomic, readonly, getter=isLoaded)    BOOL        loaded;
+@property (nonatomic, readonly)                     NSArray     *objects;
+
 - (void)setState:(NSUInteger)state withUserInfo:(id)userInfo; 
 
 - (id)objectAtIndex:(NSUInteger)index;
@@ -61,12 +63,5 @@ typedef NS_ENUM(NSUInteger, ANSState) {
 //notify with ANSDefaultState state
 - (void)exchangeObjectAtIndex:(NSUInteger)indexOne
             withObjectAtIndex:(NSUInteger)indexTwo;
-
-// this methods intended for save and load currect collection state;
-- (void)saveState;
-- (id)loadState;
-
-- (void)saveObjects;
-- (nullable id)loadObjects; 
 
 @end

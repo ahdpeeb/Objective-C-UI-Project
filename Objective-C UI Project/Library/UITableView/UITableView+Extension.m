@@ -26,7 +26,7 @@
     return nil;
 }
 
-- (void)updateTableWithBlock:(ANSUpdatingBlock)block {
+- (void)updateWithBlock:(ANSUpdatingBlock)block {
     if (!block) {
         return;
     }

@@ -13,8 +13,11 @@
 #import "ANSMacros.h"
 #import "ANSGCD.h"
 #import "NSArray+ANSExtension.h"
+#import "NSFileManager+ANSExtension.h"
 
 static const NSUInteger sleepTime = 5;
+
+static NSString * const kANSPlistName = @"aaa";
 
 @interface ANSUsersModel ()
 @property (nonatomic, retain) NSOperation *operation;
@@ -30,10 +33,14 @@ static const NSUInteger sleepTime = 5;
 #pragma mark Accsessors
 
 - (void)loadWithCount:(NSUInteger)count {
+    if (self.load) {
+        return;
+    }
+    
     ANSPerformInAsyncQueue(ANSPriorityDefault, ^{
         sleep(sleepTime);
-        NSArray *users;
-        users = [self loadState];
+        NSArray *users = nil;
+        users = [self load];
         if (!users) {
             users = [NSArray objectsWithCount:count block:^id{
                 return [ANSUser new];
@@ -126,6 +133,25 @@ static const NSUInteger sleepTime = 5;
             }];
         });
     });
+}
+
+#pragma mark -
+#pragma mark Save and loading (Public methods)
+
+- (void)save {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeFile:@"myUsers.plist" fromDirectory:NSDocumentDirectory];
+    NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inDirectory:NSDocumentDirectory];
+//    BOOL value = [self.objects writeToFile:plistPath atomically:YES];
+    BOOL isSuccessfully = [NSKeyedArchiver archiveRootObject:self.objects toFile:plistPath];
+    NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
+}
+
+- ( id)load {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inDirectory:NSDocumentDirectory];
+    
+    return []
 }
 
 @end

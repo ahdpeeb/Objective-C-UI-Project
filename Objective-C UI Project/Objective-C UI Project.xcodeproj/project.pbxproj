@@ -65,6 +65,7 @@
 		9342601F1D670B9A00F15366 /* ANSArrayModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9342601E1D670B9A00F15366 /* ANSArrayModelTest.m */; };
 		934260231D670BA100F15366 /* ANSTestObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 934260221D670BA100F15366 /* ANSTestObservableObject.m */; };
 		934260251D670BBD00F15366 /* ANSNotificationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 934260241D670BBD00F15366 /* ANSNotificationTest.m */; };
+		935E5A0B1D6F4CA5005F6285 /* aaa.plist in Resources */ = {isa = PBXBuildFile; fileRef = 935E5A0A1D6F4CA5005F6285 /* aaa.plist */; };
 		936727D71D591D25007A796F /* ANSDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C51D591D25007A796F /* ANSDataCell.m */; };
 		936727D81D591D25007A796F /* ANSDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936727C61D591D25007A796F /* ANSDataCell.xib */; };
 		936727D91D591D25007A796F /* ANSRootTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C81D591D25007A796F /* ANSRootTableView.m */; };
@@ -172,6 +173,7 @@
 		934260211D670BA100F15366 /* ANSTestObservableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSTestObservableObject.h; sourceTree = "<group>"; };
 		934260221D670BA100F15366 /* ANSTestObservableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSTestObservableObject.m; sourceTree = "<group>"; };
 		934260241D670BBD00F15366 /* ANSNotificationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSNotificationTest.m; sourceTree = "<group>"; };
+		935E5A0A1D6F4CA5005F6285 /* aaa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = aaa.plist; sourceTree = "<group>"; };
 		936727C41D591D25007A796F /* ANSDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSDataCell.h; sourceTree = "<group>"; };
 		936727C51D591D25007A796F /* ANSDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSDataCell.m; sourceTree = "<group>"; };
 		936727C61D591D25007A796F /* ANSDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSDataCell.xib; sourceTree = "<group>"; };
@@ -593,6 +595,7 @@
 			children = (
 				93C0843A1D3E381F0077A81C /* LaunchScreen.storyboard */,
 				93C084391D3E381F0077A81C /* Assets.xcassets */,
+				935E5A0A1D6F4CA5005F6285 /* aaa.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -851,6 +854,7 @@
 				9388ECF51D4A396F0082EE4B /* 13.png in Resources */,
 				9388ECF41D4A396F0082EE4B /* 12.png in Resources */,
 				9388ED001D4A396F0082EE4B /* 9.png in Resources */,
+				935E5A0B1D6F4CA5005F6285 /* aaa.plist in Resources */,
 				933B74591D65A6D900DF3DF9 /* ANSLoadingView.xib in Resources */,
 				9388ECF31D4A396F0082EE4B /* 11.png in Resources */,
 				9388ECF21D4A396F0082EE4B /* 10.png in Resources */,

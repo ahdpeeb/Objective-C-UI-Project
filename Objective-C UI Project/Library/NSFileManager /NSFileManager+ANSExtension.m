@@ -9,7 +9,7 @@
 #import "NSFileManager+ANSExtension.h"
 #import <Foundation/NSPathUtilities.h>
 
-static NSString * const kANSPlist = @"data.plist";
+static NSString * const kANSPlist = @".plist";
 
 @implementation NSFileManager (ANSExtension)
 
@@ -61,25 +61,30 @@ static NSString * const kANSPlist = @"data.plist";
     }
 }
 
-- (BOOL)copyFileAtPath:(NSString *)path toDirectory:(NSSearchPathDirectory)directory {
+- (BOOL)copyFileAtPath:(NSString *)filePath toDirectory:(NSSearchPathDirectory)directory {
     BOOL success = NO;
-    if ([self fileExistsAtPath:path]) {
+    if ([self fileExistsAtPath:filePath]) {
         NSString *directoryPath = [self pathToDirectory:directory];
+        NSString *newPath = [directoryPath stringByAppendingPathComponent:filePath.lastPathComponent];
         NSError *error = nil;
-        success = [self copyItemAtPath:path toPath: directoryPath error:&error];
+        success = [self copyItemAtPath:filePath toPath:newPath error:&error];
         if (!success) {
-            NSLog(@"[ERROR] %@ from (%@) to (%@)", error, path, directoryPath);
+            NSLog(@"[ERROR] %@", error);
         }
     }
     
     return success;
 }
 
-- (NSString *)pathToPlistInDocumentDirectory {
-    NSString *filePath = [self pathToFile:kANSPlist inDirectory:NSDocumentDirectory];
-    if (![self fileExistsAtPath: filePath]) {
-        NSString *plistFromBundle =[[NSBundle mainBundle] pathForResource:@"data" ofType:@"plist"];
-        BOOL success = [self copyFileAtPath:plistFromBundle toDirectory:NSDocumentDirectory];
+- (NSString *)pathToPlistFile:(NSString *)file
+                  inDirectory:(NSSearchPathDirectory)directory {
+    NSString *fullPlistName = [file stringByAppendingString:kANSPlist];
+    NSString *filePath = [self pathToFile:fullPlistName inDirectory:directory];
+    if (![self fileExistsAtPath:filePath]) {
+         NSString *resourcePath = [[[NSBundle mainBundle] resourcePath]
+                                   stringByAppendingPathComponent:fullPlistName];
+        
+        BOOL success = [self copyFileAtPath:resourcePath toDirectory:directory];
         if (!success) {
             return nil;
         }

@@ -23,7 +23,6 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 - (void)notifyOfChangeWithIndex:(NSUInteger)indexOne
                          index2:(NSUInteger)indexTwo
                           state:(ANSChangeState)state;
-- (NSString *)pathToPlist;
 
 @end
 
@@ -32,6 +31,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 @synthesize state = _state;
 
 @dynamic count;
+@dynamic loaded;
 @dynamic objects;
 
 #pragma mark -
@@ -51,18 +51,6 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 #pragma mark -
 #pragma mark Accsessors
 
-- (void)setState:(NSUInteger)state {
-    [self setState:state withUserInfo:nil];
-}
-
-- (void)setState:(NSUInteger)state withUserInfo:(id)userInfo {
-    @synchronized(self) {
-        _state = state;
-            
-        [self notifyOfStateChange:state withUserInfo:userInfo];
-    }
-}
-
 - (NSUInteger)count {
     @synchronized(self) {
         return self.mutableObjects.count;
@@ -72,6 +60,25 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 - (NSArray *)objects {
     @synchronized(self) {
         return [self.mutableObjects copy];
+    }
+}
+
+- (BOOL)isLoaded {
+    if (self.count > 0) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)setState:(NSUInteger)state {
+    [self setState:state withUserInfo:nil];
+}
+
+- (void)setState:(NSUInteger)state withUserInfo:(id)userInfo {
+    @synchronized(self) {
+        _state = state;
+            
+        [self notifyOfStateChange:state withUserInfo:userInfo];
     }
 }
 
@@ -91,24 +98,6 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     ANSChangeModel *model = [ANSChangeModel twoIndexModel:index1 indexTwo:index2];
     model.state = state;
     [self notifyOfStateChange:0 withUserInfo:model];
-}
-
-- (NSString *)pathToPlist {
-     NSString *documentationPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *plistPath = [documentationPath stringByAppendingPathComponent:@"data.plist"];
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-
-    if (![fileManager fileExistsAtPath: documentationPath]) {
-        NSString *plistFromBundle =[[NSBundle mainBundle] pathForResource:@"data" ofType:@"plist"];
-        NSError *error = nil;
-        BOOL success = [fileManager copyItemAtPath:plistFromBundle toPath: plistPath error:&error];
-        if (!success) {
-            NSLog(@"[ERROR] %@ (%@)", error, plistFromBundle);
-        }
-    }
-    
-    return plistPath;
 }
 
 #pragma mark -
@@ -197,36 +186,6 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
         [self.mutableObjects exchangeObjectAtIndex:indexOne withObjectAtIndex:indexTwo];
         [self notifyOfChangeWithIndex:indexOne index2:indexTwo state:ANSStateExchangeObject];
     }
-}
-
-#pragma mark -
-#pragma mark Save and loading (Public methods)
-
-- (void)saveState {
-    NSArray *objects = self.objects;
-    NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:objects];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:archive forKey:kANSArchiveKey];
-    NSLog(@"saveObjects");
-}
-
-- (id)loadState {
-    NSData *archive = [[NSUserDefaults standardUserDefaults] objectForKey:kANSArchiveKey];
-    if (archive) {
-        NSLog(@"loadObjects");
-        return [NSKeyedUnarchiver unarchiveObjectWithData:archive];
-    }
-    
-    return nil;
-}
-
-- (void)saveObjects {
-    BOOL isSuccessfully = [NSKeyedArchiver archiveRootObject:self.objects toFile:[self pathToPlist]];
-    NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
-}
-
-- (nullable id)loadObjects {
-    return [NSKeyedUnarchiver unarchiveObjectWithFile:[self pathToPlist]];
 }
 
 #pragma mark -

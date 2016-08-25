@@ -14,6 +14,6 @@ typedef void(^ANSUpdatingBlock)(void);
 // cls should be child class of ANSTableViewCell class
 - (id)reusableCellfromNibWithClass:(Class)cls;
 
-- (void)updateTableWithBlock:(ANSUpdatingBlock)block;
+- (void)updateWithBlock:(ANSUpdatingBlock)block;
 
 @end

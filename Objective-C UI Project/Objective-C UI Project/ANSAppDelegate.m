@@ -49,7 +49,7 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    [self.users saveState];
+    [self.users save];
     NSLog(@"applicationDidEnterBackground");
 }
 
@@ -62,7 +62,7 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [self.users saveState];
+    [self.users save];
     NSLog(@"applicationWillTerminate");
 }
 

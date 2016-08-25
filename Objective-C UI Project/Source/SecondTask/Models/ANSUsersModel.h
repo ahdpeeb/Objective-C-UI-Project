@@ -34,4 +34,7 @@ typedef NS_ENUM(NSUInteger, ANSUsersModelState) {
 
 - (void)loadWithCount:(NSUInteger)count; 
 
+- (void)save; 
+- (id)load; 
+
 @end

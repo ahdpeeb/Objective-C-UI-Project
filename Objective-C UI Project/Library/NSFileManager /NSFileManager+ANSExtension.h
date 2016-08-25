@@ -25,9 +25,11 @@
 // argument file format should be write with extension.Sample - "data.plist"
 - (void)removeFile:(NSString *)file fromDirectory:(NSSearchPathDirectory)directory;
 
-- (BOOL)copyFileAtPath:(NSString *)path toDirectory:(NSSearchPathDirectory)directory;
+- (BOOL)copyFileAtPath:(NSString *)filePath toDirectory:(NSSearchPathDirectory)directory;
 
-- (NSString *)pathToPlistInDocumentDirectory; 
+// generate path and "file.plist" file. You shoud write file name to "file" argument;
+- (NSString *)pathToPlistFile:(NSString *)file
+                  inDirectory:(NSSearchPathDirectory)directory;
 
 // returns string array fileNames(with extension) at path
 - (NSArray <NSString *> *)fileNamesAtPath:(NSString *)path;
