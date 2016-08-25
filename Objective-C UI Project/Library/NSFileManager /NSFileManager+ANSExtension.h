@@ -22,12 +22,12 @@
 
 - (NSString *)directoryWithName:(NSString *)name inDirectory:(NSSearchPathDirectory)directory;
 
-// argument file format should be write with extension.Sample - "data.plist"
+// argument file format should be write with extension.Sample - "data.txt"
 - (void)removeFile:(NSString *)file fromDirectory:(NSSearchPathDirectory)directory;
 
 - (BOOL)copyFileAtPath:(NSString *)filePath toDirectory:(NSSearchPathDirectory)directory;
 
-// generate path and "file.plist" file. You shoud write file name to "file" argument;
+// generate path to "file.plist" file. You shoud write file name to "file" argument;
 - (NSString *)pathToPlistFile:(NSString *)file
                   inDirectory:(NSSearchPathDirectory)directory;
 

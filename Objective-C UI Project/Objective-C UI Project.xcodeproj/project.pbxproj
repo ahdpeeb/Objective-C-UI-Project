@@ -328,10 +328,10 @@
 		933B74331D6339C300DF3DF9 /* ANSChangeModel */ = {
 			isa = PBXGroup;
 			children = (
-				933B74481D64710800DF3DF9 /* ANSChangeModel+UITableView.h */,
-				933B74491D64710800DF3DF9 /* ANSChangeModel+UITableView.m */,
 				933B74341D6339C300DF3DF9 /* ANSChangeModel.h */,
 				933B74351D6339C300DF3DF9 /* ANSChangeModel.m */,
+				933B74481D64710800DF3DF9 /* ANSChangeModel+UITableView.h */,
+				933B74491D64710800DF3DF9 /* ANSChangeModel+UITableView.m */,
 				933B743B1D6339C300DF3DF9 /* TableViewExtensions */,
 				933B74361D6339C300DF3DF9 /* ChangeModelPrivate */,
 			);

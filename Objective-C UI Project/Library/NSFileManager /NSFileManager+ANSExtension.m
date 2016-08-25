@@ -69,7 +69,7 @@ static NSString * const kANSPlist = @".plist";
         NSError *error = nil;
         success = [self copyItemAtPath:filePath toPath:newPath error:&error];
         if (!success) {
-            NSLog(@"[ERROR] %@", error);
+            NSLog(@"[ERROR] %@ (%@) (%@)", error, filePath, newPath);
         }
     }
     
@@ -78,11 +78,11 @@ static NSString * const kANSPlist = @".plist";
 
 - (NSString *)pathToPlistFile:(NSString *)file
                   inDirectory:(NSSearchPathDirectory)directory {
-    NSString *fullPlistName = [file stringByAppendingString:kANSPlist];
-    NSString *filePath = [self pathToFile:fullPlistName inDirectory:directory];
-    if (![self fileExistsAtPath:filePath]) {
+    NSString *plistFileName = [file stringByAppendingString:kANSPlist];
+    NSString *plistfilePath = [self pathToFile:plistFileName inDirectory:directory];
+    if (![self fileExistsAtPath:plistfilePath]) {
          NSString *resourcePath = [[[NSBundle mainBundle] resourcePath]
-                                   stringByAppendingPathComponent:fullPlistName];
+                                   stringByAppendingPathComponent:plistFileName];
         
         BOOL success = [self copyFileAtPath:resourcePath toDirectory:directory];
         if (!success) {
@@ -90,7 +90,7 @@ static NSString * const kANSPlist = @".plist";
         }
     }
     
-    return filePath;
+    return plistfilePath;
 }
 
 - (NSArray <NSString *> *)fileNamesAtPath:(NSString *)path {

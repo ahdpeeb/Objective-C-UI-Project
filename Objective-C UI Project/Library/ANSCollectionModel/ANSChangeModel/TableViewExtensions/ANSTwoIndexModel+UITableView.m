@@ -19,7 +19,6 @@
 {
     NSIndexPath *path = [NSIndexPath indexPathForRow:self.index inSection:0];
     NSIndexPath *pathTwo = [NSIndexPath indexPathForRow:self.indexTwo inSection:0];
-    NSMutableArray *paths = [NSMutableArray new];
     [tableView beginUpdates];
     
     switch (self.state) {
@@ -31,12 +30,17 @@
             [tableView reloadRowsAtIndexPaths:@[path, pathTwo] withRowAnimation:animation];
             break;
         
-        case ANSStateAddObjects:
-            for (NSUInteger index = self.index; index <= self.indexTwo; index ++ ) {
-               [paths addObject: [NSIndexPath indexPathForRow:index inSection:0]];
+        case ANSStateAddObjects: {
+            NSUInteger inx1 = self.index;
+            NSUInteger inx2 = self.indexTwo;
+            NSMutableArray *paths = [NSMutableArray arrayWithCapacity:inx2 - inx1];
+            for (NSUInteger index = inx1; index <= inx2; index ++ ) {
+                [paths addObject: [NSIndexPath indexPathForRow:index inSection:0]];
             }
             
             [tableView reloadRowsAtIndexPaths:paths withRowAnimation:animation];
+        }
+
             break;
             
         default:
