@@ -94,15 +94,18 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 }
 
 - (NSString *)pathToPlist {
-    NSError *error = nil;
      NSString *documentationPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     NSString *plistPath = [documentationPath stringByAppendingPathComponent:@"data.plist"];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
 
     if (![fileManager fileExistsAtPath: documentationPath]) {
-        NSString *listFromBundle =[[NSBundle mainBundle] pathForResource:@"data" ofType:@"plist"];
-        [fileManager copyItemAtPath:listFromBundle toPath: plistPath error:&error];
+        NSString *plistFromBundle =[[NSBundle mainBundle] pathForResource:@"data" ofType:@"plist"];
+        NSError *error = nil;
+        BOOL success = [fileManager copyItemAtPath:plistFromBundle toPath: plistPath error:&error];
+        if (!success) {
+            NSLog(@"[ERROR] %@ (%@)", error, plistFromBundle);
+        }
     }
     
     return plistPath;
@@ -218,8 +221,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 }
 
 - (void)saveObjects {
-    NSArray *objects = self.objects;
-    BOOL isSuccessfully = [NSKeyedArchiver archiveRootObject:objects toFile:[self pathToPlist]];
+    BOOL isSuccessfully = [NSKeyedArchiver archiveRootObject:self.objects toFile:[self pathToPlist]];
     NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
 }
 
