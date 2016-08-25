@@ -224,7 +224,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     [aCoder encodeObject:self.mutableObjects forKey:kANSCollectionKey];
 }
 
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
         NSArray *archive = [aDecoder decodeObjectForKey:kANSCollectionKey];

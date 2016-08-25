@@ -33,7 +33,7 @@ static NSString * const kANSPlistName = @"aaa";
 #pragma mark Accsessors
 
 - (void)loadWithCount:(NSUInteger)count {
-    if (self.load) {
+    if (self.isLoaded) {
         return;
     }
     
@@ -140,18 +140,17 @@ static NSString * const kANSPlistName = @"aaa";
 
 - (void)save {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager removeFile:@"myUsers.plist" fromDirectory:NSDocumentDirectory];
     NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inDirectory:NSDocumentDirectory];
 //    BOOL value = [self.objects writeToFile:plistPath atomically:YES];
     BOOL isSuccessfully = [NSKeyedArchiver archiveRootObject:self.objects toFile:plistPath];
     NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
 }
 
-- ( id)load {
+- (id)load {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inDirectory:NSDocumentDirectory];
-    
-    return []
+ 
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:plistPath];
 }
 
 @end
