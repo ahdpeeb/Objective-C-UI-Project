@@ -10,8 +10,6 @@
 
 #import "ANSMacros.h"
 
-typedef void(^ANSComplititionBlock)(void);
-
 static const NSTimeInterval kANSInterval = 1.0f;
 static const NSTimeInterval kANSDelay = 0;
 

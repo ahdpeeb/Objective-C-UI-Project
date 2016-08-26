@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^ANSComplititionBlock)(void);
+
 typedef NS_ENUM(NSUInteger, ANSLoadingViewState) {
     ANSActive,
     ANSInactive,
@@ -21,6 +23,10 @@ typedef NS_ENUM(NSUInteger, ANSLoadingViewState) {
 
 //argument view must be subclass of UIView 
 + (instancetype)loadingViewOnSuperView:(UIView *)view;
+
+- (void)setVisible:(BOOL)visible
+          animated:(BOOL)animated
+ complititionBlock:(ANSComplititionBlock)block;
 
 - (void)activate;
 - (void)deactivate;
