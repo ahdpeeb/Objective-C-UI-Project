@@ -140,14 +140,14 @@ static NSString * const kANSPlistName = @"aaa";
 
 - (void)save {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inDirectory:NSDocumentDirectory];
+    NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inSearchPathDirectory:NSDocumentDirectory];
     BOOL isSuccessfully = [NSKeyedArchiver archiveRootObject:self.objects toFile:plistPath];
     NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
 }
 
 - (id)load {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inDirectory:NSDocumentDirectory];
+    NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inSearchPathDirectory:NSDocumentDirectory];
  
     return [NSKeyedUnarchiver unarchiveObjectWithFile:plistPath];
 }

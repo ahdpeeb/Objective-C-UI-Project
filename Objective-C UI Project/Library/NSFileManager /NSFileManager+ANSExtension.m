@@ -13,30 +13,30 @@ static NSString * const kANSPlist = @".plist";
 
 @implementation NSFileManager (ANSExtension)
 
-- (NSString *)pathToDirectory:(NSSearchPathDirectory)directory {
+- (NSString *)pathToSearchPathDirectory:(NSSearchPathDirectory)directory; {
     return [NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES) firstObject];
 }
 
 - (NSString *)pathToDocumentDirectory {
-   return [self pathToDirectory:NSDocumentDirectory];
+   return [self pathToSearchPathDirectory:NSDocumentDirectory];
 }
 
 - (NSString *)pathToApplicationDirectory {
-    return [self pathToDirectory:NSApplicationDirectory];
+    return [self pathToSearchPathDirectory:NSApplicationDirectory];
 }
 
-- (NSString *)pathToFile:(NSString *)file inDirectory:(NSSearchPathDirectory)directory  {
-    NSString *directoryPath = [self pathToDirectory:directory];
+- (NSString *)pathToFile:(NSString *)file inSearchPathDirectory:(NSSearchPathDirectory)directory  {
+    NSString *directoryPath = [self pathToSearchPathDirectory:directory];
     return [directoryPath stringByAppendingPathComponent:file];
 }
 
-- (BOOL)isExistsFile:(NSString *)file inDirectory:(NSSearchPathDirectory)directory {
-    NSString *filePath = [self pathToFile:file inDirectory:directory];
+- (BOOL)fileExists:(NSString *)file inSearchPathDirectory:(NSSearchPathDirectory)directory {
+    NSString *filePath = [self pathToFile:file inSearchPathDirectory:directory];
     return [self fileExistsAtPath:filePath];
 }
 
-- (NSString *)directoryWithName:(NSString *)name inDirectory:(NSSearchPathDirectory)directory {
-    NSString *directoryPath = [self pathToFile:name inDirectory:directory];
+- (NSString *)directoryWithName:(NSString *)name inSearchPathDirectory:(NSSearchPathDirectory)directory {
+    NSString *directoryPath = [self pathToFile:name inSearchPathDirectory:directory];
     if (![self fileExistsAtPath:directoryPath]) {
         NSError *error = nil;
         BOOL success = [self createDirectoryAtPath:directoryPath
@@ -52,8 +52,8 @@ static NSString * const kANSPlist = @".plist";
     return directoryPath;
 }
 
-- (void)removeFile:(NSString *)file fromDirectory:(NSSearchPathDirectory)directory {
-    NSString *documentsPath = [self pathToDirectory:directory];
+- (void)removeFile:(NSString *)file fromSearchPathDirectory:(NSSearchPathDirectory)directory {
+    NSString *documentsPath = [self pathToSearchPathDirectory:directory];
     NSString *filePath = [documentsPath stringByAppendingPathComponent:file];
     NSError *error = nil;
         if (![self removeItemAtPath:filePath error:&error]) {
@@ -61,10 +61,10 @@ static NSString * const kANSPlist = @".plist";
     }
 }
 
-- (BOOL)copyFileAtPath:(NSString *)filePath toDirectory:(NSSearchPathDirectory)directory {
+- (BOOL)copyFileAtPath:(NSString *)filePath toSearchPathDirectory:(NSSearchPathDirectory)directory {
     BOOL success = NO;
     if ([self fileExistsAtPath:filePath]) {
-        NSString *directoryPath = [self pathToDirectory:directory];
+        NSString *directoryPath = [self pathToSearchPathDirectory:directory];
         NSString *newPath = [directoryPath stringByAppendingPathComponent:filePath.lastPathComponent];
         NSError *error = nil;
         success = [self copyItemAtPath:filePath toPath:newPath error:&error];
@@ -77,14 +77,14 @@ static NSString * const kANSPlist = @".plist";
 }
 
 - (NSString *)pathToPlistFile:(NSString *)file
-                  inDirectory:(NSSearchPathDirectory)directory {
+        inSearchPathDirectory:(NSSearchPathDirectory)directory {
     NSString *plistFileName = [file stringByAppendingString:kANSPlist];
-    NSString *plistfilePath = [self pathToFile:plistFileName inDirectory:directory];
+    NSString *plistfilePath = [self pathToFile:plistFileName inSearchPathDirectory:directory];
     if (![self fileExistsAtPath:plistfilePath]) {
          NSString *resourcePath = [[[NSBundle mainBundle] resourcePath]
                                    stringByAppendingPathComponent:plistFileName];
         
-        BOOL success = [self copyFileAtPath:resourcePath toDirectory:directory];
+        BOOL success = [self copyFileAtPath:resourcePath toSearchPathDirectory:directory];
         if (!success) {
             return nil;
         }
@@ -93,7 +93,7 @@ static NSString * const kANSPlist = @".plist";
     return plistfilePath;
 }
 
-- (NSArray <NSString *> *)fileNamesAtPath:(NSString *)path {
+- (NSArray <NSString *> *)filesNamesAtPath:(NSString *)path {
     NSMutableArray *fileNames = nil;
     NSArray *filePaths = [self contentsOfDirectoryAtPath:path error:nil];
     for (NSString *filePath in filePaths) {

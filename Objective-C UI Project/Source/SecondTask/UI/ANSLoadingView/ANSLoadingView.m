@@ -32,8 +32,13 @@ static const NSTimeInterval kANSDelay = 0;
                                     | UIViewAutoresizingFlexibleTopMargin
                                     | UIViewAutoresizingFlexibleHeight
                                     | UIViewAutoresizingFlexibleBottomMargin;
-    loadingView.backgroundColor = [UIColor grayColor];
+    loadingView.backgroundColor = [UIColor lightGrayColor];
     [view addSubview:loadingView];
+    
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    indicator.color = [UIColor orangeColor];
+    [loadingView addSubview:indicator];
     
     return loadingView;
 }
@@ -70,6 +75,7 @@ static const NSTimeInterval kANSDelay = 0;
                          self.alpha = visible;
                          if (visible) {
                              [[self superview] bringSubviewToFront:self];
+                             [self.indicator startAnimating];
                          }
                          
                          self.state = visible;

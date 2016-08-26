@@ -10,28 +10,28 @@
 
 @interface NSFileManager (ANSExtension)
 
-- (NSString *)pathToDocumentDirectory; 
+- (NSString *)pathToSearchPathDirectory:(NSSearchPathDirectory)directory;
+- (NSString *)pathToDocumentDirectory;
 - (NSString *)pathToApplicationDirectory;
-- (NSString *)pathToDirectory:(NSSearchPathDirectory)directory;
 
 // argument file format should be write with extension.Sample - "data.txt"
-- (NSString *)pathToFile:(NSString *)file inDirectory:(NSSearchPathDirectory)directory;
+- (NSString *)pathToFile:(NSString *)file inSearchPathDirectory:(NSSearchPathDirectory)directory;
 
 // argument file format should be write with extension.Sample - "data.txt"
-- (BOOL)isExistsFile:(NSString *)file inDirectory:(NSSearchPathDirectory)directory;
+- (BOOL)fileExists:(NSString *)file inSearchPathDirectory:(NSSearchPathDirectory)directory;
 
-- (NSString *)directoryWithName:(NSString *)name inDirectory:(NSSearchPathDirectory)directory;
+- (NSString *)directoryWithName:(NSString *)name inSearchPathDirectory:(NSSearchPathDirectory)directory;
 
 // argument file format should be write with extension.Sample - "data.txt"
-- (void)removeFile:(NSString *)file fromDirectory:(NSSearchPathDirectory)directory;
+- (void)removeFile:(NSString *)file fromSearchPathDirectory:(NSSearchPathDirectory)directory;
 
-- (BOOL)copyFileAtPath:(NSString *)filePath toDirectory:(NSSearchPathDirectory)directory;
+- (BOOL)copyFileAtPath:(NSString *)filePath toSearchPathDirectory:(NSSearchPathDirectory)directory;
 
 // generate path to "file.plist" file. You shoud write file name to "file" argument;
 - (NSString *)pathToPlistFile:(NSString *)file
-                  inDirectory:(NSSearchPathDirectory)directory;
+        inSearchPathDirectory:(NSSearchPathDirectory)directory;
 
 // returns string array fileNames(with extension) at path
-- (NSArray <NSString *> *)fileNamesAtPath:(NSString *)path;
+- (NSArray <NSString *> *)filesNamesAtPath:(NSString *)path;
 
 @end
