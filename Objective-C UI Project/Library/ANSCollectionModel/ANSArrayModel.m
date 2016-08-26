@@ -28,8 +28,6 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 @implementation ANSArrayModel
 
-@synthesize state = _state;
-
 @dynamic count;
 @dynamic loaded;
 @dynamic objects;
@@ -70,18 +68,6 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     return NO;
 }
 
-- (void)setState:(NSUInteger)state {
-    [self setState:state withUserInfo:nil];
-}
-
-- (void)setState:(NSUInteger)state withUserInfo:(id)userInfo {
-    @synchronized(self) {
-        _state = state;
-            
-        [self notifyOfStateChange:state withUserInfo:userInfo];
-    }
-}
-
 #pragma mark -
 #pragma mark Private methods;
 
@@ -95,7 +81,14 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
                          index2:(NSUInteger)index2
                           state:(ANSChangeState)state
 {
-    ANSChangeModel *model = [ANSChangeModel twoIndexModel:index1 index2:index2];
+    ANSChangeModel *model = nil;
+    if (state == ANSStateAddObjectsInRange) {
+        model = [ANSChangeModel rangeModelFromIndex:index1 toIndex:index2];
+    } else if ((state == ANSStateMoveObject) || (state == ANSStateExchangeObject)) {
+        model = [ANSChangeModel twoIndexModel:index1 index2:index2];
+    }
+    
+    [ANSChangeModel twoIndexModel:index1 index2:index2];
     model.state = state;
     [self notifyOfStateChange:0 withUserInfo:model];
 }

@@ -41,25 +41,15 @@ typedef NS_ENUM(NSUInteger, ANSState) {
 - (NSUInteger)indexOfObject:(id)object;
 - (id)objectAtIndexedSubscript:(NSUInteger)idx;
 
-//notify with ANSDefaultState state
 - (void)addObject:(id)object;
-
-//notify with ANSDefaultState state
 - (void)removeObject:(id)object;
 
-//notify with ANSDefaultState state
 - (void)insertObject:(id)object atIndex:(NSUInteger)index;
-
-//notify with ANSDefaultState state
 - (void)removeObjectAtIndex:(NSUInteger)index;
 
 - (void)addObjectsInRange:(NSArray*)objects;
-//- (void)removeObjectsInRange:(NSArray *)objects;
 
-//notify with ANSDefaultState state
 - (void)moveObjectFromIndex:(NSUInteger)index toIndex:(NSUInteger)index;
-
-//notify with ANSDefaultState state
 - (void)exchangeObjectAtIndex:(NSUInteger)indexOne
             withObjectAtIndex:(NSUInteger)index2;
 

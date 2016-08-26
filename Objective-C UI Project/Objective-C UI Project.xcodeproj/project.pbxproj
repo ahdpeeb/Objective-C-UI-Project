@@ -150,8 +150,8 @@
 		933B743F1D6339C300DF3DF9 /* ANSTwoIndexModel+UITableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANSTwoIndexModel+UITableView.m"; sourceTree = "<group>"; };
 		933B74401D6339C300DF3DF9 /* ANSArrayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSArrayModel.h; sourceTree = "<group>"; };
 		933B74411D6339C300DF3DF9 /* ANSArrayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSArrayModel.m; sourceTree = "<group>"; };
-		933B74481D64710800DF3DF9 /* ANSChangeModel+UITableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANSChangeModel+UITableView.h"; sourceTree = "<group>"; };
-		933B74491D64710800DF3DF9 /* ANSChangeModel+UITableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANSChangeModel+UITableView.m"; sourceTree = "<group>"; };
+		933B74481D64710800DF3DF9 /* ANSChangeModel+UITableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ANSChangeModel+UITableView.h"; path = "../ANSChangeModel+UITableView.h"; sourceTree = "<group>"; };
+		933B74491D64710800DF3DF9 /* ANSChangeModel+UITableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ANSChangeModel+UITableView.m"; path = "../ANSChangeModel+UITableView.m"; sourceTree = "<group>"; };
 		933B744B1D648CD600DF3DF9 /* UIViewController+ANSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+ANSExtension.h"; path = "Library/UIViewController/UIViewController+ANSExtension.h"; sourceTree = SOURCE_ROOT; };
 		933B744C1D648CD600DF3DF9 /* UIViewController+ANSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+ANSExtension.m"; path = "Library/UIViewController/UIViewController+ANSExtension.m"; sourceTree = SOURCE_ROOT; };
 		933B74531D65A68600DF3DF9 /* ANSLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLoadingView.h; sourceTree = "<group>"; };
@@ -336,8 +336,6 @@
 			children = (
 				933B74341D6339C300DF3DF9 /* ANSChangeModel.h */,
 				933B74351D6339C300DF3DF9 /* ANSChangeModel.m */,
-				933B74481D64710800DF3DF9 /* ANSChangeModel+UITableView.h */,
-				933B74491D64710800DF3DF9 /* ANSChangeModel+UITableView.m */,
 				933B74361D6339C300DF3DF9 /* ChangeModelPrivate */,
 				933B743B1D6339C300DF3DF9 /* TableViewExtensions */,
 			);
@@ -360,6 +358,8 @@
 		933B743B1D6339C300DF3DF9 /* TableViewExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				933B74481D64710800DF3DF9 /* ANSChangeModel+UITableView.h */,
+				933B74491D64710800DF3DF9 /* ANSChangeModel+UITableView.m */,
 				933B743C1D6339C300DF3DF9 /* ANSOneIndexModel+UITableView.h */,
 				933B743D1D6339C300DF3DF9 /* ANSOneIndexModel+UITableView.m */,
 				933B743E1D6339C300DF3DF9 /* ANSTwoIndexModel+UITableView.h */,
@@ -632,7 +632,6 @@
 			isa = PBXGroup;
 			children = (
 				934C3F151D69BB33003325A6 /* Extensions */,
-				93C5A6051D40E40B002FBCA8 /* ANSMacros */,
 				933C74581D50908000A423B9 /* ANSObservableObject */,
 				93C5A5D01D40DF3D002FBCA8 /* ANSGCD */,
 				93C5A5D61D40DF3D002FBCA8 /* ANSRandom */,
@@ -641,6 +640,7 @@
 				93C5A60A1D4125C2002FBCA8 /* ANSTableViewCell */,
 				93C5A5D31D40DF3D002FBCA8 /* ANSQueue */,
 				933B74321D6339C300DF3DF9 /* ANSArrayModel */,
+				93C5A6051D40E40B002FBCA8 /* ANSMacros */,
 			);
 			path = Library;
 			sourceTree = "<group>";

@@ -8,10 +8,16 @@
 
 #import "ANSLoadingView.h"
 
+#import "ANSMacros.h"
+
+typedef void(^ANSComplititionBlock)(void);
+
 static const NSTimeInterval kANSInterval = 1.0f;
+static const NSTimeInterval kANSDelay = 0;
 
 @interface ANSLoadingView ()
 @property (nonatomic, assign) ANSLoadingViewState state;
+@property (nonatomic, assign, getter=isVisible) BOOL visible;
 
 - (void)action:(CGFloat)alpha shouldHide:(BOOL)value state:(ANSLoadingViewState)state;
 
@@ -39,20 +45,38 @@ static const NSTimeInterval kANSInterval = 1.0f;
 #pragma mark -
 #pragma mark Initialization and deallocation
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    
-    return self;
-}
-
-- (instancetype)initWithCoder:(NSCoder *)coder {
-    self = [super initWithCoder:coder];
-    
-    return self;
-}
-
 - (void)awakeFromNib {
     [super awakeFromNib];
+}
+
+#pragma mark -
+#pragma mark Accsessors
+
+- (void)setVisible:(BOOL)visible {
+    [self setVisible:visible animated:NO];
+}
+
+- (void)setVisible:(BOOL)visible animated:(BOOL)animated {
+    [self setVisible:visible animated:animated complititionBlock:nil];
+}
+
+- (void)setVisible:(BOOL)visible
+          animated:(BOOL)animated
+ complititionBlock:(ANSComplititionBlock)block {
+    if (_visible != visible) {
+        _visible = visible;
+    }
+    
+    [UIView animateWithDuration:animated ? kANSInterval : 0
+                          delay:kANSDelay
+                        options:UIViewAnimationOptionLayoutSubviews
+                     animations:^{
+                         self.alpha = visible;
+                         self.state = visible;
+                     } completion:^(BOOL finished) {
+                         self.hidden = !visible;
+                         ANSPerformBlockWithoutArguments(block);
+                     }];
 }
 
 #pragma mark -
@@ -70,11 +94,11 @@ static const NSTimeInterval kANSInterval = 1.0f;
 #pragma mark Public method
 
 - (void)activate {
-    [self action:1 shouldHide:NO state:ANSActive];
+    [self setVisible:YES animated:YES];
 }
 
 - (void)deactivate {
-    [self action:0 shouldHide:YES state:ANSInactive];
+    [self setVisible:NO animated:YES];
 }
 
 @end
