@@ -22,9 +22,15 @@
 @end
 
 typedef NS_ENUM(NSUInteger, ANSUsersModelState) {
-    ANSUsersModelDidLoad = ANSStateCount,
-    ANSUsersModelDidfilter,
+    ANSUsersModelDidfilter = ANSStateCount,
     ANSUsersModelCountState
+};
+
+typedef NS_ENUM(NSUInteger, ANSUserLoadingState) {
+    ANSUsersModelUnloaded = ANSUsersModelCountState,
+    ANSUsersModelDidLoad,
+    ANSUsersModelLoading,
+    ANSUsersModelDidFailLoading
 };
 
 @interface ANSUsersModel : ANSArrayModel
@@ -35,6 +41,6 @@ typedef NS_ENUM(NSUInteger, ANSUsersModelState) {
 - (void)loadWithCount:(NSUInteger)count; 
 
 - (void)save;
-- (id)load;
+- (void)load;
 
 @end

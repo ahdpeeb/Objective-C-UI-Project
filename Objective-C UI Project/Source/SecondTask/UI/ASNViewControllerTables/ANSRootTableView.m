@@ -26,11 +26,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-//    ANSLoadingView *view = [NSBundle objectWithClass:[ANSLoadingView class]];
-    ANSLoadingView *view = [ANSLoadingView loadingViewOnSuperView:self];
-    self.loadingView = view;
-    [view activate];
-//    [self addSubview:view];
+    ANSLoadingView *view = [NSBundle objectWithClass:[ANSLoadingView class]];
+//    ANSLoadingView *view = [ANSLoadingView loadingViewOnSuperView:self];
+//    self.loadingView = view;
+//    [view activate];
+    [self addSubview:view];
 }
 
 #pragma mark -

@@ -24,37 +24,46 @@ static NSString * const kANSPlistName = @"aaa";
 
 - (SEL)selectorForState:(NSUInteger)state;
 - (void)sortUsersByFilterString:(NSString *)filterString;
+- (id)loadUsers;
 
 @end
 
 @implementation ANSUsersModel
 
 #pragma mark -
+#pragma mark Initilization and deallocation 
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.state = ANSUsersModelUnloaded;
+    }
+    return self;
+}
+
+#pragma mark -
 #pragma mark Accsessors
 
 - (void)loadWithCount:(NSUInteger)count {
-    if (self.isLoaded) {
-        return;
-    }
-    
-    ANSPerformInAsyncQueue(ANSPriorityDefault, ^{
-        sleep(sleepTime);
-        NSArray *users = nil;
-        users = [self load];
-        if (!users) {
-            users = [NSArray objectsWithCount:count block:^id{
-                return [ANSUser new];
-            }];
-        }
-
-        [self performBlockWithoutNotification:^{
-            [self addObjectsInRange:users];
-        }];
-        
-        ANSPerformInMainQueue(dispatch_async, ^{
-            [self notifyOfStateChange:ANSUsersModelDidLoad];
-        });
-    });
+//    ANSPerformInAsyncQueue(ANSPriorityDefault, ^{
+//        sleep(sleepTime);
+//        NSArray *users = nil;
+        [self load];
+//        if (!users) {
+//            users = [NSArray objectsWithCount:count block:^id{
+//                return [ANSUser new];
+//            }];
+//        }
+//
+//        [self performBlockWithoutNotification:^{
+//            [self addObjectsInRange:users];
+//        }];
+//        
+//        ANSPerformInMainQueue(dispatch_async, ^{
+//            [self notifyOfStateChange:ANSUsersModelDidLoad];
+//        });
+//    });
 }
 
 - (void)setOperation:(NSOperation *)operation {
@@ -145,11 +154,44 @@ static NSString * const kANSPlistName = @"aaa";
     NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
 }
 
-- (id)load {
+- (id)loadUsers  {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inSearchPathDirectory:NSDocumentDirectory];
  
     return [NSKeyedUnarchiver unarchiveObjectWithFile:plistPath];
+}
+
+- (void)load {
+    ANSUserLoadingState state = self.state;
+    if (state == ANSUsersModelLoading || state == ANSUsersModelDidLoad) {
+        [self notifyOfStateChange:state];
+        return;
+    }
+    
+    if (state == ANSUsersModelUnloaded) {
+        self.state = ANSUsersModelLoading;
+        ANSWeakify(self);
+        ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
+            ANSStrongify(self);
+            id users = [self loadUsers];
+            sleep(sleepTime);
+            if (!users) {
+                ANSPerformInMainQueue(dispatch_async, ^{
+                    self.state = ANSUsersModelDidFailLoading;
+                    return;
+                });
+            }
+            
+            [self performBlockWithoutNotification:^{
+                [self addObjectsInRange:users];
+            }];
+            
+            ANSPerformInMainQueue(dispatch_async, ^{
+                self.state = ANSUsersModelDidLoad;
+                return;
+            });
+        });
+    }
 }
 
 @end
