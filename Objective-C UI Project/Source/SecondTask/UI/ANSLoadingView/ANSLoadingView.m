@@ -17,8 +17,6 @@ static const NSTimeInterval kANSDelay = 0;
 @property (nonatomic, assign) ANSLoadingViewState state;
 @property (nonatomic, assign, getter=isVisible) BOOL visible;
 
-- (void)action:(CGFloat)alpha shouldHide:(BOOL)value state:(ANSLoadingViewState)state;
-
 @end
 
 @implementation ANSLoadingView
@@ -35,7 +33,7 @@ static const NSTimeInterval kANSDelay = 0;
                                     | UIViewAutoresizingFlexibleHeight
                                     | UIViewAutoresizingFlexibleBottomMargin;
     loadingView.backgroundColor = [UIColor grayColor];
-    [view addSubview:view];
+    [view addSubview:loadingView];
     
     return loadingView;
 }
@@ -70,6 +68,10 @@ static const NSTimeInterval kANSDelay = 0;
                         options:UIViewAnimationOptionLayoutSubviews
                      animations:^{
                          self.alpha = visible;
+                         if (visible) {
+                             [[self superview] bringSubviewToFront:self];
+                         }
+                         
                          self.state = visible;
                      } completion:^(BOOL finished) {
                          self.hidden = !visible;
@@ -77,17 +79,6 @@ static const NSTimeInterval kANSDelay = 0;
                      }];
 }
 
-#pragma mark -
-#pragma mark Private methods
-
-- (void)action:(CGFloat)alpha shouldHide:(BOOL)value state:(ANSLoadingViewState)state {
-    [UIView animateWithDuration:kANSInterval animations:^{
-        self.alpha = alpha;
-    } completion:^(BOOL finished) {
-        self.hidden = value;
-        self.state = state;
-    }];
-}
 #pragma mark -
 #pragma mark Public method
 
