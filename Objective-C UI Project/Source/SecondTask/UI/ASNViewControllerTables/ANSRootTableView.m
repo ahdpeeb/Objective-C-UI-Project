@@ -28,9 +28,10 @@
     
     ANSLoadingView *view = [NSBundle objectWithClass:[ANSLoadingView class]];
 //    ANSLoadingView *view = [ANSLoadingView loadingViewOnSuperView:self];
-//    self.loadingView = view;
-//    [view activate];
+
+    self.loadingView = view;
     [self addSubview:view];
+    [view activate];
 }
 
 #pragma mark -
