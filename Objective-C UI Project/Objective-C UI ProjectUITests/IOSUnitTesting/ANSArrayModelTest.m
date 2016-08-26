@@ -30,7 +30,7 @@ describe(@"ANSArrayModel", ^{
                 return [[ANSUser alloc] init];
             }];
             
-            [collection addObjects:objects];
+            [collection addObjectsInRange:objects];
         });
     
         it(@"objectAtIndex:100 shoudNot raise", ^{

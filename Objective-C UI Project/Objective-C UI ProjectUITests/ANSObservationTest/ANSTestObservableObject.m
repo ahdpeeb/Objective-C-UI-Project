@@ -10,26 +10,23 @@
 
 @implementation ANSTestObservableObject
 
+#define ASNSelectorForState(index) \
+    case ANSState##index: \
+        return @selector(didCallSelectorForState##index:)
+
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
-        case ANSState0:
-            return @selector(didCallSelectorForState0:);
-            
-        case ANSState1:
-            return @selector(didCallSelectorForState1:);
-            
-        case ANSState2:
-            return @selector(didCallSelectorForState2:);
-        
-        case ANSState3:
-            return @selector(didCallSelectorForState3:);
-            
-        case ANSState4:
-            return @selector(didCallSelectorForState4:);
-            
+            ASNSelectorForState(0);
+            ASNSelectorForState(1);
+            ASNSelectorForState(2);
+            ASNSelectorForState(3);
+            ASNSelectorForState(4);
+
         default:
             return [super selectorForState:state];
     }
 }
+
+#undef ASNSelectorForState
 
 @end

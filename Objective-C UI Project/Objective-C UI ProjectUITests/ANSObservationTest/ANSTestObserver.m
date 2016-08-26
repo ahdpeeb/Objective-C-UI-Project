@@ -16,24 +16,17 @@
 
 @implementation ANSTestObserver
 
-- (void)didCallSelectorForState0:(ANSTestObservableObject *)observableObject {
-    NSLog(@"didCallForState0");
-}
+#define ANSCallBackSelector(index) \
+    - (void)didCallSelectorForState##index:(id)observableObject { \
+    NSLog(@"didCallForState" "#index"); \
+    } \
 
-- (void)didCallSelectorForState1:(ANSTestObservableObject *)observableObject {
-    NSLog(@"didCallForState1");
-}
+ANSCallBackSelector(0);
+ANSCallBackSelector(1);
+ANSCallBackSelector(2);
+ANSCallBackSelector(3);
+ANSCallBackSelector(4);
 
-- (void)didCallSelectorForState2:(ANSTestObservableObject *)observableObject {
-    NSLog(@"didCallForState2");
-}
-
-- (void)didCallSelectorForState3:(ANSTestObservableObject *)observableObject {
-    NSLog(@"didCallForState3");
-}
-
-- (void)didCallSelectorForState4:(ANSTestObservableObject *)observableObject {
-    NSLog(@"didCallForState4");
-}
+#undef ANSCallBackSelector
 
 @end

@@ -12,11 +12,16 @@
 
 @protocol ANSNotificationTest <NSObject>
 
-- (void)didCallSelectorForState0:(ANSTestObservableObject *)observableObject;
-- (void)didCallSelectorForState1:(ANSTestObservableObject *)observableObject;
-- (void)didCallSelectorForState2:(ANSTestObservableObject *)observableObject;
-- (void)didCallSelectorForState3:(ANSTestObservableObject *)observableObject;
-- (void)didCallSelectorForState4:(ANSTestObservableObject *)observableObject;
+#define ANSNotificationTestSelector(index) \
+- (void)didCallSelectorForState##index:(id)observableObject
+
+ANSNotificationTestSelector(0);
+ANSNotificationTestSelector(1);
+ANSNotificationTestSelector(2);
+ANSNotificationTestSelector(3);
+ANSNotificationTestSelector(4);
+
+#undef ANSNotificationTestSelector
 
 @end
 

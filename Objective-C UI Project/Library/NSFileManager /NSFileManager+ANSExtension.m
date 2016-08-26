@@ -27,11 +27,13 @@ static NSString * const kANSPlist = @".plist";
 
 - (NSString *)pathToFile:(NSString *)file inSearchPathDirectory:(NSSearchPathDirectory)directory  {
     NSString *directoryPath = [self pathToSearchPathDirectory:directory];
+    
     return [directoryPath stringByAppendingPathComponent:file];
 }
 
 - (BOOL)fileExists:(NSString *)file inSearchPathDirectory:(NSSearchPathDirectory)directory {
     NSString *filePath = [self pathToFile:file inSearchPathDirectory:directory];
+    
     return [self fileExistsAtPath:filePath];
 }
 
@@ -40,9 +42,9 @@ static NSString * const kANSPlist = @".plist";
     if (![self fileExistsAtPath:directoryPath]) {
         NSError *error = nil;
         BOOL success = [self createDirectoryAtPath:directoryPath
-        withIntermediateDirectories:NO
-                         attributes:nil
-                              error:&error];
+                       withIntermediateDirectories:YES
+                                        attributes:nil
+                                             error:&error];
         
         if(!success) {
             NSLog(@"[ERROR] %@ (%@)",error, directoryPath);

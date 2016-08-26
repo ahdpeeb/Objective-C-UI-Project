@@ -36,6 +36,7 @@
     self = [super init];
     self.controllerHashTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
     self.shouldNotify = YES;
+    self.state = NSUIntegerMax;
     
     return self;
 }

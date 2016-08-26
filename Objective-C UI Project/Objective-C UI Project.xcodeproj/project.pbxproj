@@ -93,6 +93,8 @@
 		9388ED121D4BEA220082EE4B /* ANSImageModelDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 9388ED101D4BEA220082EE4B /* ANSImageModelDispatcher.m */; };
 		938A1BE61D70317400A77EFB /* ANSRangeChangeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 938A1BE51D70317400A77EFB /* ANSRangeChangeModel.m */; };
 		938A1BE91D7036F200A77EFB /* ANSRangeChangeModel+UITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 938A1BE81D7036F200A77EFB /* ANSRangeChangeModel+UITableView.m */; };
+		938A1BEA1D70841100A77EFB /* ANSRangeChangeModel+UITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 938A1BE81D7036F200A77EFB /* ANSRangeChangeModel+UITableView.m */; };
+		938A1BEB1D70843100A77EFB /* ANSRangeChangeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 938A1BE51D70317400A77EFB /* ANSRangeChangeModel.m */; };
 		93C084301D3E36B20077A81C /* iOS Study Plan.txt in Resources */ = {isa = PBXBuildFile; fileRef = 93C0842F1D3E36B20077A81C /* iOS Study Plan.txt */; };
 		93C084351D3E380D0077A81C /* ANSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C084321D3E380D0077A81C /* ANSAppDelegate.m */; };
 		93C084371D3E380D0077A81C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C084341D3E380D0077A81C /* main.m */; };
@@ -996,6 +998,7 @@
 				9342601F1D670B9A00F15366 /* ANSArrayModelTest.m in Sources */,
 				93425FF71D65E9B600F15366 /* UITableView+Extension.m in Sources */,
 				934260001D65E9D900F15366 /* NSTimer+ANSExtension.m in Sources */,
+				938A1BEB1D70843100A77EFB /* ANSRangeChangeModel.m in Sources */,
 				9342600B1D65EA0900F15366 /* ANSOneIndexModel.m in Sources */,
 				934260041D65E9E800F15366 /* ANSTableViewCell.m in Sources */,
 				93425FFB1D65E9C500F15366 /* NSMutableArray+ANSExtension.m in Sources */,
@@ -1010,6 +1013,7 @@
 				93425FF61D65E9B200F15366 /* ANSObservableObject.m in Sources */,
 				934260251D670BBD00F15366 /* ANSNotificationTest.m in Sources */,
 				9342600C1D65EA0B00F15366 /* ANSTwoIndexModel.m in Sources */,
+				938A1BEA1D70841100A77EFB /* ANSRangeChangeModel+UITableView.m in Sources */,
 				934260031D65E9E300F15366 /* ANSImageModelDispatcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
