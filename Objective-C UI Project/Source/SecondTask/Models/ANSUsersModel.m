@@ -168,7 +168,7 @@ static NSString * const kANSPlistName = @"aaa";
         return;
     }
     
-    if (state == ANSUsersModelUnloaded) {
+    if (state == ANSUsersModelUnloaded || state == ANSUsersModelDidFailLoading) {
         self.state = ANSUsersModelLoading;
         ANSWeakify(self);
         ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
