@@ -22,7 +22,7 @@ static const NSTimeInterval kANSInterval = 1.0f;
 #pragma mark -
 #pragma mark Class methods
 
-+ (instancetype)attachToView:(UIView *)view {
++ (instancetype)loadingViewOnSuperView:(UIView *)view {
     ANSLoadingView *loadingView = [[[self class] alloc] initWithFrame:view.bounds];
     loadingView.autoresizingMask =    UIViewAutoresizingFlexibleLeftMargin
                                     | UIViewAutoresizingFlexibleWidth

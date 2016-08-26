@@ -1,16 +1,16 @@
 //
-//  ANSOneIndexModel+UItableView.h
+//  ANSRangeChangeModel+UITableView.h
 //  Objective-C UI Project
 //
-//  Created by Nikola Andriiev on 16.08.16.
+//  Created by Nikola Andriiev on 26.08.16.
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-#import "ANSOneIndexModel.h"
+#import "ANSRangeChangeModel.h"
 
-@interface ANSOneIndexModel (UITableView)
+@interface ANSRangeChangeModel (UITableView)
 
 - (void)applyToTableView:(UITableView *)tableView;
 

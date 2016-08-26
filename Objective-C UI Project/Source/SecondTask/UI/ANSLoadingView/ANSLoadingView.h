@@ -17,9 +17,10 @@ typedef NS_ENUM(NSUInteger, ANSLoadingViewState) {
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *indicator;
 
 @property (nonatomic, readonly) ANSLoadingViewState state;
+@property (nonatomic, assign, getter=isVisible) BOOL visible; 
 
 //argument view must be subclass of UIView 
-+ (instancetype)attachToView:(UIView *)view; 
++ (instancetype)loadingViewOnSuperView:(UIView *)view;
 
 - (void)activate;
 - (void)deactivate;

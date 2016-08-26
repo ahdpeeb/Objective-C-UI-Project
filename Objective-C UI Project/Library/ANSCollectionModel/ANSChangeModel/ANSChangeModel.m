@@ -7,8 +7,10 @@
 //
 
 #import "ANSChangeModel.h"
+
 #import "ANSOneIndexModel.h"
 #import "ANSTwoIndexModel.h"
+#import "ANSRangeChangeModel.h"
 
 @implementation ANSChangeModel
 
@@ -19,8 +21,12 @@
     return [[ANSOneIndexModel alloc] initWithIndex:index];
 }
 
-+ (instancetype)twoIndexModel:(NSUInteger)index indexTwo:(NSUInteger)indexTwo {
-    return [[ANSTwoIndexModel alloc] initWithIndex:index indexTwo:indexTwo];
++ (instancetype)twoIndexModel:(NSUInteger)index index2:(NSUInteger)index2 {
+    return [[ANSTwoIndexModel alloc] initWithIndex:index index2:index2];
+}
+
++ (instancetype)rangeModelFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+    return [[ANSRangeChangeModel alloc] initFromIndex:fromIndex toIndex:toIndex];
 }
 
 #pragma mark -

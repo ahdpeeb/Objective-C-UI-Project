@@ -15,7 +15,7 @@
 typedef void(^ANSExecutableBlock)(void);
 typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controller);
 
-@interface ANSObservableObject : NSObject
+@interface ANSObservableObject : NSObject <NSCopying>
 @property (atomic, assign)  NSUInteger state;
 
 - (void)setState:(NSUInteger)state withUserInfo:(id)UserInfo;

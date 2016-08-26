@@ -23,7 +23,7 @@ static NSString * const kANSPlistName = @"aaa";
 @property (nonatomic, retain) NSOperation *operation;
 
 - (SEL)selectorForState:(NSUInteger)state;
-- (ANSUsersModel *)sortUsersByFilterString:(NSString *)filterString;
+- (void)sortUsersByFilterString:(NSString *)filterString;
 
 @end
 
@@ -48,7 +48,7 @@ static NSString * const kANSPlistName = @"aaa";
         }
 
         [self performBlockWithoutNotification:^{
-            [self addObjects:users];
+            [self addObjectsInRange:users];
         }];
         
         ANSPerformInMainQueue(dispatch_async, ^{
@@ -78,7 +78,7 @@ static NSString * const kANSPlistName = @"aaa";
             return @selector(userModelDidLoad:);
             
         case ANSUsersModelDidfilter:
-            return @selector(model:didFilterWithUserInfo:);
+            return @selector(modeldidFilter:);
             
         default:
           return [super selectorForState:state];
@@ -86,19 +86,22 @@ static NSString * const kANSPlistName = @"aaa";
 }
 
 
-- (ANSUsersModel *)sortUsersByFilterString:(NSString *)filterString {
-    ANSUsersModel * users = [ANSUsersModel new];
+- (void)sortUsersByFilterString:(NSString *)filterString {
+    NSMutableArray *otherUsers = [NSMutableArray new];
     for (ANSUser *user in self) {
         if ((filterString.length > 0)
             && [user.string rangeOfString:filterString
                                   options:NSCaseInsensitiveSearch].location == NSNotFound) {
-                continue;
-            } else {
-                [users addObject:user];
-            }
+                [otherUsers addObject:user];
+        }
     }
     
-    return users;
+    for (ANSUser *otherUser in otherUsers) {
+    [self performBlockWithoutNotification:^{
+        [self removeObject:otherUser];
+    }];
+        
+    }
 }
 
 #pragma mark -
@@ -118,18 +121,15 @@ static NSString * const kANSPlistName = @"aaa";
 }
 
 - (void)sortCollectionByfilterStirng:(NSString *)filterStirng {
-    __block ANSUsersModel *users = nil;
     ANSWeakify(self);
-    
     ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
         ANSStrongify(self);
-        users = [self sortUsersByFilterString:filterStirng];
+        [self sortUsersByFilterString:filterStirng];
         NSLog(@"have sorted");
         
         ANSPerformInMainQueue(dispatch_async, ^{
-            ANSStrongify(self);
             [self performBlockWithNotification:^{
-                [self notifyOfStateChange:ANSUsersModelDidfilter withUserInfo:users];
+                [self notifyOfStateChange:ANSUsersModelDidfilter];
             }];
         });
     });
@@ -141,7 +141,6 @@ static NSString * const kANSPlistName = @"aaa";
 - (void)save {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inDirectory:NSDocumentDirectory];
-//    BOOL value = [self.objects writeToFile:plistPath atomically:YES];
     BOOL isSuccessfully = [NSKeyedArchiver archiveRootObject:self.objects toFile:plistPath];
     NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
 }

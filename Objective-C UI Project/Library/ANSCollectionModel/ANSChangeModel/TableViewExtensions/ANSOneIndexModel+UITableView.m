@@ -8,6 +8,8 @@
 
 #import "ANSOneIndexModel+UITableView.h"
 
+#import "UITableView+Extension.h"
+
 @implementation ANSOneIndexModel (UTTableView)
 
 - (void)applyToTableView:(UITableView *)tableView {
@@ -19,23 +21,21 @@
 {
     NSIndexPath *path = [NSIndexPath indexPathForRow:self.index inSection:0];
     
-    [tableView beginUpdates];
-    
-    switch (self.state) {
-        case ANSStateAddObject:
-            [tableView insertRowsAtIndexPaths:@[path] withRowAnimation:animation];
-            break;
-            
-        case ANSStateRemoveObject:
-            [tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:animation];
-            break;
-            
-        default:
-            [tableView reloadData];
-            break;
-    }
-    
-    [tableView endUpdates];
+    [tableView updateWithBlock:^{
+        switch (self.state) {
+            case ANSStateAddObject:
+                [tableView insertRowsAtIndexPaths:@[path] withRowAnimation:animation];
+                break;
+                
+            case ANSStateRemoveObject:
+                [tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:animation];
+                break;
+                
+            default:
+                [tableView reloadData];
+                break;
+        }
+    }];
 }
 
 @end

@@ -16,7 +16,7 @@
 
 @optional
 
-- (void)model:(ANSUsersModel *)model didFilterWithUserInfo:(id)userInfo;
+- (void)modeldidFilter:(ANSUsersModel *)model;
 - (void)userModelDidLoad:(ANSUsersModel *)model;
 
 @end

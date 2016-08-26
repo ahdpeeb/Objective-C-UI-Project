@@ -20,8 +20,8 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 - (void)notifyOfChangeWithIndex:(NSUInteger)index state:(ANSChangeState)state;
 
-- (void)notifyOfChangeWithIndex:(NSUInteger)indexOne
-                         index2:(NSUInteger)indexTwo
+- (void)notifyOfChangeWithIndex:(NSUInteger)index1
+                         index2:(NSUInteger)index2
                           state:(ANSChangeState)state;
 
 @end
@@ -95,7 +95,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
                          index2:(NSUInteger)index2
                           state:(ANSChangeState)state
 {
-    ANSChangeModel *model = [ANSChangeModel twoIndexModel:index1 indexTwo:index2];
+    ANSChangeModel *model = [ANSChangeModel twoIndexModel:index1 index2:index2];
     model.state = state;
     [self notifyOfStateChange:0 withUserInfo:model];
 }
@@ -154,7 +154,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     }
 }
 
-- (void)addObjects:(NSArray *)objects {
+- (void)addObjectsInRange:(NSArray *)objects {
     @synchronized(self) {
        __block NSUInteger count = 0;
         [self performBlockWithoutNotification:^{
@@ -164,7 +164,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
             }
         }];
         
-        [self notifyOfChangeWithIndex:0 index2:count state:ANSStateAddObjects];
+        [self notifyOfChangeWithIndex:0 index2:count state:ANSStateAddObjectsInRange];
     }
 }
 
@@ -181,10 +181,10 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     }
 }
 
-- (void)exchangeObjectAtIndex:(NSUInteger)indexOne withObjectAtIndex:(NSUInteger)indexTwo {
+- (void)exchangeObjectAtIndex:(NSUInteger)indexOne withObjectAtIndex:(NSUInteger)index2 {
     @synchronized(self) {
-        [self.mutableObjects exchangeObjectAtIndex:indexOne withObjectAtIndex:indexTwo];
-        [self notifyOfChangeWithIndex:indexOne index2:indexTwo state:ANSStateExchangeObject];
+        [self.mutableObjects exchangeObjectAtIndex:indexOne withObjectAtIndex:index2];
+        [self notifyOfChangeWithIndex:indexOne index2:index2 state:ANSStateExchangeObject];
     }
 }
 
@@ -238,7 +238,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 #pragma mark NSCopying protocol
 
 - (id)copyWithZone:(NSZone *)zone {
-    ANSArrayModel *copy = [[self class] new];
+    ANSArrayModel *copy = [super copyWithZone:zone];
     if (copy) {
         id objects = [self.mutableObjects copyWithZone:zone];
         copy.mutableObjects = [NSMutableArray arrayWithArray:objects];

@@ -9,17 +9,17 @@
 #import "ANSTwoIndexModel.h"
 
 @interface ANSTwoIndexModel ()
-@property (nonatomic, assign) NSUInteger indexTwo;
+@property (nonatomic, assign) NSUInteger index2;
 
 @end
 
 @implementation ANSTwoIndexModel
 
 - (instancetype)initWithIndex:(NSUInteger)index
-                     indexTwo:(NSUInteger)indexTwo
+                     index2:(NSUInteger)index2
 {
     self = [super initWithIndex:index];
-    self.indexTwo = indexTwo;
+    self.index2 = index2;
     
     return self;
 }

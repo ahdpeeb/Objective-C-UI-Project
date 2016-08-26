@@ -6,14 +6,12 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #import "ANSOneIndexModel.h"
 
 @interface ANSTwoIndexModel : ANSOneIndexModel
-@property (nonatomic, readonly) NSUInteger indexTwo;
+@property (nonatomic, readonly) NSUInteger index2;
 
 - (instancetype)initWithIndex:(NSUInteger)index
-                     indexTwo:(NSUInteger)indexTwo;
+                     index2:(NSUInteger)index2;
 
 @end

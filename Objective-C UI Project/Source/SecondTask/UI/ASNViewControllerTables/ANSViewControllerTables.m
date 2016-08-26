@@ -254,7 +254,12 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [self.users sortCollectionByfilterStirng:searchText];
+    ANSUsersModel *copy = [self.users copy];
+    self.filteredCollection = copy;
+    BOOL value = [copy isObservedByObject:self];
+    if (value) {
+        [copy sortCollectionByfilterStirng:searchText];
+    }
 }
 
 #pragma mark -
@@ -269,9 +274,8 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
     NSLog(@"notified collectionDidUpdate, - %lu object", collection.count);
 }
 
-- (void)model:(ANSUsersModel *)model didFilterWithUserInfo:(id)userInfo {
-    NSLog(@"notified didFilterWithUserInfo - %@ ", userInfo);
-    self.filteredCollection = userInfo;
+- (void)modeldidFilter:(ANSUsersModel *)model {
+    NSLog(@"notified didFilterWithUserInfo - %@ ", model);
     [self.rootView.table reloadData];
 }
 

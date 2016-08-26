@@ -14,10 +14,10 @@
 - (NSString *)pathToApplicationDirectory;
 - (NSString *)pathToDirectory:(NSSearchPathDirectory)directory;
 
-// argument file format should be write with extension.Sample - "data.plist"
+// argument file format should be write with extension.Sample - "data.txt"
 - (NSString *)pathToFile:(NSString *)file inDirectory:(NSSearchPathDirectory)directory;
 
-// argument file format should be write with extension.Sample - "data.plist"
+// argument file format should be write with extension.Sample - "data.txt"
 - (BOOL)isExistsFile:(NSString *)file inDirectory:(NSSearchPathDirectory)directory;
 
 - (NSString *)directoryWithName:(NSString *)name inDirectory:(NSSearchPathDirectory)directory;

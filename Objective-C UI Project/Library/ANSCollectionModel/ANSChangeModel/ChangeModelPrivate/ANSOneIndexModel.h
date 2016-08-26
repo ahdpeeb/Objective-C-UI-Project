@@ -12,8 +12,6 @@
 
 @interface ANSOneIndexModel : ANSChangeModel
 
-//You should never call setter to this ptoperty.
-//write mod intended for subclasses
 @property (nonatomic, readonly) NSUInteger index;
 
 - (instancetype)initWithIndex:(NSUInteger)index;

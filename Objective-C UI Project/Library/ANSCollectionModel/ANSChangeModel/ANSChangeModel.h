@@ -12,10 +12,10 @@
 
 typedef NS_ENUM(NSUInteger, ANSChangeState) {
     ANSStateAddObject,
-    ANSStateAddObjects,
     ANSStateRemoveObject,
     ANSStateMoveObject,
-    ANSStateExchangeObject
+    ANSStateExchangeObject,
+    ANSStateAddObjectsInRange,
 };
 
 @interface ANSChangeModel : NSObject
@@ -23,7 +23,7 @@ typedef NS_ENUM(NSUInteger, ANSChangeState) {
 @property (nonatomic, assign) ANSChangeState state;
 
 + (instancetype)oneIndexModel:(NSUInteger)index; 
-+ (instancetype)twoIndexModel:(NSUInteger)index indexTwo:(NSUInteger)indexTwo; 
-
++ (instancetype)twoIndexModel:(NSUInteger)index index2:(NSUInteger)index2;
++ (instancetype)rangeModelFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
 
 @end

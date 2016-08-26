@@ -37,8 +37,6 @@ typedef NS_ENUM(NSUInteger, ANSState) {
 @property (nonatomic, readonly, getter=isLoaded)    BOOL        loaded;
 @property (nonatomic, readonly)                     NSArray     *objects;
 
-- (void)setState:(NSUInteger)state withUserInfo:(id)userInfo; 
-
 - (id)objectAtIndex:(NSUInteger)index;
 - (NSUInteger)indexOfObject:(id)object;
 - (id)objectAtIndexedSubscript:(NSUInteger)idx;
@@ -55,13 +53,14 @@ typedef NS_ENUM(NSUInteger, ANSState) {
 //notify with ANSDefaultState state
 - (void)removeObjectAtIndex:(NSUInteger)index;
 
-- (void)addObjects:(NSArray*)objects;
+- (void)addObjectsInRange:(NSArray*)objects;
+//- (void)removeObjectsInRange:(NSArray *)objects;
 
 //notify with ANSDefaultState state
 - (void)moveObjectFromIndex:(NSUInteger)index toIndex:(NSUInteger)index;
 
 //notify with ANSDefaultState state
 - (void)exchangeObjectAtIndex:(NSUInteger)indexOne
-            withObjectAtIndex:(NSUInteger)indexTwo;
+            withObjectAtIndex:(NSUInteger)index2;
 
 @end
