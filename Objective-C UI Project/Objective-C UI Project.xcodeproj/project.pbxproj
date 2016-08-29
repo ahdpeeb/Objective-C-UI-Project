@@ -71,7 +71,6 @@
 		936727D91D591D25007A796F /* ANSRootTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C81D591D25007A796F /* ANSRootTableView.m */; };
 		936727DA1D591D25007A796F /* ANSViewControllerTables.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727CA1D591D25007A796F /* ANSViewControllerTables.m */; };
 		936727DB1D591D25007A796F /* ANSViewControllerTables.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936727CB1D591D25007A796F /* ANSViewControllerTables.xib */; };
-		9383E33E1D6E17E20037C775 /* NSFileManager+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9383E33D1D6E17E20037C775 /* NSFileManager+ANSExtension.m */; };
 		9388ECDF1D49FEB50082EE4B /* ANSDataInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9388ECDE1D49FEB50082EE4B /* ANSDataInfo.m */; };
 		9388ECF11D4A396F0082EE4B /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE11D4A396F0082EE4B /* 1.png */; };
 		9388ECF21D4A396F0082EE4B /* 10.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE21D4A396F0082EE4B /* 10.png */; };
@@ -95,6 +94,7 @@
 		938A1BE91D7036F200A77EFB /* ANSRangeChangeModel+UITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 938A1BE81D7036F200A77EFB /* ANSRangeChangeModel+UITableView.m */; };
 		938A1BEA1D70841100A77EFB /* ANSRangeChangeModel+UITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 938A1BE81D7036F200A77EFB /* ANSRangeChangeModel+UITableView.m */; };
 		938A1BEB1D70843100A77EFB /* ANSRangeChangeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 938A1BE51D70317400A77EFB /* ANSRangeChangeModel.m */; };
+		939BAD841D74257800B4D610 /* NSFileManager+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BAD831D74257800B4D610 /* NSFileManager+ANSExtension.m */; };
 		93C084301D3E36B20077A81C /* iOS Study Plan.txt in Resources */ = {isa = PBXBuildFile; fileRef = 93C0842F1D3E36B20077A81C /* iOS Study Plan.txt */; };
 		93C084351D3E380D0077A81C /* ANSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C084321D3E380D0077A81C /* ANSAppDelegate.m */; };
 		93C084371D3E380D0077A81C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C084341D3E380D0077A81C /* main.m */; };
@@ -186,8 +186,6 @@
 		936727C91D591D25007A796F /* ANSViewControllerTables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSViewControllerTables.h; sourceTree = "<group>"; };
 		936727CA1D591D25007A796F /* ANSViewControllerTables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSViewControllerTables.m; sourceTree = "<group>"; };
 		936727CB1D591D25007A796F /* ANSViewControllerTables.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSViewControllerTables.xib; sourceTree = "<group>"; };
-		9383E33C1D6E17E20037C775 /* NSFileManager+ANSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+ANSExtension.h"; sourceTree = "<group>"; };
-		9383E33D1D6E17E20037C775 /* NSFileManager+ANSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+ANSExtension.m"; sourceTree = "<group>"; };
 		9388ECDD1D49FEB50082EE4B /* ANSDataInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSDataInfo.h; sourceTree = "<group>"; };
 		9388ECDE1D49FEB50082EE4B /* ANSDataInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSDataInfo.m; sourceTree = "<group>"; };
 		9388ECE11D4A396F0082EE4B /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
@@ -214,6 +212,8 @@
 		938A1BE51D70317400A77EFB /* ANSRangeChangeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSRangeChangeModel.m; sourceTree = "<group>"; };
 		938A1BE71D7036F200A77EFB /* ANSRangeChangeModel+UITableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANSRangeChangeModel+UITableView.h"; sourceTree = "<group>"; };
 		938A1BE81D7036F200A77EFB /* ANSRangeChangeModel+UITableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANSRangeChangeModel+UITableView.m"; sourceTree = "<group>"; };
+		939BAD821D74257800B4D610 /* NSFileManager+ANSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+ANSExtension.h"; sourceTree = "<group>"; };
+		939BAD831D74257800B4D610 /* NSFileManager+ANSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+ANSExtension.m"; sourceTree = "<group>"; };
 		93C084071D3E367F0077A81C /* Objective-C UI Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Objective-C UI Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C084201D3E36800077A81C /* Objective-C UI ProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Objective-C UI ProjectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C084261D3E36800077A81C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -462,12 +462,12 @@
 				933B745D1D65A8B100DF3DF9 /* UIScreen */,
 				933B744E1D648CE200DF3DF9 /* UIViewController */,
 				93EC8F621D48D9A6000624F0 /* UITableView */,
-				93EC8F5B1D48CDAA000624F0 /* UINib */,
 				93C5A5DE1D40DF3D002FBCA8 /* NSArray */,
 				933B74261D63232100DF3DF9 /* NSMutableArray */,
 				93C5A5E41D40DF3D002FBCA8 /* NSString */,
 				933B74681D65C48D00DF3DF9 /* NSBundle */,
-				9383E33B1D6E17E10037C775 /* NSFileManager  */,
+				93EC8F5B1D48CDAA000624F0 /* UINib */,
+				939BAD811D74257800B4D610 /* NSFileManager */,
 				93C5A5D91D40DF3D002FBCA8 /* ANSTimer */,
 			);
 			name = Extensions;
@@ -503,15 +503,6 @@
 				936727C61D591D25007A796F /* ANSDataCell.xib */,
 			);
 			path = ANDDataCell;
-			sourceTree = "<group>";
-		};
-		9383E33B1D6E17E10037C775 /* NSFileManager  */ = {
-			isa = PBXGroup;
-			children = (
-				9383E33C1D6E17E20037C775 /* NSFileManager+ANSExtension.h */,
-				9383E33D1D6E17E20037C775 /* NSFileManager+ANSExtension.m */,
-			);
-			path = "NSFileManager ";
 			sourceTree = "<group>";
 		};
 		9388ECE01D4A396F0082EE4B /* animationDancer */ = {
@@ -554,6 +545,15 @@
 				9388ED101D4BEA220082EE4B /* ANSImageModelDispatcher.m */,
 			);
 			path = ANSImageModelDispatcher;
+			sourceTree = "<group>";
+		};
+		939BAD811D74257800B4D610 /* NSFileManager */ = {
+			isa = PBXGroup;
+			children = (
+				939BAD821D74257800B4D610 /* NSFileManager+ANSExtension.h */,
+				939BAD831D74257800B4D610 /* NSFileManager+ANSExtension.m */,
+			);
+			path = NSFileManager;
 			sourceTree = "<group>";
 		};
 		93C083FE1D3E367F0077A81C = {
@@ -933,7 +933,6 @@
 				93C5A60D1D41265C002FBCA8 /* ANSTableViewCell.m in Sources */,
 				93026CD11D44C2BE00DFCF23 /* ANSUsersModel.m in Sources */,
 				933B74551D65A68600DF3DF9 /* ANSLoadingView.m in Sources */,
-				9383E33E1D6E17E20037C775 /* NSFileManager+ANSExtension.m in Sources */,
 				93C5A6091D4107DB002FBCA8 /* NSString+ANSExtension.m in Sources */,
 				936727D91D591D25007A796F /* ANSRootTableView.m in Sources */,
 				93C5A61A1D412D31002FBCA8 /* ANSUser.m in Sources */,
@@ -945,6 +944,7 @@
 				933C74671D50908100A423B9 /* ANSProtocolObservationController.m in Sources */,
 				9388ECDF1D49FEB50082EE4B /* ANSDataInfo.m in Sources */,
 				933C74651D50908100A423B9 /* ANSBlockObservationController.m in Sources */,
+				939BAD841D74257800B4D610 /* NSFileManager+ANSExtension.m in Sources */,
 				93052AE11D4CF2370007D20C /* ANSImageView.m in Sources */,
 				933B746B1D65C48D00DF3DF9 /* NSBundle+ANSExtenison.m in Sources */,
 				93C5A5F31D40DF3D002FBCA8 /* ANSTimerPrivate.m in Sources */,
