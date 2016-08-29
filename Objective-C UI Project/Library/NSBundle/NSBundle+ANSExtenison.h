@@ -11,6 +11,6 @@
 @interface NSBundle (ANSExtenison)
 
 //returns main view from nib. nibName and ViewName must match. 
-+ (id)objectWithClass:(Class)cls;
++ (id)objectWithClass:(Class)cls owner:(id)owner; 
 
 @end

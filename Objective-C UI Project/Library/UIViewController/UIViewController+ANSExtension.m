@@ -10,11 +10,12 @@
 
 @implementation UIViewController (ANSExtension)
 
-+ (id)controller {
-    UIViewController *object = [[self class] new];
-    NSString *name = NSStringFromClass([object class]);
++ (id)viewController {
+    return [[self alloc] initWithNibName:[self nibName] bundle:nil];
+}
 
-    return [object initWithNibName:name bundle:nil];
++ (NSString *)nibName {
+    return NSStringFromClass([self class]);
 }
 
 @end

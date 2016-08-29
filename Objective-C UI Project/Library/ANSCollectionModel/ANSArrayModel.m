@@ -82,10 +82,18 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
                           state:(ANSChangeState)state
 {
     ANSChangeModel *model = nil;
-    if (state == ANSStateAddObjectsInRange) {
-        model = [ANSChangeModel rangeModelFromIndex:index1 toIndex:index2];
-    } else if ((state == ANSStateMoveObject) || (state == ANSStateExchangeObject)) {
-        model = [ANSChangeModel twoIndexModel:index1 index2:index2];
+    switch (state) {
+        case ANSStateAddObjectsInRange:
+            model = [ANSChangeModel rangeModelFromIndex:index1 toIndex:index2];
+            break;
+        
+        case ANSStateMoveObject:
+        case ANSStateExchangeObject:
+            model = [ANSChangeModel rangeModelFromIndex:index1 toIndex:index2];
+            break;
+            
+        default:
+            break;
     }
     
     [ANSChangeModel twoIndexModel:index1 index2:index2];

@@ -26,6 +26,7 @@ static const NSTimeInterval kANSDelay = 0;
 
 + (instancetype)loadingViewOnSuperView:(UIView *)view {
     ANSLoadingView *loadingView = [[[self class] alloc] initWithFrame:view.bounds];
+    loadingView.visible = YES;
     loadingView.autoresizingMask =    UIViewAutoresizingFlexibleLeftMargin
                                     | UIViewAutoresizingFlexibleWidth
                                     | UIViewAutoresizingFlexibleRightMargin

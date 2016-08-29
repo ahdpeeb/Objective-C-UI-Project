@@ -11,6 +11,9 @@
 @interface UIViewController (ANSExtension)
 
 //Your viewControler class name must match with nib name(module)
-+ (id)controller; 
++ (id)viewController; 
+
+//method for reloading in child classes (if class name doesnt match with nib name)
++ (NSString *)nibName;
 
 @end

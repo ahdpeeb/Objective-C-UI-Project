@@ -12,7 +12,7 @@
 
 @class ANSUsersModel;
 
-@protocol ANSCollectionObserverSpecial <ANSCollectionObserver>
+@protocol ANSCollectionObserverSpecial <ANSArrayModelObserver>
 
 @optional
 

@@ -13,9 +13,9 @@
 
 @implementation NSBundle (ANSExtenison)
 
-+ (id)objectWithClass:(Class)cls {
++ (id)objectWithClass:(Class)cls owner:(id)owner {
     NSString *string = NSStringFromClass(cls);
-    NSArray *elements = [[NSBundle mainBundle] loadNibNamed:string owner:nil options:nil];
+    NSArray *elements = [[NSBundle mainBundle] loadNibNamed:string owner:owner options:nil];
     for (id element in elements) {
         if ([element isMemberOfClass:cls]) {
             return element;

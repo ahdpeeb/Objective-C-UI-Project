@@ -13,7 +13,7 @@
 @class ANSArrayModel;
 @class ANSChangeModel;
 
-@protocol ANSCollectionObserver <NSObject>
+@protocol ANSArrayModelObserver <NSObject>
 
 @optional
 
@@ -22,7 +22,7 @@
 
 @end
 
-typedef NS_ENUM(NSUInteger, ANSState) {
+typedef NS_ENUM(NSUInteger, ANSArrayModelState) {
     ANSDefaultState,
     ANSStateCount
 };

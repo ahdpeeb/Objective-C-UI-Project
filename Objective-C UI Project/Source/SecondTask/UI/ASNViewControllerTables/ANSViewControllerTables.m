@@ -226,7 +226,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-   id controller = [ANSViewControllerTables controller];
+    id controller = [ANSViewControllerTables viewController];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
