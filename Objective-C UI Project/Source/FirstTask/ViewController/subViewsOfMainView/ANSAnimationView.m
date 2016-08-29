@@ -20,7 +20,7 @@ static const NSUInteger KANSImageCount = 16;
 @property (nonatomic, strong) UIImageView   *animationImage;
 @property (nonatomic, assign) BOOL          shouldStop;
 
-// returns new cutted CGRect from superView rect
+// returns new cutted CGRect from superview rect
 - (CGRect)insectedFrame;
 
 // generate point from position

@@ -37,6 +37,7 @@ static const NSUInteger kANSUsersCount              = 10;
 @property (nonatomic, strong) ANSUsersModel                     *filteredCollection;
 
 - (void)resignSearchBar;
+- (ANSUsersModel *)presentedModel;
 
 @end
 
@@ -83,6 +84,12 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
     if (searchBar.isFirstResponder) {
         [self searchBarCancelButtonClicked:searchBar];
     }
+}
+
+- (ANSUsersModel *)presentedModel {
+    BOOL isFirstResponder = self.rootView.searchBar.isFirstResponder;
+    return isFirstResponder ? self.filteredCollection : self.users;
+
 }
 
 #pragma mark -
@@ -155,11 +162,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 - (NSInteger)   tableView:(UITableView *)tableView
     numberOfRowsInSection:(NSInteger)section
 {
-    if (self.rootView.searchBar.isFirstResponder) {
-        return self.filteredCollection.count;
-    }  else {
-        return self.users.count;
-    }
+    return [self presentedModel].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -167,14 +170,10 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 {
     ANSDataCell *cell = [tableView reusableCellfromNibWithClass:[ANSDataCell class]];
     
-    ANSUser *object = nil;
-    if (self.rootView.searchBar.isFirstResponder) {
-        object = self.filteredCollection[indexPath.row];
-    } else {
-        object = self.users[indexPath.row];
-    }
+    ANSUser *user = nil;
+    user = [self presentedModel][indexPath.row];
     
-    [cell fillInfoFromObject:object];
+    [cell fillInfoFromObject:user];
 
     return cell;
 }
