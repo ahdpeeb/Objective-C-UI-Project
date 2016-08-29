@@ -14,7 +14,7 @@ static const NSTimeInterval kANSDelay = 0;
 static const CGFloat        kANSMinAlpha = 0;
 static const CGFloat        kANSMaxAlpha = 1;
 
-typedef void(^ANSComplititionBlock)(void);
+typedef void(^ANSCompletionBlock)(void);
 
 @interface ANSLoadingView : UIView
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *indicator;
@@ -29,6 +29,6 @@ typedef void(^ANSComplititionBlock)(void);
 
 - (void)setVisible:(BOOL)visible
           animated:(BOOL)animated
- complititionBlock:(ANSComplititionBlock)block;
+ complititionBlock:(ANSCompletionBlock)block;
 
 @end

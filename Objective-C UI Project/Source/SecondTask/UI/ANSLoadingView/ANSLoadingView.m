@@ -69,7 +69,7 @@
 
 - (void)setVisible:(BOOL)visible
           animated:(BOOL)animated
- complititionBlock:(ANSComplititionBlock)block {
+ complititionBlock:(ANSCompletionBlock)block {
     if (_visible == visible) {
         return;
     }

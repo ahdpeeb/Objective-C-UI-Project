@@ -22,10 +22,10 @@ typedef void (*ANSDispatch)(ANSQSGCQueue queue, ANSGCDBlock block);
 
 //Identifier of queue prioryty
 typedef enum {
-    ANSPriorityHigh         = DISPATCH_QUEUE_PRIORITY_HIGH,          //  *  - DISPATCH_QUEUE_PRIORITY_HIGH:
-    ANSPriorityDefault      = DISPATCH_QUEUE_PRIORITY_DEFAULT,       //  *  - DISPATCH_QUEUE_PRIORITY_DEFAULT:
-    ANSPriorityLow          = DISPATCH_QUEUE_PRIORITY_LOW,           //  *  - DISPATCH_QUEUE_PRIORITY_LOW:
-    ANSPriorityBackground   = DISPATCH_QUEUE_PRIORITY_BACKGROUND     //  *  - DISPATCH_QUEUE_PRIORITY_BACKGROUND:
+    ANSPriorityHigh         = DISPATCH_QUEUE_PRIORITY_HIGH,
+    ANSPriorityDefault      = DISPATCH_QUEUE_PRIORITY_DEFAULT,
+    ANSPriorityLow          = DISPATCH_QUEUE_PRIORITY_LOW,
+    ANSPriorityBackground   = DISPATCH_QUEUE_PRIORITY_BACKGROUND
 } ANSPriorityType;
 
 #pragma mark -
