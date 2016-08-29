@@ -15,7 +15,8 @@
 #import "NSArray+ANSExtension.h"
 #import "NSFileManager+ANSExtension.h"
 
-static const NSUInteger sleepTime = 5;
+static const NSUInteger kANSSleepTime = 5;
+static const NSUInteger kANSUsersCount = 20;
 
 static NSString * const kANSPlistName = @"aaa";
 
@@ -24,7 +25,7 @@ static NSString * const kANSPlistName = @"aaa";
 
 - (SEL)selectorForState:(NSUInteger)state;
 - (void)sortUsersByFilterString:(NSString *)filterString;
-- (id)loadUsers;
+- (id)usersFromFileSystem;
 
 @end
 
@@ -104,13 +105,27 @@ static NSString * const kANSPlistName = @"aaa";
                 [otherUsers addObject:user];
         }
     }
-    
-    for (ANSUser *otherUser in otherUsers) {
     [self performBlockWithoutNotification:^{
-        [self removeObject:otherUser];
+        for (ANSUser *otherUser in otherUsers) {
+            [self removeObject:otherUser];
+        }
     }];
-        
-    }
+}
+
+#pragma mark -
+#pragma mark Private Methods
+
+- (id)usersFromFileSystem  {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inSearchPathDirectory:NSDocumentDirectory];
+    
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:plistPath];
+}
+
+- (id)newUsers {
+    return [NSArray objectsWithCount:kANSUsersCount block:^id{
+        return [ANSUser new];
+    }];
 }
 
 #pragma mark -
@@ -137,9 +152,7 @@ static NSString * const kANSPlistName = @"aaa";
         NSLog(@"have sorted");
         
         ANSPerformInMainQueue(dispatch_async, ^{
-            [self performBlockWithNotification:^{
-                [self notifyOfStateChange:ANSUsersModelDidfilter];
-            }];
+            [self notifyOfStateChange:ANSUsersModelDidfilter];
         });
     });
 }
@@ -154,13 +167,6 @@ static NSString * const kANSPlistName = @"aaa";
     NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
 }
 
-- (id)loadUsers  {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inSearchPathDirectory:NSDocumentDirectory];
- 
-    return [NSKeyedUnarchiver unarchiveObjectWithFile:plistPath];
-}
-
 - (void)load {
     ANSUserLoadingState state = self.state;
     if (state == ANSUsersModelLoading || state == ANSUsersModelDidLoad) {
@@ -173,8 +179,12 @@ static NSString * const kANSPlistName = @"aaa";
         ANSWeakify(self);
         ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
             ANSStrongify(self);
-            id users = [self loadUsers];
-            sleep(sleepTime);
+            id users = [self usersFromFileSystem];
+            if (!users) {
+                users = [self usersFromFileSystem];
+            }
+            
+            sleep(kANSSleepTime);
             if (!users) {
                 ANSPerformInMainQueue(dispatch_async, ^{
                     self.state = ANSUsersModelDidFailLoading;

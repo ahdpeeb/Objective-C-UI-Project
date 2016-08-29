@@ -8,14 +8,11 @@
 
 #import "ANSLoadingView.h"
 
+#import "NSBundle+ANSExtenison.h"
+
 #import "ANSMacros.h"
 
-static const NSTimeInterval kANSInterval = 1.0f;
-static const NSTimeInterval kANSDelay = 0;
-
 @interface ANSLoadingView ()
-@property (nonatomic, assign) ANSLoadingViewState state;
-@property (nonatomic, assign, getter=isVisible) BOOL visible;
 
 @end
 
@@ -25,27 +22,35 @@ static const NSTimeInterval kANSDelay = 0;
 #pragma mark Class methods
 
 + (instancetype)loadingViewOnSuperView:(UIView *)view {
-    ANSLoadingView *loadingView = [[[self class] alloc] initWithFrame:view.bounds];
-    loadingView.visible = YES;
+    ANSLoadingView *loadingView = [NSBundle objectWithClass:[self class] owner:nil];
+    loadingView.frame = view.bounds;
     loadingView.autoresizingMask =    UIViewAutoresizingFlexibleLeftMargin
                                     | UIViewAutoresizingFlexibleWidth
                                     | UIViewAutoresizingFlexibleRightMargin
                                     | UIViewAutoresizingFlexibleTopMargin
                                     | UIViewAutoresizingFlexibleHeight
                                     | UIViewAutoresizingFlexibleBottomMargin;
-    loadingView.backgroundColor = [UIColor lightGrayColor];
     [view addSubview:loadingView];
-    
-    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    
-    indicator.color = [UIColor orangeColor];
-    [loadingView addSubview:indicator];
     
     return loadingView;
 }
 
 #pragma mark -
 #pragma mark Initialization and deallocation
+
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    self = [super initWithCoder:coder];
+    self.visible = YES;
+    
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    self.visible = YES;
+
+    return self;
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -55,7 +60,7 @@ static const NSTimeInterval kANSDelay = 0;
 #pragma mark Accsessors
 
 - (void)setVisible:(BOOL)visible {
-    [self setVisible:visible animated:NO];
+    [self setVisible:visible animated:YES];
 }
 
 - (void)setVisible:(BOOL)visible animated:(BOOL)animated {
@@ -65,36 +70,25 @@ static const NSTimeInterval kANSDelay = 0;
 - (void)setVisible:(BOOL)visible
           animated:(BOOL)animated
  complititionBlock:(ANSComplititionBlock)block {
-    if (_visible != visible) {
-        _visible = visible;
+    if (_visible == visible) {
+        return;
     }
     
     [UIView animateWithDuration:animated ? kANSInterval : 0
                           delay:kANSDelay
-                        options:UIViewAnimationOptionLayoutSubviews
+                        options:UIViewAnimationOptionAllowUserInteraction
                      animations:^{
-                         self.alpha = visible;
+                         self.alpha = visible ? kANSMaxAlpha : kANSMinAlpha;
                          if (visible) {
                              [[self superview] bringSubviewToFront:self];
                              [self.indicator startAnimating];
                          }
                          
-                         self.state = visible;
                      } completion:^(BOOL finished) {
                          self.hidden = !visible;
                          ANSPerformBlockWithoutArguments(block);
+                         _visible = visible;
                      }];
-}
-
-#pragma mark -
-#pragma mark Public method
-
-- (void)activate {
-    [self setVisible:YES animated:YES];
-}
-
-- (void)deactivate {
-    [self setVisible:NO animated:YES];
 }
 
 @end

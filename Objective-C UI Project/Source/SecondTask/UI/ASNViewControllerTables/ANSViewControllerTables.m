@@ -264,14 +264,14 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 
 #pragma mark -
 #pragma mark ANSCollectionObserver protocol
-
-- (void)       collection:(ANSArrayModel *)collection
-       didChangeWithModel:(ANSChangeModel *)model {
+- (void)    arrayModel:(ANSArrayModel *)arrayModel
+    didChangeWithModel:(ANSChangeModel *)model
+{
     UITableView *table = self.rootView.table;
     
     [model applyToTableView:table];
     
-    NSLog(@"notified collectionDidUpdate, - %lu object", collection.count);
+    NSLog(@"notified collectionDidUpdate, - %lu object", arrayModel.count);
 }
 
 - (void)modeldidFilter:(ANSUsersModel *)model {
@@ -283,7 +283,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
     NSLog(@"notified userModelDidLoad");
     
     ANSLoadingView *loadingView = self.rootView.loadingView;
-    [loadingView deactivate];
+    loadingView.visible = NO;
     [self.rootView.table reloadData];
 }
 

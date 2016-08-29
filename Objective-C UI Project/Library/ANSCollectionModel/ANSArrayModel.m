@@ -201,7 +201,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
         case ANSDefaultState:
-            return @selector(collection:didChangeWithModel:);
+            return @selector(arrayModel:didChangeWithModel:);
             
         default:
             return [super selectorForState:state];

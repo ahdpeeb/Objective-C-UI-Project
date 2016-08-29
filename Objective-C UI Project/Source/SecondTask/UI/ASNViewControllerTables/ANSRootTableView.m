@@ -26,12 +26,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    ANSLoadingView *view = [NSBundle objectWithClass:[ANSLoadingView class] owner:nil];
-//    ANSLoadingView *view = [ANSLoadingView loadingViewOnSuperView:self];
-
+    ANSLoadingView *view = [ANSLoadingView loadingViewOnSuperView:self];
     self.loadingView = view;
-    [self addSubview:view];
-    [view activate];
 }
 
 #pragma mark -

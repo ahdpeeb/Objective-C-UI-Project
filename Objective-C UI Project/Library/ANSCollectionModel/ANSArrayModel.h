@@ -17,7 +17,7 @@
 
 @optional
 
-- (void)    collection:(ANSArrayModel *)collection
+- (void)    arrayModel:(ANSArrayModel *)arrayModel
     didChangeWithModel:(ANSChangeModel *)model;
 
 @end

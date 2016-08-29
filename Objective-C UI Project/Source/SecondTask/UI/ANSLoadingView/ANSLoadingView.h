@@ -8,27 +8,27 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^ANSComplititionBlock)(void);
 
-typedef NS_ENUM(NSUInteger, ANSLoadingViewState) {
-    ANSActive,
-    ANSInactive,
-};
+static const NSTimeInterval kANSInterval = 1.0f;
+static const NSTimeInterval kANSDelay = 0;
+static const CGFloat        kANSMinAlpha = 0;
+static const CGFloat        kANSMaxAlpha = 1;
+
+typedef void(^ANSComplititionBlock)(void);
 
 @interface ANSLoadingView : UIView
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *indicator;
 
-@property (nonatomic, readonly) ANSLoadingViewState state;
-@property (nonatomic, readonly, getter=isVisible) BOOL visible;
+@property (nonatomic, assign, getter=isVisible) BOOL visible;
 
 //argument view must be subclass of UIView 
 + (instancetype)loadingViewOnSuperView:(UIView *)view;
 
+// defauld setVisible (animated = YES)
+- (void)setVisible:(BOOL)visible animated:(BOOL)animated;
+
 - (void)setVisible:(BOOL)visible
           animated:(BOOL)animated
  complititionBlock:(ANSComplititionBlock)block;
-
-- (void)activate;
-- (void)deactivate;
 
 @end
