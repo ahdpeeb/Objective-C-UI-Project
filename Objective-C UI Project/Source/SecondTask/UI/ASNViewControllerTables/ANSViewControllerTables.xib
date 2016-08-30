@@ -40,7 +40,7 @@
             <color key="backgroundColor" red="0.99577277898788452" green="0.9922446608543396" blue="0.99200206995010376" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="searchBar" destination="ca3-ih-41w" id="P1h-Se-acM"/>
-                <outlet property="table" destination="djj-HE-MvU" id="Rp5-nZ-1gL"/>
+                <outlet property="tableView" destination="djj-HE-MvU" id="beB-ML-hlh"/>
             </connections>
             <point key="canvasLocation" x="143" y="302"/>
         </view>

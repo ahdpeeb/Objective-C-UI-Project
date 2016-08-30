@@ -112,7 +112,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 #pragma mark UIBarButtonItem actions
 
 - (void)leftBarAction:(UIBarButtonItem *)sender {
-    UITableView *table = self.rootView.table;
+    UITableView *table = self.rootView.tableView;
     
     [self resignSearchBar];
     
@@ -125,7 +125,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 }
 
 - (void)rightBarAction:(UIBarButtonItem *)sender {
-    UITableView *table = self.rootView.table;
+    UITableView *table = self.rootView.tableView;
     
     [self resignSearchBar];
     
@@ -233,11 +233,11 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
     [searchBar resignFirstResponder];
     [searchBar setShowsCancelButton:NO animated:YES];
     
-    [self.rootView.table reloadData];
+    [self.rootView.tableView reloadData];
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    UITableView *table = self.rootView.table;
+    UITableView *table = self.rootView.tableView;
     if (table.isEditing) {
         return NO;
     }
@@ -260,23 +260,25 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 - (void)    arrayModel:(ANSArrayModel *)arrayModel
     didChangeWithModel:(ANSChangeModel *)model
 {
-    UITableView *table = self.rootView.table;
-    
+    UITableView *table = self.rootView.tableView;
     [model applyToTableView:table];
     
     NSLog(@"notified collectionDidUpdate, - %lu object", arrayModel.count);
 }
 
 - (void)usersModelDidFilter:(ANSUsersModel *)model {
-    NSLog(@"notified didFilterWithUserInfo - %@ ", model);
-    [self.rootView.table reloadData];
+    ANSPerformInMainQueue(dispatch_async, ^{
+        NSLog(@"notified didFilterWithUserInfo - %@ ", model);
+        [self.rootView.tableView reloadData];
+    });
 }
 
 - (void)usersModelDidLoad:(ANSUsersModel *)model {
-    NSLog(@"notified userModelDidLoad");
-    self.rootView.activeLoadingView = NO;
-    
-    [self.rootView.table reloadData];
+    ANSPerformInMainQueue(dispatch_async, ^{
+        NSLog(@"notified userModelDidLoad");
+        self.rootView.activeLoadingView = NO;
+        [self.rootView.tableView reloadData];
+    });
 }
 
 @end

@@ -118,9 +118,7 @@ static NSString * const kANSPlistName = @"aaa";
         [self sortUsersByFilterString:filterStrirng];
         NSLog(@"have sorted");
         
-        ANSPerformInMainQueue(dispatch_async, ^{
-            [self notifyOfStateChange:ANSUsersModelDidfilter];
-        });
+        [self notifyOfStateChange:ANSUsersModelDidfilter];
     });
 }
 
@@ -135,39 +133,31 @@ static NSString * const kANSPlistName = @"aaa";
 }
 
 - (void)load {
-    ANSUserLoadingState state = self.state;
-    if (state == ANSUsersModelLoading || state == ANSUsersModelDidLoad) {
-        [self notifyOfStateChange:state];
-        return;
-    }
-    
-    if (state == ANSUsersModelUnloaded || state == ANSUsersModelDidFailLoading) {
-        self.state = ANSUsersModelLoading;
-        ANSWeakify(self);
-        ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
-            ANSStrongify(self);
-            id users = [self usersFromFileSystem];
-            if (!users) {
-                users = [self newUsers];
-            }
-            
-            sleep(kANSSleepTime);
-            if (!users) {
-                ANSPerformInMainQueue(dispatch_async, ^{
-                    self.state = ANSUsersModelDidFailLoading;
-                    return;
-                });
-            }
-            
-            [self performBlockWithoutNotification:^{
-                [self addObjectsInRange:users];
-            }];
-            
-            ANSPerformInMainQueue(dispatch_async, ^{
-                self.state = ANSUsersModelDidLoad;
-                return;
+    @synchronized(self) {
+        ANSUserLoadingState state = self.state;
+        if (state == ANSUsersModelLoading || state == ANSUsersModelDidLoad) {
+            [self notifyOfStateChange:state];
+            return;
+        }
+        
+        if (state == ANSUsersModelUnloaded || state == ANSUsersModelDidFailLoading) {
+            self.state = ANSUsersModelLoading;
+            ANSWeakify(self);
+            ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
+                ANSStrongify(self);
+                id users = [self usersFromFileSystem];
+                if (!users) {
+                    users = [self newUsers];
+                }
+                
+                [self performBlockWithoutNotification:^{
+                    [self addObjectsInRange:users];
+                }];
+                
+                sleep(kANSSleepTime);
+                self.state = (users) ? ANSUsersModelDidLoad : ANSUsersModelDidFailLoading;
             });
-        });
+        }
     }
 }
 
