@@ -96,7 +96,6 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
             break;
     }
     
-    [ANSChangeModel twoIndexModel:index1 index2:index2];
     model.state = state;
     [self notifyOfStateChange:0 withUserInfo:model];
 }

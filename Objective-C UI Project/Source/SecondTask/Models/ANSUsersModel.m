@@ -26,58 +26,11 @@ static NSString * const kANSPlistName = @"aaa";
 - (SEL)selectorForState:(NSUInteger)state;
 - (void)sortUsersByFilterString:(NSString *)filterString;
 - (id)usersFromFileSystem;
+- (id)newUsers;
 
 @end
 
 @implementation ANSUsersModel
-
-#pragma mark -
-#pragma mark Initilization and deallocation 
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.state = ANSUsersModelUnloaded;
-    }
-    return self;
-}
-
-#pragma mark -
-#pragma mark Accsessors
-
-- (void)loadWithCount:(NSUInteger)count {
-//    ANSPerformInAsyncQueue(ANSPriorityDefault, ^{
-//        sleep(sleepTime);
-//        NSArray *users = nil;
-        [self load];
-//        if (!users) {
-//            users = [NSArray objectsWithCount:count block:^id{
-//                return [ANSUser new];
-//            }];
-//        }
-//
-//        [self performBlockWithoutNotification:^{
-//            [self addObjectsInRange:users];
-//        }];
-//        
-//        ANSPerformInMainQueue(dispatch_async, ^{
-//            [self notifyOfStateChange:ANSUsersModelDidLoad];
-//        });
-//    });
-}
-
-- (void)setOperation:(NSOperation *)operation {
-    if (_operation != operation) {
-        [_operation cancel];
-        
-        _operation = operation;
-        
-        ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
-            [operation start];
-        });
-    }
-}
 
 #pragma mark -
 #pragma mark Private methods
@@ -85,10 +38,10 @@ static NSString * const kANSPlistName = @"aaa";
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
         case ANSUsersModelDidLoad:
-            return @selector(userModelDidLoad:);
+            return @selector(usersModelDidLoad:);
             
         case ANSUsersModelDidfilter:
-            return @selector(modeldidFilter:);
+            return @selector(usersModelDidFilter:);
             
         default:
           return [super selectorForState:state];
@@ -144,11 +97,11 @@ static NSString * const kANSPlistName = @"aaa";
     return users;
 }
 
-- (void)sortCollectionByfilterStirng:(NSString *)filterStirng {
+- (void)sortCollectionByfilterStrirng:(NSString *)filterStrirng {
     ANSWeakify(self);
     ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
         ANSStrongify(self);
-        [self sortUsersByFilterString:filterStirng];
+        [self sortUsersByFilterString:filterStrirng];
         NSLog(@"have sorted");
         
         ANSPerformInMainQueue(dispatch_async, ^{
@@ -158,7 +111,7 @@ static NSString * const kANSPlistName = @"aaa";
 }
 
 #pragma mark -
-#pragma mark Save and loading (Public methods)
+#pragma mark Save and loading(Public methods)
 
 - (void)save {
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -181,7 +134,7 @@ static NSString * const kANSPlistName = @"aaa";
             ANSStrongify(self);
             id users = [self usersFromFileSystem];
             if (!users) {
-                users = [self usersFromFileSystem];
+                users = [self newUsers];
             }
             
             sleep(kANSSleepTime);

@@ -9,7 +9,7 @@
 #import "ANSViewControllerTables.h"
 
 #import "ANSRootTableView.h"
-#import "ANSDataCell.h"
+#import "ANSUserCell.h"
 #import "ANSTableViewCell.h"
 #import "ANSUser.h"
 #import "ANSImageModel.h"
@@ -30,7 +30,6 @@ static NSString * const kANSEdit                    = @"Edit";
 static NSString * const kANSDone                    = @"Done";
 static NSString * const kANSTitleForHeaderSection   = @"Homer's contact list";
 static const NSUInteger kANSSectionsCount           = 1;
-static const NSUInteger kANSUsersCount              = 10; 
 
 @interface ANSViewControllerTables ()
 @property (nonatomic, strong) ANSProtocolObservationController  *controller;
@@ -69,7 +68,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.users loadWithCount:kANSUsersCount];
+    [self.users load];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -148,11 +147,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 - (nullable NSString *)tableView:(UITableView *)tableView
          titleForHeaderInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return [NSString stringWithFormat:kANSTitleForHeaderSection];
-    }
-    
-    return nil;
+    return section ? nil : kANSTitleForHeaderSection;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -168,12 +163,12 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ANSDataCell *cell = [tableView reusableCellfromNibWithClass:[ANSDataCell class]];
+    ANSUserCell *cell = [tableView reusableCellfromNibWithClass:[ANSUserCell class]];
     
     ANSUser *user = nil;
     user = [self presentedModel][indexPath.row];
     
-    [cell fillInfoFromObject:user];
+    [cell fillFromUser:user];
 
     return cell;
 }
@@ -189,6 +184,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
           toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     if (sourceIndexPath.section == destinationIndexPath.section) {
+        
         [self.users performBlockWithoutNotification:^{
             [self.users moveObjectFromIndex:sourceIndexPath.row
                                          toIndex:destinationIndexPath.row];
@@ -201,8 +197,9 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
     forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.users performBlockWithNotification:^{
-            [self.users removeObjectAtIndex:indexPath.row];
+        ANSUsersModel *users = self.users;
+        [users performBlockWithNotification:^{
+            [users removeObjectAtIndex:indexPath.row];
         }];
     }
 }
@@ -255,10 +252,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     ANSUsersModel *copy = [self.users copy];
     self.filteredCollection = copy;
-    BOOL value = [copy isObservedByObject:self];
-    if (value) {
-        [copy sortCollectionByfilterStirng:searchText];
-    }
+    [copy sortCollectionByfilterStrirng:searchText];
 }
 
 #pragma mark -
@@ -273,7 +267,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
     NSLog(@"notified collectionDidUpdate, - %lu object", arrayModel.count);
 }
 
-- (void)modeldidFilter:(ANSUsersModel *)model {
+- (void)userModelDidFilter:(ANSUsersModel *)model {
     NSLog(@"notified didFilterWithUserInfo - %@ ", model);
     [self.rootView.table reloadData];
 }

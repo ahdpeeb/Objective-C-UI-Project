@@ -12,10 +12,10 @@
 
 @class ANSImageView;
 
-@interface ANSDataCell : UITableViewCell
+@interface ANSUserCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UILabel          *label;
 @property (nonatomic, strong) IBOutlet ANSImageView     *userImageView; 
 
-- (void)fillInfoFromObject:(ANSUser *)object; 
+- (void)fillFromUser:(ANSUser *)user;
 
 @end

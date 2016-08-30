@@ -14,7 +14,7 @@
     UITableViewDataSource,
     UITableViewDelegate,
     UISearchBarDelegate,
-    ANSCollectionObserverSpecial
+    ANSUsersModelObserver
 >
 
 @property (nonatomic, strong) ANSUsersModel *users;

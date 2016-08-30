@@ -7,17 +7,17 @@
 // UILabel      *label;
 // UIImageView  *imageView;
 
-#import "ANSDataCell.h"
+#import "ANSUserCell.h"
 
 #import "ANSImageView.h"
 
-@interface ANSDataCell ()
+@interface ANSUserCell ()
 
 - (void)customizeUserPicture;
 
 @end
 
-@implementation ANSDataCell
+@implementation ANSUserCell
 
 #pragma mark -
 #pragma mark Initialization and deallocation
@@ -48,9 +48,9 @@
 #pragma mark -
 #pragma mark Public methods
 
-- (void)fillInfoFromObject:(ANSUser *)object {
-    self.label.text = object.string;
-    self.userImageView.imageModel = object.imageModel;
+- (void)fillFromUser:(ANSUser *)user {
+    self.label.text = user.string;
+    self.userImageView.imageModel = user.imageModel;
     
     [self customizeUserPicture];
 }

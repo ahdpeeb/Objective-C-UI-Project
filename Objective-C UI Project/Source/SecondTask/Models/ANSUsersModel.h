@@ -12,12 +12,12 @@
 
 @class ANSUsersModel;
 
-@protocol ANSCollectionObserverSpecial <ANSArrayModelObserver>
+@protocol ANSUsersModelObserver <ANSArrayModelObserver>
 
 @optional
 
-- (void)modeldidFilter:(ANSUsersModel *)model;
-- (void)userModelDidLoad:(ANSUsersModel *)model;
+- (void)usersModelDidFilter:(ANSUsersModel *)model;
+- (void)usersModelDidLoad:(ANSUsersModel *)model;
 
 @end
 
@@ -36,9 +36,7 @@ typedef NS_ENUM(NSUInteger, ANSUserLoadingState) {
 @interface ANSUsersModel : ANSArrayModel
 
 - (NSArray *)descendingSortedUsers; 
-- (void)sortCollectionByfilterStirng:(NSString *)filterStirng;
-
-- (void)loadWithCount:(NSUInteger)count; 
+- (void)sortCollectionByfilterStrirng:(NSString *)filterStrirng;
 
 - (void)save;
 - (void)load;
