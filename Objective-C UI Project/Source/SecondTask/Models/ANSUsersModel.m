@@ -33,6 +33,20 @@ static NSString * const kANSPlistName = @"aaa";
 @implementation ANSUsersModel
 
 #pragma mark -
+#pragma mark Initilization and deallocation 
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self performBlockWithoutNotification:^{
+            self.state = ANSUsersModelUnloaded;
+        }]; 
+        
+    }
+    return self;
+}
+
+#pragma mark -
 #pragma mark Private methods
 
 - (SEL)selectorForState:(NSUInteger)state {

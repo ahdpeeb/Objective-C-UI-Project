@@ -25,9 +25,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-    ANSLoadingView *view = [ANSLoadingView loadingViewOnSuperView:self];
-    self.loadingView = view;
+    self.activeLoadingView = YES;
 }
 
 #pragma mark -

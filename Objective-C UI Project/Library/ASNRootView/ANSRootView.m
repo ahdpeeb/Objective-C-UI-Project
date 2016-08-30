@@ -8,14 +8,51 @@
 
 #import "ANSRootView.h"
 
+#import "ANSLoadingView.h"
+
 @implementation ANSRootView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+#pragma mark -
+#pragma mark Initialization and deallocation 
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self attachDefaultLodingView];
+    }
+    
+    return self;
 }
-*/
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    if (!self.loadingView) {
+        [self attachDefaultLodingView];
+    }
+}
+
+#pragma mark -
+#pragma mark Accsessors
+
+- (void)setLoadingView:(ANSLoadingView *)loadingView {
+    if (_loadingView != loadingView) {
+        [_loadingView removeFromSuperview];
+        _loadingView = loadingView;
+    }
+}
+
+- (void)setActiveLoadingView:(BOOL)activeLoadingView {
+    if (_activeLoadingView != activeLoadingView) {
+        _loadingView.visible = activeLoadingView;
+        _activeLoadingView = activeLoadingView; 
+    }
+}
+
+#pragma mark -
+#pragma mark Private
+
+- (void)attachDefaultLodingView {
+    self.loadingView  = [ANSLoadingView loadingViewOnSuperView:self];
+}
 
 @end

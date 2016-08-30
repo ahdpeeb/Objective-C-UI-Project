@@ -267,16 +267,15 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
     NSLog(@"notified collectionDidUpdate, - %lu object", arrayModel.count);
 }
 
-- (void)userModelDidFilter:(ANSUsersModel *)model {
+- (void)usersModelDidFilter:(ANSUsersModel *)model {
     NSLog(@"notified didFilterWithUserInfo - %@ ", model);
     [self.rootView.table reloadData];
 }
 
-- (void)userModelDidLoad:(ANSUsersModel *)model {
+- (void)usersModelDidLoad:(ANSUsersModel *)model {
     NSLog(@"notified userModelDidLoad");
+    self.rootView.activeLoadingView = NO;
     
-    ANSLoadingView *loadingView = self.rootView.loadingView;
-    loadingView.visible = NO;
     [self.rootView.table reloadData];
 }
 

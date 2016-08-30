@@ -12,9 +12,10 @@
 
 #import "ANSMacros.h"
 
-@interface ANSLoadingView ()
-
-@end
+static const NSTimeInterval kANSInterval = 1.0f;
+static const NSTimeInterval kANSDelay = 0;
+static const CGFloat        kANSMinAlpha = 0;
+static const CGFloat        kANSMaxAlpha = 1;
 
 @implementation ANSLoadingView
 
@@ -40,20 +41,16 @@
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
-    self.visible = YES;
+    self.alpha = 0;
     
     return self;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    self.visible = YES;
+    self.alpha = 0;
 
     return self;
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
 }
 
 #pragma mark -
@@ -70,25 +67,28 @@
 - (void)setVisible:(BOOL)visible
           animated:(BOOL)animated
  complititionBlock:(ANSCompletionBlock)block {
-    if (_visible == visible) {
-        return;
-    }
-    
-    [UIView animateWithDuration:animated ? kANSInterval : 0
-                          delay:kANSDelay
-                        options:UIViewAnimationOptionAllowUserInteraction
-                     animations:^{
-                         self.alpha = visible ? kANSMaxAlpha : kANSMinAlpha;
-                         if (visible) {
-                             [[self superview] bringSubviewToFront:self];
-                             [self.indicator startAnimating];
-                         }
-                         
-                     } completion:^(BOOL finished) {
-                         self.hidden = !visible;
-                         ANSPerformBlockWithoutArguments(block);
-                         _visible = visible;
-                     }];
-}
+    @synchronized(self) {
+        if (_visible == visible) {
+            return;
+        }
+        
+        [UIView animateWithDuration:animated ? kANSInterval : 0
+                              delay:kANSDelay
+                            options:UIViewAnimationOptionAllowUserInteraction
+                         animations:^{
+                             if (visible) {
+                                 [[self superview] bringSubviewToFront:self];
+                                 [self.indicator startAnimating];
+                             }
+                             
+                             self.alpha = visible ? kANSMaxAlpha : kANSMinAlpha;
+                             
+                         } completion:^(BOOL finished) {
+                             self.hidden = !visible;
+                             ANSPerformBlockWithoutArguments(block);
+                             _visible = visible;
+                         }];
+        }
+   }
 
 @end

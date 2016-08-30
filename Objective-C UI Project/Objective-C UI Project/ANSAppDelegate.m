@@ -9,7 +9,6 @@
 #import "ANSAppDelegate.h"
 
 #import "ANSViewControllerTables.h"
-#import "ANSViewControllerFirstTask.h"
 #import "ANSUser.h"
 #import "ANSChangeModel.h"
 

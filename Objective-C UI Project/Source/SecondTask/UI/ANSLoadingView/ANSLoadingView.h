@@ -8,12 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
-static const NSTimeInterval kANSInterval = 1.0f;
-static const NSTimeInterval kANSDelay = 0;
-static const CGFloat        kANSMinAlpha = 0;
-static const CGFloat        kANSMaxAlpha = 1;
-
 typedef void(^ANSCompletionBlock)(void);
 
 @interface ANSLoadingView : UIView
