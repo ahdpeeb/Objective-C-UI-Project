@@ -66,13 +66,3 @@ void ANSDispatchTimer(uint seconds, bool repeat, ANSGCDBlock block) {
 dispatch_queue_t ANSQueueWithPriotity(ANSPriorityType priotity) {
     return dispatch_get_global_queue(ANSPriority(priotity), 0);
 }
-
-long ANSPriority(ANSPriorityType type) {
-    switch (type) {
-        case ANSPriorityHigh:       return  DISPATCH_QUEUE_PRIORITY_HIGH;
-        case ANSPriorityDefault:    return  DISPATCH_QUEUE_PRIORITY_DEFAULT;
-        case ANSPriorityLow:        return  DISPATCH_QUEUE_PRIORITY_LOW;
-        case ANSPriorityBackground: return  DISPATCH_QUEUE_PRIORITY_BACKGROUND;
-        default:                    return  DISPATCH_QUEUE_PRIORITY_DEFAULT;
-    }
-}

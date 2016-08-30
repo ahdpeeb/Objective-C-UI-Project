@@ -325,26 +325,26 @@
 			isa = PBXGroup;
 			children = (
 				939BADD91D75937400B4D610 /* Extensions */,
-				939BAE2B1D7594A000B4D610 /* ANSCustomViews */,
-				939BAD9C1D75937400B4D610 /* ANSCollectionModel */,
+				939BAE2B1D7594A000B4D610 /* CustomViews */,
 				939BADB21D75937400B4D610 /* ANSGCD */,
 				939BADB51D75937400B4D610 /* ANSImageModel */,
-				939BADBE1D75937400B4D610 /* ANSMacros */,
 				939BADC01D75937400B4D610 /* ANSObservableObject */,
 				939BADCD1D75937400B4D610 /* ANSQueue */,
+				939BAD9C1D75937400B4D610 /* ANSArrayModel */,
 				939BADD01D75937400B4D610 /* ANSRandom */,
-				939BADD31D75937400B4D610 /* ANSTableViewCell */,
+				939BADBE1D75937400B4D610 /* ANSMacros */,
 			);
 			path = Library;
 			sourceTree = "<group>";
 		};
-		939BAD9C1D75937400B4D610 /* ANSCollectionModel */ = {
+		939BAD9C1D75937400B4D610 /* ANSArrayModel */ = {
 			isa = PBXGroup;
 			children = (
 				939BAD9D1D75937400B4D610 /* ANSArrayModel.h */,
 				939BAD9E1D75937400B4D610 /* ANSArrayModel.m */,
 				939BAD9F1D75937400B4D610 /* ANSChangeModel */,
 			);
+			name = ANSArrayModel;
 			path = ANSCollectionModel;
 			sourceTree = "<group>";
 		};
@@ -610,14 +610,15 @@
 			path = UIViewController;
 			sourceTree = "<group>";
 		};
-		939BAE2B1D7594A000B4D610 /* ANSCustomViews */ = {
+		939BAE2B1D7594A000B4D610 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				939BADD31D75937400B4D610 /* ANSTableViewCell */,
 				933B74521D65A68600DF3DF9 /* ANSLoadingView */,
 				939BADD61D75937400B4D610 /* ASNRootView */,
 				939BADBB1D75937400B4D610 /* ANSImageView */,
 			);
-			name = ANSCustomViews;
+			name = CustomViews;
 			sourceTree = "<group>";
 		};
 		93C083FE1D3E367F0077A81C = {
