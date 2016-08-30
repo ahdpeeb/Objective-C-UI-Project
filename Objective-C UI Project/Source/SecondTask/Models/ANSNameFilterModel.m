@@ -15,7 +15,7 @@
 #import "ANSMacros.h"
 
 @interface ANSNameFilterModel ()
-@property (nonatomic, weak) id <ANSArrayModelObserver> model;
+@property (nonatomic, strong) id <ANSArrayModelObserver> model;
 @property (nonatomic, strong) ANSProtocolObservationController  *controller;
 
 @end
@@ -84,9 +84,20 @@
         [self sortUsersByFilterString:filterStrirng];
         NSLog(@"have sorted");
         
-        [self notifyOfStateChange:ANSUsersModelDidfilter];
+        [self notifyOfStateChange:ANSNameFilterModelDidfilter];
     });
 }
 
+#pragma mark -
+#pragma mark ANSUsersModelObserver
+
+- (void)usersModelDidLoad:(ANSUsersModel *)model {
+    self.model = model;
+}
+
+- (void)    arrayModel:(ANSArrayModel *)arrayModel
+    didChangeWithModel:(ANSChangeModel *)model {
+    
+}
 
 @end

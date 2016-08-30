@@ -14,6 +14,7 @@
 #import "ANSGCD.h"
 #import "NSArray+ANSExtension.h"
 #import "NSFileManager+ANSExtension.h"
+#import "ANSNameFilterModel.h"
 
 static const NSUInteger kANSSleepTime = 5;
 static const NSUInteger kANSUsersCount = 20;
@@ -47,6 +48,9 @@ static NSString * const kANSPlistName = @"aaa";
 }
 
 #pragma mark -
+#pragma mark Accsessors 
+
+#pragma mark -
 #pragma mark Private methods
 
 - (SEL)selectorForState:(NSUInteger)state {
@@ -54,8 +58,8 @@ static NSString * const kANSPlistName = @"aaa";
         case ANSUsersModelDidLoad:
             return @selector(usersModelDidLoad:);
             
-        case ANSUsersModelDidfilter:
-            return @selector(usersModelDidFilter:);
+//        case ANSUsersModelDidfilter:
+//            return @selector(usersModelDidFilter:);
             
         default:
           return [super selectorForState:state];
@@ -98,29 +102,29 @@ static NSString * const kANSPlistName = @"aaa";
 #pragma mark -
 #pragma mark Public methods
 
-- (NSArray *)descendingSortedUsers {
-    NSMutableArray *users = [NSMutableArray arrayWithArray:self.objects];
-    [users sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        if ([obj1 isKindOfClass:[ANSUser class]] && [obj2 isKindOfClass:[ANSUser class]]) {
-             return [[obj1 string] compare:[obj2 string]];
-        }
-        
-        return (NSComparisonResult)NSOrderedDescending;
-    }];
-    
-    return users;
-}
+//- (NSArray *)descendingSortedUsers {
+//    NSMutableArray *users = [NSMutableArray arrayWithArray:self.objects];
+//    [users sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//        if ([obj1 isKindOfClass:[ANSUser class]] && [obj2 isKindOfClass:[ANSUser class]]) {
+//             return [[obj1 string] compare:[obj2 string]];
+//        }
+//        
+//        return (NSComparisonResult)NSOrderedDescending;
+//    }];
+//    
+//    return users;
+//}
 
-- (void)sortCollectionByfilterStrirng:(NSString *)filterStrirng {
-    ANSWeakify(self);
-    ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
-        ANSStrongify(self);
-        [self sortUsersByFilterString:filterStrirng];
-        NSLog(@"have sorted");
-        
-        [self notifyOfStateChange:ANSUsersModelDidfilter];
-    });
-}
+//- (void)sortCollectionByfilterStrirng:(NSString *)filterStrirng {
+//    ANSWeakify(self);
+//    ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
+//        ANSStrongify(self);
+//        [self sortUsersByFilterString:filterStrirng];
+//        NSLog(@"have sorted");
+//        
+//        [self notifyOfStateChange:ANSUsersModelDidfilter];
+//    });
+//}
 
 #pragma mark -
 #pragma mark Save and loading(Public methods)

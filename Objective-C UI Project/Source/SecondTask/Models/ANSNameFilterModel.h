@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "ANSArrayModel.h"
+#import "ANSUsersModel.h"
 
 @class ANSNameFilterModel;
 
@@ -18,9 +19,12 @@
 
 @end
 
+typedef NS_ENUM(NSUInteger, ANSNameFilterModelState) {
+    ANSNameFilterModelDidfilter = ANSStateCount,
+    ANSNameFilterModelCount
+};
 
-
-@interface ANSNameFilterModel : ANSArrayModel
+@interface ANSNameFilterModel : ANSArrayModel <ANSUsersModelObserver>
 @property (nonatomic, readonly) id observableObject;
 
 - (instancetype)initWithObservableModel:(id <ANSArrayModelObserver>)model; 

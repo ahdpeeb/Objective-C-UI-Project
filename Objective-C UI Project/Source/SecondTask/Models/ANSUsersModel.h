@@ -11,29 +11,28 @@
 #import "ANSArrayModel.h"
 
 @class ANSUsersModel;
+@class ANSNameFilterModel;
 
 @protocol ANSUsersModelObserver <ANSArrayModelObserver>
 
 @optional
 
-- (void)usersModelDidFilter:(ANSUsersModel *)model;
+//- (void)usersModelDidFilter:(ANSUsersModel *)model;
 - (void)usersModelDidLoad:(ANSUsersModel *)model;
 
 @end
 
-typedef NS_ENUM(NSUInteger, ANSUsersModelState) {
-    ANSUsersModelDidfilter = ANSStateCount,
+typedef NS_ENUM(NSUInteger, ANSUserLoadingState) {
+    ANSUsersModelUnloaded = ANSStateCount,
+    ANSUsersModelDidLoad,
+    ANSUsersModelLoading,
+    ANSUsersModelDidFailLoading,
+    
     ANSUsersModelCountState
 };
 
-typedef NS_ENUM(NSUInteger, ANSUserLoadingState) {
-    ANSUsersModelUnloaded = ANSUsersModelCountState,
-    ANSUsersModelDidLoad,
-    ANSUsersModelLoading,
-    ANSUsersModelDidFailLoading
-};
-
 @interface ANSUsersModel : ANSArrayModel
+@property (nonatomic, weak) ANSNameFilterModel *nameFiltedModel
 
 - (NSArray *)descendingSortedUsers; 
 - (void)sortCollectionByfilterStrirng:(NSString *)filterStrirng;
