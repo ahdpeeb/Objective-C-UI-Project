@@ -29,7 +29,6 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 @implementation ANSArrayModel
 
 @dynamic count;
-@dynamic loaded;
 @dynamic objects;
 
 #pragma mark -

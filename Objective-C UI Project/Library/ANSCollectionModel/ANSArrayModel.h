@@ -34,7 +34,6 @@ typedef NS_ENUM(NSUInteger, ANSArrayModelState) {
 >
 
 @property (nonatomic, readonly)                     NSUInteger  count;
-@property (nonatomic, readonly, getter=isLoaded)    BOOL        loaded;
 @property (nonatomic, readonly)                     NSArray     *objects;
 
 - (id)objectAtIndex:(NSUInteger)index;
