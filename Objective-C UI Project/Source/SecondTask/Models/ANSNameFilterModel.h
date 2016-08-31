@@ -13,22 +13,23 @@
 
 @class ANSNameFilterModel;
 
-@protocol ANSNameFilterModelProtocol <NSObject>
+@protocol ANSNameFilterModelProtocol <ANSUsersModelObserver>
 
 - (void)nameFilterModelDidFilter:(ANSNameFilterModel *)model;
 
 @end
 
 typedef NS_ENUM(NSUInteger, ANSNameFilterModelState) {
-    ANSNameFilterModelDidfilter = ANSStateCount,
+    ANSNameFilterModelDidFilter = ANSUsersModelCountState,
+    
     ANSNameFilterModelCount
 };
 
 @interface ANSNameFilterModel : ANSArrayModel <ANSUsersModelObserver>
 @property (nonatomic, readonly) id observableObject;
 
-- (instancetype)initWithObservableModel:(id <ANSArrayModelObserver>)model; 
+- (instancetype)initWithObservableModel:(ANSUsersModel *)model;
 
-- (void)sortCollectionByfilterStrirng:(NSString *)filterStrirng; 
+- (void)filterModelByfilterStrirng:(NSString *)filterStrirng;
 
 @end

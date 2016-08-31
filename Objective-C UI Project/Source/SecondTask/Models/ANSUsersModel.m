@@ -15,6 +15,7 @@
 #import "NSArray+ANSExtension.h"
 #import "NSFileManager+ANSExtension.h"
 #import "ANSNameFilterModel.h"
+#import "ANSViewControllerTables.h"
 
 static const NSUInteger kANSSleepTime = 5;
 static const NSUInteger kANSUsersCount = 20;
@@ -22,12 +23,12 @@ static const NSUInteger kANSUsersCount = 20;
 static NSString * const kANSPlistName = @"aaa";
 
 @interface ANSUsersModel ()
-@property (nonatomic, retain) NSOperation *operation;
+@property (nonatomic, weak) ANSNameFilterModel *nameFilterModel;
 
 - (SEL)selectorForState:(NSUInteger)state;
-- (void)sortUsersByFilterString:(NSString *)filterString;
 - (id)usersFromFileSystem;
 - (id)newUsers;
+- (id)loadUsersModel;
 
 @end
 
@@ -48,9 +49,6 @@ static NSString * const kANSPlistName = @"aaa";
 }
 
 #pragma mark -
-#pragma mark Accsessors 
-
-#pragma mark -
 #pragma mark Private methods
 
 - (SEL)selectorForState:(NSUInteger)state {
@@ -58,29 +56,9 @@ static NSString * const kANSPlistName = @"aaa";
         case ANSUsersModelDidLoad:
             return @selector(usersModelDidLoad:);
             
-//        case ANSUsersModelDidfilter:
-//            return @selector(usersModelDidFilter:);
-            
         default:
           return [super selectorForState:state];
     }
-}
-
-
-- (void)sortUsersByFilterString:(NSString *)filterString {
-    NSMutableArray *otherUsers = [NSMutableArray new];
-    for (ANSUser *user in self) {
-        if ((filterString.length > 0)
-            && [user.string rangeOfString:filterString
-                                  options:NSCaseInsensitiveSearch].location == NSNotFound) {
-                [otherUsers addObject:user];
-        }
-    }
-    [self performBlockWithoutNotification:^{
-        for (ANSUser *otherUser in otherUsers) {
-            [self removeObject:otherUser];
-        }
-    }];
 }
 
 #pragma mark -
@@ -99,32 +77,48 @@ static NSString * const kANSPlistName = @"aaa";
     }];
 }
 
+- (id)loadUsersModel {
+   id users = [self usersFromFileSystem];
+    if (!users) {
+        users = [self newUsers];
+    }
+    
+    [self performBlockWithoutNotification:^{
+        [self addObjectsInRange:users];
+    }];
+    
+    sleep(kANSSleepTime);
+    
+    return users;
+}
+
 #pragma mark -
 #pragma mark Public methods
 
-//- (NSArray *)descendingSortedUsers {
-//    NSMutableArray *users = [NSMutableArray arrayWithArray:self.objects];
-//    [users sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-//        if ([obj1 isKindOfClass:[ANSUser class]] && [obj2 isKindOfClass:[ANSUser class]]) {
-//             return [[obj1 string] compare:[obj2 string]];
-//        }
-//        
-//        return (NSComparisonResult)NSOrderedDescending;
-//    }];
-//    
-//    return users;
-//}
+- (void)sortCollectionByfilterStrirng:(NSString *)filterStrirng {
+    ANSNameFilterModel *nameFilterModel = self.nameFilterModel;
+    if (!nameFilterModel) {
+        nameFilterModel = [[ANSNameFilterModel alloc] initWithObservableModel:self];
+        
+        self.nameFilterModel = nameFilterModel;
+        self.viewControllerObserver.filteredModel = nameFilterModel;
+    }
+    
+    [nameFilterModel filterModelByfilterStrirng:filterStrirng];
+}
 
-//- (void)sortCollectionByfilterStrirng:(NSString *)filterStrirng {
-//    ANSWeakify(self);
-//    ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
-//        ANSStrongify(self);
-//        [self sortUsersByFilterString:filterStrirng];
-//        NSLog(@"have sorted");
-//        
-//        [self notifyOfStateChange:ANSUsersModelDidfilter];
-//    });
-//}
+- (NSArray *)descendingSortedUsers {
+    NSMutableArray *users = [NSMutableArray arrayWithArray:self.objects];
+    [users sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        if ([obj1 isKindOfClass:[ANSUser class]] && [obj2 isKindOfClass:[ANSUser class]]) {
+             return [[obj1 string] compare:[obj2 string]];
+        }
+        
+        return (NSComparisonResult)NSOrderedDescending;
+    }];
+    
+    return users;
+}
 
 #pragma mark -
 #pragma mark Save and loading(Public methods)
@@ -149,16 +143,7 @@ static NSString * const kANSPlistName = @"aaa";
             ANSWeakify(self);
             ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
                 ANSStrongify(self);
-                id users = [self usersFromFileSystem];
-                if (!users) {
-                    users = [self newUsers];
-                }
-                
-                [self performBlockWithoutNotification:^{
-                    [self addObjectsInRange:users];
-                }];
-                
-                sleep(kANSSleepTime);
+                id users = [self loadUsersModel];
                 self.state = (users) ? ANSUsersModelDidLoad : ANSUsersModelDidFailLoading;
             });
         }

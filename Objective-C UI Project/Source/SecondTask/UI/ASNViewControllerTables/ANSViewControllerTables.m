@@ -14,6 +14,7 @@
 #import "ANSUser.h"
 #import "ANSImageModel.h"
 #import "ANSImageView.h"
+#import "ANSNameFilterModel.h"
 
 #import "NSArray+ANSExtension.h"
 #import "UINib+Extension.h"
@@ -32,8 +33,10 @@ static NSString * const kANSTitleForHeaderSection   = @"Homer's contact list";
 static const NSUInteger kANSSectionsCount           = 1;
 
 @interface ANSViewControllerTables ()
-@property (nonatomic, strong) ANSProtocolObservationController  *controller;
-@property (nonatomic, strong) ANSUsersModel                     *filteredCollection;
+@property (nonatomic, strong) ANSProtocolObservationController  *usersController;
+
+// the controller monitors the latest filtering model
+@property (nonatomic, strong) ANSProtocolObservationController *filterModelController;
 
 - (void)resignSearchBar;
 - (ANSUsersModel *)presentedModel;
@@ -49,13 +52,20 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 
 - (void)setUsers:(ANSUsersModel *)users {
     if (_users != users) {
-        //  [_collection removeObserverObject:self];
         _users = users;
+        _users.viewControllerObserver = self;
         
-        self.controller = [users protocolControllerWithObserver:self];
+        self.usersController = [users protocolControllerWithObserver:self];
     }
 }
 
+- (void)setFilteredModel:(ANSNameFilterModel *)filteredModel {
+    if (_filteredModel != filteredModel) {
+        _filteredModel = filteredModel;
+        
+        self.filterModelController = [filteredModel protocolControllerWithObserver:self];
+    }
+}
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -87,8 +97,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 
 - (ANSUsersModel *)presentedModel {
     BOOL isFirstResponder = self.rootView.searchBar.isFirstResponder;
-    return isFirstResponder ? self.filteredCollection : self.users;
-
+    return isFirstResponder ? (ANSUsersModel *)self.filteredModel : self.users;
 }
 
 #pragma mark -
@@ -250,9 +259,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    ANSUsersModel *copy = [self.users copy];
-    self.filteredCollection = copy;
-    [copy sortCollectionByfilterStrirng:searchText];
+    [self.users sortCollectionByfilterStrirng:searchText];
 }
 
 #pragma mark -
@@ -260,16 +267,11 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 - (void)    arrayModel:(ANSArrayModel *)arrayModel
     didChangeWithModel:(ANSChangeModel *)model
 {
-    UITableView *table = self.rootView.tableView;
-    [model applyToTableView:table];
-    
-    NSLog(@"notified collectionDidUpdate, - %lu object", arrayModel.count);
-}
-
-- (void)usersModelDidFilter:(ANSUsersModel *)model {
     ANSPerformInMainQueue(dispatch_async, ^{
-        NSLog(@"notified didFilterWithUserInfo - %@ ", model);
-        [self.rootView.tableView reloadData];
+        UITableView *table = self.rootView.tableView;
+        [model applyToTableView:table];
+        
+        NSLog(@"notified collectionDidUpdate, - %lu object", arrayModel.count);
     });
 }
 
@@ -277,6 +279,13 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
     ANSPerformInMainQueue(dispatch_async, ^{
         NSLog(@"notified userModelDidLoad");
         self.rootView.activeLoadingView = NO;
+        [self.rootView.tableView reloadData];
+    });
+}
+
+- (void)nameFilterModelDidFilter:(ANSNameFilterModel *)model {
+    ANSPerformInMainQueue(dispatch_async, ^{
+        NSLog(@"notified didFilterWithUserInfo - %@ ", model);
         [self.rootView.tableView reloadData];
     });
 }

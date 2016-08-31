@@ -12,6 +12,7 @@
 
 @class ANSUsersModel;
 @class ANSNameFilterModel;
+@class ANSViewControllerTables;
 
 @protocol ANSUsersModelObserver <ANSArrayModelObserver>
 
@@ -32,12 +33,14 @@ typedef NS_ENUM(NSUInteger, ANSUserLoadingState) {
 };
 
 @interface ANSUsersModel : ANSArrayModel
-@property (nonatomic, weak) ANSNameFilterModel *nameFiltedModel
+@property (nonatomic, weak) ANSViewControllerTables *viewControllerObserver;
 
-- (NSArray *)descendingSortedUsers; 
-- (void)sortCollectionByfilterStrirng:(NSString *)filterStrirng;
+- (NSArray *)descendingSortedUsers;
 
 - (void)save;
 - (void)load;
+
+// the last link 
+- (void)sortCollectionByfilterStrirng:(NSString *)filterStrirng;
 
 @end
