@@ -12,13 +12,15 @@
 
 @implementation ANSRootView
 
+@dynamic loadingViewVisible;
+
 #pragma mark -
 #pragma mark Initialization and deallocation 
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self attachDefaultLodingView];
+        [self attachLodingView];
     }
     
     return self;
@@ -27,7 +29,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     if (!self.loadingView) {
-        [self attachDefaultLodingView];
+        [self attachLodingView];
     }
 }
 
@@ -38,20 +40,25 @@
     if (_loadingView != loadingView) {
         [_loadingView removeFromSuperview];
         _loadingView = loadingView;
+        
+        if (loadingView) {
+            [self addSubview:loadingView];
+        }
     }
 }
 
-- (void)setActiveLoadingView:(BOOL)activeLoadingView {
-    if (_activeLoadingView != activeLoadingView) {
-        _loadingView.visible = activeLoadingView;
-        _activeLoadingView = activeLoadingView; 
-    }
+- (void)setLoadingViewVisible:(BOOL)loadingViewVisible {
+    self.loadingView.visible = loadingViewVisible;
+}
+
+- (BOOL)isLoadingViewVisible {
+   return self.loadingView.visible;
 }
 
 #pragma mark -
 #pragma mark Private
 
-- (void)attachDefaultLodingView {
+- (void)attachLodingView {
     self.loadingView  = [ANSLoadingView loadingViewOnSuperView:self];
 }
 

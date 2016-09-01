@@ -42,7 +42,7 @@ static NSString * const kANSPlistName = @"aaa";
     if (self) {
         [self performBlockWithoutNotification:^{
             self.state = ANSUsersModelUnloaded;
-        }]; 
+        }];
         
     }
     return self;
@@ -92,19 +92,21 @@ static NSString * const kANSPlistName = @"aaa";
     return users;
 }
 
-#pragma mark -
-#pragma mark Public methods
-
-- (void)sortCollectionByfilterStrirng:(NSString *)filterStrirng {
+- (void)initFilterModelsInfrastructure {
     ANSNameFilterModel *nameFilterModel = self.nameFilterModel;
     if (!nameFilterModel) {
         nameFilterModel = [[ANSNameFilterModel alloc] initWithObservableModel:self];
-        
         self.nameFilterModel = nameFilterModel;
+        
         self.viewControllerObserver.filteredModel = nameFilterModel;
     }
-    
-    [nameFilterModel filterModelByfilterStrirng:filterStrirng];
+}
+
+#pragma mark -
+#pragma mark Public methods
+
+- (void)filterNameByfilterString:(NSString *)filterString {
+    [self.nameFilterModel filterModelByfilterString:filterString];
 }
 
 - (NSArray *)descendingSortedUsers {

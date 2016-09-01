@@ -1,4 +1,4 @@
-//
+    //
 //  ANSNameFilterModel.m
 //  Objective-C UI Project
 //
@@ -16,12 +16,19 @@
 
 #import "ANSMacros.h"
 
-@interface ANSNameFilterModel ()
-@property (nonatomic, strong) ANSUsersModel *model;
-@property (nonatomic, strong) ANSProtocolObservationController  *controller;
-@property (atomic, strong)    NSString *filterString;
+typedef void(^ANSOperationBlock)(void);
 
+@interface ANSNameFilterModel ()
+@property (nonatomic, strong)   ANSUsersModel                       *model;
+@property (nonatomic, strong)   ANSProtocolObservationController    *controller;
+@property (atomic, strong)      NSString                            *filterString;
+
+- (void)addUserWithoutNotification:(ANSUser *)user;
 - (void)filterByFilterString:(NSString *)filterString;
+- (BOOL)isUser:(ANSUser *)user containsString:(NSString *)string;
+- (void)verifyObject:(id)object
+          withString:(NSString *)string
+         performBlock:(ANSOperationBlock)block;
 
 @end
 
@@ -36,7 +43,9 @@
     self = [super init];
     if (self) {
         self.model = model;
-        [self addObjectsInRange:model.objects];
+//        [self performBlockWithoutNotification:^{
+//            [self addObjectsInRange:model.objects];
+//        }]; 
     }
     
     return self;
@@ -60,21 +69,28 @@
 #pragma mark -
 #pragma mark Private methods
 
+- (void)addUserWithoutNotification:(ANSUser *)user {
+    [self performBlockWithoutNotification:^{
+        [self addObject:user];
+    }];
+}
+
 - (void)filterByFilterString:(NSString *)filterString {
-    NSMutableArray *filteredUsers = [NSMutableArray new];
+    [self performBlockWithoutNotification:^{
+        [self removeAllObjects];
+    }];
+    
     for (ANSUser *user in self.model) {
-        if ((filterString.length > 0)
-            && [user.string rangeOfString:filterString
-                                  options:NSCaseInsensitiveSearch].location == NSNotFound) {
-                [filteredUsers addObject:user];
+        if (!filterString.length) {
+            [self addUserWithoutNotification:user];
+        }
+        
+        if ([self isUser:user containsString:filterString]) {
+                [self addUserWithoutNotification:user];
         }
     }
     
-    [self performBlockWithoutNotification:^{
-        for (ANSUser *filteredUser in filteredUsers) {
-            [self removeObject:filteredUser];
-        }
-    }];
+    NSLog(@"%lu", (unsigned long)self.objects.count);
 }
 
 - (SEL)selectorForState:(NSUInteger)state {
@@ -87,16 +103,39 @@
     }
 }
 
+- (BOOL)isUser:(ANSUser *)user containsString:(NSString *)string {
+    if (!string) {
+        return true;
+    }
+    
+    BOOL value = [user.string rangeOfString:string
+                                    options:NSCaseInsensitiveSearch].location == NSNotFound;
+    return !value;
+}
+
+- (void)verifyObject:(id)object
+          withString:(NSString *)string
+         performBlock:(ANSOperationBlock)block
+{
+    if ([object isKindOfClass:[ANSUser class]]) {
+        if ([self isUser:(ANSUser *)object containsString:string]) {
+            block();
+            NSLog(@"верификация успешна");
+        }
+    }
+
+}
+
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)filterModelByfilterStrirng:(NSString *)filterStrirng {
+- (void)filterModelByfilterString:(NSString *)filterString {
     @synchronized(self) {
-        self.filterString = filterStrirng;
+        self.filterString = filterString;
         ANSWeakify(self);
         ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
             ANSStrongify(self);
-            [self filterByFilterString:filterStrirng];
+            [self filterByFilterString:filterString];
             NSLog(@"have sorted");
             
             [self notifyOfStateChange:ANSNameFilterModelDidFilter];
@@ -110,22 +149,24 @@
 - (void)    arrayModel:(ANSArrayModel *)arrayModel
     didChangeWithModel:(ANSChangeModel *)model
 {
-    ANSOneIndexModel *indexModel = (ANSOneIndexModel *)model;
-    NSUInteger index = indexModel.index;
+    id user = model.userInfo;
+    NSString *filterStirng = self.filterString;
+    
     switch (model.state) {
         case ANSStateAddObject: {
-            id object = arrayModel[index];
-            if ([object isKindOfClass:[ANSUser class]]) {
-                [self insertObject:object atIndex:index];
-            }
+            [self verifyObject:user withString:filterStirng performBlock:^{
+                [self addObject:user];
+            }];
             
-            [self filterModelByfilterStrirng:self.filterString];
             break;
         }
-        case ANSStateRemoveObject:
-            [self removeObjectAtIndex:index];
-            [self filterModelByfilterStrirng:self.filterString];
+        case ANSStateRemoveObject: {
+            [self verifyObject:user withString:filterStirng performBlock:^{
+                [self removeObject:user];
+            }];
+
             break;
+        }
             
         default:
             break;

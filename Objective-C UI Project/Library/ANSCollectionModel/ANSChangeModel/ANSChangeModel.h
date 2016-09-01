@@ -16,6 +16,7 @@ typedef NS_ENUM(NSUInteger, ANSChangeState) {
     ANSStateMoveObject,
     ANSStateExchangeObject,
     ANSStateAddObjectsInRange,
+    ASNStateRemoveAllObjects
 };
 
 @interface ANSChangeModel : NSObject

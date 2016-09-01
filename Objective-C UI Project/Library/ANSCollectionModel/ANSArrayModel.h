@@ -47,6 +47,7 @@ typedef NS_ENUM(NSUInteger, ANSArrayModelState) {
 - (void)removeObjectAtIndex:(NSUInteger)index;
 
 - (void)addObjectsInRange:(NSArray*)objects;
+- (void)removeAllObjects;
 
 - (void)moveObjectFromIndex:(NSUInteger)index toIndex:(NSUInteger)index;
 - (void)exchangeObjectAtIndex:(NSUInteger)indexOne

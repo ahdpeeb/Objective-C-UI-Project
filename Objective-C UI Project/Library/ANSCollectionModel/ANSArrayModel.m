@@ -18,10 +18,13 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 @interface ANSArrayModel ()
 @property (nonatomic, retain) NSMutableArray *mutableObjects;
 
-- (void)notifyOfChangeWithIndex:(NSUInteger)index state:(ANSChangeState)state;
+- (void)notifyOfChangeWithIndex:(NSUInteger)index
+                       userInfo:(id)userInfo
+                          state:(ANSChangeState)state;
 
 - (void)notifyOfChangeWithIndex:(NSUInteger)index1
                          index2:(NSUInteger)index2
+                       userInfo:(id)userInfo
                           state:(ANSChangeState)state;
 
 @end
@@ -70,25 +73,32 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 #pragma mark -
 #pragma mark Private methods;
 
-- (void)notifyOfChangeWithIndex:(NSUInteger)index state:(ANSChangeState)state {
+- (void)notifyOfChangeWithIndex:(NSUInteger)index
+                       userInfo:(id)userInfo
+                          state:(ANSChangeState)state
+{
     ANSChangeModel *model = [ANSChangeModel oneIndexModel:index];
+    model.userInfo = userInfo;
     model.state = state;
     [self notifyOfStateChange:0 withUserInfo:model];
 }
 
 - (void)notifyOfChangeWithIndex:(NSUInteger)index1
                          index2:(NSUInteger)index2
-                          state:(ANSChangeState)state
+                       userInfo:(id)userInfo
+                          state:(ANSChangeState)state;
 {
     ANSChangeModel *model = nil;
     switch (state) {
         case ANSStateAddObjectsInRange:
             model = [ANSChangeModel rangeModelFromIndex:index1 toIndex:index2];
+            model.userInfo = userInfo;
             break;
         
         case ANSStateMoveObject:
         case ANSStateExchangeObject:
             model = [ANSChangeModel rangeModelFromIndex:index1 toIndex:index2];
+            model.userInfo = userInfo;
             break;
             
         default:
@@ -138,7 +148,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
         
         if (![collection containsObject:object]) {
             [collection insertObject:object atIndex:index];
-            [self notifyOfChangeWithIndex:index state:ANSStateAddObject];
+            [self notifyOfChangeWithIndex:index userInfo:object state:ANSStateAddObject];
         }
     }
 }
@@ -148,7 +158,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
         id object = [self objectAtIndex:index];
         if (object) {
             [self.mutableObjects removeObjectAtIndex:index];
-            [self notifyOfChangeWithIndex:index state:ANSStateRemoveObject];
+            [self notifyOfChangeWithIndex:index userInfo:object state:ANSStateRemoveObject];
         }
     }
 }
@@ -163,7 +173,16 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
             }
         }];
         
-        [self notifyOfChangeWithIndex:0 index2:count state:ANSStateAddObjectsInRange];
+        [self notifyOfChangeWithIndex:0 index2:count userInfo:objects state:ANSStateAddObjectsInRange];
+    }
+}
+
+- (void)removeAllObjects {
+    @synchronized(self) {
+        NSUInteger count = self.count;
+        [self.mutableObjects removeAllObjects];
+        
+        [self notifyOfChangeWithIndex:0 index2:count userInfo:nil state:ASNStateRemoveAllObjects];
     }
 }
 
@@ -176,14 +195,14 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
         }
         
         [self.mutableObjects moveObjectFromIndex:fromIndex toIndex:toIndex]; 
-        [self notifyOfChangeWithIndex:fromIndex index2:toIndex state:ANSStateMoveObject];
+        [self notifyOfChangeWithIndex:fromIndex index2:toIndex userInfo:nil state:ANSStateMoveObject];
     }
 }
 
 - (void)exchangeObjectAtIndex:(NSUInteger)indexOne withObjectAtIndex:(NSUInteger)index2 {
     @synchronized(self) {
         [self.mutableObjects exchangeObjectAtIndex:indexOne withObjectAtIndex:index2];
-        [self notifyOfChangeWithIndex:indexOne index2:index2 state:ANSStateExchangeObject];
+        [self notifyOfChangeWithIndex:indexOne index2:index2 userInfo:nil state:ANSStateExchangeObject];
     }
 }
 

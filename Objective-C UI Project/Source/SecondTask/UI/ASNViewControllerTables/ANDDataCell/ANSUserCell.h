@@ -16,6 +16,6 @@
 @property (nonatomic, strong) IBOutlet UILabel          *label;
 @property (nonatomic, strong) IBOutlet ANSImageView     *userImageView; 
 
-- (void)fillFromUser:(ANSUser *)user;
+- (void)fillWithModel:(ANSUser *)user;
 
 @end

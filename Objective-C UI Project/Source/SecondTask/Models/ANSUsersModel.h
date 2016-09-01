@@ -41,6 +41,9 @@ typedef NS_ENUM(NSUInteger, ANSUserLoadingState) {
 - (void)load;
 
 // the last link 
-- (void)sortCollectionByfilterStrirng:(NSString *)filterStrirng;
+- (void)filterNameByfilterString:(NSString *)filterString;
+
+// you have to call this method afted viewControllerstart will state observe for this object 
+- (void)initFilterModelsInfrastructure;
 
 @end

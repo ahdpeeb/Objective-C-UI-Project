@@ -48,7 +48,7 @@
 #pragma mark -
 #pragma mark Public methods
 
-- (void)fillFromUser:(ANSUser *)user {
+- (void)fillWithModel:(ANSUser *)user {
     self.label.text = user.string;
     self.userImageView.imageModel = user.imageModel;
     

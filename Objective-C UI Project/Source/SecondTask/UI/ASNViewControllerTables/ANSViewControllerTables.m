@@ -56,12 +56,14 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
         _users.viewControllerObserver = self;
         
         self.usersController = [users protocolControllerWithObserver:self];
+        [users initFilterModelsInfrastructure];
     }
 }
 
 - (void)setFilteredModel:(ANSNameFilterModel *)filteredModel {
     if (_filteredModel != filteredModel) {
         _filteredModel = filteredModel;
+        _filteredModel.viewControllerObserver = self;
         
         self.filterModelController = [filteredModel protocolControllerWithObserver:self];
     }
@@ -177,7 +179,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
     ANSUser *user = nil;
     user = [self presentedModel][indexPath.row];
     
-    [cell fillFromUser:user];
+    [cell fillWithModel:user];
 
     return cell;
 }
@@ -259,26 +261,31 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [self.users sortCollectionByfilterStrirng:searchText];
+    [self.users filterNameByfilterString:searchText];
 }
 
 #pragma mark -
 #pragma mark ANSCollectionObserver protocol
+
 - (void)    arrayModel:(ANSArrayModel *)arrayModel
     didChangeWithModel:(ANSChangeModel *)model
 {
     ANSPerformInMainQueue(dispatch_async, ^{
         UITableView *table = self.rootView.tableView;
-        [model applyToTableView:table];
         
-        NSLog(@"notified collectionDidUpdate, - %lu object", arrayModel.count);
+        if ([arrayModel isMemberOfClass:[ANSUsersModel class]]) {
+            [model applyToTableView:table];
+            NSLog(@"%@ notified collectionDidUpdate, - %lu object", arrayModel, arrayModel.count);
+        } else {
+            NSLog(@"OtherModel");
+        }
     });
 }
 
 - (void)usersModelDidLoad:(ANSUsersModel *)model {
     ANSPerformInMainQueue(dispatch_async, ^{
         NSLog(@"notified userModelDidLoad");
-        self.rootView.activeLoadingView = NO;
+        self.rootView.loadingViewVisible = NO;
         [self.rootView.tableView reloadData];
     });
 }

@@ -27,9 +27,10 @@ typedef NS_ENUM(NSUInteger, ANSNameFilterModelState) {
 
 @interface ANSNameFilterModel : ANSArrayModel <ANSUsersModelObserver>
 @property (nonatomic, readonly) id observableObject;
+@property (nonatomic, weak)     ANSViewControllerTables             *viewControllerObserver;
 
 - (instancetype)initWithObservableModel:(ANSUsersModel *)model;
 
-- (void)filterModelByfilterStrirng:(NSString *)filterStrirng;
+- (void)filterModelByfilterString:(NSString *)filterString;
 
 @end
