@@ -8,7 +8,7 @@
 
 #import "ANSViewControllerTables.h"
 
-#import "ANSRootTableView.h"
+#import "ANSRootUserView.h"
 #import "ANSUserCell.h"
 #import "ANSTableViewCell.h"
 #import "ANSUser.h"
@@ -43,7 +43,7 @@ static const NSUInteger kANSSectionsCount           = 1;
 
 @end
 
-ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, rootView)
+ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, usersView)
 
 @implementation ANSViewControllerTables;
 
@@ -91,14 +91,14 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 #pragma mark Private methods
 
 - (void)resignSearchBar {
-    UISearchBar *searchBar = self.rootView.searchBar;
+    UISearchBar *searchBar = self.usersView.searchBar;
     if (searchBar.isFirstResponder) {
         [self searchBarCancelButtonClicked:searchBar];
     }
 }
 
 - (ANSUsersModel *)presentedModel {
-    BOOL isFirstResponder = self.rootView.searchBar.isFirstResponder;
+    BOOL isFirstResponder = self.usersView.searchBar.isFirstResponder;
     return isFirstResponder ? (ANSUsersModel *)self.filteredModel : self.users;
 }
 
@@ -123,7 +123,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 #pragma mark UIBarButtonItem actions
 
 - (void)leftBarAction:(UIBarButtonItem *)sender {
-    UITableView *table = self.rootView.tableView;
+    UITableView *table = self.usersView.tableView;
     
     [self resignSearchBar];
     
@@ -136,7 +136,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 }
 
 - (void)rightBarAction:(UIBarButtonItem *)sender {
-    UITableView *table = self.rootView.tableView;
+    UITableView *table = self.usersView.tableView;
     
     [self resignSearchBar];
     
@@ -244,11 +244,11 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
     [searchBar resignFirstResponder];
     [searchBar setShowsCancelButton:NO animated:YES];
     
-    [self.rootView.tableView reloadData];
+    [self.usersView.tableView reloadData];
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    UITableView *table = self.rootView.tableView;
+    UITableView *table = self.usersView.tableView;
     if (table.isEditing) {
         return NO;
     }
@@ -271,13 +271,13 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
     didChangeWithModel:(ANSChangeModel *)model
 {
     ANSPerformInMainQueue(dispatch_async, ^{
-        UITableView *table = self.rootView.tableView;
+        UITableView *table = self.usersView.tableView;
         
         if ([arrayModel isMemberOfClass:[ANSUsersModel class]]) {
             [model applyToTableView:table];
             NSLog(@"%@ notified collectionDidUpdate, - %lu object", arrayModel, arrayModel.count);
         } else {
-            NSLog(@"OtherModel");
+            NSLog(@"%@ notified collectionDidUpdate, - %lu object", arrayModel, arrayModel.count);
         }
     });
 }
@@ -285,15 +285,15 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootTableView, roo
 - (void)usersModelDidLoad:(ANSUsersModel *)model {
     ANSPerformInMainQueue(dispatch_async, ^{
         NSLog(@"notified userModelDidLoad");
-        self.rootView.loadingViewVisible = NO;
-        [self.rootView.tableView reloadData];
+        self.usersView.loadingViewVisible = NO;
+        [self.usersView.tableView reloadData];
     });
 }
 
 - (void)nameFilterModelDidFilter:(ANSNameFilterModel *)model {
     ANSPerformInMainQueue(dispatch_async, ^{
         NSLog(@"notified didFilterWithUserInfo - %@ ", model);
-        [self.rootView.tableView reloadData];
+        [self.usersView.tableView reloadData];
     });
 }
 

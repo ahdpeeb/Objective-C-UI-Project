@@ -43,9 +43,6 @@ typedef void(^ANSOperationBlock)(void);
     self = [super init];
     if (self) {
         self.model = model;
-//        [self performBlockWithoutNotification:^{
-//            [self addObjectsInRange:model.objects];
-//        }]; 
     }
     
     return self;
@@ -120,10 +117,8 @@ typedef void(^ANSOperationBlock)(void);
     if ([object isKindOfClass:[ANSUser class]]) {
         if ([self isUser:(ANSUser *)object containsString:string]) {
             block();
-            NSLog(@"верификация успешна");
         }
     }
-
 }
 
 #pragma mark -
@@ -145,6 +140,14 @@ typedef void(^ANSOperationBlock)(void);
 
 #pragma mark -
 #pragma mark ANSUsersModelObserver
+
+- (void)usersModelDidLoad:(ANSUsersModel *)model {
+    ANSPerformInAsyncQueue(ANSPriorityLow, ^{
+        [self performBlockWithoutNotification:^{
+            [self addObjectsInRange:model.objects];
+        }];
+    });
+}
 
 - (void)    arrayModel:(ANSArrayModel *)arrayModel
     didChangeWithModel:(ANSChangeModel *)model

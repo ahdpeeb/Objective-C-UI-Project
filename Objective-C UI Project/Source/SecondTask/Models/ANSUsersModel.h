@@ -18,7 +18,6 @@
 
 @optional
 
-//- (void)usersModelDidFilter:(ANSUsersModel *)model;
 - (void)usersModelDidLoad:(ANSUsersModel *)model;
 
 @end

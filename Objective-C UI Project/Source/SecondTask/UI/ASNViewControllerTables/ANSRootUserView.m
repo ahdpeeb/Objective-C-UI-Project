@@ -6,19 +6,19 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "ANSRootTableView.h"
+#import "ANSRootUserView.h"
 
 #import "ANSLoadingView.h"
 #import "UINib+Extension.h"
 #import "NSBundle+ANSExtenison.h"
 
-@interface ANSRootTableView ()
+@interface ANSRootUserView ()
 //vertical indent for table and scrollIndicator
 - (void)hsPace:(CGFloat)top;
 
 @end
 
-@implementation ANSRootTableView
+@implementation ANSRootUserView
 
 #pragma mark -
 #pragma mark Initialization and dealloc 
