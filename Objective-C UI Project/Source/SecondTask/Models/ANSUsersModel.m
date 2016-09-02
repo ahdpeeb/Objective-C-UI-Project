@@ -23,7 +23,6 @@ static const NSUInteger kANSUsersCount = 20;
 static NSString * const kANSPlistName = @"aaa";
 
 @interface ANSUsersModel ()
-@property (nonatomic, weak) ANSNameFilterModel *nameFilterModel;
 
 - (SEL)selectorForState:(NSUInteger)state;
 - (id)usersFromFileSystem;
@@ -35,26 +34,10 @@ static NSString * const kANSPlistName = @"aaa";
 @implementation ANSUsersModel
 
 #pragma mark -
-#pragma mark Initilization and deallocation 
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        [self performBlockWithoutNotification:^{
-            self.state = ANSUsersModelUnloaded;
-        }];
-        
-    }
-    return self;
-}
-
-#pragma mark -
 #pragma mark Private methods
 
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
-        case ANSUsersModelDidLoad:
-            return @selector(usersModelDidLoad:);
             
         default:
           return [super selectorForState:state];
@@ -92,22 +75,8 @@ static NSString * const kANSPlistName = @"aaa";
     return users;
 }
 
-- (void)initFilterModelsInfrastructure {
-    ANSNameFilterModel *nameFilterModel = self.nameFilterModel;
-    if (!nameFilterModel) {
-        nameFilterModel = [[ANSNameFilterModel alloc] initWithObservableModel:self];
-        self.nameFilterModel = nameFilterModel;
-        
-        self.viewControllerObserver.filteredModel = nameFilterModel;
-    }
-}
-
 #pragma mark -
 #pragma mark Public methods
-
-- (void)filterNameByfilterString:(NSString *)filterString {
-    [self.nameFilterModel filterModelByfilterString:filterString];
-}
 
 - (NSArray *)descendingSortedUsers {
     NSMutableArray *users = [NSMutableArray arrayWithArray:self.objects];
@@ -122,6 +91,12 @@ static NSString * const kANSPlistName = @"aaa";
     return users;
 }
 
+- (void)loadUsers {
+    [self loadWithBlock:^BOOL{
+       return [self loadUsersModel];
+    }];
+}
+
 #pragma mark -
 #pragma mark Save and loading(Public methods)
 
@@ -130,26 +105,6 @@ static NSString * const kANSPlistName = @"aaa";
     NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inSearchPathDirectory:NSDocumentDirectory];
     BOOL isSuccessfully = [NSKeyedArchiver archiveRootObject:self.objects toFile:plistPath];
     NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
-}
-
-- (void)load {
-    @synchronized(self) {
-        ANSUserLoadingState state = self.state;
-        if (state == ANSUsersModelLoading || state == ANSUsersModelDidLoad) {
-            [self notifyOfStateChange:state];
-            return;
-        }
-        
-        if (state == ANSUsersModelUnloaded || state == ANSUsersModelDidFailLoading) {
-            self.state = ANSUsersModelLoading;
-            ANSWeakify(self);
-            ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
-                ANSStrongify(self);
-                id users = [self loadUsersModel];
-                self.state = (users) ? ANSUsersModelDidLoad : ANSUsersModelDidFailLoading;
-            });
-        }
-    }
 }
 
 @end

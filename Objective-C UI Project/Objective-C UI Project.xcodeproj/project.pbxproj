@@ -23,6 +23,7 @@
 		936727D91D591D25007A796F /* ANSRootUserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C81D591D25007A796F /* ANSRootUserView.m */; };
 		936727DA1D591D25007A796F /* ANSViewControllerTables.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727CA1D591D25007A796F /* ANSViewControllerTables.m */; };
 		936727DB1D591D25007A796F /* ANSViewControllerTables.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936727CB1D591D25007A796F /* ANSViewControllerTables.xib */; };
+		9376C8351D79A09E00E6A3EF /* ANSLoadingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C8341D79A09E00E6A3EF /* ANSLoadingModel.m */; };
 		9388ECDF1D49FEB50082EE4B /* ANSDataInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9388ECDE1D49FEB50082EE4B /* ANSDataInfo.m */; };
 		9388ECF11D4A396F0082EE4B /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE11D4A396F0082EE4B /* 1.png */; };
 		9388ECF21D4A396F0082EE4B /* 10.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE21D4A396F0082EE4B /* 10.png */; };
@@ -113,6 +114,8 @@
 		936727C91D591D25007A796F /* ANSViewControllerTables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSViewControllerTables.h; sourceTree = "<group>"; };
 		936727CA1D591D25007A796F /* ANSViewControllerTables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSViewControllerTables.m; sourceTree = "<group>"; };
 		936727CB1D591D25007A796F /* ANSViewControllerTables.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSViewControllerTables.xib; sourceTree = "<group>"; };
+		9376C8331D79A09E00E6A3EF /* ANSLoadingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSLoadingModel.h; path = ../../Source/SecondTask/Models/ANSLoadingModel.h; sourceTree = "<group>"; };
+		9376C8341D79A09E00E6A3EF /* ANSLoadingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSLoadingModel.m; path = ../../Source/SecondTask/Models/ANSLoadingModel.m; sourceTree = "<group>"; };
 		9388ECDD1D49FEB50082EE4B /* ANSDataInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSDataInfo.h; sourceTree = "<group>"; };
 		9388ECDE1D49FEB50082EE4B /* ANSDataInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSDataInfo.m; sourceTree = "<group>"; };
 		9388ECE11D4A396F0082EE4B /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
@@ -301,6 +304,16 @@
 			path = ANDDataCell;
 			sourceTree = "<group>";
 		};
+		9376C8361D79BF3600E6A3EF /* ANSLoadingModel */ = {
+			isa = PBXGroup;
+			children = (
+				9376C8331D79A09E00E6A3EF /* ANSLoadingModel.h */,
+				9376C8341D79A09E00E6A3EF /* ANSLoadingModel.m */,
+			);
+			name = ANSLoadingModel;
+			path = ANSObservableObject;
+			sourceTree = "<group>";
+		};
 		9388ECE01D4A396F0082EE4B /* animationDancer */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,12 +342,13 @@
 			children = (
 				939BADD91D75937400B4D610 /* Extensions */,
 				939BAE2B1D7594A000B4D610 /* CustomViews */,
-				939BADB21D75937400B4D610 /* ANSGCD */,
-				939BADB51D75937400B4D610 /* ANSImageModel */,
 				939BADC01D75937400B4D610 /* ANSObservableObject */,
-				939BADCD1D75937400B4D610 /* ANSQueue */,
+				9376C8361D79BF3600E6A3EF /* ANSLoadingModel */,
 				939BAD9C1D75937400B4D610 /* ANSArrayModel */,
+				939BADB51D75937400B4D610 /* ANSImageModel */,
+				939BADCD1D75937400B4D610 /* ANSQueue */,
 				939BADD01D75937400B4D610 /* ANSRandom */,
+				939BADB21D75937400B4D610 /* ANSGCD */,
 				939BADBE1D75937400B4D610 /* ANSMacros */,
 			);
 			path = Library;
@@ -916,6 +930,7 @@
 				939BAE081D75937400B4D610 /* ANSChangeModel.m in Sources */,
 				939BAE1A1D75937400B4D610 /* ANSRootView.m in Sources */,
 				939BAE231D75937400B4D610 /* NSString+ANSExtension.m in Sources */,
+				9376C8351D79A09E00E6A3EF /* ANSLoadingModel.m in Sources */,
 				939BAE0B1D75937400B4D610 /* ANSTwoIndexModel.m in Sources */,
 				9388ECDF1D49FEB50082EE4B /* ANSDataInfo.m in Sources */,
 				93C084371D3E380D0077A81C /* main.m in Sources */,

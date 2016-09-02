@@ -16,12 +16,11 @@
     UITableViewDelegate,
     UISearchBarDelegate,
 
-    ANSUsersModelObserver,
+    ANSArrayModelObserver,
     ANSNameFilterModelProtocol
 >
 
 @property (nonatomic, strong) ANSUsersModel *users;
-@property (nonatomic, strong) ANSNameFilterModel *filteredModel;
 
 @property (nonatomic, strong) IBOutlet UISwipeGestureRecognizer *rightSwipeGesture;
 

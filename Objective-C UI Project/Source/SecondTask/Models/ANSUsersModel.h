@@ -10,39 +10,13 @@
 
 #import "ANSArrayModel.h"
 
-@class ANSUsersModel;
 @class ANSNameFilterModel;
-@class ANSViewControllerTables;
-
-@protocol ANSUsersModelObserver <ANSArrayModelObserver>
-
-@optional
-
-- (void)usersModelDidLoad:(ANSUsersModel *)model;
-
-@end
-
-typedef NS_ENUM(NSUInteger, ANSUserLoadingState) {
-    ANSUsersModelUnloaded = ANSStateCount,
-    ANSUsersModelDidLoad,
-    ANSUsersModelLoading,
-    ANSUsersModelDidFailLoading,
-    
-    ANSUsersModelCountState
-};
 
 @interface ANSUsersModel : ANSArrayModel
-@property (nonatomic, weak) ANSViewControllerTables *viewControllerObserver;
 
 - (NSArray *)descendingSortedUsers;
 
 - (void)save;
-- (void)load;
-
-// the last link 
-- (void)filterNameByfilterString:(NSString *)filterString;
-
-// you have to call this method afted viewControllerstart will state observe for this object 
-- (void)initFilterModelsInfrastructure;
+- (void)loadUsers;
 
 @end

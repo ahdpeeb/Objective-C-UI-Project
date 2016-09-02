@@ -35,11 +35,12 @@ static const NSUInteger kANSSectionsCount           = 1;
 @interface ANSViewControllerTables ()
 @property (nonatomic, strong) ANSProtocolObservationController  *usersController;
 
-// the controller monitors the latest filtering model
+@property (nonatomic, strong) ANSNameFilterModel *filteredModel;
 @property (nonatomic, strong) ANSProtocolObservationController *filterModelController;
 
 - (void)resignSearchBar;
 - (ANSUsersModel *)presentedModel;
+- (void)initFilterInfrainfrastructure;
 
 @end
 
@@ -53,17 +54,15 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
 - (void)setUsers:(ANSUsersModel *)users {
     if (_users != users) {
         _users = users;
-        _users.viewControllerObserver = self;
         
         self.usersController = [users protocolControllerWithObserver:self];
-        [users initFilterModelsInfrastructure];
+        [self initFilterInfrainfrastructure];
     }
 }
 
 - (void)setFilteredModel:(ANSNameFilterModel *)filteredModel {
     if (_filteredModel != filteredModel) {
         _filteredModel = filteredModel;
-        _filteredModel.viewControllerObserver = self;
         
         self.filterModelController = [filteredModel protocolControllerWithObserver:self];
     }
@@ -80,7 +79,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.users load];
+    [self.users loadUsers];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -100,6 +99,12 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
 - (ANSUsersModel *)presentedModel {
     BOOL isFirstResponder = self.usersView.searchBar.isFirstResponder;
     return isFirstResponder ? (ANSUsersModel *)self.filteredModel : self.users;
+}
+
+- (void)initFilterInfrainfrastructure {
+    ANSUsersModel *users = self.users;
+    ANSNameFilterModel *nameFilterModel = [[ANSNameFilterModel alloc] initWithObservableModel:users];
+    self.filteredModel = nameFilterModel;
 }
 
 #pragma mark -
@@ -261,7 +266,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [self.users filterNameByfilterString:searchText];
+    [self.filteredModel filterByfilterString:searchText];
 }
 
 #pragma mark -
@@ -282,14 +287,14 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
     });
 }
 
-- (void)usersModelDidLoad:(ANSUsersModel *)model {
+- (void)loadingModelDidLoad:(ANSLoadingModel *)model {
     ANSPerformInMainQueue(dispatch_async, ^{
         NSLog(@"notified userModelDidLoad");
         self.usersView.loadingViewVisible = NO;
         [self.usersView.tableView reloadData];
     });
 }
-
+ 
 - (void)nameFilterModelDidFilter:(ANSNameFilterModel *)model {
     ANSPerformInMainQueue(dispatch_async, ^{
         NSLog(@"notified didFilterWithUserInfo - %@ ", model);

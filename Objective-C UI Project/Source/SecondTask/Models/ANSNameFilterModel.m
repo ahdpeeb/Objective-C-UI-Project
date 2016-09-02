@@ -24,7 +24,7 @@ typedef void(^ANSOperationBlock)(void);
 @property (atomic, strong)      NSString                            *filterString;
 
 - (void)addUserWithoutNotification:(ANSUser *)user;
-- (void)filterByFilterString:(NSString *)filterString;
+- (void)filterModelByFilterString:(NSString *)filterString;
 - (BOOL)isUser:(ANSUser *)user containsString:(NSString *)string;
 - (void)verifyObject:(id)object
           withString:(NSString *)string
@@ -72,7 +72,7 @@ typedef void(^ANSOperationBlock)(void);
     }];
 }
 
-- (void)filterByFilterString:(NSString *)filterString {
+- (void)filterModelByFilterString:(NSString *)filterString {
     [self performBlockWithoutNotification:^{
         [self removeAllObjects];
     }];
@@ -124,13 +124,13 @@ typedef void(^ANSOperationBlock)(void);
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)filterModelByfilterString:(NSString *)filterString {
+- (void)filterByfilterString:(NSString *)filterString {
     @synchronized(self) {
         self.filterString = filterString;
         ANSWeakify(self);
         ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
             ANSStrongify(self);
-            [self filterByFilterString:filterString];
+            [self filterModelByFilterString:filterString];
             NSLog(@"have sorted");
             
             [self notifyOfStateChange:ANSNameFilterModelDidFilter];
@@ -155,25 +155,24 @@ typedef void(^ANSOperationBlock)(void);
     id user = model.userInfo;
     NSString *filterStirng = self.filterString;
     
-    switch (model.state) {
-        case ANSStateAddObject: {
-            [self verifyObject:user withString:filterStirng performBlock:^{
+    [self verifyObject:user withString:filterStirng performBlock:^{
+        switch (model.state) {
+            case ANSStateAddObject: {
                 [self addObject:user];
-            }];
-            
-            break;
+                break;
+            }
+            case ANSStateRemoveObject: {
+                if ([self containsObject:user]) {
+                    [self removeObject:user];
+                }
+                
+                break;
+            }
+                
+            default:
+                break;
         }
-        case ANSStateRemoveObject: {
-            [self verifyObject:user withString:filterStirng performBlock:^{
-                [self removeObject:user];
-            }];
-
-            break;
-        }
-            
-        default:
-            break;
-    }
+    }];
 }
 
 @end

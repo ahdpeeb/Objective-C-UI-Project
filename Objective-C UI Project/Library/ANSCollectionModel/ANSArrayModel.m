@@ -80,7 +80,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     ANSChangeModel *model = [ANSChangeModel oneIndexModel:index];
     model.userInfo = userInfo;
     model.state = state;
-    [self notifyOfStateChange:0 withUserInfo:model];
+    [self notifyOfStateChange:ANSArrayModelDidChange withUserInfo:model];
 }
 
 - (void)notifyOfChangeWithIndex:(NSUInteger)index1
@@ -106,11 +106,17 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     }
     
     model.state = state;
-    [self notifyOfStateChange:0 withUserInfo:model];
+    [self notifyOfStateChange:ANSArrayModelDidChange withUserInfo:model];
 }
 
 #pragma mark -
 #pragma mark Public methods; 
+
+- (BOOL)containsObject:(id)object {
+    @synchronized(self) {
+        return [self.mutableObjects containsObject:object];
+    }
+}
 
 - (id)objectAtIndex:(NSUInteger)index {
     @synchronized(self) {
@@ -173,7 +179,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
             }
         }];
         
-        [self notifyOfChangeWithIndex:0 index2:count userInfo:objects state:ANSStateAddObjectsInRange];
+        [self notifyOfChangeWithIndex:ANSArrayModelDidChange index2:count userInfo:objects state:ANSStateAddObjectsInRange];
     }
 }
 
@@ -182,7 +188,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
         NSUInteger count = self.count;
         [self.mutableObjects removeAllObjects];
         
-        [self notifyOfChangeWithIndex:0 index2:count userInfo:nil state:ASNStateRemoveAllObjects];
+        [self notifyOfChangeWithIndex:ANSArrayModelDidChange index2:count userInfo:nil state:ASNStateRemoveAllObjects];
     }
 }
 
@@ -217,7 +223,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
-        case ANSDefaultState:
+        case ANSArrayModelDidChange:
             return @selector(arrayModel:didChangeWithModel:);
             
         default:
