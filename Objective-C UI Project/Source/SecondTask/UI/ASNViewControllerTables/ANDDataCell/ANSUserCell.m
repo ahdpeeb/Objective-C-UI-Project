@@ -10,6 +10,8 @@
 #import "ANSUserCell.h"
 
 #import "ANSImageView.h"
+#import "ANSUser.h"
+#import "ANSLoadingView.h"
 
 @interface ANSUserCell ()
 
@@ -24,6 +26,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    [ANSLoadingView viewOnSuperView:self.userImageView];
 }
 
 #pragma mark -

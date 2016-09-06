@@ -21,7 +21,7 @@
 		936727D91D591D25007A796F /* ANSRootUserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C81D591D25007A796F /* ANSRootUserView.m */; };
 		936727DA1D591D25007A796F /* ANSViewControllerTables.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727CA1D591D25007A796F /* ANSViewControllerTables.m */; };
 		936727DB1D591D25007A796F /* ANSViewControllerTables.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936727CB1D591D25007A796F /* ANSViewControllerTables.xib */; };
-		9376C8351D79A09E00E6A3EF /* ANSLoadingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C8341D79A09E00E6A3EF /* ANSLoadingModel.m */; };
+		9376C8351D79A09E00E6A3EF /* ANSLoadableModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C8341D79A09E00E6A3EF /* ANSLoadableModel.m */; };
 		9376C8451D79DFB500E6A3EF /* ANSImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C83A1D79DFB500E6A3EF /* ANSImageView.m */; };
 		9376C8461D79DFB500E6A3EF /* ANSLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C83D1D79DFB500E6A3EF /* ANSLoadingView.m */; };
 		9376C8471D79DFB500E6A3EF /* ANSLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9376C83E1D79DFB500E6A3EF /* ANSLoadingView.xib */; };
@@ -55,7 +55,6 @@
 		939BAE0E1D75937400B4D610 /* ANSTwoIndexModel+UITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADB11D75937400B4D610 /* ANSTwoIndexModel+UITableView.m */; };
 		939BAE0F1D75937400B4D610 /* ANSGCD.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADB41D75937400B4D610 /* ANSGCD.m */; };
 		939BAE101D75937400B4D610 /* ANSImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADB71D75937400B4D610 /* ANSImageModel.m */; };
-		939BAE111D75937400B4D610 /* ANSImageModelDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADBA1D75937400B4D610 /* ANSImageModelDispatcher.m */; };
 		939BAE131D75937400B4D610 /* ANSObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADC21D75937400B4D610 /* ANSObservableObject.m */; };
 		939BAE141D75937400B4D610 /* ANSBlockObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADC51D75937400B4D610 /* ANSBlockObservationController.m */; };
 		939BAE151D75937400B4D610 /* ANSObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADC71D75937400B4D610 /* ANSObservationController.m */; };
@@ -111,8 +110,8 @@
 		936727C91D591D25007A796F /* ANSViewControllerTables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSViewControllerTables.h; sourceTree = "<group>"; };
 		936727CA1D591D25007A796F /* ANSViewControllerTables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSViewControllerTables.m; sourceTree = "<group>"; };
 		936727CB1D591D25007A796F /* ANSViewControllerTables.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSViewControllerTables.xib; sourceTree = "<group>"; };
-		9376C8331D79A09E00E6A3EF /* ANSLoadingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSLoadingModel.h; path = ../../Source/SecondTask/Models/ANSLoadingModel.h; sourceTree = "<group>"; };
-		9376C8341D79A09E00E6A3EF /* ANSLoadingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSLoadingModel.m; path = ../../Source/SecondTask/Models/ANSLoadingModel.m; sourceTree = "<group>"; };
+		9376C8331D79A09E00E6A3EF /* ANSLoadableModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSLoadableModel.h; path = ../../Source/SecondTask/Models/ANSLoadableModel.h; sourceTree = "<group>"; };
+		9376C8341D79A09E00E6A3EF /* ANSLoadableModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSLoadableModel.m; path = ../../Source/SecondTask/Models/ANSLoadableModel.m; sourceTree = "<group>"; };
 		9376C8391D79DFB500E6A3EF /* ANSImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSImageView.h; sourceTree = "<group>"; };
 		9376C83A1D79DFB500E6A3EF /* ANSImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSImageView.m; sourceTree = "<group>"; };
 		9376C83C1D79DFB500E6A3EF /* ANSLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLoadingView.h; sourceTree = "<group>"; };
@@ -162,8 +161,6 @@
 		939BADB41D75937400B4D610 /* ANSGCD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSGCD.m; sourceTree = "<group>"; };
 		939BADB61D75937400B4D610 /* ANSImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSImageModel.h; sourceTree = "<group>"; };
 		939BADB71D75937400B4D610 /* ANSImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSImageModel.m; sourceTree = "<group>"; };
-		939BADB91D75937400B4D610 /* ANSImageModelDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSImageModelDispatcher.h; sourceTree = "<group>"; };
-		939BADBA1D75937400B4D610 /* ANSImageModelDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSImageModelDispatcher.m; sourceTree = "<group>"; };
 		939BADBF1D75937400B4D610 /* ANSMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSMacros.h; sourceTree = "<group>"; };
 		939BADC11D75937400B4D610 /* ANSObservableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSObservableObject.h; sourceTree = "<group>"; };
 		939BADC21D75937400B4D610 /* ANSObservableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSObservableObject.m; sourceTree = "<group>"; };
@@ -296,8 +293,8 @@
 		9376C8361D79BF3600E6A3EF /* ANSLoadingModel */ = {
 			isa = PBXGroup;
 			children = (
-				9376C8331D79A09E00E6A3EF /* ANSLoadingModel.h */,
-				9376C8341D79A09E00E6A3EF /* ANSLoadingModel.m */,
+				9376C8331D79A09E00E6A3EF /* ANSLoadableModel.h */,
+				9376C8341D79A09E00E6A3EF /* ANSLoadableModel.m */,
 			);
 			name = ANSLoadingModel;
 			path = ANSObservableObject;
@@ -317,6 +314,7 @@
 		9376C8381D79DFB500E6A3EF /* ANSImageView */ = {
 			isa = PBXGroup;
 			children = (
+				939BADB51D75937400B4D610 /* ANSImageModel */,
 				9376C8391D79DFB500E6A3EF /* ANSImageView.h */,
 				9376C83A1D79DFB500E6A3EF /* ANSImageView.m */,
 			);
@@ -382,7 +380,6 @@
 				939BADC01D75937400B4D610 /* ANSObservableObject */,
 				9376C8361D79BF3600E6A3EF /* ANSLoadingModel */,
 				939BAD9C1D75937400B4D610 /* ANSArrayModel */,
-				939BADB51D75937400B4D610 /* ANSImageModel */,
 				939BADCD1D75937400B4D610 /* ANSQueue */,
 				939BADD01D75937400B4D610 /* ANSRandom */,
 				939BADB21D75937400B4D610 /* ANSGCD */,
@@ -455,18 +452,9 @@
 			children = (
 				939BADB61D75937400B4D610 /* ANSImageModel.h */,
 				939BADB71D75937400B4D610 /* ANSImageModel.m */,
-				939BADB81D75937400B4D610 /* ANSImageModelDispatcher */,
 			);
-			path = ANSImageModel;
-			sourceTree = "<group>";
-		};
-		939BADB81D75937400B4D610 /* ANSImageModelDispatcher */ = {
-			isa = PBXGroup;
-			children = (
-				939BADB91D75937400B4D610 /* ANSImageModelDispatcher.h */,
-				939BADBA1D75937400B4D610 /* ANSImageModelDispatcher.m */,
-			);
-			path = ANSImageModelDispatcher;
+			name = ANSImageModel;
+			path = ../../ANSImageModel;
 			sourceTree = "<group>";
 		};
 		939BADBE1D75937400B4D610 /* ANSMacros */ = {
@@ -927,7 +915,7 @@
 				939BAE181D75937400B4D610 /* ANSRandom.m in Sources */,
 				939BAE081D75937400B4D610 /* ANSChangeModel.m in Sources */,
 				939BAE231D75937400B4D610 /* NSString+ANSExtension.m in Sources */,
-				9376C8351D79A09E00E6A3EF /* ANSLoadingModel.m in Sources */,
+				9376C8351D79A09E00E6A3EF /* ANSLoadableModel.m in Sources */,
 				939BAE0B1D75937400B4D610 /* ANSTwoIndexModel.m in Sources */,
 				9388ECDF1D49FEB50082EE4B /* ANSDataInfo.m in Sources */,
 				93C084371D3E380D0077A81C /* main.m in Sources */,
@@ -949,7 +937,6 @@
 				939BAE061D75937400B4D610 /* ANSArrayModel.m in Sources */,
 				939BAE0D1D75937400B4D610 /* ANSRangeChangeModel+UITableView.m in Sources */,
 				93C084351D3E380D0077A81C /* ANSAppDelegate.m in Sources */,
-				939BAE111D75937400B4D610 /* ANSImageModelDispatcher.m in Sources */,
 				939BAE1C1D75937400B4D610 /* NSTimer+ANSExtension.m in Sources */,
 				939BAE1E1D75937400B4D610 /* NSBundle+ANSExtenison.m in Sources */,
 				939BAE151D75937400B4D610 /* ANSObservationController.m in Sources */,

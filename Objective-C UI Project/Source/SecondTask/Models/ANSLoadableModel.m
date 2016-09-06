@@ -6,13 +6,13 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "ANSLoadingModel.h"
+#import "ANSLoadableModel.h"
 
 #import "ANSGCD.h"
 
 #import "ANSMacros.h"
 
-@implementation ANSLoadingModel
+@implementation ANSLoadableModel
 
 #pragma mark -
 #pragma mark Initilization and deallocation
@@ -21,7 +21,7 @@
     self = [super init];
     if (self) {
         [self performBlockWithoutNotification:^{
-            self.state = ANSLoadingModelUnloaded;
+            self.state = ANSLoadableModelUnloaded;
         }];
         
     }
@@ -33,17 +33,14 @@
 
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
-        case ANSLoadingModelWillLoad:
-            return @selector(loadingModelWillLoad:);
+        case ANSLoadableModelLoading:
+            return @selector(loadableModelLoading:);
             
-        case ANSLoadingModelLoading:
-            return @selector(loadingModelLoading:);
+        case ANSLoadableModelDidLoad:
+            return @selector(loadableModelDidLoad:);
             
-        case ANSLoadingModelDidLoad:
-            return @selector(loadingModelDidLoad:);
-            
-        case ANSLoadingModelDidFailLoading:
-            return @selector(loadingModelDidFailLoading:);
+        case ANSLoadableModelDidFailLoading:
+            return @selector(loadableModelDidFailLoading:);
             
         default:
             return [super selectorForState:state];
@@ -55,25 +52,26 @@
 
 - (void)loadWithBlock:(ANSLoadingBlock)block {
     @synchronized(self) {
+        if (!block) {
+            return;
+        }
+        
         ANSLoadingState state = self.state;
-        if (state == ANSLoadingModelLoading || state == ANSLoadingModelDidLoad || state == ANSLoadingModelWillLoad) {
+        if (state == ANSLoadableModelLoading || state == ANSLoadableModelDidLoad) {
             [self notifyOfStateChange:state];
             return;
         }
         
-        if (state == ANSLoadingModelUnloaded || state == ANSLoadingModelDidFailLoading) {
-            self.state = ANSLoadingModelLoading;
+        if (state == ANSLoadableModelUnloaded || state == ANSLoadableModelDidFailLoading) {
+            self.state = ANSLoadableModelLoading;
             
             ANSWeakify(self);
             ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
                 ANSStrongify(self);
                 
-                BOOL isLoad = block();
-                if (isLoad) {
-                    self.state = ANSLoadingModelWillLoad;
-                }
+                BOOL isLoaded = block();
                 
-                self.state = (isLoad) ? ANSLoadingModelDidLoad : ANSLoadingModelDidFailLoading;
+                self.state = (isLoaded) ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
             });
         }
     }

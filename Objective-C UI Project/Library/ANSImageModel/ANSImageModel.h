@@ -8,16 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ANSObservableObject.h"
+#import "ANSLoadableModel.h"
 
-typedef NS_ENUM(NSUInteger, ANSImageModelState) {
-    ANSImageModelUnloaded,
-    ANSImageModelLoading,
-    ANSImageModelLoaded,
-    ANSImageModelFailedLoadin
-};
-
-@interface ANSImageModel : ANSObservableObject <NSCoding>
+@interface ANSImageModel : ANSLoadableModel <NSCoding>
 @property (nonatomic, readonly)                  UIImage *image;
 @property (nonatomic, readonly)                  NSURL *url;
 

@@ -10,14 +10,14 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="lCf-0x-1Ni">
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" id="lCf-0x-1Ni">
                     <rect key="frame" x="143" y="264" width="37" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <color key="color" red="0.53826719522476196" green="0.24289709329605103" blue="0.084576152265071869" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="color" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                 </activityIndicatorView>
             </subviews>
-            <color key="backgroundColor" red="0.82382417929292928" green="0.82382417929292928" blue="0.82382417929292928" alpha="0.5" colorSpace="calibratedRGB"/>
-            <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
+            <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="indicator" destination="lCf-0x-1Ni" id="dgg-VN-wD4"/>
             </connections>

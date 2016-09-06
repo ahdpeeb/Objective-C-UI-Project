@@ -9,14 +9,14 @@
 #import "ANSImageView.h"
 
 #import "ANSImageModel.h"
-#import "ANSBlockObservationController.h"
+#import "ANSProtocolObservationController.h"
 #import "ANSGCD.h"
 #import "ANSMacros.h"
+#import "ANSLoadableModel.h"
+#import "ANSLoadingView.h"
 
 @interface ANSImageView ()
-@property (nonatomic, strong) ANSBlockObservationController *observerionController;
-
-- (void)prepareController:(ANSBlockObservationController *)controller;
+@property (nonatomic, strong) ANSProtocolObservationController *observerionController;
 
 @end
 
@@ -52,6 +52,7 @@
                                 | UIViewAutoresizingFlexibleBottomMargin;
     
     self.contentImageView = imageView;
+    self.loadingView = [ANSLoadingView viewOnSuperView:self.contentImageView];
 }
 
 #pragma mark -
@@ -71,44 +72,29 @@
         [_imageModel dump];
         _imageModel = imageModel;
         
-        self.observerionController = [_imageModel blockControllerWithObserver:self];
+        self.observerionController = [_imageModel protocolControllerWithObserver:self];
         [imageModel load];
-    }
-}
-
-- (void)setObserverionController:(ANSBlockObservationController *)observerionController {
-    if (_observerionController != observerionController) {
-        _observerionController = observerionController;
-        
-        [self prepareController:observerionController];
     }
 }
 
 #pragma mark -
 #pragma mark Private
 
-- (void)prepareController:(ANSBlockObservationController *)controller {
-    ANSWeakify(self);
-    
-    ANSStateChangeBlock block = ^(ANSBlockObservationController *controller, id userInfo) {
-        ANSPerformInMainQueue(dispatch_async, ^{
-            ANSStrongifyAndReturn(self);
-            
-            ANSImageModel *model = controller.observableObject;
-            self.contentImageView.image = model.image;
-        });
-    };
-    
-    [controller setBlock:block forState:ANSImageModelLoaded];
-    [controller setBlock:block forState:ANSImageModelUnloaded];
-    
-    block = ^(ANSBlockObservationController *controller, id userInfo) {
-        ANSStrongifyAndReturn(self);
-        
-        [self.imageModel load];
-    };
-    
-    [controller setBlock:block forState:ANSImageModelFailedLoadin];
+- (void)loadableModelLoading:(ANSLoadableModel *)model {
+    ANSPerformInMainQueue(dispatch_async, ^{
+        self.loadingView.visible = YES;
+    });
+}
+
+- (void)loadableModelDidLoad:(ANSLoadableModel *)model {
+    ANSPerformInMainQueue(dispatch_async, ^{
+        self.contentImageView.image = self.imageModel.image;
+        self.loadingView.visible = NO;
+    });
+}
+
+- (void)loadableModelDidFailLoading:(ANSLoadableModel *)model {
+    [self.imageModel load];
 }
 
 @end

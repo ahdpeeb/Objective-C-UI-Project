@@ -22,7 +22,7 @@ static const CGFloat        kANSMaxAlpha = 1;
 #pragma mark -
 #pragma mark Class methods
 
-+ (instancetype)loadingViewOnSuperView:(UIView *)view {
++ (instancetype)viewOnSuperView:(UIView *)view {
     ANSLoadingView *loadingView = [NSBundle objectWithClass:[self class] owner:nil];
     loadingView.frame = view.bounds;
     loadingView.autoresizingMask =    UIViewAutoresizingFlexibleLeftMargin
@@ -69,9 +69,10 @@ static const CGFloat        kANSMaxAlpha = 1;
  complititionBlock:(ANSCompletionBlock)block {
     @synchronized(self) {
         if (_visible == visible) {
-            return;
+//            return;
         }
         
+    
         [UIView animateWithDuration:animated ? kANSInterval : 0
                               delay:kANSDelay
                             options:UIViewAnimationOptionAllowUserInteraction

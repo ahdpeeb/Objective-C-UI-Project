@@ -287,7 +287,11 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
     });
 }
 
-- (void)loadingModelDidLoad:(ANSLoadingModel *)model {
+- (void)loadableModelLoading:(ANSLoadableModel *)model {
+    self.usersView.loadingViewVisible = YES;
+}
+
+- (void)loadableModelDidLoad:(ANSLoadableModel *)model {
     ANSPerformInMainQueue(dispatch_async, ^{
         NSLog(@"notified userModelDidLoad");
         self.usersView.loadingViewVisible = NO;

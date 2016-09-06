@@ -10,7 +10,11 @@
 
 @interface NSFileManager (ANSExtension)
 
++ (NSString *)documentDirectoryPath;
+
 - (NSString *)pathToSearchPathDirectory:(NSSearchPathDirectory)directory;
+
+
 - (NSString *)pathToDocumentDirectory;
 - (NSString *)pathToApplicationDirectory;
 

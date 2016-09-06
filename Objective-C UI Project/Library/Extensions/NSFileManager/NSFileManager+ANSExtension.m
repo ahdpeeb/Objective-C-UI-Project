@@ -5,13 +5,23 @@
 //  Created by Nikola Andriiev on 24.08.16.
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
+#import <Foundation/NSPathUtilities.h>
 
 #import "NSFileManager+ANSExtension.h"
-#import <Foundation/NSPathUtilities.h>
 
 static NSString * const kANSPlist = @".plist";
 
 @implementation NSFileManager (ANSExtension)
+
++ (NSString *)documentDirectoryPath {
+    static NSString *path = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        path = [[NSFileManager defaultManager] pathToDocumentDirectory];
+    });
+    
+    return path;
+}
 
 - (NSString *)pathToSearchPathDirectory:(NSSearchPathDirectory)directory; {
     return [NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES) firstObject];

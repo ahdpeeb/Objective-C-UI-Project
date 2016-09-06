@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class ANSImageModel;
+#import "ANSLoadableModel.h"
 
-@interface ANSImageView : UIView
+@class ANSImageModel;
+@class ANSLoadingView;
+
+@interface ANSImageView : UIView <ANSLoadableModelObserver>
 @property (nonatomic, strong) IBOutlet  UIImageView     *contentImageView;
+@property (nonatomic, strong) IBOutlet  ANSLoadingView  *loadingView;
 @property (nonatomic, strong)           ANSImageModel   *imageModel;
 
 @end

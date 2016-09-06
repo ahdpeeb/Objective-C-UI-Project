@@ -56,10 +56,10 @@
 }
 
 #pragma mark -
-#pragma mark Private
+#pragma mark Private Methods
 
 - (void)attachLodingView {
-    self.loadingView  = [ANSLoadingView loadingViewOnSuperView:self];
+    self.loadingView  = [ANSLoadingView viewOnSuperView:self];
 }
 
 @end

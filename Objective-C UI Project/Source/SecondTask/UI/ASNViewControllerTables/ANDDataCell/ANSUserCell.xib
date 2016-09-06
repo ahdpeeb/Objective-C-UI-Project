@@ -22,7 +22,14 @@
                     </label>
                     <view contentMode="scaleToFill" id="LyH-NG-GwF" customClass="ANSImageView">
                         <rect key="frame" x="3" y="0.0" width="79" height="79"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="Umo-Wl-MGc" customClass="ANSLoadingView">
+                                <rect key="frame" x="0.0" y="0.0" width="79" height="79"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
@@ -30,6 +37,7 @@
             <color key="backgroundColor" red="0.19436320662498474" green="0.81301844120025635" blue="0.91241949796676636" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="label" destination="DuU-vV-Szy" id="QyV-t1-gqN"/>
+                <outlet property="loadingView" destination="Umo-Wl-MGc" id="a6k-jH-Teg"/>
                 <outlet property="userImageView" destination="LyH-NG-GwF" id="fcX-EK-DZY"/>
             </connections>
             <point key="canvasLocation" x="164" y="96"/>

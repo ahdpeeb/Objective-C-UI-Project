@@ -7,14 +7,14 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ANSLoadingModel.h"
+#import "ANSLoadableModel.h"
 #import "NSArray+ANSExtension.h"
 
 
 @class ANSArrayModel;
 @class ANSChangeModel;
 
-@protocol ANSArrayModelObserver <ANSLoadingModelObserver>
+@protocol ANSArrayModelObserver <ANSLoadableModelObserver>
 
 @optional
 
@@ -24,12 +24,12 @@
 @end
 
 typedef NS_ENUM(NSUInteger, ANSArrayModelState) {
-    ANSArrayModelDidChange = ANSLoadingModelStatesCount,
+    ANSArrayModelDidChange = ANSLoadableModelStatesCount,
     
     ANSArrayModelStatesCount
 };
 
-@interface ANSArrayModel : ANSLoadingModel <
+@interface ANSArrayModel : ANSLoadableModel <
     NSCoding,
     NSCopying,
     NSFastEnumeration

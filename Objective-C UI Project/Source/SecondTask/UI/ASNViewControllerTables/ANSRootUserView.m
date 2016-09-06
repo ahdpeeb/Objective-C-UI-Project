@@ -25,7 +25,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.loadingViewVisible = YES;
 }
 
 #pragma mark -

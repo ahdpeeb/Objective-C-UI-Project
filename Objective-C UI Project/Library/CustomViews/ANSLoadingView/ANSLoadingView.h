@@ -16,7 +16,7 @@ typedef void(^ANSCompletionBlock)(void);
 @property (nonatomic, assign, getter=isVisible) BOOL visible;
 
 //argument view must be subclass of UIView 
-+ (instancetype)loadingViewOnSuperView:(UIView *)view;
++ (instancetype)viewOnSuperView:(UIView *)view;
 
 // defauld setVisible (animated = YES)
 - (void)setVisible:(BOOL)visible animated:(BOOL)animated;
