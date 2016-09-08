@@ -27,7 +27,7 @@
 - (NSString *)directoryWithName:(NSString *)name inSearchPathDirectory:(NSSearchPathDirectory)directory;
 
 // argument file format should be write with extension.Sample - "data.txt"
-- (void)removeFile:(NSString *)file fromSearchPathDirectory:(NSSearchPathDirectory)directory;
+- (BOOL)removeFile:(NSString *)file fromSearchPathDirectory:(NSSearchPathDirectory)directory;
 
 - (BOOL)copyFileAtPath:(NSString *)filePath toSearchPathDirectory:(NSSearchPathDirectory)directory;
 

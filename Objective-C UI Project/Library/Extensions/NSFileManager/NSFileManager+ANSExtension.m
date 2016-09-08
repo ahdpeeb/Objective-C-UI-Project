@@ -64,13 +64,17 @@ static NSString * const kANSPlist = @".plist";
     return directoryPath;
 }
 
-- (void)removeFile:(NSString *)file fromSearchPathDirectory:(NSSearchPathDirectory)directory {
+- (BOOL)removeFile:(NSString *)file fromSearchPathDirectory:(NSSearchPathDirectory)directory {
     NSString *documentsPath = [self pathToSearchPathDirectory:directory];
     NSString *filePath = [documentsPath stringByAppendingPathComponent:file];
     NSError *error = nil;
         if (![self removeItemAtPath:filePath error:&error]) {
         NSLog(@"[Error] %@ (%@)", error, filePath);
+            
+        return NO;
     }
+    
+    return YES;
 }
 
 - (BOOL)copyFileAtPath:(NSString *)filePath toSearchPathDirectory:(NSSearchPathDirectory)directory {

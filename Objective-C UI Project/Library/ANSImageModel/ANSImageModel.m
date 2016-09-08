@@ -18,13 +18,17 @@ static NSString * const kANSImageName = @"kANSImageName";
 @property (nonatomic, strong)       NSString            *imageName;
 @property (nonatomic, strong)       UIImage             *image;
 @property (nonatomic, strong)       NSURL               *url;
-@property (nonatomic, strong)       NSFileManager       *fileManager;
+@property (nonatomic, readonly)     NSString            *imagePath;
 
 @property (nonatomic, assign, getter=isLoaded) BOOL loaded;
+
+- (BOOL)uploadImage;
 
 @end
 
 @implementation ANSImageModel
+
+@dynamic imagePath;
 
 #pragma mark -
 #pragma mark Class methods
@@ -40,13 +44,42 @@ static NSString * const kANSImageName = @"kANSImageName";
     self = [super init];
     if (self) {
         self.url = url;
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            _fileManager = [NSFileManager defaultManager];
-        });
     }
     
     return self;
+}
+
+#pragma mark -
+#pragma mark Accsessors
+
+- (NSString *)imagePath {
+    NSString *directoryPath = [NSFileManager documentDirectoryPath];
+    NSString *imageName = [self.url.path lastPathComponent];
+    
+    return [directoryPath stringByAppendingPathComponent:imageName];
+}
+
+#pragma mark -
+#pragma mark Privat methods
+
+- (BOOL)uploadImage {
+    NSString *imageExtension = self.url.pathExtension;
+    NSData *imageData = [NSData dataWithContentsOfURL:self.url];
+    UIImage *image = [UIImage imageWithData:imageData];
+    NSData *cachedImage = nil;
+    if (image) {
+        if ([imageExtension isEqual: @"png"]) {
+            cachedImage = UIImagePNGRepresentation(image);
+        }
+        
+        if ([imageExtension isEqual: @"jpeg"]) {
+            cachedImage = UIImageJPEGRepresentation(image, 1);
+        }
+        
+        return [cachedImage writeToFile:self.imagePath atomically:YES];
+    }
+   
+    return NO;
 }
 
 #pragma mark -
@@ -54,22 +87,14 @@ static NSString * const kANSImageName = @"kANSImageName";
 
 - (void)load {
     [self loadWithBlock:^BOOL{
-        NSString *urlPath = self.url.path;
-        NSString *directoryPath = [NSFileManager documentDirectoryPath];
-        
-        NSString *imageName = [urlPath lastPathComponent];
-        NSString *imagePathInDirectory = [directoryPath stringByAppendingPathComponent:imageName];
-        
-        UIImage *image = [UIImage imageWithContentsOfFile:imagePathInDirectory];
-        // REMOVE SLEEP
-        sleep((float)ANSRandomIntegerWithValues(1, 4));
+       UIImage *image = [UIImage imageWithContentsOfFile:self.imagePath];
         if (!image) {
-            BOOL succsess = [self.fileManager copyFileAtPath:urlPath toSearchPathDirectory:NSDocumentDirectory];
+            BOOL succsess = [self uploadImage];
             if (!succsess) {
                 return NO;
             }
         
-            image = [UIImage imageWithContentsOfFile:imagePathInDirectory];
+            image = [UIImage imageWithContentsOfFile:self.imagePath];
         }
         
         self.image = image;
@@ -90,6 +115,7 @@ static NSString * const kANSImageName = @"kANSImageName";
 
 #pragma mark -
 #pragma mark NSCoding protocol
+
 //saving name of image
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     self.imageName = self.url.path.lastPathComponent;
