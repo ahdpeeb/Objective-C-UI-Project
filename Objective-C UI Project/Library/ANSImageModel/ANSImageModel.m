@@ -54,7 +54,7 @@ static NSString * const kANSImageName = @"kANSImageName";
 
 - (NSString *)imagePath {
     NSString *directoryPath = [NSFileManager documentDirectoryPath];
-    NSString *imageName = self.url.lastPathComponent; 
+    NSString *imageName = [self.url.path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLUserAllowedCharacterSet]];
     return [directoryPath stringByAppendingPathComponent:imageName];
 }
 
