@@ -34,6 +34,10 @@ typedef NS_ENUM(NSUInteger, ANSLoadingState) {
     ANSLoadableModelStatesCount
 };
 
-- (void)loadWithBlock:(ANSLoadingBlock)block;
+- (void)load;
+
+// method for reloding in child classes. You need to set up complition steta;
+// self.state = (if loaded successfully) ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading
+- (void)performLoading;
 
 @end

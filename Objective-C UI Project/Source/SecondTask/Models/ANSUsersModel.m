@@ -91,10 +91,9 @@ static NSString * const kANSPlistName = @"aaa";
     return users;
 }
 
-- (void)loadUsers {
-    [self loadWithBlock:^BOOL{
-       return [self loadUsersModel];
-    }];
+- (void)performLoading {
+    id users = [self loadUsersModel];
+    self.state = users ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
 }
 
 #pragma mark -

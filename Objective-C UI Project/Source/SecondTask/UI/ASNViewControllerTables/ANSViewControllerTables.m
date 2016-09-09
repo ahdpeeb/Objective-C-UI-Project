@@ -79,7 +79,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.users loadUsers];
+    [self.users load];
 }
 
 - (void)didReceiveMemoryWarning {

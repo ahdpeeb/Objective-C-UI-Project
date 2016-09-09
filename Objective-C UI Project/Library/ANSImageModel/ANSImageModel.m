@@ -54,8 +54,7 @@ static NSString * const kANSImageName = @"kANSImageName";
 
 - (NSString *)imagePath {
     NSString *directoryPath = [NSFileManager documentDirectoryPath];
-    NSString *imageName = [self.url.path lastPathComponent];
-    
+    NSString *imageName = self.url.lastPathComponent; 
     return [directoryPath stringByAppendingPathComponent:imageName];
 }
 
@@ -70,9 +69,7 @@ static NSString * const kANSImageName = @"kANSImageName";
     if (image) {
         if ([imageExtension isEqual: @"png"]) {
             cachedImage = UIImagePNGRepresentation(image);
-        }
-        
-        if ([imageExtension isEqual: @"jpeg"]) {
+        } else if ([imageExtension isEqual: @"jpeg"]) {
             cachedImage = UIImageJPEGRepresentation(image, 1);
         }
         
@@ -85,25 +82,17 @@ static NSString * const kANSImageName = @"kANSImageName";
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)load {
-    [self loadWithBlock:^BOOL{
-       UIImage *image = [UIImage imageWithContentsOfFile:self.imagePath];
-        if (!image) {
-            BOOL succsess = [self uploadImage];
-            if (!succsess) {
-                return NO;
-            }
-        
-            image = [UIImage imageWithContentsOfFile:self.imagePath];
-        }
-        
-        self.image = image;
-        if (image) {
-            return YES;
-        }
-        
-        return NO;
-    }];
+- (void)performLoading {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:self.imagePath]) {
+        NSLog(@"NOImage");
+        BOOL isSuccess = [self uploadImage];
+        NSLog(@"isSuccess = %d", isSuccess);
+    }
+    
+    self.image = [UIImage imageWithContentsOfFile:self.imagePath];
+    sleep((int)ANSRandomUnsignedInteget(7));
+    self.state = self.image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
 }
 
 - (void)dump {
@@ -116,18 +105,16 @@ static NSString * const kANSImageName = @"kANSImageName";
 #pragma mark -
 #pragma mark NSCoding protocol
 
-//saving name of image
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    self.imageName = self.url.path.lastPathComponent;
+    self.imageName = self.url.URLByStandardizingPath.path;
     [aCoder encodeObject:self.imageName forKey:kANSImageName];
 }
-//restore image from mainBundle after backup using image name;
+
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
         NSString *imageName = [aDecoder decodeObjectForKey:kANSImageName];
-        NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:imageName];
-        self.url = [NSURL fileURLWithPath:imagePath isDirectory:YES];
+        self.url = [NSURL URLWithString:imageName];
     }
     
     return self;

@@ -17,6 +17,5 @@
 - (NSArray *)descendingSortedUsers;
 
 - (void)save;
-- (void)loadUsers;
 
 @end

@@ -47,15 +47,15 @@
     }
 }
 
-#pragma mark -
-#pragma mark Private methods
+- (void)performLoading {
+    [self doesNotRecognizeSelector:_cmd];
+}
 
-- (void)loadWithBlock:(ANSLoadingBlock)block {
+#pragma mark -
+#pragma mark Public methods
+
+- (void)load{
     @synchronized(self) {
-        if (!block) {
-            return;
-        }
-        
         ANSLoadingState state = self.state;
         if (state == ANSLoadableModelLoading || state == ANSLoadableModelDidLoad) {
             [self notifyOfStateChange:state];
@@ -69,13 +69,10 @@
             ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
                 ANSStrongify(self);
                 
-                BOOL isLoaded = block();
-                
-                self.state = (isLoaded) ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
+                [self performLoading];
             });
         }
     }
 }
-
 
 @end
