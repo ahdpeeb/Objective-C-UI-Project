@@ -1,5 +1,5 @@
 //
-//  ANSTableViewSell.m
+//  ANSTableViewcell.m
 //  Objective-C UI Project
 //
 //  Created by Nikola Andriiev on 21.07.16.
@@ -17,7 +17,7 @@
 #pragma mark -
 #pragma mark Public methods
 
-+ (instancetype)sellWithStyle:(UITableViewCellStyle)style {
++ (instancetype)cellWithStyle:(UITableViewCellStyle)style {
    return [[self alloc] initWithStyle:(style) reuseIdentifier:NSStringFromClass([self class])];
 }
 
@@ -27,7 +27,5 @@
 - (NSString *)reuseIdentifier {
     return NSStringFromClass([self class]);
 }
-
-
 
 @end

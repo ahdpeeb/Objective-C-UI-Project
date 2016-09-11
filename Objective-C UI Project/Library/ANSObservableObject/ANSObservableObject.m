@@ -81,8 +81,8 @@
 
 - (id)controllerWithClass:(Class)cls observer:(id)observer {
     @synchronized(self) {
-        ANSObservationController *controller = [cls allocWithObserver:observer
-                                                     observableObject:self];
+        ANSObservationController *controller = [cls controllerWithObserver:observer
+                                                          observableObject:self];
         
         [self.controllerHashTable addObject:controller];
         
@@ -137,15 +137,15 @@
 
 - (BOOL)isObservedByObject:(id)object {
     @synchronized(self) {
-    BOOL value = NO;
+        BOOL value = NO;
         for (ANSObservationController *controler in self.controllerHashTable) {
             value = [object isEqual:controler.observer];
-            
-            return YES; 
+            if (value) {
+                break;
+            }
         }
 
-    return value;
-        
+        return value;
     }
 }
 

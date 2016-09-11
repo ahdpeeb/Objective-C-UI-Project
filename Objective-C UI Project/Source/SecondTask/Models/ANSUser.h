@@ -12,9 +12,7 @@
 #import "ANSImageModel.h"
 
 @interface ANSUser : NSObject <NSCoding, NSCopying>
-@property (nonatomic, readonly) NSString        *string;
-@property (nonatomic, readonly) UIImage         *image;
-
-@property (nonatomic, strong)   ANSImageModel   *imageModel;
+@property (nonatomic, readonly) NSString        *name;
+@property (nonatomic, readonly) ANSImageModel   *imageModel;
 
 @end

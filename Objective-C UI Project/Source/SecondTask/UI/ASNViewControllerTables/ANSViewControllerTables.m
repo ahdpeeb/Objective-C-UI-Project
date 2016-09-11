@@ -38,6 +38,8 @@ static const NSUInteger kANSSectionsCount           = 1;
 @property (nonatomic, strong) ANSNameFilterModel *filteredModel;
 @property (nonatomic, strong) ANSProtocolObservationController *filterModelController;
 
+@property (nonatomic, readonly) ANSUsersModel *presenedModel;
+
 - (void)resignSearchBar;
 - (ANSUsersModel *)presentedModel;
 - (void)initFilterInfrainfrastructure;
@@ -47,6 +49,8 @@ static const NSUInteger kANSSectionsCount           = 1;
 ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, usersView)
 
 @implementation ANSViewControllerTables;
+
+@dynamic presenedModel;
 
 #pragma mark -
 #pragma mark Accsessors
@@ -68,17 +72,25 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
     }
 }
 
+- (ANSUsersModel *)presentedModel {
+    BOOL isFirstResponder = self.usersView.searchBar.isFirstResponder;
+    return isFirstResponder ? (ANSUsersModel *)self.filteredModel : self.users;
+}
+
 #pragma mark -
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.navigationItem.title = kANSTitleForHeaderSection;
     [self initLeftBarButtonItem];
     [self initRightBarButtonItem];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated]; 
+    
     [self.users load];
 }
 
@@ -94,11 +106,6 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
     if (searchBar.isFirstResponder) {
         [self searchBarCancelButtonClicked:searchBar];
     }
-}
-
-- (ANSUsersModel *)presentedModel {
-    BOOL isFirstResponder = self.usersView.searchBar.isFirstResponder;
-    return isFirstResponder ? (ANSUsersModel *)self.filteredModel : self.users;
 }
 
 - (void)initFilterInfrainfrastructure {
@@ -179,11 +186,9 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ANSUserCell *cell = [tableView reusableCellfromNibWithClass:[ANSUserCell class]];
+    ANSUserCell *cell = [tableView dequeueReusableCellWithClass:[ANSUserCell class]];
     
-    ANSUser *user = nil;
-    user = [self presentedModel][indexPath.row];
-    
+    ANSUser *user = self.presentedModel[indexPath.row];
     [cell fillWithModel:user];
 
     return cell;
@@ -280,9 +285,9 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
         
         if ([arrayModel isMemberOfClass:[ANSUsersModel class]]) {
             [model applyToTableView:table];
-            NSLog(@"%@ notified collectionDidUpdate, - %lu object", arrayModel, arrayModel.count);
+            NSLog(@"%@ notified collectionDidUpdate, - %lu object", arrayModel, (unsigned long)arrayModel.count);
         } else {
-            NSLog(@"%@ notified collectionDidUpdate, - %lu object", arrayModel, arrayModel.count);
+            NSLog(@"%@ notified collectionDidUpdate, - %lu object", arrayModel, (unsigned long)arrayModel.count);
         }
     });
 }

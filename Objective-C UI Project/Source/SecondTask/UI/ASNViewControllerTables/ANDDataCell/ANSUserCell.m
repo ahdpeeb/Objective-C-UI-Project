@@ -12,6 +12,9 @@
 #import "ANSImageView.h"
 #import "ANSUser.h"
 #import "ANSLoadingView.h"
+#import "UIView+ANSExtension.h"
+
+#import "ANSMacros.h"
 
 @interface ANSUserCell ()
 
@@ -26,8 +29,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-    [ANSLoadingView viewOnSuperView:self.userImageView];
+}
+
+- (void)dealloc {
+    NSLog(@"ANSUserCell deallocated");
 }
 
 #pragma mark -
@@ -43,17 +48,14 @@
 - (void)customizeUserPicture {
     UIImageView *picture = self.userImageView.contentImageView;
     
-    picture.layer.cornerRadius = picture.frame.size.height /2;
-    picture.layer.masksToBounds = YES;
-    
-    self.userImageView.backgroundColor = self.backgroundColor;
+    [picture roundedLayer];
 }
 
 #pragma mark -
 #pragma mark Public methods
 
 - (void)fillWithModel:(ANSUser *)user {
-    self.label.text = user.string;
+    self.label.text = user.name;
     self.userImageView.imageModel = user.imageModel;
     
     [self customizeUserPicture];

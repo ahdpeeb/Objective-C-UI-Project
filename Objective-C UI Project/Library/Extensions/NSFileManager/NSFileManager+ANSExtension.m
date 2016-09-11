@@ -65,8 +65,8 @@ static NSString * const kANSPlist = @".plist";
 }
 
 - (BOOL)removeFile:(NSString *)file fromSearchPathDirectory:(NSSearchPathDirectory)directory {
-    NSString *documentsPath = [self pathToSearchPathDirectory:directory];
-    NSString *filePath = [documentsPath stringByAppendingPathComponent:file];
+    NSString *directoryPath = [self pathToSearchPathDirectory:directory];
+    NSString *filePath = [directoryPath stringByAppendingPathComponent:file];
     NSError *error = nil;
         if (![self removeItemAtPath:filePath error:&error]) {
         NSLog(@"[Error] %@ (%@)", error, filePath);

@@ -10,14 +10,12 @@
 
 #import "ANSLoadableModel.h"
 
-@interface ANSImageModel : ANSLoadableModel <NSCoding>
-@property (nonatomic, readonly)                  UIImage *image;
-@property (nonatomic, readonly)                  NSURL *url;
+@interface ANSImageModel : ANSLoadableModel
+@property (nonatomic, readonly) UIImage *image;
+@property (nonatomic, readonly) NSURL *url;
 
 + (instancetype)imageFromURL:(NSURL *)url;
 
 - (instancetype)initWithURL:(NSURL *)url;
-
-- (void)dump;
 
 @end

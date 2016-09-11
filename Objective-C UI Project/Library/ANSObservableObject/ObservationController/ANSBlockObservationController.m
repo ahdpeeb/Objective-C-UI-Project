@@ -26,7 +26,7 @@
 - (instancetype)initWithObserver:(id)observer
                 observableObject:(ANSObservableObject *)observableObject
 {
-    self = [super initWithObserver:observer observableObject:observableObject];
+    self = [[super class]controllerWithObserver:observer observableObject:observableObject];
     if (self) {
         self.stateDictionary = [NSMutableDictionary dictionary];
     }
@@ -42,7 +42,6 @@
     if (block) {
         block(self, userInfo);
     }
-    
 }
 
 - (void)notifyOfStateChange:(NSUInteger)state {

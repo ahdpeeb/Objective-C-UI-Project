@@ -16,7 +16,7 @@
 #import "ANSLoadingView.h"
 
 @interface ANSImageView ()
-@property (nonatomic, strong) ANSProtocolObservationController *observerionController;
+@property (nonatomic, strong) ANSProtocolObservationController *observationController;
 
 @end
 
@@ -24,6 +24,10 @@
 
 #pragma mark -
 #pragma mark Initialization and deallocation
+
+- (void)dealloc {
+    NSLog(@"ANSImageView dealloc");
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -69,10 +73,9 @@
 
 - (void)setImageModel:(ANSImageModel *)imageModel {
     if(_imageModel != imageModel) {
-        [_imageModel dump];
         _imageModel = imageModel;
         
-        self.observerionController = [_imageModel protocolControllerWithObserver:self];
+        self.observationController = [_imageModel protocolControllerWithObserver:self];
         [imageModel load];
     }
 }

@@ -15,20 +15,22 @@
 static NSString * const kANSImageName = @"kANSImageName";
 
 @interface ANSImageModel ()
-@property (nonatomic, strong)       NSString            *imageName;
-@property (nonatomic, strong)       UIImage             *image;
-@property (nonatomic, strong)       NSURL               *url;
-@property (nonatomic, readonly)     NSString            *imagePath;
+@property (nonatomic, strong)   UIImage   *image;
+@property (nonatomic, strong)   NSURL     *url;
+
+@property (nonatomic, readonly) NSString  *imageName;
+@property (nonatomic, readonly) NSString  *imagePath;
 
 @property (nonatomic, assign, getter=isLoaded) BOOL loaded;
 
-- (BOOL)uploadImage;
+- (BOOL)downloadImage;
 
 @end
 
 @implementation ANSImageModel
 
 @dynamic imagePath;
+@dynamic imageName;
 
 #pragma mark -
 #pragma mark Class methods
@@ -52,31 +54,23 @@ static NSString * const kANSImageName = @"kANSImageName";
 #pragma mark -
 #pragma mark Accsessors
 
+- (NSString *)imageName {
+    NSString *name = [self.url.absoluteString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLUserAllowedCharacterSet]];
+    NSLog(@"%@", name);
+    
+    return name;
+}
+
 - (NSString *)imagePath {
-    NSString *directoryPath = [NSFileManager documentDirectoryPath];
-    NSString *imageName = [self.url.path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLUserAllowedCharacterSet]];
-    return [directoryPath stringByAppendingPathComponent:imageName];
+    return [[NSFileManager documentDirectoryPath] stringByAppendingPathComponent:self.imageName];
 }
 
 #pragma mark -
 #pragma mark Privat methods
 
-- (BOOL)uploadImage {
-    NSString *imageExtension = self.url.pathExtension;
+- (BOOL)downloadImage {
     NSData *imageData = [NSData dataWithContentsOfURL:self.url];
-    UIImage *image = [UIImage imageWithData:imageData];
-    NSData *cachedImage = nil;
-    if (image) {
-        if ([imageExtension isEqual: @"png"]) {
-            cachedImage = UIImagePNGRepresentation(image);
-        } else if ([imageExtension isEqual: @"jpeg"]) {
-            cachedImage = UIImageJPEGRepresentation(image, 1);
-        }
-        
-        return [cachedImage writeToFile:self.imagePath atomically:YES];
-    }
-   
-    return NO;
+    return [imageData writeToFile:self.imagePath atomically:YES];
 }
 
 #pragma mark -
@@ -85,39 +79,18 @@ static NSString * const kANSImageName = @"kANSImageName";
 - (void)performLoading {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:self.imagePath]) {
-        NSLog(@"NOImage");
-        BOOL isSuccess = [self uploadImage];
-        NSLog(@"isSuccess = %d", isSuccess);
+        BOOL isLoaded = [self downloadImage];
+        isLoaded ? NSLog(@"isLoaded [OK]") : NSLog(@"isLoaded [ERROR]");
     }
     
     self.image = [UIImage imageWithContentsOfFile:self.imagePath];
-    sleep((int)ANSRandomUnsignedInteget(7));
-    self.state = self.image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
-}
-
-- (void)dump {
-    @synchronized(self) {
-        self.image = nil;
-        self.state = ANSLoadableModelUnloaded;
+    UIImage *image = self.image;
+    if (!image) {
+        BOOL isRemove = [fileManager removeFile:self.imageName fromSearchPathDirectory:NSDocumentDirectory];
+        isRemove ? NSLog(@"remove [OK]") : NSLog(@"remove [ERROR]");
     }
-}
 
-#pragma mark -
-#pragma mark NSCoding protocol
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    self.imageName = self.url.URLByStandardizingPath.path;
-    [aCoder encodeObject:self.imageName forKey:kANSImageName];
-}
-
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super init];
-    if (self) {
-        NSString *imageName = [aDecoder decodeObjectForKey:kANSImageName];
-        self.url = [NSURL URLWithString:imageName];
-    }
-    
-    return self;
+    self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
 }
 
 @end

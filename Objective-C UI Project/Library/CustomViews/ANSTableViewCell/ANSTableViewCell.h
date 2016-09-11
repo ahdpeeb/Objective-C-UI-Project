@@ -1,5 +1,5 @@
 //
-//  ANSTableViewSell.h
+//  ANSTableViewCell.h
 //  Objective-C UI Project
 //
 //  Created by Nikola Andriiev on 21.07.16.
@@ -11,6 +11,6 @@
 // You shold never expect the cell have the reuseIdentifier you passed during initialization 
 @interface ANSTableViewCell : UITableViewCell
 
-+ (instancetype)sellWithStyle:(UITableViewCellStyle)style;
++ (instancetype)cellWithStyle:(UITableViewCellStyle)style;
 
 @end

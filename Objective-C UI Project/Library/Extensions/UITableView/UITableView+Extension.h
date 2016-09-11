@@ -12,7 +12,7 @@ typedef void(^ANSUpdatingBlock)(void);
 
 @interface UITableView (Extension)
 // cls should be child class of ANSTableViewCell class
-- (id)reusableCellfromNibWithClass:(Class)cls;
+- (id)dequeueReusableCellWithClass:(Class)cls;
 
 - (void)updateWithBlock:(ANSUpdatingBlock)block;
 

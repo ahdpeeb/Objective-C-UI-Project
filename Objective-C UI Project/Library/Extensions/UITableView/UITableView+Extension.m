@@ -10,20 +10,17 @@
 
 #import "UINib+Extension.h"
 #import "ANSTableViewCell.h"
+#import "NSBundle+ANSExtenison.h"
 
 @implementation UITableView (Extension)
 
-- (id)reusableCellfromNibWithClass:(Class)cls {
-    NSString *identifire = NSStringFromClass(cls);
-    ANSTableViewCell *cell = [self dequeueReusableCellWithIdentifier:identifire];
+- (id)dequeueReusableCellWithClass:(Class)cls {
+    id cell = [self dequeueReusableCellWithIdentifier:NSStringFromClass(cls)];
     if (!cell) {
-        UINib *nib = [UINib nibWithClass:cls];
-        cell = [nib objectWithClass:[cls class]];
-        
-        return cell;
+        cell = [NSBundle objectWithClass:cls owner:nil];
     }
     
-    return nil;
+    return cell;
 }
 
 - (void)updateWithBlock:(ANSUpdatingBlock)block {

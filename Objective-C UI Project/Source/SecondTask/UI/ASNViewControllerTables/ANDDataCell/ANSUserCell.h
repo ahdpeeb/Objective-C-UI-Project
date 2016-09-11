@@ -14,7 +14,7 @@
 
 @interface ANSUserCell : UITableViewCell 
 @property (nonatomic, strong) IBOutlet UILabel          *label;
-@property (nonatomic, strong) IBOutlet ANSImageView     *userImageView; 
+@property (nonatomic, strong) IBOutlet ANSImageView     *userImageView;
 @property (nonatomic, strong) IBOutlet ANSLoadingView   *loadingView;
 
 - (void)fillWithModel:(ANSUser *)user;

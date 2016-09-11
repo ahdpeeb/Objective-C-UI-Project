@@ -68,11 +68,6 @@ static const CGFloat        kANSMaxAlpha = 1;
           animated:(BOOL)animated
  complititionBlock:(ANSCompletionBlock)block {
     @synchronized(self) {
-        if (_visible == visible) {
-//            return;
-        }
-        
-    
         [UIView animateWithDuration:animated ? kANSInterval : 0
                               delay:kANSDelay
                             options:UIViewAnimationOptionAllowUserInteraction

@@ -12,12 +12,6 @@
 #import "ANSObservableObject+ANSPrivate.h"
 
 static NSString * const kANSAllocationException = @"You never should create observationController object";
-
-@interface ANSObservationController ()
-@property (nonatomic, assign) id observer;
-@property (nonatomic, assign) id observableObject;
-
-@end
   
 @implementation ANSObservationController
 
@@ -26,7 +20,7 @@ static NSString * const kANSAllocationException = @"You never should create obse
 #pragma mark -
 #pragma mark Class methods
 
-+ (instancetype)allocWithObserver:(id)observer
++ (instancetype)controllerWithObserver:(id)observer
                  observableObject:(id)observableObject
 {
     return [[self alloc] initWithObserver:observer observableObject:observableObject];
@@ -36,7 +30,7 @@ static NSString * const kANSAllocationException = @"You never should create obse
 #pragma mark Initialization and deallocation
 
 - (void)dealloc {
-   [_observableObject invalidateController:self];
+    [_observableObject invalidateController:self];
 }
 
 - (instancetype)init {
@@ -55,8 +49,8 @@ static NSString * const kANSAllocationException = @"You never should create obse
     
     self = [self init];
     if (self) {
-        self.observer = observer;
-        self.observableObject = observableObject;
+        _observer = observer;
+        _observableObject = observableObject;
     }
     
     return self;
@@ -79,11 +73,6 @@ static NSString * const kANSAllocationException = @"You never should create obse
 
 #pragma mark -
 #pragma mark public
-
-- (void)invalidate {
-    self.observableObject = nil;
-    self.observer = nil;
-}
 
 - (NSUInteger)hash {
     return [[self class] hash] ^ [self.observer hash] ^ [self.observableObject hash];

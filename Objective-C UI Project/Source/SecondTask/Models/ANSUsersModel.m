@@ -61,7 +61,9 @@ static NSString * const kANSPlistName = @"aaa";
 }
 
 - (id)loadUsersModel {
-   id users = [self usersFromFileSystem];
+    sleep(kANSSleepTime);
+    
+    id users = [self usersFromFileSystem];
     if (!users) {
         users = [self newUsers];
     }
@@ -69,8 +71,6 @@ static NSString * const kANSPlistName = @"aaa";
     [self performBlockWithoutNotification:^{
         [self addObjectsInRange:users];
     }];
-    
-    sleep(kANSSleepTime);
     
     return users;
 }

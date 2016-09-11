@@ -8,9 +8,6 @@
 
 #import "ANSObservableObject.h"
 
-//return YES if loaded, otherwise NO;
-typedef BOOL(^ANSLoadingBlock)(void);
-
 @class ANSLoadableModel;
 
 @protocol ANSLoadableModelObserver <NSObject>

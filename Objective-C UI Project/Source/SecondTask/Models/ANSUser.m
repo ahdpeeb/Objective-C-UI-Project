@@ -11,11 +11,9 @@
 #import "NSString+ANSExtension.h"
 
 static const NSUInteger kANSStringLength    = 10;
-static NSString * const kANSImageName       = @"Gomer_2";
-static NSString * const kANSImageFormat     = @"png";
+static NSString * const kANSImageLink = @"https://d13yacurqjgara.cloudfront.net/users/146798/screenshots/2843164/pikatchu-dribbble-final_1x.png";
 
-static NSString * const kANSStringKey        = @"kANSStringKey";
-static NSString * const kANSImageModelKey    = @"kANSImageModelKey";
+static NSString * const kANSStringKey = @"kANSStringKey";
 
 
 @interface ANSUser ()
@@ -25,24 +23,17 @@ static NSString * const kANSImageModelKey    = @"kANSImageModelKey";
 
 @implementation ANSUser
 
-@dynamic string;
-@dynamic image;
+@dynamic name;
+@dynamic imageModel;
 
 #pragma mark -
 #pragma mark Initialization and deallocation 
-
-- (void)dealloc {
-    self.imageModel = nil;
-}
 
 - (instancetype)init {
     self = [super init];
     if (self) {
         NSString *alphabet = [NSString alphanumericAlphabet];
         self.mutableString = [NSString randomStringWithLength:kANSStringLength alphabet:alphabet];
-        
-        NSURL *url = [[NSBundle mainBundle] URLForResource:kANSImageName withExtension:kANSImageFormat];
-        self.imageModel = [ANSImageModel imageFromURL:url];;
     }
     
     return self;
@@ -51,27 +42,26 @@ static NSString * const kANSImageModelKey    = @"kANSImageModelKey";
 #pragma mark -
 #pragma mark Accsessors
 
-- (NSString *)string {
+- (NSString *)name {
     return self.mutableString;
 }
 
-- (UIImage *)image {
-    return self.imageModel.image;
+- (ANSImageModel *)imageModel {
+    NSURL *url = [NSURL URLWithString:kANSImageLink];
+    return [ANSImageModel imageFromURL:url];
 }
 
 #pragma mark -
 #pragma mark NSCoding protocol
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.string forKey:kANSStringKey];
-    [aCoder encodeObject:self.imageModel forKey:kANSImageModelKey];
+    [aCoder encodeObject:self.name forKey:kANSStringKey];
 }
 
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
         self.mutableString = [aDecoder decodeObjectForKey:kANSStringKey];
-        self.imageModel = [aDecoder decodeObjectForKey:kANSImageModelKey];
     }
     
     return self;
@@ -84,7 +74,6 @@ static NSString * const kANSImageModelKey    = @"kANSImageModelKey";
     ANSUser * copy = [[self class] new];
     if (copy) {
         [copy setMutableString:self.mutableString];
-        [copy setImageModel:self.imageModel];
     }
     
     return copy;

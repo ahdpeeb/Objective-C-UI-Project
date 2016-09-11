@@ -105,8 +105,8 @@ typedef void(^ANSOperationBlock)(void);
         return true;
     }
     
-    BOOL value = [user.string rangeOfString:string
-                                    options:NSCaseInsensitiveSearch].location == NSNotFound;
+    BOOL value = [user.name rangeOfString:string
+                                  options:NSCaseInsensitiveSearch].location == NSNotFound;
     return !value;
 }
 

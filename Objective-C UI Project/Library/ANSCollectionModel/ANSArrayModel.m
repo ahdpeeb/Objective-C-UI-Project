@@ -67,6 +67,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     if (self.count > 0) {
         return YES;
     }
+    
     return NO;
 }
 

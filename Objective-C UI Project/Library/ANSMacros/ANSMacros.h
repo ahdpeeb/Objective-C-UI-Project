@@ -5,15 +5,14 @@
 //  Created by Nikola Andriiev on 21.07.16.
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 
-
-//empty result
+//#empty result
 #define ANSEmptyResult
 
-// Macros generate readonly property for UIView class
+//# Macros generate readonly property for UIView class
 #define ANSViewPropertySynthesize(viewClass, propertyName) \
     @property (nonatomic, readonly) viewClass * propertyName;
 
-// Macros generate getter for UIView property 
+//# Macros generate getter for UIView property
 #define ANSViewGetterSynthesize(viewClass, selector) \
     - (viewClass *)selector { \
         if ([self isViewLoaded] && [self.view isKindOfClass:[viewClass class]]) { \
@@ -68,3 +67,9 @@
 
 #define ANSPerformBlockWithoutArguments(block) \
     ANSPerformBlock(block, ANSEmptyResult) \
+
+//# object retain count
+#define ANSPrintObjectRetainCount(object) \
+    NSLog(@#object" retain count is %ld", CFGetRetainCount((__bridge CFTypeRef)object));
+
+

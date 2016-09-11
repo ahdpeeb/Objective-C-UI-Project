@@ -59,6 +59,7 @@
         ANSLoadingState state = self.state;
         if (state == ANSLoadableModelLoading || state == ANSLoadableModelDidLoad) {
             [self notifyOfStateChange:state];
+            
             return;
         }
         
