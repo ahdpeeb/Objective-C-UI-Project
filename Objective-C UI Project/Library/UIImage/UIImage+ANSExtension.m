@@ -29,6 +29,7 @@
     NSString *imagePath = [filemanager pathToFile:fullName inSearchPathDirectory:NSDocumentDirectory];
     if ([filemanager fileExistsAtPath:imagePath]) {
         NSLog(@"[ERROR] This file already exist");
+        
         return nil;
     }
     

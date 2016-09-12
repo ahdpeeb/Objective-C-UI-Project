@@ -9,7 +9,6 @@
 #import "Kiwi.h"
 
 #import "UIImage+ANSExtension.h"
-#import "NSFileManager+ANSExtension.h"
 
 SPEC_BEGIN(UIImageExtensionTest);
 
@@ -40,7 +39,7 @@ describe(@"image saving", ^{
 //        jpegPath = [image pathToJPEGRepresentationWithName:@"blia2" quality:0.5];
     });
     
-    it(@"should contain's  200 objects", ^{
+    it(@"objects validity", ^{
         [[image shouldNot] beNil];
         [[fileManager shouldNot] beNil];
         
@@ -50,10 +49,10 @@ describe(@"image saving", ^{
     });
     
     it(@"saving image to pngPath and ", ^{
-        pngPath = [image pathToPNGRepresentationWithName:@"ONE//1323выффв!№;%:?*("];
+        pngPath = [image pathToPNGRepresentationWithName:@"one"];
         [[pngPath shouldNot] beNil];
         
-        jpegPath = [image pathToJPEGRepresentationWithName:@"TWO//1323выффв!№;%:?*(" quality:1];
+        jpegPath = [image pathToJPEGRepresentationWithName:@"Two" quality:1];
         [[jpegPath shouldNot] beNil];
     });
     
