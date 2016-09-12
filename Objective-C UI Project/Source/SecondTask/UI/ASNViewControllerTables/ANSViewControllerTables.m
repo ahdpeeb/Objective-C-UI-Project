@@ -27,22 +27,22 @@
 #import "ANSMacros.h"
 #import "ANSGCD.h"
 
-static NSString * const kANSEdit                    = @"Edit";
-static NSString * const kANSDone                    = @"Done";
-static NSString * const kANSTitleForHeaderSection   = @"Homer's contact list";
-static const NSUInteger kANSSectionsCount           = 1;
+static          NSString * const kANSEdit                    = @"Edit";
+static          NSString * const kANSDone                    = @"Done";
+static          NSString * const kANSTitleForHeaderSection   = @"Homer's contact list";
+static const    NSUInteger kANSSectionsCount                 = 1;
 
 @interface ANSViewControllerTables ()
 @property (nonatomic, strong) ANSProtocolObservationController  *usersController;
 
-@property (nonatomic, strong) ANSNameFilterModel *filteredModel;
-@property (nonatomic, strong) ANSProtocolObservationController *filterModelController;
+@property (nonatomic, strong) ANSNameFilterModel                *filteredModel;
+@property (nonatomic, strong) ANSProtocolObservationController  *filterModelController;
 
-@property (nonatomic, readonly) ANSUsersModel *presenedModel;
+@property (nonatomic, readonly) ANSUsersModel                   *presenedModel;
 
 - (void)resignSearchBar;
 - (ANSUsersModel *)presentedModel;
-- (void)initFilterInfrainfrastructure;
+- (void)initFilterInfrastructure;
 
 @end
 
@@ -60,7 +60,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
         _users = users;
         
         self.usersController = [users protocolControllerWithObserver:self];
-        [self initFilterInfrainfrastructure];
+        [self initFilterInfrastructure];
     }
 }
 
@@ -108,7 +108,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
     }
 }
 
-- (void)initFilterInfrainfrastructure {
+- (void)initFilterInfrastructure {
     ANSUsersModel *users = self.users;
     ANSNameFilterModel *nameFilterModel = [[ANSNameFilterModel alloc] initWithObservableModel:users];
     self.filteredModel = nameFilterModel;
@@ -180,7 +180,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
 - (NSInteger)   tableView:(UITableView *)tableView
     numberOfRowsInSection:(NSInteger)section
 {
-    return [self presentedModel].count;
+    return self.presentedModel.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView

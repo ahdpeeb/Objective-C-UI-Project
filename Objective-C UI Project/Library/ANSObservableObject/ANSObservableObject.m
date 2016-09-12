@@ -177,6 +177,9 @@
     
 }
 
+#pragma mark -
+#pragma mark NSCopying protocol
+
 - (id)copyWithZone:(nullable NSZone *)zone {
     ANSObservableObject *copy = [[self class] new];
     copy.controllerHashTable = [self.controllerHashTable copyWithZone:zone];

@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 @interface UIImage (ANSExtension)
 
-- (NSData *)imageDataWithUrl:(NSURL *)url;
+//save UIIimage object with PNG Representation to Document directory
+- (NSString *)pathToPNGRepresentationWithName:(NSString *)name;
+
+//save UIIimage object with JPEG Representation to Document directory
+- (NSString *)pathToJPEGRepresentationWithName:(NSString *)name quality:(CGFloat)quality;
 
 @end

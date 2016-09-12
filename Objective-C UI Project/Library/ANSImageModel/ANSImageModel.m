@@ -11,6 +11,8 @@
 #import "ANSMacros.h"
 #import "ANSRandom.h"
 #import "NSFileManager+ANSExtension.h"
+#import "UIImage+ANSExtension.h"
+
 
 static NSString * const kANSImageName = @"kANSImageName";
 
@@ -55,10 +57,7 @@ static NSString * const kANSImageName = @"kANSImageName";
 #pragma mark Accsessors
 
 - (NSString *)imageName {
-    NSString *name = [self.url.absoluteString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLUserAllowedCharacterSet]];
-    NSLog(@"%@", name);
-    
-    return name;
+    return [self.url.absoluteString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLUserAllowedCharacterSet]];
 }
 
 - (NSString *)imagePath {
@@ -77,20 +76,22 @@ static NSString * const kANSImageName = @"kANSImageName";
 #pragma mark Public Methods
 
 - (void)performLoading {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:self.imagePath]) {
-        BOOL isLoaded = [self downloadImage];
-        isLoaded ? NSLog(@"isLoaded [OK]") : NSLog(@"isLoaded [ERROR]");
+    @synchronized(self) {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if (![fileManager fileExistsAtPath:self.imagePath]) {
+            BOOL isLoaded = [self downloadImage];
+            isLoaded ? NSLog(@"Loaded [OK]") : NSLog(@"Loaded [ERROR]");
+        }
+        
+        self.image = [UIImage imageWithContentsOfFile:self.imagePath];
+        UIImage *image = self.image;
+        if (!image) {
+            BOOL isRemoved = [fileManager removeFile:self.imageName fromSearchPathDirectory:NSDocumentDirectory];
+            isRemoved ? NSLog(@"Remove [OK]") : NSLog(@"Remove [ERROR]");
+        }
+        
+        self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
     }
-    
-    self.image = [UIImage imageWithContentsOfFile:self.imagePath];
-    UIImage *image = self.image;
-    if (!image) {
-        BOOL isRemove = [fileManager removeFile:self.imageName fromSearchPathDirectory:NSDocumentDirectory];
-        isRemove ? NSLog(@"remove [OK]") : NSLog(@"remove [ERROR]");
-    }
-
-    self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
 }
 
 @end

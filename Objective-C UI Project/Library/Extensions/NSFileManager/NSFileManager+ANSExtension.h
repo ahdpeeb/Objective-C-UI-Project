@@ -14,7 +14,6 @@
 
 - (NSString *)pathToSearchPathDirectory:(NSSearchPathDirectory)directory;
 
-
 - (NSString *)pathToDocumentDirectory;
 - (NSString *)pathToApplicationDirectory;
 
