@@ -54,8 +54,10 @@ describe(@"ANSArrayModel", ^{
     
         it(@"user0 should stay on 0 position after move on 400index", ^{
             ANSUser *user0 = [collection objectAtIndex:0];
-            [collection moveObjectFromIndex:0 toIndex:400];
             
+            [[theValue(collection.count) should] equal:theValue(400)];
+            
+            [collection moveObjectFromIndex:0 toIndex:400];
             [[[collection objectAtIndex:0] should] beIdenticalTo:user0];
         });
     

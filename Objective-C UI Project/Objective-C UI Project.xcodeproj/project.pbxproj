@@ -43,6 +43,13 @@
 		937547CE1D86EDF7000B1C6C /* ANSTestObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 937547C81D86EDF7000B1C6C /* ANSTestObservableObject.m */; };
 		937547CF1D86EDF7000B1C6C /* ANSTestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 937547CA1D86EDF7000B1C6C /* ANSTestObserver.m */; };
 		937547D01D86EDF7000B1C6C /* UIImageExtensionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 937547CB1D86EDF7000B1C6C /* UIImageExtensionTest.m */; };
+		937547D11D872122000B1C6C /* NSFileManager+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADE71D75937400B4D610 /* NSFileManager+ANSExtension.m */; };
+		937547D21D87217F000B1C6C /* NSArray+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADE11D75937400B4D610 /* NSArray+ANSExtension.m */; };
+		937547D31D8721AE000B1C6C /* ANSOneIndexModel+UITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADAD1D75937400B4D610 /* ANSOneIndexModel+UITableView.m */; };
+		937547D41D8721B1000B1C6C /* ANSRangeChangeModel+UITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADAF1D75937400B4D610 /* ANSRangeChangeModel+UITableView.m */; };
+		937547D51D8721B4000B1C6C /* ANSTwoIndexModel+UITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADB11D75937400B4D610 /* ANSTwoIndexModel+UITableView.m */; };
+		937547D61D8721DE000B1C6C /* NSString+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADF21D75937400B4D610 /* NSString+ANSExtension.m */; };
+		937547D71D872409000B1C6C /* NSMutableArray+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADEA1D75937400B4D610 /* NSMutableArray+ANSExtension.m */; };
 		9376C8351D79A09E00E6A3EF /* ANSLoadableModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C8341D79A09E00E6A3EF /* ANSLoadableModel.m */; };
 		9376C8451D79DFB500E6A3EF /* ANSImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C83A1D79DFB500E6A3EF /* ANSImageView.m */; };
 		9376C8461D79DFB500E6A3EF /* ANSLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C83D1D79DFB500E6A3EF /* ANSLoadingView.m */; };
@@ -1007,10 +1014,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				937547D61D8721DE000B1C6C /* NSString+ANSExtension.m in Sources */,
 				93425FF31D65E98900F15366 /* ANSUser.m in Sources */,
 				937547A71D855E23000B1C6C /* ANSChangeModel+UITableView.m in Sources */,
 				937547B81D85673D000B1C6C /* ANSProtocolObservationController.m in Sources */,
 				937547A91D855E2C000B1C6C /* ANSOneIndexModel.m in Sources */,
+				937547D11D872122000B1C6C /* NSFileManager+ANSExtension.m in Sources */,
 				937547CC1D86EDF7000B1C6C /* ANSArrayModelTest.m in Sources */,
 				937547B71D85673B000B1C6C /* ANSObservationController.m in Sources */,
 				937547AB1D855E31000B1C6C /* ANSTwoIndexModel.m in Sources */,
@@ -1018,19 +1027,24 @@
 				937547B91D85676D000B1C6C /* ANSLoadingView.m in Sources */,
 				937547AD1D855E50000B1C6C /* ANSRandom.m in Sources */,
 				937547CD1D86EDF7000B1C6C /* ANSNotificationTest.m in Sources */,
+				937547D51D8721B4000B1C6C /* ANSTwoIndexModel+UITableView.m in Sources */,
 				937547CE1D86EDF7000B1C6C /* ANSTestObservableObject.m in Sources */,
 				937547AF1D855E5D000B1C6C /* ANSLoadableModel.m in Sources */,
 				937547C01D86DCD9000B1C6C /* UIImage+ANSExtension.m in Sources */,
 				937547B61D856739000B1C6C /* ANSBlockObservationController.m in Sources */,
 				937547A81D855E28000B1C6C /* ANSChangeModel.m in Sources */,
+				937547D71D872409000B1C6C /* NSMutableArray+ANSExtension.m in Sources */,
 				937547CF1D86EDF7000B1C6C /* ANSTestObserver.m in Sources */,
 				937547AE1D855E53000B1C6C /* ANSQueue.m in Sources */,
 				937547B21D855E70000B1C6C /* ANSImageModel.m in Sources */,
 				937547AC1D855E4B000B1C6C /* ANSGCD.m in Sources */,
 				937547B11D855E6C000B1C6C /* ANSImageView.m in Sources */,
 				937547A61D855E1C000B1C6C /* ANSArrayModel.m in Sources */,
+				937547D21D87217F000B1C6C /* NSArray+ANSExtension.m in Sources */,
 				937547AA1D855E2F000B1C6C /* ANSRangeChangeModel.m in Sources */,
 				937547B01D855E62000B1C6C /* ANSObservableObject.m in Sources */,
+				937547D41D8721B1000B1C6C /* ANSRangeChangeModel+UITableView.m in Sources */,
+				937547D31D8721AE000B1C6C /* ANSOneIndexModel+UITableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
