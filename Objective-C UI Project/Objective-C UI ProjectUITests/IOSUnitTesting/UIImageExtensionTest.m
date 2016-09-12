@@ -50,10 +50,10 @@ describe(@"image saving", ^{
     });
     
     it(@"saving image to pngPath and ", ^{
-        pngPath = [image pathToPNGRepresentationWithName:@"one"];
+        pngPath = [image pathToPNGRepresentationWithName:@"ONE//1323выффв!№;%:?*("];
         [[pngPath shouldNot] beNil];
         
-        jpegPath = [image pathToJPEGRepresentationWithName:@"one" quality:1];
+        jpegPath = [image pathToJPEGRepresentationWithName:@"TWO//1323выффв!№;%:?*(" quality:1];
         [[jpegPath shouldNot] beNil];
     });
     
