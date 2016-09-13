@@ -49,10 +49,10 @@ describe(@"image saving", ^{
     });
     
     it(@"saving image to pngPath and ", ^{
-        pngPath = [image pathToPNGRepresentationWithName:@"one"];
+        pngPath = [image pathToSavedPNGWithName:@"!@#$%ˆ&*()?>"];
         [[pngPath shouldNot] beNil];
         
-        jpegPath = [image pathToJPEGRepresentationWithName:@"Two" quality:1];
+        jpegPath = [image pathToSavedJPEGWithName:@"Two!@#$%ˆ&*()?><" quality:1];
         [[jpegPath shouldNot] beNil];
     });
     

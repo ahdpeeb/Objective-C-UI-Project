@@ -13,17 +13,39 @@
 
 #import "NSFileManager+ANSExtension.h"
 
+typedef NS_ENUM(NSUInteger, ANSImageFormat) {
+    ANSImageFormatPNG,
+    ANSImageFormatGPEG,
+    ANSImageFormatGPG,
+};
+
 @implementation UIImage (ANSExtension)
 
 #pragma mark -
 #pragma mark Private methods
 
+- (NSString *)extensionFromFormat:(ANSImageFormat)format {
+    switch (format) {
+        case ANSImageFormatPNG:
+            return [NSString stringWithFormat:@"png"];
+        
+        case ANSImageFormatGPEG:
+            return [NSString stringWithFormat:@"gpeg"];
+            
+        case ANSImageFormatGPG:
+            return [NSString stringWithFormat:@"gpg"];
+            
+        default:
+            return nil;
+    }
+}
+
 - (NSString *)pathOfSavedImageName:(NSString *)name
                            quality:(CGFloat)quality
-              isJPEGRepresentation:(BOOL)representation
+                            format:(ANSImageFormat)format
 {
     NSString *correctName = [[name stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLUserAllowedCharacterSet]] lowercaseString];
-    NSString *fullName = [correctName stringByAppendingPathExtension:representation ? @"jpeg" : @"png"];
+    NSString *fullName = [correctName stringByAppendingPathExtension:[self extensionFromFormat:format]];
     
     NSFileManager *filemanager = [NSFileManager defaultManager];
     NSString *imagePath = [filemanager pathToFile:fullName inSearchPathDirectory:NSDocumentDirectory];
@@ -33,7 +55,13 @@
         return nil;
     }
     
-    NSData *imageData = representation ? UIImageJPEGRepresentation(self, quality) : UIImagePNGRepresentation(self);
+    NSData *imageData = nil;
+    if (format == ANSImageFormatGPEG || format == ANSImageFormatGPG) {
+        imageData = UIImageJPEGRepresentation(self, quality);
+    } else if (format == ANSImageFormatPNG) {
+        imageData = UIImagePNGRepresentation(self);
+    }
+    
     BOOL isSuccsess = [imageData writeToFile:imagePath atomically:YES];
     
     return isSuccsess ? imagePath : nil;
@@ -42,12 +70,13 @@
 #pragma mark -
 #pragma mark Public methods
 
-- (NSString *)pathToJPEGRepresentationWithName:(NSString *)name quality:(CGFloat)quality {
-   return [self pathOfSavedImageName:name quality:quality isJPEGRepresentation:YES];
+- (NSString *)pathToSavedJPEGWithName:(NSString *)name quality:(CGFloat)quality {
+   return [self pathOfSavedImageName:name quality:quality format:ANSImageFormatGPEG];
 }
 
-- (NSString *)pathToPNGRepresentationWithName:(NSString *)name {
-   return [self pathOfSavedImageName:name quality:0 isJPEGRepresentation:NO];
+- (NSString *)pathToSavedPNGWithName:(NSString *)name {
+   return [self pathOfSavedImageName:name quality:0 format:ANSImageFormatPNG];
 }
+
 
 @end

@@ -12,9 +12,9 @@
 @interface UIImage (ANSExtension)
 
 //save UIIimage object with PNG Representation to Document directory
-- (NSString *)pathToPNGRepresentationWithName:(NSString *)name;
+- (NSString *)pathToSavedPNGWithName:(NSString *)name;
 
 //save UIIimage object with JPEG Representation to Document directory
-- (NSString *)pathToJPEGRepresentationWithName:(NSString *)name quality:(CGFloat)quality;
+- (NSString *)pathToSavedJPEGWithName:(NSString *)name quality:(CGFloat)quality;
 
 @end
