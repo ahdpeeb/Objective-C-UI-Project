@@ -23,9 +23,10 @@ static NSString * const kANSImageName = @"kANSImageName";
 @property (nonatomic, readonly) NSString  *imageName;
 @property (nonatomic, readonly) NSString  *imagePath;
 
-@property (nonatomic, assign, getter=isLoaded) BOOL loaded;
-
-- (BOOL)downloadImage;
+- (BOOL)isDownloadedImageToFile;
+- (UIImage *)loadedImageFromInternet;
+- (void)removeCorruptedFile;
+- (UIImage *)loadedImage;
 
 @end
 
@@ -67,30 +68,51 @@ static NSString * const kANSImageName = @"kANSImageName";
 #pragma mark -
 #pragma mark Privat methods
 
-- (BOOL)downloadImage {
-    NSData *imageData = [NSData dataWithContentsOfURL:self.url];
+- (BOOL)isDownloadedImageToFile {
+    BOOL downloaded = YES;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:self.imagePath]) {
+        NSData *imageData = [NSData dataWithContentsOfURL:self.url];
+        downloaded = [imageData writeToFile:self.imagePath atomically:YES];
+        downloaded ? NSLog(@"Loaded [OK]") : NSLog(@"Loaded [ERROR]");
+    }
     
-    return [imageData writeToFile:self.imagePath atomically:YES];
+    return downloaded;
+}
+
+- (void)removeCorruptedFile {
+    BOOL isRemoved = [[NSFileManager defaultManager] removeFile:self.imageName
+                                        fromSearchPathDirectory:NSDocumentDirectory];
+    
+    isRemoved ? NSLog(@"Remove [OK]") : NSLog(@"Remove [ERROR]");
+}
+
+- (UIImage *)loadedImageFromInternet {
+    return [UIImage imageWithData:[NSData dataWithContentsOfURL:self.url]];
+}
+
+- (UIImage *)loadedImage {
+    UIImage *image = nil;
+    
+    BOOL downloaded = [self isDownloadedImageToFile];
+    if (downloaded) {
+        image = [UIImage imageWithContentsOfFile:self.imagePath];
+    }
+    
+    if (!image && downloaded) {
+        [self removeCorruptedFile];
+    } else if (!image && !downloaded) {
+        image = [self loadedImageFromInternet];
+    }
+    
+    return image;
 }
 
 #pragma mark -
 #pragma mark Public Methods
 
 - (void)performLoading {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:self.imagePath]) {
-        BOOL isLoaded = [self downloadImage];
-        isLoaded ? NSLog(@"Loaded [OK]") : NSLog(@"Loaded [ERROR]");
-    }
-    
-    self.image = [UIImage imageWithContentsOfFile:self.imagePath];
-    UIImage *image = self.image;
-    if (!image) {
-        BOOL isRemoved = [fileManager removeFile:self.imageName fromSearchPathDirectory:NSDocumentDirectory];
-        isRemoved ? NSLog(@"Remove [OK]") : NSLog(@"Remove [ERROR]");
-    }
-    
-    self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
+    self.image = [self loadedImage];
+    self.state = self.image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
 }
 
 @end

@@ -14,6 +14,8 @@
 
 @implementation ANSLoadableModel
 
+@dynamic loaded;
+
 #pragma mark -
 #pragma mark Initilization and deallocation
 
@@ -26,6 +28,13 @@
         
     }
     return self;
+}
+
+#pragma mark -
+#pragma mark Accsessors
+
+- (BOOL)isLoaded {
+    return self.state == ANSLoadableModelDidLoad;
 }
 
 #pragma mark -
@@ -54,7 +63,7 @@
 #pragma mark -
 #pragma mark Public methods
 
-- (void)load{
+- (void)load {
     @synchronized(self) {
         ANSLoadingState state = self.state;
         if (state == ANSLoadableModelLoading || state == ANSLoadableModelDidLoad) {

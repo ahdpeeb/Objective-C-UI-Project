@@ -20,8 +20,6 @@
 
 @end
 
-@interface ANSLoadableModel : ANSObservableObject
-
 typedef NS_ENUM(NSUInteger, ANSLoadingState) {
     ANSLoadableModelUnloaded,
     ANSLoadableModelLoading,
@@ -30,6 +28,9 @@ typedef NS_ENUM(NSUInteger, ANSLoadingState) {
     
     ANSLoadableModelStatesCount
 };
+
+@interface ANSLoadableModel : ANSObservableObject
+@property (nonatomic, readonly, getter=isLoaded) BOOL loaded;
 
 - (void)load;
 

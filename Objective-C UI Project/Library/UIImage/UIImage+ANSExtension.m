@@ -18,9 +18,9 @@
 #pragma mark -
 #pragma mark Private methods
 
-- (NSString *)imagePathWithName:(NSString *)name
-                        quality:(CGFloat)quality
-           isJPEGRepresentation:(BOOL)representation
+- (NSString *)pathOfSavedImageName:(NSString *)name
+                           quality:(CGFloat)quality
+              isJPEGRepresentation:(BOOL)representation
 {
     NSString *correctName = [[name stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLUserAllowedCharacterSet]] lowercaseString];
     NSString *fullName = [correctName stringByAppendingPathExtension:representation ? @"jpeg" : @"png"];
@@ -43,11 +43,11 @@
 #pragma mark Public methods
 
 - (NSString *)pathToJPEGRepresentationWithName:(NSString *)name quality:(CGFloat)quality {
-   return [self imagePathWithName:name quality:quality isJPEGRepresentation:YES];
+   return [self pathOfSavedImageName:name quality:quality isJPEGRepresentation:YES];
 }
 
 - (NSString *)pathToPNGRepresentationWithName:(NSString *)name {
-   return [self imagePathWithName:name quality:0 isJPEGRepresentation:NO];
+   return [self pathOfSavedImageName:name quality:0 isJPEGRepresentation:NO];
 }
 
 @end
