@@ -17,6 +17,8 @@
 #import "ANSNameFilterModel.h"
 #import "ANSViewControllerTables.h"
 
+typedef void(^ANSExecutionBlock)(void);
+
 static const NSUInteger kANSSleepTime = 5;
 static const NSUInteger kANSUsersCount = 20;
 
@@ -30,7 +32,9 @@ static NSString * const kANSPlistName = @"aaa";
 - (id)usersFromFileSystem;
 - (id)newUsers;
 - (id)loadUsersModel;
-- (void)handleNotification;
+- (void)startObservationForNames:(NSArray <NSString *> *)names
+                       withBlock:(ANSExecutableBlock)block;
+- (void)stopObservationForNames:(NSArray <NSString *> *)names;
 
 @end
 
@@ -40,14 +44,17 @@ static NSString * const kANSPlistName = @"aaa";
 #pragma mark Initialization and deallocation
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIApplicationDidEnterBackgroundNotification
-                                                  object:nil];
+    [self stopObservationForNames:@[UIApplicationDidEnterBackgroundNotification,
+                                    UIApplicationWillTerminateNotification]];
 }
 
 - (instancetype)init {
     self = [super init];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [self startObservationForNames:@[UIApplicationDidEnterBackgroundNotification,
+                                     UIApplicationWillTerminateNotification]
+                         withBlock:^{
+                             [self save];
+                         }];
     
     return self;
 }
@@ -93,9 +100,24 @@ static NSString * const kANSPlistName = @"aaa";
     return users;
 }
 
-- (void)handleNotification {
-    NSLog(@"[INFO] UIApplicationDidEnterBackgroundNotification");
-    [self save];
+- (void)startObservationForNames:(NSArray <NSString *> *)names
+                       withBlock:(ANSExecutableBlock)block {
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    for (NSString *name in names) {
+        self.observationHandler = [center addObserverForName:name
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                      block();
+                                                  }];
+    }
+}
+
+- (void)stopObservationForNames:(NSArray <NSString *> *)names {
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    for (NSString *name in names) {
+        [center removeObserver:self.observationHandler name:name object:nil];
+    }
 }
 
 #pragma mark -
