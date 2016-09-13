@@ -61,6 +61,10 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
         
         self.usersController = [users protocolControllerWithObserver:self];
         [self initFilterInfrastructure];
+        
+        if (self.isViewLoaded) {
+            [users load];
+        }
     }
 }
 
@@ -87,12 +91,12 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
     self.navigationItem.title = kANSTitleForHeaderSection;
     [self initLeftBarButtonItem];
     [self initRightBarButtonItem];
+    
+    [self.users load];
 }
     
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated]; 
-    
-    [self.users load];
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
