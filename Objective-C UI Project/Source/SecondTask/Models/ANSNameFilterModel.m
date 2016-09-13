@@ -25,7 +25,7 @@ typedef void(^ANSOperationBlock)(void);
 
 - (void)addUserWithoutNotification:(ANSUser *)user;
 - (void)filterModelByFilterString:(NSString *)filterString;
-- (BOOL)isUser:(ANSUser *)user containsString:(NSString *)string;
+- (BOOL)user:(ANSUser *)user containsString:(NSString *)string;
 - (void)verifyObject:(id)object
           withString:(NSString *)string
          performBlock:(ANSOperationBlock)block;
@@ -82,7 +82,7 @@ typedef void(^ANSOperationBlock)(void);
             [self addUserWithoutNotification:user];
         }
         
-        if ([self isUser:user containsString:filterString]) {
+        if ([self user:user containsString:filterString]) {
                 [self addUserWithoutNotification:user];
         }
     }
@@ -100,14 +100,15 @@ typedef void(^ANSOperationBlock)(void);
     }
 }
 
-- (BOOL)isUser:(ANSUser *)user containsString:(NSString *)string {
+- (BOOL)user:(ANSUser *)user containsString:(NSString *)string {
     if (!string) {
-        return true;
+        return YES;
     }
     
-    BOOL value = [user.name rangeOfString:string
-                                  options:NSCaseInsensitiveSearch].location == NSNotFound;
-    return !value;
+    NSRange range = [user.name rangeOfString:string
+                                  options:NSCaseInsensitiveSearch];
+    
+    return range.location == NSNotFound;
 }
 
 - (void)verifyObject:(id)object
@@ -115,7 +116,7 @@ typedef void(^ANSOperationBlock)(void);
          performBlock:(ANSOperationBlock)block
 {
     if ([object isKindOfClass:[ANSUser class]]) {
-        if ([self isUser:(ANSUser *)object containsString:string]) {
+        if ([self user:(ANSUser *)object containsString:string]) {
             block();
         }
     }

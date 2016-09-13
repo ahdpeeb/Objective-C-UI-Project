@@ -41,7 +41,7 @@ static const    NSUInteger kANSSectionsCount                 = 1;
 @property (nonatomic, readonly) ANSUsersModel                   *presenedModel;
 
 - (void)resignSearchBar;
-- (ANSUsersModel *)presentedModel;
+- (ANSArrayModel *)presentedModel;
 - (void)initFilterInfrastructure;
 
 @end
@@ -72,9 +72,10 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
     }
 }
 
-- (ANSUsersModel *)presentedModel {
+- (ANSArrayModel *)presentedModel {
     BOOL isFirstResponder = self.usersView.searchBar.isFirstResponder;
-    return isFirstResponder ? (ANSUsersModel *)self.filteredModel : self.users;
+    
+    return isFirstResponder ? self.filteredModel : self.users;
 }
 
 #pragma mark -
@@ -87,7 +88,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
     [self initLeftBarButtonItem];
     [self initRightBarButtonItem];
 }
-
+    
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated]; 
     

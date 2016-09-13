@@ -23,22 +23,40 @@ static const NSUInteger kANSUsersCount = 20;
 static NSString * const kANSPlistName = @"aaa";
 
 @interface ANSUsersModel ()
+@property (nonatomic, strong) id<NSObject> observationHandler;
 
 - (SEL)selectorForState:(NSUInteger)state;
+
 - (id)usersFromFileSystem;
 - (id)newUsers;
 - (id)loadUsersModel;
+- (void)handleNotification;
 
 @end
 
 @implementation ANSUsersModel
 
 #pragma mark -
+#pragma mark Initialization and deallocation
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidEnterBackgroundNotification
+                                                  object:nil];
+}
+
+- (instancetype)init {
+    self = [super init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleNotification) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    
+    return self;
+}
+
+#pragma mark -
 #pragma mark Private methods
 
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
-            
         default:
           return [super selectorForState:state];
     }
@@ -73,6 +91,11 @@ static NSString * const kANSPlistName = @"aaa";
     }];
     
     return users;
+}
+
+- (void)handleNotification {
+    NSLog(@"[INFO] UIApplicationDidEnterBackgroundNotification");
+    [self save];
 }
 
 #pragma mark -

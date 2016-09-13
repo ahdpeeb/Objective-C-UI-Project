@@ -73,7 +73,7 @@ static NSString * const kANSStringKey = @"kANSStringKey";
 - (ANSUser *)copyWithZone:(NSZone *)zone {
     ANSUser * copy = [[self class] new];
     if (copy) {
-        [copy setMutableString:self.mutableString];
+        copy.mutableString = self.mutableString ;
     }
     
     return copy;

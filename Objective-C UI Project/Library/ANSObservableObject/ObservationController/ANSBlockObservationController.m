@@ -26,7 +26,7 @@
 - (instancetype)initWithObserver:(id)observer
                 observableObject:(ANSObservableObject *)observableObject
 {
-    self = [[super class]controllerWithObserver:observer observableObject:observableObject];
+    self = [super initWithObserver:observer observableObject:observableObject];
     if (self) {
         self.stateDictionary = [NSMutableDictionary dictionary];
     }

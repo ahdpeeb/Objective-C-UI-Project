@@ -4,8 +4,6 @@
 //
 //  Created by Nikola Andriiev on 24.07.16.
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
-//
-#import <UIKit/UIKit.h>
 
 #import "ANSArrayModel.h"
 
@@ -61,14 +59,6 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     @synchronized(self) {
         return [self.mutableObjects copy];
     }
-}
-
-- (BOOL)isLoaded {
-    if (self.count > 0) {
-        return YES;
-    }
-    
-    return NO;
 }
 
 #pragma mark -

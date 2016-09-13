@@ -18,4 +18,7 @@
 + (instancetype)controllerWithObserver:(id)observer
                  observableObject:(id)observableObject;
 
+- (instancetype)initWithObserver:(id)observer
+                observableObject:(id)observableObject;
+
 @end

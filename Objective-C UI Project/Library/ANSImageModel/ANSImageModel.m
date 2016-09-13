@@ -69,6 +69,7 @@ static NSString * const kANSImageName = @"kANSImageName";
 
 - (BOOL)downloadImage {
     NSData *imageData = [NSData dataWithContentsOfURL:self.url];
+    
     return [imageData writeToFile:self.imagePath atomically:YES];
 }
 
@@ -76,22 +77,20 @@ static NSString * const kANSImageName = @"kANSImageName";
 #pragma mark Public Methods
 
 - (void)performLoading {
-    @synchronized(self) {
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        if (![fileManager fileExistsAtPath:self.imagePath]) {
-            BOOL isLoaded = [self downloadImage];
-            isLoaded ? NSLog(@"Loaded [OK]") : NSLog(@"Loaded [ERROR]");
-        }
-        
-        self.image = [UIImage imageWithContentsOfFile:self.imagePath];
-        UIImage *image = self.image;
-        if (!image) {
-            BOOL isRemoved = [fileManager removeFile:self.imageName fromSearchPathDirectory:NSDocumentDirectory];
-            isRemoved ? NSLog(@"Remove [OK]") : NSLog(@"Remove [ERROR]");
-        }
-        
-        self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:self.imagePath]) {
+        BOOL isLoaded = [self downloadImage];
+        isLoaded ? NSLog(@"Loaded [OK]") : NSLog(@"Loaded [ERROR]");
     }
+    
+    self.image = [UIImage imageWithContentsOfFile:self.imagePath];
+    UIImage *image = self.image;
+    if (!image) {
+        BOOL isRemoved = [fileManager removeFile:self.imageName fromSearchPathDirectory:NSDocumentDirectory];
+        isRemoved ? NSLog(@"Remove [OK]") : NSLog(@"Remove [ERROR]");
+    }
+    
+    self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
 }
 
 @end
