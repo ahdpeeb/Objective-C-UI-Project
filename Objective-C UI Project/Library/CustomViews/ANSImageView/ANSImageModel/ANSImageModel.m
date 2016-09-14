@@ -10,9 +10,15 @@
 
 #import "ANSLocalImageModel.h"
 #import "ANSInternetImageModel.h"
+#import "ANSImageModel_ANSPrivatExtension.h"
+
+#import "ANSMacros.h"
 
 @interface ANSImageModel ()
-@property (nonatomic, strong) NSMapTable *imagesStorage;
+
+- (void)initCacheStorage;
+- (ANSImageModel *)imageModelIfImageExist;
+- (void)cacheImageModel;
 
 @end
 
@@ -36,13 +42,15 @@
 #pragma mark Initialization and deallocation
 
 - (instancetype)initWithURL:(NSURL *)url {
-    if ([self class] == [ANSImageModel class]) {
-        [NSException raise:@"Invalid identifier" format:@"You should never call init method for ANSImageModel"];
-    }
-    
+    ANSInvalidIdentifierExceprionRaise(ANSImageModel);
     self = [super init];
     self.url = url;
-    [self initImagesStorage];
+    [self initCacheStorage];
+    
+    ANSImageModel *cachedModel = [self imageModelIfImageExist];
+    if (cachedModel) {
+        self = cachedModel;
+    }
     
     return self;
 }
@@ -65,14 +73,15 @@
 #pragma mark -
 #pragma mark Privat methods
 
-- (void)initImagesStorage {
-    static NSMapTable * imagesStorage = nil;
+- (void)initCacheStorage {
+    static NSMapTable * imagesModelStorage = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        imagesStorage = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsWeakMemory];
+        imagesModelStorage = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsStrongMemory
+                                                   valueOptions:NSPointerFunctionsWeakMemory];
     });
     
-    self.imagesStorage = imagesStorage;
+    self.cacheStorage = imagesModelStorage;
 }
 
 - (UIImage *)loadImage {
@@ -81,22 +90,33 @@
     return nil;
 }
 
-- (UIImage *)imageIsExist {
-    return [self.imagesStorage objectForKey:self.imageName];
+- (ANSImageModel *)imageModelIfImageExist {
+    @synchronized(self) {
+        return [self.cacheStorage objectForKey:self.imageName];
+    }
+}
+
+- (void)cacheImageModel {
+    @synchronized(self) {
+        if (![self imageModelIfImageExist]) {
+            [self.cacheStorage setObject:self forKey:self.imageName];
+        }
+    }
 }
 
 #pragma mark -
 #pragma mark Public Methods
 
 - (void)performLoading {
-    UIImage *image = [self imageIsExist];
+    UIImage *image = [self loadImage];
     if (image) {
-        self.image = image;
-    } else {
-        self.image = [self loadImage];
+        [self cacheImageModel];
+        NSLog(@"ImageNameInfo - %@", self.imageName);
+        NSLog(@"Object INFO - %@", [self.cacheStorage objectForKey:self.imageName]);
     }
     
-    self.state = self.image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
+    self.image = image;
+    self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
 }
 
 @end

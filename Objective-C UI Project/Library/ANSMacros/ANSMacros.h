@@ -72,4 +72,10 @@
 #define ANSPrintObjectRetainCount(object) \
     NSLog(@#object" retain count is %ld", CFGetRetainCount((__bridge CFTypeRef)object));
 
+//# calls NSException when you call invalid identifier 
+#define ANSInvalidIdentifierExceprionRaise(cls) \
+ if ([self class] == [cls class]) { \
+    [NSException raise:@"Invalid identifier" \
+                format:@"You should never call init method for" #cls]; \
+} \
 

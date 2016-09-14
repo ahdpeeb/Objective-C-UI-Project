@@ -11,19 +11,12 @@
 #import "ANSLoadableModel.h"
 
 @interface ANSImageModel : ANSLoadableModel
+@property (nonatomic, readonly)    NSURL        *url;
 
-//This property readonly
-@property (nonatomic, strong)      NSURL        *url;
-
-//This property readonly
-@property (nonatomic, strong)      UIImage      *image;
-
+@property (nonatomic, readonly)    UIImage      *image;
 @property (nonatomic, readonly)    NSString     *imageName;
 @property (nonatomic, readonly)    NSString     *imagePath;
 
 + (instancetype)imageFromURL:(NSURL *)url;
-
-//Privat method, have to reloaded in child classes
-- (UIImage *)loadImage;
 
 @end

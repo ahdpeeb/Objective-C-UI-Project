@@ -8,6 +8,10 @@
 
 #import "ANSLocalImageModel.h"
 
+#import "ANSImageModel_ANSPrivatExtension.h"
+
+#import "NSFileManager+ANSExtension.h"
+
 @implementation ANSLocalImageModel
 
 #pragma mark -
@@ -25,7 +29,20 @@
 #pragma mark Privat methods
 
 - (UIImage *)loadImage {
-    return [UIImage imageWithContentsOfFile:self.imagePath];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    UIImage *image = nil;
+    
+    NSString *imagePath = self.imageName;
+    if ([fileManager fileExistsAtPath:imagePath]) {
+        image = [UIImage imageWithContentsOfFile:self.imagePath];
+        if (image) {
+            NSError *error = nil;
+            [fileManager removeItemAtPath:self.imagePath error:&error];
+            [self.cacheStorage removeObjectForKey:self.imageName];
+        }
+    }
+    
+    return image;
 }
 
 @end

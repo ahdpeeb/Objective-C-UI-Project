@@ -17,8 +17,8 @@
 
 @interface ANSImageModel ()
 
-- (BOOL)isDownloadedImageToFile;
-- (UIImage *)loadedImageFromInternet;
+- (BOOL)downloadImageToFileReturnIsSuccess;
+- (UIImage *)imageFromInternet; 
 - (void)removeCorruptedFile;
 - (UIImage *)loadImage;
 
@@ -30,7 +30,8 @@
 #pragma mark Accsessors
 
 - (NSString *)imageName {
-    return [self.url.absoluteString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLUserAllowedCharacterSet]];
+    NSCharacterSet *characterSet = [NSCharacterSet URLUserAllowedCharacterSet];
+    return [self.url.absoluteString stringByAddingPercentEncodingWithAllowedCharacters:characterSet];
 }
 
 - (NSString *)imagePath {
@@ -40,7 +41,7 @@
 #pragma mark -
 #pragma mark Privat methods
 
-- (BOOL)isDownloadedImageToFile {
+- (BOOL)downloadImageToFileReturnIsSuccess {
     BOOL downloaded = YES;
     if (![[NSFileManager defaultManager] fileExistsAtPath:self.imagePath]) {
         NSData *imageData = [NSData dataWithContentsOfURL:self.url];
@@ -55,25 +56,25 @@
     BOOL isRemoved = [[NSFileManager defaultManager] removeFile:self.imageName
                                         fromSearchPathDirectory:NSDocumentDirectory];
     
-    isRemoved ? NSLog(@"Remove [OK]") : NSLog(@"Remove [ERROR]");
+    isRemoved ? NSLog(@"Removed [OK]") : NSLog(@"Removed [ERROR]");
 }
 
-- (UIImage *)loadedImageFromInternet {
+- (UIImage *)imageFromInternet {
     return [UIImage imageWithData:[NSData dataWithContentsOfURL:self.url]];
 }
 
 - (UIImage *)loadImage {
     UIImage *image = nil;
     
-    BOOL downloaded = [self isDownloadedImageToFile];
-    if (downloaded) {
+    BOOL isSuccess = [self downloadImageToFileReturnIsSuccess];
+    if (isSuccess) {
         image = [UIImage imageWithContentsOfFile:self.imagePath];
     }
     
-    if (!image && downloaded) {
+    if (!image && isSuccess) {
         [self removeCorruptedFile];
-    } else if (!image && !downloaded) {
-        image = [self loadedImageFromInternet];
+    } else if (!image && !isSuccess) {
+        image = [self imageFromInternet];
     }
     
     return image;
