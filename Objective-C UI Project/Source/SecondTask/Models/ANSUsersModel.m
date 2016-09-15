@@ -25,7 +25,7 @@ static const NSUInteger kANSUsersCount = 20;
 static NSString * const kANSPlistName = @"aaa";
 
 @interface ANSUsersModel ()
-@property (nonatomic, strong) id<NSObject> observationHandler;
+@property (nonatomic, strong) NSMutableDictionary *observationHandlers;
 
 - (SEL)selectorForState:(NSUInteger)state;
 
@@ -104,19 +104,22 @@ static NSString * const kANSPlistName = @"aaa";
                        withBlock:(ANSExecutableBlock)block {
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     for (NSString *name in names) {
-        self.observationHandler = [center addObserverForName:name
-                                                      object:nil
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification * _Nonnull note) {
+        id observationHandler = [center addObserverForName:name
+                                                     object:nil
+                                                      queue:[NSOperationQueue mainQueue]
+                                                 usingBlock:^(NSNotification * _Nonnull note) {
                                                       block();
-                                                  }];
+                                                 }];
+        
+        [self.observationHandlers setObject:observationHandler forKey:name];
     }
 }
 
 - (void)stopObservationForNames:(NSArray <NSString *> *)names {
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     for (NSString *name in names) {
-        [center removeObserver:self.observationHandler name:name object:nil];
+        id handler = [self.observationHandlers objectForKey:name];
+        [center removeObserver:handler name:name object:nil];
     }
 }
 

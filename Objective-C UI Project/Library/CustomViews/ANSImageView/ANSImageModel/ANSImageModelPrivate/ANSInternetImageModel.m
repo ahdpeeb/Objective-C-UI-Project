@@ -43,7 +43,8 @@
 
 - (void)downloadImageToFileSystem {
     if (![[NSFileManager defaultManager] fileExistsAtPath:self.imagePath]) {
-        [[NSURLSession sharedSession] downloadTaskWithURL:self.url];
+        NSURLSessionDownloadTask *downloadTask = [[NSURLSession sharedSession] downloadTaskWithURL:self.url];
+        [downloadTask resume];
     }
 }
 
@@ -61,9 +62,12 @@
 - (UIImage *)loadImage {
     [self downloadImageToFileSystem];
     UIImage *image = [UIImage imageWithContentsOfFile:self.imagePath];
+    
     if (!image) {
+        // if !error && !image
         [self removeCorruptedFile];
     } else if (!image) {
+        // if error && !image
         image = [self internetImage];
     }
     
