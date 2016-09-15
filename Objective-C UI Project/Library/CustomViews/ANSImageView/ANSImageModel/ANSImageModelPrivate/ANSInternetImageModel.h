@@ -8,6 +8,6 @@
 
 #import "ANSImageModel.h"
 
-@interface ANSInternetImageModel : ANSImageModel
+@interface ANSInternetImageModel : ANSImageModel <NSURLSessionDownloadDelegate>
 
 @end

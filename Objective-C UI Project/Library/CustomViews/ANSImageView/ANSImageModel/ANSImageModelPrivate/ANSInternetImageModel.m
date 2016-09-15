@@ -17,8 +17,8 @@
 
 @interface ANSImageModel ()
 
-- (BOOL)downloadImageToFileReturnIsSuccess;
-- (UIImage *)imageFromInternet; 
+- (void)downloadImageToFileSystem;
+- (UIImage *)internetImage;
 - (void)removeCorruptedFile;
 - (UIImage *)loadImage;
 
@@ -41,15 +41,10 @@
 #pragma mark -
 #pragma mark Privat methods
 
-- (BOOL)downloadImageToFileReturnIsSuccess {
-    BOOL downloaded = YES;
+- (void)downloadImageToFileSystem {
     if (![[NSFileManager defaultManager] fileExistsAtPath:self.imagePath]) {
-        NSData *imageData = [NSData dataWithContentsOfURL:self.url];
-        downloaded = [imageData writeToFile:self.imagePath atomically:YES];
-        downloaded ? NSLog(@"Loaded [OK]") : NSLog(@"Loaded [ERROR]");
+        [[NSURLSession sharedSession] downloadTaskWithURL:self.url];
     }
-    
-    return downloaded;
 }
 
 - (void)removeCorruptedFile {
@@ -59,25 +54,34 @@
     isRemoved ? NSLog(@"Removed [OK]") : NSLog(@"Removed [ERROR]");
 }
 
-- (UIImage *)imageFromInternet {
+- (UIImage *)internetImage {
     return [UIImage imageWithData:[NSData dataWithContentsOfURL:self.url]];
 }
 
 - (UIImage *)loadImage {
-    UIImage *image = nil;
-    
-    BOOL isSuccess = [self downloadImageToFileReturnIsSuccess];
-    if (isSuccess) {
-        image = [UIImage imageWithContentsOfFile:self.imagePath];
-    }
-    
-    if (!image && isSuccess) {
+    [self downloadImageToFileSystem];
+    UIImage *image = [UIImage imageWithContentsOfFile:self.imagePath];
+    if (!image) {
         [self removeCorruptedFile];
-    } else if (!image && !isSuccess) {
-        image = [self imageFromInternet];
+    } else if (!image) {
+        image = [self internetImage];
     }
     
     return image;
+}
+
+#pragma mark -
+#pragma mark protocol NSURLSessionDownloadDelegate
+
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask
+                              didFinishDownloadingToURL:(NSURL *)location
+{
+    NSError *error = nil;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager moveItemAtURL:location
+                         toURL:[NSURL URLWithString:self.imagePath]
+                         error:&error];
+    NSLog(@"didFinishDownloadingToURL = notification");
 }
 
 @end

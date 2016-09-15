@@ -13,12 +13,6 @@
 
 #import "NSFileManager+ANSExtension.h"
 
-typedef NS_ENUM(NSUInteger, ANSImageFormat) {
-    ANSImageFormatPNG,
-    ANSImageFormatGPEG,
-    ANSImageFormatGPG,
-};
-
 @implementation UIImage (ANSExtension)
 
 #pragma mark -
@@ -29,11 +23,8 @@ typedef NS_ENUM(NSUInteger, ANSImageFormat) {
         case ANSImageFormatPNG:
             return [NSString stringWithFormat:@"png"];
         
-        case ANSImageFormatGPEG:
+        case ANSImageFormatJPEG:
             return [NSString stringWithFormat:@"gpeg"];
-            
-        case ANSImageFormatGPG:
-            return [NSString stringWithFormat:@"gpg"];
             
         default:
             return nil;
@@ -55,13 +46,7 @@ typedef NS_ENUM(NSUInteger, ANSImageFormat) {
         return nil;
     }
     
-    NSData *imageData = nil;
-    if (format == ANSImageFormatGPEG || format == ANSImageFormatGPG) {
-        imageData = UIImageJPEGRepresentation(self, quality);
-    } else if (format == ANSImageFormatPNG) {
-        imageData = UIImagePNGRepresentation(self);
-    }
-    
+    NSData *imageData = [self imageDataWithFormat:format quality:quality];
     BOOL isSuccsess = [imageData writeToFile:imagePath atomically:YES];
     
     return isSuccsess ? imagePath : nil;
@@ -70,8 +55,20 @@ typedef NS_ENUM(NSUInteger, ANSImageFormat) {
 #pragma mark -
 #pragma mark Public methods
 
+- (NSData *)imageDataWithFormat:(ANSImageFormat)format
+                        quality:(CGFloat)quality {
+    NSData *imageData = nil;
+    if (format == ANSImageFormatJPEG) {
+        imageData = UIImageJPEGRepresentation(self, quality);
+    } else if (format == ANSImageFormatPNG) {
+        imageData = UIImagePNGRepresentation(self);
+    }
+    
+    return imageData;
+}
+
 - (NSString *)pathToSavedJPEGWithName:(NSString *)name quality:(CGFloat)quality {
-   return [self pathOfSavedImageName:name quality:quality format:ANSImageFormatGPEG];
+   return [self pathOfSavedImageName:name quality:quality format:ANSImageFormatJPEG];
 }
 
 - (NSString *)pathToSavedPNGWithName:(NSString *)name {

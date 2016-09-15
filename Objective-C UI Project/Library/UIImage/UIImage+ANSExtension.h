@@ -9,7 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, ANSImageFormat) {
+    ANSImageFormatPNG,
+    ANSImageFormatJPEG,
+};
+
 @interface UIImage (ANSExtension)
+
+- (NSData *)imageDataWithFormat:(ANSImageFormat)format
+                        quality:(CGFloat)quality; 
 
 //save UIIimage object with PNG Representation to Document directory
 - (NSString *)pathToSavedPNGWithName:(NSString *)name;
