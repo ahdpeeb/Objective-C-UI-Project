@@ -20,11 +20,8 @@
 
 - (NSString *)extensionFromFormat:(ANSImageFormat)format {
     switch (format) {
-        case ANSImageFormatPNG:
-            return [NSString stringWithFormat:@"png"];
-        
-        case ANSImageFormatJPEG:
-            return [NSString stringWithFormat:@"gpeg"];
+        case ANSImageFormatPNG: return @"png";
+        case ANSImageFormatJPEG: return @"jpeg";
             
         default:
             return nil;

@@ -33,15 +33,14 @@ static          NSString * const kANSTitleForHeaderSection   = @"Homer's contact
 static const    NSUInteger kANSSectionsCount                 = 1;
 
 @interface ANSViewControllerTables ()
-@property (nonatomic, strong) ANSProtocolObservationController  *usersController;
+@property (nonatomic, strong)   ANSProtocolObservationController  *usersController;
 
-@property (nonatomic, strong) ANSNameFilterModel                *filteredModel;
-@property (nonatomic, strong) ANSProtocolObservationController  *filterModelController;
+@property (nonatomic, strong)   ANSNameFilterModel                *filteredModel;
+@property (nonatomic, strong)   ANSProtocolObservationController  *filterModelController;
 
-@property (nonatomic, readonly) ANSUsersModel                   *presenedModel;
+@property (nonatomic, readonly) ANSUsersModel                     *presentedModel;
 
 - (void)resignSearchBar;
-- (ANSArrayModel *)presentedModel;
 - (void)initFilterInfrastructure;
 
 @end
@@ -50,7 +49,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
 
 @implementation ANSViewControllerTables;
 
-@dynamic presenedModel;
+@dynamic presentedModel;
 
 #pragma mark -
 #pragma mark Accsessors
