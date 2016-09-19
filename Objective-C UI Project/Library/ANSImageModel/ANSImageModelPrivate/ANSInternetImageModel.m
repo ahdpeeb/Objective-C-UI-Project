@@ -19,7 +19,6 @@
 @interface ANSImageModel ()
 @property (nonatomic, strong) NSURLSessionTask *task;
 
-- (void)downloadImageToFileSystem;
 - (UIImage *)internetImage;
 - (void)removeCorruptedFile;
 - (void)loadImage:(NSError *)error;
@@ -54,16 +53,6 @@
 #pragma mark -
 #pragma mark Privat methods
 
-- (void)downloadImageToFileSystem {
-    if (![[NSFileManager defaultManager] fileExistsAtPath:self.imagePath]) {
-        NSURLSessionDownloadTask *downloadTask = [[NSURLSession sharedSession] downloadTaskWithURL:self.url];
-        self.task = downloadTask;
-        [downloadTask resume];
-    } else {
-        [self loadImage:nil];
-    }
-}
-
 - (void)removeCorruptedFile {
     BOOL isRemoved = [[NSFileManager defaultManager] removeFile:self.imageName
                                         fromSearchPathDirectory:NSDocumentDirectory];
@@ -92,7 +81,12 @@
 }
 
 - (void)performLoading {
-    [self downloadImageToFileSystem];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:self.imagePath]) {
+        self.task = [[NSURLSession sharedSession] downloadTaskWithURL:self.url];
+        [self.task resume];
+    } else {
+        [self loadImage:nil];
+    }
 }
 
 #pragma mark -

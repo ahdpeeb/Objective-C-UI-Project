@@ -379,10 +379,10 @@
 		9376C8371D79DFB500E6A3EF /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				9376C8381D79DFB500E6A3EF /* ANSImageView */,
-				9376C83B1D79DFB500E6A3EF /* ANSLoadingView */,
-				9376C83F1D79DFB500E6A3EF /* ANSTableViewCell */,
 				9376C8421D79DFB500E6A3EF /* ASNRootView */,
+				9376C83B1D79DFB500E6A3EF /* ANSLoadingView */,
+				9376C8381D79DFB500E6A3EF /* ANSImageView */,
+				9376C83F1D79DFB500E6A3EF /* ANSTableViewCell */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";

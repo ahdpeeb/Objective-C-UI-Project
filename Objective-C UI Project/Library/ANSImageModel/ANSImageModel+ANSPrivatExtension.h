@@ -15,6 +15,6 @@
 //Privat property for ANSImageModel
 @property (nonatomic, strong)       NSURL           *url;
 @property (nonatomic, strong)       UIImage         *image;
-@property (nonatomic, strong)       ANSCacheStorage *storage;
+@property (nonatomic, strong)       ANSCacheStorage *cache;
 
 @end

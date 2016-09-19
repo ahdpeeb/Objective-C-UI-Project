@@ -26,7 +26,7 @@
     ANSImageModel *model = (url.isFileURL) ? [[ANSLocalImageModel alloc] initWithURL:url]
                                         : [[ANSInternetImageModel alloc] initWithURL:url];
     
-    id cachedModel = [model.storage objectForKey:model.imageName];
+    id cachedModel = [model.cache objectForKey:model.imageName];
     if (cachedModel) {
         model = cachedModel;
     }
@@ -42,13 +42,13 @@
     self = [super init];
     
     self.url = url;
-    self.storage = [ANSCacheStorage cacheStorage];
-    [self.storage cacheObject:self forKey:self.imageName];
+    self.cache = [ANSCacheStorage cacheStorage];
     
     return self;
 }
 
 - (void)dealloc {
+    
 }
 
 #pragma mark -
