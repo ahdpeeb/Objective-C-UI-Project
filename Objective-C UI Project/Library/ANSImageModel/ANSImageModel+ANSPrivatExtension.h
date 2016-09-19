@@ -8,11 +8,13 @@
 
 #import "ANSImageModel.h"
 
+#import "ANSCacheStorage.h"
+
 @interface ANSImageModel ()
 
 //Privat property for ANSImageModel
-@property (nonatomic, strong)       NSURL        *url;
-@property (nonatomic, strong)       UIImage      *image;
-@property (nonatomic, strong)       NSMapTable   *cacheStorage;
+@property (nonatomic, strong)       NSURL           *url;
+@property (nonatomic, strong)       UIImage         *image;
+@property (nonatomic, strong)       ANSCacheStorage *storage;
 
 @end

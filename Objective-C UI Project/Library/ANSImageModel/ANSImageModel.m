@@ -8,47 +8,40 @@
 
 #import "ANSImageModel.h"
 
+#import "ANSLocalImageModel.h"
+#import "ANSInternetImageModel.h"
+#import "ANSImageModel+ANSPrivatExtension.h"
+
 #import "ANSMacros.h"
-#import "ANSRandom.h"
-#import "NSFileManager+ANSExtension.h"
-#import "UIImage+ANSExtension.h"
-
-
-static NSString * const kANSImageName = @"kANSImageName";
-
-@interface ANSImageModel ()
-@property (nonatomic, strong)   UIImage   *image;
-@property (nonatomic, strong)   NSURL     *url;
-
-@property (nonatomic, readonly) NSString  *imageName;
-@property (nonatomic, readonly) NSString  *imagePath;
-
-- (BOOL)isDownloadedImageToFile;
-- (UIImage *)loadedImageFromInternet;
-- (void)removeCorruptedFile;
-- (UIImage *)loadedImage;
-
-@end
 
 @implementation ANSImageModel
 
-@dynamic imagePath;
 @dynamic imageName;
+@dynamic imagePath;
 
 #pragma mark -
 #pragma mark Class methods
 
 + (instancetype)imageFromURL:(NSURL *)url {
-    return [[self alloc] initWithURL:url];
+    if (url.isFileURL) {
+        return [[ANSLocalImageModel alloc] initWithURL:url];
+    }
+    
+    return [[ANSInternetImageModel alloc] initWithURL:url];
 }
 
 #pragma mark -
 #pragma mark Initialization and deallocation
 
 - (instancetype)initWithURL:(NSURL *)url {
+    ANSInvalidIdentifierExceprionRaise(ANSImageModel);
     self = [super init];
-    if (self) {
-        self.url = url;
+    self.url = url;
+    self.storage = [ANSCacheStorage cacheStorage];
+    
+    id cachedModel = [self.storage objectForKey:self.imageName];
+    if (cachedModel) {
+        self = cachedModel;
     }
     
     return self;
@@ -58,61 +51,31 @@ static NSString * const kANSImageName = @"kANSImageName";
 #pragma mark Accsessors
 
 - (NSString *)imageName {
-    return [self.url.absoluteString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLUserAllowedCharacterSet]];
+    [self doesNotRecognizeSelector:_cmd];
+    
+    return nil;
 }
 
 - (NSString *)imagePath {
-    return [[NSFileManager documentDirectoryPath] stringByAppendingPathComponent:self.imageName];
+    [self doesNotRecognizeSelector:_cmd];
+    
+    return nil;
 }
 
 #pragma mark -
 #pragma mark Privat methods
 
-- (BOOL)isDownloadedImageToFile {
-    BOOL downloaded = YES;
-    if (![[NSFileManager defaultManager] fileExistsAtPath:self.imagePath]) {
-        NSData *imageData = [NSData dataWithContentsOfURL:self.url];
-        downloaded = [imageData writeToFile:self.imagePath atomically:YES];
-        downloaded ? NSLog(@"Loaded [OK]") : NSLog(@"Loaded [ERROR]");
-    }
+- (UIImage *)loadImage {
+    [self doesNotRecognizeSelector:_cmd];
     
-    return downloaded;
-}
-
-- (void)removeCorruptedFile {
-    BOOL isRemoved = [[NSFileManager defaultManager] removeFile:self.imageName
-                                        fromSearchPathDirectory:NSDocumentDirectory];
-    
-    isRemoved ? NSLog(@"Remove [OK]") : NSLog(@"Remove [ERROR]");
-}
-
-- (UIImage *)loadedImageFromInternet {
-    return [UIImage imageWithData:[NSData dataWithContentsOfURL:self.url]];
-}
-
-- (UIImage *)loadedImage {
-    UIImage *image = nil;
-    
-    BOOL downloaded = [self isDownloadedImageToFile];
-    if (downloaded) {
-        image = [UIImage imageWithContentsOfFile:self.imagePath];
-    }
-    
-    if (!image && downloaded) {
-        [self removeCorruptedFile];
-    } else if (!image && !downloaded) {
-        image = [self loadedImageFromInternet];
-    }
-    
-    return image;
+    return nil;
 }
 
 #pragma mark -
 #pragma mark Public Methods
 
 - (void)performLoading {
-    self.image = [self loadedImage];
-    self.state = self.image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
+    [self doesNotRecognizeSelector:_cmd]; 
 }
 
 @end

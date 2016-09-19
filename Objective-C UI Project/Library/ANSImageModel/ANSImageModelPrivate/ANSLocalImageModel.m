@@ -8,24 +8,38 @@
 
 #import "ANSLocalImageModel.h"
 
+#import "ANSImageModel+ANSPrivatExtension.h"
+
+#import "NSFileManager+ANSExtension.h"
+
 @implementation ANSLocalImageModel
 
 #pragma mark -
 #pragma mark Accsessors
 
 - (NSString *)imageName {
-    return self.url.lastPathComponent;
+    @synchronized(self) {
+        return self.url.lastPathComponent;
+    }
 }
 
 - (NSString *)imagePath {
-    return self.url.path;
+    @synchronized(self) {
+        return self.url.path;
+    }
 }
 
 #pragma mark -
 #pragma mark Privat methods
 
-- (UIImage *)loadImage {
-    return [UIImage imageWithContentsOfFile:self.imagePath];
+- (void)performLoading {
+    UIImage *image = [UIImage imageWithContentsOfFile:self.imagePath];
+    if (image) {
+        [self.storage cacheObject:self forKey:self.imageName];
+    }
+    
+    self.image = image;
+    self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
 }
-
+    
 @end

@@ -11,12 +11,6 @@
 		93026CD11D44C2BE00DFCF23 /* ANSUsersModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93026CD01D44C2BE00DFCF23 /* ANSUsersModel.m */; };
 		93026CD41D464C9100DFCF23 /* Gomer_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 93026CD21D464C9100DFCF23 /* Gomer_2.png */; };
 		93026CD71D464D0900DFCF23 /* Gomer_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 93026CD61D464D0900DFCF23 /* Gomer_1.jpg */; };
-		931FBAE31D899C0400D6E960 /* ANSImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 931FBADD1D899C0400D6E960 /* ANSImageModel.m */; };
-		931FBAE41D899C0400D6E960 /* ANSImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 931FBADD1D899C0400D6E960 /* ANSImageModel.m */; };
-		931FBAE51D899C0400D6E960 /* ANSInternetImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 931FBAE01D899C0400D6E960 /* ANSInternetImageModel.m */; };
-		931FBAE61D899C0400D6E960 /* ANSInternetImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 931FBAE01D899C0400D6E960 /* ANSInternetImageModel.m */; };
-		931FBAE71D899C0400D6E960 /* ANSLocalImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 931FBAE21D899C0400D6E960 /* ANSLocalImageModel.m */; };
-		931FBAE81D899C0400D6E960 /* ANSLocalImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 931FBAE21D899C0400D6E960 /* ANSLocalImageModel.m */; };
 		93425FF31D65E98900F15366 /* ANSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C5A6191D412D31002FBCA8 /* ANSUser.m */; };
 		935E5A0B1D6F4CA5005F6285 /* aaa.plist in Resources */ = {isa = PBXBuildFile; fileRef = 935E5A0A1D6F4CA5005F6285 /* aaa.plist */; };
 		936727D71D591D25007A796F /* ANSUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C51D591D25007A796F /* ANSUserCell.m */; };
@@ -41,8 +35,6 @@
 		937547B71D85673B000B1C6C /* ANSObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADC71D75937400B4D610 /* ANSObservationController.m */; };
 		937547B81D85673D000B1C6C /* ANSProtocolObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADC91D75937400B4D610 /* ANSProtocolObservationController.m */; };
 		937547B91D85676D000B1C6C /* ANSLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C83D1D79DFB500E6A3EF /* ANSLoadingView.m */; };
-		937547BC1D858501000B1C6C /* UIImage+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 937547BB1D858501000B1C6C /* UIImage+ANSExtension.m */; };
-		937547C01D86DCD9000B1C6C /* UIImage+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 937547BB1D858501000B1C6C /* UIImage+ANSExtension.m */; };
 		937547CC1D86EDF7000B1C6C /* ANSArrayModelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 937547C41D86EDF7000B1C6C /* ANSArrayModelTest.m */; };
 		937547CD1D86EDF7000B1C6C /* ANSNotificationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 937547C61D86EDF7000B1C6C /* ANSNotificationTest.m */; };
 		937547CE1D86EDF7000B1C6C /* ANSTestObservableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 937547C81D86EDF7000B1C6C /* ANSTestObservableObject.m */; };
@@ -112,6 +104,16 @@
 		93C0843C1D3E381F0077A81C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93C084391D3E381F0077A81C /* Assets.xcassets */; };
 		93C0843D1D3E381F0077A81C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93C0843A1D3E381F0077A81C /* LaunchScreen.storyboard */; };
 		93C5A61A1D412D31002FBCA8 /* ANSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C5A6191D412D31002FBCA8 /* ANSUser.m */; };
+		93E991F71D8F1E2500DCCE1B /* ANSImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E991F11D8F1E2500DCCE1B /* ANSImageModel.m */; };
+		93E991F81D8F1E2500DCCE1B /* ANSImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E991F11D8F1E2500DCCE1B /* ANSImageModel.m */; };
+		93E991F91D8F1E2500DCCE1B /* ANSInternetImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E991F41D8F1E2500DCCE1B /* ANSInternetImageModel.m */; };
+		93E991FA1D8F1E2500DCCE1B /* ANSInternetImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E991F41D8F1E2500DCCE1B /* ANSInternetImageModel.m */; };
+		93E991FB1D8F1E2500DCCE1B /* ANSLocalImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E991F61D8F1E2500DCCE1B /* ANSLocalImageModel.m */; };
+		93E991FC1D8F1E2500DCCE1B /* ANSLocalImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E991F61D8F1E2500DCCE1B /* ANSLocalImageModel.m */; };
+		93E992001D8F1E7300DCCE1B /* UIImage+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E991FF1D8F1E7300DCCE1B /* UIImage+ANSExtension.m */; };
+		93E992011D8F1E7300DCCE1B /* UIImage+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E991FF1D8F1E7300DCCE1B /* UIImage+ANSExtension.m */; };
+		93E992041D8F1FF400DCCE1B /* ANSCacheStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E992031D8F1FF400DCCE1B /* ANSCacheStorage.m */; };
+		93E992051D8F1FF400DCCE1B /* ANSCacheStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E992031D8F1FF400DCCE1B /* ANSCacheStorage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,13 +131,6 @@
 		93026CD01D44C2BE00DFCF23 /* ANSUsersModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSUsersModel.m; sourceTree = "<group>"; };
 		93026CD21D464C9100DFCF23 /* Gomer_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gomer_2.png; sourceTree = "<group>"; };
 		93026CD61D464D0900DFCF23 /* Gomer_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Gomer_1.jpg; sourceTree = "<group>"; };
-		931FBADC1D899C0400D6E960 /* ANSImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSImageModel.h; sourceTree = "<group>"; };
-		931FBADD1D899C0400D6E960 /* ANSImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSImageModel.m; sourceTree = "<group>"; };
-		931FBADF1D899C0400D6E960 /* ANSInternetImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSInternetImageModel.h; sourceTree = "<group>"; };
-		931FBAE01D899C0400D6E960 /* ANSInternetImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSInternetImageModel.m; sourceTree = "<group>"; };
-		931FBAE11D899C0400D6E960 /* ANSLocalImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLocalImageModel.h; sourceTree = "<group>"; };
-		931FBAE21D899C0400D6E960 /* ANSLocalImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSLocalImageModel.m; sourceTree = "<group>"; };
-		931FBAEA1D89ACE700D6E960 /* ANSImageModel_ANSPrivatExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSImageModel_ANSPrivatExtension.h; path = ../ANSImageModel_ANSPrivatExtension.h; sourceTree = "<group>"; };
 		935E5A0A1D6F4CA5005F6285 /* aaa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = aaa.plist; sourceTree = "<group>"; };
 		936727C41D591D25007A796F /* ANSUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSUserCell.h; sourceTree = "<group>"; };
 		936727C51D591D25007A796F /* ANSUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSUserCell.m; sourceTree = "<group>"; };
@@ -147,8 +142,6 @@
 		936727CB1D591D25007A796F /* ANSViewControllerTables.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSViewControllerTables.xib; sourceTree = "<group>"; };
 		937547B31D856043000B1C6C /* UIView+ANSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+ANSExtension.h"; path = "Library/Extensions/UIView/UIView+ANSExtension.h"; sourceTree = SOURCE_ROOT; };
 		937547B41D856043000B1C6C /* UIView+ANSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+ANSExtension.m"; path = "Library/Extensions/UIView/UIView+ANSExtension.m"; sourceTree = SOURCE_ROOT; };
-		937547BA1D858501000B1C6C /* UIImage+ANSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ANSExtension.h"; path = "Library/UIImage/UIImage+ANSExtension.h"; sourceTree = SOURCE_ROOT; };
-		937547BB1D858501000B1C6C /* UIImage+ANSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ANSExtension.m"; path = "Library/UIImage/UIImage+ANSExtension.m"; sourceTree = SOURCE_ROOT; };
 		937547C41D86EDF7000B1C6C /* ANSArrayModelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSArrayModelTest.m; sourceTree = "<group>"; };
 		937547C61D86EDF7000B1C6C /* ANSNotificationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSNotificationTest.m; sourceTree = "<group>"; };
 		937547C71D86EDF7000B1C6C /* ANSTestObservableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSTestObservableObject.h; sourceTree = "<group>"; };
@@ -256,6 +249,17 @@
 		93C0843B1D3E381F0077A81C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		93C5A6181D412D31002FBCA8 /* ANSUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSUser.h; sourceTree = "<group>"; };
 		93C5A6191D412D31002FBCA8 /* ANSUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSUser.m; sourceTree = "<group>"; };
+		93E991EF1D8F1E2500DCCE1B /* ANSImageModel+ANSPrivatExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANSImageModel+ANSPrivatExtension.h"; sourceTree = "<group>"; };
+		93E991F01D8F1E2500DCCE1B /* ANSImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSImageModel.h; sourceTree = "<group>"; };
+		93E991F11D8F1E2500DCCE1B /* ANSImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSImageModel.m; sourceTree = "<group>"; };
+		93E991F31D8F1E2500DCCE1B /* ANSInternetImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSInternetImageModel.h; sourceTree = "<group>"; };
+		93E991F41D8F1E2500DCCE1B /* ANSInternetImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSInternetImageModel.m; sourceTree = "<group>"; };
+		93E991F51D8F1E2500DCCE1B /* ANSLocalImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLocalImageModel.h; sourceTree = "<group>"; };
+		93E991F61D8F1E2500DCCE1B /* ANSLocalImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSLocalImageModel.m; sourceTree = "<group>"; };
+		93E991FE1D8F1E7300DCCE1B /* UIImage+ANSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ANSExtension.h"; sourceTree = "<group>"; };
+		93E991FF1D8F1E7300DCCE1B /* UIImage+ANSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ANSExtension.m"; sourceTree = "<group>"; };
+		93E992021D8F1FF400DCCE1B /* ANSCacheStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSCacheStorage.h; path = ANSCacheStorage/ANSCacheStorage.h; sourceTree = "<group>"; };
+		93E992031D8F1FF400DCCE1B /* ANSCacheStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSCacheStorage.m; path = ANSCacheStorage/ANSCacheStorage.m; sourceTree = "<group>"; };
 		B5E0F054CF32267BB37C7D7E /* Pods-Objective-C UI ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C UI ProjectUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Objective-C UI ProjectUITests/Pods-Objective-C UI ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BAFBFF2E6CE8F3654A93BDE2 /* libPods-Objective-C UI ProjectUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Objective-C UI ProjectUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F28C68C0A3FCC8C7F0409676 /* Pods-Objective-C UI ProjectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C UI ProjectUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Objective-C UI ProjectUITests/Pods-Objective-C UI ProjectUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -292,33 +296,10 @@
 		931FBADA1D899B9D00D6E960 /* ANSImageView */ = {
 			isa = PBXGroup;
 			children = (
-				931FBADB1D899C0400D6E960 /* ANSImageModel */,
 				9376C8391D79DFB500E6A3EF /* ANSImageView.h */,
 				9376C83A1D79DFB500E6A3EF /* ANSImageView.m */,
 			);
 			name = ANSImageView;
-			sourceTree = "<group>";
-		};
-		931FBADB1D899C0400D6E960 /* ANSImageModel */ = {
-			isa = PBXGroup;
-			children = (
-				931FBADC1D899C0400D6E960 /* ANSImageModel.h */,
-				931FBADD1D899C0400D6E960 /* ANSImageModel.m */,
-				931FBADE1D899C0400D6E960 /* ANSImageModelPrivate */,
-			);
-			path = ANSImageModel;
-			sourceTree = "<group>";
-		};
-		931FBADE1D899C0400D6E960 /* ANSImageModelPrivate */ = {
-			isa = PBXGroup;
-			children = (
-				931FBADF1D899C0400D6E960 /* ANSInternetImageModel.h */,
-				931FBAE01D899C0400D6E960 /* ANSInternetImageModel.m */,
-				931FBAE11D899C0400D6E960 /* ANSLocalImageModel.h */,
-				931FBAE21D899C0400D6E960 /* ANSLocalImageModel.m */,
-				931FBAEA1D89ACE700D6E960 /* ANSImageModel_ANSPrivatExtension.h */,
-			);
-			path = ANSImageModelPrivate;
 			sourceTree = "<group>";
 		};
 		936727C01D591D25007A796F /* UI */ = {
@@ -361,15 +342,6 @@
 			);
 			name = UIView;
 			path = ANSTimer;
-			sourceTree = "<group>";
-		};
-		937547BD1D85850D000B1C6C /* UIImage */ = {
-			isa = PBXGroup;
-			children = (
-				937547BA1D858501000B1C6C /* UIImage+ANSExtension.h */,
-				937547BB1D858501000B1C6C /* UIImage+ANSExtension.m */,
-			);
-			name = UIImage;
 			sourceTree = "<group>";
 		};
 		937547C31D86EDF7000B1C6C /* IOSUnitTesting */ = {
@@ -482,6 +454,7 @@
 				939BADC01D75937400B4D610 /* ANSObservableObject */,
 				9376C8361D79BF3600E6A3EF /* ANSLoadingModel */,
 				939BAD9C1D75937400B4D610 /* ANSArrayModel */,
+				93E991EE1D8F1E2500DCCE1B /* ANSImageModel */,
 				939BADCD1D75937400B4D610 /* ANSQueue */,
 				939BADD01D75937400B4D610 /* ANSRandom */,
 				939BADB21D75937400B4D610 /* ANSGCD */,
@@ -620,9 +593,9 @@
 				939BADFA1D75937400B4D610 /* UINib */,
 				939BADFD1D75937400B4D610 /* UIScreen */,
 				937547A51D855775000B1C6C /* UIView */,
+				93E991FD1D8F1E7300DCCE1B /* UIImage */,
 				939BAE001D75937400B4D610 /* UITableView */,
 				939BAE031D75937400B4D610 /* UIViewController */,
-				937547BD1D85850D000B1C6C /* UIImage */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -825,6 +798,47 @@
 			path = Resources/Images;
 			sourceTree = "<group>";
 		};
+		93E991EE1D8F1E2500DCCE1B /* ANSImageModel */ = {
+			isa = PBXGroup;
+			children = (
+				93E991F01D8F1E2500DCCE1B /* ANSImageModel.h */,
+				93E991F11D8F1E2500DCCE1B /* ANSImageModel.m */,
+				93E991EF1D8F1E2500DCCE1B /* ANSImageModel+ANSPrivatExtension.h */,
+				93E992061D8F1FF900DCCE1B /* ANSCacheStorage */,
+				93E991F21D8F1E2500DCCE1B /* ANSImageModelPrivate */,
+			);
+			path = ANSImageModel;
+			sourceTree = "<group>";
+		};
+		93E991F21D8F1E2500DCCE1B /* ANSImageModelPrivate */ = {
+			isa = PBXGroup;
+			children = (
+				93E991F31D8F1E2500DCCE1B /* ANSInternetImageModel.h */,
+				93E991F41D8F1E2500DCCE1B /* ANSInternetImageModel.m */,
+				93E991F51D8F1E2500DCCE1B /* ANSLocalImageModel.h */,
+				93E991F61D8F1E2500DCCE1B /* ANSLocalImageModel.m */,
+			);
+			path = ANSImageModelPrivate;
+			sourceTree = "<group>";
+		};
+		93E991FD1D8F1E7300DCCE1B /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				93E991FE1D8F1E7300DCCE1B /* UIImage+ANSExtension.h */,
+				93E991FF1D8F1E7300DCCE1B /* UIImage+ANSExtension.m */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
+		93E992061D8F1FF900DCCE1B /* ANSCacheStorage */ = {
+			isa = PBXGroup;
+			children = (
+				93E992021D8F1FF400DCCE1B /* ANSCacheStorage.h */,
+				93E992031D8F1FF400DCCE1B /* ANSCacheStorage.m */,
+			);
+			name = ANSCacheStorage;
+			sourceTree = "<group>";
+		};
 		ABC3C745AE84E877F62B212F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -996,19 +1010,19 @@
 				9376C8451D79DFB500E6A3EF /* ANSImageView.m in Sources */,
 				939BAE2F1D75C80900B4D610 /* ANSNameFilterModel.m in Sources */,
 				939BAE271D75937400B4D610 /* UINib+Extension.m in Sources */,
+				93E992001D8F1E7300DCCE1B /* UIImage+ANSExtension.m in Sources */,
 				939BAE1B1D75937400B4D610 /* ANSTimerPrivate.m in Sources */,
 				93026CD11D44C2BE00DFCF23 /* ANSUsersModel.m in Sources */,
 				939BAE291D75937400B4D610 /* UITableView+Extension.m in Sources */,
 				939BAE0C1D75937400B4D610 /* ANSOneIndexModel+UITableView.m in Sources */,
-				931FBAE71D899C0400D6E960 /* ANSLocalImageModel.m in Sources */,
+				93E991FB1D8F1E2500DCCE1B /* ANSLocalImageModel.m in Sources */,
 				936727D91D591D25007A796F /* ANSRootUserView.m in Sources */,
 				93C5A61A1D412D31002FBCA8 /* ANSUser.m in Sources */,
 				939BAE0A1D75937400B4D610 /* ANSRangeChangeModel.m in Sources */,
-				937547BC1D858501000B1C6C /* UIImage+ANSExtension.m in Sources */,
 				937547B51D856043000B1C6C /* UIView+ANSExtension.m in Sources */,
 				939BAE171D75937400B4D610 /* ANSQueue.m in Sources */,
 				939BAE181D75937400B4D610 /* ANSRandom.m in Sources */,
-				931FBAE51D899C0400D6E960 /* ANSInternetImageModel.m in Sources */,
+				93E991F91D8F1E2500DCCE1B /* ANSInternetImageModel.m in Sources */,
 				939BAE081D75937400B4D610 /* ANSChangeModel.m in Sources */,
 				939BAE231D75937400B4D610 /* NSString+ANSExtension.m in Sources */,
 				9376C8351D79A09E00E6A3EF /* ANSLoadableModel.m in Sources */,
@@ -1017,8 +1031,9 @@
 				93C084371D3E380D0077A81C /* main.m in Sources */,
 				9376C8461D79DFB500E6A3EF /* ANSLoadingView.m in Sources */,
 				939BAE071D75937400B4D610 /* ANSChangeModel+UITableView.m in Sources */,
+				93E992041D8F1FF400DCCE1B /* ANSCacheStorage.m in Sources */,
 				939BAE091D75937400B4D610 /* ANSOneIndexModel.m in Sources */,
-				931FBAE31D899C0400D6E960 /* ANSImageModel.m in Sources */,
+				93E991F71D8F1E2500DCCE1B /* ANSImageModel.m in Sources */,
 				939BAE201D75937400B4D610 /* NSMutableArray+ANSExtension.m in Sources */,
 				939BAE131D75937400B4D610 /* ANSObservableObject.m in Sources */,
 				936727D71D591D25007A796F /* ANSUserCell.m in Sources */,
@@ -1057,20 +1072,20 @@
 				937547D01D86EDF7000B1C6C /* UIImageExtensionTest.m in Sources */,
 				937547B91D85676D000B1C6C /* ANSLoadingView.m in Sources */,
 				937547AD1D855E50000B1C6C /* ANSRandom.m in Sources */,
+				93E992011D8F1E7300DCCE1B /* UIImage+ANSExtension.m in Sources */,
 				937547CD1D86EDF7000B1C6C /* ANSNotificationTest.m in Sources */,
 				937547D51D8721B4000B1C6C /* ANSTwoIndexModel+UITableView.m in Sources */,
 				937547CE1D86EDF7000B1C6C /* ANSTestObservableObject.m in Sources */,
 				937547AF1D855E5D000B1C6C /* ANSLoadableModel.m in Sources */,
-				937547C01D86DCD9000B1C6C /* UIImage+ANSExtension.m in Sources */,
-				931FBAE61D899C0400D6E960 /* ANSInternetImageModel.m in Sources */,
+				93E991FA1D8F1E2500DCCE1B /* ANSInternetImageModel.m in Sources */,
 				937547B61D856739000B1C6C /* ANSBlockObservationController.m in Sources */,
 				937547A81D855E28000B1C6C /* ANSChangeModel.m in Sources */,
 				937547D71D872409000B1C6C /* NSMutableArray+ANSExtension.m in Sources */,
 				937547CF1D86EDF7000B1C6C /* ANSTestObserver.m in Sources */,
 				937547AE1D855E53000B1C6C /* ANSQueue.m in Sources */,
-				931FBAE41D899C0400D6E960 /* ANSImageModel.m in Sources */,
+				93E991F81D8F1E2500DCCE1B /* ANSImageModel.m in Sources */,
 				937547AC1D855E4B000B1C6C /* ANSGCD.m in Sources */,
-				931FBAE81D899C0400D6E960 /* ANSLocalImageModel.m in Sources */,
+				93E991FC1D8F1E2500DCCE1B /* ANSLocalImageModel.m in Sources */,
 				937547B11D855E6C000B1C6C /* ANSImageView.m in Sources */,
 				937547A61D855E1C000B1C6C /* ANSArrayModel.m in Sources */,
 				937547D21D87217F000B1C6C /* NSArray+ANSExtension.m in Sources */,
@@ -1078,6 +1093,7 @@
 				937547B01D855E62000B1C6C /* ANSObservableObject.m in Sources */,
 				937547D41D8721B1000B1C6C /* ANSRangeChangeModel+UITableView.m in Sources */,
 				937547D31D8721AE000B1C6C /* ANSOneIndexModel+UITableView.m in Sources */,
+				93E992051D8F1FF400DCCE1B /* ANSCacheStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
