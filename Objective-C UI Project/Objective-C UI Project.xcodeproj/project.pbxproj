@@ -804,8 +804,8 @@
 				93E991F01D8F1E2500DCCE1B /* ANSImageModel.h */,
 				93E991F11D8F1E2500DCCE1B /* ANSImageModel.m */,
 				93E991EF1D8F1E2500DCCE1B /* ANSImageModel+ANSPrivatExtension.h */,
-				93E992061D8F1FF900DCCE1B /* ANSCacheStorage */,
 				93E991F21D8F1E2500DCCE1B /* ANSImageModelPrivate */,
+				93E992061D8F1FF900DCCE1B /* ANSCacheStorage */,
 			);
 			path = ANSImageModel;
 			sourceTree = "<group>";

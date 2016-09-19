@@ -15,6 +15,7 @@
 + (instancetype)cacheStorage;
 
 - (void)cacheObject:(id)object forKey:(NSString *)key;
+- (void)removeCachedObjectForKey:(NSString *)key;
 - (id)objectForKey:(NSString *)key;
 
 @end

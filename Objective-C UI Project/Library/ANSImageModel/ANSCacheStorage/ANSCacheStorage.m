@@ -66,4 +66,10 @@
     }
 }
 
+- (void)removeCachedObjectForKey:(NSString *)key {
+    @synchronized(self) {
+        [self.storage removeObjectForKey:key];
+    }
+}
+
 @end

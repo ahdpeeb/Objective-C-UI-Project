@@ -34,10 +34,6 @@
 
 - (void)performLoading {
     UIImage *image = [UIImage imageWithContentsOfFile:self.imagePath];
-    if (image) {
-        [self.storage cacheObject:self forKey:self.imageName];
-    }
-    
     self.image = image;
     self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
 }

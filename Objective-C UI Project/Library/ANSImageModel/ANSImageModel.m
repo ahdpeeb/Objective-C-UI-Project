@@ -23,11 +23,15 @@
 #pragma mark Class methods
 
 + (instancetype)imageFromURL:(NSURL *)url {
-    if (url.isFileURL) {
-        return [[ANSLocalImageModel alloc] initWithURL:url];
+    ANSImageModel *model = (url.isFileURL) ? [[ANSLocalImageModel alloc] initWithURL:url]
+                                        : [[ANSInternetImageModel alloc] initWithURL:url];
+    
+    id cachedModel = [model.storage objectForKey:model.imageName];
+    if (cachedModel) {
+        model = cachedModel;
     }
     
-    return [[ANSInternetImageModel alloc] initWithURL:url];
+    return model;
 }
 
 #pragma mark -
@@ -36,15 +40,15 @@
 - (instancetype)initWithURL:(NSURL *)url {
     ANSInvalidIdentifierExceprionRaise(ANSImageModel);
     self = [super init];
+    
     self.url = url;
     self.storage = [ANSCacheStorage cacheStorage];
-    
-    id cachedModel = [self.storage objectForKey:self.imageName];
-    if (cachedModel) {
-        self = cachedModel;
-    }
+    [self.storage cacheObject:self forKey:self.imageName];
     
     return self;
+}
+
+- (void)dealloc {
 }
 
 #pragma mark -
