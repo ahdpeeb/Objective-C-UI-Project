@@ -16,9 +16,6 @@
 
 @implementation ANSImageModel
 
-@dynamic imageName;
-@dynamic imagePath;
-
 #pragma mark -
 #pragma mark Class methods
 
@@ -52,8 +49,5 @@
 - (void)dealloc {
     
 }
-
-#pragma mark -
-#pragma mark Public methods
 
 @end
