@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ANSLoginViewController : UIViewController
+@interface ANSLoginViewController : UIViewController 
 
 - (IBAction)onLogin:(UIButton *)sender;
 

@@ -884,11 +884,11 @@
 		93E994CD1D9150AD00DCCE1B /* ANSLoginView */ = {
 			isa = PBXGroup;
 			children = (
-				93E994CE1D9150AD00DCCE1B /* ANSLoginView.h */,
-				93E994CF1D9150AD00DCCE1B /* ANSLoginView.m */,
 				93E994D01D9150AD00DCCE1B /* ANSLoginViewController.h */,
 				93E994D11D9150AD00DCCE1B /* ANSLoginViewController.m */,
 				93E994D21D9150AD00DCCE1B /* ANSLoginViewController.xib */,
+				93E994CE1D9150AD00DCCE1B /* ANSLoginView.h */,
+				93E994CF1D9150AD00DCCE1B /* ANSLoginView.m */,
 			);
 			path = ANSLoginView;
 			sourceTree = "<group>";

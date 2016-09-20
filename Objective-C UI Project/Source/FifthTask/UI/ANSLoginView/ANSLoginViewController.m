@@ -19,6 +19,8 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 
 @interface ANSLoginViewController ()
 
+- (void)loadDriens;
+
 @end
 
 @implementation ANSLoginViewController
@@ -32,25 +34,47 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
 
+- (void)loadFriens {
+    if  (![FBSDKAccessToken currentAccessToken]) {
+        return;
+    }
+    
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                  initWithGraphPath:@"me"
+                                         parameters:@{@"fields": @"id, name, gender"}
+                                         HTTPMethod:@"GET"];
+    
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                          NSDictionary *result,
+                                          NSError *error) {
+        if (error) {
+            NSLog(@"%@", error);
+            return;
+        }
+        NSString *bla  = [result objectForKey:@"name"];
+        NSString *bla2 = [result objectForKey:@"id"];
+        NSString *bla3 = [result objectForKey:@"gender"];
+        NSArray *friends = [result objectForKey:@"data"];
+  //      NSLog(@"I have a friend named %@ with id %@", friend.name, friend.objectID);
+    }];
 }
 
 #pragma mark -
 #pragma mark Buttons
 
 - (IBAction)onLogin:(UIButton *)sender {
-    FBSDKLoginManager *login = [FBSDKLoginManager new];
-    [login logInWithReadPermissions:@[@"public_profile", @"user_friends"]
-                 fromViewController:self
-                            handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                if (error) {
-                                    NSLog(@"Process error");
-                                } else if (result.isCancelled) {
-                                    NSLog(@"Cancelled");
-                                } else {
-                                    NSLog(@"Logged in");
-                                }
-                            }];
+    FBSDKLoginManager *manager = [FBSDKLoginManager new];
+    [manager logInWithReadPermissions:@[@"public_profile", @"user_friends", @"read_custom_friendlists"]
+                   fromViewController:self
+                              handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                                  if (!error || result.isCancelled) {
+                                      NSLog(@"Loggined");
+                                      [self loadFriens];
+                                  }
+                              }];
     
 }
+     
 @end
