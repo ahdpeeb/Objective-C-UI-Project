@@ -99,17 +99,19 @@
         self.task = [[NSURLSession sharedSession]
                      downloadTaskWithURL:self.url
                        completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-                           
                            NSError *moveError = nil;
                            [manager moveItemAtURL:location
                                             toURL:[NSURL URLWithString:self.imagePath]
                                             error:&moveError];
-                           
+                           UIImage *image = nil;
                            if (moveError || error) {
-                               self.image = [self imageFromUrl:self.url];
+                               image = [self imageFromUrl:self.url];
                            } else {
-                               [super performLoading];
+                               image = [UIImage imageWithContentsOfFile:self.imagePath];
                            }
+                           
+                           self.image = image;
+                           self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
                        }];
         
     }
