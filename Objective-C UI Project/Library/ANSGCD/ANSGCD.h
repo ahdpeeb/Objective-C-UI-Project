@@ -22,10 +22,10 @@ typedef void (*ANSDispatch)(ANSQSGCQueue queue, ANSGCDBlock block);
 
 //Identifier of queue prioryty
 typedef enum {
-    ANSPriorityHigh         = DISPATCH_QUEUE_PRIORITY_HIGH,             //  *  - DISPATCH_QUEUE_PRIORITY_HIGH:
-    ANSPriorityDefault      = DISPATCH_QUEUE_PRIORITY_DEFAULT,          //  *  - DISPATCH_QUEUE_PRIORITY_DEFAULT:
-    ANSPriorityLow          = DISPATCH_QUEUE_PRIORITY_LOW,              //  *  - DISPATCH_QUEUE_PRIORITY_LOW:
-    ANSPriorityBackground   = DISPATCH_QUEUE_PRIORITY_BACKGROUND        //  *  - DISPATCH_QUEUE_PRIORITY_BACKGROUND:
+    ANSPriorityHigh         = DISPATCH_QUEUE_PRIORITY_HIGH,
+    ANSPriorityDefault      = DISPATCH_QUEUE_PRIORITY_DEFAULT,
+    ANSPriorityLow          = DISPATCH_QUEUE_PRIORITY_LOW,
+    ANSPriorityBackground   = DISPATCH_QUEUE_PRIORITY_BACKGROUND
 } ANSPriorityType;
 
 #pragma mark -
@@ -43,7 +43,7 @@ void ANSPerformInAsyncQueue(ANSPriorityType type, ANSGCDBlock block);
 void ANSPerformInSyncQueue(ANSPriorityType type, ANSGCDBlock block);
 
 //  Perform block in main thread.
-//  Functios must take ONLY "dispatch_async", "dispatch_async".
+//  Functios "timing" argument must be ONLY "dispatch_async" or "dispatch_sync".
 void ANSPerformInMainQueue(ANSDispatch timing, ANSGCDBlock block);
 
 //  Perform block after deley in main thread. 

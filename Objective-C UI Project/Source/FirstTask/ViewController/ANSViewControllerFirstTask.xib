@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
@@ -15,14 +14,14 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ju4-Er-EBw" customClass="ANSAnimatedView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ju4-Er-EBw" customClass="ANSAnimationView">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <color key="backgroundColor" red="0.99603289365768433" green="0.99618560075759888" blue="0.99165958166122437" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
                         <rect key="frame" x="150" y="250" width="86" height="193"/>
                     </variation>
                 </view>
-                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qyd-Xe-5JR">
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qyd-Xe-5JR">
                     <rect key="frame" x="-25" y="-15" width="51" height="31"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
                         <rect key="frame" x="169" y="523" width="51" height="31"/>
@@ -46,8 +45,8 @@
                 </mask>
             </variation>
             <connections>
-                <outlet property="OnSwitch" destination="qyd-Xe-5JR" id="Rk1-XY-Te4"/>
-                <outlet property="view" destination="ju4-Er-EBw" id="7eY-Zu-YW0"/>
+                <outlet property="animationSwitcher" destination="qyd-Xe-5JR" id="q9B-u9-2mg"/>
+                <outlet property="animationView" destination="ju4-Er-EBw" id="peB-Y8-QAL"/>
             </connections>
         </view>
     </objects>

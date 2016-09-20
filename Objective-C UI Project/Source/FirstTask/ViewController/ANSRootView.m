@@ -10,15 +10,4 @@
 
 @implementation ANSRootView
 
-#pragma mark -
-#pragma mark Initialization and deallocation
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    
-    self.OnSwitch.on = NO;
-    
-    [self.view initDancer];
-}
-
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#include "ANSRootView.h"
+@class ANSRootView;
 
 @interface ANSViewControllerFirstTask : UIViewController
 @property (nonatomic, readonly) ANSRootView *rootView;

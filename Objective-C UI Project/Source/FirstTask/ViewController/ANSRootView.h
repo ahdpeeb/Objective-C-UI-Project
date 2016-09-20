@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ANSAnimatedView.h"
+@class ANSAnimationView;
 
 @interface ANSRootView : UIView
-@property (nonatomic, strong) IBOutlet ANSAnimatedView  *view;
-@property (nonatomic, strong) IBOutlet UISwitch         *OnSwitch;
+@property (nonatomic, strong) IBOutlet ANSAnimationView *animationView;
+@property (nonatomic, strong) IBOutlet UISwitch         *animationSwitcher;
 
 @end

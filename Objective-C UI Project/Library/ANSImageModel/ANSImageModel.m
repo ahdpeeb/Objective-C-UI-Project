@@ -8,103 +8,78 @@
 
 #import "ANSImageModel.h"
 
-#import "ANSImageModelDispatcher.h"
+#import "ANSLocalImageModel.h"
+#import "ANSInternetImageModel.h"
+#import "ANSImageModel+ANSPrivatExtension.h"
 
-@interface ANSImageModel ()
-@property (nonatomic, strong)      UIImage          *image;
-@property (nonatomic, strong)      NSURL            *url;
-@property (nonatomic, strong)      NSOperation      *operation;
-
-@property (nonatomic, assign, getter=isLoaded) BOOL loaded;
-
-- (NSOperation *)imageLoadingOperation;
-
-@end
+#import "ANSMacros.h"
 
 @implementation ANSImageModel
+
+@dynamic imageName;
+@dynamic imagePath;
 
 #pragma mark -
 #pragma mark Class methods
 
 + (instancetype)imageFromURL:(NSURL *)url {
-    return [[self alloc] initWithURL:url];
+    ANSImageModel *model = (url.isFileURL) ? [[ANSLocalImageModel alloc] initWithURL:url]
+                                        : [[ANSInternetImageModel alloc] initWithURL:url];
+    
+    id cachedModel = [model.cache objectForKey:model.imageName];
+    if (cachedModel) {
+        model = cachedModel;
+    }
+    
+    return model;
 }
 
 #pragma mark -
 #pragma mark Initialization and deallocation
 
-- (void)dealloc {
-    self.operation = nil;
-}
-
 - (instancetype)initWithURL:(NSURL *)url {
+    ANSInvalidIdentifierExceprionRaise(ANSImageModel);
     self = [super init];
-    if (self) {
-        self.url = url;
-    }
+    
+    self.url = url;
+    self.cache = [ANSCacheStorage cacheStorage];
     
     return self;
 }
 
+- (void)dealloc {
+    
+}
+
 #pragma mark -
-#pragma mark Accessors
+#pragma mark Accsessors
 
-- (void)setOperation:(NSOperation *)operation {
-    if (_operation != operation) {
-        [operation cancel];
-        
-        _operation = operation;
-        
-        if (operation) {
-            ANSImageModelDispatcher *dispatcher = [ANSImageModelDispatcher new];
-            [[dispatcher queue] addOperation:operation];
-        }
+- (NSString *)imageName {
+    [self doesNotRecognizeSelector:_cmd];
+    
+    return nil;
+}
 
-    }
+- (NSString *)imagePath {
+    [self doesNotRecognizeSelector:_cmd];
+    
+    return nil;
+}
+
+#pragma mark -
+#pragma mark Privat methods
+
+- (UIImage *)loadImage {
+    [self doesNotRecognizeSelector:_cmd];
+    
+    return nil;
 }
 
 #pragma mark -
 #pragma mark Public Methods
 
-- (void)load {
-    @synchronized(self) {
-        if (self.state == ANSImageModelLoading) {
-            return;
-        }
-        
-        if (self.state == ANSImageModelLoaded) {
-            [self notifyOfStateChange:ANSImageModelLoaded];
-        }
-        
-        self.state =ANSImageModelLoading;
-    }
-    
-    self.operation = [self imageLoadingOperation];
-}
-
-- (void)dump {
-    self.operation = nil;
-    self.image = nil;
-    self.state = ANSImageModelUnloaded;
-}
-
-#pragma mark -
-#pragma mark Private methods
-
-- (NSOperation *)imageLoadingOperation {
-    __weak ANSImageModel *weakSelf = self;
-    NSBlockOperation *operation = [NSBlockOperation blockOperationWithBlock:^{
-        __strong ANSImageModel *strongSelf = weakSelf;
-        
-        strongSelf.image = [UIImage imageWithContentsOfFile:[strongSelf.url absoluteString]];
-    }];
-    
-    operation.completionBlock = ^{
-        __strong ANSImageModel *strongSelf = weakSelf;
-        strongSelf.state = strongSelf.image ? ANSImageModelLoaded : ANSImageModelFailedLoadin;
-    };
-    
-    return operation;
+- (void)performLoading {
+    [self doesNotRecognizeSelector:_cmd]; 
 }
 
 @end

@@ -8,6 +8,9 @@
 
 #import "ANSViewControllerFirstTask.h"
 
+#import "ANSRootView.h"
+#import "ANSAnimationView.h"
+
 @interface ANSViewControllerFirstTask ()
 
 @end
@@ -41,9 +44,9 @@
 #pragma mark -
 #pragma mark Buttons
 
-- (IBAction)onAnimation:(id)sender {
-    ANSAnimatedView *view = self.rootView.view;
-    [sender isOn] ? [view startAnimation] : [view stopAnimation];
+- (IBAction)onAnimation:(UISwitch *)sender {
+    ANSAnimationView *view = self.rootView.animationView;
+    view.animating = sender.on;
 }
 
 @end

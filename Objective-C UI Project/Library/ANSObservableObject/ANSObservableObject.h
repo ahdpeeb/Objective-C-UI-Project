@@ -8,28 +8,43 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ANSObservableObject : NSObject
-@property (atomic, assign)          NSUInteger    state;
-@property (nonatomic, readonly)     NSSet         *observersSet;
+@class ANSObservationController;
+@class ANSProtocolObservationController;
+@class ANSBlockObservationController;
 
-- (void)setState:(NSUInteger)state withObject:(id)object;
+typedef void(^ANSExecutableBlock)(void);
+typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controller);
 
-- (void)addObserverObject:(id)object;
-- (void)addObserverObjects:(NSArray *)objects;
-- (void)removeObserverObject:(id)object;
-- (void)removeObserverObjects:(NSArray *)objects;
+@interface ANSObservableObject : NSObject <NSCopying>
+@property (atomic, assign)  NSUInteger state;
+
+- (void)setState:(NSUInteger)state withUserInfo:(id)UserInfo;
+
+//Use this methods for set observation with protocol.
+/*Observable object will create ObservationController (for each observer), which will notify
+    observer about state changes in observable object*/
+//in you subclass you need to define "selectorForState" method
+- (ANSProtocolObservationController *)protocolControllerWithObserver:(id)observer;
+
+//Use this methods for set observation with block.
+/*Observable object will create ObservationController (for each observer), which will notify
+ observer about state changes in observable object*/
+- (ANSBlockObservationController *)blockControllerWithObserver:(id)observer;
+
 - (BOOL)isObservedByObject:(id)object;
 
-//This method is intended for subclasses. Never call it directly.
+- (void)performBlockWithNotification:(ANSExecutableBlock)block;
+- (void)performBlockWithoutNotification:(ANSExecutableBlock)block;
 
-- (void)notifyOfStateChange:(NSUInteger)state;
-- (void)notifyOfStateChange:(NSUInteger)state withObject:(id)object;
+#pragma mark -
+#pragma mark Private declaration
 
-//This method is intended for subclasses. Never call it directly.
 //It must be determined directly in observable object.  
+//This method is intended for subclasses. Never call it directly.
 - (SEL)selectorForState:(NSUInteger)state;
 
-- (void)notifyObserversWithSelector:(SEL)selector;
-- (void)notifyObserversWithSelector:(SEL)selector object:(id)object;
+//This method is intended for subclasses. Never call it directly.
+- (void)notifyOfStateChange:(NSUInteger)state;
+- (void)notifyOfStateChange:(NSUInteger)state withUserInfo:(id)UserInfo;
 
 @end

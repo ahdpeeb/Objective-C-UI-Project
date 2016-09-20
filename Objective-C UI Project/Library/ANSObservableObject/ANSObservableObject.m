@@ -1,4 +1,4 @@
-//
+    //
 //  ANSObservableObjectTest.m
 //  Objective-c course
 //
@@ -8,8 +8,20 @@
 
 #import "ANSObservableObject.h"
 
+#import "ANSObservationController.h"
+#import "ANSBlockObservationController.h"
+#import "ANSProtocolObservationController.h"
+#import "ANSObservationController+ANSPrivate.h"
+
 @interface ANSObservableObject ()
-@property (nonatomic, retain) NSHashTable *observersHashTable;
+@property (nonatomic, retain) NSHashTable *controllerHashTable;
+@property (nonatomic, assign) BOOL        shouldNotify;
+
+- (id)controllerWithClass:(Class)cls observer:(id)observer;
+- (void)notifyOfStateChange:(NSUInteger)state
+                  withBlock:(ANSControllerNotificationBlock)block;
+
+- (void)performBlock:(ANSExecutableBlock)block shouldNotify:(BOOL)shouldNotify;
 
 @end
 
@@ -17,14 +29,14 @@
 
 @synthesize state = _state;
 
-@dynamic observersSet;
-
 #pragma mark -
 #pragma mark Initialization and deallocation
 
 - (instancetype)init {
     self = [super init];
-    self.observersHashTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
+    self.controllerHashTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
+    self.shouldNotify = YES;
+    self.state = NSUIntegerMax;
     
     return self;
 }
@@ -32,85 +44,25 @@
 #pragma mark -
 #pragma mark Accessors
 
-- (void)setState:(NSUInteger)state withObject:(id)object {
+- (void)setState:(NSUInteger)state withUserInfo:(id)UserInfo {
     @synchronized(self) {
         if (_state != state) {
             _state = state;
             
-            [self notifyObserversWithSelector:[self selectorForState:state] object:object];
+            [self notifyOfStateChange:state withUserInfo:UserInfo];
         }
     }
 }
 
 - (void)setState:(NSUInteger)state {
     @synchronized(self) {
-        [self setState:state withObject:self];
+        [self setState:state withUserInfo:self];
     }
 }
 
 - (NSUInteger)state {
     @synchronized(self) {
         return _state;
-    }
-}
-
-- (NSSet *)observersSet {
-    @synchronized(self) {
-        return self.observersHashTable.setRepresentation;
-    }
-}
-
-#pragma mark -
-#pragma mark Public methods
-
-- (void)addObserverObject:(id)object {
-    @synchronized(self) {
-        [self.observersHashTable addObject:object];
-    }
-}
-
-- (void)addObserverObjects:(NSArray *)objects {
-    @synchronized(self) {
-        NSHashTable *observers = self.observersHashTable;
-        if (!objects) {
-            return;
-        }
-            
-        for (id object in objects) {
-            [observers addObject:object];
-        }
-    }
-}
-
-- (void)removeObserverObject:(id)object {
-    @synchronized(self) {
-        [self.observersHashTable removeObject:object];
-    }
-}
-
-- (void)removeObserverObjects:(NSArray *)objects {
-    @synchronized(self) {
-        NSHashTable *observers = self.observersHashTable;
-        for (id observer in objects) {
-            [observers removeObject:observer];
-        }
-    }
-}
-
-- (BOOL)isObservedByObject:(id)object {
-    @synchronized(self) {
-        return [self.observersHashTable containsObject:object];
-    }
-}
-
-- (void)notifyOfStateChange:(NSUInteger)state {
-    [self notifyOfStateChange:state withObject:nil];
-}
-
-- (void)notifyOfStateChange:(NSUInteger)state withObject:(id)object {
-    @synchronized(self) {
-       SEL selector = [self selectorForState:state];
-        [self notifyObserversWithSelector:selector object:object];
     }
 }
 
@@ -121,19 +73,118 @@
     return NULL;
 }
 
-- (void)notifyObserversWithSelector:(SEL)selector {
-    [self notifyObserversWithSelector:selector object:self];
+- (void)invalidateController:(ANSObservationController *)controller {
+    @synchronized(self) {
+        [self.controllerHashTable removeObject:controller];
+    }
 }
 
-- (void)notifyObserversWithSelector:(SEL)selector object:(id)object {
+- (id)controllerWithClass:(Class)cls observer:(id)observer {
     @synchronized(self) {
-        NSHashTable *observers = self.observersHashTable;
-        for (id observer in observers) {
-            if ([observer respondsToSelector:selector]) {
-                [observer performSelector:selector withObject:self withObject:object];
-            }
+        ANSObservationController *controller = [cls controllerWithObserver:observer
+                                                          observableObject:self];
+        
+        [self.controllerHashTable addObject:controller];
+        
+        return controller;
+    }
+}
+
+- (void)notifyOfStateChange:(NSUInteger)state
+                  withBlock:(ANSControllerNotificationBlock)block
+{
+    @synchronized(self) {
+        if (!block) {
+            return;
+        }
+        
+        for (ANSObservationController *controller in self.controllerHashTable) {
+            block(controller);
         }
     }
+}
+
+- (void)notifyOfStateChange:(NSUInteger)state withUserInfo:(id)UserInfo {
+    @synchronized(self) {
+        if (self.shouldNotify) {
+            [self notifyOfStateChange:(state)
+                            withBlock:^(ANSObservationController *controller) {
+                                [controller notifyOfStateChange:state withUserInfo:UserInfo];
+                            }];
+        }
+    }
+}
+
+- (void)notifyOfStateChange:(NSUInteger)state {
+    @synchronized(self) {
+        [self notifyOfStateChange:state withUserInfo:nil];
+    }
+}
+
+- (void)performBlock:(ANSExecutableBlock)block shouldNotify:(BOOL)shouldNotify {
+    @synchronized(self) {
+        BOOL value = self.shouldNotify;
+        self.shouldNotify = shouldNotify;
+        
+        block();
+        
+        self.shouldNotify = value;
+    }
+}
+
+#pragma mark -
+#pragma mark Public methods
+
+- (BOOL)isObservedByObject:(id)object {
+    @synchronized(self) {
+        BOOL value = NO;
+        for (ANSObservationController *controler in self.controllerHashTable) {
+            value = [object isEqual:controler.observer];
+            if (value) {
+                break;
+            }
+        }
+
+        return value;
+    }
+}
+
+- (ANSProtocolObservationController *)protocolControllerWithObserver:(id)observer {
+    Class resultClass = [ANSProtocolObservationController class];
+    for (ANSObservationController *controler in self.controllerHashTable) {
+        if (controler.observer == observer && [controler isMemberOfClass:resultClass]) {
+            return (ANSProtocolObservationController *)controler;
+        }
+    }
+    
+    return [self controllerWithClass:[ANSProtocolObservationController class]
+                                observer:observer];
+}
+
+- (ANSBlockObservationController *)blockControllerWithObserver:(id)observer {
+
+    
+    return [self controllerWithClass:[ANSBlockObservationController class]
+                                observer:observer];
+}
+
+- (void)performBlockWithNotification:(ANSExecutableBlock)block {
+    [self performBlock:block shouldNotify:YES];
+}
+
+- (void)performBlockWithoutNotification:(ANSExecutableBlock)block {
+    [self performBlock:block shouldNotify:NO];
+    
+}
+
+#pragma mark -
+#pragma mark NSCopying protocol
+
+- (id)copyWithZone:(nullable NSZone *)zone {
+    ANSObservableObject *copy = [[self class] new];
+    copy.controllerHashTable = [self.controllerHashTable copyWithZone:zone];
+    
+    return copy;
 }
 
 @end

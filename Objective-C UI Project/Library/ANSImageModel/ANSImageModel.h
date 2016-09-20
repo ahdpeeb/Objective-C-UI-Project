@@ -8,24 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ANSObservableObject.h"
+#import "ANSLoadableModel.h"
 
-typedef NS_ENUM(NSUInteger, ANSImageModelState) {
-    ANSImageModelUnloaded,
-    ANSImageModelLoading,
-    ANSImageModelLoaded,
-    ANSImageModelFailedLoadin
-};
+@interface ANSImageModel : ANSLoadableModel
+@property (nonatomic, readonly)    NSURL        *url;
 
-@interface ANSImageModel : ANSObservableObject
-@property (nonatomic, readonly)                  UIImage *image;
-@property (nonatomic, readonly)                  NSURL *url;
+@property (nonatomic, readonly)    UIImage      *image;
+@property (nonatomic, readonly)    NSString     *imageName;
+@property (nonatomic, readonly)    NSString     *imagePath;
 
 + (instancetype)imageFromURL:(NSURL *)url;
-
-- (instancetype)initWithURL:(NSURL *)url;
-
-- (void)load;
-- (void)dump;
 
 @end

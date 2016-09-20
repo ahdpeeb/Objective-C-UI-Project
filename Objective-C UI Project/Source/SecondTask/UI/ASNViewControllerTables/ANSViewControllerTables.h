@@ -8,16 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ANSDataCollection.h"
+#import "ANSUsersModel.h"
+#import "ANSNameFilterModel.h"
 
 @interface ANSViewControllerTables : UIViewController <
-UITableViewDataSource,
-UITableViewDelegate,
-ANSCollectionObserver
->
-@property (nonatomic, strong) ANSDataCollection *collection;
+    UITableViewDataSource,
+    UITableViewDelegate,
+    UISearchBarDelegate,
 
-- (IBAction)onEditButton:(id)sender;
-- (IBAction)onAddButton:(id)sender;
+    ANSArrayModelObserver,
+    ANSNameFilterModelProtocol
+>
+
+@property (nonatomic, strong) ANSUsersModel *users;
+
+@property (nonatomic, strong) IBOutlet UISwipeGestureRecognizer *rightSwipeGesture;
+
+- (IBAction)onRightSwipe:(UISwipeGestureRecognizer *)sender;
 
 @end
