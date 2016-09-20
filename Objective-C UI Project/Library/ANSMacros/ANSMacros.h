@@ -34,7 +34,6 @@
     ANSViewGetterSynthesize(baseViewClass, propertyName) \
     @end \
 
-
 //# Strongify / Weakify
 //Weakify and Strongify object before using in block
 #define ANSWeakify(object) \

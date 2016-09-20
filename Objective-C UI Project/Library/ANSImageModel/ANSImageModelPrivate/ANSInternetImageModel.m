@@ -27,6 +27,8 @@
 
 @implementation ANSInternetImageModel
 
+@synthesize task = _task;
+
 #pragma mark -
 #pragma mark Initialization and deallocation 
 

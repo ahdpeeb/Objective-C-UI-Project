@@ -114,6 +114,17 @@
 		93E992011D8F1E7300DCCE1B /* UIImage+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E991FF1D8F1E7300DCCE1B /* UIImage+ANSExtension.m */; };
 		93E992041D8F1FF400DCCE1B /* ANSCacheStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E992031D8F1FF400DCCE1B /* ANSCacheStorage.m */; };
 		93E992051D8F1FF400DCCE1B /* ANSCacheStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E992031D8F1FF400DCCE1B /* ANSCacheStorage.m */; };
+		93E9935F1D90882600DCCE1B /* AccountKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E9925D1D90882500DCCE1B /* AccountKit.framework */; };
+		93E993601D90882600DCCE1B /* AccountKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E9925D1D90882500DCCE1B /* AccountKit.framework */; };
+		93E993731D90882600DCCE1B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E992681D90882500DCCE1B /* FBSDKCoreKit.framework */; };
+		93E993741D90882600DCCE1B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E992681D90882500DCCE1B /* FBSDKCoreKit.framework */; };
+		93E993751D90882600DCCE1B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E992691D90882500DCCE1B /* FBSDKLoginKit.framework */; };
+		93E993761D90882600DCCE1B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E992691D90882500DCCE1B /* FBSDKLoginKit.framework */; };
+		93E9937D1D90882600DCCE1B /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 93E9926D1D90882500DCCE1B /* README.txt */; };
+		93E9937E1D90882600DCCE1B /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 93E9926D1D90882500DCCE1B /* README.txt */; };
+		93E994B31D91384600DCCE1B /* ANSLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E994B21D91384600DCCE1B /* ANSLoginView.m */; };
+		93E994BC1D913FCE00DCCE1B /* ANSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E994BA1D913FCE00DCCE1B /* ANSLoginViewController.m */; };
+		93E994BD1D913FCE00DCCE1B /* ANSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93E994BB1D913FCE00DCCE1B /* ANSLoginViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -260,6 +271,15 @@
 		93E991FF1D8F1E7300DCCE1B /* UIImage+ANSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ANSExtension.m"; sourceTree = "<group>"; };
 		93E992021D8F1FF400DCCE1B /* ANSCacheStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSCacheStorage.h; path = ANSCacheStorage/ANSCacheStorage.h; sourceTree = "<group>"; };
 		93E992031D8F1FF400DCCE1B /* ANSCacheStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSCacheStorage.m; path = ANSCacheStorage/ANSCacheStorage.m; sourceTree = "<group>"; };
+		93E9925D1D90882500DCCE1B /* AccountKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AccountKit.framework; sourceTree = "<group>"; };
+		93E992681D90882500DCCE1B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		93E992691D90882500DCCE1B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		93E9926D1D90882500DCCE1B /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		93E994B11D91384600DCCE1B /* ANSLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLoginView.h; sourceTree = "<group>"; };
+		93E994B21D91384600DCCE1B /* ANSLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSLoginView.m; sourceTree = "<group>"; };
+		93E994B91D913FCE00DCCE1B /* ANSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLoginViewController.h; sourceTree = "<group>"; };
+		93E994BA1D913FCE00DCCE1B /* ANSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSLoginViewController.m; sourceTree = "<group>"; };
+		93E994BB1D913FCE00DCCE1B /* ANSLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSLoginViewController.xib; sourceTree = "<group>"; };
 		B5E0F054CF32267BB37C7D7E /* Pods-Objective-C UI ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C UI ProjectUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Objective-C UI ProjectUITests/Pods-Objective-C UI ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BAFBFF2E6CE8F3654A93BDE2 /* libPods-Objective-C UI ProjectUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Objective-C UI ProjectUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F28C68C0A3FCC8C7F0409676 /* Pods-Objective-C UI ProjectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C UI ProjectUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Objective-C UI ProjectUITests/Pods-Objective-C UI ProjectUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -270,6 +290,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93E993751D90882600DCCE1B /* FBSDKLoginKit.framework in Frameworks */,
+				93E9935F1D90882600DCCE1B /* AccountKit.framework in Frameworks */,
+				93E993731D90882600DCCE1B /* FBSDKCoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +300,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93E993741D90882600DCCE1B /* FBSDKCoreKit.framework in Frameworks */,
 				5AEE41B75AE5AF77748B1091 /* libPods-Objective-C UI ProjectUITests.a in Frameworks */,
+				93E993601D90882600DCCE1B /* AccountKit.framework in Frameworks */,
+				93E993761D90882600DCCE1B /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -760,6 +786,7 @@
 			isa = PBXGroup;
 			children = (
 				93C5A5B81D40DB2C002FBCA8 /* SecondTask */,
+				93E994A81D9089CA00DCCE1B /* FifthTask */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -839,9 +866,57 @@
 			name = ANSCacheStorage;
 			sourceTree = "<group>";
 		};
+		93E9925C1D90882500DCCE1B /* FacebookSDKs-iOS-4 */ = {
+			isa = PBXGroup;
+			children = (
+				93E9925D1D90882500DCCE1B /* AccountKit.framework */,
+				93E992681D90882500DCCE1B /* FBSDKCoreKit.framework */,
+				93E992691D90882500DCCE1B /* FBSDKLoginKit.framework */,
+				93E9926D1D90882500DCCE1B /* README.txt */,
+			);
+			path = "FacebookSDKs-iOS-4";
+			sourceTree = "<group>";
+		};
+		93E994A81D9089CA00DCCE1B /* FifthTask */ = {
+			isa = PBXGroup;
+			children = (
+				93E994AA1D91314800DCCE1B /* UI */,
+				93E994A91D91314800DCCE1B /* Models */,
+			);
+			path = FifthTask;
+			sourceTree = "<group>";
+		};
+		93E994A91D91314800DCCE1B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		93E994AA1D91314800DCCE1B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				93E994B01D9137DC00DCCE1B /* ANSLoginViewController */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		93E994B01D9137DC00DCCE1B /* ANSLoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				93E994B91D913FCE00DCCE1B /* ANSLoginViewController.h */,
+				93E994BA1D913FCE00DCCE1B /* ANSLoginViewController.m */,
+				93E994BB1D913FCE00DCCE1B /* ANSLoginViewController.xib */,
+				93E994B11D91384600DCCE1B /* ANSLoginView.h */,
+				93E994B21D91384600DCCE1B /* ANSLoginView.m */,
+			);
+			name = ANSLoginViewController;
+			sourceTree = "<group>";
+		};
 		ABC3C745AE84E877F62B212F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93E9925C1D90882500DCCE1B /* FacebookSDKs-iOS-4 */,
 				BAFBFF2E6CE8F3654A93BDE2 /* libPods-Objective-C UI ProjectUITests.a */,
 			);
 			name = Frameworks;
@@ -934,11 +1009,13 @@
 				9388ECFF1D4A396F0082EE4B /* 8.png in Resources */,
 				9388ECFD1D4A396F0082EE4B /* 6.png in Resources */,
 				9388ECF81D4A396F0082EE4B /* 16.png in Resources */,
+				93E994BD1D913FCE00DCCE1B /* ANSLoginViewController.xib in Resources */,
 				9388ECFC1D4A396F0082EE4B /* 5.png in Resources */,
 				936727D81D591D25007A796F /* ANSUserCell.xib in Resources */,
 				9388ECF71D4A396F0082EE4B /* 15.png in Resources */,
 				9388ECF91D4A396F0082EE4B /* 2.png in Resources */,
 				9388ECFA1D4A396F0082EE4B /* 3.png in Resources */,
+				93E9937D1D90882600DCCE1B /* README.txt in Resources */,
 				936727DB1D591D25007A796F /* ANSViewControllerTables.xib in Resources */,
 				9388ECF51D4A396F0082EE4B /* 13.png in Resources */,
 				9388ECF41D4A396F0082EE4B /* 12.png in Resources */,
@@ -963,6 +1040,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93E9937E1D90882600DCCE1B /* README.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1029,6 +1107,7 @@
 				939BAE0B1D75937400B4D610 /* ANSTwoIndexModel.m in Sources */,
 				9388ECDF1D49FEB50082EE4B /* ANSDataInfo.m in Sources */,
 				93C084371D3E380D0077A81C /* main.m in Sources */,
+				93E994B31D91384600DCCE1B /* ANSLoginView.m in Sources */,
 				9376C8461D79DFB500E6A3EF /* ANSLoadingView.m in Sources */,
 				939BAE071D75937400B4D610 /* ANSChangeModel+UITableView.m in Sources */,
 				93E992041D8F1FF400DCCE1B /* ANSCacheStorage.m in Sources */,
@@ -1042,6 +1121,7 @@
 				939BAE1F1D75937400B4D610 /* NSFileManager+ANSExtension.m in Sources */,
 				9376C8491D79DFB500E6A3EF /* ANSRootView.m in Sources */,
 				939BAE0E1D75937400B4D610 /* ANSTwoIndexModel+UITableView.m in Sources */,
+				93E994BC1D913FCE00DCCE1B /* ANSLoginViewController.m in Sources */,
 				9376C8481D79DFB500E6A3EF /* ANSTableViewCell.m in Sources */,
 				939BAE161D75937400B4D610 /* ANSProtocolObservationController.m in Sources */,
 				939BAE2A1D75937400B4D610 /* UIViewController+ANSExtension.m in Sources */,
@@ -1203,8 +1283,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FacebookSDKs-iOS-4",
+				);
 				INFOPLIST_FILE = "Objective-C UI Project/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/facebook",
+					frameworks/FBSDKCoreKit.framework,
+					"$(PROJECT_DIR)/facebook",
+					frameworks/FBSDKLoginKit.framework,
+					"$(PROJECT_DIR)/facebook",
+					frameworks/FBSDKShareKit.framework,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Andriiev.Mykola.Objective-C-UI-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1214,8 +1308,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FacebookSDKs-iOS-4",
+				);
 				INFOPLIST_FILE = "Objective-C UI Project/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/facebook",
+					frameworks/FBSDKCoreKit.framework,
+					"$(PROJECT_DIR)/facebook",
+					frameworks/FBSDKLoginKit.framework,
+					"$(PROJECT_DIR)/facebook",
+					frameworks/FBSDKShareKit.framework,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Andriiev.Mykola.Objective-C-UI-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1225,6 +1333,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F28C68C0A3FCC8C7F0409676 /* Pods-Objective-C UI ProjectUITests.debug.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FacebookSDKs-iOS-4",
+				);
 				INFOPLIST_FILE = "Objective-C UI ProjectUITests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1239,6 +1351,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B5E0F054CF32267BB37C7D7E /* Pods-Objective-C UI ProjectUITests.release.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FacebookSDKs-iOS-4",
+				);
 				INFOPLIST_FILE = "Objective-C UI ProjectUITests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
