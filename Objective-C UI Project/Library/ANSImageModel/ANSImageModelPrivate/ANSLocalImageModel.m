@@ -33,9 +33,9 @@
 #pragma mark Privat methods
 
 - (void)performLoading {
-    self.image = [UIImage imageWithContentsOfFile:self.imagePath];
-    self.state = self.image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
-    // if !image - have to use default umage
+    UIImage *image = [UIImage imageWithContentsOfFile:self.imagePath];
+    self.image = image;
+    self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
 }
     
 @end

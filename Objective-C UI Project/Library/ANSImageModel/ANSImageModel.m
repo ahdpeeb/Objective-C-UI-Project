@@ -23,13 +23,17 @@
 #pragma mark Class methods
 
 + (instancetype)imageFromURL:(NSURL *)url {
-    ANSImageModel *model = (url.isFileURL) ? [[ANSLocalImageModel alloc] initWithURL:url]
-                                        : [[ANSInternetImageModel alloc] initWithURL:url];
+    ANSCacheStorage *cache = [ANSCacheStorage sharedStorage];
     
-    id cachedModel = [model.cache objectForKey:model.imageName];
-    if (cachedModel) {
-        model = cachedModel;
+    id model = [cache objectForKey:url];
+    if (model) {
+        return model;
     }
+    
+    Class cls = url.fileURL ? [ANSLocalImageModel class] : [ANSInternetImageModel class];
+    model = [[cls alloc] initWithURL:url];
+    
+    [cache cacheObject:model forKey:url];
     
     return model;
 }
@@ -40,9 +44,7 @@
 - (instancetype)initWithURL:(NSURL *)url {
     ANSInvalidIdentifierExceprionRaise(ANSImageModel);
     self = [super init];
-    
     self.url = url;
-    self.cache = [ANSCacheStorage cacheStorage];
     
     return self;
 }
@@ -52,34 +54,6 @@
 }
 
 #pragma mark -
-#pragma mark Accsessors
-
-- (NSString *)imageName {
-    [self doesNotRecognizeSelector:_cmd];
-    
-    return nil;
-}
-
-- (NSString *)imagePath {
-    [self doesNotRecognizeSelector:_cmd];
-    
-    return nil;
-}
-
-#pragma mark -
-#pragma mark Privat methods
-
-- (UIImage *)loadImage {
-    [self doesNotRecognizeSelector:_cmd];
-    
-    return nil;
-}
-
-#pragma mark -
-#pragma mark Public Methods
-
-- (void)performLoading {
-    [self doesNotRecognizeSelector:_cmd]; 
-}
+#pragma mark Public methods
 
 @end

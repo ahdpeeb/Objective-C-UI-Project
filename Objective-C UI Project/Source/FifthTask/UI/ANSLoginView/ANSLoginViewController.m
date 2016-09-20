@@ -19,7 +19,7 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 
 @interface ANSLoginViewController ()
 
-- (void)loadDriens;
+- (void)loadFriens;
 
 @end
 
@@ -69,7 +69,7 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
     [manager logInWithReadPermissions:@[@"public_profile", @"user_friends", @"read_custom_friendlists"]
                    fromViewController:self
                               handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                  if (!error || result.isCancelled) {
+                                  if (!error && !result.isCancelled) {
                                       NSLog(@"Loggined");
                                       [self loadFriens];
                                   }

@@ -19,9 +19,10 @@
 @interface ANSImageModel ()
 @property (nonatomic, strong) NSURLSessionTask *task;
 
-- (UIImage *)internetImage;
+- (BOOL)isImageCached;
 - (void)removeCorruptedFile;
-- (void)loadImage:(NSError *)error;
+- (UIImage *)imageFromUrl:(NSURL *)url;
+- (void)loadImage;
 
 @end
 
@@ -33,7 +34,7 @@
 #pragma mark Initialization and deallocation 
 
 - (void)dealloc {
-    [[NSURLSession sharedSession] invalidateAndCancel];
+    self.task = nil;
 }
 
 #pragma mark -
@@ -52,58 +53,63 @@
     }
 }
 
+- (void)setTask:(NSURLSessionTask *)task {
+    if (_task != task) {
+        
+        [_task cancel];
+        _task = task;
+        [_task resume];
+    }
+}
+
+
 #pragma mark -
 #pragma mark Privat methods
 
+- (BOOL)isImageCached {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    return [fileManager fileExists:self.imageName inSearchPathDirectory:NSDocumentDirectory];
+}
+
 - (void)removeCorruptedFile {
-    BOOL isRemoved = [[NSFileManager defaultManager] removeFile:self.imageName
-                                        fromSearchPathDirectory:NSDocumentDirectory];
-    
-    isRemoved ? NSLog(@"Removed [OK]") : NSLog(@"Removed [ERROR]");
-}
-
-- (UIImage *)internetImage {
-    return [UIImage imageWithData:[NSData dataWithContentsOfURL:self.url]];
-}
-
-- (void)loadImage:(NSError *)error {
-    @synchronized(self) {
-        UIImage *image = [UIImage imageWithContentsOfFile:self.imagePath];
-        if (!image) {
-            if (error) {
-                image = [self internetImage];
-            }
-            
-            [self removeCorruptedFile];
-        }
+    if ([self isImageCached]) {
+        BOOL isRemoved = [[NSFileManager defaultManager] removeFile:self.imageName
+                         fromSearchPathDirectory:NSDocumentDirectory];
         
-        self.image = image;
-        self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
+        isRemoved ? NSLog(@"Removed [OK]") : NSLog(@"Removed [ERROR]");
     }
+}
+
+- (UIImage *)imageFromUrl:(NSURL *)url {
+    return [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
 }
 
 - (void)performLoading {
-    if (![[NSFileManager defaultManager] fileExistsAtPath:self.imagePath]) {
-        self.task = [[NSURLSession sharedSession] downloadTaskWithURL:self.url];
-        [self.task resume];
+    if ([self isImageCached]) {
+        [super performLoading];
     } else {
-        [self loadImage:nil];
+        [self removeCorruptedFile];
+        [self loadImage];
     }
 }
 
-#pragma mark -
-#pragma mark protocol NSURLSessionDownloadDelegate
-
-- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask
-                              didFinishDownloadingToURL:(NSURL *)location
-{
-    NSError *error = nil;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager moveItemAtURL:location
-                         toURL:[NSURL URLWithString:self.imagePath]
-                         error:&error];
-    
-    [self loadImage:error];
+- (void)loadImage {
+    __block NSFileManager *manager = [NSFileManager defaultManager];
+    if (![manager fileExistsAtPath:self.imagePath]) {
+        self.task = [[NSURLSession sharedSession]
+                     downloadTaskWithURL:self.url
+                       completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+                           if (error) {
+                               return;
+                           }
+                           NSError *moveError = nil;
+                           [manager moveItemAtURL:location
+                                            toURL:[NSURL URLWithString:self.imagePath]
+                                            error:&moveError];
+                           if (moveError) {
+                               self.image = [self imageFromUrl:location];                           }
+                       }];
+    }
 }
 
 @end

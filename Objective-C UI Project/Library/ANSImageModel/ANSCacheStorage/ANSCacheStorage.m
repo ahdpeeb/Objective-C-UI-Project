@@ -30,7 +30,7 @@
     return self;
 }
 
-+ (instancetype)cacheStorage {
++ (instancetype)sharedStorage {
     @synchronized(self) {
         static id cacheStorage = nil;
         static dispatch_once_t onceToken;
@@ -46,19 +46,21 @@
 #pragma mark Acsessors 
 
 - (NSUInteger)count {
-   return self.storage.count;
+    @synchronized(self) {
+        return self.storage.count;
+    }
 }
 
 #pragma mark -
 #pragma mark Public Methods
 
-- (id)objectForKey:(NSString *)key {
+- (id)objectForKey:(id)key {
     @synchronized(self) {
         return [self.storage objectForKey:key];
     }
 }
 
-- (void)cacheObject:(id)object forKey:(NSString *)key {
+- (void)cacheObject:(id)object forKey:(id)key {
     @synchronized(self) {
         if (![self objectForKey:key]) {
             [self.storage setObject:object forKey:key];
@@ -66,7 +68,7 @@
     }
 }
 
-- (void)removeCachedObjectForKey:(NSString *)key {
+- (void)removeCachedObjectForKey:(id)key {
     @synchronized(self) {
         [self.storage removeObjectForKey:key];
     }

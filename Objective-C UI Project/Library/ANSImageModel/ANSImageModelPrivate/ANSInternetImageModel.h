@@ -6,8 +6,8 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "ANSImageModel.h"
+#import "ANSLocalImageModel.h"
 
-@interface ANSInternetImageModel : ANSImageModel <NSURLSessionDownloadDelegate>
+@interface ANSInternetImageModel : ANSLocalImageModel
 
 @end

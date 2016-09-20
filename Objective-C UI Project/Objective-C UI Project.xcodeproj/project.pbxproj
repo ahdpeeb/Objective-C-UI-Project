@@ -831,10 +831,10 @@
 		93E991F21D8F1E2500DCCE1B /* ANSImageModelPrivate */ = {
 			isa = PBXGroup;
 			children = (
-				93E991F31D8F1E2500DCCE1B /* ANSInternetImageModel.h */,
-				93E991F41D8F1E2500DCCE1B /* ANSInternetImageModel.m */,
 				93E991F51D8F1E2500DCCE1B /* ANSLocalImageModel.h */,
 				93E991F61D8F1E2500DCCE1B /* ANSLocalImageModel.m */,
+				93E991F31D8F1E2500DCCE1B /* ANSInternetImageModel.h */,
+				93E991F41D8F1E2500DCCE1B /* ANSInternetImageModel.m */,
 			);
 			path = ANSImageModelPrivate;
 			sourceTree = "<group>";

@@ -12,10 +12,10 @@
 @property (nonatomic, assign, readonly) NSUInteger count;
 
 //Designated initializar, sigleton object;
-+ (instancetype)cacheStorage;
++ (instancetype)sharedStorage;
 
-- (void)cacheObject:(id)object forKey:(NSString *)key;
-- (void)removeCachedObjectForKey:(NSString *)key;
-- (id)objectForKey:(NSString *)key;
+- (void)cacheObject:(id)object forKey:(id)key;
+- (void)removeCachedObjectForKey:(id)key;
+- (id)objectForKey:(id)key;
 
 @end

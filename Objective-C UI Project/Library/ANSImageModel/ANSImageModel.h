@@ -12,10 +12,7 @@
 
 @interface ANSImageModel : ANSLoadableModel
 @property (nonatomic, readonly)    NSURL        *url;
-
 @property (nonatomic, readonly)    UIImage      *image;
-@property (nonatomic, readonly)    NSString     *imageName;
-@property (nonatomic, readonly)    NSString     *imagePath;
 
 + (instancetype)imageFromURL:(NSURL *)url;
 
