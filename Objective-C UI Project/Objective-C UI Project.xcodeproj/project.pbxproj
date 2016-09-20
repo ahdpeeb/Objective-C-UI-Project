@@ -114,12 +114,12 @@
 		93E992011D8F1E7300DCCE1B /* UIImage+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E991FF1D8F1E7300DCCE1B /* UIImage+ANSExtension.m */; };
 		93E992041D8F1FF400DCCE1B /* ANSCacheStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E992031D8F1FF400DCCE1B /* ANSCacheStorage.m */; };
 		93E992051D8F1FF400DCCE1B /* ANSCacheStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E992031D8F1FF400DCCE1B /* ANSCacheStorage.m */; };
-		93E994C31D914F4800DCCE1B /* ANSLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E994BF1D914F4800DCCE1B /* ANSLoginView.m */; };
-		93E994C41D914F4800DCCE1B /* ANSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E994C11D914F4800DCCE1B /* ANSLoginViewController.m */; };
-		93E994C51D914F4800DCCE1B /* ANSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93E994C21D914F4800DCCE1B /* ANSLoginViewController.xib */; };
 		93E994C91D914FA300DCCE1B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E994C61D914FA300DCCE1B /* FBSDKCoreKit.framework */; };
 		93E994CA1D914FA300DCCE1B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E994C71D914FA300DCCE1B /* FBSDKLoginKit.framework */; };
 		93E994CB1D914FA300DCCE1B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E994C81D914FA300DCCE1B /* FBSDKShareKit.framework */; };
+		93E994D31D9150AD00DCCE1B /* ANSLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E994CF1D9150AD00DCCE1B /* ANSLoginView.m */; };
+		93E994D41D9150AD00DCCE1B /* ANSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E994D11D9150AD00DCCE1B /* ANSLoginViewController.m */; };
+		93E994D51D9150AD00DCCE1B /* ANSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93E994D21D9150AD00DCCE1B /* ANSLoginViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -266,14 +266,14 @@
 		93E991FF1D8F1E7300DCCE1B /* UIImage+ANSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ANSExtension.m"; sourceTree = "<group>"; };
 		93E992021D8F1FF400DCCE1B /* ANSCacheStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSCacheStorage.h; path = ANSCacheStorage/ANSCacheStorage.h; sourceTree = "<group>"; };
 		93E992031D8F1FF400DCCE1B /* ANSCacheStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSCacheStorage.m; path = ANSCacheStorage/ANSCacheStorage.m; sourceTree = "<group>"; };
-		93E994BE1D914F4800DCCE1B /* ANSLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLoginView.h; sourceTree = "<group>"; };
-		93E994BF1D914F4800DCCE1B /* ANSLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSLoginView.m; sourceTree = "<group>"; };
-		93E994C01D914F4800DCCE1B /* ANSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLoginViewController.h; sourceTree = "<group>"; };
-		93E994C11D914F4800DCCE1B /* ANSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSLoginViewController.m; sourceTree = "<group>"; };
-		93E994C21D914F4800DCCE1B /* ANSLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSLoginViewController.xib; sourceTree = "<group>"; };
 		93E994C61D914FA300DCCE1B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		93E994C71D914FA300DCCE1B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		93E994C81D914FA300DCCE1B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		93E994CE1D9150AD00DCCE1B /* ANSLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLoginView.h; sourceTree = "<group>"; };
+		93E994CF1D9150AD00DCCE1B /* ANSLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSLoginView.m; sourceTree = "<group>"; };
+		93E994D01D9150AD00DCCE1B /* ANSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLoginViewController.h; sourceTree = "<group>"; };
+		93E994D11D9150AD00DCCE1B /* ANSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSLoginViewController.m; sourceTree = "<group>"; };
+		93E994D21D9150AD00DCCE1B /* ANSLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSLoginViewController.xib; sourceTree = "<group>"; };
 		B5E0F054CF32267BB37C7D7E /* Pods-Objective-C UI ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C UI ProjectUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Objective-C UI ProjectUITests/Pods-Objective-C UI ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BAFBFF2E6CE8F3654A93BDE2 /* libPods-Objective-C UI ProjectUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Objective-C UI ProjectUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F28C68C0A3FCC8C7F0409676 /* Pods-Objective-C UI ProjectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C UI ProjectUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Objective-C UI ProjectUITests/Pods-Objective-C UI ProjectUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -860,7 +860,7 @@
 		93E994A81D9089CA00DCCE1B /* FifthTask */ = {
 			isa = PBXGroup;
 			children = (
-				93E994AA1D91314800DCCE1B /* UI */,
+				93E994CC1D9150AD00DCCE1B /* UI */,
 				93E994A91D91314800DCCE1B /* Models */,
 			);
 			path = FifthTask;
@@ -873,24 +873,24 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		93E994AA1D91314800DCCE1B /* UI */ = {
+		93E994CC1D9150AD00DCCE1B /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				93E994B01D9137DC00DCCE1B /* ANSLoginViewController */,
+				93E994CD1D9150AD00DCCE1B /* ANSLoginView */,
 			);
 			path = UI;
 			sourceTree = "<group>";
 		};
-		93E994B01D9137DC00DCCE1B /* ANSLoginViewController */ = {
+		93E994CD1D9150AD00DCCE1B /* ANSLoginView */ = {
 			isa = PBXGroup;
 			children = (
-				93E994BE1D914F4800DCCE1B /* ANSLoginView.h */,
-				93E994BF1D914F4800DCCE1B /* ANSLoginView.m */,
-				93E994C01D914F4800DCCE1B /* ANSLoginViewController.h */,
-				93E994C11D914F4800DCCE1B /* ANSLoginViewController.m */,
-				93E994C21D914F4800DCCE1B /* ANSLoginViewController.xib */,
+				93E994CE1D9150AD00DCCE1B /* ANSLoginView.h */,
+				93E994CF1D9150AD00DCCE1B /* ANSLoginView.m */,
+				93E994D01D9150AD00DCCE1B /* ANSLoginViewController.h */,
+				93E994D11D9150AD00DCCE1B /* ANSLoginViewController.m */,
+				93E994D21D9150AD00DCCE1B /* ANSLoginViewController.xib */,
 			);
-			name = ANSLoginViewController;
+			path = ANSLoginView;
 			sourceTree = "<group>";
 		};
 		ABC3C745AE84E877F62B212F /* Frameworks */ = {
@@ -991,7 +991,6 @@
 				9388ECFF1D4A396F0082EE4B /* 8.png in Resources */,
 				9388ECFD1D4A396F0082EE4B /* 6.png in Resources */,
 				9388ECF81D4A396F0082EE4B /* 16.png in Resources */,
-				93E994C51D914F4800DCCE1B /* ANSLoginViewController.xib in Resources */,
 				9388ECFC1D4A396F0082EE4B /* 5.png in Resources */,
 				936727D81D591D25007A796F /* ANSUserCell.xib in Resources */,
 				9388ECF71D4A396F0082EE4B /* 15.png in Resources */,
@@ -1012,6 +1011,7 @@
 				9388ECFB1D4A396F0082EE4B /* 4.png in Resources */,
 				93C0843C1D3E381F0077A81C /* Assets.xcassets in Resources */,
 				9388ECF61D4A396F0082EE4B /* 14.png in Resources */,
+				93E994D51D9150AD00DCCE1B /* ANSLoginViewController.xib in Resources */,
 				93026CD41D464C9100DFCF23 /* Gomer_2.png in Resources */,
 				93C084301D3E36B20077A81C /* iOS Study Plan.txt in Resources */,
 			);
@@ -1079,7 +1079,7 @@
 				939BAE0A1D75937400B4D610 /* ANSRangeChangeModel.m in Sources */,
 				937547B51D856043000B1C6C /* UIView+ANSExtension.m in Sources */,
 				939BAE171D75937400B4D610 /* ANSQueue.m in Sources */,
-				93E994C31D914F4800DCCE1B /* ANSLoginView.m in Sources */,
+				93E994D31D9150AD00DCCE1B /* ANSLoginView.m in Sources */,
 				939BAE181D75937400B4D610 /* ANSRandom.m in Sources */,
 				93E991F91D8F1E2500DCCE1B /* ANSInternetImageModel.m in Sources */,
 				939BAE081D75937400B4D610 /* ANSChangeModel.m in Sources */,
@@ -1101,7 +1101,7 @@
 				939BAE1F1D75937400B4D610 /* NSFileManager+ANSExtension.m in Sources */,
 				9376C8491D79DFB500E6A3EF /* ANSRootView.m in Sources */,
 				939BAE0E1D75937400B4D610 /* ANSTwoIndexModel+UITableView.m in Sources */,
-				93E994C41D914F4800DCCE1B /* ANSLoginViewController.m in Sources */,
+				93E994D41D9150AD00DCCE1B /* ANSLoginViewController.m in Sources */,
 				9376C8481D79DFB500E6A3EF /* ANSTableViewCell.m in Sources */,
 				939BAE161D75937400B4D610 /* ANSProtocolObservationController.m in Sources */,
 				939BAE2A1D75937400B4D610 /* UIViewController+ANSExtension.m in Sources */,
