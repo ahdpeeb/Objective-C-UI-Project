@@ -17,25 +17,15 @@
 #pragma mark -
 #pragma mark Accsessors
 
-- (NSString *)imageName {
-    @synchronized(self) {
-        return self.url.lastPathComponent;
-    }
-}
-
 - (NSString *)imagePath {
-    @synchronized(self) {
-        return self.url.path;
-    }
+    return self.url.path;
 }
 
 #pragma mark -
 #pragma mark Privat methods
 
 - (void)performLoading {
-    UIImage *image = [UIImage imageWithContentsOfFile:self.imagePath];
-    self.image = image;
-    self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
+    self.image = [UIImage imageWithContentsOfFile:self.imagePath];
 }
     
 @end

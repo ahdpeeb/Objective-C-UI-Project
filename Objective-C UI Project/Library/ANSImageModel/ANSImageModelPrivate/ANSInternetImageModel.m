@@ -41,16 +41,12 @@
 #pragma mark Accsessors
 
 - (NSString *)imageName {
-    @synchronized(self) {
-        NSCharacterSet *characterSet = [NSCharacterSet URLUserAllowedCharacterSet];
-        return [self.url.absoluteString stringByAddingPercentEncodingWithAllowedCharacters:characterSet];
-    }
+    NSCharacterSet *characterSet = [NSCharacterSet URLUserAllowedCharacterSet];
+    return [self.url.absoluteString stringByAddingPercentEncodingWithAllowedCharacters:characterSet];
 }
 
 - (NSString *)imagePath {
-    @synchronized(self) {
-        return [[NSFileManager documentDirectoryPath] stringByAppendingPathComponent:self.imageName];
-    }
+    return [[NSFileManager documentDirectoryPath] stringByAppendingPathComponent:self.imageName];
 }
 
 - (void)setTask:(NSURLSessionTask *)task {
@@ -87,11 +83,11 @@
 - (void)performLoading {
     if ([self isImageCached]) {
         [super performLoading];
-        
-        return;
+        if (self.image) {
+            [self removeCorruptedFile];
+        }
     }
     
-    [self removeCorruptedFile];
     [self loadImage];
 }
 
@@ -100,22 +96,18 @@
     self.task = [[NSURLSession sharedSession]
                  downloadTaskWithURL:self.url
                    completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-                       NSError *moveError = nil;
                        if (!error) {
+                           NSError *moveError = nil;
                            [manager moveItemAtURL:location
                                             toURL:[NSURL URLWithString:self.imagePath]
                                             error:&moveError];
-                       }
-                       
-                       UIImage *image = nil;
-                       if (moveError) {
-                           image = [self imageFromUrl:self.url];
-                       } else {
-                           image = [UIImage imageWithContentsOfFile:self.imagePath];
-                       }
-                       
-                       self.image = image;
-                       self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
+                           
+                           if (moveError) {
+                               self.image = [self imageFromUrl:self.url];
+                           }
+                           
+                           self.image = [UIImage imageWithContentsOfFile:self.imagePath];
+                        }
                    }];
 }
 

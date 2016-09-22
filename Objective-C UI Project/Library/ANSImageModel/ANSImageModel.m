@@ -46,5 +46,12 @@
     return self;
 }
 
+- (void)setImage:(UIImage *)image {
+    if (_image != image) {
+        _image = image;
+        
+        self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
+    }
+}
 
 @end
