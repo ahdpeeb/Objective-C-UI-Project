@@ -97,6 +97,7 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
         NSLog(@"faceBookFriends count = %lu", (unsigned long)faceBookFriends.count);
         
         ANSFriendListViewController *controller = [ANSFriendListViewController viewController];
+        controller.friends = faceBookFriends;
         [self.navigationController pushViewController:controller animated:YES];
     }];
 }

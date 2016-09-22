@@ -10,7 +10,7 @@
 
 #import "ANSRootView.h"
 
-@interface ANSRootUserView : ANSRootView
+@interface ANSFriendListView : ANSRootView
 @property (nonatomic, strong) IBOutlet UITableView      *tableView;
 @property (nonatomic, strong) IBOutlet UISearchBar      *searchBar;
 

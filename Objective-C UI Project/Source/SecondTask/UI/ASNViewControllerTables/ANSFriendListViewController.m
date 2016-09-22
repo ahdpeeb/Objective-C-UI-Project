@@ -8,7 +8,7 @@
 
 #import "ANSFriendListViewController.h"
 
-#import "ANSRootUserView.h"
+#import "ANSFriendListView.h"
 #import "ANSUserCell.h"
 #import "ANSTableViewCell.h"
 #import "ANSFaceBookUser.h"
@@ -39,14 +39,14 @@ static const    NSUInteger kANSSectionsCount                 = 1;
 @property (nonatomic, strong)   ANSNameFilterModel                *filteredModel;
 @property (nonatomic, strong)   ANSProtocolObservationController  *filterModelController;
 
-@property (nonatomic, readonly) ANSUsersModel                     *presentedModel;
+@property (nonatomic, readonly) ANSFaceBookFriends                *presentedModel;
 
 - (void)resignSearchBar;
 - (void)initFilterInfrastructure;
 
 @end
 
-ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSRootUserView, usersView)
+ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView, friendListView)
 
 @implementation ANSFriendListViewController;
 
@@ -57,15 +57,10 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSRootUserView, 
 
 - (void)setFriends:(ANSFaceBookFriends *)friends {
     if (_friends != friends) {
-        friends = friends;
+        _friends = friends;
         
         self.usersController = [friends protocolControllerWithObserver:self];
-        [self initFilterInfrastructure];
-        
-        if (self.isViewLoaded) {
-        // if no internet connerion
-            [friends load];
-        }
+//        [self initFilterInfrastructure];
     }
 }
 
@@ -78,7 +73,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSRootUserView, 
 }
 
 - (ANSArrayModel *)presentedModel {
-    BOOL isFirstResponder = self.usersView.searchBar.isFirstResponder;
+    BOOL isFirstResponder = self.friendListView.searchBar.isFirstResponder;
     
     return isFirstResponder ? self.filteredModel : self.friends;
 }
@@ -93,14 +88,14 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSRootUserView, 
     [self initLeftBarButtonItem];
     [self initRightBarButtonItem];
 // if no internet connerion
-    [self.friends load];
+//  [self.friendListView.tableView reloadData];
 }
 
 #pragma mark -
 #pragma mark Private methods
 
 - (void)resignSearchBar {
-    UISearchBar *searchBar = self.usersView.searchBar;
+    UISearchBar *searchBar = self.friendListView.searchBar;
     if (searchBar.isFirstResponder) {
         [self searchBarCancelButtonClicked:searchBar];
     }
@@ -134,7 +129,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSRootUserView, 
 #pragma mark UIBarButtonItem actions
 
 - (void)leftBarAction:(UIBarButtonItem *)sender {
-    UITableView *table = self.usersView.tableView;
+    UITableView *table = self.friendListView.tableView;
     
     [self resignSearchBar];
     
@@ -144,7 +139,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSRootUserView, 
 }
 
 - (void)rightBarAction:(UIBarButtonItem *)sender {
-    UITableView *table = self.usersView.tableView;
+    UITableView *table = self.friendListView.tableView;
     
     [self resignSearchBar];
     
@@ -184,8 +179,8 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSRootUserView, 
 {
     ANSUserCell *cell = [tableView dequeueReusableCellWithClass:[ANSUserCell class]];
     
-    ANSUser *user = self.presentedModel[indexPath.row];
-    [cell fillWithModel:user];
+    ANSFaceBookUser *user = self.presentedModel[indexPath.row];
+    [cell fillWithUser:user];
 
     return cell;
 }
@@ -230,8 +225,9 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSRootUserView, 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    id controller = [ANSFriendListViewController viewController];
-    [self.navigationController pushViewController:controller animated:YES];
+    id friendListViewController = [ANSFriendListViewController viewController];
+    [self.navigationController pushViewController:friendListViewController
+                                         animated:YES];
 }
 
 #pragma mark -
@@ -241,11 +237,11 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSRootUserView, 
     [searchBar resignFirstResponder];
     [searchBar setShowsCancelButton:NO animated:YES];
     
-    [self.usersView.tableView reloadData];
+    [self.friendListView.tableView reloadData];
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    UITableView *table = self.usersView.tableView;
+    UITableView *table = self.friendListView.tableView;
     if (table.isEditing) {
         return NO;
     }
@@ -268,9 +264,9 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSRootUserView, 
     didChangeWithModel:(ANSChangeModel *)model
 {
     ANSPerformInMainQueue(dispatch_async, ^{
-        UITableView *table = self.usersView.tableView;
+        UITableView *table = self.friendListView.tableView;
         
-        if ([arrayModel isMemberOfClass:[ANSUsersModel class]]) {
+        if ([arrayModel isMemberOfClass:[ANSFaceBookFriends class]]) {
             [model applyToTableView:table];
             NSLog(@"%@ notified collectionDidUpdate, - %lu object", arrayModel, (unsigned long)arrayModel.count);
         } else {
@@ -280,21 +276,21 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSRootUserView, 
 }
 
 - (void)loadableModelLoading:(ANSLoadableModel *)model {
-    self.usersView.loadingViewVisible = YES;
+    self.friendListView.loadingViewVisible = YES;
 }
 
 - (void)loadableModelDidLoad:(ANSLoadableModel *)model {
     ANSPerformInMainQueue(dispatch_async, ^{
         NSLog(@"notified userModelDidLoad");
-        self.usersView.loadingViewVisible = NO;
-        [self.usersView.tableView reloadData];
+        self.friendListView.loadingViewVisible = NO;
+        [self.friendListView.tableView reloadData];
     });
 }
  
 - (void)nameFilterModelDidFilter:(ANSNameFilterModel *)model {
     ANSPerformInMainQueue(dispatch_async, ^{
         NSLog(@"notified didFilterWithUserInfo - %@ ", model);
-        [self.usersView.tableView reloadData];
+        [self.friendListView.tableView reloadData];
     });
 }
 

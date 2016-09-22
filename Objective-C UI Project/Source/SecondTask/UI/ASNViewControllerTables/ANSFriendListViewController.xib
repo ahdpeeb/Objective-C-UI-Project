@@ -11,7 +11,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="ANSRootUserView">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="ANSFriendListView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -39,8 +39,8 @@
             </subviews>
             <color key="backgroundColor" red="0.99577277898788452" green="0.9922446608543396" blue="0.99200206995010376" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
-                <outlet property="searchBar" destination="ca3-ih-41w" id="P1h-Se-acM"/>
-                <outlet property="tableView" destination="djj-HE-MvU" id="beB-ML-hlh"/>
+                <outlet property="searchBar" destination="ca3-ih-41w" id="NKJ-er-X0W"/>
+                <outlet property="tableView" destination="djj-HE-MvU" id="ww1-zZ-qjO"/>
             </connections>
             <point key="canvasLocation" x="143" y="302"/>
         </view>

@@ -13,14 +13,13 @@
 #import "ANSLoginViewController.h"
 
 #import "ANSFriendListViewController.h"
-#import "ANSUser.h"
+#import "ANSFaceBookUser.h"
 #import "ANSChangeModel.h"
 
 #import "NSArray+ANSExtension.h"
 #import "ANSGCD.h"
 
 @interface ANSAppDelegate ()
-@property (nonatomic, strong) ANSUsersModel *users;
 
 @end
 
@@ -43,9 +42,6 @@
     
 #pragma mark -
 #pragma mark Extra third task
-
-    self.users = [ANSUsersModel new];
-//  controller.users = self.users;
     
     return YES;
 }

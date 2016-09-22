@@ -9,7 +9,7 @@
 #import "ANSNameFilterModel.h"
 
 #import "ANSProtocolObservationController.h"
-#import "ANSUser.h"
+#import "ANSFaceBookUser.h"
 #import "ANSGCD.h"
 #import "ANSChangeModel.h"
 #import "ANSOneIndexModel.h"
@@ -19,13 +19,13 @@
 typedef void(^ANSOperationBlock)(void);
 
 @interface ANSNameFilterModel ()
-@property (nonatomic, strong)   ANSUsersModel                       *model;
+@property (nonatomic, strong)   ANSFaceBookFriends                  *model;
 @property (nonatomic, strong)   ANSProtocolObservationController    *controller;
 @property (atomic, strong)      NSString                            *filterString;
 
-- (void)addUserWithoutNotification:(ANSUser *)user;
+- (void)addUserWithoutNotification:(ANSFaceBookUser *)user;
 - (void)filterModelByFilterString:(NSString *)filterString;
-- (BOOL)user:(ANSUser *)user containsString:(NSString *)string;
+- (BOOL)user:(ANSFaceBookUser *)user containsString:(NSString *)string;
 - (void)verifyObject:(id)object
           withString:(NSString *)string
          performBlock:(ANSOperationBlock)block;
@@ -51,7 +51,7 @@ typedef void(^ANSOperationBlock)(void);
 #pragma mark -
 #pragma mark Accsessors
 
-- (void)setModel:(ANSUsersModel *)model {
+- (void)setModel:(ANSFaceBookFriends *)model {
     if (_model != model) {
         _model = model;
         
@@ -66,7 +66,7 @@ typedef void(^ANSOperationBlock)(void);
 #pragma mark -
 #pragma mark Private methods
 
-- (void)addUserWithoutNotification:(ANSUser *)user {
+- (void)addUserWithoutNotification:(ANSFaceBookUser *)user {
     [self performBlockWithoutNotification:^{
         [self addObject:user];
     }];
@@ -77,7 +77,7 @@ typedef void(^ANSOperationBlock)(void);
         [self removeAllObjects];
     }];
     
-    for (ANSUser *user in self.model) {
+    for (ANSFaceBookUser *user in self.model) {
         if (!filterString.length) {
             [self addUserWithoutNotification:user];
         }
@@ -100,12 +100,12 @@ typedef void(^ANSOperationBlock)(void);
     }
 }
 
-- (BOOL)user:(ANSUser *)user containsString:(NSString *)string {
+- (BOOL)user:(ANSFaceBookUser *)user containsString:(NSString *)string {
     if (!string) {
         return YES;
     }
     
-    NSRange range = [user.name rangeOfString:string
+    NSRange range = [user.fullName rangeOfString:string
                                   options:NSCaseInsensitiveSearch];
     
     return range.location == NSNotFound;
@@ -115,8 +115,8 @@ typedef void(^ANSOperationBlock)(void);
           withString:(NSString *)string
          performBlock:(ANSOperationBlock)block
 {
-    if ([object isKindOfClass:[ANSUser class]]) {
-        if ([self user:(ANSUser *)object containsString:string]) {
+    if ([object isKindOfClass:[ANSFaceBookUser class]]) {
+        if ([self user:(ANSFaceBookUser *)object containsString:string]) {
             block();
         }
     }
@@ -142,7 +142,7 @@ typedef void(^ANSOperationBlock)(void);
 #pragma mark -
 #pragma mark ANSUsersModelObserver
 
-- (void)usersModelDidLoad:(ANSUsersModel *)model {
+- (void)usersModelDidLoad:(ANSFaceBookFriends *)model {
     ANSPerformInAsyncQueue(ANSPriorityLow, ^{
         [self performBlockWithoutNotification:^{
             [self addObjectsInRange:model.objects];

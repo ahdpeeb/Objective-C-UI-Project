@@ -10,7 +10,7 @@
 #import "ANSUserCell.h"
 
 #import "ANSImageView.h"
-#import "ANSUser.h"
+#import "ANSFaceBookUser.h"
 #import "ANSLoadingView.h"
 #import "UIView+ANSExtension.h"
 
@@ -32,7 +32,6 @@
 }
 
 - (void)dealloc {
-    NSLog(@"ANSUserCell deallocated");
 }
 
 #pragma mark -
@@ -54,8 +53,8 @@
 #pragma mark -
 #pragma mark Public methods
 
-- (void)fillWithModel:(ANSUser *)user {
-    self.label.text = user.name;
+- (void)fillWithUser:(ANSFaceBookUser *)user {
+    self.label.text = user.fullName;
     self.userImageView.imageModel = user.imageModel;
     
     [self customizeUserPicture];

@@ -1,5 +1,4 @@
 //
-//  ANSUser.m
 //  Objective-C UI Project
 //
 //  Created by Nikola Andriiev on 21.07.16.
