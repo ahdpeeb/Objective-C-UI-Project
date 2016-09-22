@@ -8,8 +8,6 @@
 
 #import "ANSRootView.h"
 
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
-
 @interface ANSLoginView : ANSRootView
 
 @property (strong, nonatomic) IBOutlet UIButton *loginButton;

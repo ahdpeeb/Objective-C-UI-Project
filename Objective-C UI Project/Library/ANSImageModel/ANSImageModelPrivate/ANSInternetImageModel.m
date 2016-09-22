@@ -87,6 +87,8 @@
 - (void)performLoading {
     if ([self isImageCached]) {
         [super performLoading];
+        
+        return;
     }
     
     [self removeCorruptedFile];
@@ -95,25 +97,26 @@
 
 - (void)loadImage {
     __block NSFileManager *manager = [NSFileManager defaultManager];
-    if (![manager fileExistsAtPath:self.imagePath]) {
-        self.task = [[NSURLSession sharedSession]
-                     downloadTaskWithURL:self.url
-                       completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-                           NSError *moveError = nil;
+    self.task = [[NSURLSession sharedSession]
+                 downloadTaskWithURL:self.url
+                   completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+                       NSError *moveError = nil;
+                       if (!error) {
                            [manager moveItemAtURL:location
                                             toURL:[NSURL URLWithString:self.imagePath]
                                             error:&moveError];
-                           UIImage *image = nil;
-                           if (moveError || error) {
-                               image = [self imageFromUrl:self.url];
-                           } else {
-                               image = [UIImage imageWithContentsOfFile:self.imagePath];
-                           }
-                           
-                           self.image = image;
-                           self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
-                       }];
-    }
+                       }
+                       
+                       UIImage *image = nil;
+                       if (moveError) {
+                           image = [self imageFromUrl:self.url];
+                       } else {
+                           image = [UIImage imageWithContentsOfFile:self.imagePath];
+                       }
+                       
+                       self.image = image;
+                       self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
+                   }];
 }
 
 @end

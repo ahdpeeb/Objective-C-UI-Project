@@ -58,12 +58,13 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
         user.lastName = [frind objectForKey:@"last_name"];
         
         id dataPicture = [[frind objectForKey:@"picture"] objectForKey:@"data"];
-        user.lastName = [dataPicture objectForKey:@"url"];
+        NSString *URLString = [dataPicture objectForKey:@"url"];
+        user.imageUrl = [NSURL URLWithString:URLString];
         
-        NSLog(@"user id = %lu, fullName -%@ %@, picture - %@",user.ID,
+        NSLog(@"user id = %lu, fullName - %@ %@, picture - %@",user.ID,
                                                               user.firsName,
                                                               user.lastName,
-                                                              user.lastName);
+                                                              user.imageUrl);
         [users addObject:user];
     }
     
@@ -78,7 +79,7 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
     FBSDKGraphRequest *request = nil;
     request = [[FBSDKGraphRequest alloc]
               initWithGraphPath:@"me/friends"
-                     parameters:@{@"fields": @"id, first_name, last_name, picture.type(square)"}
+                     parameters:@{@"fields": @"id, first_name, last_name, picture.type(large)"}
                      HTTPMethod:@"GET"];
     
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,

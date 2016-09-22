@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5AEE41B75AE5AF77748B1091 /* libPods-Objective-C UI ProjectUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BAFBFF2E6CE8F3654A93BDE2 /* libPods-Objective-C UI ProjectUITests.a */; };
 		93026CD41D464C9100DFCF23 /* Gomer_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 93026CD21D464C9100DFCF23 /* Gomer_2.png */; };
 		93026CD71D464D0900DFCF23 /* Gomer_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 93026CD61D464D0900DFCF23 /* Gomer_1.jpg */; };
 		9315EA6E1D92D7490053D21D /* ANSFaceBookUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA6B1D92D7490053D21D /* ANSFaceBookUser.m */; };
 		9315EA731D93EC4D0053D21D /* ANSFaceBookFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA721D93EC4D0053D21D /* ANSFaceBookFriends.m */; };
+		9315EA8A1D9426870053D21D /* libFBSDKCoreKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9315EA871D9426870053D21D /* libFBSDKCoreKit.a */; };
+		9315EA8B1D9426870053D21D /* libFBSDKLoginKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9315EA881D9426870053D21D /* libFBSDKLoginKit.a */; };
+		9315EA8C1D9426870053D21D /* libFBSDKShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9315EA891D9426870053D21D /* libFBSDKShareKit.a */; };
 		935E5A0B1D6F4CA5005F6285 /* aaa.plist in Resources */ = {isa = PBXBuildFile; fileRef = 935E5A0A1D6F4CA5005F6285 /* aaa.plist */; };
 		936727D71D591D25007A796F /* ANSUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C51D591D25007A796F /* ANSUserCell.m */; };
 		936727D81D591D25007A796F /* ANSUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936727C61D591D25007A796F /* ANSUserCell.xib */; };
@@ -107,12 +109,11 @@
 		93E992011D8F1E7300DCCE1B /* UIImage+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E991FF1D8F1E7300DCCE1B /* UIImage+ANSExtension.m */; };
 		93E992041D8F1FF400DCCE1B /* ANSCacheStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E992031D8F1FF400DCCE1B /* ANSCacheStorage.m */; };
 		93E992051D8F1FF400DCCE1B /* ANSCacheStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E992031D8F1FF400DCCE1B /* ANSCacheStorage.m */; };
-		93E994C91D914FA300DCCE1B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E994C61D914FA300DCCE1B /* FBSDKCoreKit.framework */; };
-		93E994CA1D914FA300DCCE1B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E994C71D914FA300DCCE1B /* FBSDKLoginKit.framework */; };
-		93E994CB1D914FA300DCCE1B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E994C81D914FA300DCCE1B /* FBSDKShareKit.framework */; };
 		93E994D31D9150AD00DCCE1B /* ANSLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E994CF1D9150AD00DCCE1B /* ANSLoginView.m */; };
 		93E994D41D9150AD00DCCE1B /* ANSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E994D11D9150AD00DCCE1B /* ANSLoginViewController.m */; };
 		93E994D51D9150AD00DCCE1B /* ANSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93E994D21D9150AD00DCCE1B /* ANSLoginViewController.xib */; };
+		B31E153A99E6E9FD54C009B4 /* libPods-Objective-C UI Project.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D61D00FCF09E7B8E93AA3BF /* libPods-Objective-C UI Project.a */; };
+		E3F88A6491D5A78D0595B312 /* libPods-Objective-C UI ProjectUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBF0228B73B450A5AD3DBF2 /* libPods-Objective-C UI ProjectUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,12 +127,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		486FD201570D96C7BDB4C317 /* Pods-Objective-C UI Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C UI Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-Objective-C UI Project/Pods-Objective-C UI Project.release.xcconfig"; sourceTree = "<group>"; };
+		6EBF0228B73B450A5AD3DBF2 /* libPods-Objective-C UI ProjectUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Objective-C UI ProjectUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93026CD21D464C9100DFCF23 /* Gomer_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gomer_2.png; sourceTree = "<group>"; };
 		93026CD61D464D0900DFCF23 /* Gomer_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Gomer_1.jpg; sourceTree = "<group>"; };
 		9315EA6A1D92D7490053D21D /* ANSFaceBookUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFaceBookUser.h; sourceTree = "<group>"; };
 		9315EA6B1D92D7490053D21D /* ANSFaceBookUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFaceBookUser.m; sourceTree = "<group>"; };
 		9315EA711D93EC4D0053D21D /* ANSFaceBookFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSFaceBookFriends.h; path = ANSFacebookFriends/ANSFaceBookFriends.h; sourceTree = "<group>"; };
 		9315EA721D93EC4D0053D21D /* ANSFaceBookFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSFaceBookFriends.m; path = ANSFacebookFriends/ANSFaceBookFriends.m; sourceTree = "<group>"; };
+		9315EA871D9426870053D21D /* libFBSDKCoreKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKCoreKit.a; path = "Pods/../build/Debug-iphoneos/FBSDKCoreKit/libFBSDKCoreKit.a"; sourceTree = "<group>"; };
+		9315EA881D9426870053D21D /* libFBSDKLoginKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKLoginKit.a; path = "Pods/../build/Debug-iphoneos/FBSDKLoginKit/libFBSDKLoginKit.a"; sourceTree = "<group>"; };
+		9315EA891D9426870053D21D /* libFBSDKShareKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKShareKit.a; path = "Pods/../build/Debug-iphoneos/FBSDKShareKit/libFBSDKShareKit.a"; sourceTree = "<group>"; };
 		935E5A0A1D6F4CA5005F6285 /* aaa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = aaa.plist; sourceTree = "<group>"; };
 		936727C41D591D25007A796F /* ANSUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSUserCell.h; sourceTree = "<group>"; };
 		936727C51D591D25007A796F /* ANSUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSUserCell.m; sourceTree = "<group>"; };
@@ -250,16 +256,14 @@
 		93E991FF1D8F1E7300DCCE1B /* UIImage+ANSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ANSExtension.m"; sourceTree = "<group>"; };
 		93E992021D8F1FF400DCCE1B /* ANSCacheStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSCacheStorage.h; path = ANSCacheStorage/ANSCacheStorage.h; sourceTree = "<group>"; };
 		93E992031D8F1FF400DCCE1B /* ANSCacheStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSCacheStorage.m; path = ANSCacheStorage/ANSCacheStorage.m; sourceTree = "<group>"; };
-		93E994C61D914FA300DCCE1B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		93E994C71D914FA300DCCE1B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		93E994C81D914FA300DCCE1B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		93E994CE1D9150AD00DCCE1B /* ANSLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLoginView.h; sourceTree = "<group>"; };
 		93E994CF1D9150AD00DCCE1B /* ANSLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSLoginView.m; sourceTree = "<group>"; };
 		93E994D01D9150AD00DCCE1B /* ANSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLoginViewController.h; sourceTree = "<group>"; };
 		93E994D11D9150AD00DCCE1B /* ANSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSLoginViewController.m; sourceTree = "<group>"; };
 		93E994D21D9150AD00DCCE1B /* ANSLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSLoginViewController.xib; sourceTree = "<group>"; };
+		9D61D00FCF09E7B8E93AA3BF /* libPods-Objective-C UI Project.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Objective-C UI Project.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E0F054CF32267BB37C7D7E /* Pods-Objective-C UI ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C UI ProjectUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Objective-C UI ProjectUITests/Pods-Objective-C UI ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
-		BAFBFF2E6CE8F3654A93BDE2 /* libPods-Objective-C UI ProjectUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Objective-C UI ProjectUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB09091B1A7DD91BDD1FAAC0 /* Pods-Objective-C UI Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C UI Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Objective-C UI Project/Pods-Objective-C UI Project.debug.xcconfig"; sourceTree = "<group>"; };
 		F28C68C0A3FCC8C7F0409676 /* Pods-Objective-C UI ProjectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C UI ProjectUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Objective-C UI ProjectUITests/Pods-Objective-C UI ProjectUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -268,9 +272,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93E994CA1D914FA300DCCE1B /* FBSDKLoginKit.framework in Frameworks */,
-				93E994C91D914FA300DCCE1B /* FBSDKCoreKit.framework in Frameworks */,
-				93E994CB1D914FA300DCCE1B /* FBSDKShareKit.framework in Frameworks */,
+				9315EA8A1D9426870053D21D /* libFBSDKCoreKit.a in Frameworks */,
+				9315EA8B1D9426870053D21D /* libFBSDKLoginKit.a in Frameworks */,
+				9315EA8C1D9426870053D21D /* libFBSDKShareKit.a in Frameworks */,
+				B31E153A99E6E9FD54C009B4 /* libPods-Objective-C UI Project.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,18 +283,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5AEE41B75AE5AF77748B1091 /* libPods-Objective-C UI ProjectUITests.a in Frameworks */,
+				E3F88A6491D5A78D0595B312 /* libPods-Objective-C UI ProjectUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4DADEA539AD2A963E50E40F2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9315EA871D9426870053D21D /* libFBSDKCoreKit.a */,
+				9315EA881D9426870053D21D /* libFBSDKLoginKit.a */,
+				9315EA891D9426870053D21D /* libFBSDKShareKit.a */,
+				6EBF0228B73B450A5AD3DBF2 /* libPods-Objective-C UI ProjectUITests.a */,
+				9D61D00FCF09E7B8E93AA3BF /* libPods-Objective-C UI Project.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4E48BA7DF8283C8199047031 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				F28C68C0A3FCC8C7F0409676 /* Pods-Objective-C UI ProjectUITests.debug.xcconfig */,
 				B5E0F054CF32267BB37C7D7E /* Pods-Objective-C UI ProjectUITests.release.xcconfig */,
+				EB09091B1A7DD91BDD1FAAC0 /* Pods-Objective-C UI Project.debug.xcconfig */,
+				486FD201570D96C7BDB4C317 /* Pods-Objective-C UI Project.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -706,7 +725,7 @@
 				93C084231D3E36800077A81C /* Objective-C UI ProjectUITests */,
 				93C084081D3E367F0077A81C /* Products */,
 				4E48BA7DF8283C8199047031 /* Pods */,
-				ABC3C745AE84E877F62B212F /* Frameworks */,
+				4DADEA539AD2A963E50E40F2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -848,17 +867,6 @@
 			path = ANSLoginView;
 			sourceTree = "<group>";
 		};
-		ABC3C745AE84E877F62B212F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				93E994C61D914FA300DCCE1B /* FBSDKCoreKit.framework */,
-				93E994C71D914FA300DCCE1B /* FBSDKLoginKit.framework */,
-				93E994C81D914FA300DCCE1B /* FBSDKShareKit.framework */,
-				BAFBFF2E6CE8F3654A93BDE2 /* libPods-Objective-C UI ProjectUITests.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -866,9 +874,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 93C084291D3E36800077A81C /* Build configuration list for PBXNativeTarget "Objective-C UI Project" */;
 			buildPhases = (
+				BE8871861217C2733A7A3604 /* [CP] Check Pods Manifest.lock */,
 				93C084031D3E367F0077A81C /* Sources */,
 				93C084041D3E367F0077A81C /* Frameworks */,
 				93C084051D3E367F0077A81C /* Resources */,
+				B6B6BC7488CC80318F0109FD /* [CP] Embed Pods Frameworks */,
+				1570D98A16FCD8C625A1F18B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -888,6 +899,7 @@
 				93C0841D1D3E36800077A81C /* Frameworks */,
 				93C0841E1D3E36800077A81C /* Resources */,
 				172CC122171D1C53388D83D1 /* [CP] Copy Pods Resources */,
+				79CC797474E46E168523813E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -982,6 +994,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1570D98A16FCD8C625A1F18B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Objective-C UI Project/Pods-Objective-C UI Project-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		172CC122171D1C53388D83D1 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -997,6 +1024,51 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Objective-C UI ProjectUITests/Pods-Objective-C UI ProjectUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		79CC797474E46E168523813E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Objective-C UI ProjectUITests/Pods-Objective-C UI ProjectUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B6B6BC7488CC80318F0109FD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Objective-C UI Project/Pods-Objective-C UI Project-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BE8871861217C2733A7A3604 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		FF3998705DCBBABC61A2C3C7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1009,7 +1081,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1209,6 +1281,7 @@
 		};
 		93C0842A1D3E36800077A81C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB09091B1A7DD91BDD1FAAC0 /* Pods-Objective-C UI Project.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1227,6 +1300,9 @@
 					frameworks/FBSDKLoginKit.framework,
 					"$(PROJECT_DIR)/facebook",
 					frameworks/FBSDKShareKit.framework,
+					"$(PROJECT_DIR)/build/Debug-iphoneos/FBSDKCoreKit",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/FBSDKLoginKit",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/FBSDKShareKit",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Andriiev.Mykola.Objective-C-UI-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1235,6 +1311,7 @@
 		};
 		93C0842B1D3E36800077A81C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 486FD201570D96C7BDB4C317 /* Pods-Objective-C UI Project.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1253,6 +1330,9 @@
 					frameworks/FBSDKLoginKit.framework,
 					"$(PROJECT_DIR)/facebook",
 					frameworks/FBSDKShareKit.framework,
+					"$(PROJECT_DIR)/build/Debug-iphoneos/FBSDKCoreKit",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/FBSDKLoginKit",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/FBSDKShareKit",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Andriiev.Mykola.Objective-C-UI-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
