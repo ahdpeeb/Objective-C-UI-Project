@@ -11,7 +11,7 @@
 #import "NSString+ANSExtension.h"
 
 static const NSUInteger kANSStringLength    = 10;
-static NSString * const kANSImageLink = @"https://d13yacurqjgara.cloudfront.net/users/146798/screenshots/2843164/pikatchu-dribbble-final_1x.png";
+static NSString * const kANSImageLink = @"https://scontent.xx.fbcdn.net/v/t1.0-1/c8.0.50.50/p50x50/14355644_134000623724354_17367281214759701_n.jpg?oh=e3d77de4321ad2995d5c7bf757fefd59&oe=586EB85C";
 
 static NSString * const kANSStringKey = @"kANSStringKey";
 

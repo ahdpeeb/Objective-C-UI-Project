@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ANSUsersModel.h"
+#import "ANSFaceBookFriends.h"
 #import "ANSNameFilterModel.h"
 
-@interface ANSViewControllerTables : UIViewController <
+@interface ANSFriendListViewController : UIViewController <
     UITableViewDataSource,
     UITableViewDelegate,
     UISearchBarDelegate,
@@ -20,7 +20,7 @@
     ANSNameFilterModelProtocol
 >
 
-@property (nonatomic, strong) ANSUsersModel *users;
+@property (nonatomic, strong) ANSFaceBookFriends *friends;
 
 @property (nonatomic, strong) IBOutlet UISwipeGestureRecognizer *rightSwipeGesture;
 

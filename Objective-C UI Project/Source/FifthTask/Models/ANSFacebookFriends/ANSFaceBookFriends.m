@@ -1,44 +1,31 @@
 //
-//  ANSDataCollection.m
+//  ANSFaceBookFriends.m
 //  Objective-C UI Project
 //
-//  Created by Nikola Andriiev on 24.07.16.
+//  Created by Nikola Andriiev on 22.09.16.
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 #import <UIKit/UIKit.h>
 
-#import "ANSUsersModel.h"
+#import "ANSFaceBookFriends.h"
 
-#import "ANSUser.h"
-#import "ANSMacros.h"
 #import "ANSGCD.h"
 #import "NSArray+ANSExtension.h"
 #import "NSFileManager+ANSExtension.h"
 #import "ANSNameFilterModel.h"
-#import "ANSFriendListViewController.h"
 
-typedef void(^ANSExecutionBlock)(void);
-
-static const NSUInteger kANSSleepTime = 5;
-static const NSUInteger kANSUsersCount = 20;
+#import "ANSMacros.h"
 
 static NSString * const kANSPlistName = @"aaa";
 
-@interface ANSUsersModel ()
+@interface ANSFaceBookFriends ()
 @property (nonatomic, strong) NSMutableDictionary *observationHandlers;
 
 - (SEL)selectorForState:(NSUInteger)state;
 
-- (id)usersFromFileSystem;
-- (id)newUsers;
-- (id)loadUsersModel;
-- (void)startObservationForNames:(NSArray <NSString *> *)names
-                       withBlock:(ANSExecutableBlock)block;
-- (void)stopObservationForNames:(NSArray <NSString *> *)names;
-
 @end
 
-@implementation ANSUsersModel
+@implementation ANSFaceBookFriends
 
 #pragma mark -
 #pragma mark Initialization and deallocation
@@ -60,12 +47,12 @@ static NSString * const kANSPlistName = @"aaa";
 }
 
 #pragma mark -
-#pragma mark Private methods
+#pragma mark Private methods (reloaded from super)
 
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
         default:
-          return [super selectorForState:state];
+            return [super selectorForState:state];
     }
 }
 
@@ -79,25 +66,9 @@ static NSString * const kANSPlistName = @"aaa";
     return [NSKeyedUnarchiver unarchiveObjectWithFile:plistPath];
 }
 
-- (id)newUsers {
-    return [NSArray objectsWithCount:kANSUsersCount block:^id{
-        return [ANSUser new];
-    }];
-}
-
 - (id)loadUsersModel {
-    sleep(kANSSleepTime);
-    
-    id users = [self usersFromFileSystem];
-    if (!users) {
-        users = [self newUsers];
-    }
-    
-    [self performBlockWithoutNotification:^{
-        [self addObjectsInRange:users];
-    }];
-    
-    return users;
+    sleep(3);
+    return  [self usersFromFileSystem];
 }
 
 - (void)startObservationForNames:(NSArray <NSString *> *)names
@@ -105,11 +76,11 @@ static NSString * const kANSPlistName = @"aaa";
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     for (NSString *name in names) {
         id observationHandler = [center addObserverForName:name
-                                                     object:nil
-                                                      queue:[NSOperationQueue mainQueue]
-                                                 usingBlock:^(NSNotification * _Nonnull note) {
-                                                      block();
-                                                 }];
+                                                    object:nil
+                                                     queue:[NSOperationQueue mainQueue]
+                                                usingBlock:^(NSNotification * _Nonnull note) {
+                                                    block();
+                                                }];
         
         [self.observationHandlers setObject:observationHandler forKey:name];
     }

@@ -16,6 +16,7 @@
 @implementation ANSCacheStorage
 
 @dynamic count;
+@dynamic allKeys;
 
 #pragma mark -
 #pragma mark Initialization and deallocation
@@ -51,20 +52,26 @@
     }
 }
 
-#pragma mark -
-#pragma mark Public Methods
-
-- (id)objectForKey:(id)key {
+- (NSArray *)allKeys {
     @synchronized(self) {
-        return [self.storage objectForKey:key];
+       return self.storage.keyEnumerator.allObjects;
     }
 }
 
-- (void)cacheObject:(id)object forKey:(id)key {
+#pragma mark -
+#pragma mark Public Methods
+
+- (void)setObject:(id)object forKey:(id)key {
     @synchronized(self) {
         if (![self objectForKey:key]) {
             [self.storage setObject:object forKey:key];
         }
+    }
+}
+
+- (id)objectForKey:(id)key {
+    @synchronized(self) {
+        return [self.storage objectForKey:key];
     }
 }
 
@@ -73,5 +80,14 @@
         [self.storage removeObjectForKey:key];
     }
 }
+
+- (void)setObject:(id)object forKeyedSubscript:(id)key {
+    [self setObject:object forKey:key];
+}
+
+- (id)objectForKeyedSubscript:(id)key {
+    return [self objectForKey:key];
+}
+
 
 @end

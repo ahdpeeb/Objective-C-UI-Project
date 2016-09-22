@@ -6,12 +6,13 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "ANSViewControllerTables.h"
+#import "ANSFriendListViewController.h"
 
 #import "ANSRootUserView.h"
 #import "ANSUserCell.h"
 #import "ANSTableViewCell.h"
-#import "ANSUser.h"
+#import "ANSFaceBookUser.h"
+#import "ANSFaceBookFriends.h"
 #import "ANSImageModel.h"
 #import "ANSImageView.h"
 #import "ANSNameFilterModel.h"
@@ -29,10 +30,10 @@
 
 static          NSString * const kANSEdit                    = @"Edit";
 static          NSString * const kANSDone                    = @"Done";
-static          NSString * const kANSTitleForHeaderSection   = @"Homer's contact list";
+static          NSString * const kANSTitleForHeaderSection   = @"User's friends";
 static const    NSUInteger kANSSectionsCount                 = 1;
 
-@interface ANSViewControllerTables ()
+@interface ANSFriendListViewController ()
 @property (nonatomic, strong)   ANSProtocolObservationController  *usersController;
 
 @property (nonatomic, strong)   ANSNameFilterModel                *filteredModel;
@@ -45,24 +46,25 @@ static const    NSUInteger kANSSectionsCount                 = 1;
 
 @end
 
-ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, usersView)
+ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSRootUserView, usersView)
 
-@implementation ANSViewControllerTables;
+@implementation ANSFriendListViewController;
 
 @dynamic presentedModel;
 
 #pragma mark -
 #pragma mark Accsessors
 
-- (void)setUsers:(ANSUsersModel *)users {
-    if (_users != users) {
-        _users = users;
+- (void)setFriends:(ANSFaceBookFriends *)friends {
+    if (_friends != friends) {
+        friends = friends;
         
-        self.usersController = [users protocolControllerWithObserver:self];
+        self.usersController = [friends protocolControllerWithObserver:self];
         [self initFilterInfrastructure];
         
         if (self.isViewLoaded) {
-            [users load];
+        // if no internet connerion
+            [friends load];
         }
     }
 }
@@ -78,7 +80,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
 - (ANSArrayModel *)presentedModel {
     BOOL isFirstResponder = self.usersView.searchBar.isFirstResponder;
     
-    return isFirstResponder ? self.filteredModel : self.users;
+    return isFirstResponder ? self.filteredModel : self.friends;
 }
 
 #pragma mark -
@@ -90,16 +92,8 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
     self.navigationItem.title = kANSTitleForHeaderSection;
     [self initLeftBarButtonItem];
     [self initRightBarButtonItem];
-    
-    [self.users load];
-}
-    
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+// if no internet connerion
+    [self.friends load];
 }
 
 #pragma mark -
@@ -113,8 +107,9 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
 }
 
 - (void)initFilterInfrastructure {
-    ANSUsersModel *users = self.users;
-    ANSNameFilterModel *nameFilterModel = [[ANSNameFilterModel alloc] initWithObservableModel:users];
+    ANSFaceBookFriends *friends = self.friends;
+    ANSNameFilterModel *nameFilterModel = [[ANSNameFilterModel alloc]
+                                           initWithObservableModel:friends];
     self.filteredModel = nameFilterModel;
 }
 
@@ -144,10 +139,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
     [self resignSearchBar];
     
     if (table.editing) {
-        ANSUser *object = [[ANSUser alloc] init];
-        [self.users performBlockWithNotification:^{
-            [self.users insertObject:object atIndex:0];
-        }];
+        // NO ACTION!
     }
 }
 
@@ -210,8 +202,8 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
 {
     if (sourceIndexPath.section == destinationIndexPath.section) {
         
-        [self.users performBlockWithoutNotification:^{
-            [self.users moveObjectFromIndex:sourceIndexPath.row
+        [self.friends performBlockWithoutNotification:^{
+            [self.friends moveObjectFromIndex:sourceIndexPath.row
                                          toIndex:destinationIndexPath.row];
         }];
     }
@@ -222,10 +214,7 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
     forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        ANSUsersModel *users = self.users;
-        [users performBlockWithNotification:^{
-            [users removeObjectAtIndex:indexPath.row];
-        }];
+        //NO ACTION! 
     }
 }
 
@@ -237,17 +226,11 @@ ANSViewControllerBaseViewProperty(ANSViewControllerTables, ANSRootUserView, user
 {
     return UITableViewCellEditingStyleDelete;
 }
-    //should shift leftBar if (aditing = YES)
-- (BOOL)                        tableView:(UITableView *)tableView
-   shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    id controller = [ANSViewControllerTables viewController];
+    id controller = [ANSFriendListViewController viewController];
     [self.navigationController pushViewController:controller animated:YES];
 }
 

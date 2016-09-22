@@ -30,7 +30,7 @@
     Class cls = url.fileURL ? [ANSLocalImageModel class] : [ANSInternetImageModel class];
     model = [[cls alloc] initWithURL:url];
     
-    [cache cacheObject:model forKey:url];
+    [cache setObject:model forKey:url];
     
     return model;
 }

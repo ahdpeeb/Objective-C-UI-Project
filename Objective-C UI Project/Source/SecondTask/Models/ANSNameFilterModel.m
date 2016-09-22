@@ -39,7 +39,7 @@ typedef void(^ANSOperationBlock)(void);
 #pragma mark -
 #pragma mark Initialization and deadllocation
 
-- (instancetype)initWithObservableModel:(ANSUsersModel *)model {
+- (instancetype)initWithObservableModel:(id)model {
     self = [super init];
     if (self) {
         self.model = model;

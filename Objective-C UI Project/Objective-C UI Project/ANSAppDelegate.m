@@ -12,7 +12,7 @@
 
 #import "ANSLoginViewController.h"
 
-#import "ANSViewControllerTables.h"
+#import "ANSFriendListViewController.h"
 #import "ANSUser.h"
 #import "ANSChangeModel.h"
 
@@ -33,8 +33,8 @@
     UIWindow *window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window = window;
     
-    ANSViewControllerTables *controller = [ANSViewControllerTables new];
-//    ANSLoginViewController *controller  = [ANSLoginViewController new];
+//   ANSViewControllerTables *controller = [ANSViewControllerTables new];
+    ANSLoginViewController *controller  = [ANSLoginViewController new];
     UINavigationController *navigationController;
     navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
     window.rootViewController = navigationController;
@@ -45,7 +45,7 @@
 #pragma mark Extra third task
 
     self.users = [ANSUsersModel new];
-    controller.users = self.users;
+//  controller.users = self.users;
     
     return YES;
 }

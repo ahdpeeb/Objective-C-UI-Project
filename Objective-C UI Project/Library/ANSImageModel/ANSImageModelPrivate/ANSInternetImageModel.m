@@ -87,10 +87,10 @@
 - (void)performLoading {
     if ([self isImageCached]) {
         [super performLoading];
-    } else {
-        [self removeCorruptedFile];
-        [self loadImage];
     }
+    
+    [self removeCorruptedFile];
+    [self loadImage];
 }
 
 - (void)loadImage {
@@ -113,7 +113,6 @@
                            self.image = image;
                            self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
                        }];
-        
     }
 }
 

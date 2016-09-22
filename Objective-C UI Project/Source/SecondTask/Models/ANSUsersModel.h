@@ -14,8 +14,6 @@
 
 @interface ANSUsersModel : ANSArrayModel
 
-- (NSArray *)descendingSortedUsers;
-
 - (void)save;
 
 @end

@@ -12,14 +12,22 @@
 #import "ANSLoginViewController.h"
 
 #import "ANSLoginView.h"
+#import "ANSFaceBookUser.h"
+#import "ANSFaceBookFriends.h"
+#import "ANSFriendListViewController.h"
+
+#import "UIViewController+ANSExtension.h"
 
 #import "ANSMacros.h"
 
 ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginView);
 
 @interface ANSLoginViewController ()
+@property (nonatomic, strong) FBSDKLoginManager *LoginManager;
+@property (nonatomic, strong) FBSDKGraphRequest *request;
 
-- (void)loadFriens;
+- (void)loadFriends;
+- (NSArray *)usersFromFrinds:(NSArray *)friends;
 
 @end
 
@@ -29,6 +37,8 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
+    self.LoginManager = [FBSDKLoginManager new];
+    [self initLeftBarButtonItem];
     [super viewDidLoad];
 }
 
@@ -36,15 +46,40 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
     [super didReceiveMemoryWarning];
 }
 
-- (void)loadFriens {
+#pragma mark -
+#pragma mark Private methods
+
+- (NSArray *)usersFromFrinds:(NSArray *)friends {
+    NSMutableArray *users = [NSMutableArray new];
+    for (NSDictionary *frind in friends) {
+        ANSFaceBookUser *user = [ANSFaceBookUser new];
+        user.ID = (NSInteger)[frind objectForKey:@"id"];
+        user.firsName = [frind objectForKey:@"first_name"];
+        user.lastName = [frind objectForKey:@"last_name"];
+        
+        id dataPicture = [[frind objectForKey:@"picture"] objectForKey:@"data"];
+        user.lastName = [dataPicture objectForKey:@"url"];
+        
+        NSLog(@"user id = %lu, fullName -%@ %@, picture - %@",user.ID,
+                                                              user.firsName,
+                                                              user.lastName,
+                                                              user.lastName);
+        [users addObject:user];
+    }
+    
+    return [NSArray arrayWithArray:users];
+}
+
+- (void)loadFriends {
     if  (![FBSDKAccessToken currentAccessToken]) {
         return;
     }
     
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
-                                  initWithGraphPath:@"me"
-                                         parameters:@{@"fields": @"id, name, gender"}
-                                         HTTPMethod:@"GET"];
+    FBSDKGraphRequest *request = nil;
+    request = [[FBSDKGraphRequest alloc]
+              initWithGraphPath:@"me/friends"
+                     parameters:@{@"fields": @"id, first_name, last_name, picture.type(square)"}
+                     HTTPMethod:@"GET"];
     
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
                                           NSDictionary *result,
@@ -53,25 +88,49 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
             NSLog(@"%@", error);
             return;
         }
-        NSString *bla  = [result objectForKey:@"name"];
-        NSString *bla2 = [result objectForKey:@"id"];
-        NSString *bla3 = [result objectForKey:@"gender"];
+        
         NSArray *friends = [result objectForKey:@"data"];
-  //      NSLog(@"I have a friend named %@ with id %@", friend.name, friend.objectID);
+        NSArray *users = [self usersFromFrinds:friends];
+        
+        ANSFaceBookFriends *faceBookFriends = [ANSFaceBookFriends new];
+        [faceBookFriends addObjectsInRange:users];
+        NSLog(@"faceBookFriends count = %lu", (unsigned long)faceBookFriends.count);
+        
+        ANSFriendListViewController *controller = [ANSFriendListViewController viewController];
+        [self.navigationController pushViewController:controller animated:YES];
     }];
 }
 
 #pragma mark -
-#pragma mark Buttons
+#pragma mark UIBarButtonItems
+
+- (void)initLeftBarButtonItem {
+    UIBarButtonItem *buttom = [[UIBarButtonItem alloc]
+                               initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                               target:self
+                               action:@selector(leftBarAction:)];
+    
+    [self.navigationItem setLeftBarButtonItem:buttom animated:YES];
+}
+
+#pragma mark -
+#pragma mark UIBarButtonItems actions
+
+- (void)leftBarAction:(UIBarButtonItem *)sender {
+    [self.LoginManager logOut];
+}
+
+#pragma mark -
+#pragma mark Buttons actions
 
 - (IBAction)onLogin:(UIButton *)sender {
-    FBSDKLoginManager *manager = [FBSDKLoginManager new];
-    [manager logInWithReadPermissions:@[@"public_profile", @"user_friends", @"read_custom_friendlists"]
+    [self.LoginManager logInWithReadPermissions:@[@"public_profile", @"user_friends"]
                    fromViewController:self
                               handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                  if (!error && !result.isCancelled) {
+                                  BOOL value = result.isCancelled;
+                                  if (!error && !value) {
                                       NSLog(@"Loggined");
-                                      [self loadFriens];
+                                      [self loadFriends];
                                   }
                               }];
     
