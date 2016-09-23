@@ -10,8 +10,6 @@
 
 #import "ANSImageModel+ANSPrivatExtension.h"
 
-typedef void(^ANSImageHandler)(void);
-
 @implementation ANSLocalImageModel
 
 #pragma mark -

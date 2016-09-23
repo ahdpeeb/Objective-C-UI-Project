@@ -11,13 +11,12 @@
 #import "ANSImageModel.h"
 
 @interface ANSFaceBookUser : NSObject <NSCoding, NSCopying>
-@property (nonatomic, assign)  NSInteger    ID;
-@property (nonatomic, strong)  NSString     *firsName;
-@property (nonatomic, strong)  NSString     *lastName;
-@property (nonatomic, strong)  NSURL        *imageUrl;
+@property (nonatomic, readonly)  NSInteger    ID;
+@property (nonatomic, readonly)  NSURL        *imageUrl;
 
 @property (nonatomic, readonly) NSString        *fullName;
 @property (nonatomic, readonly) ANSImageModel   *imageModel;
 
+- (void)loadUser;
 
 @end

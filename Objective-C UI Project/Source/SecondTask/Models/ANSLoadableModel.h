@@ -34,7 +34,7 @@ typedef NS_ENUM(NSUInteger, ANSLoadingState) {
 
 - (void)load;
 
-// method for reloding in child classes. You need to set up complition steta;
+// method for reloding in child classes. You need to set up complition state..
 // self.state = (if loaded successfully) ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading
 - (void)performLoading;
 

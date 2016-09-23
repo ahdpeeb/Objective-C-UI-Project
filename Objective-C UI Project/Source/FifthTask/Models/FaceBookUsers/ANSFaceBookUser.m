@@ -8,6 +8,7 @@
 #import "ANSFaceBookUser.h"
 
 #import "NSString+ANSExtension.h"
+#import "ANSLoadableUserContext.h"
 
 static NSString * const kANSIDKey        = @"kANSIDKey";
 static NSString * const kANSFirstNameKey = @"kANSFirstNameKey";
@@ -15,6 +16,10 @@ static NSString * const kANSLastNameKey  = @"kANSLastNameKey";
 static NSString * const kANSImageUrlKey  = @"kANSImageUrlKey";
 
 @interface ANSFaceBookUser ()
+@property (nonatomic, assign)    NSInteger    ID;
+@property (nonatomic, strong)    NSString     *firsName;
+@property (nonatomic, strong)    NSString     *lastName;
+@property (nonatomic, strong)    NSURL        *imageUrl;
 
 @end
 
@@ -25,10 +30,10 @@ static NSString * const kANSImageUrlKey  = @"kANSImageUrlKey";
 #pragma mark -
 #pragma mark Initialization and deallocation 
 
-- (instancetype)init {
+- (instancetype)initWithID:(NSUInteger)ID {
     self = [super init];
     if (self) {
-
+        self.ID = ID;
     }
     
     return self;
@@ -44,6 +49,9 @@ static NSString * const kANSImageUrlKey  = @"kANSImageUrlKey";
 - (ANSImageModel *)imageModel {
     return [ANSImageModel imageFromURL:self.imageUrl];
 }
+
+#pragma mark -
+#pragma mark PublicMethods
 
 #pragma mark -
 #pragma mark NSCoding protocol

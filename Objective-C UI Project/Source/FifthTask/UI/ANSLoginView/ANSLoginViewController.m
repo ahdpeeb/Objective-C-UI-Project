@@ -24,7 +24,6 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 
 @interface ANSLoginViewController ()
 @property (nonatomic, strong) FBSDKLoginManager *LoginManager;
-@property (nonatomic, strong) FBSDKGraphRequest *request;
 
 - (void)loadFriends;
 - (NSArray *)usersFromFrinds:(NSArray *)friends;
@@ -38,7 +37,6 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 
 - (void)viewDidLoad {
     self.LoginManager = [FBSDKLoginManager new];
-    [self initLeftBarButtonItem];
     [super viewDidLoad];
 }
 
@@ -49,27 +47,27 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 #pragma mark -
 #pragma mark Private methods
 
-- (NSArray *)usersFromFrinds:(NSArray *)friends {
-    NSMutableArray *users = [NSMutableArray new];
-    for (NSDictionary *frind in friends) {
-        ANSFaceBookUser *user = [ANSFaceBookUser new];
-        user.ID = (NSInteger)[frind objectForKey:@"id"];
-        user.firsName = [frind objectForKey:@"first_name"];
-        user.lastName = [frind objectForKey:@"last_name"];
-        
-        NSDictionary *dataPicture = [[frind objectForKey:@"picture"] objectForKey:@"data"];
-        NSString *URLString = [dataPicture objectForKey:@"url"];
-        user.imageUrl = [NSURL URLWithString:URLString];
-        
-        NSLog(@"user id = %lu, fullName - %@ %@, picture - %@",user.ID,
-                                                              user.firsName,
-                                                              user.lastName,
-                                                              user.imageUrl);
-        [users addObject:user];
-    }
-    
-    return [NSArray arrayWithArray:users];
-}
+//- (NSArray *)usersFromFrinds:(NSArray *)friends {
+//    NSMutableArray *users = [NSMutableArray new];
+//    for (NSDictionary *frind in friends) {
+//        ANSFaceBookUser *user = [ANSFaceBookUser new];
+//        user.ID = (NSInteger)[frind objectForKey:@"id"];
+//        user.firsName = [frind objectForKey:@"first_name"];
+//        user.lastName = [frind objectForKey:@"last_name"];
+//        
+//        NSDictionary * dataPicture = [[frind objectForKey:@"picture"] objectForKey:@"data"];
+//        NSString *URLString = [dataPicture objectForKey:@"url"];
+//        user.imageUrl = [NSURL URLWithString:URLString];
+//        
+//        NSLog(@"user id = %lu, fullName - %@ %@, picture - %@",user.ID,
+//                                                              user.firsName,
+//                                                              user.lastName,
+//                                                              user.imageUrl);
+//        [users addObject:user];
+//    }
+//    
+//    return [NSArray arrayWithArray:users];
+//}
 
 - (void)loadFriends {
     if  (![FBSDKAccessToken currentAccessToken]) {
@@ -101,25 +99,6 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
         controller.friends = faceBookFriends;
         [self.navigationController pushViewController:controller animated:YES];
     }];
-}
-
-#pragma mark -
-#pragma mark UIBarButtonItems
-
-- (void)initLeftBarButtonItem {
-    UIBarButtonItem *buttom = [[UIBarButtonItem alloc]
-                               initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                               target:self
-                               action:@selector(leftBarAction:)];
-    
-    [self.navigationItem setLeftBarButtonItem:buttom animated:YES];
-}
-
-#pragma mark -
-#pragma mark UIBarButtonItems actions
-
-- (void)leftBarAction:(UIBarButtonItem *)sender {
-    [self.LoginManager logOut];
 }
 
 #pragma mark -
