@@ -10,16 +10,9 @@
 
 #import "ANSImageModel+ANSPrivatExtension.h"
 
-#import "NSFileManager+ANSExtension.h"
+typedef void(^ANSImageHandler)(void);
 
 @implementation ANSLocalImageModel
-
-#pragma mark -
-#pragma mark Accsessors
-
-- (NSString *)imagePath {
-    return self.url.path;
-}
 
 #pragma mark -
 #pragma mark Privat methods

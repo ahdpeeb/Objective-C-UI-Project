@@ -11,28 +11,34 @@
 #import "ANSLocalImageModel.h"
 #import "ANSInternetImageModel.h"
 #import "ANSImageModel+ANSPrivatExtension.h"
+#import "NSFileManager+ANSExtension.h"
 
 #import "ANSMacros.h"
 
 @implementation ANSImageModel
 
+@dynamic imageName;
+@dynamic imagePath;
+
 #pragma mark -
 #pragma mark Class methods
 
 + (instancetype)imageFromURL:(NSURL *)url {
-    ANSCacheStorage *cache = [ANSCacheStorage sharedStorage];
-    
-    id model = [cache objectForKey:url];
-    if (model) {
+    @synchronized(self) {
+        ANSCacheStorage *cache = [ANSCacheStorage sharedStorage];
+        
+        id model = [cache objectForKey:url];
+        if (model) {
+            return model;
+        }
+        
+        Class cls = url.fileURL ? [ANSLocalImageModel class] : [ANSInternetImageModel class];
+        model = [[cls alloc] initWithURL:url];
+        
+        [cache setObject:model forKey:url];
+        
         return model;
     }
-    
-    Class cls = url.fileURL ? [ANSLocalImageModel class] : [ANSInternetImageModel class];
-    model = [[cls alloc] initWithURL:url];
-    
-    [cache setObject:model forKey:url];
-    
-    return model;
 }
 
 #pragma mark -
@@ -46,12 +52,25 @@
     return self;
 }
 
+#pragma mark -
+#pragma mark Accsessors
+
 - (void)setImage:(UIImage *)image {
     if (_image != image) {
         _image = image;
         
         self.state = image ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
     }
+}
+
+- (NSString *)imageName {
+    NSCharacterSet *characterSet = [NSCharacterSet URLUserAllowedCharacterSet];
+    
+    return [self.url.absoluteString stringByAddingPercentEncodingWithAllowedCharacters:characterSet];
+}
+
+- (NSString *)imagePath {
+    return [[NSFileManager documentDirectoryPath] stringByAppendingPathComponent:self.imageName];
 }
 
 @end

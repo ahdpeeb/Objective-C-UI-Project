@@ -18,6 +18,7 @@
 
 @interface ANSImageModel ()
 @property (nonatomic, strong) NSURLSessionTask *task;
+@property (nonatomic, readonly) NSURL *localURL;
 
 - (BOOL)isImageCached;
 - (void)removeCorruptedFile;
@@ -27,6 +28,8 @@
 @end
 
 @implementation ANSInternetImageModel
+
+@dynamic localURL;
 
 @synthesize task = _task;
 
@@ -40,13 +43,8 @@
 #pragma mark -
 #pragma mark Accsessors
 
-- (NSString *)imageName {
-    NSCharacterSet *characterSet = [NSCharacterSet URLUserAllowedCharacterSet];
-    return [self.url.absoluteString stringByAddingPercentEncodingWithAllowedCharacters:characterSet];
-}
-
-- (NSString *)imagePath {
-    return [[NSFileManager documentDirectoryPath] stringByAppendingPathComponent:self.imageName];
+- (NSURL *)localURL {
+    return [NSURL fileURLWithPath:self.imagePath];
 }
 
 - (void)setTask:(NSURLSessionTask *)task {
@@ -58,19 +56,16 @@
     }
 }
 
-
 #pragma mark -
 #pragma mark Privat methods
 
 - (BOOL)isImageCached {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    return [fileManager fileExists:self.imageName inSearchPathDirectory:NSDocumentDirectory];
+    return [[NSFileManager defaultManager] fileExistsAtPath:self.imagePath];
 }
 
 - (void)removeCorruptedFile {
     if ([self isImageCached]) {
-        BOOL isRemoved = [[NSFileManager defaultManager] removeFile:self.imageName
-                         fromSearchPathDirectory:NSDocumentDirectory];
+        BOOL isRemoved = [[NSFileManager defaultManager] removeItemAtPath:self.imagePath error:nil];
         
         isRemoved ? NSLog(@"Removed [OK]") : NSLog(@"Removed [ERROR]");
     }
@@ -82,33 +77,34 @@
 
 - (void)performLoading {
     if ([self isImageCached]) {
-        [super performLoading];
-        if (self.image) {
-            [self removeCorruptedFile];
+        if ([self imageFromUrl:self.localURL]) {
+            [super performLoading];
+            return;
         }
+        
+        [self removeCorruptedFile];
     }
-    
+
     [self loadImage];
 }
 
 - (void)loadImage {
-    __block NSFileManager *manager = [NSFileManager defaultManager];
-    self.task = [[NSURLSession sharedSession]
-                 downloadTaskWithURL:self.url
-                   completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-                       if (!error) {
-                           NSError *moveError = nil;
-                           [manager moveItemAtURL:location
-                                            toURL:[NSURL URLWithString:self.imagePath]
-                                            error:&moveError];
-                           
-                           if (moveError) {
-                               self.image = [self imageFromUrl:self.url];
-                           }
-                           
-                           self.image = [UIImage imageWithContentsOfFile:self.imagePath];
-                        }
-                   }];
+    NSURLSession *session = [NSURLSession sharedSession];
+    self.task = [session downloadTaskWithURL:self.url
+                           completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+                               if (error) {
+                                   self.state = ANSLoadableModelDidFailLoading;
+                                   return;
+                               }
+                               
+                               NSError *moveError = nil;
+                               [[NSFileManager defaultManager] moveItemAtURL:location
+                                                                       toURL:self.localURL
+                                                                       error:&moveError];
+                               
+                               NSURL *imageUrl = moveError ? location : self.localURL;
+                               self.image = [self imageFromUrl:imageUrl];
+                           }];
 }
 
 @end

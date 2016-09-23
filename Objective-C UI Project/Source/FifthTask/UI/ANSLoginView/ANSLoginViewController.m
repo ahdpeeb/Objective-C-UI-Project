@@ -57,7 +57,7 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
         user.firsName = [frind objectForKey:@"first_name"];
         user.lastName = [frind objectForKey:@"last_name"];
         
-        id dataPicture = [[frind objectForKey:@"picture"] objectForKey:@"data"];
+        NSDictionary *dataPicture = [[frind objectForKey:@"picture"] objectForKey:@"data"];
         NSString *URLString = [dataPicture objectForKey:@"url"];
         user.imageUrl = [NSURL URLWithString:URLString];
         
