@@ -12,6 +12,9 @@
 
 #import "ANSFaceBookUser.h"
 
+static NSString * const kANSFirstNameKey = @"first_name";
+static NSString * const kANSLastNameKey = @"first_name";
+
 @interface ANSLoadableUserContext ()
 @property (nonatomic, strong) FBSDKGraphRequestConnection *requestConnection;
 
@@ -20,6 +23,13 @@
 @end
 
 @implementation ANSLoadableUserContext
+
+#pragma mark -
+#pragma mark Initialization and deallocation
+
+- (void)dealloc {
+    [self.requestConnection cancel];
+}
 
 #pragma mark -
 #pragma mark Private Methods;
@@ -34,7 +44,7 @@
                parameters:@{@"fields": @"first_name, last_name, picture.type(large)"}
                HTTPMethod:@"GET"];
     
-    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+   self.requestConnection = [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
                                               NSDictionary *result,
                                               NSError *error) {
         if (error) {
@@ -50,8 +60,8 @@
 
 - (void)fillUserFromResult:(NSDictionary *)result {
     ANSFaceBookUser *user = self.model;
-    user.firsName = [result objectForKey:@"first_name"];
-    user.lastName = [result objectForKey:@"last_name"];
+    user.firsName = [result objectForKey:kANSFirstNameKey];
+    user.lastName = [result objectForKey:kANSLastNameKey];
     
     NSDictionary * dataPicture = [[result objectForKey:@"picture"] objectForKey:@"data"];
     NSString *URLString = [dataPicture objectForKey:@"url"];
