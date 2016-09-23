@@ -17,9 +17,6 @@ static NSString * const kANSImageUrlKey  = @"kANSImageUrlKey";
 
 @interface ANSFaceBookUser ()
 @property (nonatomic, assign)    NSInteger    ID;
-@property (nonatomic, strong)    NSString     *firsName;
-@property (nonatomic, strong)    NSString     *lastName;
-@property (nonatomic, strong)    NSURL        *imageUrl;
 
 @end
 

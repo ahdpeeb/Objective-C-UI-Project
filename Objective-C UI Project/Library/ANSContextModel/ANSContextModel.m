@@ -70,9 +70,7 @@
                 ANSStrongify(self);
                 [self performProcessing];
             });
-
         }
-            
     }
 }
 

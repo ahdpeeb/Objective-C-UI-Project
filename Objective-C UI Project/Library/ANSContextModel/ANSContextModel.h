@@ -9,8 +9,8 @@
 #import "ANSObservableObject.h"
 
 typedef NS_ENUM(NSUInteger, ANSContextState) {
+    ANSContextDidFinishExecution, // what initial state? 
     ANSContextExecuting,
-    ANSContextDidFinishExecution,
     ANSContextDidFailedExecution,
     
     AANSContextStateCount
