@@ -17,16 +17,16 @@
 #import "ANSMacros.h"
 
 @interface ANSFBUserContext ()
-@property (nonatomic, strong) ANSFacebookUser             *user;
+@property (nonatomic, strong) id                           model;
 @property (nonatomic, strong) FBSDKGraphRequestConnection *requestConnection;
 
 @end
 
 @implementation ANSFBUserContext
 
-- (instancetype)initWitUser:(ANSFacebookUser *)user; {
+- (instancetype)initWithModel:(id)model; {
     self = [super init];
-    self.user = user;
+    self.model = model;
     
     return self;
 }
@@ -45,20 +45,15 @@
     return nil;
 }
 
-- (void)fillUserFromResult:(NSDictionary *)result {
+- (void)fillModelFromResult:(NSDictionary *)result {
     
 }
 
 #pragma mark -
 #pragma mark Public methods
 
-- (void)executeForUserState:(ANSUserState)state {
+- (void)execute {
     @synchronized (self) {
-        ANSFacebookUser *user = self.user;
-        if (user.state == state) {
-            return;
-        }
-        
         FBSDKGraphRequest *request = nil;
         request = [[FBSDKGraphRequest alloc]
                    initWithGraphPath:[self graphPathInit]
@@ -73,8 +68,7 @@
                 return;
             }
             
-            [self fillUserFromResult:result];
-            user.state = state;
+            [self fillModelFromResult:result];
         }];
     }
 }

@@ -11,14 +11,14 @@
 #import "ANSFacebookUser.h"
 
 @interface ANSFBUserContext : NSObject
-@property (nonatomic, readonly) ANSFacebookUser *user;
+@property (nonatomic, readonly) id model;
 
-- (instancetype)initWitUser:(ANSFacebookUser *)user;
+- (instancetype)initWithModel:(id)model;
 
-- (void)executeForUserState:(ANSUserState)state;
+- (void)execute;
 - (void)cancel;
 
-- (void)fillUserFromResult:(NSDictionary *)result;
+- (void)fillModelFromResult:(NSDictionary *)result;
 
 // next methods need to me reloaded in child classes:
 // return's graphPath string

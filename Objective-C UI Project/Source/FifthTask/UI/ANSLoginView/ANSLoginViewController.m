@@ -25,9 +25,9 @@
 ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginView);
 
 @interface ANSLoginViewController ()
-@property (nonatomic, strong) ANSFBLoginContext *loginContext;
+@property (nonatomic, strong) ANSFBLoginContext                *loginContext;
 
-@property (nonatomic, strong) ANSFacebookUser *user;
+@property (nonatomic, strong) ANSFacebookUser                  *user;
 @property (nonatomic, strong) ANSProtocolObservationController *contoller;
 
 @end
@@ -57,8 +57,8 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 #pragma mark Private metods
 - (void)loadUser {
     ANSFacebookUser *user = [ANSFacebookUser new];
-    ANSFBLoginContext *context = [[ANSFBLoginContext alloc] initWitUser:user];
-    [context executeForUserState:ANSUserDidLoadID];
+    ANSFBLoginContext *context = [[ANSFBLoginContext alloc] initWithModel:user];
+    [context execute];
 }
 
 

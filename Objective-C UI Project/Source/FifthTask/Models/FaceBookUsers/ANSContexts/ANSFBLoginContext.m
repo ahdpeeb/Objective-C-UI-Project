@@ -8,6 +8,8 @@
 
 #import "ANSFBLoginContext.h"
 
+#import "ANSFacebookUser.h"
+
 @implementation ANSFBLoginContext
 
 - (NSString *)graphPathInit {
@@ -22,9 +24,15 @@
     return @{@"fields": @"id"};
 }
 
-- (void)fillUserFromResult:(NSDictionary *)result {
+- (void)fillModelFromResult:(NSDictionary *)result {
+    ANSFacebookUser *user = self.model;
+    if (user.state == ANSUserDidLoadID) {
+        return;
+    }
+    
     NSString *ID = (NSString *)[result objectForKeyedSubscript:@"id"];
-    self.user.ID = ID.intValue;
+    user.ID = ID.intValue;
+    user.state = ANSUserDidLoadID;
 }
 
 @end

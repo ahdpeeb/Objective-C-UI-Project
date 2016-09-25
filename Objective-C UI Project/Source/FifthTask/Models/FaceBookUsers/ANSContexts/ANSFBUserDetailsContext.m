@@ -18,7 +18,8 @@ static NSString * const kANSLastNameKey = @"last_name";
 #pragma mark Private Methods;
 
 - (NSString *)graphPathInit; {
-    return [NSString stringWithFormat:@"/{user-%lu}", (long)self.user.ID];
+    ANSFacebookUser *user = self.model;
+    return [NSString stringWithFormat:@"/{user-%lu}", (long)user.ID];
 }
 
 - (NSString *)HTTPMethodInit {
@@ -30,7 +31,7 @@ static NSString * const kANSLastNameKey = @"last_name";
 }
 
 - (void)fillUserFromResult:(NSDictionary *)result {
-    ANSFacebookUser *user = self.user;
+    ANSFacebookUser *user = self.model;
     user.firsName = [result objectForKey:kANSFirstNameKey];
     user.lastName = [result objectForKey:kANSLastNameKey];
     
