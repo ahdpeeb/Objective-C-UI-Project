@@ -12,9 +12,11 @@
 #import "ANSLoginViewController.h"
 
 #import "ANSLoginView.h"
-#import "ANSFaceBookUser.h"
+#import "ANSFacebookUser.h"
 #import "ANSFaceBookFriends.h"
 #import "ANSFriendListViewController.h"
+#import "ANSFBLoginContext.h"
+#import "ANSProtocolObservationController.h"
 
 #import "UIViewController+ANSExtension.h"
 
@@ -23,10 +25,10 @@
 ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginView);
 
 @interface ANSLoginViewController ()
-@property (nonatomic, strong) FBSDKLoginManager *LoginManager;
+@property (nonatomic, strong) ANSFBLoginContext *loginContext;
 
-- (void)loadFriends;
-- (NSArray *)usersFromFrinds:(NSArray *)friends;
+@property (nonatomic, strong) ANSFacebookUser *user;
+@property (nonatomic, strong) ANSProtocolObservationController *contoller;
 
 @end
 
@@ -36,7 +38,6 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
-    self.LoginManager = [FBSDKLoginManager new];
     [super viewDidLoad];
 }
 
@@ -44,77 +45,45 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark -
-#pragma mark Private methods
-
-//- (NSArray *)usersFromFrinds:(NSArray *)friends {
-//    NSMutableArray *users = [NSMutableArray new];
-//    for (NSDictionary *frind in friends) {
-//        ANSFaceBookUser *user = [ANSFaceBookUser new];
-//        user.ID = (NSInteger)[frind objectForKey:@"id"];
-//        user.firsName = [frind objectForKey:@"first_name"];
-//        user.lastName = [frind objectForKey:@"last_name"];
-//        
-//        NSDictionary * dataPicture = [[frind objectForKey:@"picture"] objectForKey:@"data"];
-//        NSString *URLString = [dataPicture objectForKey:@"url"];
-//        user.imageUrl = [NSURL URLWithString:URLString];
-//        
-//        NSLog(@"user id = %lu, fullName - %@ %@, picture - %@",user.ID,
-//                                                              user.firsName,
-//                                                              user.lastName,
-//                                                              user.imageUrl);
-//        [users addObject:user];
-//    }
-//    
-//    return [NSArray arrayWithArray:users];
-//}
-
-- (void)loadFriends {
-    if  (![FBSDKAccessToken currentAccessToken]) {
-        return;
+- (void)setUser:(ANSFacebookUser *)user {
+    if (_user != user) {
+        _user = user;
+        
+        self.contoller = [user protocolControllerWithObserver:self];
     }
-    
-    FBSDKGraphRequest *request = nil;
-    request = [[FBSDKGraphRequest alloc]
-              initWithGraphPath:@"me/friends"
-                     parameters:@{@"fields": @"id, first_name, last_name, picture.type(large)"}
-                     HTTPMethod:@"GET"];
-    
-    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
-                                          NSDictionary *result,
-                                          NSError *error) {
-        if (error) {
-            NSLog(@"%@", error);
-            return;
-        }
-        
-        NSArray *friends = [result objectForKey:@"data"];
-        NSArray *users = [self usersFromFrinds:friends];
-        
-        ANSFaceBookFriends *faceBookFriends = [ANSFaceBookFriends new];
-        [faceBookFriends addObjectsInRange:users];
-        NSLog(@"faceBookFriends count = %lu", (unsigned long)faceBookFriends.count);
-        
-        ANSFriendListViewController *controller = [ANSFriendListViewController viewController];
-        controller.friends = faceBookFriends;
-        [self.navigationController pushViewController:controller animated:YES];
-    }];
 }
+
+#pragma mark -
+#pragma mark Private metods
+- (void)loadUser {
+    ANSFacebookUser *user = [ANSFacebookUser new];
+    ANSFBLoginContext *context = [[ANSFBLoginContext alloc] initWitUser:user];
+    [context executeForUserState:ANSUserDidLoadID];
+}
+
 
 #pragma mark -
 #pragma mark Buttons actions
 
 - (IBAction)onLogin:(UIButton *)sender {
-    [self.LoginManager logInWithReadPermissions:@[@"public_profile", @"user_friends"]
+    [[FBSDKLoginManager new] logInWithReadPermissions:@[@"public_profile", @"user_friends"]
                    fromViewController:self
                               handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
                                   BOOL value = result.isCancelled;
                                   if (!error && !value) {
                                       NSLog(@"Loggined");
-                                      [self loadFriends];
+                                      [self loadUser];
                                   }
                               }];
-    
 }
-     
+
+#pragma mark -
+#pragma mark ANSUserStateObserver ptotocol 
+
+- (void)userDidLoadID:(ANSFacebookUser *)user {
+    ANSFriendListViewController *controller = [ANSFriendListViewController viewController];
+    controller.user = user;
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
 @end

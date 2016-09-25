@@ -11,11 +11,12 @@
 #import "ANSFriendListView.h"
 #import "ANSUserCell.h"
 #import "ANSTableViewCell.h"
-#import "ANSFaceBookUser.h"
+#import "ANSFacebookUser.h"
 #import "ANSFaceBookFriends.h"
 #import "ANSImageModel.h"
 #import "ANSImageView.h"
 #import "ANSNameFilterModel.h"
+#import "ANSFaceBookFriends.h"
 
 #import "NSArray+ANSExtension.h"
 #import "UINib+Extension.h"
@@ -38,8 +39,8 @@ static const    NSUInteger kANSSectionsCount                 = 1;
 
 @property (nonatomic, strong)   ANSNameFilterModel                *filteredModel;
 @property (nonatomic, strong)   ANSProtocolObservationController  *filterModelController;
-
-@property (nonatomic, readonly) ANSFaceBookFriends                *presentedModel;
+@property (nonatomic, readonly) ANSArrayModel *presentedModel;
+@property (nonatomic, strong)   ANSFaceBookFriends *friends;
 
 - (void)resignSearchBar;
 - (void)initFilterInfrastructure;
@@ -179,7 +180,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 {
     ANSUserCell *cell = [tableView dequeueReusableCellWithClass:[ANSUserCell class]];
     
-    ANSFaceBookUser *user = self.presentedModel[indexPath.row];
+    ANSFacebookUser *user = self.presentedModel[indexPath.row];
     [cell fillWithUser:user];
 
     return cell;

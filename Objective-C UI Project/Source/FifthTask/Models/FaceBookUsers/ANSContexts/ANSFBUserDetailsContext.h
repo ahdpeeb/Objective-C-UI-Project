@@ -6,8 +6,9 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "ANSContextModel.h"
+#import "ANSFBUserContext.h"
 
-@interface ANSLoadableUserContext : ANSContextModel
+@interface ANSFBUserDetailsContext : ANSFBUserContext
+
 
 @end

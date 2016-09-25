@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ANSLoginViewController : UIViewController 
+#import "ANSFacebookUser.h"
+
+@interface ANSLoginViewController : UIViewController  <ANSUserStateObserver>
 
 - (IBAction)onLogin:(UIButton *)sender;
 

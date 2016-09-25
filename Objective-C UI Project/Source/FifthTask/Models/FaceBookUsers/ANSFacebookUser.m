@@ -5,36 +5,25 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "ANSFaceBookUser.h"
+#import "ANSFacebookUser.h"
 
 #import "NSString+ANSExtension.h"
-#import "ANSLoadableUserContext.h"
+
+#import "ANSImageModel.h"
 
 static NSString * const kANSIDKey        = @"kANSIDKey";
 static NSString * const kANSFirstNameKey = @"kANSFirstNameKey";
 static NSString * const kANSLastNameKey  = @"kANSLastNameKey";
 static NSString * const kANSImageUrlKey  = @"kANSImageUrlKey";
 
-@interface ANSFaceBookUser ()
-@property (nonatomic, assign)    NSInteger    ID;
+@interface ANSFacebookUser ()
 
 @end
 
-@implementation ANSFaceBookUser
+@implementation ANSFacebookUser
 
 @dynamic fullName;
-
-#pragma mark -
-#pragma mark Initialization and deallocation 
-
-- (instancetype)initWithID:(NSUInteger)ID {
-    self = [super init];
-    if (self) {
-        self.ID = ID;
-    }
-    
-    return self;
-}
+@dynamic imageModel; 
 
 #pragma mark -
 #pragma mark Accsessors
@@ -48,7 +37,24 @@ static NSString * const kANSImageUrlKey  = @"kANSImageUrlKey";
 }
 
 #pragma mark -
-#pragma mark PublicMethods
+#pragma mark Private Methods
+
+- (SEL)selectorForState:(NSUInteger)state {
+    switch (state) {
+        case ANSUserDidLoadID:
+            return @selector(userDidLoadID:);
+            
+        case ANSUserDidLoadBasic:
+            return @selector(userDidLoadBasic:);
+            
+        case ANSUserDidLoadDetails:
+            return @selector(userDidLoadDetails:);
+            
+        default:
+            return [super selectorForState:state];
+    }
+}
+
 
 #pragma mark -
 #pragma mark NSCoding protocol
@@ -75,8 +81,8 @@ static NSString * const kANSImageUrlKey  = @"kANSImageUrlKey";
 #pragma mark -
 #pragma mark NSCopying protocol
 
-- (ANSFaceBookUser *)copyWithZone:(NSZone *)zone {
-    ANSFaceBookUser* copy = [[self class] new];
+- (ANSFacebookUser *)copyWithZone:(NSZone *)zone {
+    ANSFacebookUser* copy = [[self class] new];
     if (copy) {
         copy.ID = self.ID;
         copy.firsName = self.firsName;

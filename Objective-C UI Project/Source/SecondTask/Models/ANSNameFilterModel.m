@@ -9,7 +9,7 @@
 #import "ANSNameFilterModel.h"
 
 #import "ANSProtocolObservationController.h"
-#import "ANSFaceBookUser.h"
+#import "ANSFacebookUser.h"
 #import "ANSGCD.h"
 #import "ANSChangeModel.h"
 #import "ANSOneIndexModel.h"
@@ -23,9 +23,9 @@ typedef void(^ANSOperationBlock)(void);
 @property (nonatomic, strong)   ANSProtocolObservationController    *controller;
 @property (atomic, strong)      NSString                            *filterString;
 
-- (void)addUserWithoutNotification:(ANSFaceBookUser *)user;
+- (void)addUserWithoutNotification:(ANSFacebookUser *)user;
 - (void)filterModelByFilterString:(NSString *)filterString;
-- (BOOL)user:(ANSFaceBookUser *)user containsString:(NSString *)string;
+- (BOOL)user:(ANSFacebookUser *)user containsString:(NSString *)string;
 - (void)verifyObject:(id)object
           withString:(NSString *)string
          performBlock:(ANSOperationBlock)block;
@@ -66,7 +66,7 @@ typedef void(^ANSOperationBlock)(void);
 #pragma mark -
 #pragma mark Private methods
 
-- (void)addUserWithoutNotification:(ANSFaceBookUser *)user {
+- (void)addUserWithoutNotification:(ANSFacebookUser *)user {
     [self performBlockWithoutNotification:^{
         [self addObject:user];
     }];
@@ -77,7 +77,7 @@ typedef void(^ANSOperationBlock)(void);
         [self removeAllObjects];
     }];
     
-    for (ANSFaceBookUser *user in self.model) {
+    for (ANSFacebookUser *user in self.model) {
         if (!filterString.length) {
             [self addUserWithoutNotification:user];
         }
@@ -100,7 +100,7 @@ typedef void(^ANSOperationBlock)(void);
     }
 }
 
-- (BOOL)user:(ANSFaceBookUser *)user containsString:(NSString *)string {
+- (BOOL)user:(ANSFacebookUser *)user containsString:(NSString *)string {
     if (!string) {
         return YES;
     }
@@ -115,8 +115,8 @@ typedef void(^ANSOperationBlock)(void);
           withString:(NSString *)string
          performBlock:(ANSOperationBlock)block
 {
-    if ([object isKindOfClass:[ANSFaceBookUser class]]) {
-        if ([self user:(ANSFaceBookUser *)object containsString:string]) {
+    if ([object isKindOfClass:[ANSFacebookUser class]]) {
+        if ([self user:(ANSFacebookUser *)object containsString:string]) {
             block();
         }
     }

@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		93026CD41D464C9100DFCF23 /* Gomer_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 93026CD21D464C9100DFCF23 /* Gomer_2.png */; };
 		93026CD71D464D0900DFCF23 /* Gomer_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 93026CD61D464D0900DFCF23 /* Gomer_1.jpg */; };
-		9315EA6E1D92D7490053D21D /* ANSFaceBookUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA6B1D92D7490053D21D /* ANSFaceBookUser.m */; };
+		9315EA6E1D92D7490053D21D /* ANSFacebookUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA6B1D92D7490053D21D /* ANSFacebookUser.m */; };
 		9315EA731D93EC4D0053D21D /* ANSFaceBookFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA721D93EC4D0053D21D /* ANSFaceBookFriends.m */; };
 		9315EA8A1D9426870053D21D /* libFBSDKCoreKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9315EA871D9426870053D21D /* libFBSDKCoreKit.a */; };
 		9315EA8B1D9426870053D21D /* libFBSDKLoginKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9315EA881D9426870053D21D /* libFBSDKLoginKit.a */; };
 		9315EA8C1D9426870053D21D /* libFBSDKShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9315EA891D9426870053D21D /* libFBSDKShareKit.a */; };
-		9315EA931D955DAB0053D21D /* ANSLoadableUserContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA921D955DAB0053D21D /* ANSLoadableUserContext.m */; };
-		9315EA961D9560D40053D21D /* ANSContextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA951D9560D40053D21D /* ANSContextModel.m */; };
+		9315EA931D955DAB0053D21D /* ANSFBUserDetailsContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA921D955DAB0053D21D /* ANSFBUserDetailsContext.m */; };
+		9315EA961D9560D40053D21D /* ANSFBUserContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA951D9560D40053D21D /* ANSFBUserContext.m */; };
 		935E5A0B1D6F4CA5005F6285 /* aaa.plist in Resources */ = {isa = PBXBuildFile; fileRef = 935E5A0A1D6F4CA5005F6285 /* aaa.plist */; };
 		936727D71D591D25007A796F /* ANSUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C51D591D25007A796F /* ANSUserCell.m */; };
 		936727D81D591D25007A796F /* ANSUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936727C61D591D25007A796F /* ANSUserCell.xib */; };
@@ -101,6 +101,7 @@
 		93C084371D3E380D0077A81C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C084341D3E380D0077A81C /* main.m */; };
 		93C0843C1D3E381F0077A81C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 93C084391D3E381F0077A81C /* Assets.xcassets */; };
 		93C0843D1D3E381F0077A81C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93C0843A1D3E381F0077A81C /* LaunchScreen.storyboard */; };
+		93CF63331D97F93700FFFFF4 /* ANSFBLoginContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 93CF63321D97F93700FFFFF4 /* ANSFBLoginContext.m */; };
 		93E991F71D8F1E2500DCCE1B /* ANSImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E991F11D8F1E2500DCCE1B /* ANSImageModel.m */; };
 		93E991F81D8F1E2500DCCE1B /* ANSImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E991F11D8F1E2500DCCE1B /* ANSImageModel.m */; };
 		93E991F91D8F1E2500DCCE1B /* ANSInternetImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E991F41D8F1E2500DCCE1B /* ANSInternetImageModel.m */; };
@@ -133,17 +134,17 @@
 		6EBF0228B73B450A5AD3DBF2 /* libPods-Objective-C UI ProjectUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Objective-C UI ProjectUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93026CD21D464C9100DFCF23 /* Gomer_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gomer_2.png; sourceTree = "<group>"; };
 		93026CD61D464D0900DFCF23 /* Gomer_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Gomer_1.jpg; sourceTree = "<group>"; };
-		9315EA6A1D92D7490053D21D /* ANSFaceBookUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFaceBookUser.h; sourceTree = "<group>"; };
-		9315EA6B1D92D7490053D21D /* ANSFaceBookUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFaceBookUser.m; sourceTree = "<group>"; };
+		9315EA6A1D92D7490053D21D /* ANSFacebookUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFacebookUser.h; sourceTree = "<group>"; };
+		9315EA6B1D92D7490053D21D /* ANSFacebookUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFacebookUser.m; sourceTree = "<group>"; };
 		9315EA711D93EC4D0053D21D /* ANSFaceBookFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSFaceBookFriends.h; path = ANSFacebookFriends/ANSFaceBookFriends.h; sourceTree = "<group>"; };
 		9315EA721D93EC4D0053D21D /* ANSFaceBookFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSFaceBookFriends.m; path = ANSFacebookFriends/ANSFaceBookFriends.m; sourceTree = "<group>"; };
 		9315EA871D9426870053D21D /* libFBSDKCoreKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKCoreKit.a; path = "Pods/../build/Debug-iphoneos/FBSDKCoreKit/libFBSDKCoreKit.a"; sourceTree = "<group>"; };
 		9315EA881D9426870053D21D /* libFBSDKLoginKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKLoginKit.a; path = "Pods/../build/Debug-iphoneos/FBSDKLoginKit/libFBSDKLoginKit.a"; sourceTree = "<group>"; };
 		9315EA891D9426870053D21D /* libFBSDKShareKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKShareKit.a; path = "Pods/../build/Debug-iphoneos/FBSDKShareKit/libFBSDKShareKit.a"; sourceTree = "<group>"; };
-		9315EA911D955DAB0053D21D /* ANSLoadableUserContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLoadableUserContext.h; sourceTree = "<group>"; };
-		9315EA921D955DAB0053D21D /* ANSLoadableUserContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSLoadableUserContext.m; sourceTree = "<group>"; };
-		9315EA941D9560D40053D21D /* ANSContextModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSContextModel.h; path = ANSContextModel/ANSContextModel.h; sourceTree = "<group>"; };
-		9315EA951D9560D40053D21D /* ANSContextModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSContextModel.m; path = ANSContextModel/ANSContextModel.m; sourceTree = "<group>"; };
+		9315EA911D955DAB0053D21D /* ANSFBUserDetailsContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFBUserDetailsContext.h; sourceTree = "<group>"; };
+		9315EA921D955DAB0053D21D /* ANSFBUserDetailsContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFBUserDetailsContext.m; sourceTree = "<group>"; };
+		9315EA941D9560D40053D21D /* ANSFBUserContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSFBUserContext.h; path = ANSContextModel/ANSFBUserContext.h; sourceTree = "<group>"; };
+		9315EA951D9560D40053D21D /* ANSFBUserContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSFBUserContext.m; path = ANSContextModel/ANSFBUserContext.m; sourceTree = "<group>"; };
 		935E5A0A1D6F4CA5005F6285 /* aaa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = aaa.plist; sourceTree = "<group>"; };
 		936727C41D591D25007A796F /* ANSUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSUserCell.h; sourceTree = "<group>"; };
 		936727C51D591D25007A796F /* ANSUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSUserCell.m; sourceTree = "<group>"; };
@@ -251,6 +252,8 @@
 		93C084341D3E380D0077A81C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		93C084391D3E381F0077A81C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		93C0843B1D3E381F0077A81C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		93CF63311D97F93700FFFFF4 /* ANSFBLoginContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFBLoginContext.h; sourceTree = "<group>"; };
+		93CF63321D97F93700FFFFF4 /* ANSFBLoginContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFBLoginContext.m; sourceTree = "<group>"; };
 		93E991EF1D8F1E2500DCCE1B /* ANSImageModel+ANSPrivatExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANSImageModel+ANSPrivatExtension.h"; sourceTree = "<group>"; };
 		93E991F01D8F1E2500DCCE1B /* ANSImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSImageModel.h; sourceTree = "<group>"; };
 		93E991F11D8F1E2500DCCE1B /* ANSImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSImageModel.m; sourceTree = "<group>"; };
@@ -322,9 +325,8 @@
 		9315EA691D92D7490053D21D /* ANSFaceBookUser */ = {
 			isa = PBXGroup;
 			children = (
-				9315EA6A1D92D7490053D21D /* ANSFaceBookUser.h */,
-				9315EA6B1D92D7490053D21D /* ANSFaceBookUser.m */,
-				9315EA901D955DAB0053D21D /* ANSContexts */,
+				9315EA6A1D92D7490053D21D /* ANSFacebookUser.h */,
+				9315EA6B1D92D7490053D21D /* ANSFacebookUser.m */,
 			);
 			name = ANSFaceBookUser;
 			path = FaceBookUsers;
@@ -343,17 +345,20 @@
 		9315EA901D955DAB0053D21D /* ANSContexts */ = {
 			isa = PBXGroup;
 			children = (
-				9315EA911D955DAB0053D21D /* ANSLoadableUserContext.h */,
-				9315EA921D955DAB0053D21D /* ANSLoadableUserContext.m */,
+				93CF63311D97F93700FFFFF4 /* ANSFBLoginContext.h */,
+				93CF63321D97F93700FFFFF4 /* ANSFBLoginContext.m */,
+				9315EA911D955DAB0053D21D /* ANSFBUserDetailsContext.h */,
+				9315EA921D955DAB0053D21D /* ANSFBUserDetailsContext.m */,
 			);
-			path = ANSContexts;
+			name = ANSContexts;
+			path = FaceBookUsers/ANSContexts;
 			sourceTree = "<group>";
 		};
 		9315EA971D9560DD0053D21D /* ANScontextModel */ = {
 			isa = PBXGroup;
 			children = (
-				9315EA941D9560D40053D21D /* ANSContextModel.h */,
-				9315EA951D9560D40053D21D /* ANSContextModel.m */,
+				9315EA941D9560D40053D21D /* ANSFBUserContext.h */,
+				9315EA951D9560D40053D21D /* ANSFBUserContext.m */,
 			);
 			name = ANScontextModel;
 			sourceTree = "<group>";
@@ -867,6 +872,7 @@
 			children = (
 				9315EA691D92D7490053D21D /* ANSFaceBookUser */,
 				9315EA741D93EC5D0053D21D /* ANSFaceBookFriends */,
+				9315EA901D955DAB0053D21D /* ANSContexts */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -943,7 +949,7 @@
 		93C083FF1D3E367F0077A81C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Andriiev.Mykola;
 				TargetAttributes = {
 					93C084061D3E367F0077A81C = {
@@ -1143,7 +1149,7 @@
 				939BAE071D75937400B4D610 /* ANSChangeModel+UITableView.m in Sources */,
 				93E992041D8F1FF400DCCE1B /* ANSCacheStorage.m in Sources */,
 				939BAE091D75937400B4D610 /* ANSOneIndexModel.m in Sources */,
-				9315EA931D955DAB0053D21D /* ANSLoadableUserContext.m in Sources */,
+				9315EA931D955DAB0053D21D /* ANSFBUserDetailsContext.m in Sources */,
 				93E991F71D8F1E2500DCCE1B /* ANSImageModel.m in Sources */,
 				939BAE201D75937400B4D610 /* NSMutableArray+ANSExtension.m in Sources */,
 				939BAE131D75937400B4D610 /* ANSObservableObject.m in Sources */,
@@ -1159,12 +1165,13 @@
 				939BAE2A1D75937400B4D610 /* UIViewController+ANSExtension.m in Sources */,
 				939BAE281D75937400B4D610 /* UIScreen+ANSExtension.m in Sources */,
 				939BAE061D75937400B4D610 /* ANSArrayModel.m in Sources */,
-				9315EA961D9560D40053D21D /* ANSContextModel.m in Sources */,
+				93CF63331D97F93700FFFFF4 /* ANSFBLoginContext.m in Sources */,
+				9315EA961D9560D40053D21D /* ANSFBUserContext.m in Sources */,
 				939BAE0D1D75937400B4D610 /* ANSRangeChangeModel+UITableView.m in Sources */,
 				93C084351D3E380D0077A81C /* ANSAppDelegate.m in Sources */,
 				939BAE1C1D75937400B4D610 /* NSTimer+ANSExtension.m in Sources */,
 				939BAE1E1D75937400B4D610 /* NSBundle+ANSExtenison.m in Sources */,
-				9315EA6E1D92D7490053D21D /* ANSFaceBookUser.m in Sources */,
+				9315EA6E1D92D7490053D21D /* ANSFacebookUser.m in Sources */,
 				939BAE151D75937400B4D610 /* ANSObservationController.m in Sources */,
 				939BAE141D75937400B4D610 /* ANSBlockObservationController.m in Sources */,
 			);
@@ -1240,8 +1247,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1263,7 +1272,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1283,8 +1292,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1300,7 +1311,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
