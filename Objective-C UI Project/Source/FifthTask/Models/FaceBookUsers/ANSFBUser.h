@@ -8,15 +8,15 @@
 
 #import "ANSObservableObject.h"
 
-@class ANSFacebookUser;
+@class ANSFBUser;
 @class ANSImageModel;
 
 @protocol ANSUserStateObserver <NSObject>
 
 @optional;
-- (void)userDidLoadID:(ANSFacebookUser *)user;
-- (void)userDidLoadBasic:(ANSFacebookUser *)user;
-- (void)userDidLoadDetails:(ANSFacebookUser *)user;
+- (void)userDidLoadID:(ANSFBUser *)user;
+- (void)userDidLoadBasic:(ANSFBUser *)user;
+- (void)userDidLoadDetails:(ANSFBUser *)user;
 
 @end
 
@@ -29,7 +29,7 @@ typedef NS_ENUM(NSUInteger, ANSUserState) {
     ANSUserStateCount,
 };
 
-@interface ANSFacebookUser : ANSObservableObject  <NSCoding, NSCopying>
+@interface ANSFBUser : ANSObservableObject  <NSCoding, NSCopying>
 @property (nonatomic, assign)    NSInteger      ID;
 @property (nonatomic, strong)    NSString       *firsName;
 @property (nonatomic, strong)    NSString       *lastName;

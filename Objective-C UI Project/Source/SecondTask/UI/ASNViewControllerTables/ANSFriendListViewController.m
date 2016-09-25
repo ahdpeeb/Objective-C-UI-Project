@@ -11,12 +11,12 @@
 #import "ANSFriendListView.h"
 #import "ANSUserCell.h"
 #import "ANSTableViewCell.h"
-#import "ANSFacebookUser.h"
-#import "ANSFaceBookFriends.h"
 #import "ANSImageModel.h"
 #import "ANSImageView.h"
 #import "ANSNameFilterModel.h"
-#import "ANSFaceBookFriends.h"
+#import "ANSFBUser.h"
+#import "ANSFBFriends.h"
+#import "ANSFBFriendsContext.h"
 
 #import "NSArray+ANSExtension.h"
 #import "UINib+Extension.h"
@@ -35,12 +35,15 @@ static          NSString * const kANSTitleForHeaderSection   = @"User's friends"
 static const    NSUInteger kANSSectionsCount                 = 1;
 
 @interface ANSFriendListViewController ()
+@property (nonatomic, strong)   ANSFBFriends *friends;
 @property (nonatomic, strong)   ANSProtocolObservationController  *usersController;
 
 @property (nonatomic, strong)   ANSNameFilterModel                *filteredModel;
 @property (nonatomic, strong)   ANSProtocolObservationController  *filterModelController;
-@property (nonatomic, readonly) ANSArrayModel *presentedModel;
-@property (nonatomic, strong)   ANSFaceBookFriends *friends;
+
+@property (nonatomic, strong)   ANSFBFriendsContext *friendsContext;
+
+@property (nonatomic, readonly) ANSArrayModel *presentedModel;;
 
 - (void)resignSearchBar;
 - (void)initFilterInfrastructure;
@@ -56,7 +59,19 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 #pragma mark -
 #pragma mark Accsessors
 
-- (void)setFriends:(ANSFaceBookFriends *)friends {
+- (void)setUser:(ANSFBUser *)user {
+    if (_user != user) {
+        _user = user;
+        
+        self.friends = [ANSFBFriends new];
+        ANSFBFriendsContext *context = [[ANSFBFriendsContext alloc] initWithModel:self.friends];
+        self.friendsContext = context;
+        context.user = user;
+        [context execute];
+    }
+}
+
+- (void)setFriends:(ANSFBFriends *)friends {
     if (_friends != friends) {
         _friends = friends;
         
@@ -103,7 +118,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 }
 
 - (void)initFilterInfrastructure {
-    ANSFaceBookFriends *friends = self.friends;
+    ANSFBFriends *friends = self.friends;
     ANSNameFilterModel *nameFilterModel = [[ANSNameFilterModel alloc]
                                            initWithObservableModel:friends];
     self.filteredModel = nameFilterModel;
@@ -180,7 +195,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 {
     ANSUserCell *cell = [tableView dequeueReusableCellWithClass:[ANSUserCell class]];
     
-    ANSFacebookUser *user = self.presentedModel[indexPath.row];
+    ANSFBUser *user = self.presentedModel[indexPath.row];
     [cell fillWithUser:user];
 
     return cell;
@@ -267,7 +282,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     ANSPerformInMainQueue(dispatch_async, ^{
         UITableView *table = self.friendListView.tableView;
         
-        if ([arrayModel isMemberOfClass:[ANSFaceBookFriends class]]) {
+        if ([arrayModel isMemberOfClass:[ANSFBFriends class]]) {
             [model applyToTableView:table];
             NSLog(@"%@ notified collectionDidUpdate, - %lu object", arrayModel, (unsigned long)arrayModel.count);
         } else {

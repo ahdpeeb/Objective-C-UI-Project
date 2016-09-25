@@ -11,7 +11,7 @@
 
 #import "ANSFBUserContext.h"
 
-#import "ANSFacebookUser.h"
+#import "ANSFBUser.h"
 #import "ANSGCD.h"
 
 #import "ANSMacros.h"

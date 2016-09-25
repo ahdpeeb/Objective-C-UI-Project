@@ -5,7 +5,7 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "ANSFacebookUser.h"
+#import "ANSFBUser.h"
 
 #import "NSString+ANSExtension.h"
 
@@ -16,11 +16,11 @@ static NSString * const kANSFirstNameKey = @"kANSFirstNameKey";
 static NSString * const kANSLastNameKey  = @"kANSLastNameKey";
 static NSString * const kANSImageUrlKey  = @"kANSImageUrlKey";
 
-@interface ANSFacebookUser ()
+@interface ANSFBUser ()
 
 @end
 
-@implementation ANSFacebookUser
+@implementation ANSFBUser
 
 @dynamic fullName;
 @dynamic imageModel; 
@@ -81,8 +81,8 @@ static NSString * const kANSImageUrlKey  = @"kANSImageUrlKey";
 #pragma mark -
 #pragma mark NSCopying protocol
 
-- (ANSFacebookUser *)copyWithZone:(NSZone *)zone {
-    ANSFacebookUser* copy = [[self class] new];
+- (ANSFBUser *)copyWithZone:(NSZone *)zone {
+    ANSFBUser* copy = [[self class] new];
     if (copy) {
         copy.ID = self.ID;
         copy.firsName = self.firsName;

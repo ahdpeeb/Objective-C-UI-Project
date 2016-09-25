@@ -8,9 +8,12 @@
 
 #import "ANSFBLoginContext.h"
 
-#import "ANSFacebookUser.h"
+#import "ANSFBUser.h"
 
 @implementation ANSFBLoginContext
+
+#pragma mark -
+#pragma mark Reloaded Methods
 
 - (NSString *)graphPathInit {
     return @"me";
@@ -25,7 +28,7 @@
 }
 
 - (void)fillModelFromResult:(NSDictionary *)result {
-    ANSFacebookUser *user = self.model;
+    ANSFBUser *user = self.model;
     if (user.state == ANSUserDidLoadID) {
         return;
     }

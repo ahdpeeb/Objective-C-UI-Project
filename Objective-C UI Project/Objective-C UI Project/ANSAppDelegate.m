@@ -13,7 +13,7 @@
 #import "ANSLoginViewController.h"
 
 #import "ANSFriendListViewController.h"
-#import "ANSFacebookUser.h"
+#import "ANSFBUser.h"
 #import "ANSChangeModel.h"
 
 #import "NSArray+ANSExtension.h"

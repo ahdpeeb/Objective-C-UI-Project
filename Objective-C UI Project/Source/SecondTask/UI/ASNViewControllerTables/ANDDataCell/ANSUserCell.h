@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class ANSFaceBookUser;
+@class ANSFBUser;
 @class ANSImageView;
 @class ANSLoadingView;
 
@@ -17,6 +17,6 @@
 @property (nonatomic, strong) IBOutlet ANSImageView     *userImageView;
 @property (nonatomic, strong) IBOutlet ANSLoadingView   *loadingView;
 
-- (void)fillWithUser:(ANSFaceBookUser *)user;
+- (void)fillWithUser:(ANSFBUser *)user;
 
 @end

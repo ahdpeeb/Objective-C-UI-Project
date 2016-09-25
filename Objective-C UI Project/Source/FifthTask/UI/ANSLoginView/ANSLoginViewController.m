@@ -12,8 +12,8 @@
 #import "ANSLoginViewController.h"
 
 #import "ANSLoginView.h"
-#import "ANSFacebookUser.h"
-#import "ANSFaceBookFriends.h"
+#import "ANSFBUser.h"
+#import "ANSFBFriends.h"
 #import "ANSFriendListViewController.h"
 #import "ANSFBLoginContext.h"
 #import "ANSProtocolObservationController.h"
@@ -27,7 +27,7 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 @interface ANSLoginViewController ()
 @property (nonatomic, strong) ANSFBLoginContext                *loginContext;
 
-@property (nonatomic, strong) ANSFacebookUser                  *user;
+@property (nonatomic, strong) ANSFBUser                  *user;
 @property (nonatomic, strong) ANSProtocolObservationController *contoller;
 
 @end
@@ -45,7 +45,7 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
     [super didReceiveMemoryWarning];
 }
 
-- (void)setUser:(ANSFacebookUser *)user {
+- (void)setUser:(ANSFBUser *)user {
     if (_user != user) {
         _user = user;
         
@@ -56,7 +56,7 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 #pragma mark -
 #pragma mark Private metods
 - (void)loadUser {
-    ANSFacebookUser *user = [ANSFacebookUser new];
+    ANSFBUser *user = [ANSFBUser new];
     self.user = user;
     ANSFBLoginContext *context = [[ANSFBLoginContext alloc] initWithModel:user];
     
@@ -82,7 +82,7 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 #pragma mark -
 #pragma mark ANSUserStateObserver ptotocol 
 
-- (void)userDidLoadID:(ANSFacebookUser *)user {
+- (void)userDidLoadID:(ANSFBUser *)user {
     ANSFriendListViewController *controller = [ANSFriendListViewController viewController];
     controller.user = user;
     [self.navigationController pushViewController:controller animated:YES];

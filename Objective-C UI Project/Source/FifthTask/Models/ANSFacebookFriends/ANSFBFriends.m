@@ -1,5 +1,5 @@
 //
-//  ANSFaceBookFriends.m
+//  ANSFBFriends.m
 //  Objective-C UI Project
 //
 //  Created by Nikola Andriiev on 22.09.16.
@@ -7,25 +7,27 @@
 //
 #import <UIKit/UIKit.h>
 
-#import "ANSFaceBookFriends.h"
+#import "ANSFBFriends.h"
 
-#import "ANSGCD.h"
+#import "ANSNameFilterModel.h"
+#import "ANSFBUser.h"
+
 #import "NSArray+ANSExtension.h"
 #import "NSFileManager+ANSExtension.h"
-#import "ANSNameFilterModel.h"
+#import "ANSGCD.h"
 
 #import "ANSMacros.h"
 
 static NSString * const kANSPlistName = @"aaa";
 
-@interface ANSFaceBookFriends ()
+@interface ANSFBFriends ()
 @property (nonatomic, strong) NSMutableDictionary *observationHandlers;
 
 - (SEL)selectorForState:(NSUInteger)state;
 
 @end
 
-@implementation ANSFaceBookFriends
+@implementation ANSFBFriends
 
 #pragma mark -
 #pragma mark Initialization and deallocation

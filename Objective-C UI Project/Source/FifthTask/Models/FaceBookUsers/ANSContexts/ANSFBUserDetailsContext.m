@@ -7,7 +7,7 @@
 //
 #import "ANSFBUserDetailsContext.h"
 
-#import "ANSFacebookUser.h"
+#import "ANSFBUser.h"
 
 static NSString * const kANSFirstNameKey = @"first_name";
 static NSString * const kANSLastNameKey = @"last_name";
@@ -18,7 +18,7 @@ static NSString * const kANSLastNameKey = @"last_name";
 #pragma mark Private Methods;
 
 - (NSString *)graphPathInit; {
-    ANSFacebookUser *user = self.model;
+    ANSFBUser *user = self.model;
     return [NSString stringWithFormat:@"/{user-%lu}", (long)user.ID];
 }
 
@@ -31,7 +31,7 @@ static NSString * const kANSLastNameKey = @"last_name";
 }
 
 - (void)fillUserFromResult:(NSDictionary *)result {
-    ANSFacebookUser *user = self.model;
+    ANSFBUser *user = self.model;
     user.firsName = [result objectForKey:kANSFirstNameKey];
     user.lastName = [result objectForKey:kANSLastNameKey];
     

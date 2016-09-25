@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "ANSArrayModel.h"
-#import "ANSFaceBookFriends.h"
+#import "ANSFBFriends.h"
 
 @class ANSNameFilterModel;
 

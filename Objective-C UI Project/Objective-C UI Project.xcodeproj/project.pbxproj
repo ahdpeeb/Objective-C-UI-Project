@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		93026CD41D464C9100DFCF23 /* Gomer_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 93026CD21D464C9100DFCF23 /* Gomer_2.png */; };
 		93026CD71D464D0900DFCF23 /* Gomer_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 93026CD61D464D0900DFCF23 /* Gomer_1.jpg */; };
-		9315EA6E1D92D7490053D21D /* ANSFacebookUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA6B1D92D7490053D21D /* ANSFacebookUser.m */; };
-		9315EA731D93EC4D0053D21D /* ANSFaceBookFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA721D93EC4D0053D21D /* ANSFaceBookFriends.m */; };
+		9302D7BD1D981385003CD9B8 /* ANSFBFriendsContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7BC1D981385003CD9B8 /* ANSFBFriendsContext.m */; };
+		9315EA6E1D92D7490053D21D /* ANSFBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA6B1D92D7490053D21D /* ANSFBUser.m */; };
+		9315EA731D93EC4D0053D21D /* ANSFBFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA721D93EC4D0053D21D /* ANSFBFriends.m */; };
 		9315EA8A1D9426870053D21D /* libFBSDKCoreKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9315EA871D9426870053D21D /* libFBSDKCoreKit.a */; };
 		9315EA8B1D9426870053D21D /* libFBSDKLoginKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9315EA881D9426870053D21D /* libFBSDKLoginKit.a */; };
 		9315EA8C1D9426870053D21D /* libFBSDKShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9315EA891D9426870053D21D /* libFBSDKShareKit.a */; };
@@ -134,10 +135,12 @@
 		6EBF0228B73B450A5AD3DBF2 /* libPods-Objective-C UI ProjectUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Objective-C UI ProjectUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93026CD21D464C9100DFCF23 /* Gomer_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gomer_2.png; sourceTree = "<group>"; };
 		93026CD61D464D0900DFCF23 /* Gomer_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Gomer_1.jpg; sourceTree = "<group>"; };
-		9315EA6A1D92D7490053D21D /* ANSFacebookUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFacebookUser.h; sourceTree = "<group>"; };
-		9315EA6B1D92D7490053D21D /* ANSFacebookUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFacebookUser.m; sourceTree = "<group>"; };
-		9315EA711D93EC4D0053D21D /* ANSFaceBookFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSFaceBookFriends.h; path = ANSFacebookFriends/ANSFaceBookFriends.h; sourceTree = "<group>"; };
-		9315EA721D93EC4D0053D21D /* ANSFaceBookFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSFaceBookFriends.m; path = ANSFacebookFriends/ANSFaceBookFriends.m; sourceTree = "<group>"; };
+		9302D7BB1D981385003CD9B8 /* ANSFBFriendsContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFBFriendsContext.h; sourceTree = "<group>"; };
+		9302D7BC1D981385003CD9B8 /* ANSFBFriendsContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFBFriendsContext.m; sourceTree = "<group>"; };
+		9315EA6A1D92D7490053D21D /* ANSFBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFBUser.h; sourceTree = "<group>"; };
+		9315EA6B1D92D7490053D21D /* ANSFBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFBUser.m; sourceTree = "<group>"; };
+		9315EA711D93EC4D0053D21D /* ANSFBFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSFBFriends.h; path = ANSFacebookFriends/ANSFBFriends.h; sourceTree = "<group>"; };
+		9315EA721D93EC4D0053D21D /* ANSFBFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSFBFriends.m; path = ANSFacebookFriends/ANSFBFriends.m; sourceTree = "<group>"; };
 		9315EA871D9426870053D21D /* libFBSDKCoreKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKCoreKit.a; path = "Pods/../build/Debug-iphoneos/FBSDKCoreKit/libFBSDKCoreKit.a"; sourceTree = "<group>"; };
 		9315EA881D9426870053D21D /* libFBSDKLoginKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKLoginKit.a; path = "Pods/../build/Debug-iphoneos/FBSDKLoginKit/libFBSDKLoginKit.a"; sourceTree = "<group>"; };
 		9315EA891D9426870053D21D /* libFBSDKShareKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKShareKit.a; path = "Pods/../build/Debug-iphoneos/FBSDKShareKit/libFBSDKShareKit.a"; sourceTree = "<group>"; };
@@ -322,11 +325,38 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		9302D7B91D98130E003CD9B8 /* ANSFBLoginContext */ = {
+			isa = PBXGroup;
+			children = (
+				93CF63311D97F93700FFFFF4 /* ANSFBLoginContext.h */,
+				93CF63321D97F93700FFFFF4 /* ANSFBLoginContext.m */,
+			);
+			name = ANSFBLoginContext;
+			sourceTree = "<group>";
+		};
+		9302D7BA1D98132A003CD9B8 /* ANSFBUserDetailsContext */ = {
+			isa = PBXGroup;
+			children = (
+				9315EA911D955DAB0053D21D /* ANSFBUserDetailsContext.h */,
+				9315EA921D955DAB0053D21D /* ANSFBUserDetailsContext.m */,
+			);
+			name = ANSFBUserDetailsContext;
+			sourceTree = "<group>";
+		};
+		9302D7BE1D98138E003CD9B8 /* ANSFBFriendsContext */ = {
+			isa = PBXGroup;
+			children = (
+				9302D7BB1D981385003CD9B8 /* ANSFBFriendsContext.h */,
+				9302D7BC1D981385003CD9B8 /* ANSFBFriendsContext.m */,
+			);
+			name = ANSFBFriendsContext;
+			sourceTree = "<group>";
+		};
 		9315EA691D92D7490053D21D /* ANSFaceBookUser */ = {
 			isa = PBXGroup;
 			children = (
-				9315EA6A1D92D7490053D21D /* ANSFacebookUser.h */,
-				9315EA6B1D92D7490053D21D /* ANSFacebookUser.m */,
+				9315EA6A1D92D7490053D21D /* ANSFBUser.h */,
+				9315EA6B1D92D7490053D21D /* ANSFBUser.m */,
 			);
 			name = ANSFaceBookUser;
 			path = FaceBookUsers;
@@ -335,8 +365,8 @@
 		9315EA741D93EC5D0053D21D /* ANSFaceBookFriends */ = {
 			isa = PBXGroup;
 			children = (
-				9315EA711D93EC4D0053D21D /* ANSFaceBookFriends.h */,
-				9315EA721D93EC4D0053D21D /* ANSFaceBookFriends.m */,
+				9315EA711D93EC4D0053D21D /* ANSFBFriends.h */,
+				9315EA721D93EC4D0053D21D /* ANSFBFriends.m */,
 				939BAE2C1D75C79300B4D610 /* ANSFilterModel */,
 			);
 			name = ANSFaceBookFriends;
@@ -345,10 +375,9 @@
 		9315EA901D955DAB0053D21D /* ANSContexts */ = {
 			isa = PBXGroup;
 			children = (
-				93CF63311D97F93700FFFFF4 /* ANSFBLoginContext.h */,
-				93CF63321D97F93700FFFFF4 /* ANSFBLoginContext.m */,
-				9315EA911D955DAB0053D21D /* ANSFBUserDetailsContext.h */,
-				9315EA921D955DAB0053D21D /* ANSFBUserDetailsContext.m */,
+				9302D7B91D98130E003CD9B8 /* ANSFBLoginContext */,
+				9302D7BE1D98138E003CD9B8 /* ANSFBFriendsContext */,
+				9302D7BA1D98132A003CD9B8 /* ANSFBUserDetailsContext */,
 			);
 			name = ANSContexts;
 			path = FaceBookUsers/ANSContexts;
@@ -1142,7 +1171,7 @@
 				939BAE081D75937400B4D610 /* ANSChangeModel.m in Sources */,
 				939BAE231D75937400B4D610 /* NSString+ANSExtension.m in Sources */,
 				9376C8351D79A09E00E6A3EF /* ANSLoadableModel.m in Sources */,
-				9315EA731D93EC4D0053D21D /* ANSFaceBookFriends.m in Sources */,
+				9315EA731D93EC4D0053D21D /* ANSFBFriends.m in Sources */,
 				939BAE0B1D75937400B4D610 /* ANSTwoIndexModel.m in Sources */,
 				93C084371D3E380D0077A81C /* main.m in Sources */,
 				9376C8461D79DFB500E6A3EF /* ANSLoadingView.m in Sources */,
@@ -1171,8 +1200,9 @@
 				93C084351D3E380D0077A81C /* ANSAppDelegate.m in Sources */,
 				939BAE1C1D75937400B4D610 /* NSTimer+ANSExtension.m in Sources */,
 				939BAE1E1D75937400B4D610 /* NSBundle+ANSExtenison.m in Sources */,
-				9315EA6E1D92D7490053D21D /* ANSFacebookUser.m in Sources */,
+				9315EA6E1D92D7490053D21D /* ANSFBUser.m in Sources */,
 				939BAE151D75937400B4D610 /* ANSObservationController.m in Sources */,
+				9302D7BD1D981385003CD9B8 /* ANSFBFriendsContext.m in Sources */,
 				939BAE141D75937400B4D610 /* ANSBlockObservationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

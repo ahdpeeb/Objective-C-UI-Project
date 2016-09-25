@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ANSFacebookUser.h"
+#import "ANSFBUser.h"
 
 @interface ANSFBUserContext : NSObject
 @property (nonatomic, readonly) id model;

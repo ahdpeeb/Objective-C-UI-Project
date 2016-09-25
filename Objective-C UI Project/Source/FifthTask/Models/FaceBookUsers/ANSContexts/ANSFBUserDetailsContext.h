@@ -10,5 +10,4 @@
 
 @interface ANSFBUserDetailsContext : ANSFBUserContext
 
-
 @end

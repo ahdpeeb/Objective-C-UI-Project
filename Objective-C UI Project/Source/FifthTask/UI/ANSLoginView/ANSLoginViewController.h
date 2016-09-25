@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ANSFacebookUser.h"
+#import "ANSFBUser.h"
 
 @interface ANSLoginViewController : UIViewController  <ANSUserStateObserver>
 
