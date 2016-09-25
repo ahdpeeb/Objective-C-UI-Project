@@ -32,7 +32,7 @@ static NSString * const kANSLastNameKey = @"last_name";
 
 - (void)fillUserFromResult:(NSDictionary *)result {
     ANSFBUser *user = self.model;
-    user.firsName = [result objectForKey:kANSFirstNameKey];
+    user.firstName = [result objectForKey:kANSFirstNameKey];
     user.lastName = [result objectForKey:kANSLastNameKey];
     
     NSDictionary * dataPicture = [[result objectForKey:@"picture"] objectForKey:@"data"];
@@ -40,7 +40,7 @@ static NSString * const kANSLastNameKey = @"last_name";
     user.imageUrl = [NSURL URLWithString:URLString];
     
     NSLog(@"user id = %lu, fullName - %@ %@, picture - %@",(long)user.ID,
-          user.firsName,
+          user.firstName,
           user.lastName,
           user.imageUrl);
 }

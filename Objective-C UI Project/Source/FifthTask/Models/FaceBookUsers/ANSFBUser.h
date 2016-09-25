@@ -5,6 +5,7 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 #import "ANSObservableObject.h"
 
@@ -31,8 +32,8 @@ typedef NS_ENUM(NSUInteger, ANSUserState) {
 
 @interface ANSFBUser : ANSObservableObject  <NSCoding, NSCopying>
 @property (nonatomic, assign)    NSInteger      ID;
-@property (nonatomic, strong)    NSString       *firsName;
-@property (nonatomic, strong)    NSString       *lastName;
+@property (nonatomic, copy)      NSString       *firstName;
+@property (nonatomic, copy)      NSString       *lastName;
 @property (nonatomic, strong)    NSURL          *imageUrl;
 
 @property (nonatomic, readonly) NSString        *fullName;

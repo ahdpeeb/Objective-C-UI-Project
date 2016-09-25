@@ -34,7 +34,7 @@
     }
     
     NSString *ID = (NSString *)[result objectForKeyedSubscript:@"id"];
-    user.ID = ID.intValue;
+    user.ID = ID.doubleValue;
     user.state = ANSUserDidLoadID;
 }
 

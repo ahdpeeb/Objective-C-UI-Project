@@ -23,7 +23,7 @@
 
 - (NSString *)graphPathInit {
     ANSFBUser *user = self.user;
-    return [NSString stringWithFormat:@"/{user-%lu}/friends", (long)user.ID];
+    return [NSString stringWithFormat:@"%lu/friends", (long)user.ID];
 }
 
 - (NSString *)HTTPMethodInit {
@@ -31,12 +31,12 @@
 }
 
 - (NSDictionary *)parametresInit {
-    return @{@"fields":@"id" @"first_name, last_name, picture.type(large)"};
+    return @{@"fields":@"id, first_name, last_name, picture.type(large)"};
 }
 
 - (void)fillModelFromResult:(NSDictionary *)result {
     ANSFBFriends *friends = self.model;
-    if (friends.state != ANSLoadableModelDidLoad) {
+    if (friends.state == ANSLoadableModelDidLoad) {
         return;
     }
     
@@ -58,7 +58,7 @@
     for (id dataUser in dataUsers) {
         ANSFBUser *user = [ANSFBUser new];
         user.ID = (NSUInteger)dataUser[@"id"];
-        user.firsName = dataUser[@"first_name"];
+        user.firstName = dataUser[@"first_name"];
         user.lastName = dataUser[@"last_name"];
         
         NSDictionary * dataPicture = dataUser[@"picture"][@"data"];

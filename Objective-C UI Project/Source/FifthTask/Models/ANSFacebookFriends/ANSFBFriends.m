@@ -32,21 +32,6 @@ static NSString * const kANSPlistName = @"aaa";
 #pragma mark -
 #pragma mark Initialization and deallocation
 
-- (void)dealloc {
-    [self stopObservationForNames:@[UIApplicationDidEnterBackgroundNotification,
-                                    UIApplicationWillTerminateNotification]];
-}
-
-- (instancetype)init {
-    self = [super init];
-    [self startObservationForNames:@[UIApplicationDidEnterBackgroundNotification,
-                                     UIApplicationWillTerminateNotification]
-                         withBlock:^{
-                             [self save];
-                         }];
-    
-    return self;
-}
 
 #pragma mark -
 #pragma mark Private methods (reloaded from super)

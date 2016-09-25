@@ -29,7 +29,7 @@ static NSString * const kANSImageUrlKey  = @"kANSImageUrlKey";
 #pragma mark Accsessors
 
 - (NSString *)fullName {
-    return [self.firsName stringByAppendingString:self.lastName];
+    return [NSString stringWithFormat:@"%@ %@", self.lastName, self.firstName];
 }
 
 - (ANSImageModel *)imageModel {
@@ -61,7 +61,7 @@ static NSString * const kANSImageUrlKey  = @"kANSImageUrlKey";
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeInteger:self.ID forKey:kANSIDKey];    
-    [aCoder encodeObject:self.firsName forKey:kANSFirstNameKey];
+    [aCoder encodeObject:self.firstName forKey:kANSFirstNameKey];
     [aCoder encodeObject:self.lastName forKey:kANSLastNameKey];
     [aCoder encodeObject:self.imageUrl forKey:kANSImageUrlKey];
 }
@@ -70,7 +70,7 @@ static NSString * const kANSImageUrlKey  = @"kANSImageUrlKey";
     self = [super init];
     if (self) {
         self.ID       = [aDecoder decodeIntegerForKey:kANSIDKey];
-        self.firsName = [aDecoder decodeObjectForKey:kANSFirstNameKey];
+        self.firstName = [aDecoder decodeObjectForKey:kANSFirstNameKey];
         self.lastName = [aDecoder decodeObjectForKey:kANSLastNameKey];
         self.imageUrl = [aDecoder decodeObjectForKey:kANSImageUrlKey];
     }
@@ -85,7 +85,7 @@ static NSString * const kANSImageUrlKey  = @"kANSImageUrlKey";
     ANSFBUser* copy = [[self class] new];
     if (copy) {
         copy.ID = self.ID;
-        copy.firsName = self.firsName;
+        copy.firstName = self.firstName;
         copy.lastName = self.lastName;
         copy.imageUrl = self.imageUrl;
     }
