@@ -57,7 +57,9 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 #pragma mark Private metods
 - (void)loadUser {
     ANSFacebookUser *user = [ANSFacebookUser new];
+    self.user = user;
     ANSFBLoginContext *context = [[ANSFBLoginContext alloc] initWithModel:user];
+    
     [context execute];
 }
 
