@@ -25,7 +25,14 @@ ANSViewControllerBaseViewProperty(ANSUserDetailsViewController, ANSUserDetailsVi
 @implementation ANSUserDetailsViewController
 
 #pragma mark -
-#pragma mark view lifeCycle
+#pragma mark Initialization and deadllocation
+
+- (void)dealloc {
+    [self.detailsContext cancel];
+}
+
+#pragma mark -
+#pragma mark View lifeCycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];

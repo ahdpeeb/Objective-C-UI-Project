@@ -65,6 +65,10 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     return self;
 }
 
+- (void)dealloc {
+    [self.friendsContext cancel];
+}
+
 #pragma mark -
 #pragma mark Accsessors
 

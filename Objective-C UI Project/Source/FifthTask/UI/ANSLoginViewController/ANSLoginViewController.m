@@ -25,14 +25,18 @@
 ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginView);
 
 @interface ANSLoginViewController ()
-@property (nonatomic, strong) ANSFBLoginContext                *loginContext;
+@property (nonatomic, strong) ANSFBLoginContext                     *loginContext;
 
-@property (nonatomic, strong) ANSFBUser                  *user;
-@property (nonatomic, strong) ANSProtocolObservationController *contoller;
+@property (nonatomic, strong) ANSFBUser                             *user;
+@property (nonatomic, strong) ANSProtocolObservationController      *contoller;
 
 @end
 
 @implementation ANSLoginViewController
+
+- (void)dealloc {
+    [self.loginContext cancel];
+}
 
 #pragma mark -
 #pragma mark View lifecycle

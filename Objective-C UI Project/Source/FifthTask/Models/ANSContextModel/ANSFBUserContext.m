@@ -33,6 +33,7 @@
 
 #pragma mark -
 #pragma mark Public methods
+
 - (NSString *)graphPathInit {
     return nil;
 }
