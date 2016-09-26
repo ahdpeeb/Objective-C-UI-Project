@@ -30,10 +30,6 @@ static NSString * const kANSPlistName = @"aaa";
 @implementation ANSFBFriends
 
 #pragma mark -
-#pragma mark Initialization and deallocation
-
-
-#pragma mark -
 #pragma mark Private methods (reloaded from super)
 
 - (SEL)selectorForState:(NSUInteger)state {

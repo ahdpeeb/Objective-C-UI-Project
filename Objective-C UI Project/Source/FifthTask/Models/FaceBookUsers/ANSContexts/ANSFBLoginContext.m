@@ -9,6 +9,7 @@
 #import "ANSFBLoginContext.h"
 
 #import "ANSFBUser.h"
+#import "ANSFBConstatns.h"
 
 @implementation ANSFBLoginContext
 
@@ -16,15 +17,15 @@
 #pragma mark Reloaded Methods
 
 - (NSString *)graphPathInit {
-    return @"me";
+    return kANSme;
 }
 
 - (NSString *)HTTPMethodInit {
-    return @"GET";
+    return kANSGet;
 }
 
 - (NSDictionary *)parametresInit {
-    return @{@"fields": @"id"};
+    return @{kANSFields: kANSme};
 }
 
 - (void)fillModelFromResult:(NSDictionary *)result {
@@ -33,8 +34,7 @@
         return;
     }
     
-    NSString *ID = (NSString *)[result objectForKeyedSubscript:@"id"];
-    user.ID = ID.doubleValue;
+    user.ID = [[result objectForKeyedSubscript:kANSID] doubleValue];
     user.state = ANSUserDidLoadID;
 }
 

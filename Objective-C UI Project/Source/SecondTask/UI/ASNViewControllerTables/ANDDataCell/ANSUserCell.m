@@ -31,9 +31,6 @@
     [super awakeFromNib];
 }
 
-- (void)dealloc {
-}
-
 #pragma mark -
 #pragma mark Acsessors
 
@@ -46,7 +43,6 @@
 
 - (void)customizeUserPicture {
     UIImageView *picture = self.userImageView.contentImageView;
-    
     [picture roundedLayer];
 }
 

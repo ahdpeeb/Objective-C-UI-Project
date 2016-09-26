@@ -10,13 +10,14 @@
 		93026CD41D464C9100DFCF23 /* Gomer_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 93026CD21D464C9100DFCF23 /* Gomer_2.png */; };
 		93026CD71D464D0900DFCF23 /* Gomer_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 93026CD61D464D0900DFCF23 /* Gomer_1.jpg */; };
 		9302D7BD1D981385003CD9B8 /* ANSFBFriendsContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7BC1D981385003CD9B8 /* ANSFBFriendsContext.m */; };
+		9302D7C31D991249003CD9B8 /* ANSFBUserContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7C21D991249003CD9B8 /* ANSFBUserContext.m */; };
+		9302D7C91D991440003CD9B8 /* ANSFBConstatns.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7C81D991440003CD9B8 /* ANSFBConstatns.m */; };
 		9315EA6E1D92D7490053D21D /* ANSFBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA6B1D92D7490053D21D /* ANSFBUser.m */; };
 		9315EA731D93EC4D0053D21D /* ANSFBFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA721D93EC4D0053D21D /* ANSFBFriends.m */; };
 		9315EA8A1D9426870053D21D /* libFBSDKCoreKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9315EA871D9426870053D21D /* libFBSDKCoreKit.a */; };
 		9315EA8B1D9426870053D21D /* libFBSDKLoginKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9315EA881D9426870053D21D /* libFBSDKLoginKit.a */; };
 		9315EA8C1D9426870053D21D /* libFBSDKShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9315EA891D9426870053D21D /* libFBSDKShareKit.a */; };
 		9315EA931D955DAB0053D21D /* ANSFBUserDetailsContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA921D955DAB0053D21D /* ANSFBUserDetailsContext.m */; };
-		9315EA961D9560D40053D21D /* ANSFBUserContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA951D9560D40053D21D /* ANSFBUserContext.m */; };
 		935E5A0B1D6F4CA5005F6285 /* aaa.plist in Resources */ = {isa = PBXBuildFile; fileRef = 935E5A0A1D6F4CA5005F6285 /* aaa.plist */; };
 		936727D71D591D25007A796F /* ANSUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C51D591D25007A796F /* ANSUserCell.m */; };
 		936727D81D591D25007A796F /* ANSUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936727C61D591D25007A796F /* ANSUserCell.xib */; };
@@ -137,6 +138,10 @@
 		93026CD61D464D0900DFCF23 /* Gomer_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Gomer_1.jpg; sourceTree = "<group>"; };
 		9302D7BB1D981385003CD9B8 /* ANSFBFriendsContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFBFriendsContext.h; sourceTree = "<group>"; };
 		9302D7BC1D981385003CD9B8 /* ANSFBFriendsContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFBFriendsContext.m; sourceTree = "<group>"; };
+		9302D7C11D991249003CD9B8 /* ANSFBUserContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFBUserContext.h; sourceTree = "<group>"; };
+		9302D7C21D991249003CD9B8 /* ANSFBUserContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFBUserContext.m; sourceTree = "<group>"; };
+		9302D7C71D991440003CD9B8 /* ANSFBConstatns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFBConstatns.h; sourceTree = "<group>"; };
+		9302D7C81D991440003CD9B8 /* ANSFBConstatns.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFBConstatns.m; sourceTree = "<group>"; };
 		9315EA6A1D92D7490053D21D /* ANSFBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFBUser.h; sourceTree = "<group>"; };
 		9315EA6B1D92D7490053D21D /* ANSFBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFBUser.m; sourceTree = "<group>"; };
 		9315EA711D93EC4D0053D21D /* ANSFBFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSFBFriends.h; path = ANSFacebookFriends/ANSFBFriends.h; sourceTree = "<group>"; };
@@ -146,8 +151,6 @@
 		9315EA891D9426870053D21D /* libFBSDKShareKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKShareKit.a; path = "Pods/../build/Debug-iphoneos/FBSDKShareKit/libFBSDKShareKit.a"; sourceTree = "<group>"; };
 		9315EA911D955DAB0053D21D /* ANSFBUserDetailsContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFBUserDetailsContext.h; sourceTree = "<group>"; };
 		9315EA921D955DAB0053D21D /* ANSFBUserDetailsContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFBUserDetailsContext.m; sourceTree = "<group>"; };
-		9315EA941D9560D40053D21D /* ANSFBUserContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSFBUserContext.h; path = ANSContextModel/ANSFBUserContext.h; sourceTree = "<group>"; };
-		9315EA951D9560D40053D21D /* ANSFBUserContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSFBUserContext.m; path = ANSContextModel/ANSFBUserContext.m; sourceTree = "<group>"; };
 		935E5A0A1D6F4CA5005F6285 /* aaa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = aaa.plist; sourceTree = "<group>"; };
 		936727C41D591D25007A796F /* ANSUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSUserCell.h; sourceTree = "<group>"; };
 		936727C51D591D25007A796F /* ANSUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSUserCell.m; sourceTree = "<group>"; };
@@ -352,6 +355,18 @@
 			name = ANSFBFriendsContext;
 			sourceTree = "<group>";
 		};
+		9302D7C01D991249003CD9B8 /* ANSContextModel */ = {
+			isa = PBXGroup;
+			children = (
+				9302D7C71D991440003CD9B8 /* ANSFBConstatns.h */,
+				9302D7C81D991440003CD9B8 /* ANSFBConstatns.m */,
+				9302D7C11D991249003CD9B8 /* ANSFBUserContext.h */,
+				9302D7C21D991249003CD9B8 /* ANSFBUserContext.m */,
+			);
+			name = ANSContextModel;
+			path = Source/FifthTask/Models/ANSContextModel;
+			sourceTree = SOURCE_ROOT;
+		};
 		9315EA691D92D7490053D21D /* ANSFaceBookUser */ = {
 			isa = PBXGroup;
 			children = (
@@ -375,21 +390,13 @@
 		9315EA901D955DAB0053D21D /* ANSContexts */ = {
 			isa = PBXGroup;
 			children = (
+				9302D7C01D991249003CD9B8 /* ANSContextModel */,
 				9302D7B91D98130E003CD9B8 /* ANSFBLoginContext */,
 				9302D7BE1D98138E003CD9B8 /* ANSFBFriendsContext */,
 				9302D7BA1D98132A003CD9B8 /* ANSFBUserDetailsContext */,
 			);
 			name = ANSContexts;
 			path = FaceBookUsers/ANSContexts;
-			sourceTree = "<group>";
-		};
-		9315EA971D9560DD0053D21D /* ANScontextModel */ = {
-			isa = PBXGroup;
-			children = (
-				9315EA941D9560D40053D21D /* ANSFBUserContext.h */,
-				9315EA951D9560D40053D21D /* ANSFBUserContext.m */,
-			);
-			name = ANScontextModel;
 			sourceTree = "<group>";
 		};
 		931FBADA1D899B9D00D6E960 /* ANSImageView */ = {
@@ -529,7 +536,6 @@
 				939BADD01D75937400B4D610 /* ANSRandom */,
 				939BADB21D75937400B4D610 /* ANSGCD */,
 				939BADBE1D75937400B4D610 /* ANSMacros */,
-				9315EA971D9560DD0053D21D /* ANScontextModel */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -1153,6 +1159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				939BAE1D1D75937400B4D610 /* NSArray+ANSExtension.m in Sources */,
+				9302D7C91D991440003CD9B8 /* ANSFBConstatns.m in Sources */,
 				9376C8451D79DFB500E6A3EF /* ANSImageView.m in Sources */,
 				939BAE2F1D75C80900B4D610 /* ANSNameFilterModel.m in Sources */,
 				939BAE271D75937400B4D610 /* UINib+Extension.m in Sources */,
@@ -1195,7 +1202,6 @@
 				939BAE281D75937400B4D610 /* UIScreen+ANSExtension.m in Sources */,
 				939BAE061D75937400B4D610 /* ANSArrayModel.m in Sources */,
 				93CF63331D97F93700FFFFF4 /* ANSFBLoginContext.m in Sources */,
-				9315EA961D9560D40053D21D /* ANSFBUserContext.m in Sources */,
 				939BAE0D1D75937400B4D610 /* ANSRangeChangeModel+UITableView.m in Sources */,
 				93C084351D3E380D0077A81C /* ANSAppDelegate.m in Sources */,
 				939BAE1C1D75937400B4D610 /* NSTimer+ANSExtension.m in Sources */,
@@ -1204,6 +1210,7 @@
 				939BAE151D75937400B4D610 /* ANSObservationController.m in Sources */,
 				9302D7BD1D981385003CD9B8 /* ANSFBFriendsContext.m in Sources */,
 				939BAE141D75937400B4D610 /* ANSBlockObservationController.m in Sources */,
+				9302D7C31D991249003CD9B8 /* ANSFBUserContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
