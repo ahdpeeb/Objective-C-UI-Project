@@ -77,8 +77,10 @@
 
 - (void)performLoading {
     if ([self isImageCached]) {
-        if ([self imageFromUrl:self.localURL]) {
-            [super performLoading];
+        UIImage *image = [self imageFromUrl:self.localURL];
+        if (image) {
+            [super finishLoadingWithImage:image];
+            
             return;
         }
         

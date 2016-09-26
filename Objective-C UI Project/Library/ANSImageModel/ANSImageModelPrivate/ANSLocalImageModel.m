@@ -15,8 +15,13 @@
 #pragma mark -
 #pragma mark Privat methods
 
+- (void)finishLoadingWithImage:(UIImage *)image {
+    self.image = image;
+}
+
 - (void)performLoading {
-    self.image = [UIImage imageWithContentsOfFile:self.imagePath];
+    UIImage *image = [UIImage imageWithContentsOfFile:self.imagePath];
+    [self finishLoadingWithImage:image];
 }
     
 @end

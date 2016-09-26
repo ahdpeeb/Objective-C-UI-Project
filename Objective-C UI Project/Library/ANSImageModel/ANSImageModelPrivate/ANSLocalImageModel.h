@@ -9,5 +9,7 @@
 #import "ANSImageModel.h"
 
 @interface ANSLocalImageModel : ANSImageModel
+// Method intended for subclasses
+- (void)finishLoadingWithImage:(UIImage *)image;
 
 @end
