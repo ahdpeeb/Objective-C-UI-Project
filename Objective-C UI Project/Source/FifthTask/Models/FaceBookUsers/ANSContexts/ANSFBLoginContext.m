@@ -34,7 +34,7 @@
         return;
     }
     
-    user.ID = [[result objectForKeyedSubscript:kANSID] doubleValue];
+    user.ID = ((NSString *)result[kANSID]).longLongValue;
     user.state = ANSUserDidLoadID;
 }
 

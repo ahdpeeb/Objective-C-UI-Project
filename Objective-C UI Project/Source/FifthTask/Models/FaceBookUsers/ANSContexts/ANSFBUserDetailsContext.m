@@ -8,9 +8,7 @@
 #import "ANSFBUserDetailsContext.h"
 
 #import "ANSFBUser.h"
-
-static NSString * const kANSFirstNameKey = @"first_name";
-static NSString * const kANSLastNameKey = @"last_name";
+#import "ANSFBConstatns.h"
 
 @implementation ANSFBUserDetailsContext
 
@@ -18,31 +16,27 @@ static NSString * const kANSLastNameKey = @"last_name";
 #pragma mark Private Methods;
 
 - (NSString *)graphPathInit; {
-    ANSFBUser *user = self.model;
-    return [NSString stringWithFormat:@"/{user-%lu}", (long)user.ID];
+    NSUInteger value = ((ANSFBUser *)self.model).ID;
+    return [NSString stringWithFormat:@"%ld", value];
 }
 
 - (NSString *)HTTPMethodInit {
-    return @"GET";
+    return kANSGet;
 }
 
 - (NSDictionary *)parametresInit {
-   return @{@"fields": @"first_name, last_name, picture.type(large)"};
+    return @{kANSFields:[NSString stringWithFormat:@"%@, %@, %@",
+                         kANSHometown,
+                         kANSGender,
+                         kANSEmail]};
 }
 
-- (void)fillUserFromResult:(NSDictionary *)result {
+- (void)fillModelFromResult:(NSDictionary *)result {
     ANSFBUser *user = self.model;
-    user.firstName = [result objectForKey:kANSFirstNameKey];
-    user.lastName = [result objectForKey:kANSLastNameKey];
+    user.email = result[kANSEmail];
+    user.gender = result[kANSGender];
     
-    NSDictionary * dataPicture = [[result objectForKey:@"picture"] objectForKey:@"data"];
-    NSString *URLString = [dataPicture objectForKey:@"url"];
-    user.imageUrl = [NSURL URLWithString:URLString];
-    
-    NSLog(@"user id = %lu, fullName - %@ %@, picture - %@",(long)user.ID,
-          user.firstName,
-          user.lastName,
-          user.imageUrl);
+    user.state = ANSUserDidLoadDetails;
 }
 
 @end

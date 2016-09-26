@@ -8,7 +8,21 @@
 
 #import "ANSUserDetailsView.h"
 
+#import "ANSFBUser.h"
+#import "ANSImageView.h"
+
 @implementation ANSUserDetailsView
 
+#pragma mark -
+#pragma mark Public methods
+
+- (void)fillBasicInfoFromUser:(ANSFBUser *)user {
+    self.imageView.imageModel =user.imageModel;
+    self.fullNameLabel.text = user.fullName;
+}
+
+- (void)fillFullInfoFromUser:(ANSFBUser *)user {
+    self.genderLabel.text = user.gender;
+}
 
 @end

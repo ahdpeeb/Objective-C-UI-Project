@@ -59,9 +59,9 @@
     NSMutableArray *mutableUsers = [NSMutableArray new];
     
     NSArray *dataUsers = result[kANSData];
-    for (id dataUser in dataUsers) {
+    for (NSDictionary *dataUser in dataUsers) {
         ANSFBUser *user = [ANSFBUser new];
-        user.ID = (NSUInteger)dataUser[kANSID];
+        user.ID = ((NSString *)dataUser[kANSID]).longLongValue;
         user.firstName = dataUser[kANSFirstName];
         user.lastName = dataUser[kANSLastName];
         

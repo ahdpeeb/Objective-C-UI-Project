@@ -34,7 +34,10 @@ typedef NS_ENUM(NSUInteger, ANSUserState) {
 @property (nonatomic, assign)    NSInteger      ID;
 @property (nonatomic, copy)      NSString       *firstName;
 @property (nonatomic, copy)      NSString       *lastName;
+@property (nonatomic, copy)      NSString       *gender;
+@property (nonatomic, copy)      NSString       *email;
 @property (nonatomic, strong)    NSURL          *imageUrl;
+
 
 @property (nonatomic, readonly) NSString        *fullName;
 @property (nonatomic, readonly) ANSImageModel   *imageModel;

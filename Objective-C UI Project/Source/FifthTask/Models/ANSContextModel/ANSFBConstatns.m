@@ -21,5 +21,8 @@ NSString * const kANSData = @"data";
 NSString * const kANSPicture = @"picture";
 NSString * const kANSURL = @"url";
 NSString * const kANSFriends = @"friends";
+NSString * const kANSHometown = @"hometown";
+NSString * const kANSGender = @"gender";
+NSString * const kANSEmail = @"email";
 
 @end

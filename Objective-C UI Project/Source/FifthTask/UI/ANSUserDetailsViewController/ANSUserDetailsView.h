@@ -9,12 +9,14 @@
 #import "ANSRootView.h"
 
 @class ANSImageView;
+@class ANSFBUser;
 
 @interface ANSUserDetailsView : ANSRootView
-
 @property (nonatomic, strong) IBOutlet ANSImageView *imageView;
-@property (nonatomic, strong) IBOutlet UILabel      *fullName;
-@property (nonatomic, strong) IBOutlet UILabel      *gender;
+@property (nonatomic, strong) IBOutlet UILabel      *fullNameLabel;
+@property (nonatomic, strong) IBOutlet UILabel      *genderLabel;
 
+- (void)fillBasicInfoFromUser:(ANSFBUser *)user;
+- (void)fillFullInfoFromUser:(ANSFBUser *)user;
 
 @end

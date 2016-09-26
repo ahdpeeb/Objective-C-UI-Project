@@ -17,6 +17,7 @@
 #import "ANSFBUser.h"
 #import "ANSFBFriends.h"
 #import "ANSFBFriendsContext.h"
+#import "ANSUserDetailsViewController.h"
 
 #import "NSArray+ANSExtension.h"
 #import "UINib+Extension.h"
@@ -34,27 +35,35 @@ static          NSString * const kANSDone                    = @"Done";
 static          NSString * const kANSTitleForHeaderSection   = @"User's friends";
 static const    NSUInteger kANSSectionsCount                 = 1;
 
+ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView, friendListView);
+
 @interface ANSFriendListViewController ()
-@property (nonatomic, strong)   ANSFBFriends *friends;
+@property (nonatomic, strong)   ANSFBFriends                      *friends;
 @property (nonatomic, strong)   ANSProtocolObservationController  *usersController;
 
 @property (nonatomic, strong)   ANSNameFilterModel                *filteredModel;
 @property (nonatomic, strong)   ANSProtocolObservationController  *filterModelController;
 
-@property (nonatomic, strong)   ANSFBFriendsContext *friendsContext;
-
-@property (nonatomic, readonly) ANSArrayModel *presentedModel;;
+@property (nonatomic, strong)   ANSFBFriendsContext               *friendsContext;
+@property (nonatomic, readonly) ANSArrayModel                     *presentedModel;;
 
 - (void)resignSearchBar;
 - (void)initFilterInfrastructure;
 
 @end
 
-ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView, friendListView)
-
 @implementation ANSFriendListViewController;
 
 @dynamic presentedModel;
+
+#pragma mark -
+#pragma Initialization and deallocation
+
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    self = [super initWithCoder:coder];
+
+    return self;
+}
 
 #pragma mark -
 #pragma mark Accsessors
@@ -101,8 +110,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     [super viewDidLoad];
     
     self.navigationItem.title = kANSTitleForHeaderSection;
-    [self initLeftBarButtonItem];
-    [self initRightBarButtonItem];
+
 // if no internet connerion
 //  [self.friendListView.tableView reloadData];
 }
@@ -127,42 +135,8 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 #pragma mark -
 #pragma mark UIBarButtonItems
 
-- (void)initLeftBarButtonItem {
-    UIBarButtonItem *buttom = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(leftBarAction:)];
-    [self.navigationItem setLeftBarButtonItem:buttom animated:YES];
-}
-    //TableView Method
-- (void)initRightBarButtonItem {
-    UIBarButtonItem *buttom = [[UIBarButtonItem alloc] initWithTitle:kANSEdit
-                                                               style:UIBarButtonItemStyleDone
-                                                              target:self
-                                                              action:@selector(rightBarAction:)];
-    
-    [self.navigationItem setRightBarButtonItem:buttom animated:YES];
-}
-
 #pragma mark -
 #pragma mark UIBarButtonItem actions
-
-- (void)leftBarAction:(UIBarButtonItem *)sender {
-    UITableView *table = self.friendListView.tableView;
-    
-    [self resignSearchBar];
-    
-    if (table.editing) {
-        // NO ACTION!
-    }
-}
-
-- (void)rightBarAction:(UIBarButtonItem *)sender {
-    UITableView *table = self.friendListView.tableView;
-    
-    [self resignSearchBar];
-    
-    BOOL isEditing = table.editing;
-    [sender setTitle:(isEditing ? kANSEdit : kANSDone)];
-    [table setEditing:(isEditing ? NO : YES) animated:YES];
-}
 
 #pragma mark -
 #pragma mark Gestures
@@ -204,7 +178,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 - (BOOL)        tableView:(UITableView *)tableView
     canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return YES;
+    return NO;
 }
 
 - (void)    tableView:(UITableView *)tableView
@@ -241,8 +215,11 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    id friendListViewController = [ANSFriendListViewController viewController];
-    [self.navigationController pushViewController:friendListViewController
+    ANSUserDetailsViewController *controller = nil;
+    controller = [ANSUserDetailsViewController viewController];
+    controller.user = self.friends[indexPath.row];
+    
+    [self.navigationController pushViewController:controller
                                          animated:YES];
 }
 

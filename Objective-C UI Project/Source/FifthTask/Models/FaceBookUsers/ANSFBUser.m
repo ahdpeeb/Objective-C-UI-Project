@@ -55,7 +55,6 @@ static NSString * const kANSImageUrlKey  = @"kANSImageUrlKey";
     }
 }
 
-
 #pragma mark -
 #pragma mark NSCoding protocol
 
