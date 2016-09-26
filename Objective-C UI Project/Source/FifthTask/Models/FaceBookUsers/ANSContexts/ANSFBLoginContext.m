@@ -25,7 +25,7 @@
 }
 
 - (NSDictionary *)parametresInit {
-    return @{kANSFields: kANSme};
+    return @{kANSFields: kANSID};
 }
 
 - (void)fillModelFromResult:(NSDictionary *)result {

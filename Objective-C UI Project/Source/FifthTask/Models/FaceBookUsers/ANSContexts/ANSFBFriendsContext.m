@@ -10,6 +10,7 @@
 
 #import "ANSFBUser.h"
 #import "ANSFBFriends.h"
+#import "ANSFBConstatns.h"
 
 @interface ANSFBFriendsContext ()
 - (NSArray *)friendsFromResult:(NSDictionary *)result;
@@ -23,15 +24,18 @@
 
 - (NSString *)graphPathInit {
     ANSFBUser *user = self.user;
-    return [NSString stringWithFormat:@"%lu/friends", (long)user.ID];
+    return [NSString stringWithFormat:@"%lu/%@", (long)user.ID, kANSFriends];
 }
 
 - (NSString *)HTTPMethodInit {
-    return @"GET";
+    return kANSGet;
 }
 
 - (NSDictionary *)parametresInit {
-    return @{@"fields":@"id, first_name, last_name, picture.type(large)"};
+    return @{kANSFields:[NSString stringWithFormat:@"%@, %@, %@, %@", kANSID,
+                                                                      kANSFirstName,
+                                                                      kANSLastName,
+                                                                      kANSLargePicture]};
 }
 
 - (void)fillModelFromResult:(NSDictionary *)result {
@@ -54,15 +58,15 @@
 - (NSArray *)friendsFromResult:(NSDictionary *)result {
     NSMutableArray *mutableUsers = [NSMutableArray new];
     
-    NSArray *dataUsers = result[@"data"];
+    NSArray *dataUsers = result[kANSData];
     for (id dataUser in dataUsers) {
         ANSFBUser *user = [ANSFBUser new];
-        user.ID = (NSUInteger)dataUser[@"id"];
-        user.firstName = dataUser[@"first_name"];
-        user.lastName = dataUser[@"last_name"];
+        user.ID = (NSUInteger)dataUser[kANSID];
+        user.firstName = dataUser[kANSFirstName];
+        user.lastName = dataUser[kANSLastName];
         
-        NSDictionary * dataPicture = dataUser[@"picture"][@"data"];
-        NSString *URLString = dataPicture[@"url"];
+        NSDictionary * dataPicture = dataUser[kANSPicture][kANSData];
+        NSString *URLString = dataPicture[kANSURL];
         user.imageUrl = [NSURL URLWithString:URLString];
         [mutableUsers addObject:user];
     }

@@ -20,5 +20,6 @@ NSString * const kANSLargePicture = @"picture.type(large)";
 NSString * const kANSData = @"data";
 NSString * const kANSPicture = @"picture";
 NSString * const kANSURL = @"url";
+NSString * const kANSFriends = @"friends";
 
 @end

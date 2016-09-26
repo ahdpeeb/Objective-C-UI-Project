@@ -20,5 +20,5 @@ FOUNDATION_EXPORT NSString * const kANSLargePicture;
 FOUNDATION_EXPORT NSString * const kANSData;
 FOUNDATION_EXPORT NSString * const kANSPicture;
 FOUNDATION_EXPORT NSString * const kANSURL;
-
+FOUNDATION_EXPORT NSString * const kANSFriends;
 @end
