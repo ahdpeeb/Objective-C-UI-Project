@@ -12,6 +12,17 @@
 		9302D7BD1D981385003CD9B8 /* ANSFBFriendsContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7BC1D981385003CD9B8 /* ANSFBFriendsContext.m */; };
 		9302D7C31D991249003CD9B8 /* ANSFBUserContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7C21D991249003CD9B8 /* ANSFBUserContext.m */; };
 		9302D7C91D991440003CD9B8 /* ANSFBConstatns.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7C81D991440003CD9B8 /* ANSFBConstatns.m */; };
+		9302D7D41D991DA8003CD9B8 /* ANSFriendListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7CC1D991DA8003CD9B8 /* ANSFriendListView.m */; };
+		9302D7D51D991DA8003CD9B8 /* ANSFriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7CE1D991DA8003CD9B8 /* ANSFriendListViewController.m */; };
+		9302D7D61D991DA8003CD9B8 /* ANSFriendListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9302D7CF1D991DA8003CD9B8 /* ANSFriendListViewController.xib */; };
+		9302D7D71D991DA8003CD9B8 /* ANSUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7D21D991DA8003CD9B8 /* ANSUserCell.m */; };
+		9302D7D81D991DA8003CD9B8 /* ANSUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9302D7D31D991DA8003CD9B8 /* ANSUserCell.xib */; };
+		9302D7E21D992415003CD9B8 /* ANSUserDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7E01D992415003CD9B8 /* ANSUserDetailsViewController.m */; };
+		9302D7E31D992415003CD9B8 /* ANSUserDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9302D7E11D992415003CD9B8 /* ANSUserDetailsViewController.xib */; };
+		9302D7E61D992446003CD9B8 /* ANSUserDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7E51D992446003CD9B8 /* ANSUserDetailsView.m */; };
+		9302D7ED1D9924BB003CD9B8 /* ANSLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7E91D9924BB003CD9B8 /* ANSLoginView.m */; };
+		9302D7EE1D9924BB003CD9B8 /* ANSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7EB1D9924BB003CD9B8 /* ANSLoginViewController.m */; };
+		9302D7EF1D9924BB003CD9B8 /* ANSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9302D7EC1D9924BB003CD9B8 /* ANSLoginViewController.xib */; };
 		9315EA6E1D92D7490053D21D /* ANSFBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA6B1D92D7490053D21D /* ANSFBUser.m */; };
 		9315EA731D93EC4D0053D21D /* ANSFBFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA721D93EC4D0053D21D /* ANSFBFriends.m */; };
 		9315EA8A1D9426870053D21D /* libFBSDKCoreKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9315EA871D9426870053D21D /* libFBSDKCoreKit.a */; };
@@ -19,11 +30,6 @@
 		9315EA8C1D9426870053D21D /* libFBSDKShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9315EA891D9426870053D21D /* libFBSDKShareKit.a */; };
 		9315EA931D955DAB0053D21D /* ANSFBUserDetailsContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA921D955DAB0053D21D /* ANSFBUserDetailsContext.m */; };
 		935E5A0B1D6F4CA5005F6285 /* aaa.plist in Resources */ = {isa = PBXBuildFile; fileRef = 935E5A0A1D6F4CA5005F6285 /* aaa.plist */; };
-		936727D71D591D25007A796F /* ANSUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C51D591D25007A796F /* ANSUserCell.m */; };
-		936727D81D591D25007A796F /* ANSUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936727C61D591D25007A796F /* ANSUserCell.xib */; };
-		936727D91D591D25007A796F /* ANSFriendListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727C81D591D25007A796F /* ANSFriendListView.m */; };
-		936727DA1D591D25007A796F /* ANSFriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 936727CA1D591D25007A796F /* ANSFriendListViewController.m */; };
-		936727DB1D591D25007A796F /* ANSFriendListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 936727CB1D591D25007A796F /* ANSFriendListViewController.xib */; };
 		937547A61D855E1C000B1C6C /* ANSArrayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BAD9E1D75937400B4D610 /* ANSArrayModel.m */; };
 		937547A71D855E23000B1C6C /* ANSChangeModel+UITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADA11D75937400B4D610 /* ANSChangeModel+UITableView.m */; };
 		937547A81D855E28000B1C6C /* ANSChangeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADA31D75937400B4D610 /* ANSChangeModel.m */; };
@@ -114,9 +120,6 @@
 		93E992011D8F1E7300DCCE1B /* UIImage+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E991FF1D8F1E7300DCCE1B /* UIImage+ANSExtension.m */; };
 		93E992041D8F1FF400DCCE1B /* ANSCacheStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E992031D8F1FF400DCCE1B /* ANSCacheStorage.m */; };
 		93E992051D8F1FF400DCCE1B /* ANSCacheStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E992031D8F1FF400DCCE1B /* ANSCacheStorage.m */; };
-		93E994D31D9150AD00DCCE1B /* ANSLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E994CF1D9150AD00DCCE1B /* ANSLoginView.m */; };
-		93E994D41D9150AD00DCCE1B /* ANSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E994D11D9150AD00DCCE1B /* ANSLoginViewController.m */; };
-		93E994D51D9150AD00DCCE1B /* ANSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93E994D21D9150AD00DCCE1B /* ANSLoginViewController.xib */; };
 		B31E153A99E6E9FD54C009B4 /* libPods-Objective-C UI Project.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D61D00FCF09E7B8E93AA3BF /* libPods-Objective-C UI Project.a */; };
 		E3F88A6491D5A78D0595B312 /* libPods-Objective-C UI ProjectUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBF0228B73B450A5AD3DBF2 /* libPods-Objective-C UI ProjectUITests.a */; };
 /* End PBXBuildFile section */
@@ -142,6 +145,24 @@
 		9302D7C21D991249003CD9B8 /* ANSFBUserContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFBUserContext.m; sourceTree = "<group>"; };
 		9302D7C71D991440003CD9B8 /* ANSFBConstatns.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFBConstatns.h; sourceTree = "<group>"; };
 		9302D7C81D991440003CD9B8 /* ANSFBConstatns.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFBConstatns.m; sourceTree = "<group>"; };
+		9302D7CB1D991DA8003CD9B8 /* ANSFriendListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFriendListView.h; sourceTree = "<group>"; };
+		9302D7CC1D991DA8003CD9B8 /* ANSFriendListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFriendListView.m; sourceTree = "<group>"; };
+		9302D7CD1D991DA8003CD9B8 /* ANSFriendListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFriendListViewController.h; sourceTree = "<group>"; };
+		9302D7CE1D991DA8003CD9B8 /* ANSFriendListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFriendListViewController.m; sourceTree = "<group>"; };
+		9302D7CF1D991DA8003CD9B8 /* ANSFriendListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSFriendListViewController.xib; sourceTree = "<group>"; };
+		9302D7D11D991DA8003CD9B8 /* ANSUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSUserCell.h; sourceTree = "<group>"; };
+		9302D7D21D991DA8003CD9B8 /* ANSUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSUserCell.m; sourceTree = "<group>"; };
+		9302D7D31D991DA8003CD9B8 /* ANSUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSUserCell.xib; sourceTree = "<group>"; };
+		9302D7DF1D992415003CD9B8 /* ANSUserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSUserDetailsViewController.h; sourceTree = "<group>"; };
+		9302D7E01D992415003CD9B8 /* ANSUserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSUserDetailsViewController.m; sourceTree = "<group>"; };
+		9302D7E11D992415003CD9B8 /* ANSUserDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSUserDetailsViewController.xib; sourceTree = "<group>"; };
+		9302D7E41D992446003CD9B8 /* ANSUserDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSUserDetailsView.h; sourceTree = "<group>"; };
+		9302D7E51D992446003CD9B8 /* ANSUserDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSUserDetailsView.m; sourceTree = "<group>"; };
+		9302D7E81D9924BB003CD9B8 /* ANSLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLoginView.h; sourceTree = "<group>"; };
+		9302D7E91D9924BB003CD9B8 /* ANSLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSLoginView.m; sourceTree = "<group>"; };
+		9302D7EA1D9924BB003CD9B8 /* ANSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLoginViewController.h; sourceTree = "<group>"; };
+		9302D7EB1D9924BB003CD9B8 /* ANSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSLoginViewController.m; sourceTree = "<group>"; };
+		9302D7EC1D9924BB003CD9B8 /* ANSLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSLoginViewController.xib; sourceTree = "<group>"; };
 		9315EA6A1D92D7490053D21D /* ANSFBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFBUser.h; sourceTree = "<group>"; };
 		9315EA6B1D92D7490053D21D /* ANSFBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFBUser.m; sourceTree = "<group>"; };
 		9315EA711D93EC4D0053D21D /* ANSFBFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSFBFriends.h; path = ANSFacebookFriends/ANSFBFriends.h; sourceTree = "<group>"; };
@@ -152,14 +173,6 @@
 		9315EA911D955DAB0053D21D /* ANSFBUserDetailsContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFBUserDetailsContext.h; sourceTree = "<group>"; };
 		9315EA921D955DAB0053D21D /* ANSFBUserDetailsContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFBUserDetailsContext.m; sourceTree = "<group>"; };
 		935E5A0A1D6F4CA5005F6285 /* aaa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = aaa.plist; sourceTree = "<group>"; };
-		936727C41D591D25007A796F /* ANSUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSUserCell.h; sourceTree = "<group>"; };
-		936727C51D591D25007A796F /* ANSUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSUserCell.m; sourceTree = "<group>"; };
-		936727C61D591D25007A796F /* ANSUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSUserCell.xib; sourceTree = "<group>"; };
-		936727C71D591D25007A796F /* ANSFriendListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFriendListView.h; sourceTree = "<group>"; };
-		936727C81D591D25007A796F /* ANSFriendListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFriendListView.m; sourceTree = "<group>"; };
-		936727C91D591D25007A796F /* ANSFriendListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFriendListViewController.h; sourceTree = "<group>"; };
-		936727CA1D591D25007A796F /* ANSFriendListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFriendListViewController.m; sourceTree = "<group>"; };
-		936727CB1D591D25007A796F /* ANSFriendListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSFriendListViewController.xib; sourceTree = "<group>"; };
 		937547B31D856043000B1C6C /* UIView+ANSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+ANSExtension.h"; path = "Library/Extensions/UIView/UIView+ANSExtension.h"; sourceTree = SOURCE_ROOT; };
 		937547B41D856043000B1C6C /* UIView+ANSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+ANSExtension.m"; path = "Library/Extensions/UIView/UIView+ANSExtension.m"; sourceTree = SOURCE_ROOT; };
 		9376C8331D79A09E00E6A3EF /* ANSLoadableModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSLoadableModel.h; path = ../../Source/SecondTask/Models/ANSLoadableModel.h; sourceTree = "<group>"; };
@@ -271,11 +284,6 @@
 		93E991FF1D8F1E7300DCCE1B /* UIImage+ANSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ANSExtension.m"; sourceTree = "<group>"; };
 		93E992021D8F1FF400DCCE1B /* ANSCacheStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSCacheStorage.h; path = ANSCacheStorage/ANSCacheStorage.h; sourceTree = "<group>"; };
 		93E992031D8F1FF400DCCE1B /* ANSCacheStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSCacheStorage.m; path = ANSCacheStorage/ANSCacheStorage.m; sourceTree = "<group>"; };
-		93E994CE1D9150AD00DCCE1B /* ANSLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLoginView.h; sourceTree = "<group>"; };
-		93E994CF1D9150AD00DCCE1B /* ANSLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSLoginView.m; sourceTree = "<group>"; };
-		93E994D01D9150AD00DCCE1B /* ANSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSLoginViewController.h; sourceTree = "<group>"; };
-		93E994D11D9150AD00DCCE1B /* ANSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSLoginViewController.m; sourceTree = "<group>"; };
-		93E994D21D9150AD00DCCE1B /* ANSLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSLoginViewController.xib; sourceTree = "<group>"; };
 		9D61D00FCF09E7B8E93AA3BF /* libPods-Objective-C UI Project.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Objective-C UI Project.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E0F054CF32267BB37C7D7E /* Pods-Objective-C UI ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C UI ProjectUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Objective-C UI ProjectUITests/Pods-Objective-C UI ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EB09091B1A7DD91BDD1FAAC0 /* Pods-Objective-C UI Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C UI Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Objective-C UI Project/Pods-Objective-C UI Project.debug.xcconfig"; sourceTree = "<group>"; };
@@ -367,6 +375,53 @@
 			path = Source/FifthTask/Models/ANSContextModel;
 			sourceTree = SOURCE_ROOT;
 		};
+		9302D7CA1D991DA8003CD9B8 /* ANSFriendListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9302D7CD1D991DA8003CD9B8 /* ANSFriendListViewController.h */,
+				9302D7CE1D991DA8003CD9B8 /* ANSFriendListViewController.m */,
+				9302D7CF1D991DA8003CD9B8 /* ANSFriendListViewController.xib */,
+				9302D7CB1D991DA8003CD9B8 /* ANSFriendListView.h */,
+				9302D7CC1D991DA8003CD9B8 /* ANSFriendListView.m */,
+				9302D7D01D991DA8003CD9B8 /* ANSUserCell */,
+			);
+			path = ANSFriendListViewController;
+			sourceTree = "<group>";
+		};
+		9302D7D01D991DA8003CD9B8 /* ANSUserCell */ = {
+			isa = PBXGroup;
+			children = (
+				9302D7D11D991DA8003CD9B8 /* ANSUserCell.h */,
+				9302D7D21D991DA8003CD9B8 /* ANSUserCell.m */,
+				9302D7D31D991DA8003CD9B8 /* ANSUserCell.xib */,
+			);
+			path = ANSUserCell;
+			sourceTree = "<group>";
+		};
+		9302D7DE1D992415003CD9B8 /* ANSUserDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9302D7DF1D992415003CD9B8 /* ANSUserDetailsViewController.h */,
+				9302D7E01D992415003CD9B8 /* ANSUserDetailsViewController.m */,
+				9302D7E11D992415003CD9B8 /* ANSUserDetailsViewController.xib */,
+				9302D7E41D992446003CD9B8 /* ANSUserDetailsView.h */,
+				9302D7E51D992446003CD9B8 /* ANSUserDetailsView.m */,
+			);
+			path = ANSUserDetailsViewController;
+			sourceTree = "<group>";
+		};
+		9302D7E71D9924BB003CD9B8 /* ANSLoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9302D7E81D9924BB003CD9B8 /* ANSLoginView.h */,
+				9302D7E91D9924BB003CD9B8 /* ANSLoginView.m */,
+				9302D7EA1D9924BB003CD9B8 /* ANSLoginViewController.h */,
+				9302D7EB1D9924BB003CD9B8 /* ANSLoginViewController.m */,
+				9302D7EC1D9924BB003CD9B8 /* ANSLoginViewController.xib */,
+			);
+			path = ANSLoginViewController;
+			sourceTree = "<group>";
+		};
 		9315EA691D92D7490053D21D /* ANSFaceBookUser */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,31 +461,6 @@
 				9376C83A1D79DFB500E6A3EF /* ANSImageView.m */,
 			);
 			name = ANSImageView;
-			sourceTree = "<group>";
-		};
-		936727C21D591D25007A796F /* ASNViewControllerTables */ = {
-			isa = PBXGroup;
-			children = (
-				936727C91D591D25007A796F /* ANSFriendListViewController.h */,
-				936727CA1D591D25007A796F /* ANSFriendListViewController.m */,
-				936727CB1D591D25007A796F /* ANSFriendListViewController.xib */,
-				936727C71D591D25007A796F /* ANSFriendListView.h */,
-				936727C81D591D25007A796F /* ANSFriendListView.m */,
-				936727C31D591D25007A796F /* ANSUserCell */,
-			);
-			name = ASNViewControllerTables;
-			path = ../../SecondTask/UI/ASNViewControllerTables;
-			sourceTree = "<group>";
-		};
-		936727C31D591D25007A796F /* ANSUserCell */ = {
-			isa = PBXGroup;
-			children = (
-				936727C41D591D25007A796F /* ANSUserCell.h */,
-				936727C51D591D25007A796F /* ANSUserCell.m */,
-				936727C61D591D25007A796F /* ANSUserCell.xib */,
-			);
-			name = ANSUserCell;
-			path = ANDDataCell;
 			sourceTree = "<group>";
 		};
 		937547A51D855775000B1C6C /* UIView */ = {
@@ -915,23 +945,11 @@
 		93E994CC1D9150AD00DCCE1B /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				93E994CD1D9150AD00DCCE1B /* ANSLoginViewController */,
-				936727C21D591D25007A796F /* ASNViewControllerTables */,
+				9302D7E71D9924BB003CD9B8 /* ANSLoginViewController */,
+				9302D7CA1D991DA8003CD9B8 /* ANSFriendListViewController */,
+				9302D7DE1D992415003CD9B8 /* ANSUserDetailsViewController */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		93E994CD1D9150AD00DCCE1B /* ANSLoginViewController */ = {
-			isa = PBXGroup;
-			children = (
-				93E994D01D9150AD00DCCE1B /* ANSLoginViewController.h */,
-				93E994D11D9150AD00DCCE1B /* ANSLoginViewController.m */,
-				93E994D21D9150AD00DCCE1B /* ANSLoginViewController.xib */,
-				93E994CE1D9150AD00DCCE1B /* ANSLoginView.h */,
-				93E994CF1D9150AD00DCCE1B /* ANSLoginView.m */,
-			);
-			name = ANSLoginViewController;
-			path = ANSLoginView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1025,18 +1043,19 @@
 				9388ECFF1D4A396F0082EE4B /* 8.png in Resources */,
 				9388ECFD1D4A396F0082EE4B /* 6.png in Resources */,
 				9388ECF81D4A396F0082EE4B /* 16.png in Resources */,
+				9302D7EF1D9924BB003CD9B8 /* ANSLoginViewController.xib in Resources */,
 				9388ECFC1D4A396F0082EE4B /* 5.png in Resources */,
-				936727D81D591D25007A796F /* ANSUserCell.xib in Resources */,
+				9302D7E31D992415003CD9B8 /* ANSUserDetailsViewController.xib in Resources */,
 				9388ECF71D4A396F0082EE4B /* 15.png in Resources */,
 				9388ECF91D4A396F0082EE4B /* 2.png in Resources */,
 				9388ECFA1D4A396F0082EE4B /* 3.png in Resources */,
-				936727DB1D591D25007A796F /* ANSFriendListViewController.xib in Resources */,
 				9388ECF51D4A396F0082EE4B /* 13.png in Resources */,
 				9388ECF41D4A396F0082EE4B /* 12.png in Resources */,
 				9388ED001D4A396F0082EE4B /* 9.png in Resources */,
 				9376C8471D79DFB500E6A3EF /* ANSLoadingView.xib in Resources */,
 				935E5A0B1D6F4CA5005F6285 /* aaa.plist in Resources */,
 				9388ECF31D4A396F0082EE4B /* 11.png in Resources */,
+				9302D7D81D991DA8003CD9B8 /* ANSUserCell.xib in Resources */,
 				9388ECF21D4A396F0082EE4B /* 10.png in Resources */,
 				9388ECF11D4A396F0082EE4B /* 1.png in Resources */,
 				9388ECFE1D4A396F0082EE4B /* 7.png in Resources */,
@@ -1045,9 +1064,9 @@
 				9388ECFB1D4A396F0082EE4B /* 4.png in Resources */,
 				93C0843C1D3E381F0077A81C /* Assets.xcassets in Resources */,
 				9388ECF61D4A396F0082EE4B /* 14.png in Resources */,
-				93E994D51D9150AD00DCCE1B /* ANSLoginViewController.xib in Resources */,
 				93026CD41D464C9100DFCF23 /* Gomer_2.png in Resources */,
 				93C084301D3E36B20077A81C /* iOS Study Plan.txt in Resources */,
+				9302D7D61D991DA8003CD9B8 /* ANSFriendListViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1161,6 +1180,7 @@
 				939BAE1D1D75937400B4D610 /* NSArray+ANSExtension.m in Sources */,
 				9302D7C91D991440003CD9B8 /* ANSFBConstatns.m in Sources */,
 				9376C8451D79DFB500E6A3EF /* ANSImageView.m in Sources */,
+				9302D7ED1D9924BB003CD9B8 /* ANSLoginView.m in Sources */,
 				939BAE2F1D75C80900B4D610 /* ANSNameFilterModel.m in Sources */,
 				939BAE271D75937400B4D610 /* UINib+Extension.m in Sources */,
 				93E992001D8F1E7300DCCE1B /* UIImage+ANSExtension.m in Sources */,
@@ -1168,12 +1188,12 @@
 				939BAE291D75937400B4D610 /* UITableView+Extension.m in Sources */,
 				939BAE0C1D75937400B4D610 /* ANSOneIndexModel+UITableView.m in Sources */,
 				93E991FB1D8F1E2500DCCE1B /* ANSLocalImageModel.m in Sources */,
-				936727D91D591D25007A796F /* ANSFriendListView.m in Sources */,
 				939BAE0A1D75937400B4D610 /* ANSRangeChangeModel.m in Sources */,
+				9302D7EE1D9924BB003CD9B8 /* ANSLoginViewController.m in Sources */,
 				937547B51D856043000B1C6C /* UIView+ANSExtension.m in Sources */,
 				939BAE171D75937400B4D610 /* ANSQueue.m in Sources */,
-				93E994D31D9150AD00DCCE1B /* ANSLoginView.m in Sources */,
 				939BAE181D75937400B4D610 /* ANSRandom.m in Sources */,
+				9302D7E21D992415003CD9B8 /* ANSUserDetailsViewController.m in Sources */,
 				93E991F91D8F1E2500DCCE1B /* ANSInternetImageModel.m in Sources */,
 				939BAE081D75937400B4D610 /* ANSChangeModel.m in Sources */,
 				939BAE231D75937400B4D610 /* NSString+ANSExtension.m in Sources */,
@@ -1184,22 +1204,23 @@
 				9376C8461D79DFB500E6A3EF /* ANSLoadingView.m in Sources */,
 				939BAE071D75937400B4D610 /* ANSChangeModel+UITableView.m in Sources */,
 				93E992041D8F1FF400DCCE1B /* ANSCacheStorage.m in Sources */,
+				9302D7D51D991DA8003CD9B8 /* ANSFriendListViewController.m in Sources */,
 				939BAE091D75937400B4D610 /* ANSOneIndexModel.m in Sources */,
 				9315EA931D955DAB0053D21D /* ANSFBUserDetailsContext.m in Sources */,
 				93E991F71D8F1E2500DCCE1B /* ANSImageModel.m in Sources */,
 				939BAE201D75937400B4D610 /* NSMutableArray+ANSExtension.m in Sources */,
 				939BAE131D75937400B4D610 /* ANSObservableObject.m in Sources */,
-				936727D71D591D25007A796F /* ANSUserCell.m in Sources */,
 				939BAE0F1D75937400B4D610 /* ANSGCD.m in Sources */,
-				936727DA1D591D25007A796F /* ANSFriendListViewController.m in Sources */,
 				939BAE1F1D75937400B4D610 /* NSFileManager+ANSExtension.m in Sources */,
 				9376C8491D79DFB500E6A3EF /* ANSRootView.m in Sources */,
 				939BAE0E1D75937400B4D610 /* ANSTwoIndexModel+UITableView.m in Sources */,
-				93E994D41D9150AD00DCCE1B /* ANSLoginViewController.m in Sources */,
 				9376C8481D79DFB500E6A3EF /* ANSTableViewCell.m in Sources */,
+				9302D7D41D991DA8003CD9B8 /* ANSFriendListView.m in Sources */,
 				939BAE161D75937400B4D610 /* ANSProtocolObservationController.m in Sources */,
+				9302D7D71D991DA8003CD9B8 /* ANSUserCell.m in Sources */,
 				939BAE2A1D75937400B4D610 /* UIViewController+ANSExtension.m in Sources */,
 				939BAE281D75937400B4D610 /* UIScreen+ANSExtension.m in Sources */,
+				9302D7E61D992446003CD9B8 /* ANSUserDetailsView.m in Sources */,
 				939BAE061D75937400B4D610 /* ANSArrayModel.m in Sources */,
 				93CF63331D97F93700FFFFF4 /* ANSFBLoginContext.m in Sources */,
 				939BAE0D1D75937400B4D610 /* ANSRangeChangeModel+UITableView.m in Sources */,
