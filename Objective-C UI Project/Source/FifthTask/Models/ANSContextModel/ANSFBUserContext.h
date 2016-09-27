@@ -18,7 +18,7 @@
 - (void)execute;
 - (void)cancel;
 
-- (void)fillModelFromResult:(NSDictionary *)result;
+- (void)fillModelFromResult:(NSMutableDictionary *)result;
 
 // next methods need to me reloaded in child classes:
 // return's graphPath string

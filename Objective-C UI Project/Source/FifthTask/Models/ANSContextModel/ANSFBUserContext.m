@@ -78,7 +78,7 @@
 
 - (void)executeRequest {
     self.requestConnection = [self.request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
-                                                                   NSDictionary *result,
+                                                                   NSMutableDictionary *result,
                                                                    NSError *error) {
         if (error) {
             NSLog(@"[ERROR] %@", error);

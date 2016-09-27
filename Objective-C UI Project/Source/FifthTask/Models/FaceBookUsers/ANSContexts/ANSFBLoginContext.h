@@ -11,7 +11,6 @@
 #import "ANSFBUserContext.h"
 
 @interface ANSFBLoginContext : ANSFBUserContext
-
 @property (nonatomic, strong) FBSDKLoginManager *loginManager;
 
 @end

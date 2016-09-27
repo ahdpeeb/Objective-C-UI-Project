@@ -31,7 +31,7 @@
                          kANSEmail]};
 }
 
-- (void)fillModelFromResult:(NSDictionary *)result {
+- (void)fillModelFromResult:(NSMutableDictionary *)result {
     ANSFBUser *user = self.model;
     user.gender = result[kANSGender];
     id email = result[kANSEmail];

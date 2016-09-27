@@ -171,7 +171,7 @@
 		9302D7F71D9A8A14003CD9B8 /* ANSJSONRepresentationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSJSONRepresentationProtocol.h; sourceTree = "<group>"; };
 		9302D7FA1D9A8C73003CD9B8 /* NSMutableDictionary+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+Extension.h"; sourceTree = "<group>"; };
 		9302D7FB1D9A8C73003CD9B8 /* NSMutableDictionary+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+Extension.m"; sourceTree = "<group>"; };
-		9302D7FE1D9A8FC3003CD9B8 /* ANSJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSJSONParser.h; sourceTree = "<group>"; };
+		9302D8051D9AA0EA003CD9B8 /* ANSJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSJsonParser.h; sourceTree = "<group>"; };
 		9315EA6A1D92D7490053D21D /* ANSFBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFBUser.h; sourceTree = "<group>"; };
 		9315EA6B1D92D7490053D21D /* ANSFBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFBUser.m; sourceTree = "<group>"; };
 		9315EA711D93EC4D0053D21D /* ANSFBFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSFBFriends.h; path = ANSFacebookFriends/ANSFBFriends.h; sourceTree = "<group>"; };
@@ -444,8 +444,8 @@
 		9302D7F61D9A8A14003CD9B8 /* ANSProtocols + hedders */ = {
 			isa = PBXGroup;
 			children = (
-				9302D7FE1D9A8FC3003CD9B8 /* ANSJSONParser.h */,
 				9302D7F71D9A8A14003CD9B8 /* ANSJSONRepresentationProtocol.h */,
+				9302D8051D9AA0EA003CD9B8 /* ANSJsonParser.h */,
 			);
 			name = "ANSProtocols + hedders";
 			path = ANSProtocols;

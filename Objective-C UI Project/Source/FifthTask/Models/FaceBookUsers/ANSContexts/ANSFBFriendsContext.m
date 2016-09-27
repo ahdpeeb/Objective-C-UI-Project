@@ -11,9 +11,14 @@
 #import "ANSFBUser.h"
 #import "ANSFBFriends.h"
 #import "ANSFBConstatns.h"
+#import "ANSJsonParser.h"
+
+#import "NSFileManager+ANSExtension.h"
+
+static NSString * const kANSPlistName = @"aaa";
 
 @interface ANSFBFriendsContext ()
-- (NSArray *)friendsFromResult:(NSDictionary *)result;
+- (NSArray *)friendsFromResult:(NSMutableDictionary *)result;
 
 @end
 
@@ -38,16 +43,6 @@
                                                                       kANSLargePicture]};
 }
 
-- (void)fillModelFromResult:(NSDictionary *)result {
-    ANSFBFriends *friends = self.model;
-    [friends performBlockWithoutNotification:^{
-        NSArray *frinds = [self friendsFromResult:result];
-        [friends addObjectsInRange:frinds];
-    }];
-    
-    friends.state = ANSLoadableModelDidLoad;
-}
-
 - (void)notifyIfLoadingFailed {
     ANSFBFriends *friends = self.model;
     friends.state = ANSLoadableModelDidFailLoading;
@@ -61,26 +56,47 @@
     }
 }
 
+- (void)fillModelFromResult:(NSMutableDictionary *)result {
+    ANSFBFriends *friends = self.model;
+    [friends performBlockWithoutNotification:^{
+        NSArray *frinds = [self friendsFromResult:result];
+        [friends addObjectsInRange:frinds];
+    }];
+    [self saveFriends];
+    friends.state = ANSLoadableModelDidLoad;
+}
+
 #pragma mark -
 #pragma mark Private methods
 
-- (NSArray *)friendsFromResult:(NSDictionary *)result {
+- (NSArray *)friendsFromResult:(NSMutableDictionary *)result {
     NSMutableArray *mutableUsers = [NSMutableArray new];
     
-    NSArray *dataUsers = result[kANSData];
-    for (NSDictionary *dataUser in dataUsers) {
-        ANSFBUser *user = [ANSFBUser new];
-        user.ID = ((NSString *)dataUser[kANSID]).longLongValue;
-        user.firstName = dataUser[kANSFirstName];
-        user.lastName = dataUser[kANSLastName];
+    NSMutableDictionary *dictionary = [result JSONRepresentation];
+    NSMutableArray *dataUsers = [dictionary[kANSData] JSONRepresentation];
+    
+    for (NSMutableDictionary *dataUser in dataUsers) {
+        NSMutableDictionary *user = [dataUser JSONRepresentation];
+        ANSFBUser *fbUser = [ANSFBUser new];
+        fbUser.ID = ((NSString *)user[kANSID]).longLongValue;
+        fbUser.firstName = user[kANSFirstName];
+        fbUser.lastName = user[kANSLastName];
         
-        NSDictionary * dataPicture = dataUser[kANSPicture][kANSData];
+        NSDictionary * dataPicture = [(user[kANSPicture][kANSData]) JSONRepresentation];
         NSString *URLString = dataPicture[kANSURL];
-        user.imageUrl = [NSURL URLWithString:URLString];
-        [mutableUsers addObject:user];
+        fbUser.imageUrl = [NSURL URLWithString:URLString];
+        [mutableUsers addObject:fbUser];
     }
     
     return [mutableUsers copy];
+}
+
+- (void)saveFriends {
+    ANSFBFriends *friends = self.model;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inSearchPathDirectory:NSDocumentDirectory];
+    BOOL isSuccessfully = [NSKeyedArchiver archiveRootObject:friends.objects toFile:plistPath];
+    NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
 }
 
 @end

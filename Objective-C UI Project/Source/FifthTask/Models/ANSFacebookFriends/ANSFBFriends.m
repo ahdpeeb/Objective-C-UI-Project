@@ -46,10 +46,6 @@ static NSString * const kANSPlistName = @"aaa";
     return [NSKeyedUnarchiver unarchiveObjectWithFile:plistPath];
 }
 
-- (id)loadUsersModel {
-    sleep(3);
-    return  [self usersFromFileSystem];
-}
 
 - (void)startObservationForNames:(NSArray <NSString *> *)names
                        withBlock:(ANSExecutableBlock)block {
@@ -74,19 +70,14 @@ static NSString * const kANSPlistName = @"aaa";
     }
 }
 
+- (id)loadUsersModel {
+    sleep(3);
+    return  [self usersFromFileSystem];
+}
+
 - (void)performLoading {
     id users = [self loadUsersModel];
     self.state = users ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
-}
-
-#pragma mark -
-#pragma mark Save and loading(Public methods)
-
-- (void)save {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inSearchPathDirectory:NSDocumentDirectory];
-    BOOL isSuccessfully = [NSKeyedArchiver archiveRootObject:self.objects toFile:plistPath];
-    NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
 }
 
 @end
