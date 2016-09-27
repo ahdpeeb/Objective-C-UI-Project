@@ -40,6 +40,21 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
     [self.loginContext cancel];
 }
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil
+                         bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    FBSDKAccessToken *token = [FBSDKAccessToken currentAccessToken];
+    if (token) {
+        ANSFBUser *user = [ANSFBUser new];
+        self.user = user;
+        user.ID = token.userID.doubleValue;
+        [self userDidLoadID:user];
+    }
+    
+    return self;
+}
+
 #pragma mark -
 #pragma mark View lifecycle
 
