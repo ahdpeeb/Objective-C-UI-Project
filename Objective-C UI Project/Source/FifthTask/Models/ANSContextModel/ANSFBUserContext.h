@@ -33,4 +33,7 @@
 //need to be reloaded, for model notyfication if loading failed
 - (void)notifyIfLoadingFailed;
 
+//need to be reloaded, for model notyfication if model already loaded
+- (void)notifyIfLoaded;
+
 @end

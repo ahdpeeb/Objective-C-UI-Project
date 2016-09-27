@@ -28,30 +28,22 @@
     return @{kANSFields: kANSID};
 }
 
+- (void)fillModelFromResult:(NSDictionary *)result {
+    ANSFBUser *user = self.model;
+    user.ID = ((NSString *)result[kANSID]).longLongValue;
+    user.state = ANSUserDidLoadID;
+}
+
 - (void)notifyIfLoadingFailed {
     ANSFBUser *user = self.model;
     user.state = ANSUserDidFailLoading;
 }
 
-- (void)fillModelFromResult:(NSDictionary *)result {
+- (void)notifyIfLoaded {
     ANSFBUser *user = self.model;
     if (user.state == ANSUserDidLoadID) {
-        return;
+        [user notifyOfStateChange:ANSUserDidLoadID];
     }
-    
-    user.ID = ((NSString *)result[kANSID]).longLongValue;
-    user.state = ANSUserDidLoadID;
-}
-
-#pragma mark -
-#pragma mark Public methods 
-
-- (void)login {
-
-}
-
-- (void)logOut {
-
 }
 
 @end

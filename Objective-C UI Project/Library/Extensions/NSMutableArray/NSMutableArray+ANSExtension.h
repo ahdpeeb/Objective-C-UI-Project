@@ -8,8 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSMutableArray (ANSExtension)
+#import "ANSJSONRepresentationProtocol.h"
 
-- (void)moveObjectFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex; 
+@interface NSMutableArray (ANSExtension) <ANSJSONRepresentationProtocol>
+
+- (void)moveObjectFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex;
+
+//remove all NSNULL objects from array
+- (instancetype)JSONRepresentation;
 
 @end

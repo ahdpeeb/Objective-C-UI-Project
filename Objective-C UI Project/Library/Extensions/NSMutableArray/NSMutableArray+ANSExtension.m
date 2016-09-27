@@ -8,12 +8,20 @@
 
 #import "NSMutableArray+ANSExtension.h"
 
-@implementation NSMutableArray (ANSExtension)
+@implementation NSMutableArray (ANSExtension) 
+
 - (void)moveObjectFromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
     if (fromIndex != toIndex) {
         id object = [self objectAtIndex:fromIndex];
         [self removeObject:object];
         [self insertObject:object atIndex:toIndex];
+    }
+}
+
+- (instancetype)JSONRepresentation {
+    @synchronized (self) {
+        [self removeObjectIdenticalTo:[NSNull null]];
+        return self;
     }
 }
 

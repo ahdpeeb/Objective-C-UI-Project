@@ -40,10 +40,6 @@
 
 - (void)fillModelFromResult:(NSDictionary *)result {
     ANSFBFriends *friends = self.model;
-    if (friends.state == ANSLoadableModelDidLoad) {
-        return;
-    }
-    
     [friends performBlockWithoutNotification:^{
         NSArray *frinds = [self friendsFromResult:result];
         [friends addObjectsInRange:frinds];
@@ -55,6 +51,14 @@
 - (void)notifyIfLoadingFailed {
     ANSFBFriends *friends = self.model;
     friends.state = ANSLoadableModelDidFailLoading;
+}
+
+- (void)notifyIfLoaded {
+    ANSFBFriends *friends = self.model;
+    if (friends.state == ANSLoadableModelDidLoad) {
+        [friends notifyOfStateChange:ANSLoadableModelDidLoad];
+        return;
+    }
 }
 
 #pragma mark -

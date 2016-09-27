@@ -24,6 +24,8 @@
 		9302D7EE1D9924BB003CD9B8 /* ANSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7EB1D9924BB003CD9B8 /* ANSLoginViewController.m */; };
 		9302D7EF1D9924BB003CD9B8 /* ANSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9302D7EC1D9924BB003CD9B8 /* ANSLoginViewController.xib */; };
 		9302D7F41D99667E003CD9B8 /* NSJSONSerialization+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7F31D99667E003CD9B8 /* NSJSONSerialization+Extension.m */; };
+		9302D7FC1D9A8C73003CD9B8 /* NSMutableDictionary+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7FB1D9A8C73003CD9B8 /* NSMutableDictionary+Extension.m */; };
+		9302D7FD1D9A8C73003CD9B8 /* NSMutableDictionary+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7FB1D9A8C73003CD9B8 /* NSMutableDictionary+Extension.m */; };
 		9315EA6E1D92D7490053D21D /* ANSFBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA6B1D92D7490053D21D /* ANSFBUser.m */; };
 		9315EA731D93EC4D0053D21D /* ANSFBFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA721D93EC4D0053D21D /* ANSFBFriends.m */; };
 		9315EA8A1D9426870053D21D /* libFBSDKCoreKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9315EA871D9426870053D21D /* libFBSDKCoreKit.a */; };
@@ -166,6 +168,10 @@
 		9302D7EC1D9924BB003CD9B8 /* ANSLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ANSLoginViewController.xib; sourceTree = "<group>"; };
 		9302D7F21D99667E003CD9B8 /* NSJSONSerialization+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSJSONSerialization+Extension.h"; sourceTree = "<group>"; };
 		9302D7F31D99667E003CD9B8 /* NSJSONSerialization+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSJSONSerialization+Extension.m"; sourceTree = "<group>"; };
+		9302D7F71D9A8A14003CD9B8 /* ANSJSONRepresentationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSJSONRepresentationProtocol.h; sourceTree = "<group>"; };
+		9302D7FA1D9A8C73003CD9B8 /* NSMutableDictionary+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+Extension.h"; sourceTree = "<group>"; };
+		9302D7FB1D9A8C73003CD9B8 /* NSMutableDictionary+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+Extension.m"; sourceTree = "<group>"; };
+		9302D7FE1D9A8FC3003CD9B8 /* ANSJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSJSONParser.h; sourceTree = "<group>"; };
 		9315EA6A1D92D7490053D21D /* ANSFBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFBUser.h; sourceTree = "<group>"; };
 		9315EA6B1D92D7490053D21D /* ANSFBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFBUser.m; sourceTree = "<group>"; };
 		9315EA711D93EC4D0053D21D /* ANSFBFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSFBFriends.h; path = ANSFacebookFriends/ANSFBFriends.h; sourceTree = "<group>"; };
@@ -435,6 +441,26 @@
 			path = ../NSJSONSerialization;
 			sourceTree = "<group>";
 		};
+		9302D7F61D9A8A14003CD9B8 /* ANSProtocols + hedders */ = {
+			isa = PBXGroup;
+			children = (
+				9302D7FE1D9A8FC3003CD9B8 /* ANSJSONParser.h */,
+				9302D7F71D9A8A14003CD9B8 /* ANSJSONRepresentationProtocol.h */,
+			);
+			name = "ANSProtocols + hedders";
+			path = ANSProtocols;
+			sourceTree = "<group>";
+		};
+		9302D7F81D9A8AB9003CD9B8 /* ANSMutableDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				9302D7FA1D9A8C73003CD9B8 /* NSMutableDictionary+Extension.h */,
+				9302D7FB1D9A8C73003CD9B8 /* NSMutableDictionary+Extension.m */,
+			);
+			name = ANSMutableDictionary;
+			path = Library/ANSMutableDictionary;
+			sourceTree = SOURCE_ROOT;
+		};
 		9315EA691D92D7490053D21D /* ANSFaceBookUser */ = {
 			isa = PBXGroup;
 			children = (
@@ -569,6 +595,7 @@
 		939BAD9B1D75937400B4D610 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				9302D7F61D9A8A14003CD9B8 /* ANSProtocols + hedders */,
 				939BADD91D75937400B4D610 /* Extensions */,
 				9376C8371D79DFB500E6A3EF /* CustomViews */,
 				939BADC01D75937400B4D610 /* ANSObservableObject */,
@@ -709,6 +736,7 @@
 				939BADE21D75937400B4D610 /* NSBundle */,
 				939BADE51D75937400B4D610 /* NSFileManager */,
 				939BADE81D75937400B4D610 /* NSMutableArray */,
+				9302D7F81D9A8AB9003CD9B8 /* ANSMutableDictionary */,
 				939BADEE1D75937400B4D610 /* NSString */,
 				939BADFA1D75937400B4D610 /* UINib */,
 				939BADFD1D75937400B4D610 /* UIScreen */,
@@ -1206,6 +1234,7 @@
 				939BAE0A1D75937400B4D610 /* ANSRangeChangeModel.m in Sources */,
 				9302D7EE1D9924BB003CD9B8 /* ANSLoginViewController.m in Sources */,
 				937547B51D856043000B1C6C /* UIView+ANSExtension.m in Sources */,
+				9302D7FC1D9A8C73003CD9B8 /* NSMutableDictionary+Extension.m in Sources */,
 				939BAE171D75937400B4D610 /* ANSQueue.m in Sources */,
 				939BAE181D75937400B4D610 /* ANSRandom.m in Sources */,
 				9302D7E21D992415003CD9B8 /* ANSUserDetailsViewController.m in Sources */,
@@ -1262,6 +1291,7 @@
 				937547B71D85673B000B1C6C /* ANSObservationController.m in Sources */,
 				937547AB1D855E31000B1C6C /* ANSTwoIndexModel.m in Sources */,
 				937547B91D85676D000B1C6C /* ANSLoadingView.m in Sources */,
+				9302D7FD1D9A8C73003CD9B8 /* NSMutableDictionary+Extension.m in Sources */,
 				937547AD1D855E50000B1C6C /* ANSRandom.m in Sources */,
 				93E992011D8F1E7300DCCE1B /* UIImage+ANSExtension.m in Sources */,
 				937547D51D8721B4000B1C6C /* ANSTwoIndexModel+UITableView.m in Sources */,

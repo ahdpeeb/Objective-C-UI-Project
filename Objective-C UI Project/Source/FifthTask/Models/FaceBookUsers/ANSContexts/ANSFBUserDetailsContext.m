@@ -40,4 +40,11 @@
     user.state = ANSUserDidLoadDetails;
 }
 
+- (void)notifyIfLoaded {
+    ANSFBUser *user = self.model;
+    if (user.state == ANSUserDidLoadDetails) {
+        [user notifyOfStateChange:ANSUserDidLoadDetails];
+    }
+}
+
 @end

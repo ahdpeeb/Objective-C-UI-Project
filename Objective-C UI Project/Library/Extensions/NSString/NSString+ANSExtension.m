@@ -77,4 +77,8 @@
     return [result copy];
 }
 
+- (instancetype)JSONRepresentation {
+    return  ([self isEqual:[NSNull class]]) ? nil : self;
+}
+
 @end

@@ -63,6 +63,10 @@
     return;
 }
 
+- (void)notifyIfLoaded {
+    return;
+}
+
 #pragma mark -
 #pragma mark Ptivate methods
 
@@ -92,6 +96,7 @@
 
 - (void)execute {
     @synchronized (self) {
+        [self notifyIfLoaded];
         [self initRequest];
         [self executeRequest];
     }

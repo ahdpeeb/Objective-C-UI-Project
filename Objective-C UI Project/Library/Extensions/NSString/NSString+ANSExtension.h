@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (ANSExtension)
+#import "ANSJSONRepresentationProtocol.h"
+
+@interface NSString (ANSExtension) <ANSJSONRepresentationProtocol>
 
 + (instancetype)randomStringWithLength:(NSUInteger)length
                               alphabet:(NSString *)alphabet;
@@ -24,5 +26,7 @@
 + (instancetype)letterAlphabet;
 
 - (NSArray *)symbols;
+
+- (instancetype)JSONRepresentation;
 
 @end
