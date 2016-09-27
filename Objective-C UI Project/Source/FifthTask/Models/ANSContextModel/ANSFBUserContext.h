@@ -22,12 +22,15 @@
 
 // next methods need to me reloaded in child classes:
 // return's graphPath string
-- (NSString *)graphPathInit;
+- (NSString *)graphPath;
 
 //return value must be: @"GET", @"POST", @"DELETE". default is @"GET"
-- (NSString *)HTTPMethodInit;
+- (NSString *)HTTPMethod;
 
 // return's dictionaty with parametres;
-- (NSDictionary *)parametresInit;
+- (NSDictionary *)parametres;
+
+//need to be reloaded, for model notyfication if loading failed
+- (void)notifyIfLoadingFailed;
 
 @end

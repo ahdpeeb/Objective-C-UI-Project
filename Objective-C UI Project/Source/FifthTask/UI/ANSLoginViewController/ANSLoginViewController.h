@@ -13,5 +13,6 @@
 @interface ANSLoginViewController : UIViewController  <ANSUserStateObserver>
 
 - (IBAction)onLogin:(UIButton *)sender;
+- (void)logOut;
 
 @end

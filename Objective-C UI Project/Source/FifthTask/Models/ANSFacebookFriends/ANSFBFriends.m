@@ -30,13 +30,10 @@ static NSString * const kANSPlistName = @"aaa";
 @implementation ANSFBFriends
 
 #pragma mark -
-#pragma mark Private methods (reloaded from super)
+#pragma mark Private methods (reloaded)
 
 - (SEL)selectorForState:(NSUInteger)state {
-    switch (state) {
-        default:
-            return [super selectorForState:state];
-    }
+    return [super selectorForState:state];
 }
 
 #pragma mark -

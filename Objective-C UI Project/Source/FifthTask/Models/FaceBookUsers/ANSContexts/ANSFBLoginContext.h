@@ -6,8 +6,12 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
 #import "ANSFBUserContext.h"
 
 @interface ANSFBLoginContext : ANSFBUserContext
+
+@property (nonatomic, strong) FBSDKLoginManager *loginManager;
 
 @end

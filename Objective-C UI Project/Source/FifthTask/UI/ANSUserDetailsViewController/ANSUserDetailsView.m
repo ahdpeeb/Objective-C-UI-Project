@@ -23,6 +23,7 @@
 
 - (void)fillFullInfoFromUser:(ANSFBUser *)user {
     self.genderLabel.text = user.gender;
+    self.emailLabel.text = user.email;
 }
 
 @end

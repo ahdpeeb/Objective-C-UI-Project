@@ -68,7 +68,7 @@ static NSString * const kANSImageUrlKey  = @"kANSImageUrlKey";
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
-        self.ID       = [aDecoder decodeIntegerForKey:kANSIDKey];
+        self.ID = [aDecoder decodeIntegerForKey:kANSIDKey];
         self.firstName = [aDecoder decodeObjectForKey:kANSFirstNameKey];
         self.lastName = [aDecoder decodeObjectForKey:kANSLastNameKey];
         self.imageUrl = [aDecoder decodeObjectForKey:kANSImageUrlKey];

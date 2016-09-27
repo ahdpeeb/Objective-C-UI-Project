@@ -16,6 +16,7 @@
     UITableViewDataSource,
     UITableViewDelegate,
     UISearchBarDelegate,
+    UINavigationControllerDelegate,
 
     ANSArrayModelObserver,
     ANSNameFilterModelProtocol

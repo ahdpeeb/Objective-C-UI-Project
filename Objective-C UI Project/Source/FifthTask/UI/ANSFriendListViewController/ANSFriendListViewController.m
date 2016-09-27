@@ -18,6 +18,7 @@
 #import "ANSFBFriends.h"
 #import "ANSFBFriendsContext.h"
 #import "ANSUserDetailsViewController.h"
+#import "ANSLoginViewController.h"
 
 #import "NSArray+ANSExtension.h"
 #import "UINib+Extension.h"
@@ -30,8 +31,6 @@
 #import "ANSMacros.h"
 #import "ANSGCD.h"
 
-static          NSString * const kANSEdit                    = @"Edit";
-static          NSString * const kANSDone                    = @"Done";
 static          NSString * const kANSTitleForHeaderSection   = @"User's friends";
 static const    NSUInteger kANSSectionsCount                 = 1;
 
@@ -49,6 +48,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 
 - (void)resignSearchBar;
 - (void)initFilterInfrastructure;
+- (void)onLeftButton;
 
 @end
 
@@ -61,8 +61,17 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
-
+    [self initLeftButton];
+    
     return self;
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    [self initLeftButton];
+   
+    
+    return self; 
 }
 
 - (void)dealloc {
@@ -89,7 +98,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
         _friends = friends;
         
         self.usersController = [friends protocolControllerWithObserver:self];
-//        [self initFilterInfrastructure];
+        [self initFilterInfrastructure];
     }
 }
 
@@ -113,6 +122,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationController.delegate = self;
     self.navigationItem.title = kANSTitleForHeaderSection;
 
 // if no internet connerion
@@ -137,11 +147,17 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 }
 
 #pragma mark -
-#pragma mark UIBarButtonItems
+#pragma mark BarButtonItems
 
-#pragma mark -
-#pragma mark UIBarButtonItem actions
+- (void)initLeftButton {
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Return" style:UIBarButtonItemStylePlain target:self action:@selector(onLeftButton)];
+    self.navigationItem.leftBarButtonItem = leftButton;
+}
 
+- (void)onLeftButton {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+                                   
 #pragma mark -
 #pragma mark Gestures
 
@@ -177,34 +193,6 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     [cell fillWithUser:user];
 
     return cell;
-}
-
-- (BOOL)        tableView:(UITableView *)tableView
-    canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return NO;
-}
-
-- (void)    tableView:(UITableView *)tableView
-   moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
-          toIndexPath:(NSIndexPath *)destinationIndexPath
-{
-    if (sourceIndexPath.section == destinationIndexPath.section) {
-        
-        [self.friends performBlockWithoutNotification:^{
-            [self.friends moveObjectFromIndex:sourceIndexPath.row
-                                         toIndex:destinationIndexPath.row];
-        }];
-    }
-}
-
-- (void)    tableView:(UITableView *)tableView
-    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
-    forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        //NO ACTION! 
-    }
 }
 
 #pragma mark -
@@ -289,6 +277,18 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
         NSLog(@"notified didFilterWithUserInfo - %@ ", model);
         [self.friendListView.tableView reloadData];
     });
+}
+
+#pragma mark -
+#pragma mark UINavigationControllerDelegate protocol
+
+- (void)navigationController:(UINavigationController *)navigationController
+      willShowViewController:(UIViewController *)viewController
+                    animated:(BOOL)animated
+{
+    if ([viewController class] == [ANSLoginViewController class]) {
+        [(ANSLoginViewController *)viewController logOut];
+    }
 }
 
 @end

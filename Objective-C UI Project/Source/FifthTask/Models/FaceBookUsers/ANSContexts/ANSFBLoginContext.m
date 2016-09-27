@@ -14,18 +14,23 @@
 @implementation ANSFBLoginContext
 
 #pragma mark -
-#pragma mark Reloaded Methods
+#pragma mark Private Methods (reloaded)
 
-- (NSString *)graphPathInit {
-    return kANSme;
+- (NSString *)graphPath {
+    return kANSMe;
 }
 
-- (NSString *)HTTPMethodInit {
+- (NSString *)HTTPMethod {
     return kANSGet;
 }
 
-- (NSDictionary *)parametresInit {
+- (NSDictionary *)parametres {
     return @{kANSFields: kANSID};
+}
+
+- (void)notifyIfLoadingFailed {
+    ANSFBUser *user = self.model;
+    user.state = ANSUserDidFailLoading;
 }
 
 - (void)fillModelFromResult:(NSDictionary *)result {
@@ -36,6 +41,17 @@
     
     user.ID = ((NSString *)result[kANSID]).longLongValue;
     user.state = ANSUserDidLoadID;
+}
+
+#pragma mark -
+#pragma mark Public methods 
+
+- (void)login {
+
+}
+
+- (void)logOut {
+
 }
 
 @end

@@ -18,11 +18,20 @@
 
 @interface ANSFBUserContext ()
 @property (nonatomic, strong) id                           model;
+
 @property (nonatomic, strong) FBSDKGraphRequestConnection *requestConnection;
+@property (nonatomic, strong) FBSDKGraphRequest           *request;
+
+- (void)initRequest;
+- (void)executeRequest;
 
 @end
 
 @implementation ANSFBUserContext
+
+- (void)dealloc {
+    [self cancel];
+}
 
 - (instancetype)initWithModel:(id)model; {
     self = [super init];
@@ -34,20 +43,48 @@
 #pragma mark -
 #pragma mark Public methods
 
-- (NSString *)graphPathInit {
+- (NSString *)graphPath {
     return nil;
 }
 
-- (NSDictionary *)parametresInit {
+- (NSDictionary *)parametres {
     return nil;
 }
 
-- (NSString *)HTTPMethodInit {
+- (NSString *)HTTPMethod {
     return nil;
 }
 
 - (void)fillModelFromResult:(NSDictionary *)result {
-    
+    return;
+}
+
+- (void)notifyIfLoadingFailed {
+    return;
+}
+
+#pragma mark -
+#pragma mark Ptivate methods
+
+- (void)initRequest {
+    self.request = [[FBSDKGraphRequest alloc] initWithGraphPath:[self graphPath]
+                                                     parameters:[self parametres]
+                                                     HTTPMethod:[self HTTPMethod]];
+}
+
+- (void)executeRequest {
+    self.requestConnection = [self.request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                                                   NSDictionary *result,
+                                                                   NSError *error) {
+        if (error) {
+            NSLog(@"[ERROR] %@", error);
+            [self notifyIfLoadingFailed];
+            
+            return;
+        }
+        
+        [self fillModelFromResult:result];
+    }];
 }
 
 #pragma mark -
@@ -55,22 +92,8 @@
 
 - (void)execute {
     @synchronized (self) {
-        FBSDKGraphRequest *request = nil;
-        request = [[FBSDKGraphRequest alloc]
-                   initWithGraphPath:[self graphPathInit]
-                   parameters:[self parametresInit]
-                   HTTPMethod:[self HTTPMethodInit]];
-        
-        self.requestConnection = [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
-                                                                       NSDictionary *result,
-                                                                       NSError *error) {
-            if (error) {
-                NSLog(@"[ERROR] %@", error);
-                return;
-            }
-            
-            [self fillModelFromResult:result];
-        }];
+        [self initRequest];
+        [self executeRequest];
     }
 }
 

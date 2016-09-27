@@ -10,7 +10,7 @@
 
 @interface ANSFBConstatns : NSObject
 
-FOUNDATION_EXPORT NSString * const kANSme;
+FOUNDATION_EXPORT NSString * const kANSMe;
 FOUNDATION_EXPORT NSString * const kANSGet;
 FOUNDATION_EXPORT NSString * const kANSFields;
 FOUNDATION_EXPORT NSString * const kANSID;
@@ -24,5 +24,7 @@ FOUNDATION_EXPORT NSString * const kANSFriends;
 FOUNDATION_EXPORT NSString * const kANSHometown;
 FOUNDATION_EXPORT NSString * const kANSGender;
 FOUNDATION_EXPORT NSString * const kANSEmail;
+FOUNDATION_EXPORT NSString * const kANSPublicProfile;
+FOUNDATION_EXPORT NSString * const kANSUserFriends;
 
 @end

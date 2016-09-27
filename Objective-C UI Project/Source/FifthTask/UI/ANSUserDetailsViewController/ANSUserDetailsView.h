@@ -15,6 +15,7 @@
 @property (nonatomic, strong) IBOutlet ANSImageView *imageView;
 @property (nonatomic, strong) IBOutlet UILabel      *fullNameLabel;
 @property (nonatomic, strong) IBOutlet UILabel      *genderLabel;
+@property (nonatomic, strong) IBOutlet UILabel      *emailLabel;
 
 - (void)fillBasicInfoFromUser:(ANSFBUser *)user;
 - (void)fillFullInfoFromUser:(ANSFBUser *)user;

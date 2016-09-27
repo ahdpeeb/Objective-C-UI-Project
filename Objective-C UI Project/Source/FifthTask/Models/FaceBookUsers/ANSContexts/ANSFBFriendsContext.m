@@ -20,18 +20,18 @@
 @implementation ANSFBFriendsContext
 
 #pragma mark -
-#pragma mark Reloaded Methods
+#pragma mark Private Methods (reloaded)
 
-- (NSString *)graphPathInit {
+- (NSString *)graphPath {
     ANSFBUser *user = self.user;
     return [NSString stringWithFormat:@"%lu/%@", (long)user.ID, kANSFriends];
 }
 
-- (NSString *)HTTPMethodInit {
+- (NSString *)HTTPMethod {
     return kANSGet;
 }
 
-- (NSDictionary *)parametresInit {
+- (NSDictionary *)parametres {
     return @{kANSFields:[NSString stringWithFormat:@"%@, %@, %@, %@", kANSID,
                                                                       kANSFirstName,
                                                                       kANSLastName,
@@ -50,6 +50,11 @@
     }];
     
     friends.state = ANSLoadableModelDidLoad;
+}
+
+- (void)notifyIfLoadingFailed {
+    ANSFBFriends *friends = self.model;
+    friends.state = ANSLoadableModelDidFailLoading;
 }
 
 #pragma mark -

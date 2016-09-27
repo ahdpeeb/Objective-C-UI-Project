@@ -18,11 +18,13 @@
 - (void)userDidLoadID:(ANSFBUser *)user;
 - (void)userDidLoadBasic:(ANSFBUser *)user;
 - (void)userDidLoadDetails:(ANSFBUser *)user;
+- (void)userDidFailLoading:(ANSFBUser *)user;
 
 @end
 
 typedef NS_ENUM(NSUInteger, ANSUserState) {
     ANSUserUnloaded,
+    ANSUserDidFailLoading,
     ANSUserDidLoadID,
     ANSUserDidLoadBasic,
     ANSUserDidLoadDetails,

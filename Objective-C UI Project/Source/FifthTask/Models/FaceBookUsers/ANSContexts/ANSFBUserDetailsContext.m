@@ -13,18 +13,18 @@
 @implementation ANSFBUserDetailsContext
 
 #pragma mark -
-#pragma mark Private Methods;
+#pragma mark Private Methods (reloaded);
 
-- (NSString *)graphPathInit; {
+- (NSString *)graphPath; {
     NSUInteger value = ((ANSFBUser *)self.model).ID;
     return [NSString stringWithFormat:@"%ld", value];
 }
 
-- (NSString *)HTTPMethodInit {
+- (NSString *)HTTPMethod {
     return kANSGet;
 }
 
-- (NSDictionary *)parametresInit {
+- (NSDictionary *)parametres {
     return @{kANSFields:[NSString stringWithFormat:@"%@, %@, %@",
                          kANSHometown,
                          kANSGender,
@@ -33,8 +33,9 @@
 
 - (void)fillModelFromResult:(NSDictionary *)result {
     ANSFBUser *user = self.model;
-    user.email = result[kANSEmail];
     user.gender = result[kANSGender];
+    id email = result[kANSEmail];
+    user.email = email;
     
     user.state = ANSUserDidLoadDetails;
 }
