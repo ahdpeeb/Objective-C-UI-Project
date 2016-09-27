@@ -198,12 +198,6 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 #pragma mark -
 #pragma mark UITableViewDelegate protocol
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView
-           editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewCellEditingStyleDelete;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -259,6 +253,9 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
         }
     });
 }
+
+#pragma mark -
+#pragma mark ANSLoadableModelObserver protocol
 
 - (void)loadableModelLoading:(ANSLoadableModel *)model {
     self.friendListView.loadingViewVisible = YES;

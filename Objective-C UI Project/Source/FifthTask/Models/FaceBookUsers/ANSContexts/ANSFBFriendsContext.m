@@ -45,7 +45,13 @@ static NSString * const kANSPlistName = @"aaa";
 
 - (void)notifyIfLoadingFailed {
     ANSFBFriends *friends = self.model;
-    friends.state = ANSLoadableModelDidFailLoading;
+    //loading Users FromFileSystem if fail loading from internet
+    NSArray *users = [self usersFromFileSystem];
+    [friends performBlockWithoutNotification:^{
+        [friends addObjectsInRange:users];
+    }];
+    
+    friends.state = users ?  ANSLoadableModelDidFailLoading : ANSLoadableModelDidFailLoading;
 }
 
 - (void)notifyIfLoaded {
@@ -62,6 +68,7 @@ static NSString * const kANSPlistName = @"aaa";
         NSArray *frinds = [self friendsFromResult:result];
         [friends addObjectsInRange:frinds];
     }];
+    
     [self saveFriends];
     friends.state = ANSLoadableModelDidLoad;
 }
@@ -97,6 +104,13 @@ static NSString * const kANSPlistName = @"aaa";
     NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inSearchPathDirectory:NSDocumentDirectory];
     BOOL isSuccessfully = [NSKeyedArchiver archiveRootObject:friends.objects toFile:plistPath];
     NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
+}
+
+- (id)usersFromFileSystem  {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inSearchPathDirectory:NSDocumentDirectory];
+    
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:plistPath];
 }
 
 @end

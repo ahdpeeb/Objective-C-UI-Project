@@ -85,6 +85,8 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
                                   if (!error && !value) {
                                       NSLog(@"Loggined");
                                       [self loadUser];
+                                  } else {
+                                      [self userDidLoadID:nil];
                                   }
                               }];
 }
