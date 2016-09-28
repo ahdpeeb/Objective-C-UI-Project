@@ -1,5 +1,5 @@
 //
-//  NSMutableDictionary+Extension.h
+//  ANSJSONRepresentation.h
 //  Objective-C UI Project
 //
 //  Created by Nikola Andriiev on 27.09.16.
@@ -8,9 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ANSJSONRepresentationProtocol.h"
-
-@interface NSMutableDictionary (Extension)
+@protocol ANSJSONRepresentation <NSObject>
 
 - (instancetype)JSONRepresentation;
 

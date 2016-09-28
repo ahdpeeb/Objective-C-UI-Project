@@ -17,12 +17,9 @@
 #import "ANSMacros.h"
 
 @interface ANSFBUserContext ()
-@property (nonatomic, strong) id                           model;
-
+@property (nonatomic, strong) id                          model;
 @property (nonatomic, strong) FBSDKGraphRequestConnection *requestConnection;
-@property (nonatomic, strong) FBSDKGraphRequest           *request;
 
-- (void)initRequest;
 - (void)executeRequest;
 
 @end
@@ -48,6 +45,7 @@
         
         [_requestConnection cancel];
         _requestConnection = requestConnections;
+        [_requestConnection start];
     }
 }
 
@@ -66,7 +64,7 @@
     return nil;
 }
 
-- (void)fillModelFromResult:(NSDictionary *)result {
+- (void)fillModelFromResult:(NSDictionary <ANSJSONRepresentation> *)result; {
     return;
 }
 
@@ -74,23 +72,23 @@
     return;
 }
 
-- (void)notifyIfLoaded {
-    return;
+- (BOOL)notifyIfLoaded {
+    [self doesNotRecognizeSelector:_cmd];
+    
+    return NO;
 }
 
 #pragma mark -
 #pragma mark Ptivate methods
 
-- (void)initRequest {
-    self.request = [[FBSDKGraphRequest alloc] initWithGraphPath:[self graphPath]
-                                                     parameters:[self parametres]
-                                                     HTTPMethod:[self HTTPMethod]];
-}
-
 - (void)executeRequest {
-    self.requestConnection = [self.request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
-                                                                   NSMutableDictionary *result,
-                                                                   NSError *error) {
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[self graphPath]
+                                                                   parameters:[self parametres]
+                                                                   HTTPMethod:[self HTTPMethod]];
+    
+    self.requestConnection = [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                                                        NSDictionary <ANSJSONRepresentation>  *result,
+                                                                        NSError *error) {
         if (error) {
             NSLog(@"[ERROR] %@", error);
             [self notifyIfLoadingFailed];
@@ -108,7 +106,6 @@
 - (void)execute {
     @synchronized (self) {
         [self notifyIfLoaded];
-        [self initRequest];
         [self executeRequest];
     }
 }

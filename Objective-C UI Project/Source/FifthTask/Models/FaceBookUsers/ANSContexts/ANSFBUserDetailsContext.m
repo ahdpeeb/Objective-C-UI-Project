@@ -31,7 +31,7 @@
                          kANSEmail]};
 }
 
-- (void)fillModelFromResult:(NSMutableDictionary *)result {
+- (void)fillModelFromResult:(NSDictionary *)result {
     ANSFBUser *user = self.model;
     user.gender = result[kANSGender];
     id email = result[kANSEmail];
@@ -40,11 +40,15 @@
     user.state = ANSUserDidLoadDetails;
 }
 
-- (void)notifyIfLoaded {
+- (BOOL)notifyIfLoaded {
     ANSFBUser *user = self.model;
     if (user.state == ANSUserDidLoadDetails) {
         [user notifyOfStateChange:ANSUserDidLoadDetails];
+        
+        return YES;
     }
+    
+    return NO;
 }
 
 @end

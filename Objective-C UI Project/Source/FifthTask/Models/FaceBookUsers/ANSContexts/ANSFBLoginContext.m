@@ -10,7 +10,7 @@
 
 #import "ANSFBUser.h"
 #import "ANSFBConstatns.h"
-#import "ANSJsonParser.h"
+#import "ANSJSONRepresentation.h"
 
 @implementation ANSFBLoginContext
 
@@ -34,17 +34,21 @@
     user.state = ANSUserDidFailLoading;
 }
 
-- (void)notifyIfLoaded {
+- (BOOL)notifyIfLoaded {
     ANSFBUser *user = self.model;
     if (user.state == ANSUserDidLoadID) {
         [user notifyOfStateChange:ANSUserDidLoadID];
+        
+        return YES;
     }
+    
+    return NO;
 }
 
-- (void)fillModelFromResult:(NSMutableDictionary *)result {
+- (void)fillModelFromResult:(NSDictionary <ANSJSONRepresentation> *)result; {
     ANSFBUser *user = self.model;
-    NSMutableDictionary *dictionary = [result JSONRepresentation];
-    user.ID = ((NSString *)dictionary[kANSID]).doubleValue;
+    NSDictionary *parsedResult = [result JSONRepresentation];
+    user.ID = [(NSString *)parsedResult[kANSID] doubleValue];
     user.state = ANSUserDidLoadID;
 }
 

@@ -10,6 +10,8 @@
 
 #import "ANSFBUser.h"
 
+#import "ANSJSONRepresentation.h"
+
 @interface ANSFBUserContext : NSObject
 @property (nonatomic, readonly) id model;
 
@@ -18,7 +20,8 @@
 - (void)execute;
 - (void)cancel;
 
-- (void)fillModelFromResult:(NSMutableDictionary *)result;
+//need to be reloaded
+- (void)fillModelFromResult:(NSDictionary <ANSJSONRepresentation> *)result;
 
 // next methods need to me reloaded in child classes:
 // return's graphPath string
@@ -33,7 +36,8 @@
 //need to be reloaded, for model notyfication if loading failed
 - (void)notifyIfLoadingFailed;
 
-//need to be reloaded, for model notyfication if model already loaded
-- (void)notifyIfLoaded;
+//need to be reloaded, for model notyfication if model already loaded.
+//if loaded, shoulds return YES.
+- (BOOL)notifyIfLoaded;
 
 @end

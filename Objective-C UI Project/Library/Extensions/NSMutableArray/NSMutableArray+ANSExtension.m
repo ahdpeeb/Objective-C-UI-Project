@@ -18,11 +18,4 @@
     }
 }
 
-- (instancetype)JSONRepresentation {
-    @synchronized (self) {
-        [self removeObjectIdenticalTo:[NSNull null]];
-        return self;
-    }
-}
-
 @end
