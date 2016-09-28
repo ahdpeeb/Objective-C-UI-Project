@@ -32,34 +32,19 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 @property (nonatomic, strong) ANSFBUser                             *user;
 @property (nonatomic, strong) ANSProtocolObservationController      *contoller;
 
+- (void)autoLogin;
+
 @end
 
 @implementation ANSLoginViewController
-
-- (void)dealloc {
-    [self.loginContext cancel];
-}
-
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil
-                         bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    FBSDKAccessToken *token = [FBSDKAccessToken currentAccessToken];
-    if (token) {
-        ANSFBUser *user = [ANSFBUser new];
-        self.user = user;
-        user.ID = token.userID.doubleValue;
-        [self userDidLoadID:user];
-    }
-    
-    return self;
-}
 
 #pragma mark -
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self autoLogin];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,12 +65,19 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 - (void)loadUser {
     ANSFBUser *user = [ANSFBUser new];
     self.user = user;
-    
     self.loginContext =  [[ANSFBLoginContext alloc] initWithModel:user];
-    
     [self.loginContext execute];
 }
 
+- (void)autoLogin {
+    FBSDKAccessToken *token = [FBSDKAccessToken currentAccessToken];
+    if (token) {
+        ANSFBUser *user = [ANSFBUser new];
+        self.user = user;
+        user.ID = token.userID.doubleValue;
+        [self userDidLoadID:user];
+    }
+}
 
 #pragma mark -
 #pragma mark Buttons actions
@@ -100,17 +92,8 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
                                   if (!error && !value) {
                                       NSLog(@"Loggined");
                                       [self loadUser];
-                                  } else {
-                                      [self userDidLoadID:nil];
                                   }
                               }];
-}
-
-#pragma mark -
-#pragma mark Public methods
-
-- (void)logOut {
-    [self.loginManager logOut];
 }
 
 #pragma mark -

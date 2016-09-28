@@ -44,7 +44,7 @@
 - (void)fillModelFromResult:(NSMutableDictionary *)result {
     ANSFBUser *user = self.model;
     NSMutableDictionary *dictionary = [result JSONRepresentation];
-    user.ID = ((NSString *)dictionary[kANSID]).longLongValue;
+    user.ID = ((NSString *)dictionary[kANSID]).doubleValue;
     user.state = ANSUserDidLoadID;
 }
 

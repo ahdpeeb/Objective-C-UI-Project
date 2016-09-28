@@ -85,7 +85,7 @@ static NSString * const kANSPlistName = @"aaa";
     for (NSMutableDictionary *dataUser in dataUsers) {
         NSMutableDictionary *user = [dataUser JSONRepresentation];
         ANSFBUser *fbUser = [ANSFBUser new];
-        fbUser.ID = ((NSString *)user[kANSID]).longLongValue;
+        fbUser.ID = ((NSString *)user[kANSID]).doubleValue;
         fbUser.firstName = user[kANSFirstName];
         fbUser.lastName = user[kANSLastName];
         

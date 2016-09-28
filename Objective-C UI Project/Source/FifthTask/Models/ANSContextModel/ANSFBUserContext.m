@@ -30,7 +30,7 @@
 @implementation ANSFBUserContext
 
 - (void)dealloc {
-    [self cancel];
+    self.requestConnection = nil;
 }
 
 - (instancetype)initWithModel:(id)model; {
@@ -38,6 +38,17 @@
     self.model = model;
     
     return self;
+}
+
+#pragma mark -
+#pragma mark Accsessors
+
+- (void)setRequestConnection:(FBSDKGraphRequestConnection *)requestConnections {
+    if (_requestConnection != requestConnections) {
+        
+        [_requestConnection cancel];
+        _requestConnection = requestConnections;
+    }
 }
 
 #pragma mark -

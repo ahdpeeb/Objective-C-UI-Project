@@ -5,6 +5,7 @@
 //  Created by Nikola Andriiev on 22.07.16.
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 #import "ANSFriendListViewController.h"
 
@@ -74,10 +75,6 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     return self; 
 }
 
-- (void)dealloc {
-    [self.friendsContext cancel];
-}
-
 #pragma mark -
 #pragma mark Accsessors
 
@@ -122,7 +119,6 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.delegate = self;
     self.navigationItem.title = kANSTitleForHeaderSection;
 
 // if no internet connerion
@@ -155,6 +151,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 }
 
 - (void)onLeftButton {
+    [[FBSDKLoginManager new] logOut]; 
     [self.navigationController popViewControllerAnimated:YES];
 }
                                    
@@ -219,15 +216,6 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     [self.friendListView.tableView reloadData];
 }
 
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-    UITableView *table = self.friendListView.tableView;
-    if (table.isEditing) {
-        return NO;
-    }
-    
-    return YES;
-}
-
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     [searchBar setShowsCancelButton:YES animated:YES];
 }
@@ -258,7 +246,9 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 #pragma mark ANSLoadableModelObserver protocol
 
 - (void)loadableModelLoading:(ANSLoadableModel *)model {
-    self.friendListView.loadingViewVisible = YES;
+    ANSPerformInMainQueue(dispatch_async, ^{
+        self.friendListView.loadingViewVisible = YES;
+    });
 }
 
 - (void)loadableModelDidLoad:(ANSLoadableModel *)model {
@@ -274,18 +264,6 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
         NSLog(@"notified didFilterWithUserInfo - %@ ", model);
         [self.friendListView.tableView reloadData];
     });
-}
-
-#pragma mark -
-#pragma mark UINavigationControllerDelegate protocol
-
-- (void)navigationController:(UINavigationController *)navigationController
-      willShowViewController:(UIViewController *)viewController
-                    animated:(BOOL)animated
-{
-    if ([viewController class] == [ANSLoginViewController class]) {
-        [(ANSLoginViewController *)viewController logOut];
-    }
 }
 
 @end
