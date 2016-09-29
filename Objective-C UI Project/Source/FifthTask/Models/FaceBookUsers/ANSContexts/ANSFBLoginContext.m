@@ -26,7 +26,7 @@
 }
 
 - (NSDictionary *)parametres {
-    return @{kANSFields: kANSID};
+    return @{kANSFields:[NSString stringWithFormat:@"%@, %@", kANSID, kANSLocation]};
 }
 
 - (void)notifyIfLoadingFailed {
@@ -48,6 +48,8 @@
 - (void)fillModelFromResult:(NSDictionary <ANSJSONRepresentation> *)result; {
     ANSFBUser *user = self.model;
     NSDictionary *parsedResult = [result JSONRepresentation];
+    NSLog(@"parsedResult [INFO] - %@", parsedResult);
+    
     user.ID = [(NSString *)parsedResult[kANSID] doubleValue];
     user.state = ANSUserDidLoadID;
 }

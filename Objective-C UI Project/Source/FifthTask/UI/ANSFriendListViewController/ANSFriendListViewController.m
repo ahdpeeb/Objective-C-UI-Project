@@ -49,7 +49,9 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 
 - (void)resignSearchBar;
 - (void)initFilterInfrastructure;
-- (void)onLeftButton;
+
+- (void)leftBarButtonAction:(UIBarButtonItem *)sender;
+- (void)initLeftBarButton;
 
 @end
 
@@ -62,14 +64,14 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
-    [self initLeftButton];
+    [self initLeftBarButton];
     
     return self;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    [self initLeftButton];
+    [self initLeftBarButton];
    
     
     return self; 
@@ -145,12 +147,12 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 #pragma mark -
 #pragma mark BarButtonItems
 
-- (void)initLeftButton {
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Return" style:UIBarButtonItemStylePlain target:self action:@selector(onLeftButton)];
+- (void)initLeftBarButton {
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Return" style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonAction:)];
     self.navigationItem.leftBarButtonItem = leftButton;
 }
 
-- (void)onLeftButton {
+- (void)leftBarButtonAction:(UIBarButtonItem *)sender {
     [[FBSDKLoginManager new] logOut]; 
     [self.navigationController popViewControllerAnimated:YES];
 }

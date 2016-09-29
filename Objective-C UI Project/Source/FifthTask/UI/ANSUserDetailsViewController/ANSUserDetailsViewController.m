@@ -8,6 +8,7 @@
 
 #import "ANSUserDetailsViewController.h"
 
+#import "ANSFriendListViewController.h"
 #import "ANSUserDetailsView.h"
 #import "ANSFBUserDetailsContext.h"
 #import "ANSProtocolObservationController.h"
@@ -20,9 +21,29 @@ ANSViewControllerBaseViewProperty(ANSUserDetailsViewController, ANSUserDetailsVi
 @property (nonatomic, strong) ANSFBUserDetailsContext *detailsContext;
 @property (nonatomic, strong) ANSProtocolObservationController *userController;
 
+- (void)initRightBarButton;
+- (void)rightBarButtonAction:(UIBarButtonItem *)sender;
+
 @end
 
 @implementation ANSUserDetailsViewController
+
+#pragma mark -
+#pragma Initialization and deallocation
+
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    self = [super initWithCoder:coder];
+    [self initRightBarButton];
+    
+    return self;
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    [self initRightBarButton];
+    
+    return self;
+}
 
 #pragma mark -
 #pragma mark View lifeCycle
@@ -38,7 +59,7 @@ ANSViewControllerBaseViewProperty(ANSUserDetailsViewController, ANSUserDetailsVi
 }
 
 #pragma mark -
-#pragma mark view lifeCycle
+#pragma mark Accsessors
 
 - (void)setUser:(ANSFBUser *)user {
     if (_user != user) {
@@ -52,7 +73,22 @@ ANSViewControllerBaseViewProperty(ANSUserDetailsViewController, ANSUserDetailsVi
         [context execute];
     }
 }
- 
+
+#pragma mark -
+#pragma mark - BarButton items
+
+- (void)initRightBarButton {
+    UIBarButtonItem * rightButton = nil;
+    rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Friends" style:UIBarButtonItemStyleDone target:self action:@selector(rightBarButtonAction:)];
+    self.navigationItem.rightBarButtonItem = rightButton;
+}
+
+- (void)rightBarButtonAction:(UIBarButtonItem *)sender {
+    ANSFriendListViewController *controller = [ANSFriendListViewController new];
+    controller.user = self.user;
+    [self.navigationController pushViewController:controller animated:NO];
+}
+
 #pragma mark -
 #pragma mark ANSUserStateObserver protocol
 

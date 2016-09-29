@@ -26,5 +26,6 @@ NSString * const kANSGender         = @"gender";
 NSString * const kANSEmail          = @"email";
 NSString * const kANSPublicProfile  = @"public_profile";
 NSString * const kANSUserFriends    = @"user_friends";
+NSString * const kANSLocation       = @"location";
 
 @end

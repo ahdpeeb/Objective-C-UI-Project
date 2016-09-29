@@ -18,6 +18,7 @@
 static NSString * const kANSPlistName = @"aaa";
 
 @interface ANSFBFriendsContext ()
+
 - (NSArray *)friendsFromResult:(NSDictionary <ANSJSONRepresentation> *)result;
 
 @end
@@ -102,15 +103,15 @@ static NSString * const kANSPlistName = @"aaa";
 - (void)saveFriends {
     ANSFBFriends *friends = self.model;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName
-                                 inSearchPathDirectory:NSDocumentDirectory];
+    NSString *plistPath = [fileManager pathToPlistWithName:@(self.user.ID).stringValue inSearchPathDirectory:NSDocumentDirectory];
     BOOL isSuccessfully = [NSKeyedArchiver archiveRootObject:friends.objects toFile:plistPath];
     NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
 }
 
 - (id)usersFromFileSystem  {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *plistPath = [fileManager pathToPlistFile:kANSPlistName inSearchPathDirectory:NSDocumentDirectory];
+    NSString *plistPath = [fileManager pathToPlistFile:@(self.user.ID).stringValue
+                                 inSearchPathDirectory:NSDocumentDirectory];
     
     return [NSKeyedUnarchiver unarchiveObjectWithFile:plistPath];
 }

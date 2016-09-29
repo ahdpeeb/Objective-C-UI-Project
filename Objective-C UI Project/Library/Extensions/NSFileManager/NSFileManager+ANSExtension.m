@@ -119,4 +119,11 @@ static NSString * const kANSPlist = @".plist";
     return [fileNames copy];
 }
 
+- (NSString *)pathToPlistWithName:(NSString *)name inSearchPathDirectory:(NSSearchPathDirectory)directory {
+    NSString *plistName = [name stringByAppendingString:kANSPlist];
+    NSString *directoryPath = [self pathToSearchPathDirectory:directory];
+    
+    return [directoryPath stringByAppendingPathComponent: plistName];
+}
+
 @end

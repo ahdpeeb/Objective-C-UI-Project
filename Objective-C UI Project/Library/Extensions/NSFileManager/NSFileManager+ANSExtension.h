@@ -30,9 +30,13 @@
 
 - (BOOL)copyFileAtPath:(NSString *)filePath toSearchPathDirectory:(NSSearchPathDirectory)directory;
 
-// generate path to "file.plist" file. You shoud write file name to "file" argument;
+// looking for "file.plist" file in directory or [NSBundle mainBundle].
+// You shoud write file name to "file" argument;
 - (NSString *)pathToPlistFile:(NSString *)file
         inSearchPathDirectory:(NSSearchPathDirectory)directory;
+
+// generate path to "file.plist" file with name;
+- (NSString *)pathToPlistWithName:(NSString *)name inSearchPathDirectory:(NSSearchPathDirectory)directory;
 
 // returns string array fileNames(with extension) at path
 - (NSArray <NSString *> *)filesNamesAtPath:(NSString *)path;

@@ -26,5 +26,6 @@ FOUNDATION_EXPORT NSString * const kANSGender;
 FOUNDATION_EXPORT NSString * const kANSEmail;
 FOUNDATION_EXPORT NSString * const kANSPublicProfile;
 FOUNDATION_EXPORT NSString * const kANSUserFriends;
+FOUNDATION_EXPORT NSString * const kANSLocation;
 
 @end
