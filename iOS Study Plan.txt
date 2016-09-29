@@ -1,4 +1,4 @@
-	 Лекция 1
+	 Лекция 1 test 
 Материалы:
 http://comsci.liu.edu/~murali/c/PreprocessCompileLink.htm
 http://www.cplusplus.com/reference/cstdio/printf/
