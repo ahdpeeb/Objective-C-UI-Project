@@ -77,11 +77,4 @@
     return [result copy];
 }
 
-#pragma mark -
-#pragma mark ANSJSONRepresentation protocol
-
-- (instancetype)JSONRepresentation {
-    return self;
-}
-
 @end

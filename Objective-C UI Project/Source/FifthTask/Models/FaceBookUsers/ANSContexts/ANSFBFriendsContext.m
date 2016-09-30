@@ -11,8 +11,8 @@
 #import "ANSFBUser.h"
 #import "ANSFBFriends.h"
 #import "ANSFBConstatns.h"
-#import "ANSJsonParser.h"
 
+#import "NSDictionary+ANSJSONRepresentation.h"
 #import "NSFileManager+ANSExtension.h"
 
 static NSString * const kANSPlistName = @"aaa";

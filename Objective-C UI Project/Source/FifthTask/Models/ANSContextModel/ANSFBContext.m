@@ -6,17 +6,16 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
-#import "ANSFBUserContext.h"
+#import "ANSFBContext.h"
 
 #import "ANSFBUser.h"
 #import "ANSGCD.h"
 
 #import "ANSMacros.h"
 
-@interface ANSFBUserContext ()
+@interface ANSFBContext ()
 @property (nonatomic, strong) id                          model;
 @property (nonatomic, strong) FBSDKGraphRequestConnection *requestConnection;
 
@@ -24,7 +23,7 @@
 
 @end
 
-@implementation ANSFBUserContext
+@implementation ANSFBContext
 
 - (void)dealloc {
     self.requestConnection = nil;

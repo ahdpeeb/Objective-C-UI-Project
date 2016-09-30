@@ -6,8 +6,8 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "ANSFBUserContext.h"
+#import "ANSFBContext.h"
 
-@interface ANSFBLoginContext : ANSFBUserContext
+@interface ANSFBLoginContext : ANSFBContext
 
 @end

@@ -35,16 +35,4 @@
     return [self filteredArrayUsingPredicate:filter];
 }
 
-#pragma mark -
-#pragma mark ANSJSONRepresentation protocol
-
-- (instancetype)JSONRepresentation {
-    NSMutableArray *objects = [NSMutableArray new];
-    for (id <ANSJSONRepresentation> object in self) {
-        [objects addObject:[object JSONRepresentation]];
-    }
-    
-    return [objects copy];
-}
-
 @end

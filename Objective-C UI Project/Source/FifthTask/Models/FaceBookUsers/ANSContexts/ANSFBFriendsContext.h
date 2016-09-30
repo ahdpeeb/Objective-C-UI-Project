@@ -6,11 +6,11 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "ANSFBUserContext.h"
+#import "ANSFBContext.h"
 
 @class ANSFBUser;
 
-@interface ANSFBFriendsContext : ANSFBUserContext
+@interface ANSFBFriendsContext : ANSFBContext
 @property (nonatomic, strong) ANSFBUser *user;
 
 @end

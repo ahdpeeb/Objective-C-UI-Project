@@ -12,7 +12,7 @@
 
 #import "ANSJSONRepresentation.h"
 
-@interface ANSFBUserContext : NSObject
+@interface ANSFBContext : NSObject
 @property (nonatomic, readonly) id model;
 
 - (instancetype)initWithModel:(id)model;

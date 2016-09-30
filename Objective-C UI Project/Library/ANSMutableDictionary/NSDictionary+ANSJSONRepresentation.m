@@ -6,9 +6,9 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "NSDictionary+Extension.h"
+#import "NSDictionary+ANSJSONRepresentation.h"
 
-@implementation NSDictionary (Extension)
+@implementation NSDictionary (ANSJSONRepresentation)
 
 - (instancetype)JSONRepresentation {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
@@ -17,7 +17,7 @@
         [dictionary setValue:[object JSONRepresentation] forKey:key];
     }
     
-    return [dictionary copy];
+    return [[self class] dictionaryWithDictionary:dictionary];
 }
 
 @end

@@ -1,20 +1,20 @@
 //
-//  NSNull+Extension.m
+//  NSString+ANSJSONRepresentation.m
 //  Objective-C UI Project
 //
-//  Created by Nikola Andriiev on 28.09.16.
+//  Created by Nikola Andriiev on 30.09.16.
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "NSNull+Extension.h"
+#import "NSString+ANSJSONRepresentation.h"
 
-@implementation NSNull (Extension)
+@implementation NSString (ANSJSONRepresentation)
 
 #pragma mark -
 #pragma mark ANSJSONRepresentation protocol
 
 - (instancetype)JSONRepresentation {
-    return nil;
+    return self;
 }
 
 @end
