@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		93026CD41D464C9100DFCF23 /* Gomer_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 93026CD21D464C9100DFCF23 /* Gomer_2.png */; };
-		93026CD71D464D0900DFCF23 /* Gomer_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 93026CD61D464D0900DFCF23 /* Gomer_1.jpg */; };
 		9302D7BD1D981385003CD9B8 /* ANSFBFriendsContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7BC1D981385003CD9B8 /* ANSFBFriendsContext.m */; };
 		9302D7C31D991249003CD9B8 /* ANSFBUserContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7C21D991249003CD9B8 /* ANSFBUserContext.m */; };
 		9302D7C91D991440003CD9B8 /* ANSFBConstatns.m in Sources */ = {isa = PBXBuildFile; fileRef = 9302D7C81D991440003CD9B8 /* ANSFBConstatns.m */; };
@@ -68,22 +66,6 @@
 		9376C8471D79DFB500E6A3EF /* ANSLoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9376C83E1D79DFB500E6A3EF /* ANSLoadingView.xib */; };
 		9376C8481D79DFB500E6A3EF /* ANSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C8411D79DFB500E6A3EF /* ANSTableViewCell.m */; };
 		9376C8491D79DFB500E6A3EF /* ANSRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C8441D79DFB500E6A3EF /* ANSRootView.m */; };
-		9388ECF11D4A396F0082EE4B /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE11D4A396F0082EE4B /* 1.png */; };
-		9388ECF21D4A396F0082EE4B /* 10.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE21D4A396F0082EE4B /* 10.png */; };
-		9388ECF31D4A396F0082EE4B /* 11.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE31D4A396F0082EE4B /* 11.png */; };
-		9388ECF41D4A396F0082EE4B /* 12.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE41D4A396F0082EE4B /* 12.png */; };
-		9388ECF51D4A396F0082EE4B /* 13.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE51D4A396F0082EE4B /* 13.png */; };
-		9388ECF61D4A396F0082EE4B /* 14.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE61D4A396F0082EE4B /* 14.png */; };
-		9388ECF71D4A396F0082EE4B /* 15.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE71D4A396F0082EE4B /* 15.png */; };
-		9388ECF81D4A396F0082EE4B /* 16.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE81D4A396F0082EE4B /* 16.png */; };
-		9388ECF91D4A396F0082EE4B /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECE91D4A396F0082EE4B /* 2.png */; };
-		9388ECFA1D4A396F0082EE4B /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECEA1D4A396F0082EE4B /* 3.png */; };
-		9388ECFB1D4A396F0082EE4B /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECEB1D4A396F0082EE4B /* 4.png */; };
-		9388ECFC1D4A396F0082EE4B /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECEC1D4A396F0082EE4B /* 5.png */; };
-		9388ECFD1D4A396F0082EE4B /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECED1D4A396F0082EE4B /* 6.png */; };
-		9388ECFE1D4A396F0082EE4B /* 7.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECEE1D4A396F0082EE4B /* 7.png */; };
-		9388ECFF1D4A396F0082EE4B /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECEF1D4A396F0082EE4B /* 8.png */; };
-		9388ED001D4A396F0082EE4B /* 9.png in Resources */ = {isa = PBXBuildFile; fileRef = 9388ECF01D4A396F0082EE4B /* 9.png */; };
 		939BAE061D75937400B4D610 /* ANSArrayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BAD9E1D75937400B4D610 /* ANSArrayModel.m */; };
 		939BAE071D75937400B4D610 /* ANSChangeModel+UITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADA11D75937400B4D610 /* ANSChangeModel+UITableView.m */; };
 		939BAE081D75937400B4D610 /* ANSChangeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BADA31D75937400B4D610 /* ANSChangeModel.m */; };
@@ -145,8 +127,6 @@
 /* Begin PBXFileReference section */
 		486FD201570D96C7BDB4C317 /* Pods-Objective-C UI Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C UI Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-Objective-C UI Project/Pods-Objective-C UI Project.release.xcconfig"; sourceTree = "<group>"; };
 		6EBF0228B73B450A5AD3DBF2 /* libPods-Objective-C UI ProjectUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Objective-C UI ProjectUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		93026CD21D464C9100DFCF23 /* Gomer_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Gomer_2.png; sourceTree = "<group>"; };
-		93026CD61D464D0900DFCF23 /* Gomer_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Gomer_1.jpg; sourceTree = "<group>"; };
 		9302D7BB1D981385003CD9B8 /* ANSFBFriendsContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFBFriendsContext.h; sourceTree = "<group>"; };
 		9302D7BC1D981385003CD9B8 /* ANSFBFriendsContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFBFriendsContext.m; sourceTree = "<group>"; };
 		9302D7C11D991249003CD9B8 /* ANSFBUserContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSFBUserContext.h; sourceTree = "<group>"; };
@@ -206,22 +186,6 @@
 		9376C8411D79DFB500E6A3EF /* ANSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSTableViewCell.m; sourceTree = "<group>"; };
 		9376C8431D79DFB500E6A3EF /* ANSRootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSRootView.h; sourceTree = "<group>"; };
 		9376C8441D79DFB500E6A3EF /* ANSRootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSRootView.m; sourceTree = "<group>"; };
-		9388ECE11D4A396F0082EE4B /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
-		9388ECE21D4A396F0082EE4B /* 10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10.png; sourceTree = "<group>"; };
-		9388ECE31D4A396F0082EE4B /* 11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 11.png; sourceTree = "<group>"; };
-		9388ECE41D4A396F0082EE4B /* 12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 12.png; sourceTree = "<group>"; };
-		9388ECE51D4A396F0082EE4B /* 13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 13.png; sourceTree = "<group>"; };
-		9388ECE61D4A396F0082EE4B /* 14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 14.png; sourceTree = "<group>"; };
-		9388ECE71D4A396F0082EE4B /* 15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 15.png; sourceTree = "<group>"; };
-		9388ECE81D4A396F0082EE4B /* 16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 16.png; sourceTree = "<group>"; };
-		9388ECE91D4A396F0082EE4B /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
-		9388ECEA1D4A396F0082EE4B /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
-		9388ECEB1D4A396F0082EE4B /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
-		9388ECEC1D4A396F0082EE4B /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
-		9388ECED1D4A396F0082EE4B /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6.png; sourceTree = "<group>"; };
-		9388ECEE1D4A396F0082EE4B /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
-		9388ECEF1D4A396F0082EE4B /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
-		9388ECF01D4A396F0082EE4B /* 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9.png; sourceTree = "<group>"; };
 		939BAD9D1D75937400B4D610 /* ANSArrayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSArrayModel.h; sourceTree = "<group>"; };
 		939BAD9E1D75937400B4D610 /* ANSArrayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSArrayModel.m; sourceTree = "<group>"; };
 		939BADA01D75937400B4D610 /* ANSChangeModel+UITableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANSChangeModel+UITableView.h"; sourceTree = "<group>"; };
@@ -614,29 +578,6 @@
 			path = ASNRootView;
 			sourceTree = "<group>";
 		};
-		9388ECE01D4A396F0082EE4B /* animationDancer */ = {
-			isa = PBXGroup;
-			children = (
-				9388ECE11D4A396F0082EE4B /* 1.png */,
-				9388ECE21D4A396F0082EE4B /* 10.png */,
-				9388ECE31D4A396F0082EE4B /* 11.png */,
-				9388ECE41D4A396F0082EE4B /* 12.png */,
-				9388ECE51D4A396F0082EE4B /* 13.png */,
-				9388ECE61D4A396F0082EE4B /* 14.png */,
-				9388ECE71D4A396F0082EE4B /* 15.png */,
-				9388ECE81D4A396F0082EE4B /* 16.png */,
-				9388ECE91D4A396F0082EE4B /* 2.png */,
-				9388ECEA1D4A396F0082EE4B /* 3.png */,
-				9388ECEB1D4A396F0082EE4B /* 4.png */,
-				9388ECEC1D4A396F0082EE4B /* 5.png */,
-				9388ECED1D4A396F0082EE4B /* 6.png */,
-				9388ECEE1D4A396F0082EE4B /* 7.png */,
-				9388ECEF1D4A396F0082EE4B /* 8.png */,
-				9388ECF01D4A396F0082EE4B /* 9.png */,
-			);
-			path = animationDancer;
-			sourceTree = "<group>";
-		};
 		939BAD9B1D75937400B4D610 /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -965,9 +906,6 @@
 		93E520981D4250AC007EAD07 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				9388ECE01D4A396F0082EE4B /* animationDancer */,
-				93026CD61D464D0900DFCF23 /* Gomer_1.jpg */,
-				93026CD21D464C9100DFCF23 /* Gomer_2.png */,
 			);
 			name = Images;
 			path = Resources/Images;
@@ -1131,31 +1069,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9388ECFF1D4A396F0082EE4B /* 8.png in Resources */,
-				9388ECFD1D4A396F0082EE4B /* 6.png in Resources */,
-				9388ECF81D4A396F0082EE4B /* 16.png in Resources */,
 				9302D7EF1D9924BB003CD9B8 /* ANSLoginViewController.xib in Resources */,
-				9388ECFC1D4A396F0082EE4B /* 5.png in Resources */,
 				9302D7E31D992415003CD9B8 /* ANSUserDetailsViewController.xib in Resources */,
-				9388ECF71D4A396F0082EE4B /* 15.png in Resources */,
-				9388ECF91D4A396F0082EE4B /* 2.png in Resources */,
-				9388ECFA1D4A396F0082EE4B /* 3.png in Resources */,
-				9388ECF51D4A396F0082EE4B /* 13.png in Resources */,
-				9388ECF41D4A396F0082EE4B /* 12.png in Resources */,
-				9388ED001D4A396F0082EE4B /* 9.png in Resources */,
 				9376C8471D79DFB500E6A3EF /* ANSLoadingView.xib in Resources */,
 				935E5A0B1D6F4CA5005F6285 /* aaa.plist in Resources */,
-				9388ECF31D4A396F0082EE4B /* 11.png in Resources */,
 				9302D7D81D991DA8003CD9B8 /* ANSUserCell.xib in Resources */,
-				9388ECF21D4A396F0082EE4B /* 10.png in Resources */,
-				9388ECF11D4A396F0082EE4B /* 1.png in Resources */,
-				9388ECFE1D4A396F0082EE4B /* 7.png in Resources */,
 				93C0843D1D3E381F0077A81C /* LaunchScreen.storyboard in Resources */,
-				93026CD71D464D0900DFCF23 /* Gomer_1.jpg in Resources */,
-				9388ECFB1D4A396F0082EE4B /* 4.png in Resources */,
 				93C0843C1D3E381F0077A81C /* Assets.xcassets in Resources */,
-				9388ECF61D4A396F0082EE4B /* 14.png in Resources */,
-				93026CD41D464C9100DFCF23 /* Gomer_2.png in Resources */,
 				93C084301D3E36B20077A81C /* iOS Study Plan.txt in Resources */,
 				9302D7D61D991DA8003CD9B8 /* ANSFriendListViewController.xib in Resources */,
 			);
