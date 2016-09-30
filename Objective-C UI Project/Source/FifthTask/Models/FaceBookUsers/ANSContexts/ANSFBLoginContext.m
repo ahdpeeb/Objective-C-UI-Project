@@ -50,7 +50,7 @@
     NSDictionary *parsedResult = [result JSONRepresentation];
     NSLog(@"parsedResult [INFO] - %@", parsedResult);
     
-    user.ID = [(NSString *)parsedResult[kANSID] doubleValue];
+    user.ID = [parsedResult[kANSID] integerValue];
     user.state = ANSUserDidLoadID;
 }
 

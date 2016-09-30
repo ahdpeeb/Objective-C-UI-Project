@@ -29,8 +29,7 @@ static NSString * const kANSPlistName = @"aaa";
 #pragma mark Private Methods (reloaded)
 
 - (NSString *)graphPath {
-    ANSFBUser *user = self.user;
-    return [NSString stringWithFormat:@"%lu/%@", (long)user.ID, kANSFriends];
+    return [NSString stringWithFormat:@"%lu/%@",[(ANSFBUser *)self.user ID], kANSFriends];
 }
 
 - (NSString *)HTTPMethod {
@@ -67,14 +66,14 @@ static NSString * const kANSPlistName = @"aaa";
 }
 
 - (void)fillModelFromResult:(NSDictionary <ANSJSONRepresentation> *)result; {
-    ANSFBFriends *friends = self.model;
-    [friends performBlockWithoutNotification:^{
-        NSArray *frinds = [self friendsFromResult:result];
-        [friends addObjectsInRange:frinds];
+    ANSFBFriends *fbFriends = self.model;
+    [fbFriends performBlockWithoutNotification:^{
+        NSArray *friends = [self friendsFromResult:result];
+        [fbFriends addObjectsInRange:friends];
     }];
     
     [self saveFriends];
-    friends.state = ANSLoadableModelDidLoad;
+    fbFriends.state = ANSLoadableModelDidLoad;
 }
 
 #pragma mark -
@@ -87,7 +86,7 @@ static NSString * const kANSPlistName = @"aaa";
     NSArray *dataUsers = parsedResult[kANSData];
     for (NSDictionary *dataUser in dataUsers) {
         ANSFBUser *fbUser = [ANSFBUser new];
-        fbUser.ID = ((NSString *)dataUser[kANSID]).doubleValue;
+        fbUser.ID = [dataUser[kANSID] integerValue];
         fbUser.firstName = dataUser[kANSFirstName];
         fbUser.lastName = dataUser[kANSLastName];
         

@@ -16,8 +16,7 @@
 #pragma mark Private Methods (reloaded);
 
 - (NSString *)graphPath; {
-    NSUInteger value = ((ANSFBUser *)self.model).ID;
-    return [NSString stringWithFormat:@"%ld", value];
+    return [NSString stringWithFormat:@"%ld", ((ANSFBUser *)self.model).ID];
 }
 
 - (NSString *)HTTPMethod {

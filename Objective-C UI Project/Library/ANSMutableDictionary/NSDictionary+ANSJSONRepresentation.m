@@ -13,8 +13,10 @@
 - (instancetype)JSONRepresentation {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     for (id key in [self allKeys]) {
-        id <ANSJSONRepresentation> object = self[key];
-        [dictionary setValue:[object JSONRepresentation] forKey:key];
+        id <ANSJSONRepresentation> object = [self[key] JSONRepresentation];
+        if (object) {
+            dictionary[key] = object;
+        }
     }
     
     return [[self class] dictionaryWithDictionary:dictionary];

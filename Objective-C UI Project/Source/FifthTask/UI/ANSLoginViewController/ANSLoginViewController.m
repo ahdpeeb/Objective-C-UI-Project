@@ -74,7 +74,7 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
     if (token) {
         ANSFBUser *user = [ANSFBUser new];
         self.user = user;
-        user.ID = token.userID.doubleValue;
+        user.ID = [token.userID integerValue];
         [self userDidLoadID:user];
     }
 }
