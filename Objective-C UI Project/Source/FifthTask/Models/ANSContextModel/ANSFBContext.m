@@ -44,7 +44,6 @@
         
         [_requestConnection cancel];
         _requestConnection = requestConnections;
-        [_requestConnection start];
     }
 }
 
@@ -67,20 +66,23 @@
     return;
 }
 
-- (void)notifyIfLoadingFailed {
-    return;
+- (BOOL)isModelLoaded {
+    [self doesNotRecognizeSelector:_cmd];
+    return NO;
 }
 
-- (BOOL)notifyIfLoaded {
-    [self doesNotRecognizeSelector:_cmd];
-    
-    return NO;
+- (void)loadFromCache {
+    return;
 }
 
 #pragma mark -
 #pragma mark Ptivate methods
 
 - (void)executeRequest {
+    if ([self isModelLoaded]) {
+        return;
+    }
+    
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[self graphPath]
                                                                    parameters:[self parametres]
                                                                    HTTPMethod:[self HTTPMethod]];
@@ -90,7 +92,7 @@
                                                                         NSError *error) {
         if (error) {
             NSLog(@"[ERROR] %@", error);
-            [self notifyIfLoadingFailed];
+            [self loadFromCache];
             
             return;
         }
@@ -103,16 +105,11 @@
 #pragma mark Public methods
 
 - (void)execute {
-    @synchronized (self) {
-        [self notifyIfLoaded];
-        [self executeRequest];
-    }
+    [self executeRequest];
 }
 
 - (void)cancel {
-    @synchronized (self) {
-        [self.requestConnection cancel];
-    }
+    [self.requestConnection cancel];
 }
 
 @end

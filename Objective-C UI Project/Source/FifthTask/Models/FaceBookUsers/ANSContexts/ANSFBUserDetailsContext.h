@@ -8,6 +8,6 @@
 
 #import "ANSFBLoginContext.h"
 
-@interface ANSFBUserDetailsContext : ANSFBLoginContext
+@interface ANSFBUserDetailsContext : ANSFBContext
 
 @end

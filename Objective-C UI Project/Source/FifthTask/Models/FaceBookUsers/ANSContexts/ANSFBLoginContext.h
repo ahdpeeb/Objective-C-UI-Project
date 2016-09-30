@@ -8,6 +8,11 @@
 
 #import "ANSFBContext.h"
 
+@class ANSLoginViewController;
+
 @interface ANSFBLoginContext : ANSFBContext
+@property (nonatomic, weak) ANSLoginViewController *viewController;
+
+- (void)fillUserID:(ANSFBUser *)user;
 
 @end

@@ -33,11 +33,10 @@
 // return's dictionaty with parametres;
 - (NSDictionary *)parametres;
 
-//need to be reloaded, for model notyfication if loading failed
-- (void)notifyIfLoadingFailed;
+// need to be reloaded if no internet;
+- (void)loadFromCache;
 
-//need to be reloaded, for model notyfication if model already loaded.
-//if loaded, shoulds return YES.
-- (BOOL)notifyIfLoaded;
+// need to be reloaded
+- (BOOL)isModelLoaded;
 
 @end

@@ -30,16 +30,12 @@
                          kANSEmail]};
 }
 
-- (void)fillModelFromResult:(NSDictionary *)result {
+- (void)loadFromCache {
     ANSFBUser *user = self.model;
-    user.gender = result[kANSGender];
-    id email = result[kANSEmail];
-    user.email = email;
-    
-    user.state = ANSUserDidLoadDetails;
+    user.state = ANSUserDidFailLoading;
 }
 
-- (BOOL)notifyIfLoaded {
+- (BOOL)isModelLoaded {
     ANSFBUser *user = self.model;
     if (user.state == ANSUserDidLoadDetails) {
         [user notifyOfStateChange:ANSUserDidLoadDetails];
@@ -48,6 +44,15 @@
     }
     
     return NO;
+}
+
+- (void)fillModelFromResult:(NSDictionary *)result {
+    ANSFBUser *user = self.model;
+    user.gender = result[kANSGender];
+    id email = result[kANSEmail];
+    user.email = email;
+    
+    user.state = ANSUserDidLoadDetails;
 }
 
 @end

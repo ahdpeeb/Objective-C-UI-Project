@@ -43,18 +43,7 @@ static NSString * const kANSPlistName = @"aaa";
                                                                       kANSLargePicture]};
 }
 
-- (void)notifyIfLoadingFailed {
-    ANSFBFriends *friends = self.model;
-    //loading Users FromFileSystem if fail loading from internet
-    NSArray *users = [self usersFromFileSystem];
-    [friends performBlockWithoutNotification:^{
-        [friends addObjectsInRange:users];
-    }];
-    
-    friends.state = users ?  ANSLoadableModelDidFailLoading : ANSLoadableModelDidFailLoading;
-}
-
-- (BOOL)notifyIfLoaded {
+- (BOOL)isModelLoaded {
     ANSFBFriends *friends = self.model;
     if (friends.state == ANSLoadableModelDidLoad) {
         [friends notifyOfStateChange:ANSLoadableModelDidLoad];
@@ -74,6 +63,16 @@ static NSString * const kANSPlistName = @"aaa";
     
     [self saveFriends];
     fbFriends.state = ANSLoadableModelDidLoad;
+}
+
+- (void)loadFromCache {
+    ANSFBFriends *friends = self.model;
+    NSArray *users = [self usersFromFileSystem];
+    [friends performBlockWithoutNotification:^{
+        [friends addObjectsInRange:users];
+    }];
+    
+    friends.state = users ?  ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
 }
 
 #pragma mark -
