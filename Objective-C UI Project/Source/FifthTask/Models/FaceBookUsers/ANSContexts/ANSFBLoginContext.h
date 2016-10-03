@@ -11,8 +11,8 @@
 @class ANSLoginViewController;
 
 @interface ANSFBLoginContext : ANSFBContext
-@property (nonatomic, weak) ANSLoginViewController *viewController;
+@property (nonatomic, weak, readonly) ANSLoginViewController *viewController;
 
-- (void)fillUserID:(ANSFBUser *)user;
+- (instancetype)initWithModel:(id)model controller:(ANSLoginViewController *)controller;
 
 @end

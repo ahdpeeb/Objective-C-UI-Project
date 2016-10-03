@@ -43,6 +43,7 @@
 
 - (void)customizeUserPicture {
     UIImageView *picture = self.userImageView.contentImageView;
+    picture.contentMode = UIViewContentModeRedraw;
     [picture roundedLayer];
 }
 

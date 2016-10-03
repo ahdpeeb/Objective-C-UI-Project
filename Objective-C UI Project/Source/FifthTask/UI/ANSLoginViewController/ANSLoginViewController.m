@@ -18,6 +18,7 @@
 #import "ANSFBLoginContext.h"
 #import "ANSProtocolObservationController.h"
 #import "ANSFBConstatns.h"
+#import "ANSLoginInterection.h"
 
 #import "UIViewController+ANSExtension.h"
 
@@ -50,19 +51,10 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
     [super didReceiveMemoryWarning];
 }
 
-- (void)setLoginContext:(ANSFBLoginContext *)loginContext {
-    if (_loginContext != loginContext) {
-        _loginContext = loginContext;
-        
-        _loginContext.viewController = self;
-    }
-}
-
 - (void)setUser:(ANSFBUser *)user {
     if (_user != user) {
         _user = user;
-        
-        self.loginContext = [[ANSFBLoginContext alloc] initWithModel:_user];
+
         self.contoller = [user protocolControllerWithObserver:self];
     }
 }
@@ -71,15 +63,17 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 #pragma mark Private metods
 
 - (void)autoLogin {
-    ANSFBUser *user = [ANSFBUser new];
-    self.user = user;
-    [self.loginContext fillUserID:user];
+    self.user = [ANSFBUser new];
+    ANSLoginInterection *interection = [ANSLoginInterection interectionWithUser:self.user];
+    [interection execute];
 }
 
 #pragma mark -
 #pragma mark Buttons actions
 
 - (IBAction)onLogin:(UIButton *)sender {
+    self.user = [ANSFBUser new];
+    self.loginContext = [[ANSFBLoginContext alloc] initWithModel:self.user controller:self];
     [self.loginContext execute];
 }
 

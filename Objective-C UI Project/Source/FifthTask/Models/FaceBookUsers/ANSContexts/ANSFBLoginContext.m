@@ -15,36 +15,38 @@
 #import "ANSFBConstatns.h"
 #import "ANSJSONRepresentation.h"
 #import "ANSLoginViewController.h"
+#import "ANSLoginInterection.h"
+
+@interface ANSFBLoginContext ()
+@property (nonatomic, weak) ANSLoginViewController *viewController;
+
+@end
 
 @implementation ANSFBLoginContext
+
+- (instancetype)initWithModel:(id)model controller:(ANSLoginViewController *)controller {
+    self = [super initWithModel:model];
+    self.viewController = controller;
+    
+    return self;
+}
 
 #pragma mark -
 #pragma mark Public Methods (reloaded)
 
 - (void)execute {
     ANSFBUser *user = self.model;
+    ANSLoginInterection *interection = [ANSLoginInterection interectionWithUser:user];
     FBSDKLoginManager *manager = [FBSDKLoginManager new];
     [manager logInWithReadPermissions:@[kANSPublicProfile, kANSUserFriends, kANSEmail]
                    fromViewController:self.viewController
                               handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
                                   if (!error && !result.isCancelled) {
-                                      [self fillUserID:user];
+                                      [interection execute];
                                   } else {
                                       user.state = ANSUserDidFailLoading;
                                   }
                               }];
-}
-
-- (void)fillUserID:(ANSFBUser *)user {
-    FBSDKAccessToken *token = [FBSDKAccessToken currentAccessToken];
-    if (token) {
-        user.ID = [token.userID integerValue];
-        if (user.state != ANSUserDidLoadID) {
-            user.state = ANSUserDidLoadID;
-        } else {
-            [user notifyOfStateChange:ANSUserDidLoadID];
-        }
-    }
 }
 
 @end
