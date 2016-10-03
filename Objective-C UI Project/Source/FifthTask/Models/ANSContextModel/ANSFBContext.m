@@ -48,7 +48,7 @@
 }
 
 #pragma mark -
-#pragma mark Public methods
+#pragma mark Ptivate methods
 
 - (NSString *)graphPath {
     return nil;
@@ -66,17 +66,15 @@
     return;
 }
 
-- (BOOL)isModelLoaded {
-    [self doesNotRecognizeSelector:_cmd];
-    return NO;
-}
-
 - (void)loadFromCache {
     return;
 }
 
-#pragma mark -
-#pragma mark Ptivate methods
+- (BOOL)isModelLoaded {
+    [self doesNotRecognizeSelector:_cmd];
+    
+    return NO;
+}
 
 - (void)executeRequest {
     if ([self isModelLoaded]) {

@@ -29,7 +29,7 @@ static NSString * const kANSPlistName = @"aaa";
 #pragma mark Private Methods (reloaded)
 
 - (NSString *)graphPath {
-    return [NSString stringWithFormat:@"%lu/%@",[(ANSFBUser *)self.user ID], kANSFriends];
+    return [NSString stringWithFormat:@"%lu/%@",self.user.ID, kANSFriends];
 }
 
 - (NSString *)HTTPMethod {
@@ -43,15 +43,20 @@ static NSString * const kANSPlistName = @"aaa";
                                                                       kANSLargePicture]};
 }
 
-- (BOOL)isModelLoaded {
-    ANSFBFriends *friends = self.model;
-    if (friends.state == ANSLoadableModelDidLoad) {
-        [friends notifyOfStateChange:ANSLoadableModelDidLoad];
+- (BOOL)isModelLoadedWithState:(NSUInteger)state {
+    ANSObservableObject *model = self.model;
+    if (model.state == ANSLoadableModelDidLoad) {
+        [model notifyOfStateChange:ANSLoadableModelDidLoad];
         
         return YES;
     }
     
     return NO;
+
+}
+
+- (BOOL)isModelLoaded {
+    return [self isModelLoadedWithState:ANSLoadableModelDidLoad];
 }
 
 - (void)fillModelFromResult:(NSDictionary <ANSJSONRepresentation> *)result; {
@@ -78,6 +83,17 @@ static NSString * const kANSPlistName = @"aaa";
 #pragma mark -
 #pragma mark Private methods
 
+- (void)fillUser:(ANSFBUser *)user
+      fromResult:(NSDictionary *)result {
+    user.ID = (NSUInteger)[result[kANSID] integerValue];
+    user.firstName = result[kANSFirstName];
+    user.lastName = result[kANSLastName];
+    
+    NSDictionary * dataPicture = result[kANSPicture][kANSData] ;
+    NSString *URLString = dataPicture[kANSURL];
+    user.imageUrl = [NSURL URLWithString:URLString];
+}
+
 - (NSArray *)friendsFromResult:(NSDictionary <ANSJSONRepresentation> *)result {
     NSMutableArray *mutableUsers = [NSMutableArray new];
     NSDictionary *parsedResult = [result JSONRepresentation];
@@ -85,13 +101,7 @@ static NSString * const kANSPlistName = @"aaa";
     NSArray *dataUsers = parsedResult[kANSData];
     for (NSDictionary *dataUser in dataUsers) {
         ANSFBUser *fbUser = [ANSFBUser new];
-        fbUser.ID = [dataUser[kANSID] integerValue];
-        fbUser.firstName = dataUser[kANSFirstName];
-        fbUser.lastName = dataUser[kANSLastName];
-        
-        NSDictionary * dataPicture = dataUser[kANSPicture][kANSData] ;
-        NSString *URLString = dataPicture[kANSURL];
-        fbUser.imageUrl = [NSURL URLWithString:URLString];
+        [self fillUser:fbUser fromResult:dataUser];
         [mutableUsers addObject:fbUser];
     }
     

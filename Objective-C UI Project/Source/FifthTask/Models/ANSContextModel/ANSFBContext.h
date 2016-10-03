@@ -36,7 +36,4 @@
 // need to be reloaded if no internet;
 - (void)loadFromCache;
 
-// need to be reloaded
-- (BOOL)isModelLoaded;
-
 @end

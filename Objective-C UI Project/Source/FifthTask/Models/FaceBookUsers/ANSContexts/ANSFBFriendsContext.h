@@ -13,4 +13,11 @@
 @interface ANSFBFriendsContext : ANSFBContext
 @property (nonatomic, strong) ANSFBUser *user;
 
+//method for subclasses
+- (void)fillUser:(ANSFBUser *)user
+      fromResult:(NSDictionary *)result;
+
+//method for subclasses
+- (BOOL)isModelLoadedWithState:(NSUInteger)state;
+
 @end

@@ -36,21 +36,14 @@
 }
 
 - (BOOL)isModelLoaded {
-    ANSFBUser *user = self.model;
-    if (user.state == ANSUserDidLoadDetails) {
-        [user notifyOfStateChange:ANSUserDidLoadDetails];
-        
-        return YES;
-    }
-    
-    return NO;
+   return [super isModelLoadedWithState:ANSUserDidLoadDetails];
 }
 
 - (void)fillModelFromResult:(NSDictionary *)result {
     ANSFBUser *user = self.model;
+    [super fillUser:user fromResult:result];
     user.gender = result[kANSGender];
-    id email = result[kANSEmail];
-    user.email = email;
+    user.email = result[kANSEmail];
     
     user.state = ANSUserDidLoadDetails;
 }
