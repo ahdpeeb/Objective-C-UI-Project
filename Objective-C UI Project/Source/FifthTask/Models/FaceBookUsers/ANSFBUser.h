@@ -44,4 +44,6 @@ typedef NS_ENUM(NSUInteger, ANSUserState) {
 @property (nonatomic, readonly) NSString        *fullName;
 @property (nonatomic, readonly) ANSImageModel   *imageModel;
 
+- (void)save;
+
 @end

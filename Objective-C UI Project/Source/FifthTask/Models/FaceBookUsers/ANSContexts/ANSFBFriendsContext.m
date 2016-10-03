@@ -92,6 +92,9 @@ static NSString * const kANSPlistName = @"aaa";
     NSDictionary * dataPicture = result[kANSPicture][kANSData] ;
     NSString *URLString = dataPicture[kANSURL];
     user.imageUrl = [NSURL URLWithString:URLString];
+    
+    [user save];
+    user.state = ANSUserDidLoadBasic;
 }
 
 - (NSArray *)friendsFromResult:(NSDictionary <ANSJSONRepresentation> *)result {

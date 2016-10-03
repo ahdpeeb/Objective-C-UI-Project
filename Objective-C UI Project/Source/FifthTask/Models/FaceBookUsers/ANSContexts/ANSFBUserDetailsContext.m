@@ -44,7 +44,8 @@
     [super fillUser:user fromResult:result];
     user.gender = result[kANSGender];
     user.email = result[kANSEmail];
-    
+   
+    [user save];
     user.state = ANSUserDidLoadDetails;
 }
 
