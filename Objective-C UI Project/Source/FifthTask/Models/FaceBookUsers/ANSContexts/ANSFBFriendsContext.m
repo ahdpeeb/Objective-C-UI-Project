@@ -93,7 +93,6 @@ static NSString * const kANSPlistName = @"aaa";
     NSString *URLString = dataPicture[kANSURL];
     user.imageUrl = [NSURL URLWithString:URLString];
     
-    [user save];
     user.state = ANSUserDidLoadBasic;
 }
 
@@ -105,6 +104,8 @@ static NSString * const kANSPlistName = @"aaa";
     for (NSDictionary *dataUser in dataUsers) {
         ANSFBUser *fbUser = [ANSFBUser new];
         [self fillUser:fbUser fromResult:dataUser];
+        
+        [fbUser save];
         [mutableUsers addObject:fbUser];
     }
     
