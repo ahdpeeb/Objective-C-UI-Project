@@ -11,8 +11,8 @@
 #import "ANSFBUser.h"
 #import "ANSFBFriends.h"
 #import "ANSFBConstatns.h"
-#import "ANSJsonParser.h"
 
+#import "NSDictionary+ANSJSONRepresentation.h"
 #import "NSFileManager+ANSExtension.h"
 
 static NSString * const kANSPlistName = @"aaa";
@@ -29,8 +29,7 @@ static NSString * const kANSPlistName = @"aaa";
 #pragma mark Private Methods (reloaded)
 
 - (NSString *)graphPath {
-    ANSFBUser *user = self.user;
-    return [NSString stringWithFormat:@"%lu/%@", (long)user.ID, kANSFriends];
+    return [NSString stringWithFormat:@"%lu/%@",self.user.ID, kANSFriends];
 }
 
 - (NSString *)HTTPMethod {
@@ -44,41 +43,58 @@ static NSString * const kANSPlistName = @"aaa";
                                                                       kANSLargePicture]};
 }
 
-- (void)notifyIfLoadingFailed {
-    ANSFBFriends *friends = self.model;
-    //loading Users FromFileSystem if fail loading from internet
-    NSArray *users = [self usersFromFileSystem];
-    [friends performBlockWithoutNotification:^{
-        [friends addObjectsInRange:users];
-    }];
-    
-    friends.state = users ?  ANSLoadableModelDidFailLoading : ANSLoadableModelDidFailLoading;
-}
-
-- (BOOL)notifyIfLoaded {
-    ANSFBFriends *friends = self.model;
-    if (friends.state == ANSLoadableModelDidLoad) {
-        [friends notifyOfStateChange:ANSLoadableModelDidLoad];
+- (BOOL)isModelLoadedWithState:(NSUInteger)state {
+    ANSObservableObject *model = self.model;
+    if (model.state == ANSLoadableModelDidLoad) {
+        [model notifyOfStateChange:ANSLoadableModelDidLoad];
         
         return YES;
     }
     
     return NO;
+
+}
+
+- (BOOL)isModelLoaded {
+    return [self isModelLoadedWithState:ANSLoadableModelDidLoad];
 }
 
 - (void)fillModelFromResult:(NSDictionary <ANSJSONRepresentation> *)result; {
-    ANSFBFriends *friends = self.model;
-    [friends performBlockWithoutNotification:^{
-        NSArray *frinds = [self friendsFromResult:result];
-        [friends addObjectsInRange:frinds];
+    ANSFBFriends *fbFriends = self.model;
+    [fbFriends performBlockWithoutNotification:^{
+        NSArray *friends = [self friendsFromResult:result];
+        [fbFriends addObjectsInRange:friends];
     }];
     
     [self saveFriends];
-    friends.state = ANSLoadableModelDidLoad;
+    fbFriends.state = ANSLoadableModelDidLoad;
+}
+
+- (void)loadFromCache {
+    ANSFBFriends *friends = self.model;
+    NSArray *users = [self usersFromFileSystem];
+    [friends performBlockWithoutNotification:^{
+        [friends addObjectsInRange:users];
+    }];
+    
+    friends.state = users ?  ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
 }
 
 #pragma mark -
 #pragma mark Private methods
+
+- (void)fillUser:(ANSFBUser *)user
+      fromResult:(NSDictionary *)result {
+    user.ID = (NSUInteger)[result[kANSID] integerValue];
+    user.firstName = result[kANSFirstName];
+    user.lastName = result[kANSLastName];
+    
+    NSDictionary * dataPicture = result[kANSPicture][kANSData] ;
+    NSString *URLString = dataPicture[kANSURL];
+    user.imageUrl = [NSURL URLWithString:URLString];
+    
+    user.state = ANSUserDidLoadBasic;
+}
 
 - (NSArray *)friendsFromResult:(NSDictionary <ANSJSONRepresentation> *)result {
     NSMutableArray *mutableUsers = [NSMutableArray new];
@@ -87,13 +103,9 @@ static NSString * const kANSPlistName = @"aaa";
     NSArray *dataUsers = parsedResult[kANSData];
     for (NSDictionary *dataUser in dataUsers) {
         ANSFBUser *fbUser = [ANSFBUser new];
-        fbUser.ID = ((NSString *)dataUser[kANSID]).doubleValue;
-        fbUser.firstName = dataUser[kANSFirstName];
-        fbUser.lastName = dataUser[kANSLastName];
+        [self fillUser:fbUser fromResult:dataUser];
         
-        NSDictionary * dataPicture = dataUser[kANSPicture][kANSData] ;
-        NSString *URLString = dataPicture[kANSURL];
-        fbUser.imageUrl = [NSURL URLWithString:URLString];
+        [fbUser save];
         [mutableUsers addObject:fbUser];
     }
     

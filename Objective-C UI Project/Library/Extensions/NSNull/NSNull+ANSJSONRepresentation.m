@@ -1,20 +1,20 @@
 //
-//  NSNumber+Extension.m
+//  NSNull+Extension.m
 //  Objective-C UI Project
 //
 //  Created by Nikola Andriiev on 28.09.16.
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "NSNumber+Extension.h"
+#import "NSNull+ANSJSONRepresentation.h"
 
-@implementation NSNumber (Extension) 
+@implementation NSNull (Extension)
 
 #pragma mark -
 #pragma mark ANSJSONRepresentation protocol
 
 - (instancetype)JSONRepresentation {
-    return self;
+    return nil;
 }
 
 @end

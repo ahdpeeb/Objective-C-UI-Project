@@ -6,52 +6,47 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
 #import "ANSFBLoginContext.h"
 
 #import "ANSFBUser.h"
 #import "ANSFBConstatns.h"
 #import "ANSJSONRepresentation.h"
+#import "ANSLoginViewController.h"
+#import "ANSLoginInterection.h"
+
+@interface ANSFBLoginContext ()
+@property (nonatomic, weak) ANSLoginViewController *viewController;
+
+@end
 
 @implementation ANSFBLoginContext
 
+- (instancetype)initWithModel:(id)model controller:(ANSLoginViewController *)controller {
+    self = [super initWithModel:model];
+    self.viewController = controller;
+    
+    return self;
+}
+
 #pragma mark -
-#pragma mark Private Methods (reloaded)
+#pragma mark Public Methods (reloaded)
 
-- (NSString *)graphPath {
-    return kANSMe;
-}
-
-- (NSString *)HTTPMethod {
-    return kANSGet;
-}
-
-- (NSDictionary *)parametres {
-    return @{kANSFields:[NSString stringWithFormat:@"%@, %@", kANSID, kANSLocation]};
-}
-
-- (void)notifyIfLoadingFailed {
+- (void)execute {
     ANSFBUser *user = self.model;
-    user.state = ANSUserDidFailLoading;
-}
-
-- (BOOL)notifyIfLoaded {
-    ANSFBUser *user = self.model;
-    if (user.state == ANSUserDidLoadID) {
-        [user notifyOfStateChange:ANSUserDidLoadID];
-        
-        return YES;
-    }
-    
-    return NO;
-}
-
-- (void)fillModelFromResult:(NSDictionary <ANSJSONRepresentation> *)result; {
-    ANSFBUser *user = self.model;
-    NSDictionary *parsedResult = [result JSONRepresentation];
-    NSLog(@"parsedResult [INFO] - %@", parsedResult);
-    
-    user.ID = [(NSString *)parsedResult[kANSID] doubleValue];
-    user.state = ANSUserDidLoadID;
+    ANSLoginInterection *interection = [ANSLoginInterection interectionWithUser:user];
+    FBSDKLoginManager *manager = [FBSDKLoginManager new];
+    [manager logInWithReadPermissions:@[kANSPublicProfile, kANSUserFriends, kANSEmail]
+                   fromViewController:self.viewController
+                              handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                                  if (!error && !result.isCancelled) {
+                                      [interection execute];
+                                  } else {
+                                      user.state = ANSUserDidFailLoading;
+                                  }
+                              }];
 }
 
 @end

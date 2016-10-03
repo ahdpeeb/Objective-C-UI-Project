@@ -4,7 +4,7 @@
 //
 //  Created by Nikola Andriiev on 30.07.16.
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
-//
+//  aspectFit aspectfil - contentType
 
 #import <UIKit/UIKit.h>
 

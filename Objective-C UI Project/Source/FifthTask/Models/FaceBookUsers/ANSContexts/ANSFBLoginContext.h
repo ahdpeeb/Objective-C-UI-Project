@@ -6,8 +6,13 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "ANSFBUserContext.h"
+#import "ANSFBContext.h"
 
-@interface ANSFBLoginContext : ANSFBUserContext
+@class ANSLoginViewController;
+
+@interface ANSFBLoginContext : ANSFBContext
+@property (nonatomic, weak, readonly) ANSLoginViewController *viewController;
+
+- (instancetype)initWithModel:(id)model controller:(ANSLoginViewController *)controller;
 
 @end

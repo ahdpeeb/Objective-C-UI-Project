@@ -1,5 +1,5 @@
 //
-//  NSNull+Extension.h
+//  NSNumber+Extension.h
 //  Objective-C UI Project
 //
 //  Created by Nikola Andriiev on 28.09.16.
@@ -10,6 +10,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSNull (Extension) <ANSJSONRepresentation>
+@interface NSNumber (ANSJSONRepresentation) <ANSJSONRepresentation>
 
 @end

@@ -6,17 +6,16 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
-#import "ANSFBUserContext.h"
+#import "ANSFBContext.h"
 
 #import "ANSFBUser.h"
 #import "ANSGCD.h"
 
 #import "ANSMacros.h"
 
-@interface ANSFBUserContext ()
+@interface ANSFBContext ()
 @property (nonatomic, strong) id                          model;
 @property (nonatomic, strong) FBSDKGraphRequestConnection *requestConnection;
 
@@ -24,7 +23,7 @@
 
 @end
 
-@implementation ANSFBUserContext
+@implementation ANSFBContext
 
 - (void)dealloc {
     self.requestConnection = nil;
@@ -45,12 +44,11 @@
         
         [_requestConnection cancel];
         _requestConnection = requestConnections;
-        [_requestConnection start];
     }
 }
 
 #pragma mark -
-#pragma mark Public methods
+#pragma mark Ptivate methods
 
 - (NSString *)graphPath {
     return nil;
@@ -68,20 +66,21 @@
     return;
 }
 
-- (void)notifyIfLoadingFailed {
+- (void)loadFromCache {
     return;
 }
 
-- (BOOL)notifyIfLoaded {
+- (BOOL)isModelLoaded {
     [self doesNotRecognizeSelector:_cmd];
     
     return NO;
 }
 
-#pragma mark -
-#pragma mark Ptivate methods
-
 - (void)executeRequest {
+    if ([self isModelLoaded]) {
+        return;
+    }
+    
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[self graphPath]
                                                                    parameters:[self parametres]
                                                                    HTTPMethod:[self HTTPMethod]];
@@ -91,7 +90,7 @@
                                                                         NSError *error) {
         if (error) {
             NSLog(@"[ERROR] %@", error);
-            [self notifyIfLoadingFailed];
+            [self loadFromCache];
             
             return;
         }
@@ -104,16 +103,11 @@
 #pragma mark Public methods
 
 - (void)execute {
-    @synchronized (self) {
-        [self notifyIfLoaded];
-        [self executeRequest];
-    }
+    [self executeRequest];
 }
 
 - (void)cancel {
-    @synchronized (self) {
-        [self.requestConnection cancel];
-    }
+    [self.requestConnection cancel];
 }
 
 @end

@@ -7,14 +7,16 @@
 
 #import "ANSFBUser.h"
 
-#import "NSString+ANSExtension.h"
-
 #import "ANSImageModel.h"
+#import "NSString+ANSExtension.h"
+#import "NSFileManager+ANSExtension.h"
 
 static NSString * const kANSIDKey        = @"kANSIDKey";
 static NSString * const kANSFirstNameKey = @"kANSFirstNameKey";
 static NSString * const kANSLastNameKey  = @"kANSLastNameKey";
 static NSString * const kANSImageUrlKey  = @"kANSImageUrlKey";
+
+static NSString * const kANSUserID = @"userID";
 
 @interface ANSFBUser ()
 
@@ -53,6 +55,17 @@ static NSString * const kANSImageUrlKey  = @"kANSImageUrlKey";
         default:
             return [super selectorForState:state];
     }
+}
+
+#pragma mark -
+#pragma mark Public methods
+
+- (void)save {
+    NSString *plistName = [NSString stringWithFormat:@"%@ %lu", kANSUserID, self.ID];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *plistPath = [fileManager pathToPlistWithName:plistName inSearchPathDirectory:NSDocumentDirectory];
+    BOOL isSuccessfully = [NSKeyedArchiver archiveRootObject:self toFile:plistPath];
+    NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
 }
 
 #pragma mark -
