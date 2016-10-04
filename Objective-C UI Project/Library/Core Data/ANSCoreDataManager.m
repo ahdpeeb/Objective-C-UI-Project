@@ -21,7 +21,12 @@ static NSString * const kANSSqlite       =  @".sqlite";
 @property (nonatomic, copy)     NSString     *momName;
 @property (nonatomic, copy)     NSString     *storeName;
 @property (nonatomic, assign)   ANSStoreType storeType;
-@property (nonatomic, readonly) NSString   *projectName;
+
+@property (nonatomic, readonly) NSString     *projectName;
+
+- (void)raiseInfrastructure;
+- (NSString *)stringFromStoreType:(ANSStoreType)storeType;
+- (NSURL *)persistentStoreURL;
 
 @end
 
@@ -31,18 +36,6 @@ static NSString * const kANSSqlite       =  @".sqlite";
 
 #pragma mark -
 #pragma mark Class methods
-
-- (instancetype)initWithMomName:(NSString *)momName
-                      storeName:(NSString *)storeName
-                      storeType:(ANSStoreType)storeType
-{
-    self = [super init];
-    self.momName = momName;
-    self.storeName = storeName;
-    self.storeType = storeType;
-    
-    return self;
-}
 
 + (instancetype)managerWithMomName:(NSString *)momName {
     return [self managerWithMomName:momName storeName:nil storeType:0];
@@ -63,16 +56,29 @@ static NSString * const kANSSqlite       =  @".sqlite";
 }
 
 #pragma mark -
-#pragma mark Accsessors
+#pragma mark Initialization and deallocation
 
-- (NSString *)projectName {
-    return  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+- (instancetype)initWithMomName:(NSString *)momName
+                      storeName:(NSString *)storeName
+                      storeType:(ANSStoreType)storeType
+{
+    self = [super init];
+    self.momName = momName;
+    self.storeName = storeName;
+    self.storeType = storeType;
+    
+    return self;
 }
+
+#pragma mark -
+#pragma mark Accsessors
 
 - (NSManagedObjectModel *)managedObjectModel {
     NSString *momName = self.momName;
     if (!momName) {
-        return nil;
+        [[NSException exceptionWithName:@"unvalid momName"
+                                 reason:@"CoreDataManager momName"
+                               userInfo:nil] raise];
     }
     
     if (_managedObjectModel) {
@@ -92,8 +98,8 @@ static NSString * const kANSSqlite       =  @".sqlite";
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
     NSString *storeType = [self stringFromStoreType:self.storeType];
-    NSError *error = nil;
     
+    NSError *error = nil;
     [_persistentStoreCoordinator addPersistentStoreWithType:storeType
                                               configuration:nil
                                                         URL:[self persistentStoreURL]
@@ -116,11 +122,15 @@ static NSString * const kANSSqlite       =  @".sqlite";
     return _managedObjectContext;
 }
 
+- (NSString *)projectName {
+    return  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+}
+
 #pragma mark -
 #pragma mark Private 
 
 - (void)raiseInfrastructure {
-    NSLog(@"raise - %@", self.managedObjectContext);
+    __unused id result = (self.managedObjectContext);
 }
 
 - (NSString *)stringFromStoreType:(ANSStoreType)storeType {
@@ -132,11 +142,9 @@ static NSString * const kANSSqlite       =  @".sqlite";
 }
 
 - (NSURL *)persistentStoreURL {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *fileName = self.storeName ? self.storeName : [NSString stringWithFormat:@"%@%@", self.projectName, kANSSqlite];
     
-    NSString *fileName = self.storeName ? self.storeName : [NSString stringWithFormat:@"%@%@", self.projectName, kANSSqlite];;
-    
-    NSString *directoryPath = [fileManager pathToDocumentDirectory];
+    NSString *directoryPath = [[NSFileManager defaultManager] pathToDocumentDirectory];
     NSString *pathToStore = [directoryPath stringByAppendingPathComponent:fileName];
     
     return [NSURL fileURLWithPath:pathToStore];

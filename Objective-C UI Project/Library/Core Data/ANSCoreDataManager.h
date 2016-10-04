@@ -23,6 +23,7 @@ typedef NS_ENUM(NSUInteger, ANSStoreType) {
 //MOM name in main bunble. default store type ANSStoreTypeSQLLite;
 + (instancetype)managerWithMomName:(NSString *)momName;
 
+// custom store name must contains file extension
 + (instancetype)managerWithMomName:(NSString *)momName
                          storeName:(NSString *)storeName
                          storeType:(ANSStoreType)storeType;
