@@ -32,6 +32,8 @@
     UIWindow *window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     self.window = window;
     
+
+    
 //   ANSViewControllerTables *controller = [ANSViewControllerTables new];
     ANSLoginViewController *controller  = [ANSLoginViewController new];
     UINavigationController *navigationController;

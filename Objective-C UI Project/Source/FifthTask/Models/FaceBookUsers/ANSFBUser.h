@@ -34,7 +34,7 @@ typedef NS_ENUM(NSUInteger, ANSUserState) {
 
 @interface ANSFBUser : ANSObservableObject  <NSCoding, NSCopying>
 @property (nonatomic, assign)    NSUInteger     ID;
-@property (nonatomic, copy)      NSString       *firstName;
+@property (nonatomic, copy)      NSString       *firstName; 
 @property (nonatomic, copy)      NSString       *lastName;
 @property (nonatomic, copy)      NSString       *gender;
 @property (nonatomic, copy)      NSString       *email;

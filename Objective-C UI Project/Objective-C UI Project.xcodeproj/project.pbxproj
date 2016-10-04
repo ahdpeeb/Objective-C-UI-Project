@@ -29,6 +29,7 @@
 		9315EA931D955DAB0053D21D /* ANSFBUserDetailsContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 9315EA921D955DAB0053D21D /* ANSFBUserDetailsContext.m */; };
 		935E5A0B1D6F4CA5005F6285 /* aaa.plist in Resources */ = {isa = PBXBuildFile; fileRef = 935E5A0A1D6F4CA5005F6285 /* aaa.plist */; };
 		939BAE2F1D75C80900B4D610 /* ANSNameFilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 939BAE2E1D75C80900B4D610 /* ANSNameFilterModel.m */; };
+		93A41AF01DA40261005FA99A /* ANSCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A41AEE1DA3E6F6005FA99A /* ANSCoreDataManager.m */; };
 		93C084301D3E36B20077A81C /* iOS Study Plan.txt in Resources */ = {isa = PBXBuildFile; fileRef = 93C0842F1D3E36B20077A81C /* iOS Study Plan.txt */; };
 		93C084351D3E380D0077A81C /* ANSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C084321D3E380D0077A81C /* ANSAppDelegate.m */; };
 		93C084371D3E380D0077A81C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C084341D3E380D0077A81C /* main.m */; };
@@ -81,6 +82,8 @@
 		93E3E5601DA3AF3100C2BBC1 /* ANSObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E3E5441DA3AF3100C2BBC1 /* ANSObservationController.m */; };
 		93E3E5611DA3AF3100C2BBC1 /* ANSProtocolObservationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E3E5461DA3AF3100C2BBC1 /* ANSProtocolObservationController.m */; };
 		93E3E5621DA3AF3100C2BBC1 /* ANSQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E3E54C1DA3AF3100C2BBC1 /* ANSQueue.m */; };
+		93E3E5651DA3B07000C2BBC1 /* Objective-C UI Project.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93E3E5631DA3B07000C2BBC1 /* Objective-C UI Project.xcdatamodeld */; };
+		93E3E5701DA3D68600C2BBC1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93E3E56F1DA3D68600C2BBC1 /* CoreData.framework */; };
 		B31E153A99E6E9FD54C009B4 /* libPods-Objective-C UI Project.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D61D00FCF09E7B8E93AA3BF /* libPods-Objective-C UI Project.a */; };
 		E3F88A6491D5A78D0595B312 /* libPods-Objective-C UI ProjectUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBF0228B73B450A5AD3DBF2 /* libPods-Objective-C UI ProjectUITests.a */; };
 /* End PBXBuildFile section */
@@ -134,6 +137,8 @@
 		935E5A0A1D6F4CA5005F6285 /* aaa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = aaa.plist; sourceTree = "<group>"; };
 		939BAE2D1D75C80900B4D610 /* ANSNameFilterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSNameFilterModel.h; sourceTree = "<group>"; };
 		939BAE2E1D75C80900B4D610 /* ANSNameFilterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSNameFilterModel.m; sourceTree = "<group>"; };
+		93A41AED1DA3E6F6005FA99A /* ANSCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSCoreDataManager.h; sourceTree = "<group>"; };
+		93A41AEE1DA3E6F6005FA99A /* ANSCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSCoreDataManager.m; sourceTree = "<group>"; };
 		93C084071D3E367F0077A81C /* Objective-C UI Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Objective-C UI Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C084201D3E36800077A81C /* Objective-C UI ProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Objective-C UI ProjectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C084261D3E36800077A81C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -243,6 +248,10 @@
 		93E3E5491DA3AF3100C2BBC1 /* ANSObservationController+ANSPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANSObservationController+ANSPrivate.h"; sourceTree = "<group>"; };
 		93E3E54B1DA3AF3100C2BBC1 /* ANSQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSQueue.h; sourceTree = "<group>"; };
 		93E3E54C1DA3AF3100C2BBC1 /* ANSQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSQueue.m; sourceTree = "<group>"; };
+		93E3E5641DA3B07000C2BBC1 /* Objective-C UI Project.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Objective-C UI Project.xcdatamodel"; sourceTree = "<group>"; };
+		93E3E56F1DA3D68600C2BBC1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		93E3E5741DA3D9AC00C2BBC1 /* NSManagedObject+ANSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+ANSExtension.h"; sourceTree = "<group>"; };
+		93E3E5751DA3D9AC00C2BBC1 /* NSManagedObject+ANSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+ANSExtension.m"; sourceTree = "<group>"; };
 		9D61D00FCF09E7B8E93AA3BF /* libPods-Objective-C UI Project.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Objective-C UI Project.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E0F054CF32267BB37C7D7E /* Pods-Objective-C UI ProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C UI ProjectUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Objective-C UI ProjectUITests/Pods-Objective-C UI ProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EB09091B1A7DD91BDD1FAAC0 /* Pods-Objective-C UI Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective-C UI Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Objective-C UI Project/Pods-Objective-C UI Project.debug.xcconfig"; sourceTree = "<group>"; };
@@ -254,6 +263,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93E3E5701DA3D68600C2BBC1 /* CoreData.framework in Frameworks */,
 				9315EA8A1D9426870053D21D /* libFBSDKCoreKit.a in Frameworks */,
 				9315EA8B1D9426870053D21D /* libFBSDKLoginKit.a in Frameworks */,
 				9315EA8C1D9426870053D21D /* libFBSDKShareKit.a in Frameworks */,
@@ -275,6 +285,7 @@
 		4DADEA539AD2A963E50E40F2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93E3E56F1DA3D68600C2BBC1 /* CoreData.framework */,
 				9315EA871D9426870053D21D /* libFBSDKCoreKit.a */,
 				9315EA881D9426870053D21D /* libFBSDKLoginKit.a */,
 				9315EA891D9426870053D21D /* libFBSDKShareKit.a */,
@@ -496,6 +507,7 @@
 				93E3E4531DA3AC1D00C2BBC1 /* CustomViews */,
 				93E3E5111DA3AF3100C2BBC1 /* Models */,
 				93E3E4501DA3AC1D00C2BBC1 /* ANSRandom */,
+				93E3E56E1DA3D55D00C2BBC1 /* Core Data */,
 				93E3E44D1DA3AC1D00C2BBC1 /* ANSGCD */,
 				93E3E4A41DA3AC1D00C2BBC1 /* Macroses */,
 			);
@@ -905,6 +917,18 @@
 		93E3E54D1DA3AF3100C2BBC1 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				93E3E5631DA3B07000C2BBC1 /* Objective-C UI Project.xcdatamodeld */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		93E3E56E1DA3D55D00C2BBC1 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				93A41AED1DA3E6F6005FA99A /* ANSCoreDataManager.h */,
+				93A41AEE1DA3E6F6005FA99A /* ANSCoreDataManager.m */,
+				93E3E5741DA3D9AC00C2BBC1 /* NSManagedObject+ANSExtension.h */,
+				93E3E5751DA3D9AC00C2BBC1 /* NSManagedObject+ANSExtension.m */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -1153,6 +1177,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93E3E5651DA3B07000C2BBC1 /* Objective-C UI Project.xcdatamodeld in Sources */,
 				93E3E4EA1DA3AC1E00C2BBC1 /* NSArray+JSONRepresentation.m in Sources */,
 				93E3E4F41DA3AC1E00C2BBC1 /* NSString+ANSJSONRepresentation.m in Sources */,
 				9302D7C91D991440003CD9B8 /* ANSFBConstatns.m in Sources */,
@@ -1167,6 +1192,7 @@
 				93E3E5571DA3AF3100C2BBC1 /* ANSCacheStorage.m in Sources */,
 				93E3E5501DA3AF3100C2BBC1 /* ANSChangeModel.m in Sources */,
 				93E3E4EF1DA3AC1E00C2BBC1 /* NSNull+ANSJSONRepresentation.m in Sources */,
+				93A41AF01DA40261005FA99A /* ANSCoreDataManager.m in Sources */,
 				93E3E55F1DA3AF3100C2BBC1 /* ANSBlockObservationController.m in Sources */,
 				9315EA731D93EC4D0053D21D /* ANSFBFriends.m in Sources */,
 				93E3E54E1DA3AF3100C2BBC1 /* ANSArrayModel.m in Sources */,
@@ -1460,6 +1486,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		93E3E5631DA3B07000C2BBC1 /* Objective-C UI Project.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				93E3E5641DA3B07000C2BBC1 /* Objective-C UI Project.xcdatamodel */,
+			);
+			currentVersion = 93E3E5641DA3B07000C2BBC1 /* Objective-C UI Project.xcdatamodel */;
+			path = "Objective-C UI Project.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 93C083FF1D3E367F0077A81C /* Project object */;
 }
