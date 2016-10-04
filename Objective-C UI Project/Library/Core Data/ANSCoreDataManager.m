@@ -22,7 +22,6 @@ static NSString * const kANSSqlite       =  @".sqlite";
 @property (nonatomic, copy)     NSString     *storeName;
 @property (nonatomic, assign)   ANSStoreType storeType;
 @property (nonatomic, readonly) NSString   *projectName;
-@property (nonatomic, readonly) NSString   *
 
 @end
 
@@ -95,7 +94,10 @@ static NSString * const kANSSqlite       =  @".sqlite";
     NSString *storeType = [self stringFromStoreType:self.storeType];
     NSError *error = nil;
     
-    [_persistentStoreCoordinator addPersistentStoreWithType:storeType configuration:nil URL:<#(nullable NSURL *)#> options:nil error:&error];
+    [_persistentStoreCoordinator addPersistentStoreWithType:storeType
+                                              configuration:nil
+                                                        URL:[self persistentStoreURL]
+                                                    options:nil error:&error];
     
     return _persistentStoreCoordinator;
 }
@@ -130,10 +132,14 @@ static NSString * const kANSSqlite       =  @".sqlite";
 }
 
 - (NSURL *)persistentStoreURL {
-    NSString *fileName = nil;
-    if (!self.storeName) {
-        fileName = [NSString stringWithFormat:@"%@%@"[self projectName]]
-    }
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSString *fileName = self.storeName ? self.storeName : [NSString stringWithFormat:@"%@%@", self.projectName, kANSSqlite];;
+    
+    NSString *directoryPath = [fileManager pathToDocumentDirectory];
+    NSString *pathToStore = [directoryPath stringByAppendingPathComponent:fileName];
+    
+    return [NSURL fileURLWithPath:pathToStore];
 }
 
 @end
