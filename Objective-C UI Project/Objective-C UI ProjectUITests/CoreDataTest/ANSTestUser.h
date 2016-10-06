@@ -9,11 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface ANSTestUser : NSObject
-
-+ (instancetype)randomUser;
-
 @property (nonatomic, strong) NSString *firsName;
 @property (nonatomic, strong) NSString *secondName;
 @property (nonatomic, assign) NSUInteger age;
+
++ (instancetype)randomUser;
 
 @end

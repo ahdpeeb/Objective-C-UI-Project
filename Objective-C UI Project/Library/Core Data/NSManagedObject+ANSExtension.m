@@ -10,15 +10,6 @@
 
 @implementation NSManagedObject (ANSExtension)
 
-
-- (void)addManagedObject {
-
-}
-
-- (void)saveManagedObject {
-
-}
-
 - (void)setCustomValue:(id)value forKey:(NSString *)key {
     [self willChangeValueForKey:key];
     [self setPrimitiveValue:value forKey:key];
@@ -34,7 +25,6 @@
 }
 
 - (void)setCustomValue:(id)value inMutableSetForKey:(NSString *)key {
-    
     
 }
 

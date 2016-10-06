@@ -14,7 +14,7 @@ typedef void(^ANSConfiguretionBlock)(NSManagedObject *object);
 
 // This method insert new managedObject to context
 // You objective-c class name mast match with entityName
-- (NSManagedObject *)managedObjectWithClass:(Class)cls;
+- (NSManagedObject *)managedObjectWithClass:(NSString *)cls;
 
 //managedObject should already be inserted to context.
 //this method customizes your managedObject and save it to data base;
@@ -23,7 +23,7 @@ typedef void(^ANSConfiguretionBlock)(NSManagedObject *object);
        withConfiguretionBlock:(ANSConfiguretionBlock)block;
 
 //returns all managedObjects from dataBase with given class
-- (NSArray *)objectsFromDataBaseWith:(Class)cls;
+- (NSArray *)objectsFromDataBaseWith:(NSString *)cls;
 
 //returns managedObjects from dataBase, filteres by predicate conditions, sorted by sortDescriptors;
 - (NSArray *)sortedObjectsWith:(Class)cls

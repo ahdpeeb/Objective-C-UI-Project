@@ -12,8 +12,8 @@
 
 @implementation NSManagedObjectContext (Extension)
 
-- (NSManagedObject *)managedObjectWithClass:(Class)cls {
-    return [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(cls)
+- (NSManagedObject *)managedObjectWithClass:(NSString *)cls {
+    return [NSEntityDescription insertNewObjectForEntityForName:cls
                                          inManagedObjectContext:self];
 }
 
@@ -30,9 +30,8 @@
     return YES;  
 }
 
-- (NSArray *)objectsFromDataBaseWith:(Class)cls {
-    NSString *name = NSStringFromClass(cls);
-    NSFetchRequest *reques = [NSFetchRequest fetchRequestWithEntityName:name];
+- (NSArray *)objectsFromDataBaseWith:(NSString *)cls {
+    NSFetchRequest *reques = [NSFetchRequest fetchRequestWithEntityName:cls];
     NSError *executeError = nil;
     NSArray *objects = [self executeFetchRequest:reques error:&executeError];
     if (executeError) {
