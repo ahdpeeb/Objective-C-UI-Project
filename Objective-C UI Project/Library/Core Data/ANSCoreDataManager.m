@@ -62,6 +62,10 @@ static NSString * const kANSSqlite       =  @"sqlite";
 #pragma mark -
 #pragma mark Initialization and deallocation
 
+- (instancetype)initWithMomName:(NSString *)momName {
+    return [self initWithMomName:momName storeName:nil storeType:0];
+}
+
 - (instancetype)initWithMomName:(NSString *)momName
                       storeName:(NSString *)storeName
                       storeType:(ANSStoreType)storeType
@@ -78,6 +82,10 @@ static NSString * const kANSSqlite       =  @"sqlite";
 #pragma mark Accsessors
 
 - (NSManagedObjectModel *)managedObjectModel {
+    if (_managedObjectModel) {
+        return _managedObjectModel;
+    }
+    
     NSString *momName = self.momName;
     if (!momName) {
         [[NSException exceptionWithName:@"unvalid momName"
@@ -85,11 +93,9 @@ static NSString * const kANSSqlite       =  @"sqlite";
                                userInfo:nil] raise];
     }
     
-    if (_managedObjectModel) {
-        return _managedObjectModel;
-    }
     
-    NSURL *url = [[NSBundle mainBundle] URLForResource:momName withExtension:kANSMomExtension];
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSURL *url = [bundle URLForResource:momName withExtension:kANSMomExtension];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:url];
     
     return _managedObjectModel;
@@ -109,6 +115,9 @@ static NSString * const kANSSqlite       =  @"sqlite";
                                                         URL:[self persistentStoreURL]
                                                     options:nil
                                                       error:&error];
+    if (error) {
+        NSLog(@"[ERROR] %@", [error localizedDescription]);
+    }
     
     return _persistentStoreCoordinator;
 }

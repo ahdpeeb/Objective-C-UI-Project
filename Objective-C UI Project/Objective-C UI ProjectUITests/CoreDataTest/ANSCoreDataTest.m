@@ -23,16 +23,20 @@ describe(@"coreDataTest", ^{
     });
     
     beforeAll(^{
-       sharedManager = [ANSCoreDataManager sharedManagerWithMomName:@"ANSCoreDataModel"];
+        sharedManager = [[ANSCoreDataManager alloc] initWithMomName:@"ANSCoreDataModel"];
     });
     
     beforeEach(^{
         
     });
     
-    it(@"bla lba ", ^{
-        ANSCoreDataManager *manager = [ANSCoreDataManager sharedManager];
-        [[manager shouldNot] beNil]; 
+    it(@"sharedManager ", ^{
+        [[sharedManager shouldNot] beNil];
+        
+        [[sharedManager.managedObjectModel shouldNot] beNil];
+        [[sharedManager.persistentStoreCoordinator shouldNot] beNil];
+        [[sharedManager.managedObjectContext shouldNot] beNil];
+
     });
     
     it(@"bla bla", ^{

@@ -33,6 +33,9 @@ typedef NS_ENUM(NSUInteger, ANSStoreType) {
                                storeType:(ANSStoreType)storeType;
 
 // this method intedded
+
+- (instancetype)initWithMomName:(NSString *)momName;
+
 - (instancetype)initWithMomName:(NSString *)momName
                       storeName:(NSString *)storeName
                       storeType:(ANSStoreType)storeType;

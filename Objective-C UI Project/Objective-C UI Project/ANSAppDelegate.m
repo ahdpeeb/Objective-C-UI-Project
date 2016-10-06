@@ -7,6 +7,7 @@
 //
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <CoreData/CoreData.h>
 
 #import "ANSAppDelegate.h"
 
@@ -18,8 +19,10 @@
 
 #import "NSArray+ANSExtension.h"
 #import "ANSGCD.h"
+#import "ANSCoreDataManager.h"
 
 @interface ANSAppDelegate ()
+@property (nonatomic, strong) ANSCoreDataManager *dataManager;
 
 @end
 
@@ -37,6 +40,9 @@
     UINavigationController *navigationController;
     navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
     window.rootViewController = navigationController;
+    self.dataManager = [ANSCoreDataManager sharedManagerWithMomName:@"ANSUsersMom"];
+    id dataManager = [ANSCoreDataManager sharedManager];
+    
     
     [window makeKeyAndVisible];
     
