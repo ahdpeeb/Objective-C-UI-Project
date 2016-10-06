@@ -22,7 +22,6 @@ typedef void(^ANSConfiguretionBlock)(NSManagedObject *object);
 - (BOOL)    saveManagedObject:(NSManagedObject *)object
        withConfiguretionBlock:(ANSConfiguretionBlock)block;
 
-
 //returns all managedObjects from dataBase with given class
 - (NSArray *)objectsFromDataBaseWith:(Class)cls;
 

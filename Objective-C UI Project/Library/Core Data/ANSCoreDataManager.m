@@ -93,7 +93,6 @@ static NSString * const kANSSqlite       =  @"sqlite";
                                userInfo:nil] raise];
     }
     
-    
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     NSURL *url = [bundle URLForResource:momName withExtension:kANSMomExtension];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:url];
@@ -141,7 +140,7 @@ static NSString * const kANSSqlite       =  @"sqlite";
 }
 
 #pragma mark -
-#pragma mark Private 
+#pragma mark Private methods
 
 - (void)raiseInfrastructure {
     __unused id result = (self.managedObjectContext);

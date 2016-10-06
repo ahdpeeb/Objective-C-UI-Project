@@ -22,7 +22,6 @@ typedef NS_ENUM(NSUInteger, ANSStoreType) {
 
 // SharedManager for main thread
 // MOM name in main bunble. default store type ANSStoreTypeSQLLite;
-
 + (instancetype)sharedManager;
 
 + (instancetype)sharedManagerWithMomName:(NSString *)momName;
@@ -32,8 +31,7 @@ typedef NS_ENUM(NSUInteger, ANSStoreType) {
                                storeName:(NSString *)storeName
                                storeType:(ANSStoreType)storeType;
 
-// this method intedded
-
+// this method intedded for creatind additional data managers
 - (instancetype)initWithMomName:(NSString *)momName;
 
 - (instancetype)initWithMomName:(NSString *)momName
