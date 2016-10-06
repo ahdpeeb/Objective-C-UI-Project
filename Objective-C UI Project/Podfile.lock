@@ -12,12 +12,14 @@ PODS:
   - FBSDKShareKit (4.16.0):
     - FBSDKCoreKit
   - Kiwi (2.4.0)
+  - SocketRocket (0.5.1)
 
 DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
-  - Kiwi (~> 2.3)
+  - Kiwi
+  - SocketRocket
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -25,7 +27,8 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 9a514a55a7d05190f64d4ef09502737588b5b561
   FBSDKShareKit: e81505de17fc0624cbaa87b83cccc9f2a786e6cb
   Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
 
-PODFILE CHECKSUM: c39349cbf9bc07d73e8d42ce1f379005ee39898c
+PODFILE CHECKSUM: 60fbbc1a42df421c3d652235bcd18d9551cce4c0
 
 COCOAPODS: 1.1.0.rc.2

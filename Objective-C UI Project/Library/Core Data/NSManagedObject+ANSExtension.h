@@ -10,14 +10,7 @@
 
 @interface NSManagedObject (ANSExtension)
 
-+ (NSArray *)fetchEntityWithSortDescriptors:(NSArray *)sortDescriptors
-                                  predicate:(NSPredicate *)predicate;
-
-+ (id)managedObject;
-
-- (void)addManagedObject;
-- (void)saveManagedObject;
-
+//coreDate defult set/get implementation for key
 - (void)setCustomValue:(id)value forKey:(NSString *)key;
 - (id)customValue:(id)value forKey:(NSString *)key;
 

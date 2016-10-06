@@ -1,9 +1,10 @@
 target ‘Objective-C UI ProjectUITests’ do
-  pod ‘Kiwi’, '~> 2.3’
+       pod ‘Kiwi’
 end
 
 target ‘Objective-C UI Project’ do
-  pod 'FBSDKCoreKit'
-  pod 'FBSDKLoginKit' 
-  pod ’FBSDKShareKit’
+ 	 pod 'FBSDKCoreKit'
+	 pod 'FBSDKLoginKit' 
+  	 pod ’FBSDKShareKit’
+	 pod 'SocketRocket'
 end

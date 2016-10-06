@@ -33,8 +33,6 @@
     self.window = window;
     
 
-    
-//   ANSViewControllerTables *controller = [ANSViewControllerTables new];
     ANSLoginViewController *controller  = [ANSLoginViewController new];
     UINavigationController *navigationController;
     navigationController = [[UINavigationController alloc] initWithRootViewController:controller];

@@ -20,12 +20,21 @@ typedef NS_ENUM(NSUInteger, ANSStoreType) {
 @property (nonatomic, readonly) NSManagedObjectModel         *managedObjectModel;
 @property (nonatomic, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-//MOM name in main bunble. default store type ANSStoreTypeSQLLite;
-+ (instancetype)managerWithMomName:(NSString *)momName;
+// SharedManager for main thread
+// MOM name in main bunble. default store type ANSStoreTypeSQLLite;
+
++ (instancetype)sharedManager;
+
++ (instancetype)sharedManagerWithMomName:(NSString *)momName;
 
 // custom store name must contains file extension
-+ (instancetype)managerWithMomName:(NSString *)momName
-                         storeName:(NSString *)storeName
-                         storeType:(ANSStoreType)storeType;
++ (instancetype)sharedManagerWithMomName:(NSString *)momName
+                               storeName:(NSString *)storeName
+                               storeType:(ANSStoreType)storeType;
+
+// this method intedded
+- (instancetype)initWithMomName:(NSString *)momName
+                      storeName:(NSString *)storeName
+                      storeType:(ANSStoreType)storeType;
 
 @end

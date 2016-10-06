@@ -10,15 +10,6 @@
 
 @implementation NSManagedObject (ANSExtension)
 
-+ (NSArray *)fetchEntityWithSortDescriptors:(NSArray *)sortDescriptors
-                                  predicate:(NSPredicate *)predicate {
-
-    return nil;
-}
-
-+ (id)managedObject {
-    [NSManagedObjectContext ]
-}
 
 - (void)addManagedObject {
 
@@ -43,7 +34,8 @@
 }
 
 - (void)setCustomValue:(id)value inMutableSetForKey:(NSString *)key {
-    [self willChangeValueForKey:key withSetMutation:<#(NSKeyValueSetMutationKind)#> usingObjects:<#(nonnull NSSet *)#>]
+    
+    
 }
 
 - (void)removeCustomValue:(id)value inMutableSetForKey:(NSString *)key {

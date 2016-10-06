@@ -11,7 +11,7 @@
 #import "NSFileManager+ANSExtension.h"
 
 static NSString * const kANSMomExtension =  @"momd";
-static NSString * const kANSSqlite       =  @".sqlite";
+static NSString * const kANSSqlite       =  @"sqlite";
 
 @interface ANSCoreDataManager ()
 @property (nonatomic, strong) NSManagedObjectContext       *managedObjectContext;
@@ -37,13 +37,17 @@ static NSString * const kANSSqlite       =  @".sqlite";
 #pragma mark -
 #pragma mark Class methods
 
-+ (instancetype)managerWithMomName:(NSString *)momName {
-    return [self managerWithMomName:momName storeName:nil storeType:0];
++ (instancetype)sharedManager {
+    return [self sharedManagerWithMomName:nil];
 }
 
-+ (instancetype)managerWithMomName:(NSString *)momName
-                         storeName:(NSString *)storeName
-                         storeType:(ANSStoreType)storeType;
++ (instancetype)sharedManagerWithMomName:(NSString *)momName {
+    return [self sharedManagerWithMomName:momName storeName:nil storeType:0];
+}
+
++ (instancetype)sharedManagerWithMomName:(NSString *)momName
+                               storeName:(NSString *)storeName
+                               storeType:(ANSStoreType)storeType;
 {
     static ANSCoreDataManager *manager = nil;
     static dispatch_once_t onceToken;
@@ -103,7 +107,8 @@ static NSString * const kANSSqlite       =  @".sqlite";
     [_persistentStoreCoordinator addPersistentStoreWithType:storeType
                                               configuration:nil
                                                         URL:[self persistentStoreURL]
-                                                    options:nil error:&error];
+                                                    options:nil
+                                                      error:&error];
     
     return _persistentStoreCoordinator;
 }
@@ -142,7 +147,9 @@ static NSString * const kANSSqlite       =  @".sqlite";
 }
 
 - (NSURL *)persistentStoreURL {
-    NSString *fileName = self.storeName ? self.storeName : [NSString stringWithFormat:@"%@%@", self.projectName, kANSSqlite];
+    NSString *storeName = self.storeName;
+    
+    NSString *fileName = storeName ? storeName : [self.projectName stringByAppendingPathExtension:kANSSqlite];
     
     NSString *directoryPath = [[NSFileManager defaultManager] pathToDocumentDirectory];
     NSString *pathToStore = [directoryPath stringByAppendingPathComponent:fileName];
