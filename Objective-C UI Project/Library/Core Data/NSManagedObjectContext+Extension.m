@@ -30,7 +30,7 @@
     return YES;  
 }
 
-- (NSArray *)objectsFromDataBaseWith:(NSString *)cls {
+- (NSArray *)objectsFromDataBaseWithCls:(NSString *)cls {
     NSFetchRequest *reques = [NSFetchRequest fetchRequestWithEntityName:cls];
     NSError *executeError = nil;
     NSArray *objects = [self executeFetchRequest:reques error:&executeError];

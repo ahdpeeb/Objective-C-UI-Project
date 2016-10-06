@@ -51,17 +51,19 @@ describe(@"coreDataTest", ^{
         [[sharedManager.managedObjectContext shouldNot] beNil];
     });
     
-    it(@"save first ", ^{
+    it(@"save first object", ^{
         NSManagedObject *user = [sharedManager.managedObjectContext managedObjectWithClass:@"ANSUser"];
         [sharedManager.managedObjectContext saveManagedObject:user withConfiguretionBlock:^(NSManagedObject *object) {
             [user setValue:@"Boris" forKey:@"firstName"];
-            [user setValue:@"HrenPopadesh" forKey:@"lastName"];
+            [user setValue:@"HrenPopadesh suka" forKey:@"lastName"];
+            [user setValue:@(15) forKey:@"age"];
             NSLog(@"%@", object);
         }];
     });
     
-    it(@"bla 2", ^{
-
+    it(@"get all objects from dataBase", ^{
+        NSArray *users = [sharedManager.managedObjectContext objectsFromDataBaseWithCls:@"ANSUser"];
+        NSLog(@"users - %@, count-%ld", users, users.count);
     });
     
     it(@"bla 3", ^{

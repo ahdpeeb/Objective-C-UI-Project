@@ -23,7 +23,7 @@ typedef void(^ANSConfiguretionBlock)(NSManagedObject *object);
        withConfiguretionBlock:(ANSConfiguretionBlock)block;
 
 //returns all managedObjects from dataBase with given class
-- (NSArray *)objectsFromDataBaseWith:(NSString *)cls;
+- (NSArray *)objectsFromDataBaseWithCls:(NSString *)cls;
 
 //returns managedObjects from dataBase, filteres by predicate conditions, sorted by sortDescriptors;
 - (NSArray *)sortedObjectsWith:(Class)cls
