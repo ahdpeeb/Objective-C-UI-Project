@@ -8,6 +8,7 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <CoreData/CoreData.h>
 
 #import "ANSLoginViewController.h"
 
@@ -19,8 +20,10 @@
 #import "ANSProtocolObservationController.h"
 #import "ANSFBConstatns.h"
 #import "ANSLoginInterection.h"
+#import "ANSUser.h"
 
 #import "UIViewController+ANSExtension.h"
+#import "NSManagedObject+ANSExtension.h"
 
 #import "ANSMacros.h"
 
@@ -75,6 +78,21 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
     self.user = [ANSFBUser new];
     self.loginContext = [[ANSFBLoginContext alloc] initWithModel:self.user controller:self];
     [self.loginContext execute];
+}
+
+- (IBAction)onCoreDataTest:(UIButton *)sender {
+//    for (NSUInteger index = 0; index < 100; index ++) {
+//        ANSUser *user = [ANSUser newObject];
+//        [user fillWithRandom];
+//        [user save];
+//    }
+    
+    NSArray *users = [ANSUser objectsFromBase];
+    NSString *word = @"ab";
+    NSPredicate *namePredicate = [NSPredicate predicateWithFormat:@"(firstName CONTAINS[c] %@)", word];
+    NSArray *filteredUsers = [ANSUser objectsFromBaseWithSortDescriptors:nil predicate:namePredicate batchCount:0];
+    
+    NSLog(@"users.count - %lu", (unsigned long)filteredUsers.count);
 }
 
 #pragma mark -

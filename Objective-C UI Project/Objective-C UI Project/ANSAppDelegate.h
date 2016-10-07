@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class ANSCoreDataManager;
+
 @interface ANSAppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;
 

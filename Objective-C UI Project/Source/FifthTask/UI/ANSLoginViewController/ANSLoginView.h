@@ -9,6 +9,7 @@
 #import "ANSRootView.h"
 
 @interface ANSLoginView : ANSRootView
-@property (strong, nonatomic) IBOutlet UIButton *loginButton;
+@property (nonatomic, strong) IBOutlet UIButton *loginButton;
+@property (nonatomic, strong) IBOutlet UIButton *coreDataTest;
 
 @end

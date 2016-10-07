@@ -24,12 +24,22 @@
                         <action selector="onLogin:" destination="-1" eventType="touchUpInside" id="jDm-3O-7bL"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="X41-5W-uDM">
+                    <frame key="frameInset" minX="133" minY="590" width="109" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.63179158560994586" green="1" blue="0.011207478707119134" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                    <state key="normal" title="core data test"/>
+                    <connections>
+                        <action selector="onCoreDataTest:" destination="-1" eventType="touchUpInside" id="D1Y-WU-IYF"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="loginButton" destination="p2s-xJ-9fU" id="eGS-Vk-W6k"/>
             </connections>
-            <point key="canvasLocation" x="274" y="265"/>
+            <point key="canvasLocation" x="273.5" y="264.5"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

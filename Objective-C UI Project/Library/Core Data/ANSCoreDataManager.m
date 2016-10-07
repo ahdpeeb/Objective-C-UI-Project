@@ -37,6 +37,10 @@ static NSString * const kANSSqlite       =  @"sqlite";
 #pragma mark -
 #pragma mark Class methods
 
+//managedObject = метод, который возвращает instansce type;
+//mamagedObjectWith(managedObjectContext);
+//fetchrequstcontroller
+
 + (instancetype)sharedManager {
     return [self sharedManagerWithMomName:nil];
 }
@@ -116,6 +120,9 @@ static NSString * const kANSSqlite       =  @"sqlite";
                                                       error:&error];
     if (error) {
         NSLog(@"[ERROR] %@", [error localizedDescription]);
+        NSURL *url = [self persistentStoreURL];
+        NSError *deleteError = nil;
+        [[NSFileManager defaultManager] removeItemAtURL:url error:&deleteError];
     }
     
     return _persistentStoreCoordinator;

@@ -41,8 +41,6 @@
     navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
     window.rootViewController = navigationController;
     self.dataManager = [ANSCoreDataManager sharedManagerWithMomName:@"ANSUsersMom"];
-    id dataManager = [ANSCoreDataManager sharedManager];
-    
     
     [window makeKeyAndVisible];
     

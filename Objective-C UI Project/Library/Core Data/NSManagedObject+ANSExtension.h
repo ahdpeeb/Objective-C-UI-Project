@@ -8,7 +8,26 @@
 
 #import <CoreData/CoreData.h>
 
+// MO  - managedObject
+// MOC - managedObjectContext;
+
 @interface NSManagedObject (ANSExtension)
+
+// This method insert new managedObject to sharedManager MOC
+// You objective-c class name mast match with entityName
++ (instancetype)newObject;
+
+// returns all objects from dataBase
++ (NSArray *)objectsFromBase;
++ (NSArray *)objectsFromBaseWithSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
+                                      predicate:(NSPredicate *)predicate
+                                     batchCount:(NSUInteger)count;
+//save MO to dataBase
+//MO must be inserted to sharedManager MOC and configureted before saving
+- (BOOL)save;
+
+//dalate MO from DB
+- (BOOL)delate;
 
 //coreDate defult set/get implementation for key
 - (void)setCustomValue:(id)value forKey:(NSString *)key;
