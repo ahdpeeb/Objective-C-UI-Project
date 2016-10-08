@@ -18,9 +18,8 @@ typedef void(^ANSExecutableBlock)(void);
 
 @property (atomic, assign) NSUInteger state;
 
+
 - (void)setState:(NSUInteger)state withUserInfo:(id)UserInfo;
-- (void)setState:(NSUInteger)state;
-- (NSUInteger)state; 
 
 //Use this methods for set observation with protocol.
 /*Observable object will create ObservationController (for each observer), which will notify

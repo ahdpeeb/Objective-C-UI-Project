@@ -10,7 +10,7 @@
 
 #import "ANSFBUser.h"
 
-@interface ANSUserDetailsViewController : UIViewController <ANSUserStateObserver>
+@interface ANSUserDetailsViewController : UIViewController <ANSFBUserStateObserver, ANSFBUserStateObserver>
 @property (nonatomic, strong) ANSFBUser *user;
 
 @end

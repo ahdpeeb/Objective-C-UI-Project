@@ -14,7 +14,7 @@
 @class ANSObservableObject;
 @class ANSUser;
 
-@protocol ANSUserObserverr <NSObject> // ANSUserObserverr
+@protocol ANSUserObserver <NSObject> // ANSUserObserverr
 
 @optional;
 - (void)userDidLoadID:(ANSUser *)user;
@@ -24,12 +24,12 @@
 
 @end
 
-typedef NS_ENUM(NSUInteger, ANSUserStatee) { //ANSUserStatee 
-    ANSUserUnloadedd, //
-    ANSUserDidFailLoadingg, //
-    ANSUserDidLoadIDD, //
-    ANSUserDidLoadBasicc, //
-    ANSUserDidLoadDetailss, //
+typedef NS_ENUM(NSUInteger, ANSUserState) { //ANSUserStatee
+    ANSUserUnloaded, //
+    ANSUserDidFailLoading, //
+    ANSUserDidLoadID, //
+    ANSUserDidLoadBasic, //
+    ANSUserDidLoadDetails, //
     
     ANSUserStateCount, //
 };

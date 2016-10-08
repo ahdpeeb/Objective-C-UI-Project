@@ -33,7 +33,10 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 @property (nonatomic, strong) ANSFBLoginContext                     *loginContext;
 
 @property (nonatomic, strong) ANSFBUser                             *user;
-@property (nonatomic, strong) ANSProtocolObservationController      *contoller;
+@property (nonatomic, strong) ANSProtocolObservationController      *userContoller;
+
+@property (nonatomic, strong) ANSUser                               *testUser;
+@property (nonatomic, strong) ANSProtocolObservationController      *testUserContoller;
 
 - (void)autoLogin;
 
@@ -58,9 +61,18 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
     if (_user != user) {
         _user = user;
 
-        self.contoller = [user protocolControllerWithObserver:self];
+        self.userContoller = [user protocolControllerWithObserver:self];
     }
 }
+
+- (void)setTestUser:(ANSUser *)testUser {
+    if (_testUser != testUser) {
+        _testUser = testUser;
+        
+        self.testUserContoller = [testUser protocolControllerWithObserver:self];
+    }
+}
+
 
 #pragma mark -
 #pragma mark Private metods
@@ -81,20 +93,34 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 }
 
 - (IBAction)onCoreDataTest:(UIButton *)sender {
-//    for (NSUInteger index = 0; index < 100; index ++) {
-//        ANSUser *user = [ANSUser newObject];
-//        [user fillWithRandom];
-//        [user save];
-//    }
+    for (NSUInteger index = 0; index < 100; index ++) {
+        ANSUser *user = [ANSUser object];
+        self.testUser = user;
+        [user fillWithRandom];
+        user.state = ANSUserDidLoadID;
+    }
 }
 
 #pragma mark -
 #pragma mark ANSUserStateObserver ptotocol 
 
-- (void)userDidLoadID:(ANSFBUser *)user {
-    ANSFriendListViewController *controller = [ANSFriendListViewController viewController];
-    controller.user = user;
-    [self.navigationController pushViewController:controller animated:YES];
+//- (void)userDidLoadID:(ANSFBUser *)user {
+//    ANSFriendListViewController *controller = [ANSFriendListViewController viewController];
+//    controller.user = user;
+//    [self.navigationController pushViewController:controller animated:YES];
+//}
+
+- (void)userDidLoadID:(ANSUser *)user {
+    NSLog(@"userDidLoadID");
+}
+- (void)userDidLoadBasic:(ANSUser *)user {
+     NSLog(@"userDidLoadID");
+}
+- (void)userDidLoadDetails:(ANSUser *)user {
+     NSLog(@"userDidLoadID");
+}
+- (void)userDidFailLoading:(ANSUser *)user {
+     NSLog(@"userDidLoadID");
 }
 
 @end

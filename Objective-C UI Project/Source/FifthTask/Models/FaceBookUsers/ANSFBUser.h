@@ -12,13 +12,13 @@
 @class ANSFBUser;
 @class ANSImageModel;
 
-@protocol ANSUserStateObserver <NSObject>
+@protocol ANSFBUserStateObserver <NSObject>
 
 @optional;
-- (void)userDidLoadID:(ANSFBUser *)user;
-- (void)userDidLoadBasic:(ANSFBUser *)user;
-- (void)userDidLoadDetails:(ANSFBUser *)user;
-- (void)userDidFailLoading:(ANSFBUser *)user;
+- (void)fbuserDidLoadID:(ANSFBUser *)user;
+- (void)fbuserDidLoadBasic:(ANSFBUser *)user;
+- (void)fbuserDidLoadDetails:(ANSFBUser *)user;
+- (void)fbuserDidFailLoading:(ANSFBUser *)user;
 
 @end
 

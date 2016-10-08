@@ -62,7 +62,8 @@
 
 - (void)setState:(NSUInteger)state {
     @synchronized(self) {
-        [self setState:state withUserInfo:self];
+        id target = self.target;
+        [self setState:state withUserInfo:target ? target : self];
     }
 }
 
@@ -70,6 +71,10 @@
     @synchronized(self) {
         return _state;
     }
+}
+
+- (id)target {
+    return _target ? _target : self;
 }
 
 #pragma mark -
@@ -96,27 +101,14 @@
     }
 }
 
-- (void)notifyOfStateChange:(NSUInteger)state
-                  withBlock:(ANSControllerNotificationBlock)block
-{
-    @synchronized(self) {
-        if (!block) {
-            return;
-        }
-        
-        for (ANSObservationController *controller in self.controllerHashTable) {
-            block(controller);
-        }
-    }
-}
-
 - (void)notifyOfStateChange:(NSUInteger)state withUserInfo:(id)UserInfo {
     @synchronized(self) {
         if (self.shouldNotify) {
-            [self notifyOfStateChange:(state)
-                            withBlock:^(ANSObservationController *controller) {
-                                [controller notifyOfStateChange:state withUserInfo:UserInfo];
-                            }];
+            NSLog(@"количество обсерверов - %ld", self.controllerHashTable.count);
+            for (ANSObservationController *controller in self.controllerHashTable) {
+                NSLog(@"%@", controller);
+                [controller notifyOfStateChange:state withUserInfo:UserInfo];
+            }
         }
     }
 }

@@ -25,15 +25,6 @@
 @synthesize fullName;
 @synthesize imageUrl;
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.userObservationTarget = [[ANSObservableObject alloc] initWithTarget:self];
-    }
-    
-    return self;
-}
-
 #pragma mark -
 #pragma mark Life Time
 
@@ -45,6 +36,7 @@
     //create from MOC
 - (void)awakeFromInsert {
     [super awakeFromInsert];
+    self.userObservationTarget = [[ANSObservableObject alloc] initWithTarget:self];
 }
 
 #pragma mark -
@@ -67,13 +59,13 @@
 
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
-        case ANSUserDidLoadIDD:
+        case ANSUserDidLoadID:
             return @selector(userDidLoadID:);
             
-        case ANSUserDidLoadBasicc:
+        case ANSUserDidLoadBasic:
             return @selector(userDidLoadBasic:);
             
-        case ANSUserDidLoadDetailss:
+        case ANSUserDidLoadDetails:
             return @selector(userDidLoadDetails:);
             
         default:
