@@ -104,9 +104,7 @@
 - (void)notifyOfStateChange:(NSUInteger)state withUserInfo:(id)UserInfo {
     @synchronized(self) {
         if (self.shouldNotify) {
-            NSLog(@"количество обсерверов - %ld", self.controllerHashTable.count);
             for (ANSObservationController *controller in self.controllerHashTable) {
-                NSLog(@"%@", controller);
                 [controller notifyOfStateChange:state withUserInfo:UserInfo];
             }
         }

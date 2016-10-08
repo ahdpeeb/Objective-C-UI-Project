@@ -98,6 +98,9 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
         self.testUser = user;
         [user fillWithRandom];
         user.state = ANSUserDidLoadID;
+        user.state = ANSUserDidLoadID;
+        user.state = ANSUserDidLoadBasic;
+        user.state = ANSUserDidLoadDetails;
     }
 }
 
@@ -114,13 +117,13 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
     NSLog(@"userDidLoadID");
 }
 - (void)userDidLoadBasic:(ANSUser *)user {
-     NSLog(@"userDidLoadID");
+     NSLog(@"userDidLoadBasic");
 }
 - (void)userDidLoadDetails:(ANSUser *)user {
-     NSLog(@"userDidLoadID");
+     NSLog(@"userDidLoadDetails");
 }
 - (void)userDidFailLoading:(ANSUser *)user {
-     NSLog(@"userDidLoadID");
+     NSLog(@"userDidFailLoading");
 }
 
 @end
