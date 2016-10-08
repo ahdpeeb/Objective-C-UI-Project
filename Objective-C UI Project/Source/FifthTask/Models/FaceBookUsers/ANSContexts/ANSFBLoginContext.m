@@ -44,7 +44,7 @@
                                   if (!error && !result.isCancelled) {
                                       [interection execute];
                                   } else {
-                                      user.state = ANSUserDidFailLoading;
+                                      user.state = ANSFBUserDidFailLoading;
                                   }
                               }];
 }

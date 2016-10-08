@@ -10,91 +10,91 @@
 
 #import "ANSCoreDataManager.h"
 
+@interface NSManagedObject (ANSPrivate)
++ (NSManagedObjectContext *)context;
+@end
+
+@implementation NSManagedObject (ANSPrivate)
+
++ (NSManagedObjectContext *)context {
+    return [[ANSCoreDataManager sharedManager] managedObjectContext];
+}
+
+@end
+
 @implementation NSManagedObject (ANSExtension)
 
-+ (instancetype)newObject {
-    ANSCoreDataManager *manager = [ANSCoreDataManager sharedManager];
++ (instancetype)object {
     NSString *className = NSStringFromClass([self class]);
  
     return [NSEntityDescription insertNewObjectForEntityForName:className
-                                         inManagedObjectContext:manager.managedObjectContext];
-
+                                         inManagedObjectContext:[self context]];
 }
 
-+ (NSArray *)objectsFromBase {
-    return [self objectsFromBaseWithSortDescriptors:nil predicate:nil batchCount:0];
-}
-
-+ (NSArray *)objectsFromBaseWithSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
-                                      predicate:(NSPredicate *)predicate
-                                     batchCount:(NSUInteger)count
-{
-    NSManagedObjectContext *context = [[ANSCoreDataManager sharedManager] managedObjectContext];
++ (NSFetchRequest *)fetchReques {
     NSString *name = NSStringFromClass([self class]);
-    NSFetchRequest *reques = [NSFetchRequest fetchRequestWithEntityName:name];
+    return [NSFetchRequest fetchRequestWithEntityName:name];
+}
+
++ (instancetype)objectWithPredicate:(NSPredicate *)predicate {
+   return [[self objectsWithPredicate:predicate] firstObject];
+}
+
++ (NSArray *)objects {
+    return [self objectsWithSortDescriptors:nil predicate:nil batchCount:0];
+}
+
++ (NSArray *)objectsWithPredicate:(NSPredicate *)predicate {
+    return [self objectsWithSortDescriptors:nil predicate:predicate batchCount:0];
+}
+
++ (NSArray *)objectsWithSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
+                              predicate:(NSPredicate *)predicate {
+    return [self objectsWithSortDescriptors:sortDescriptors predicate:predicate batchCount:0];
+}
+
++ (NSArray *)objectsWithSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
+                              predicate:(NSPredicate *)predicate
+                             batchCount:(NSUInteger)count
+{
+   
+    NSFetchRequest *reques = [self fetchRequest];
     
     reques.sortDescriptors = sortDescriptors;
     reques.predicate = predicate;
     reques.fetchBatchSize = count;
     
     NSError *executeError = nil;
-    NSArray *objects = [context executeFetchRequest:reques error:&executeError];
+    NSArray *objects = [[self context] executeFetchRequest:reques error:&executeError];
     if (executeError) {
         NSLog(@"%@", [executeError localizedDescription]);
     }
     
     return objects;
-
 }
 
 - (BOOL)save {
-    ANSCoreDataManager *manager = [ANSCoreDataManager sharedManager];
     NSError *saveArror = nil;
-    if (![manager.managedObjectContext save:&saveArror]) {
+    if (![[[self class] context] save:&saveArror]) {
         NSLog(@"%@", [saveArror localizedDescription]);
         return NO;
     }
     
     return YES;
 }
-- (BOOL)delate {
+
+- (void)refresh {
+    [[[self class] context] refreshObject:self mergeChanges:YES];
+}
+
+- (BOOL)remove {
     ANSCoreDataManager *manager = [ANSCoreDataManager sharedManager];
     [manager.managedObjectContext deleteObject:self];
     
-    return [manager.managedObjectContext save:nil];
+    return [[[self class] context] save:nil];
 }
 
 #pragma mark -
 #pragma mark Accsessors
-
-- (void)setCustomValue:(id)value forKey:(NSString *)key {
-    [self willChangeValueForKey:key];
-    [self setPrimitiveValue:value forKey:key];
-    [self didChangeValueForKey:key];
-}
-
-- (id)customValue:(id)value forKey:(NSString *)key {
-    [self willAccessValueForKey:key];
-    id resultValue = [self primitiveValueForKey:key];
-    [self didAccessValueForKey:key];
-    
-    return resultValue;
-}
-
-- (void)setCustomValue:(id)value inMutableSetForKey:(NSString *)key {
-    
-}
-
-- (void)removeCustomValue:(id)value inMutableSetForKey:(NSString *)key {
-
-}
-
-- (void)addCustomValues:(NSSet *)values inMutableSetForKey:(NSString *)key {
-
-}
-
-- (void)removeCustomValues:(NSSet *)values inMutableSetForKey:(NSString *)key {
-
-}
 
 @end

@@ -43,13 +43,13 @@ static NSString * const kANSUserID = @"userID";
 
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
-        case ANSUserDidLoadID:
+        case ANSFBUserDidLoadID:
             return @selector(userDidLoadID:);
             
-        case ANSUserDidLoadBasic:
+        case ANSFBUserDidLoadBasic:
             return @selector(userDidLoadBasic:);
             
-        case ANSUserDidLoadDetails:
+        case ANSFBUserDidLoadDetails:
             return @selector(userDidLoadDetails:);
             
         default:

@@ -16,6 +16,7 @@
 @interface ANSObservableObject ()
 @property (nonatomic, retain) NSHashTable *controllerHashTable;
 @property (nonatomic, assign) BOOL        shouldNotify;
+@property (nonatomic, weak)   id          target;
 
 - (id)controllerWithClass:(Class)cls observer:(id)observer;
 - (void)notifyOfStateChange:(NSUInteger)state
@@ -32,13 +33,18 @@
 #pragma mark -
 #pragma mark Initialization and deallocation
 
-- (instancetype)init {
+- (instancetype)initWithTarget:(id)target  {
     self = [super init];
     self.controllerHashTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
     self.shouldNotify = YES;
     self.state = NSUIntegerMax;
+    self.target = target ? target : self;
     
     return self;
+}
+
+- (instancetype)init {
+    return [self initWithTarget:nil];
 }
 
 #pragma mark -

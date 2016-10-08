@@ -32,11 +32,11 @@
 
 - (void)loadFromCache {
     ANSFBUser *user = self.model;
-    user.state = ANSUserDidFailLoading;
+    user.state = ANSFBUserDidFailLoading;
 }
 
 - (BOOL)isModelLoaded {
-   return [super isModelLoadedWithState:ANSUserDidLoadDetails];
+   return [super isModelLoadedWithState:ANSFBUserDidLoadDetails];
 }
 
 - (void)fillModelFromResult:(NSDictionary *)result {
@@ -46,7 +46,7 @@
     user.email = result[kANSEmail];
    
     [user save];
-    user.state = ANSUserDidLoadDetails;
+    user.state = ANSFBUserDidLoadDetails;
 }
 
 @end

@@ -10,4 +10,6 @@
 
 @interface NSManagedObjectContext (Extension)
 
++ (void)saveContext;
+
 @end

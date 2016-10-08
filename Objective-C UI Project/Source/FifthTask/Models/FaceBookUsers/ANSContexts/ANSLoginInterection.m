@@ -45,7 +45,7 @@
     if (token) {
         ANSFBUser *user = self.user;
         user.ID = (NSUInteger)[token.userID integerValue];
-        user.state = ANSUserDidLoadID;
+        user.state = ANSFBUserDidLoadID;
     }
 }
 

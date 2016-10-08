@@ -86,13 +86,6 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 //        [user fillWithRandom];
 //        [user save];
 //    }
-    
-    NSArray *users = [ANSUser objectsFromBase];
-    NSString *word = @"ab";
-    NSPredicate *namePredicate = [NSPredicate predicateWithFormat:@"(firstName CONTAINS[c] %@)", word];
-    NSArray *filteredUsers = [ANSUser objectsFromBaseWithSortDescriptors:nil predicate:namePredicate batchCount:0];
-    
-    NSLog(@"users.count - %lu", (unsigned long)filteredUsers.count);
 }
 
 #pragma mark -

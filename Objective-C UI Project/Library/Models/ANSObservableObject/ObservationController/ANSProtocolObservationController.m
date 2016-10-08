@@ -23,7 +23,8 @@
 #pragma mark Private Methods
 
 - (void)notifyOfStateChange:(NSUInteger)state withUserInfo:(id)userInfo {
-    [self notifyObserversWithSelector:[self.observableObject selectorForState:state] object:userInfo];
+    [self notifyObserversWithSelector:[[self.observableObject target] selectorForState:state]
+                               object:userInfo];
 }
 
 - (void)notifyOfStateChange:(NSUInteger)state {
@@ -34,7 +35,7 @@
     id observer = self.observer;
     
     if ([observer respondsToSelector:selector]) {
-        [observer performSelector:selector withObject:self.observableObject withObject:object];
+        [observer performSelector:selector withObject:[self.observableObject target] withObject:object];
     }
 }
 

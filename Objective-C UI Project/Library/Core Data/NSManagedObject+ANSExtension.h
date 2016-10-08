@@ -15,28 +15,32 @@
 
 // This method insert new managedObject to sharedManager MOC
 // You objective-c class name mast match with entityName
-+ (instancetype)newObject;
++ (instancetype)object;
+
+//Returns first objects which suitable for predicae conditions
++ (instancetype)objectWithPredicate:(NSPredicate *)predicate;
+
++ (NSFetchRequest *)fetchReques;
 
 // returns all objects from dataBase
-+ (NSArray *)objectsFromBase;
-+ (NSArray *)objectsFromBaseWithSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
-                                      predicate:(NSPredicate *)predicate
-                                     batchCount:(NSUInteger)count;
++ (NSArray *)objects;
+
++ (NSArray *)objectsWithPredicate:(NSPredicate *)predicate;
+
++ (NSArray *)objectsWithSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
+                              predicate:(NSPredicate *)predicate;
+
++ (NSArray *)objectsWithSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
+                              predicate:(NSPredicate *)predicate
+                             batchCount:(NSUInteger)count;
+
 //save MO to dataBase
 //MO must be inserted to sharedManager MOC and configureted before saving
 - (BOOL)save;
+//refresh objects and merge changes
+- (void)refresh;
 
-//dalate MO from DB
-- (BOOL)delate;
-
-//coreDate defult set/get implementation for key
-- (void)setCustomValue:(id)value forKey:(NSString *)key;
-- (id)customValue:(id)value forKey:(NSString *)key;
-
-- (void)setCustomValue:(id)value inMutableSetForKey:(NSString *)key;
-- (void)removeCustomValue:(id)value inMutableSetForKey:(NSString *)key;
-
-- (void)addCustomValues:(NSSet *)values inMutableSetForKey:(NSString *)key;
-- (void)removeCustomValues:(NSSet *)values inMutableSetForKey:(NSString *)key;
+//remove MO from DB
+- (BOOL)remove;
 
 @end

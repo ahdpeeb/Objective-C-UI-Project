@@ -22,14 +22,14 @@
 
 @end
 
-typedef NS_ENUM(NSUInteger, ANSUserState) {
-    ANSUserUnloaded,
-    ANSUserDidFailLoading,
-    ANSUserDidLoadID,
-    ANSUserDidLoadBasic,
-    ANSUserDidLoadDetails,
+typedef NS_ENUM(NSUInteger, ANSFBUserState) {
+    ANSFBUserUnloaded,
+    ANSFBUserDidFailLoading,
+    ANSFBUserDidLoadID,
+    ANSFBUserDidLoadBasic,
+    ANSFBUserDidLoadDetails,
     
-    ANSUserStateCount,
+    ANSFBUserStateCount,
 };
 
 @interface ANSFBUser : ANSObservableObject  <NSCoding, NSCopying>

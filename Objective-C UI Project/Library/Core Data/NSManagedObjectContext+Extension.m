@@ -7,10 +7,31 @@
 //
 
 #import "NSManagedObjectContext+Extension.h"
-
+#import "ANSCoreDataManager.h"
 #import "ANSMacros.h"
 
-@implementation NSManagedObjectContext (Extension)
+@interface NSManagedObjectContext (ANSPrivate)
++ (NSManagedObjectContext *)context;
+@end
 
+@implementation NSManagedObjectContext (ANSPrivate)
++ (NSManagedObjectContext *)context {
+    
+    return [[ANSCoreDataManager sharedManager] managedObjectContext];
+}
+
+@end
+
+@implementation NSManagedObjectContext (ANSExtension)
+
++ (void)saveContext {
+    NSError *saveError = nil;
+    if ([[self context] hasChanges]) {
+        if ([[self context] save:&saveError]) {
+            NSLog(@"[ERROR] save arror - %@", [saveError localizedDescription]);
+            abort();
+        }
+    }
+}
 
 @end

@@ -143,6 +143,7 @@
 		9315EA921D955DAB0053D21D /* ANSFBUserDetailsContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSFBUserDetailsContext.m; sourceTree = "<group>"; };
 		934DB0F11DA7D77E00588924 /* ANSUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSUser.h; sourceTree = "<group>"; };
 		934DB0F21DA7D77E00588924 /* ANSUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSUser.m; sourceTree = "<group>"; };
+		934DB0F41DA97C6C00588924 /* ANSObservableObjectPtotocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSObservableObjectPtotocol.h; sourceTree = "<group>"; };
 		935E5A0A1D6F4CA5005F6285 /* aaa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = aaa.plist; sourceTree = "<group>"; };
 		9382A6451DA5345E007E8D36 /* NSManagedObjectContext+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+Extension.h"; sourceTree = "<group>"; };
 		9382A6461DA5345E007E8D36 /* NSManagedObjectContext+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+Extension.m"; sourceTree = "<group>"; };
@@ -893,6 +894,7 @@
 		93E3E53D1DA3AF3100C2BBC1 /* ANSObservableObject */ = {
 			isa = PBXGroup;
 			children = (
+				934DB0F41DA97C6C00588924 /* ANSObservableObjectPtotocol.h */,
 				93E3E53E1DA3AF3100C2BBC1 /* ANSObservableObject.h */,
 				93E3E53F1DA3AF3100C2BBC1 /* ANSObservableObject.m */,
 				93E3E5401DA3AF3100C2BBC1 /* ObservationController */,
