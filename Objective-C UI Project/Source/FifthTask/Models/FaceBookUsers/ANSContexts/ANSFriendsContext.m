@@ -15,6 +15,8 @@
 #import "NSFileManager+ANSExtension.h"
 #import "NSManagedObject+ANSExtension.h"
 
+#import "ANSGCD.h"
+
 @interface ANSFriendsContext ()
 - (ANSUser *)userFromResult:(NSDictionary *)result;
 - (NSSet *)friendsFromResult:(NSDictionary <ANSJSONRepresentation> *)result;
@@ -43,10 +45,11 @@
 
 - (BOOL)isModelLoadedWithState:(NSUInteger)state {
     ANSUser *user = self.model;
+    NSLog(@"user state = %lu", (unsigned long)user.state);
     if (user.state == state) {
-        //HAVE TO BE Changed
-//      [user notifyOfStateChange:state];
-
+    //HAVE TO BE Changed
+//        [user notifyOfStateChange:state];
+//
 //        return YES;
     }
     
@@ -54,12 +57,15 @@
 }
 
 - (BOOL)isModelLoaded {
-    return [self isModelLoadedWithState:ANSLoadableModelDidLoad];
+    return [self isModelLoadedWithState:ANSUserDidLoadID];
 }
 
 - (void)fillModelFromResult:(NSDictionary <ANSJSONRepresentation> *)result; {
     ANSUser *user = self.model;
     [user addFriends:[self friendsFromResult:result]];
+    
+    user.state = ANSUserDidLoadFriends;
+    
     NSLog(@"%lu", user.friends.count);
 }
 
@@ -76,7 +82,6 @@
     user.imageURL = dataPicture[kANSURL];
     
     [user save];
-    user.state = ANSUserDidLoadBasic;
     
     return user;
 }

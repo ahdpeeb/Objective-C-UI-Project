@@ -1,3 +1,4 @@
+
 //
 //  ANSProtocolObservationController.m
 //  Objective-C UI Project
@@ -33,7 +34,6 @@
 
 - (void)notifyObserversWithSelector:(SEL)selector object:(id)object {
     id observer = self.observer;
-    
     if ([observer respondsToSelector:selector]) {
         [observer performSelector:selector withObject:[self.observableObject target] withObject:object];
     }

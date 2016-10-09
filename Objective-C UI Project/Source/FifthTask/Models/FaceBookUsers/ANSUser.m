@@ -67,8 +67,8 @@
         case ANSUserDidLoadID:
             return @selector(userDidLoadID:);
             
-        case ANSUserDidLoadBasic:
-            return @selector(userDidLoadBasic:);
+        case ANSUserDidLoadFriends:
+            return @selector(userDidLoadFriends:);
             
         case ANSUserDidLoadDetails:
             return @selector(userDidLoadDetails:);

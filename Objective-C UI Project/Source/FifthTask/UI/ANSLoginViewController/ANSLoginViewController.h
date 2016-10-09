@@ -13,6 +13,5 @@
 @interface ANSLoginViewController : UIViewController <ANSUserObserver>
 
 - (IBAction)onLogin:(UIButton *)sender;
-- (IBAction)onCoreDataTest:(UIButton *)sender;
 
 @end

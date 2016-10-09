@@ -17,7 +17,7 @@
 
 @interface ANSFBContext ()
 @property (nonatomic, strong) ANSUser                     *model;
-@property (nonatomic, strong) FBSDKGraphRequestConnection *requestConnection;
+@property (atomic, strong) FBSDKGraphRequestConnection *requestConnection;
 
 - (void)executeRequest;
 
@@ -84,18 +84,19 @@
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[self graphPath]
                                                                    parameters:[self parametres]
                                                                    HTTPMethod:[self HTTPMethod]];
-    
+ 
     self.requestConnection = [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
                                                                         NSDictionary <ANSJSONRepresentation>  *result,
                                                                         NSError *error) {
-        if (error) {
-            NSLog(@"[ERROR] %@", error);
-            [self loadFromCache];
-            
-            return;
-        }
         
-        [self fillModelFromResult:result];
+            if (error) {
+                NSLog(@"[ERROR] %@", error);
+                //            [self loadFromCache];
+                
+                return;
+            }
+            
+            [self fillModelFromResult:result];
     }];
 }
 

@@ -31,13 +31,15 @@
 #pragma mark Initialization and deallocation
 
 - (instancetype)initWithTarget:(id)target  {
-    self = [super init];
-    self.controllerHashTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
-    self.shouldNotify = YES;
-    self.state = NSUIntegerMax;
-    self.target = target ? target : self;
-    
-    return self;
+    @synchronized (self) {
+        self = [super init];
+        self.controllerHashTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
+        self.shouldNotify = YES;
+        self.state = NSUIntegerMax;
+        self.target = target ? target : self;
+        
+        return self;
+    }
 }
 
 - (instancetype)init {
@@ -71,14 +73,18 @@
 }
 
 - (id)target {
-    return _target ? _target : self;
+    @synchronized (self) {
+        return _target ? _target : self;
+    }
 }
 
 #pragma mark -
 #pragma mark Private methods
 
 - (SEL)selectorForState:(NSUInteger)state {
-    return NULL;
+    @synchronized (self) {
+        return NULL;
+    }
 }
 
 - (void)invalidateController:(ANSObservationController *)controller {
@@ -103,6 +109,7 @@
         if (self.shouldNotify) {
             for (ANSObservationController *controller in self.controllerHashTable) {
                 [controller notifyOfStateChange:state withUserInfo:UserInfo];
+                NSLog(@"начало выполнения");
             }
         }
     }
@@ -167,7 +174,6 @@
 
 - (void)performBlockWithoutNotification:(ANSExecutableBlock)block {
     [self performBlock:block shouldNotify:NO];
-    
 }
 
 #pragma mark -

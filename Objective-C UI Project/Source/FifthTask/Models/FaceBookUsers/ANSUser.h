@@ -20,7 +20,7 @@
 
 @optional;
 - (void)userDidLoadID:(ANSUser *)user;
-- (void)userDidLoadBasic:(ANSUser *)user;
+- (void)userDidLoadFriends:(ANSUser *)user;
 - (void)userDidLoadDetails:(ANSUser *)user;
 - (void)userDidFailLoading:(ANSUser *)user;
 
@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger, ANSUserState) {
     ANSUserUnloaded,
     ANSUserDidFailLoading,
     ANSUserDidLoadID,
-    ANSUserDidLoadBasic,
+    ANSUserDidLoadFriends,
     ANSUserDidLoadDetails,
     
     ANSUserStateCount,

@@ -26,6 +26,7 @@
 #import "UIViewController+ANSExtension.h"
 #import "ANSLoadingView.h"
 #import "ANSCoreDataManager.h"
+#import "NSManagedObject+ANSExtension.h"
 
 #import "ANSMacros.h"
 #import "ANSGCD.h"
@@ -33,14 +34,20 @@
 ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView, friendListView);
 
 @interface ANSFriendListViewController ()
-@property (nonatomic, strong)     ANSFriendsContext                 *friendsContext;
-@property (nonatomic, strong)     NSFetchedResultsController        *resultsController;
+@property (nonatomic, strong) ANSProtocolObservationController  *userController;
 
-- (void)resignSearchBar;
-- (void)initFilterInfrastructure;
+@property (nonatomic, strong) ANSFriendsContext                 *friendsContext;
+@property (nonatomic, strong) NSFetchedResultsController        *resultsController;
+
+//- (void)resignSearchBar;
+//- (void)initFilterInfrastructure;
 
 - (void)leftBarButtonAction:(UIBarButtonItem *)sender;
 - (void)initLeftBarButton;
+
+- (NSFetchedResultsController *)controllerWithRequest:(NSFetchRequest *)reques
+                                   sectionNameKeyPath:(NSString *)keyPath;
+- (void)initResultsController ;
 
 @end
 
@@ -70,11 +77,17 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     if (_resultsController != resultsController) {
         _resultsController = resultsController;
         
+        _resultsController.delegate = self;
+        
         NSError *error = nil;
-        if ([_resultsController performFetch:&error]) {
+        if (![_resultsController performFetch:&error]) {
             NSLog(@"%@", [error localizedDescription]);
             abort();
         }
+        
+        NSArray *objects = [_resultsController fetchedObjects];
+        NSLog(@"objects count = %ld", objects.count);
+        [self.friendListView.tableView reloadData];
     }
 }
 
@@ -84,9 +97,10 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
         
         ANSFriendsContext *context = [[ANSFriendsContext alloc] initWithModel:user];
         self.friendsContext = context;
-        [context execute];
         
- //       [self.resultsController]
+        self.userController = [user protocolControllerWithObserver:self];
+        
+        [context execute];
     }
 }
 
@@ -122,6 +136,17 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
                                                managedObjectContext:context
                                                  sectionNameKeyPath:keyPath
                                                           cacheName:nil];
+}
+
+- (void)initResultsController {
+    NSSortDescriptor *descriptor = nil;
+    descriptor = [NSSortDescriptor sortDescriptorWithKey:@"idNumber" ascending:YES];
+    NSFetchRequest *reques = [ANSUser fetchRequesWithSortDescriptors:@[descriptor]
+                                                           predicate:nil
+                                                          batchCount:10];
+    
+    self.resultsController = [self controllerWithRequest:reques
+                                      sectionNameKeyPath:nil];
 }
 
 - (void)resignSearchBar {
@@ -161,23 +186,26 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 #pragma mark -
 #pragma mark UITableViewDataSource protocol
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return kANSSectionsCount;
-//}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    NSUInteger value = [[self.resultsController sections] count];
+    return [[self.resultsController sections] count];
+}
 
-//- (NSInteger)   tableView:(UITableView *)tableView
-//    numberOfRowsInSection:(NSInteger)section
-//{
-//    return self.presentedModel.count;
-//}
+- (NSInteger)   tableView:(UITableView *)tableView
+    numberOfRowsInSection:(NSInteger)section
+{
+    id <NSFetchedResultsSectionInfo> result = self.resultsController.sections[section];
+    return [result numberOfObjects];
+    
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ANSUserCell *cell = [tableView dequeueReusableCellWithClass:[ANSUserCell class]];
     
-//    ANSUser *user = self.presentedModel[indexPath.row];
-//    [cell fillWithUser:user];
+    ANSUser *user = [self.resultsController objectAtIndexPath:indexPath];
+    [cell fillWithUser:user];
 
     return cell;
 }
@@ -214,23 +242,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 //    [self.filteredModel filterByfilterString:searchText];
 }
 
-#pragma mark -
-#pragma mark ANSLoadableModelObserver protocol
 
-- (void)loadableModelLoading:(ANSLoadableModel *)model {
-    ANSPerformInMainQueue(dispatch_async, ^{
-        self.friendListView.loadingViewVisible = YES;
-    });
-}
-
-- (void)loadableModelDidLoad:(ANSLoadableModel *)model {
-    ANSPerformInMainQueue(dispatch_async, ^{
-        NSLog(@"notified userModelDidLoad");
-        self.friendListView.loadingViewVisible = NO;
-        [self.friendListView.tableView reloadData];
-    });
-}
- 
 //- (void)nameFilterModelDidFilter:(ANSNameFilterModel *)model {
 //    ANSPerformInMainQueue(dispatch_async, ^{
 //        NSLog(@"notified didFilterWithUserInfo - %@ ", model);
@@ -240,5 +252,23 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 
 #pragma mark -
 #pragma mark NSFetchedResultsControllerDelegate protocol
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.friendListView.tableView beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.friendListView.tableView endUpdates];
+}
+
+#pragma mark -
+#pragma mark ANSUserObserver protocol
+
+- (void)userDidLoadFriends:(ANSUser *)user {
+    ANSPerformInMainQueue(dispatch_async, ^{
+            [self initResultsController];
+            self.friendListView.loadingView.visible = NO;
+    });
+}
 
 @end

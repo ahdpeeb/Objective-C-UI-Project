@@ -24,6 +24,7 @@
 #import "NSManagedObject+ANSExtension.h"
 
 #import "ANSMacros.h"
+#import "ANSGCD.h"
 
 ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginView);
 
@@ -31,7 +32,7 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 @property (nonatomic, strong) ANSLoginContext                     *loginContext;
 
 @property (nonatomic, strong) ANSUser                               *user;
-@property (nonatomic, strong) ANSProtocolObservationController      *userContoller;
+@property (nonatomic, strong) ANSProtocolObservationController      *userController;
 
 - (void)autoLogin;
 
@@ -56,7 +57,7 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
     if (_user != user) {
         _user = user;
         
-        self.userContoller = [user protocolControllerWithObserver:self];
+        self.userController = [user protocolControllerWithObserver:self];
     }
 }
 
@@ -67,6 +68,7 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
     self.user = [ANSUser object];
     ANSLoginInterection *interection = [ANSLoginInterection interectionWithUser:self.user];
     [interection execute];
+    [self userDidLoadID:self.user];
 }
 
 #pragma mark -
@@ -81,10 +83,12 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 #pragma mark -
 #pragma mark ANSUserObserver ptotocol
 
-- (void)userDidLoadID:(ANSUser *)user {
+- (void)userDidLoadID:(ANSUser *)user {    
     ANSFriendListViewController *controller = [ANSFriendListViewController viewController];
     controller.user = user;
-    [self.navigationController pushViewController:controller animated:YES];
+    ANSPerformInMainQueue(dispatch_async, ^{
+        [self.navigationController pushViewController:controller animated:YES];
+    }); 
 }
 
 @end

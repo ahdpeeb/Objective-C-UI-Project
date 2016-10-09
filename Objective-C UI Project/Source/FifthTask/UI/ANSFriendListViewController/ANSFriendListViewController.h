@@ -9,15 +9,14 @@
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
 
-@class ANSUser;
+#import "ANSUser.h"
 
 @interface ANSFriendListViewController : UIViewController <
     UITableViewDataSource,
     UITableViewDelegate,
     UISearchBarDelegate,
-    UINavigationControllerDelegate,
-    NSFetchedResultsControllerDelegate
-
+    NSFetchedResultsControllerDelegate,
+    ANSUserObserver
 //    ANSArrayModelObserver,
 //    ANSNameFilterModelProtocol
 >
