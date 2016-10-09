@@ -5,18 +5,20 @@
 //  Created by Nikola Andriiev on 23.09.16.
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
-#import "ANSFBUserDetailsContext.h"
+#import "ANSUserDetailsContext.h"
 
-#import "ANSFBUser.h"
+#import "ANSUser.h"
 #import "ANSFBConstatns.h"
 
-@implementation ANSFBUserDetailsContext
+#import "NSManagedObject+ANSExtension.h"
+
+@implementation ANSUserDetailsContext
 
 #pragma mark -
 #pragma mark Private Methods (reloaded);
 
 - (NSString *)graphPath; {
-    return [NSString stringWithFormat:@"%ld", ((ANSFBUser *)self.model).ID];
+    return [NSString stringWithFormat:@"%lld", ((ANSUser *)self.model).idNumber];
 }
 
 - (NSString *)HTTPMethod {
@@ -31,22 +33,22 @@
 }
 
 - (void)loadFromCache {
-    ANSFBUser *user = self.model;
-    user.state = ANSFBUserDidFailLoading;
+    ANSUser *user = self.model;
+    user.state = ANSUserDidFailLoading;
 }
 
 - (BOOL)isModelLoaded {
-   return [super isModelLoadedWithState:ANSFBUserDidLoadDetails];
+   return [super isModelLoadedWithState:ANSUserDidLoadDetails];
 }
 
-- (void)fillModelFromResult:(NSDictionary *)result {
-    ANSFBUser *user = self.model;
-    [super fillUser:user fromResult:result];
+- (ANSUser *)userFromResult:(NSDictionary *)result {
+    ANSUser *user = [super userFromResult:result];
     user.gender = result[kANSGender];
-    user.email = result[kANSEmail];
    
     [user save];
-    user.state = ANSFBUserDidLoadDetails;
+    user.state = ANSUserDidLoadDetails;
+    
+    return user;
 }
 
 @end

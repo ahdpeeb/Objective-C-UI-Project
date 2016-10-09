@@ -14,8 +14,6 @@
 @class ANSProtocolObservationController;
 @class ANSBlockObservationController;
 
-typedef void(^ANSControllerNotificationBlock)(ANSObservationController *controller);
-
 @interface ANSObservableObject : NSObject <NSCopying, ANSObservableObjectPtotocol>
 @property (atomic, assign)                       NSUInteger state;
 

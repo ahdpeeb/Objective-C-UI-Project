@@ -8,16 +8,14 @@
 
 #import "ANSFBContext.h"
 
-@class ANSFBUser;
+@class ANSUser;
 
-@interface ANSFBFriendsContext : ANSFBContext
-@property (nonatomic, strong) ANSFBUser *user;
-
-//method for subclasses
-- (void)fillUser:(ANSFBUser *)user
-      fromResult:(NSDictionary *)result;
+@interface ANSFriendsContext : ANSFBContext
+@property (nonatomic, strong) ANSUser *user;
 
 //method for subclasses
+- (ANSUser *)userFromResult:(NSDictionary *)result;
+
 - (BOOL)isModelLoadedWithState:(NSUInteger)state;
 
 @end

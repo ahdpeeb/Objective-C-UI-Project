@@ -9,7 +9,7 @@
 #import "ANSNameFilterModel.h"
 
 #import "ANSProtocolObservationController.h"
-#import "ANSFBUser.h"
+#import "ANSUser.h"
 #import "ANSFBFriends.h"
 #import "ANSGCD.h"
 #import "ANSChangeModel.h"
@@ -22,11 +22,11 @@ typedef void(^ANSOperationBlock)(void);
 @interface ANSNameFilterModel ()
 @property (nonatomic, strong)   ANSFBFriends                  *model;
 @property (nonatomic, strong)   ANSProtocolObservationController    *controller;
-@property (atomic, strong)      NSString                            *filterString;
+@property (nonatomic, strong)      NSString                            *filterString;
 
-- (void)addUserWithoutNotification:(ANSFBUser *)user;
+- (void)addUserWithoutNotification:(ANSUser *)user;
 - (void)filterModelByFilterString:(NSString *)filterString;
-- (BOOL)user:(ANSFBUser *)user containsString:(NSString *)string;
+- (BOOL)user:(ANSUser *)user containsString:(NSString *)string;
 - (void)verifyObject:(id)object
           withString:(NSString *)string
          performBlock:(ANSOperationBlock)block;
@@ -67,7 +67,7 @@ typedef void(^ANSOperationBlock)(void);
 #pragma mark -
 #pragma mark Private methods
 
-- (void)addUserWithoutNotification:(ANSFBUser *)user {
+- (void)addUserWithoutNotification:(ANSUser *)user {
     [self performBlockWithoutNotification:^{
         [self addObject:user];
     }];
@@ -78,7 +78,7 @@ typedef void(^ANSOperationBlock)(void);
         [self removeAllObjects];
     }];
     
-    for (ANSFBUser *user in self.model) {
+    for (ANSUser *user in self.model) {
         if (!filterString.length) {
             [self addUserWithoutNotification:user];
         }
@@ -101,7 +101,7 @@ typedef void(^ANSOperationBlock)(void);
     }
 }
 
-- (BOOL)user:(ANSFBUser *)user containsString:(NSString *)string {
+- (BOOL)user:(ANSUser *)user containsString:(NSString *)string {
     if (!string) {
         return YES;
     }
@@ -116,8 +116,8 @@ typedef void(^ANSOperationBlock)(void);
           withString:(NSString *)string
          performBlock:(ANSOperationBlock)block
 {
-    if ([object isKindOfClass:[ANSFBUser class]]) {
-        if ([self user:(ANSFBUser *)object containsString:string]) {
+    if ([object isKindOfClass:[ANSUser class]]) {
+        if ([self user:(ANSUser *)object containsString:string]) {
             block();
         }
     }

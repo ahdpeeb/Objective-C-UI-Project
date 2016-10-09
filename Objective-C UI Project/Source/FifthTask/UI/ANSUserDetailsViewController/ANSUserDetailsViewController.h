@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ANSFBUser.h"
+#import "ANSUser.h"
 
-@interface ANSUserDetailsViewController : UIViewController <ANSFBUserStateObserver, ANSFBUserStateObserver>
-@property (nonatomic, strong) ANSFBUser *user;
+@interface ANSUserDetailsViewController : UIViewController <ANSUserObserver>
+@property (nonatomic, strong) ANSUser *user;
 
 @end

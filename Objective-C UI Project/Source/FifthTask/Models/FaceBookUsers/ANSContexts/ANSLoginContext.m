@@ -9,20 +9,20 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
-#import "ANSFBLoginContext.h"
+#import "ANSLoginContext.h"
 
-#import "ANSFBUser.h"
+#import "ANSUser.h"
 #import "ANSFBConstatns.h"
 #import "ANSJSONRepresentation.h"
 #import "ANSLoginViewController.h"
 #import "ANSLoginInterection.h"
 
-@interface ANSFBLoginContext ()
+@interface ANSLoginContext ()
 @property (nonatomic, weak) ANSLoginViewController *viewController;
 
 @end
 
-@implementation ANSFBLoginContext
+@implementation ANSLoginContext
 
 - (instancetype)initWithModel:(id)model controller:(ANSLoginViewController *)controller {
     self = [super initWithModel:model];
@@ -35,7 +35,7 @@
 #pragma mark Public Methods (reloaded)
 
 - (void)execute {
-    ANSFBUser *user = self.model;
+    ANSUser *user = self.model;
     ANSLoginInterection *interection = [ANSLoginInterection interectionWithUser:user];
     FBSDKLoginManager *manager = [FBSDKLoginManager new];
     [manager logInWithReadPermissions:@[kANSPublicProfile, kANSUserFriends, kANSEmail]
@@ -44,7 +44,7 @@
                                   if (!error && !result.isCancelled) {
                                       [interection execute];
                                   } else {
-                                      user.state = ANSFBUserDidFailLoading;
+                                      user.state = ANSUserDidFailLoading;
                                   }
                               }];
 }

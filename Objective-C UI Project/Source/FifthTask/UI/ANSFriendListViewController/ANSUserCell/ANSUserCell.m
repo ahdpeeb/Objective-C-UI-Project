@@ -10,7 +10,7 @@
 #import "ANSUserCell.h"
 
 #import "ANSImageView.h"
-#import "ANSFBUser.h"
+#import "ANSUser.h"
 #import "ANSLoadingView.h"
 #import "UIView+ANSExtension.h"
 
@@ -50,7 +50,7 @@
 #pragma mark -
 #pragma mark Public methods
 
-- (void)fillWithUser:(ANSFBUser *)user {
+- (void)fillWithUser:(ANSUser *)user {
     self.label.text = user.fullName;
     self.userImageView.imageModel = user.imageModel;
     

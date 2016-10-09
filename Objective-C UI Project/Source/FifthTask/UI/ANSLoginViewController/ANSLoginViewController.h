@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ANSFBUser.h"
 #import "ANSUser.h"
 
-@interface ANSLoginViewController : UIViewController <ANSFBUserStateObserver, ANSUserObserver>
+@interface ANSLoginViewController : UIViewController <ANSUserObserver>
 
 - (IBAction)onLogin:(UIButton *)sender;
 - (IBAction)onCoreDataTest:(UIButton *)sender;

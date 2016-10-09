@@ -25,6 +25,8 @@
 @synthesize fullName;
 @synthesize imageUrl;
 
+@dynamic imageModel;
+
 #pragma mark -
 #pragma mark Life Time
 
@@ -48,6 +50,10 @@
 
 - (NSString *)fullName {
     return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
+}
+
+- (ANSImageModel *)imageModel {
+    return [ANSImageModel imageFromURL:self.imageUrl];
 }
 
 #pragma mark -

@@ -6,30 +6,31 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
-#import "ANSFBFriendsContext.h"
+#import "ANSFriendsContext.h"
 
-#import "ANSFBUser.h"
+#import "ANSUser.h"
 #import "ANSFBFriends.h"
 #import "ANSFBConstatns.h"
 
 #import "NSDictionary+ANSJSONRepresentation.h"
 #import "NSFileManager+ANSExtension.h"
+#import "NSManagedObject+ANSExtension.h"
 
 static NSString * const kANSPlistName = @"aaa";
 
-@interface ANSFBFriendsContext ()
-
+@interface ANSFriendsContext ()
+- (ANSUser *)userFromResult:(NSDictionary *)result;
 - (NSArray *)friendsFromResult:(NSDictionary <ANSJSONRepresentation> *)result;
 
 @end
 
-@implementation ANSFBFriendsContext
+@implementation ANSFriendsContext
 
 #pragma mark -
 #pragma mark Private Methods (reloaded)
 
 - (NSString *)graphPath {
-    return [NSString stringWithFormat:@"%lu/%@",self.user.ID, kANSFriends];
+    return [NSString stringWithFormat:@"%lld/%@",self.user.idNumber, kANSFriends];
 }
 
 - (NSString *)HTTPMethod {
@@ -52,7 +53,6 @@ static NSString * const kANSPlistName = @"aaa";
     }
     
     return NO;
-
 }
 
 - (BOOL)isModelLoaded {
@@ -83,17 +83,18 @@ static NSString * const kANSPlistName = @"aaa";
 #pragma mark -
 #pragma mark Private methods
 
-- (void)fillUser:(ANSFBUser *)user
-      fromResult:(NSDictionary *)result {
-    user.ID = (NSUInteger)[result[kANSID] integerValue];
+- (ANSUser *)userFromResult:(NSDictionary *)result {
+    NSUInteger ID = (NSUInteger)[result[kANSID] integerValue];
+    ANSUser *user = [ANSUser objectWithID:ID];
     user.firstName = result[kANSFirstName];
     user.lastName = result[kANSLastName];
     
     NSDictionary * dataPicture = result[kANSPicture][kANSData] ;
-    NSString *URLString = dataPicture[kANSURL];
-    user.imageUrl = [NSURL URLWithString:URLString];
+    user.imageURL = dataPicture[kANSURL];
     
-    user.state = ANSFBUserDidLoadBasic;
+    user.state = ANSUserDidLoadBasic;
+    
+    return user;
 }
 
 - (NSArray *)friendsFromResult:(NSDictionary <ANSJSONRepresentation> *)result {
@@ -102,11 +103,10 @@ static NSString * const kANSPlistName = @"aaa";
     
     NSArray *dataUsers = parsedResult[kANSData];
     for (NSDictionary *dataUser in dataUsers) {
-        ANSFBUser *fbUser = [ANSFBUser new];
-        [self fillUser:fbUser fromResult:dataUser];
+        ANSUser *user = [self userFromResult:dataUser];
+        [user save];
         
-        [fbUser save];
-        [mutableUsers addObject:fbUser];
+        [mutableUsers addObject:user];
     }
     
     return [mutableUsers copy];
@@ -115,14 +115,14 @@ static NSString * const kANSPlistName = @"aaa";
 - (void)saveFriends {
     ANSFBFriends *friends = self.model;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *plistPath = [fileManager pathToPlistWithName:@(self.user.ID).stringValue inSearchPathDirectory:NSDocumentDirectory];
+    NSString *plistPath = [fileManager pathToPlistWithName:@(self.user.idNumber).stringValue inSearchPathDirectory:NSDocumentDirectory];
     BOOL isSuccessfully = [NSKeyedArchiver archiveRootObject:friends.objects toFile:plistPath];
     NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
 }
 
 - (id)usersFromFileSystem  {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *plistPath = [fileManager pathToPlistFile:@(self.user.ID).stringValue
+    NSString *plistPath = [fileManager pathToPlistFile:@(self.user.idNumber).stringValue
                                  inSearchPathDirectory:NSDocumentDirectory];
     
     return [NSKeyedUnarchiver unarchiveObjectWithFile:plistPath];

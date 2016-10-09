@@ -10,7 +10,7 @@
 
 #import "ANSFBContext.h"
 
-#import "ANSFBUser.h"
+#import "ANSUser.h"
 #import "ANSGCD.h"
 
 #import "ANSMacros.h"

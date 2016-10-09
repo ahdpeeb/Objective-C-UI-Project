@@ -10,7 +10,7 @@
 
 @class ANSLoginViewController;
 
-@interface ANSFBLoginContext : ANSFBContext
+@interface ANSLoginContext : ANSFBContext
 @property (nonatomic, weak, readonly) ANSLoginViewController *viewController;
 
 - (instancetype)initWithModel:(id)model controller:(ANSLoginViewController *)controller;

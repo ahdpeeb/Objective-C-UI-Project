@@ -14,7 +14,7 @@
 #import "ANSLoginViewController.h"
 
 #import "ANSFriendListViewController.h"
-#import "ANSFBUser.h"
+#import "ANSUser.h"
 #import "ANSChangeModel.h"
 
 #import "NSArray+ANSExtension.h"

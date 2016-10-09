@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ANSFBUser.h"
+#import "ANSUser.h"
 
 #import "ANSJSONRepresentation.h"
 

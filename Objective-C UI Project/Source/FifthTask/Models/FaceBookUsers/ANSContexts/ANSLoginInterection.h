@@ -8,14 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@class ANSFBUser;
+@class ANSUser;
 
 @interface ANSLoginInterection : NSObject
-@property (nonatomic, readonly) ANSFBUser *user;
+@property (nonatomic, readonly) ANSUser *user;
 
-+ (instancetype)interectionWithUser:(ANSFBUser *)user;
++ (instancetype)interectionWithUser:(ANSUser *)user;
 
-- (instancetype)initWithUser:(ANSFBUser *)user;
+- (instancetype)initWithUser:(ANSUser *)user;
 
 - (void)execute;
 

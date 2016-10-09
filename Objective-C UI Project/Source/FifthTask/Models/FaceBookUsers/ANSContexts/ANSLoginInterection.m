@@ -11,10 +11,10 @@
 
 #import "ANSLoginInterection.h"
 
-#import "ANSFBUser.h"
+#import "ANSUser.h"
 
 @interface ANSLoginInterection ()
-@property (nonatomic, strong) ANSFBUser *user;
+@property (nonatomic, strong) ANSUser *user;
 
 @end
 
@@ -23,14 +23,14 @@
 #pragma mark -
 #pragma mark Class methods
 
-+ (instancetype)interectionWithUser:(ANSFBUser *)user {
++ (instancetype)interectionWithUser:(ANSUser *)user {
     return [[self alloc] initWithUser:user];
 }
 
 #pragma mark -
 #pragma mark Initialization and deallocation
 
-- (instancetype)initWithUser:(ANSFBUser *)user {
+- (instancetype)initWithUser:(ANSUser *)user {
     self = [super init];
     self.user = user;
     
@@ -43,9 +43,9 @@
 - (void)execute {
     FBSDKAccessToken *token = [FBSDKAccessToken currentAccessToken];
     if (token) {
-        ANSFBUser *user = self.user;
-        user.ID = (NSUInteger)[token.userID integerValue];
-        user.state = ANSFBUserDidLoadID;
+        ANSUser *user = self.user;
+        user.idNumber = (NSUInteger)[token.userID integerValue];
+        user.state = ANSUserDidLoadID;
     }
 }
 

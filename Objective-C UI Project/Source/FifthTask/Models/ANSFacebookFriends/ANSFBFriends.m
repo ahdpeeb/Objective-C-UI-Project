@@ -10,7 +10,7 @@
 #import "ANSFBFriends.h"
 
 #import "ANSNameFilterModel.h"
-#import "ANSFBUser.h"
+#import "ANSUser.h"
 
 #import "NSArray+ANSExtension.h"
 #import "NSFileManager+ANSExtension.h"

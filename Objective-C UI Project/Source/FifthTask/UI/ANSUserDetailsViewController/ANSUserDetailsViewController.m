@@ -10,7 +10,7 @@
 
 #import "ANSFriendListViewController.h"
 #import "ANSUserDetailsView.h"
-#import "ANSFBUserDetailsContext.h"
+#import "ANSUserDetailsContext.h"
 #import "ANSProtocolObservationController.h"
 
 #import "ANSMacros.h"
@@ -18,7 +18,7 @@
 ANSViewControllerBaseViewProperty(ANSUserDetailsViewController, ANSUserDetailsView, detailsView);
 
 @interface ANSUserDetailsViewController ()
-@property (nonatomic, strong) ANSFBUserDetailsContext *detailsContext;
+@property (nonatomic, strong) ANSUserDetailsContext *detailsContext;
 @property (nonatomic, strong) ANSProtocolObservationController *userController;
 
 - (void)initRightBarButton;
@@ -61,14 +61,14 @@ ANSViewControllerBaseViewProperty(ANSUserDetailsViewController, ANSUserDetailsVi
 #pragma mark -
 #pragma mark Accsessors
 
-- (void)setUser:(ANSFBUser *)user {
+- (void)setUser:(ANSUser *)user {
     if (_user != user) {
         _user = user;
         
         self.userController = [user protocolControllerWithObserver:self];
         
-        ANSFBUserDetailsContext *context = nil;
-        context = [[ANSFBUserDetailsContext alloc] initWithModel:user];
+        ANSUserDetailsContext *context = nil;
+        context = [[ANSUserDetailsContext alloc] initWithModel:user];
         self.detailsContext = context;
         [context execute];
     }
@@ -92,7 +92,7 @@ ANSViewControllerBaseViewProperty(ANSUserDetailsViewController, ANSUserDetailsVi
 #pragma mark -
 #pragma mark ANSUserStateObserver protocol
 
-- (void)userDidLoadDetails:(ANSFBUser *)user {
+- (void)userDidLoadDetails:(ANSUser *)user {
     [self.detailsView fillFullInfoFromUser:user];
     self.detailsView.loadingViewVisible = NO;
 }

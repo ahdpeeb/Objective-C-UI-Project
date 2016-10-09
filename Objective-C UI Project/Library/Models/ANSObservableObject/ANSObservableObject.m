@@ -19,9 +19,6 @@
 @property (nonatomic, weak)   id          target;
 
 - (id)controllerWithClass:(Class)cls observer:(id)observer;
-- (void)notifyOfStateChange:(NSUInteger)state
-                  withBlock:(ANSControllerNotificationBlock)block;
-
 - (void)performBlock:(ANSExecutableBlock)block shouldNotify:(BOOL)shouldNotify;
 
 @end

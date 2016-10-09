@@ -11,10 +11,12 @@
 
 #import "ANSObservableObjectPtotocol.h"
 
+#import "ANSImageModel.h"
+
 @class ANSObservableObject;
 @class ANSUser;
 
-@protocol ANSUserObserver <NSObject> // ANSUserObserverr
+@protocol ANSUserObserver <NSObject>
 
 @optional;
 - (void)userDidLoadID:(ANSUser *)user;
@@ -24,14 +26,14 @@
 
 @end
 
-typedef NS_ENUM(NSUInteger, ANSUserState) { //ANSUserStatee
-    ANSUserUnloaded, //
-    ANSUserDidFailLoading, //
-    ANSUserDidLoadID, //
-    ANSUserDidLoadBasic, //
-    ANSUserDidLoadDetails, //
+typedef NS_ENUM(NSUInteger, ANSUserState) {
+    ANSUserUnloaded,
+    ANSUserDidFailLoading,
+    ANSUserDidLoadID,
+    ANSUserDidLoadBasic,
+    ANSUserDidLoadDetails,
     
-    ANSUserStateCount, //
+    ANSUserStateCount,
 };
 
 @interface ANSUser : NSManagedObject <ANSObservableObjectPtotocol>
@@ -39,6 +41,7 @@ typedef NS_ENUM(NSUInteger, ANSUserState) { //ANSUserStatee
 
 @property (nonatomic, readonly) NSString      *fullName;
 @property (nonatomic, readonly) NSURL         *imageUrl;
+@property (nonatomic, readonly) ANSImageModel *imageModel;
 
 + (instancetype)objectWithID:(NSUInteger)ID;
 

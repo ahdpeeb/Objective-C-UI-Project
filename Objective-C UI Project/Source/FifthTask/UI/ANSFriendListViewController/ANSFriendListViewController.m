@@ -15,9 +15,9 @@
 #import "ANSImageModel.h"
 #import "ANSImageView.h"
 #import "ANSNameFilterModel.h"
-#import "ANSFBUser.h"
+#import "ANSUser.h"
 #import "ANSFBFriends.h"
-#import "ANSFBFriendsContext.h"
+#import "ANSFriendsContext.h"
 #import "ANSUserDetailsViewController.h"
 #import "ANSLoginViewController.h"
 
@@ -44,7 +44,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 @property (nonatomic, strong)   ANSNameFilterModel                *filteredModel;
 @property (nonatomic, strong)   ANSProtocolObservationController  *filterModelController;
 
-@property (nonatomic, strong)   ANSFBFriendsContext               *friendsContext;
+@property (nonatomic, strong)   ANSFriendsContext               *friendsContext;
 @property (nonatomic, readonly) ANSArrayModel                     *presentedModel;;
 
 - (void)resignSearchBar;
@@ -80,12 +80,12 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 #pragma mark -
 #pragma mark Accsessors
 
-- (void)setUser:(ANSFBUser *)user {
+- (void)setUser:(ANSUser *)user {
     if (_user != user) {
         _user = user;
         
         self.friends = [ANSFBFriends new];
-        ANSFBFriendsContext *context = [[ANSFBFriendsContext alloc] initWithModel:self.friends];
+        ANSFriendsContext *context = [[ANSFriendsContext alloc] initWithModel:self.friends];
         self.friendsContext = context;
         context.user = user;
         [context execute];
@@ -122,9 +122,6 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     [super viewDidLoad];
     
     self.navigationItem.title = kANSTitleForHeaderSection;
-
-// if no internet connerion
-//  [self.friendListView.tableView reloadData];
 }
 
 #pragma mark -
@@ -188,7 +185,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 {
     ANSUserCell *cell = [tableView dequeueReusableCellWithClass:[ANSUserCell class]];
     
-    ANSFBUser *user = self.presentedModel[indexPath.row];
+    ANSUser *user = self.presentedModel[indexPath.row];
     [cell fillWithUser:user];
 
     return cell;
