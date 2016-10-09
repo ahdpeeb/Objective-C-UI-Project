@@ -45,8 +45,6 @@ typedef NS_ENUM(NSUInteger, ANSUserState) {
 
 + (instancetype)objectWithID:(NSUInteger)ID;
 
-- (void)fillWithRandom;
-
 @end
 
 #import "ANSUser+CoreDataProperties.h"

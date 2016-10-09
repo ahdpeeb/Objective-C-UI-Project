@@ -37,10 +37,6 @@ static NSString * const kANSPlistName = @"aaa";
 }
 
 #pragma mark -
-#pragma mark Private Methods
-
-
-#pragma mark -
 #pragma mark Private Methods (reloaded)
 
 //- (void)performLoading {

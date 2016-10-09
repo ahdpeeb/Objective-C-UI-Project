@@ -10,7 +10,6 @@
 
 #import "ANSProtocolObservationController.h"
 #import "ANSUser.h"
-#import "ANSFBFriends.h"
 #import "ANSGCD.h"
 #import "ANSChangeModel.h"
 #import "ANSOneIndexModel.h"

@@ -6,9 +6,8 @@
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
 //
 
+#import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
-
-#import "ANSNameFilterModel.h"
 
 @class ANSUser;
 
@@ -17,9 +16,10 @@
     UITableViewDelegate,
     UISearchBarDelegate,
     UINavigationControllerDelegate,
+    NSFetchedResultsControllerDelegate
 
-    ANSArrayModelObserver,
-    ANSNameFilterModelProtocol
+//    ANSArrayModelObserver,
+//    ANSNameFilterModelProtocol
 >
 
 @property (nonatomic, strong) ANSUser *user;

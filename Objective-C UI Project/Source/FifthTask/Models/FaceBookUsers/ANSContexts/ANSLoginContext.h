@@ -9,10 +9,12 @@
 #import "ANSFBContext.h"
 
 @class ANSLoginViewController;
+@class ANSUser;
 
 @interface ANSLoginContext : ANSFBContext
 @property (nonatomic, weak, readonly) ANSLoginViewController *viewController;
 
-- (instancetype)initWithModel:(id)model controller:(ANSLoginViewController *)controller;
+- (instancetype)initWithModel:(ANSUser *)model
+                   controller:(ANSLoginViewController *)controller;
 
 @end

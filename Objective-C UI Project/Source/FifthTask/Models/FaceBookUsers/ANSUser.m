@@ -22,9 +22,8 @@
 
 @synthesize userObservationTarget;
 
-@synthesize fullName;
-@synthesize imageUrl;
-
+@dynamic imageUrl;
+@dynamic fullName;
 @dynamic imageModel;
 
 #pragma mark -
@@ -81,15 +80,6 @@
 
 #pragma mark -
 #pragma mark Public methods
-
-- (void)fillWithRandom {
-    self.idNumber = ANSRandomIntegerWithValues(10000, 99999);
-    self.firstName = [NSString randomStringWithLength:5
-                                             alphabet:[NSString alphanumericAlphabet]];
-    
-    self.firstName = [NSString randomStringWithLength:5
-                                             alphabet:[NSString alphanumericAlphabet]];
-}
 
 + (instancetype)objectWithID:(NSUInteger)ID {
     ANSUser *object = [self objectWithPredicate:[NSPredicate predicateWithFormat:@"idNumber = %ld", ID]];

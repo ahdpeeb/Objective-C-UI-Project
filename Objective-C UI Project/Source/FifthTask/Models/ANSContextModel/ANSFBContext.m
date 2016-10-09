@@ -16,7 +16,7 @@
 #import "ANSMacros.h"
 
 @interface ANSFBContext ()
-@property (nonatomic, strong) id                          model;
+@property (nonatomic, strong) ANSUser                     *model;
 @property (nonatomic, strong) FBSDKGraphRequestConnection *requestConnection;
 
 - (void)executeRequest;

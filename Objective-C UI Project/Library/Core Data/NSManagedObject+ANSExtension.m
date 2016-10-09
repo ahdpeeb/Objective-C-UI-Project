@@ -36,6 +36,19 @@
     return [NSFetchRequest fetchRequestWithEntityName:name];
 }
 
++ (NSFetchRequest *)fetchRequesWithSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
+                                         predicate:(NSPredicate *)predicate
+                                        batchCount:(NSUInteger)count
+{
+    NSFetchRequest *reques = [self fetchRequest];
+
+    reques.sortDescriptors = sortDescriptors;
+    reques.predicate = predicate;
+    reques.fetchBatchSize = count;
+    
+    return reques;
+}
+
 + (instancetype)objectWithPredicate:(NSPredicate *)predicate {
    return [[self objectsWithPredicate:predicate] firstObject];
 }
@@ -58,11 +71,9 @@
                              batchCount:(NSUInteger)count
 {
    
-    NSFetchRequest *reques = [self fetchRequest];
-    
-    reques.sortDescriptors = sortDescriptors;
-    reques.predicate = predicate;
-    reques.fetchBatchSize = count;
+    NSFetchRequest *reques = [self fetchRequesWithSortDescriptors:sortDescriptors
+                                                        predicate:predicate
+                                                       batchCount:count];
     
     NSError *executeError = nil;
     NSArray *objects = [[self context] executeFetchRequest:reques error:&executeError];

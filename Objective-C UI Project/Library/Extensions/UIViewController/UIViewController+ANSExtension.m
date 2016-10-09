@@ -11,11 +11,15 @@
 @implementation UIViewController (ANSExtension)
 
 + (id)viewController {
-    return [[self alloc] initWithNibName:[self nibName] bundle:nil];
+    @synchronized (self) {
+        return [[self alloc] initWithNibName:[self nibName] bundle:nil];
+    }
 }
 
 + (NSString *)nibName {
-    return NSStringFromClass([self class]);
+    @synchronized (self) {
+          return NSStringFromClass([self class]);
+    }
 }
 
 @end

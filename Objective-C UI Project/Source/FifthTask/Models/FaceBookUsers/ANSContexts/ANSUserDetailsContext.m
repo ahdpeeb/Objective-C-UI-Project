@@ -18,7 +18,7 @@
 #pragma mark Private Methods (reloaded);
 
 - (NSString *)graphPath; {
-    return [NSString stringWithFormat:@"%lld", ((ANSUser *)self.model).idNumber];
+    return [NSString stringWithFormat:@"%lld", self.model.idNumber];
 }
 
 - (NSString *)HTTPMethod {

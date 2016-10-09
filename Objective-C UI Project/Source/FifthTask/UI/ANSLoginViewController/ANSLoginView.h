@@ -10,6 +10,5 @@
 
 @interface ANSLoginView : ANSRootView
 @property (nonatomic, strong) IBOutlet UIButton *loginButton;
-@property (nonatomic, strong) IBOutlet UIButton *coreDataTest;
 
 @end

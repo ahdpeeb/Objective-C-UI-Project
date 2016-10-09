@@ -14,7 +14,6 @@
 
 #import "ANSLoginView.h"
 #import "ANSUser.h"
-#import "ANSFBFriends.h"
 #import "ANSFriendListViewController.h"
 #import "ANSLoginContext.h"
 #import "ANSProtocolObservationController.h"
@@ -79,15 +78,6 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
     [self.loginContext execute];
 }
 
-//test Button
-- (IBAction)onCoreDataTest:(UIButton *)sender {
-    for (NSUInteger index = 0; index < 100; index ++) {
-        ANSUser *user = [ANSUser object];
-        self.user = user;
-        [user fillWithRandom];
-    }
-}
-
 #pragma mark -
 #pragma mark ANSUserObserver ptotocol
 
@@ -95,15 +85,6 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
     ANSFriendListViewController *controller = [ANSFriendListViewController viewController];
     controller.user = user;
     [self.navigationController pushViewController:controller animated:YES];
-}
-- (void)userDidLoadBasic:(ANSUser *)user {
-     NSLog(@"userDidLoadBasic");
-}
-- (void)userDidLoadDetails:(ANSUser *)user {
-     NSLog(@"userDidLoadDetails");
-}
-- (void)userDidFailLoading:(ANSUser *)user {
-     NSLog(@"userDidFailLoading");
 }
 
 @end

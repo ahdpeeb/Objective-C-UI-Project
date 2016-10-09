@@ -11,12 +11,9 @@
 
 #import "ANSFriendListView.h"
 #import "ANSUserCell.h"
-#import "ANSTableViewCell.h"
 #import "ANSImageModel.h"
 #import "ANSImageView.h"
-#import "ANSNameFilterModel.h"
 #import "ANSUser.h"
-#import "ANSFBFriends.h"
 #import "ANSFriendsContext.h"
 #import "ANSUserDetailsViewController.h"
 #import "ANSLoginViewController.h"
@@ -28,24 +25,16 @@
 #import "ANSChangeModel+UITableView.h"
 #import "UIViewController+ANSExtension.h"
 #import "ANSLoadingView.h"
+#import "ANSCoreDataManager.h"
 
 #import "ANSMacros.h"
 #import "ANSGCD.h"
 
-static          NSString * const kANSTitleForHeaderSection   = @"User's friends";
-static const    NSUInteger kANSSectionsCount                 = 1;
-
 ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView, friendListView);
 
 @interface ANSFriendListViewController ()
-@property (nonatomic, strong)   ANSFBFriends                      *friends;
-@property (nonatomic, strong)   ANSProtocolObservationController  *usersController;
-
-@property (nonatomic, strong)   ANSNameFilterModel                *filteredModel;
-@property (nonatomic, strong)   ANSProtocolObservationController  *filterModelController;
-
-@property (nonatomic, strong)   ANSFriendsContext               *friendsContext;
-@property (nonatomic, readonly) ANSArrayModel                     *presentedModel;;
+@property (nonatomic, strong)     ANSFriendsContext                 *friendsContext;
+@property (nonatomic, strong)     NSFetchedResultsController        *resultsController;
 
 - (void)resignSearchBar;
 - (void)initFilterInfrastructure;
@@ -56,8 +45,6 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 @end
 
 @implementation ANSFriendListViewController;
-
-@dynamic presentedModel;
 
 #pragma mark -
 #pragma Initialization and deallocation
@@ -73,59 +60,69 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     [self initLeftBarButton];
    
-    
     return self; 
 }
 
 #pragma mark -
 #pragma mark Accsessors
 
+- (void)setResultsController:(NSFetchedResultsController *)resultsController {
+    if (_resultsController != resultsController) {
+        _resultsController = resultsController;
+        
+        NSError *error = nil;
+        if ([_resultsController performFetch:&error]) {
+            NSLog(@"%@", [error localizedDescription]);
+            abort();
+        }
+    }
+}
+
 - (void)setUser:(ANSUser *)user {
     if (_user != user) {
         _user = user;
         
-        self.friends = [ANSFBFriends new];
-        ANSFriendsContext *context = [[ANSFriendsContext alloc] initWithModel:self.friends];
+        ANSFriendsContext *context = [[ANSFriendsContext alloc] initWithModel:user];
         self.friendsContext = context;
-        context.user = user;
         [context execute];
-    }
-}
-
-- (void)setFriends:(ANSFBFriends *)friends {
-    if (_friends != friends) {
-        _friends = friends;
         
-        self.usersController = [friends protocolControllerWithObserver:self];
-        [self initFilterInfrastructure];
+ //       [self.resultsController]
     }
 }
 
-- (void)setFilteredModel:(ANSNameFilterModel *)filteredModel {
-    if (_filteredModel != filteredModel) {
-        _filteredModel = filteredModel;
-        
-        self.filterModelController = [filteredModel protocolControllerWithObserver:self];
-    }
-}
+//- (void)setFilteredModel:(ANSNameFilterModel *)filteredModel {
+//    if (_filteredModel != filteredModel) {
+//        _filteredModel = filteredModel;
+//        
+//        self.filterModelController = [filteredModel protocolControllerWithObserver:self];
+//    }
+//}
 
-- (ANSArrayModel *)presentedModel {
-    BOOL isFirstResponder = self.friendListView.searchBar.isFirstResponder;
-    
-    return isFirstResponder ? self.filteredModel : self.friends;
-}
+//- (ANSArrayModel *)presentedModel {
+//    BOOL isFirstResponder = self.friendListView.searchBar.isFirstResponder;
+//    
+//    return isFirstResponder ? self.filteredModel : self.friends;
+//}
 
 #pragma mark -
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.navigationItem.title = kANSTitleForHeaderSection;
 }
 
 #pragma mark -
 #pragma mark Private methods
+
+- (NSFetchedResultsController *)controllerWithRequest:(NSFetchRequest *)reques
+                                   sectionNameKeyPath:(NSString *)keyPath
+{
+    NSManagedObjectContext *context = [[ANSCoreDataManager sharedManager] managedObjectContext];
+    return [[NSFetchedResultsController alloc] initWithFetchRequest:reques
+                                               managedObjectContext:context
+                                                 sectionNameKeyPath:keyPath
+                                                          cacheName:nil];
+}
 
 - (void)resignSearchBar {
     UISearchBar *searchBar = self.friendListView.searchBar;
@@ -134,12 +131,12 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     }
 }
 
-- (void)initFilterInfrastructure {
-    ANSFBFriends *friends = self.friends;
-    ANSNameFilterModel *nameFilterModel = [[ANSNameFilterModel alloc]
-                                           initWithObservableModel:friends];
-    self.filteredModel = nameFilterModel;
-}
+//- (void)initFilterInfrastructure {
+//    ANSFBFriends *friends = self.friends;
+//    ANSNameFilterModel *nameFilterModel = [[ANSNameFilterModel alloc]
+//                                           initWithObservableModel:friends];
+//    self.filteredModel = nameFilterModel;
+//}
 
 #pragma mark -
 #pragma mark BarButtonItems
@@ -164,29 +161,23 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 #pragma mark -
 #pragma mark UITableViewDataSource protocol
 
-- (nullable NSString *)tableView:(UITableView *)tableView
-         titleForHeaderInSection:(NSInteger)section
-{
-    return section ? nil : kANSTitleForHeaderSection;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//    return kANSSectionsCount;
+//}
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return kANSSectionsCount;
-}
-
-- (NSInteger)   tableView:(UITableView *)tableView
-    numberOfRowsInSection:(NSInteger)section
-{
-    return self.presentedModel.count;
-}
+//- (NSInteger)   tableView:(UITableView *)tableView
+//    numberOfRowsInSection:(NSInteger)section
+//{
+//    return self.presentedModel.count;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ANSUserCell *cell = [tableView dequeueReusableCellWithClass:[ANSUserCell class]];
     
-    ANSUser *user = self.presentedModel[indexPath.row];
-    [cell fillWithUser:user];
+//    ANSUser *user = self.presentedModel[indexPath.row];
+//    [cell fillWithUser:user];
 
     return cell;
 }
@@ -199,7 +190,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     
     ANSUserDetailsViewController *controller = nil;
     controller = [ANSUserDetailsViewController viewController];
-    controller.user = self.friends[indexPath.row];
+//    controller.user = self.friends[indexPath.row];
     
     [self.navigationController pushViewController:controller
                                          animated:YES];
@@ -220,25 +211,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [self.filteredModel filterByfilterString:searchText];
-}
-
-#pragma mark -
-#pragma mark ANSCollectionObserver protocol
-
-- (void)    arrayModel:(ANSArrayModel *)arrayModel
-    didChangeWithModel:(ANSChangeModel *)model
-{
-    ANSPerformInMainQueue(dispatch_async, ^{
-        UITableView *table = self.friendListView.tableView;
-        
-        if ([arrayModel isMemberOfClass:[ANSFBFriends class]]) {
-            [model applyToTableView:table];
-            NSLog(@"%@ notified collectionDidUpdate, - %lu object", arrayModel, (unsigned long)arrayModel.count);
-        } else {
-            NSLog(@"%@ notified collectionDidUpdate, - %lu object", arrayModel, (unsigned long)arrayModel.count);
-        }
-    });
+//    [self.filteredModel filterByfilterString:searchText];
 }
 
 #pragma mark -
@@ -258,11 +231,14 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     });
 }
  
-- (void)nameFilterModelDidFilter:(ANSNameFilterModel *)model {
-    ANSPerformInMainQueue(dispatch_async, ^{
-        NSLog(@"notified didFilterWithUserInfo - %@ ", model);
-        [self.friendListView.tableView reloadData];
-    });
-}
+//- (void)nameFilterModelDidFilter:(ANSNameFilterModel *)model {
+//    ANSPerformInMainQueue(dispatch_async, ^{
+//        NSLog(@"notified didFilterWithUserInfo - %@ ", model);
+//        [self.friendListView.tableView reloadData];
+//    });
+//}
+
+#pragma mark -
+#pragma mark NSFetchedResultsControllerDelegate protocol
 
 @end

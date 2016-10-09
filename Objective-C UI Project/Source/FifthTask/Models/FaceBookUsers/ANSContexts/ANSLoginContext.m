@@ -38,7 +38,7 @@
     ANSUser *user = self.model;
     ANSLoginInterection *interection = [ANSLoginInterection interectionWithUser:user];
     FBSDKLoginManager *manager = [FBSDKLoginManager new];
-    [manager logInWithReadPermissions:@[kANSPublicProfile, kANSUserFriends, kANSEmail]
+    [manager logInWithReadPermissions:@[kANSPublicProfile, kANSUserFriends]
                    fromViewController:self.viewController
                               handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
                                   if (!error && !result.isCancelled) {

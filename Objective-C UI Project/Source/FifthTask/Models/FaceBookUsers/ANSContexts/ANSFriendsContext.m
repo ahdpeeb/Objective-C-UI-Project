@@ -9,18 +9,15 @@
 #import "ANSFriendsContext.h"
 
 #import "ANSUser.h"
-#import "ANSFBFriends.h"
 #import "ANSFBConstatns.h"
 
 #import "NSDictionary+ANSJSONRepresentation.h"
 #import "NSFileManager+ANSExtension.h"
 #import "NSManagedObject+ANSExtension.h"
 
-static NSString * const kANSPlistName = @"aaa";
-
 @interface ANSFriendsContext ()
 - (ANSUser *)userFromResult:(NSDictionary *)result;
-- (NSArray *)friendsFromResult:(NSDictionary <ANSJSONRepresentation> *)result;
+- (NSSet *)friendsFromResult:(NSDictionary <ANSJSONRepresentation> *)result;
 
 @end
 
@@ -30,7 +27,7 @@ static NSString * const kANSPlistName = @"aaa";
 #pragma mark Private Methods (reloaded)
 
 - (NSString *)graphPath {
-    return [NSString stringWithFormat:@"%lld/%@",self.user.idNumber, kANSFriends];
+    return [NSString stringWithFormat:@"%lld/%@",self.model.idNumber, kANSFriends];
 }
 
 - (NSString *)HTTPMethod {
@@ -45,11 +42,12 @@ static NSString * const kANSPlistName = @"aaa";
 }
 
 - (BOOL)isModelLoadedWithState:(NSUInteger)state {
-    ANSObservableObject *model = self.model;
-    if (model.state == ANSLoadableModelDidLoad) {
-        [model notifyOfStateChange:ANSLoadableModelDidLoad];
-        
-        return YES;
+    ANSUser *user = self.model;
+    if (user.state == state) {
+        //HAVE TO BE Changed
+//      [user notifyOfStateChange:state];
+
+//        return YES;
     }
     
     return NO;
@@ -60,24 +58,9 @@ static NSString * const kANSPlistName = @"aaa";
 }
 
 - (void)fillModelFromResult:(NSDictionary <ANSJSONRepresentation> *)result; {
-    ANSFBFriends *fbFriends = self.model;
-    [fbFriends performBlockWithoutNotification:^{
-        NSArray *friends = [self friendsFromResult:result];
-        [fbFriends addObjectsInRange:friends];
-    }];
-    
-    [self saveFriends];
-    fbFriends.state = ANSLoadableModelDidLoad;
-}
-
-- (void)loadFromCache {
-    ANSFBFriends *friends = self.model;
-    NSArray *users = [self usersFromFileSystem];
-    [friends performBlockWithoutNotification:^{
-        [friends addObjectsInRange:users];
-    }];
-    
-    friends.state = users ?  ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
+    ANSUser *user = self.model;
+    [user addFriends:[self friendsFromResult:result]];
+    NSLog(@"%lu", user.friends.count);
 }
 
 #pragma mark -
@@ -92,13 +75,14 @@ static NSString * const kANSPlistName = @"aaa";
     NSDictionary * dataPicture = result[kANSPicture][kANSData] ;
     user.imageURL = dataPicture[kANSURL];
     
+    [user save];
     user.state = ANSUserDidLoadBasic;
     
     return user;
 }
 
-- (NSArray *)friendsFromResult:(NSDictionary <ANSJSONRepresentation> *)result {
-    NSMutableArray *mutableUsers = [NSMutableArray new];
+- (NSSet *)friendsFromResult:(NSDictionary <ANSJSONRepresentation> *)result {
+    NSMutableSet *mutableUsers = [NSMutableSet new];
     NSDictionary *parsedResult = [result JSONRepresentation];
     
     NSArray *dataUsers = parsedResult[kANSData];
@@ -110,22 +94,6 @@ static NSString * const kANSPlistName = @"aaa";
     }
     
     return [mutableUsers copy];
-}
-
-- (void)saveFriends {
-    ANSFBFriends *friends = self.model;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *plistPath = [fileManager pathToPlistWithName:@(self.user.idNumber).stringValue inSearchPathDirectory:NSDocumentDirectory];
-    BOOL isSuccessfully = [NSKeyedArchiver archiveRootObject:friends.objects toFile:plistPath];
-    NSLog(@"%@", (isSuccessfully) ? @"saved successfully" : @"save failed");
-}
-
-- (id)usersFromFileSystem  {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *plistPath = [fileManager pathToPlistFile:@(self.user.idNumber).stringValue
-                                 inSearchPathDirectory:NSDocumentDirectory];
-    
-    return [NSKeyedUnarchiver unarchiveObjectWithFile:plistPath];
 }
 
 @end

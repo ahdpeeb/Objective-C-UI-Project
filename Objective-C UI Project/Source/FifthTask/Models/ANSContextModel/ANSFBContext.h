@@ -13,9 +13,9 @@
 #import "ANSJSONRepresentation.h"
 
 @interface ANSFBContext : NSObject
-@property (nonatomic, readonly) id model;
+@property (nonatomic, readonly) ANSUser *model;
 
-- (instancetype)initWithModel:(id)model;
+- (instancetype)initWithModel:(ANSUser *)model;
 
 - (void)execute;
 - (void)cancel;

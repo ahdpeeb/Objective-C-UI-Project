@@ -6,11 +6,12 @@
         <attribute name="idNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="friends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ANSUser" inverseName="friends" inverseEntity="ANSUser" syncable="YES"/>
         <fetchedProperty name="fullName" optional="YES" syncable="YES">
             <fetchRequest name="fetchedPropertyFetchRequest" entity="ANSUser"/>
         </fetchedProperty>
     </entity>
     <elements>
-        <element name="ANSUser" positionX="-45" positionY="0" width="128" height="146"/>
+        <element name="ANSUser" positionX="-45" positionY="0" width="128" height="161"/>
     </elements>
 </model>

@@ -22,6 +22,10 @@
 
 + (NSFetchRequest *)fetchReques;
 
++ (NSFetchRequest *)fetchRequesWithSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
+                                         predicate:(NSPredicate *)predicate
+                                        batchCount:(NSUInteger)count;
+
 // returns all objects from dataBase
 + (NSArray *)objects;
 

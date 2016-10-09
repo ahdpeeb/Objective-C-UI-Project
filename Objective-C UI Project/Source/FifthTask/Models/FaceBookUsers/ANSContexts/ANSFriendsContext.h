@@ -11,7 +11,6 @@
 @class ANSUser;
 
 @interface ANSFriendsContext : ANSFBContext
-@property (nonatomic, strong) ANSUser *user;
 
 //method for subclasses
 - (ANSUser *)userFromResult:(NSDictionary *)result;
