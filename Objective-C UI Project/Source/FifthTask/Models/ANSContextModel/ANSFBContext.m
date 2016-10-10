@@ -17,7 +17,7 @@
 
 @interface ANSFBContext ()
 @property (nonatomic, strong) ANSUser                     *model;
-@property (atomic, strong) FBSDKGraphRequestConnection *requestConnection;
+@property (nonatomic, strong) FBSDKGraphRequestConnection *requestConnection;
 
 - (void)executeRequest;
 

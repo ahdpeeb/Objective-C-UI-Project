@@ -29,10 +29,10 @@
 #pragma mark -
 #pragma mark Life Time
 
-    //inserted from dataBase
+    //teken from dataBase
 - (void)awakeFromFetch {
     [super awakeFromFetch];
-    
+    self.userObservationTarget = [[ANSObservableObject alloc] initWithTarget:self];
 }
     //create from MOC
 - (void)awakeFromInsert {
@@ -59,7 +59,10 @@
 #pragma mark Private Methods
 
 - (id)forwardingTargetForSelector:(SEL)aSelector {
-    return self.userObservationTarget;
+    @synchronized (self) {
+        NSLog(@"to %@ sent %@ ",self.userObservationTarget, NSStringFromSelector(aSelector));
+        return self.userObservationTarget;
+    }
 }
 
 - (SEL)selectorForState:(NSUInteger)state {
@@ -82,13 +85,15 @@
 #pragma mark Public methods
 
 + (instancetype)objectWithID:(NSUInteger)ID {
-    ANSUser *object = [self objectWithPredicate:[NSPredicate predicateWithFormat:@"idNumber = %ld", ID]];
-    if (!object) {
-        object = [self object];
-        object.idNumber = ID;
+    @synchronized (self) {
+        ANSUser *object = [self objectWithPredicate:[NSPredicate predicateWithFormat:@"idNumber = %ld", ID]];
+        if (!object) {
+            object = [self object];
+            object.idNumber = ID;
+        }
+        
+        return object;
     }
-    
-    return object;
 }
 
 @end

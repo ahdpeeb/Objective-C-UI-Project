@@ -45,6 +45,7 @@
     if (token) {
         ANSUser *user = self.user;
         user.idNumber = (NSUInteger)[token.userID integerValue];
+   //      user.state = ANSUserDidLoadID; //пиздец с энумерирыванием HashTable ???
     }
 }
 

@@ -41,6 +41,7 @@
 //save MO to dataBase
 //MO must be inserted to sharedManager MOC and configureted before saving
 - (BOOL)save;
+
 //refresh objects and merge changes
 - (void)refresh;
 

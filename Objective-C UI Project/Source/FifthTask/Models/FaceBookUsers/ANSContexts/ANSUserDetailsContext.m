@@ -41,11 +41,16 @@
    return [super isModelLoadedWithState:ANSUserDidLoadDetails];
 }
 
+- (void)fillModelFromResult:(NSDictionary <ANSJSONRepresentation> *)result {
+    [self userFromResult:result];
+}
+
 - (ANSUser *)userFromResult:(NSDictionary *)result {
-    ANSUser *user = [super userFromResult:result];
+    ANSUser *user = self.model;
     user.gender = result[kANSGender];
    
-    [user save];
+    [user refresh];
+    NSLog(@"bla bla lba"); 
     user.state = ANSUserDidLoadDetails;
     
     return user;

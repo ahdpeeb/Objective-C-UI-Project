@@ -11,9 +11,11 @@
 #import "ANSFriendListViewController.h"
 #import "ANSUserDetailsView.h"
 #import "ANSUserDetailsContext.h"
+
 #import "ANSProtocolObservationController.h"
 
 #import "ANSMacros.h"
+#import "ANSGCD.h"
 
 ANSViewControllerBaseViewProperty(ANSUserDetailsViewController, ANSUserDetailsView, detailsView);
 
@@ -90,11 +92,12 @@ ANSViewControllerBaseViewProperty(ANSUserDetailsViewController, ANSUserDetailsVi
 }
 
 #pragma mark -
-#pragma mark ANSUserStateObserver protocol
+#pragma mark ANSUserObserver protocol
 
 - (void)userDidLoadDetails:(ANSUser *)user {
-    [self.detailsView fillFullInfoFromUser:user];
-    self.detailsView.loadingViewVisible = NO;
+    ANSPerformInMainQueue(dispatch_async, ^{
+        [self.detailsView fillFullInfoFromUser:user];
+    });
 }
 
 @end

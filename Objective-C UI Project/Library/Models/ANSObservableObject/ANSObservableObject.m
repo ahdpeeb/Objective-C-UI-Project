@@ -109,7 +109,6 @@
         if (self.shouldNotify) {
             for (ANSObservationController *controller in self.controllerHashTable) {
                 [controller notifyOfStateChange:state withUserInfo:UserInfo];
-                NSLog(@"начало выполнения");
             }
         }
     }

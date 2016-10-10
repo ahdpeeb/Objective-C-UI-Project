@@ -39,9 +39,6 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 @property (nonatomic, strong) ANSFriendsContext                 *friendsContext;
 @property (nonatomic, strong) NSFetchedResultsController        *resultsController;
 
-//- (void)resignSearchBar;
-//- (void)initFilterInfrastructure;
-
 - (void)leftBarButtonAction:(UIBarButtonItem *)sender;
 - (void)initLeftBarButton;
 
@@ -135,14 +132,18 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     return [[NSFetchedResultsController alloc] initWithFetchRequest:reques
                                                managedObjectContext:context
                                                  sectionNameKeyPath:keyPath
-                                                          cacheName:nil];
+                                                          cacheName:@"Master"];
 }
 
 - (void)initResultsController {
     NSSortDescriptor *descriptor = nil;
     descriptor = [NSSortDescriptor sortDescriptorWithKey:@"idNumber" ascending:YES];
+    
+    NSPredicate *predicate = nil;
+    predicate = [NSPredicate predicateWithFormat:@"friends contains %@", self.user];
+    
     NSFetchRequest *reques = [ANSUser fetchRequesWithSortDescriptors:@[descriptor]
-                                                           predicate:nil
+                                                           predicate:predicate
                                                           batchCount:10];
     
     self.resultsController = [self controllerWithRequest:reques
@@ -155,13 +156,6 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
         [self searchBarCancelButtonClicked:searchBar];
     }
 }
-
-//- (void)initFilterInfrastructure {
-//    ANSFBFriends *friends = self.friends;
-//    ANSNameFilterModel *nameFilterModel = [[ANSNameFilterModel alloc]
-//                                           initWithObservableModel:friends];
-//    self.filteredModel = nameFilterModel;
-//}
 
 #pragma mark -
 #pragma mark BarButtonItems
@@ -218,8 +212,9 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     
     ANSUserDetailsViewController *controller = nil;
     controller = [ANSUserDetailsViewController viewController];
-//    controller.user = self.friends[indexPath.row];
+    ANSUser *user = [self.resultsController objectAtIndexPath:indexPath];
     
+    controller.user = user;
     [self.navigationController pushViewController:controller
                                          animated:YES];
 }
@@ -241,14 +236,6 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
 //    [self.filteredModel filterByfilterString:searchText];
 }
-
-
-//- (void)nameFilterModelDidFilter:(ANSNameFilterModel *)model {
-//    ANSPerformInMainQueue(dispatch_async, ^{
-//        NSLog(@"notified didFilterWithUserInfo - %@ ", model);
-//        [self.friendListView.tableView reloadData];
-//    });
-//}
 
 #pragma mark -
 #pragma mark NSFetchedResultsControllerDelegate protocol

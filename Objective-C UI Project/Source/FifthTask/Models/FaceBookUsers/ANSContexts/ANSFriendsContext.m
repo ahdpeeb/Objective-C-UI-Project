@@ -60,7 +60,7 @@
     return [self isModelLoadedWithState:ANSUserDidLoadID];
 }
 
-- (void)fillModelFromResult:(NSDictionary <ANSJSONRepresentation> *)result; {
+- (void)fillModelFromResult:(NSDictionary <ANSJSONRepresentation> *)result {
     ANSUser *user = self.model;
     [user addFriends:[self friendsFromResult:result]];
     

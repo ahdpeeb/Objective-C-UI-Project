@@ -19,10 +19,11 @@
 @protocol ANSUserObserver <NSObject>
 
 @optional;
+
+- (void)userDidFailLoading:(ANSUser *)user;
 - (void)userDidLoadID:(ANSUser *)user;
 - (void)userDidLoadFriends:(ANSUser *)user;
 - (void)userDidLoadDetails:(ANSUser *)user;
-- (void)userDidFailLoading:(ANSUser *)user;
 
 @end
 
