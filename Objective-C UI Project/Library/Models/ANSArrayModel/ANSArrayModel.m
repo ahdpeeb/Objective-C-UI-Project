@@ -35,10 +35,6 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 #pragma mark -
 #pragma mark Initialization and deallocation
 
-- (void)dealloc {
-    NSLog(@"collection model deallocated");
-}
-
 - (instancetype)init {
     self = [super init];
     self.mutableObjects = [NSMutableArray new];

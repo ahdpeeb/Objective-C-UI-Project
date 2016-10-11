@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface _ANSMasterViewController : UIViewController
+@interface ANSMasterViewController : UIViewController
 
 @end

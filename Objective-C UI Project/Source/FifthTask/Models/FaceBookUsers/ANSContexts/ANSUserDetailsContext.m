@@ -50,7 +50,6 @@
     user.gender = result[kANSGender];
    
     [user refresh];
-    NSLog(@"bla bla lba"); 
     user.state = ANSUserDidLoadDetails;
     
     return user;

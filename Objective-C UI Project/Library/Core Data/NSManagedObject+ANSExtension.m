@@ -37,11 +37,6 @@
                                          inManagedObjectContext:[self context]];
 }
 
-+ (NSFetchRequest *)request {
-    NSString *name = NSStringFromClass([self class]);
-    return [NSFetchRequest fetchRequestWithEntityName:name];
-}
-
 + (NSFetchRequest *)fetchRequestWithSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
                                          predicate:(NSPredicate *)predicate
                                         batchCount:(NSUInteger)count
@@ -91,14 +86,13 @@
 }
 
 - (BOOL)save {
-    NSError *saveArror = nil;
-    if (![[self context] save:&saveArror]) {
-        NSLog(@"%@", [saveArror localizedDescription]);
-        return NO;
+    NSError *saveError = nil;
+    if (![[self context] save:&saveError]) {
+        NSLog(@"%@", [saveError localizedDescription]);
     }
     
-    return YES;
-}
+    return !saveError;
+}  
 
 - (void)refresh {
     [[self context] refreshObject:self mergeChanges:YES];
