@@ -68,7 +68,6 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
     self.user = [ANSUser object];
     ANSLoginInterection *interection = [ANSLoginInterection interectionWithUser:self.user];
     [interection execute];
-    [self userDidLoadID:self.user];
 }
 
 #pragma mark -
@@ -83,10 +82,10 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 #pragma mark -
 #pragma mark ANSUserObserver ptotocol
 
-- (void)userDidLoadID:(ANSUser *)user {    
-    ANSFriendListViewController *controller = [ANSFriendListViewController viewController];
-    controller.user = user;
+- (void)userDidLoadID:(ANSUser *)user {
     ANSPerformInMainQueue(dispatch_async, ^{
+        ANSFriendListViewController *controller = [ANSFriendListViewController viewController];
+        controller.user = user;
         [self.navigationController pushViewController:controller animated:YES];
     }); 
 }

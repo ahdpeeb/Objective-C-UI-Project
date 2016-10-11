@@ -30,7 +30,11 @@
 #pragma mark -
 #pragma mark Initialization and deallocation
 
-- (instancetype)initWithTarget:(id)target  {
+- (instancetype)init {
+    return [self initWithTarget:nil];
+}
+
+- (instancetype)initWithTarget:(id <ANSObservableObject>)target  {
     @synchronized (self) {
         self = [super init];
         self.controllerHashTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
@@ -40,10 +44,6 @@
         
         return self;
     }
-}
-
-- (instancetype)init {
-    return [self initWithTarget:nil];
 }
 
 #pragma mark -
@@ -61,20 +61,13 @@
 
 - (void)setState:(NSUInteger)state {
     @synchronized(self) {
-        id target = self.target;
-        [self setState:state withUserInfo:target ? target : self];
+        [self setState:state withUserInfo:nil];
     }
 }
 
 - (NSUInteger)state {
     @synchronized(self) {
         return _state;
-    }
-}
-
-- (id)target {
-    @synchronized (self) {
-        return _target ? _target : self;
     }
 }
 

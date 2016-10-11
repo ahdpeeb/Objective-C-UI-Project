@@ -37,7 +37,7 @@ typedef NS_ENUM(NSUInteger, ANSUserState) {
     ANSUserStateCount,
 };
 
-@interface ANSUser : NSManagedObject <ANSObservableObjectPtotocol>
+@interface ANSUser : NSManagedObject <ANSObservableObject>
 @property (nonatomic, readonly) ANSObservableObject *userObservationTarget;
 
 @property (nonatomic, readonly) NSString      *fullName;

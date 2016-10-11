@@ -24,7 +24,7 @@
 #pragma mark Private Methods
 
 - (void)notifyOfStateChange:(NSUInteger)state withUserInfo:(id)userInfo {
-    [self notifyObserversWithSelector:[[self.observableObject target] selectorForState:state]
+    [self notifyObserversWithSelector:[self.observableObject.target selectorForState:state]
                                object:userInfo];
 }
 
@@ -35,12 +35,12 @@
 - (void)notifyObserversWithSelector:(SEL)selector object:(id)object {
     id observer = self.observer;
     if ([observer respondsToSelector:selector]) {
-        [observer performSelector:selector withObject:[self.observableObject target] withObject:object];
+        [observer performSelector:selector withObject:self.observableObject.target withObject:object];
     }
 }
 
 - (void)notifyObserversWithSelector:(SEL)selector {
-    [self notifyObserversWithSelector:selector object:self.observableObject];
+    [self notifyObserversWithSelector:selector object:nil];
 }
 
 @end

@@ -11,8 +11,8 @@
 #import "ANSObservableObject.h"
 
 @interface ANSObservationController : NSObject
-@property (nonatomic, weak, readonly) id      observer;
-@property (nonatomic, weak, readonly) id      observableObject;
+@property (nonatomic, weak, readonly) id                           observer;
+@property (nonatomic, weak, readonly) id <ANSObservableObject>     observableObject;
 @property (nonatomic, readonly, getter=isValid) BOOL    valid;
 
 + (instancetype)controllerWithObserver:(id)observer

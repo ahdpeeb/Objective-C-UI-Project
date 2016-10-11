@@ -14,9 +14,8 @@
 @class ANSProtocolObservationController;
 @class ANSBlockObservationController;
 
-@interface ANSObservableObject : NSObject <NSCopying, ANSObservableObjectPtotocol>
-@property (atomic, assign)                       NSUInteger state;
+@interface ANSObservableObject : NSObject <NSCopying, ANSObservableObject>
 
-- (instancetype)initWithTarget:(id)target NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTarget:(id <ANSObservableObject>)target NS_DESIGNATED_INITIALIZER;
 
 @end

@@ -27,18 +27,27 @@
 @dynamic imageModel;
 
 #pragma mark -
-#pragma mark Life Time
+#pragma mark Initialization and deallocation
 
-    //teken from dataBase
-- (void)awakeFromFetch {
-    [super awakeFromFetch];
+- (NSManagedObject *)initWithEntity:(NSEntityDescription *)entity
+     insertIntoManagedObjectContext:( NSManagedObjectContext *)context
+{
+    self = [super initWithEntity:entity insertIntoManagedObjectContext:context];
     self.userObservationTarget = [[ANSObservableObject alloc] initWithTarget:self];
+    
+    return self;
 }
-    //create from MOC
-- (void)awakeFromInsert {
-    [super awakeFromInsert];
-    self.userObservationTarget = [[ANSObservableObject alloc] initWithTarget:self];
-}
+
+//    //teken from dataBase
+//- (void)awakeFromFetch {
+//    [super awakeFromFetch];
+//    
+//}
+//    //create from MOC
+//- (void)awakeFromInsert {
+//    [super awakeFromInsert];
+//    self.userObservationTarget = [[ANSObservableObject alloc] initWithTarget:self];
+//}
 
 #pragma mark -
 #pragma mark Accsessors 

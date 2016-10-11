@@ -36,12 +36,12 @@ void ANSPerformInMainQueue(ANSDispatch timing, ANSGCDBlock block) {
     if (!block) {
         return;
     }
-    
-    if ([NSThread isMainThread]) {
-        block();
-    } else {
+//    
+//    if ([NSThread isMainThread]) {
+//        block();
+//    } else {
         timing(dispatch_get_main_queue(), block);
-    }
+//    }
 }
 
 void ANSDispatchTimer(uint seconds, bool repeat, ANSGCDBlock block) {

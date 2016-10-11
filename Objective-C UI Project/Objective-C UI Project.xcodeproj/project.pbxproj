@@ -27,8 +27,8 @@
 		934DB0DA1DA68E6900588924 /* NSString+ANSJSONRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E3E48A1DA3AC1D00C2BBC1 /* NSString+ANSJSONRepresentation.m */; };
 		934DB0DB1DA68E6A00588924 /* NSString+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E3E4881DA3AC1D00C2BBC1 /* NSString+ANSExtension.m */; };
 		934DB0F31DA7D77E00588924 /* ANSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 934DB0F21DA7D77E00588924 /* ANSUser.m */; };
-		934DB1391DABC9F600588924 /*  ANSMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 934DB1371DABC9F600588924 /*  ANSMasterViewController.m */; };
-		934DB13A1DABC9F600588924 /*  ANSMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934DB1381DABC9F600588924 /*  ANSMasterViewController.xib */; };
+		934DB13F1DACD63C00588924 /*  ANSMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 934DB13D1DACD63C00588924 /*  ANSMasterViewController.m */; };
+		934DB1401DACD63C00588924 /*  ANSMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934DB13E1DACD63C00588924 /*  ANSMasterViewController.xib */; };
 		935E5A0B1D6F4CA5005F6285 /* aaa.plist in Resources */ = {isa = PBXBuildFile; fileRef = 935E5A0A1D6F4CA5005F6285 /* aaa.plist */; };
 		9368188E1DA686F000B04C29 /* NSFileManager+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E3E4741DA3AC1D00C2BBC1 /* NSFileManager+ANSExtension.m */; };
 		9382A6471DA5345E007E8D36 /* NSManagedObjectContext+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382A6461DA5345E007E8D36 /* NSManagedObjectContext+Extension.m */; };
@@ -139,9 +139,9 @@
 		934DB0F11DA7D77E00588924 /* ANSUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSUser.h; sourceTree = "<group>"; };
 		934DB0F21DA7D77E00588924 /* ANSUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSUser.m; sourceTree = "<group>"; };
 		934DB0F41DA97C6C00588924 /* ANSObservableObjectPtotocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSObservableObjectPtotocol.h; sourceTree = "<group>"; };
-		934DB1361DABC9F600588924 /*  ANSMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = " ANSMasterViewController.h"; sourceTree = "<group>"; };
-		934DB1371DABC9F600588924 /*  ANSMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = " ANSMasterViewController.m"; sourceTree = "<group>"; };
-		934DB1381DABC9F600588924 /*  ANSMasterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = " ANSMasterViewController.xib"; sourceTree = "<group>"; };
+		934DB13C1DACD63C00588924 /*  ANSMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = " ANSMasterViewController.h"; sourceTree = "<group>"; };
+		934DB13D1DACD63C00588924 /*  ANSMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = " ANSMasterViewController.m"; sourceTree = "<group>"; };
+		934DB13E1DACD63C00588924 /*  ANSMasterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = " ANSMasterViewController.xib"; sourceTree = "<group>"; };
 		935E5A0A1D6F4CA5005F6285 /* aaa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = aaa.plist; sourceTree = "<group>"; };
 		9382A6451DA5345E007E8D36 /* NSManagedObjectContext+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+Extension.h"; sourceTree = "<group>"; };
 		9382A6461DA5345E007E8D36 /* NSManagedObjectContext+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+Extension.m"; sourceTree = "<group>"; };
@@ -429,14 +429,14 @@
 			path = FaceBookUsers/ANSContexts;
 			sourceTree = "<group>";
 		};
-		934DB1351DABC9BB00588924 /* ANSMasterViewController */ = {
+		934DB13B1DACD63C00588924 /* ANSMasterViewControler */ = {
 			isa = PBXGroup;
 			children = (
-				934DB1361DABC9F600588924 /*  ANSMasterViewController.h */,
-				934DB1371DABC9F600588924 /*  ANSMasterViewController.m */,
-				934DB1381DABC9F600588924 /*  ANSMasterViewController.xib */,
+				934DB13C1DACD63C00588924 /*  ANSMasterViewController.h */,
+				934DB13D1DACD63C00588924 /*  ANSMasterViewController.m */,
+				934DB13E1DACD63C00588924 /*  ANSMasterViewController.xib */,
 			);
-			name = ANSMasterViewController;
+			path = ANSMasterViewControler;
 			sourceTree = "<group>";
 		};
 		93C083FE1D3E367F0077A81C = {
@@ -538,6 +538,7 @@
 		93E3E4531DA3AC1D00C2BBC1 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				934DB13B1DACD63C00588924 /* ANSMasterViewControler */,
 				93E3E4541DA3AC1D00C2BBC1 /* ANSImageView */,
 				93E3E4571DA3AC1D00C2BBC1 /* ANSLoadingView */,
 				93E3E45B1DA3AC1D00C2BBC1 /* ANSTableViewCell */,
@@ -775,7 +776,6 @@
 		93E3E5111DA3AF3100C2BBC1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				934DB1351DABC9BB00588924 /* ANSMasterViewController */,
 				93E3E5121DA3AF3100C2BBC1 /* ANSCollectionModel */,
 				93E3E5281DA3AF3100C2BBC1 /* ANSImageModel */,
 				93E3E5341DA3AF3100C2BBC1 /* ANSLoadableModel */,
@@ -889,10 +889,10 @@
 		93E3E5401DA3AF3100C2BBC1 /* ObservationController */ = {
 			isa = PBXGroup;
 			children = (
-				93E3E5411DA3AF3100C2BBC1 /* ANSBlockObservationController.h */,
-				93E3E5421DA3AF3100C2BBC1 /* ANSBlockObservationController.m */,
 				93E3E5431DA3AF3100C2BBC1 /* ANSObservationController.h */,
 				93E3E5441DA3AF3100C2BBC1 /* ANSObservationController.m */,
+				93E3E5411DA3AF3100C2BBC1 /* ANSBlockObservationController.h */,
+				93E3E5421DA3AF3100C2BBC1 /* ANSBlockObservationController.m */,
 				93E3E5451DA3AF3100C2BBC1 /* ANSProtocolObservationController.h */,
 				93E3E5461DA3AF3100C2BBC1 /* ANSProtocolObservationController.m */,
 				93E3E5471DA3AF3100C2BBC1 /* PrivatExtension */,
@@ -1054,10 +1054,10 @@
 				9302D7E31D992415003CD9B8 /* ANSUserDetailsViewController.xib in Resources */,
 				93E3E4E31DA3AC1D00C2BBC1 /* ANSLoadingView.xib in Resources */,
 				935E5A0B1D6F4CA5005F6285 /* aaa.plist in Resources */,
-				934DB13A1DABC9F600588924 /*  ANSMasterViewController.xib in Resources */,
 				9302D7D81D991DA8003CD9B8 /* ANSUserCell.xib in Resources */,
 				93C0843D1D3E381F0077A81C /* LaunchScreen.storyboard in Resources */,
 				93C0843C1D3E381F0077A81C /* Assets.xcassets in Resources */,
+				934DB1401DACD63C00588924 /*  ANSMasterViewController.xib in Resources */,
 				93C084301D3E36B20077A81C /* iOS Study Plan.txt in Resources */,
 				9302D7D61D991DA8003CD9B8 /* ANSFriendListViewController.xib in Resources */,
 			);
@@ -1178,7 +1178,6 @@
 				93E3E4FB1DA3AC1E00C2BBC1 /* UITableView+Extension.m in Sources */,
 				9302D7EE1D9924BB003CD9B8 /* ANSLoginViewController.m in Sources */,
 				9302D7E21D992415003CD9B8 /* ANSUserDetailsViewController.m in Sources */,
-				934DB1391DABC9F600588924 /*  ANSMasterViewController.m in Sources */,
 				93E3E4E01DA3AC1D00C2BBC1 /* ANSRandom.m in Sources */,
 				93E3E4E71DA3AC1E00C2BBC1 /* ANSTimerPrivate.m in Sources */,
 				93E3E5571DA3AF3100C2BBC1 /* ANSCacheStorage.m in Sources */,
@@ -1202,6 +1201,7 @@
 				9302D7D71D991DA8003CD9B8 /* ANSUserCell.m in Sources */,
 				93E3E5531DA3AF3100C2BBC1 /* ANSTwoIndexModel.m in Sources */,
 				93E3E5621DA3AF3100C2BBC1 /* ANSQueue.m in Sources */,
+				934DB13F1DACD63C00588924 /*  ANSMasterViewController.m in Sources */,
 				93E3E5511DA3AF3100C2BBC1 /* ANSOneIndexModel.m in Sources */,
 				93E3E4FA1DA3AC1E00C2BBC1 /* UIScreen+ANSExtension.m in Sources */,
 				93E3E4F81DA3AC1E00C2BBC1 /* UIImage+ANSExtension.m in Sources */,

@@ -9,15 +9,16 @@
 #import <Foundation/Foundation.h>
 @class ANSProtocolObservationController;
 @class ANSBlockObservationController;
+@class ANSObservationController;
 
 typedef void(^ANSExecutableBlock)(void);
 
-@protocol ANSObservableObjectPtotocol <NSObject>
+@protocol ANSObservableObject <NSObject>
 
 @optional
 
-@property (atomic, assign) NSUInteger state;
-
+@property (nonatomic, assign)         NSUInteger state;
+@property (nonatomic, weak, readonly) id         target;
 
 - (void)setState:(NSUInteger)state withUserInfo:(id)UserInfo;
 
@@ -37,6 +38,7 @@ typedef void(^ANSExecutableBlock)(void);
 - (void)performBlockWithNotification:(ANSExecutableBlock)block;
 - (void)performBlockWithoutNotification:(ANSExecutableBlock)block;
 
+- (void)invalidateController:(ANSObservationController *)controller;
 #pragma mark -
 #pragma mark Private declaration
 

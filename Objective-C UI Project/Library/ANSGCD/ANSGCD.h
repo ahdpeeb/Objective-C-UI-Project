@@ -18,7 +18,7 @@ typedef dispatch_queue_t ANSQSGCQueue;
 typedef void(^ANSGCDBlock)(void);
 
 //signature to dispatch_async/ dispatch_sync functions
-typedef void (*ANSDispatch)(ANSQSGCQueue queue, ANSGCDBlock block);
+typedef void (* ANSDispatch)(ANSQSGCQueue queue, ANSGCDBlock block);
 
 //Identifier of queue prioryty
 typedef enum {
