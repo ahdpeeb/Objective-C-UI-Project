@@ -142,7 +142,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     NSPredicate *predicate = nil;
     predicate = [NSPredicate predicateWithFormat:@"friends contains %@", self.user];
     
-    NSFetchRequest *reques = [ANSUser fetchRequesWithSortDescriptors:@[descriptor]
+    NSFetchRequest *reques = [ANSUser fetchRequestWithSortDescriptors:@[descriptor]
                                                            predicate:predicate
                                                           batchCount:10];
     

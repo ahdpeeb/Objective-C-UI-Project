@@ -4,20 +4,26 @@
 //
 //  Created by Nikola Andriiev on 04.10.16.
 //  Copyright © 2016 Andriiev.Mykola. All rights reserved.
-//
 
 #import "NSManagedObject+ANSExtension.h"
 
 #import "ANSCoreDataManager.h"
 
 @interface NSManagedObject (ANSPrivate)
+
 + (NSManagedObjectContext *)context;
+- (NSManagedObjectContext *)context;
+
 @end
 
 @implementation NSManagedObject (ANSPrivate)
 
 + (NSManagedObjectContext *)context {
     return [[ANSCoreDataManager sharedManager] managedObjectContext];
+}
+
+- (NSManagedObjectContext *)context {
+   return [[self class] context];
 }
 
 @end
@@ -31,12 +37,12 @@
                                          inManagedObjectContext:[self context]];
 }
 
-+ (NSFetchRequest *)fetchReques {
++ (NSFetchRequest *)request {
     NSString *name = NSStringFromClass([self class]);
     return [NSFetchRequest fetchRequestWithEntityName:name];
 }
 
-+ (NSFetchRequest *)fetchRequesWithSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
++ (NSFetchRequest *)fetchRequestWithSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
                                          predicate:(NSPredicate *)predicate
                                         batchCount:(NSUInteger)count
 {
@@ -62,7 +68,8 @@
 }
 
 + (NSArray *)objectsWithSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
-                              predicate:(NSPredicate *)predicate {
+                              predicate:(NSPredicate *)predicate
+{
     return [self objectsWithSortDescriptors:sortDescriptors predicate:predicate batchCount:0];
 }
 
@@ -70,13 +77,12 @@
                               predicate:(NSPredicate *)predicate
                              batchCount:(NSUInteger)count
 {
-   
-    NSFetchRequest *reques = [self fetchRequesWithSortDescriptors:sortDescriptors
-                                                        predicate:predicate
-                                                       batchCount:count];
+    NSFetchRequest *request = [self fetchRequestWithSortDescriptors:sortDescriptors
+                                                          predicate:predicate
+                                                         batchCount:count];
     
     NSError *executeError = nil;
-    NSArray *objects = [[self context] executeFetchRequest:reques error:&executeError];
+    NSArray *objects = [[self context] executeFetchRequest:request error:&executeError];
     if (executeError) {
         NSLog(@"%@", [executeError localizedDescription]);
     }
@@ -86,7 +92,7 @@
 
 - (BOOL)save {
     NSError *saveArror = nil;
-    if (![[[self class] context] save:&saveArror]) {
+    if (![[self context] save:&saveArror]) {
         NSLog(@"%@", [saveArror localizedDescription]);
         return NO;
     }
@@ -95,17 +101,14 @@
 }
 
 - (void)refresh {
-    [[[self class] context] refreshObject:self mergeChanges:YES];
+    [[self context] refreshObject:self mergeChanges:YES];
 }
 
 - (BOOL)remove {
     ANSCoreDataManager *manager = [ANSCoreDataManager sharedManager];
     [manager.managedObjectContext deleteObject:self];
     
-    return [[[self class] context] save:nil];
+    return [[self context] save:nil];
 }
-
-#pragma mark -
-#pragma mark Accsessors
 
 @end

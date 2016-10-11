@@ -20,11 +20,9 @@
 //Returns first objects which suitable for predicae conditions
 + (instancetype)objectWithPredicate:(NSPredicate *)predicate;
 
-+ (NSFetchRequest *)fetchReques;
-
-+ (NSFetchRequest *)fetchRequesWithSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
-                                         predicate:(NSPredicate *)predicate
-                                        batchCount:(NSUInteger)count;
++ (NSFetchRequest *)fetchRequestWithSortDescriptors:(NSArray<NSSortDescriptor *> *)sortDescriptors
+                                     predicate:(NSPredicate *)predicate
+                                    batchCount:(NSUInteger)count;
 
 // returns all objects from dataBase
 + (NSArray *)objects;

@@ -15,8 +15,8 @@
 @end
 
 @implementation NSManagedObjectContext (ANSPrivate)
-+ (NSManagedObjectContext *)context {
-    
+
++ (NSManagedObjectContext *)context {    
     return [[ANSCoreDataManager sharedManager] managedObjectContext];
 }
 
