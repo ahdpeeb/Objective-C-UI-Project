@@ -84,13 +84,13 @@
 #pragma mark Private
 
 - (void)loadableModelLoading:(ANSLoadableModel *)model {
-    ANSPerformInMainQueue(dispatch_async, ^{
+    ANSPerformAsyncOnMainQueue(^{
         self.loadingView.visible = YES;
     });
 }
 
 - (void)loadableModelDidLoad:(ANSLoadableModel *)model {
-    ANSPerformInMainQueue(dispatch_async, ^{
+    ANSPerformAsyncOnMainQueue(^{
         self.contentImageView.image = self.imageModel.image;
         self.loadingView.visible = NO;
     });

@@ -252,9 +252,9 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 #pragma mark ANSUserObserver protocol
 
 - (void)userDidLoadFriends:(ANSUser *)user {
-    ANSPerformInMainQueue(dispatch_async, ^{
-            [self initResultsController];
-            self.friendListView.loadingView.visible = NO;
+    ANSPerformAsyncOnMainQueue(^{
+        [self initResultsController];
+        self.friendListView.loadingView.visible = NO;
     });
 }
 

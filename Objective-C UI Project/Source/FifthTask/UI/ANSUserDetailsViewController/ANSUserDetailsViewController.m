@@ -95,7 +95,7 @@ ANSViewControllerBaseViewProperty(ANSUserDetailsViewController, ANSUserDetailsVi
 #pragma mark ANSUserObserver protocol
 
 - (void)userDidLoadDetails:(ANSUser *)user {
-    ANSPerformInMainQueue(dispatch_async, ^{
+    ANSPerformAsyncOnMainQueue(^{
         [self.detailsView fillFullInfoFromUser:user];
     });
 }

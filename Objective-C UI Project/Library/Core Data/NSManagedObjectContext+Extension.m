@@ -24,7 +24,7 @@
 
 @implementation NSManagedObjectContext (ANSExtension)
 
-+ (void)saveContext {
++ (void)save {
     NSError *saveError = nil;
     if ([[self context] hasChanges]) {
         if ([[self context] save:&saveError]) {

@@ -27,6 +27,21 @@
 @dynamic imageModel;
 
 #pragma mark -
+#pragma mark Class methods
+
++ (instancetype)objectWithID:(NSUInteger)ID {
+    @synchronized (self) {
+        ANSUser *object = [self objectWithPredicate:[NSPredicate predicateWithFormat:@"idNumber = %ld", ID]];
+        if (!object) {
+            object = [self object];
+            object.idNumber = ID;
+        }
+        
+        return object;
+    }
+}
+
+#pragma mark -
 #pragma mark Initialization and deallocation
 
 - (NSManagedObject *)initWithEntity:(NSEntityDescription *)entity
@@ -87,21 +102,6 @@
             
         default:
             return [self.userObservationTarget selectorForState:state];
-    }
-}
-
-#pragma mark -
-#pragma mark Public methods
-
-+ (instancetype)objectWithID:(NSUInteger)ID {
-    @synchronized (self) {
-        ANSUser *object = [self objectWithPredicate:[NSPredicate predicateWithFormat:@"idNumber = %ld", ID]];
-        if (!object) {
-            object = [self object];
-            object.idNumber = ID;
-        }
-        
-        return object;
     }
 }
 

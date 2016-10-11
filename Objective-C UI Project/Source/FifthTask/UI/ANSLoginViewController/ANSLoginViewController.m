@@ -83,11 +83,11 @@ ANSViewControllerBaseViewProperty(ANSLoginViewController, ANSLoginView, loginVie
 #pragma mark ANSUserObserver ptotocol
 
 - (void)userDidLoadID:(ANSUser *)user {
-    ANSPerformInMainQueue(dispatch_async, ^{
+    ANSPerformAsyncOnMainQueue(^{
         ANSFriendListViewController *controller = [ANSFriendListViewController viewController];
         controller.user = user;
         [self.navigationController pushViewController:controller animated:YES];
-    }); 
+    });
 }
 
 @end
