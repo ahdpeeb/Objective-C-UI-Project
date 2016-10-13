@@ -104,9 +104,13 @@
     
     return NO;
 }
-
+    // if invalid index exception rice
 - (id)objectAtIndex:(NSUInteger)index {
-   return [self.resultsController objectAtIndexPath:[NSIndexPath indexPathWithIndex:index]];
+    if (index < self.count) {
+        return [self.resultsController objectAtIndexPath:[NSIndexPath indexPathWithIndex:index]];
+    }
+    
+    return nil;
 }
 
 - (NSUInteger)indexOfObject:(id)object {
@@ -119,11 +123,15 @@
 }
 
 - (void)addObject:(NSManagedObject *)object {
-    [object save];
+    if ([[self predicate] evaluateWithObject:object]) {
+        [object save];
+    }
 }
 
 - (void)removeObject:(NSManagedObject *)object {
-    [object remove];
+    if ([self containsObject:object]) {
+        [object remove];
+    }
 }
 
 - (void)insertObject:(id)object atIndex:(NSUInteger)index {
@@ -131,20 +139,22 @@
 }
 
 - (void)removeObjectAtIndex:(NSUInteger)index {
-    id object = [self objectAtIndex:index];
-    [object remove];
+    NSManagedObject *object = [self objectAtIndex:index];
+    if (object) {
+        [object remove];
+    }
 }
 
 - (void)addObjectsInRange:(NSArray *)objects {
     for (id object in objects) {
-        [object save];
+        [self addObject:object];
     }
 }
 
 - (void)removeAllObjects {
     NSArray *objects = self.resultsController.fetchedObjects;
     for (id object in objects) {
-        [object remove];
+        [self removeObject:object];
     }
 }
 
