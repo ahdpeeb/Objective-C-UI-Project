@@ -9,10 +9,9 @@
 
 #import "ANSLoadableModel.h"
 #import "NSArray+ANSExtension.h"
-
+#import "ANSChangeModel.h"
 
 @class ANSArrayModel;
-@class ANSChangeModel;
 
 @protocol ANSArrayModelObserver <ANSLoadableModelObserver>
 
@@ -54,7 +53,18 @@ typedef NS_ENUM(NSUInteger, ANSArrayModelState) {
 - (void)removeAllObjects;
 
 - (void)moveObjectFromIndex:(NSUInteger)index toIndex:(NSUInteger)index;
-- (void)exchangeObjectAtIndex:(NSUInteger)indexOne
+- (void)exchangeObjectAtIndex:(NSUInteger)index
             withObjectAtIndex:(NSUInteger)index2;
+
+#pragma mark - methods intended for subclasses
+
+- (void)notifyOfChangeWithIndex:(NSUInteger)index
+                       userInfo:(id)userInfo
+                          state:(ANSChangeState)state;
+
+- (void)notifyOfChangeWithIndex:(NSUInteger)index1
+                         index2:(NSUInteger)index2
+                       userInfo:(id)userInfo
+                          state:(ANSChangeState)state;
 
 @end

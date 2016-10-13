@@ -16,15 +16,6 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 @interface ANSArrayModel ()
 @property (nonatomic, retain) NSMutableArray *mutableObjects;
 
-- (void)notifyOfChangeWithIndex:(NSUInteger)index
-                       userInfo:(id)userInfo
-                          state:(ANSChangeState)state;
-
-- (void)notifyOfChangeWithIndex:(NSUInteger)index1
-                         index2:(NSUInteger)index2
-                       userInfo:(id)userInfo
-                          state:(ANSChangeState)state;
-
 @end
 
 @implementation ANSArrayModel
@@ -119,7 +110,7 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
 
 - (void)addObject:(id)object {
     @synchronized(self) {
-        [self insertObject:object atIndex:0];
+        [self insertObject:object atIndex:self.count];
     }
 }
 
@@ -166,7 +157,8 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
             }
         }];
         
-        [self notifyOfChangeWithIndex:ANSArrayModelDidChange index2:count userInfo:objects state:ANSStateAddObjectsInRange];
+        NSInteger fromIndex = self.count - count - 1;
+        [self notifyOfChangeWithIndex:fromIndex index2:fromIndex + count userInfo:objects state:ANSStateAddObjectsInRange];
     }
 }
 
@@ -192,10 +184,10 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     }
 }
 
-- (void)exchangeObjectAtIndex:(NSUInteger)indexOne withObjectAtIndex:(NSUInteger)index2 {
+- (void)exchangeObjectAtIndex:(NSUInteger)index withObjectAtIndex:(NSUInteger)index2 {
     @synchronized(self) {
-        [self.mutableObjects exchangeObjectAtIndex:indexOne withObjectAtIndex:index2];
-        [self notifyOfChangeWithIndex:indexOne index2:index2 userInfo:nil state:ANSStateExchangeObject];
+        [self.mutableObjects exchangeObjectAtIndex:index withObjectAtIndex:index2];
+        [self notifyOfChangeWithIndex:index index2:index2 userInfo:nil state:ANSStateExchangeObject];
     }
 }
 

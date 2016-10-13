@@ -38,7 +38,9 @@
 		934DB15D1DAD06D200588924 /* ANSOneIndexModel+UITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 934DB1521DAD06D200588924 /* ANSOneIndexModel+UITableView.m */; };
 		934DB15E1DAD06D200588924 /* ANSRangeChangeModel+UITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 934DB1541DAD06D200588924 /* ANSRangeChangeModel+UITableView.m */; };
 		934DB15F1DAD06D200588924 /* ANSTwoIndexModel+UITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 934DB1561DAD06D200588924 /* ANSTwoIndexModel+UITableView.m */; };
-		934DB1631DAD116B00588924 /* ANSWrapedFetchedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 934DB1621DAD116B00588924 /* ANSWrapedFetchedController.m */; };
+		934DB16B1DAF9B6D00588924 /* ANSCoreDataArrayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 934DB16A1DAF9B6D00588924 /* ANSCoreDataArrayModel.m */; };
+		934DB16E1DAF9E4B00588924 /* ANSUserFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 934DB16D1DAF9E4B00588924 /* ANSUserFriends.m */; };
+		934DB1731DAFABC300588924 /* NSIndexPath+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 934DB1721DAFABC300588924 /* NSIndexPath+ANSExtension.m */; };
 		935E5A0B1D6F4CA5005F6285 /* aaa.plist in Resources */ = {isa = PBXBuildFile; fileRef = 935E5A0A1D6F4CA5005F6285 /* aaa.plist */; };
 		9368188E1DA686F000B04C29 /* NSFileManager+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E3E4741DA3AC1D00C2BBC1 /* NSFileManager+ANSExtension.m */; };
 		9382A6471DA5345E007E8D36 /* NSManagedObjectContext+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382A6461DA5345E007E8D36 /* NSManagedObjectContext+Extension.m */; };
@@ -161,8 +163,12 @@
 		934DB1541DAD06D200588924 /* ANSRangeChangeModel+UITableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANSRangeChangeModel+UITableView.m"; sourceTree = "<group>"; };
 		934DB1551DAD06D200588924 /* ANSTwoIndexModel+UITableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ANSTwoIndexModel+UITableView.h"; sourceTree = "<group>"; };
 		934DB1561DAD06D200588924 /* ANSTwoIndexModel+UITableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ANSTwoIndexModel+UITableView.m"; sourceTree = "<group>"; };
-		934DB1611DAD116B00588924 /* ANSWrapedFetchedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ANSWrapedFetchedController.h; path = ANSWrappedFetchedController/ANSWrapedFetchedController.h; sourceTree = "<group>"; };
-		934DB1621DAD116B00588924 /* ANSWrapedFetchedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ANSWrapedFetchedController.m; path = ANSWrappedFetchedController/ANSWrapedFetchedController.m; sourceTree = "<group>"; };
+		934DB1691DAF9B6D00588924 /* ANSCoreDataArrayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSCoreDataArrayModel.h; sourceTree = "<group>"; };
+		934DB16A1DAF9B6D00588924 /* ANSCoreDataArrayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSCoreDataArrayModel.m; sourceTree = "<group>"; };
+		934DB16C1DAF9E4B00588924 /* ANSUserFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSUserFriends.h; sourceTree = "<group>"; };
+		934DB16D1DAF9E4B00588924 /* ANSUserFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSUserFriends.m; sourceTree = "<group>"; };
+		934DB1711DAFABC200588924 /* NSIndexPath+ANSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+ANSExtension.h"; sourceTree = "<group>"; };
+		934DB1721DAFABC300588924 /* NSIndexPath+ANSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+ANSExtension.m"; sourceTree = "<group>"; };
 		935E5A0A1D6F4CA5005F6285 /* aaa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = aaa.plist; sourceTree = "<group>"; };
 		9382A6451DA5345E007E8D36 /* NSManagedObjectContext+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+Extension.h"; sourceTree = "<group>"; };
 		9382A6461DA5345E007E8D36 /* NSManagedObjectContext+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+Extension.m"; sourceTree = "<group>"; };
@@ -415,6 +421,8 @@
 			children = (
 				934DB0F11DA7D77E00588924 /* ANSUser.h */,
 				934DB0F21DA7D77E00588924 /* ANSUser.m */,
+				934DB16C1DAF9E4B00588924 /* ANSUserFriends.h */,
+				934DB16D1DAF9E4B00588924 /* ANSUserFriends.m */,
 			);
 			name = ANSFaceBookUser;
 			path = FaceBookUsers;
@@ -449,7 +457,7 @@
 				934DB1431DAD06D200588924 /* ANSArrayModel.m */,
 				934DB1441DAD06D200588924 /* ANSChangeModel */,
 			);
-			name = ANSArrayModel;
+			path = ANSArrayModel;
 			sourceTree = "<group>";
 		};
 		934DB1441DAD06D200588924 /* ANSChangeModel */ = {
@@ -491,15 +499,22 @@
 			path = TableViewExtensions;
 			sourceTree = "<group>";
 		};
-		934DB1601DAD10A500588924 /* ANSWrappedFetchedControllerl */ = {
+		934DB1681DAF9B6D00588924 /* ANSCoreDataArrayModel */ = {
 			isa = PBXGroup;
 			children = (
-				934DB1611DAD116B00588924 /* ANSWrapedFetchedController.h */,
-				934DB1621DAD116B00588924 /* ANSWrapedFetchedController.m */,
-				934DB1411DAD06D200588924 /* ANSArrayModel */,
+				934DB1691DAF9B6D00588924 /* ANSCoreDataArrayModel.h */,
+				934DB16A1DAF9B6D00588924 /* ANSCoreDataArrayModel.m */,
 			);
-			name = ANSWrappedFetchedControllerl;
-			path = ANSArrayModel;
+			path = ANSCoreDataArrayModel;
+			sourceTree = "<group>";
+		};
+		934DB16F1DAFAAE300588924 /* NSIndexPath */ = {
+			isa = PBXGroup;
+			children = (
+				934DB1711DAFABC200588924 /* NSIndexPath+ANSExtension.h */,
+				934DB1721DAFABC300588924 /* NSIndexPath+ANSExtension.m */,
+			);
+			path = NSIndexPath;
 			sourceTree = "<group>";
 		};
 		93C083FE1D3E367F0077A81C = {
@@ -650,6 +665,7 @@
 		93E3E4611DA3AC1D00C2BBC1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				934DB16F1DAFAAE300588924 /* NSIndexPath */,
 				93E3E4621DA3AC1D00C2BBC1 /* ANSMutableDictionary */,
 				93E3E4651DA3AC1D00C2BBC1 /* ANSTimer */,
 				93E3E46A1DA3AC1D00C2BBC1 /* NSArray */,
@@ -839,7 +855,8 @@
 		93E3E5111DA3AF3100C2BBC1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				934DB1601DAD10A500588924 /* ANSWrappedFetchedControllerl */,
+				934DB1411DAD06D200588924 /* ANSArrayModel */,
+				934DB1681DAF9B6D00588924 /* ANSCoreDataArrayModel */,
 				93E3E5281DA3AF3100C2BBC1 /* ANSImageModel */,
 				93E3E5341DA3AF3100C2BBC1 /* ANSLoadableModel */,
 				93E3E53D1DA3AF3100C2BBC1 /* ANSObservableObject */,
@@ -1191,6 +1208,7 @@
 				93E3E4E91DA3AC1E00C2BBC1 /* NSArray+ANSExtension.m in Sources */,
 				93E3E4FB1DA3AC1E00C2BBC1 /* UITableView+Extension.m in Sources */,
 				9302D7EE1D9924BB003CD9B8 /* ANSLoginViewController.m in Sources */,
+				934DB16E1DAF9E4B00588924 /* ANSUserFriends.m in Sources */,
 				9302D7E21D992415003CD9B8 /* ANSUserDetailsViewController.m in Sources */,
 				934DB15D1DAD06D200588924 /* ANSOneIndexModel+UITableView.m in Sources */,
 				93E3E4E01DA3AC1D00C2BBC1 /* ANSRandom.m in Sources */,
@@ -1224,6 +1242,7 @@
 				93E3E4E51DA3AC1E00C2BBC1 /* ANSRootView.m in Sources */,
 				9382A6471DA5345E007E8D36 /* NSManagedObjectContext+Extension.m in Sources */,
 				93E3E5611DA3AF3100C2BBC1 /* ANSProtocolObservationController.m in Sources */,
+				934DB1731DAFABC300588924 /* NSIndexPath+ANSExtension.m in Sources */,
 				93E3E5581DA3AF3100C2BBC1 /* ANSImageModel.m in Sources */,
 				934DB1571DAD06D200588924 /* ANSArrayModel.m in Sources */,
 				93E3E4EC1DA3AC1E00C2BBC1 /* NSFileManager+ANSExtension.m in Sources */,
@@ -1247,7 +1266,7 @@
 				9302D7BD1D981385003CD9B8 /* ANSFriendsContext.m in Sources */,
 				9302D7C31D991249003CD9B8 /* ANSFBContext.m in Sources */,
 				9382A7841DA658A5007E8D36 /* NSManagedObject+ANSExtension.m in Sources */,
-				934DB1631DAD116B00588924 /* ANSWrapedFetchedController.m in Sources */,
+				934DB16B1DAF9B6D00588924 /* ANSCoreDataArrayModel.m in Sources */,
 				934DB15C1DAD06D200588924 /* ANSTwoIndexModel.m in Sources */,
 				93E3E4F91DA3AC1E00C2BBC1 /* UINib+Extension.m in Sources */,
 			);

@@ -30,6 +30,10 @@
             case ANSStateRemoveObject:
                 [tableView deleteRowsAtIndexPaths:@[path] withRowAnimation:animation];
                 break;
+            
+            case ANSStateUpdateObject:
+                [tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:animation];
+                break;
                 
             default:
                 [tableView reloadData];

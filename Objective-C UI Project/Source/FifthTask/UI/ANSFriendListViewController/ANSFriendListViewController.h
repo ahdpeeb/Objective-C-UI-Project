@@ -8,7 +8,7 @@
 
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
-
+#import "ANSCoreDataArrayModel.h"
 #import "ANSUser.h"
 
 @interface ANSFriendListViewController : UIViewController <
@@ -16,9 +16,8 @@
     UITableViewDelegate,
     UISearchBarDelegate,
     NSFetchedResultsControllerDelegate,
-    ANSUserObserver
-//    ANSArrayModelObserver,
-//    ANSNameFilterModelProtocol
+    ANSUserObserver,
+    ANSArrayModelObserver
 >
 
 @property (nonatomic, strong) ANSUser *user;

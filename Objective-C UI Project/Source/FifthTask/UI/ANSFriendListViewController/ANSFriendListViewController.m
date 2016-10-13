@@ -14,6 +14,7 @@
 #import "ANSImageModel.h"
 #import "ANSImageView.h"
 #import "ANSUser.h"
+#import "ANSUserFriends.h"
 #import "ANSFriendsContext.h"
 #import "ANSUserDetailsViewController.h"
 #import "ANSLoginViewController.h"
@@ -36,15 +37,13 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 @interface ANSFriendListViewController ()
 @property (nonatomic, strong) ANSProtocolObservationController  *userController;
 
+@property (nonatomic, strong) ANSUserFriends                    *userFriends;
+@property (nonatomic, strong) ANSProtocolObservationController  *userFriendsController;
+
 @property (nonatomic, strong) ANSFriendsContext                 *friendsContext;
-@property (nonatomic, strong) NSFetchedResultsController        *resultsController;
 
 - (void)leftBarButtonAction:(UIBarButtonItem *)sender;
 - (void)initLeftBarButton;
-
-- (NSFetchedResultsController *)controllerWithRequest:(NSFetchRequest *)reques
-                                   sectionNameKeyPath:(NSString *)keyPath;
-- (void)initResultsController ;
 
 @end
 
@@ -70,24 +69,6 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 #pragma mark -
 #pragma mark Accsessors
 
-- (void)setResultsController:(NSFetchedResultsController *)resultsController {
-    if (_resultsController != resultsController) {
-        _resultsController = resultsController;
-        
-        _resultsController.delegate = self;
-        
-        NSError *error = nil;
-        if (![_resultsController performFetch:&error]) {
-            NSLog(@"%@", [error localizedDescription]);
-            abort();
-        }
-        
-        NSArray *objects = [_resultsController fetchedObjects];
-        NSLog(@"objects count = %ld", objects.count);
-        [self.friendListView.tableView reloadData];
-    }
-}
-
 - (void)setUser:(ANSUser *)user {
     if (_user != user) {
         _user = user;
@@ -101,60 +82,19 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     }
 }
 
-//- (void)setFilteredModel:(ANSNameFilterModel *)filteredModel {
-//    if (_filteredModel != filteredModel) {
-//        _filteredModel = filteredModel;
-//        
-//        self.filterModelController = [filteredModel protocolControllerWithObserver:self];
-//    }
-//}
-
-//- (ANSArrayModel *)presentedModel {
-//    BOOL isFirstResponder = self.friendListView.searchBar.isFirstResponder;
-//    
-//    return isFirstResponder ? self.filteredModel : self.friends;
-//}
+- (void)setUserFriends:(ANSUserFriends *)userFriends {
+    if (_userFriends != userFriends) {
+        _userFriends = userFriends;
+        
+        self.userFriendsController = [userFriends protocolControllerWithObserver:self];
+    }
+}
 
 #pragma mark -
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-}
-
-#pragma mark -
-#pragma mark Private methods
-
-- (NSFetchedResultsController *)controllerWithRequest:(NSFetchRequest *)reques
-                                   sectionNameKeyPath:(NSString *)keyPath
-{
-    NSManagedObjectContext *context = [[ANSCoreDataManager sharedManager] managedObjectContext];
-    return [[NSFetchedResultsController alloc] initWithFetchRequest:reques
-                                               managedObjectContext:context
-                                                 sectionNameKeyPath:keyPath
-                                                          cacheName:@"Master"];
-}
-
-- (void)initResultsController {
-    NSSortDescriptor *descriptor = nil;
-    descriptor = [NSSortDescriptor sortDescriptorWithKey:@"idNumber" ascending:YES];
-    
-    NSPredicate *predicate = nil;
-    predicate = [NSPredicate predicateWithFormat:@"friends contains %@", self.user];
-    
-    NSFetchRequest *reques = [ANSUser fetchRequestWithSortDescriptors:@[descriptor]
-                                                           predicate:predicate
-                                                          batchCount:10];
-    
-    self.resultsController = [self controllerWithRequest:reques
-                                      sectionNameKeyPath:nil];
-}
-
-- (void)resignSearchBar {
-    UISearchBar *searchBar = self.friendListView.searchBar;
-    if (searchBar.isFirstResponder) {
-        [self searchBarCancelButtonClicked:searchBar];
-    }
 }
 
 #pragma mark -
@@ -178,18 +118,19 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 }
 
 #pragma mark -
+#pragma mark Private methods
+
+#pragma mark -
 #pragma mark UITableViewDataSource protocol
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    NSUInteger value = [[self.resultsController sections] count];
-    return [[self.resultsController sections] count];
+    return 1;
 }
 
 - (NSInteger)   tableView:(UITableView *)tableView
     numberOfRowsInSection:(NSInteger)section
 {
-    id <NSFetchedResultsSectionInfo> result = self.resultsController.sections[section];
-    return [result numberOfObjects];
+    return self.userFriends.count;
     
 }
 
@@ -251,9 +192,9 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 #pragma mark -
 #pragma mark ANSUserObserver protocol
 
-- (void)userDidLoadFriends:(ANSUser *)user {
+- (void)loadableModelDidLoad:(ANSLoadableModel *)model; {
     ANSPerformAsyncOnMainQueue(^{
-        [self initResultsController];
+        [self.friendListView.tableView reloadData];
         self.friendListView.loadingView.visible = NO;
     });
 }
