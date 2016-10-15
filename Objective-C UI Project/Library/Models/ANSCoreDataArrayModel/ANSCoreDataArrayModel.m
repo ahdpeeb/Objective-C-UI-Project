@@ -15,10 +15,14 @@
 #import "NSManagedObjectContext+Extension.h"
 #import "NSIndexPath+ANSExtension.h"
 
+#import "ANSUser.h"
+
 @interface ANSCoreDataArrayModel ()
-@property (nonatomic, strong)   id <ANSObservableObject>   object;
+@property (nonatomic, strong)   id <ANSObservableObject>   model;
 @property (nonatomic, strong)   NSFetchedResultsController *resultsController;
+@property (nonatomic, strong)   NSString                   *keyPath;
 @property (nonatomic, readonly) NSManagedObjectContext     *context;
+
 
 - (void)initResultsController;
 
@@ -28,48 +32,65 @@
 
 @dynamic context;
 @dynamic count;
+@dynamic objects;
 
 #pragma mark -
 #pragma mark Initializations and deallocations
 
-- (instancetype)initWithModel:(id <ANSObservableObject>)model {
+- (instancetype)initWithModel:(id <ANSObservableObject>)model
+                      keyPath:(NSString *)keyPath
+{
     self = [super init];
-    self.object = model;
+    self.model = model;
+    self.keyPath = keyPath;
     [self initResultsController];
     
     return self;
 }
-
+// objects, count, conteinsObject, objectAt index, insert, remove; - перегрузить 
 #pragma mark -
 #pragma mark Accsessors 
 
 - (NSUInteger)count {
-   return [self.resultsController.fetchedObjects count];
+    @synchronized (self) {
+        return self.objects.count;
+    }
+}
+
+- (NSArray *)objects {
+    @synchronized (self) {
+        return self.resultsController.fetchedObjects;
+    }
 }
 
 - (NSManagedObjectContext *)context {
-    return [[ANSCoreDataManager sharedManager] managedObjectContext];
+    @synchronized (self) {
+        return [[ANSCoreDataManager sharedManager] managedObjectContext];
+    }
 }
 
 - (void)setResultsController:(NSFetchedResultsController *)resultsController {
     if (_resultsController != resultsController) {
         _resultsController = resultsController;
-    }
+    
         _resultsController.delegate = self;
         NSError *error = nil;
         if (![_resultsController performFetch:&error]) {
             NSLog(@"%@", [error localizedDescription]);
             abort();
         }
+        
+        NSLog(@"fetched objects count - %lu",(unsigned long)self.objects.count);
+    }
 }
 
 #pragma mark -
 #pragma mark Private methods
 
 - (void)initResultsController {
-    NSFetchRequest *reques = [NSManagedObject fetchRequestWithSortDescriptors:[self sortDescriptors]
-                                                            predicate:[self predicate]
-                                                           batchCount:[self batchCount]];
+    NSFetchRequest *reques = [[self.model class] fetchRequestWithSortDescriptors:[self sortDescriptors]
+                                                                        predicate:[self fetchedPredicate]
+                                                                       batchCount:[self batchCount]];
     
     self.resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:reques
                                                                  managedObjectContext:self.context
@@ -84,8 +105,13 @@
     return nil;
 }
 
-- (NSPredicate *)predicate {
+- (NSPredicate *)filterPredicate {
     return nil;
+}
+
+- (NSPredicate *)fetchedPredicate {
+    return nil;
+//    return [NSPredicate predicateWithFormat:@"%@ CONTAINS %@", self.keyPath, self.model];
 }
 
 - (NSUInteger)batchCount {
@@ -96,75 +122,71 @@
 #pragma mark Public reloaded methods
 
 - (BOOL)containsObject:(NSManagedObject *)object {
-    for (NSManagedObject *entiti in self.resultsController.fetchedObjects) {
-        if ([entiti.objectID isEqual:object.objectID]) {
-            return YES;
-        }
+    @synchronized (self) {
+        return [self.fetchedPredicate evaluateWithObject:object];
     }
-    
-    return NO;
 }
     // if invalid index exception rice
 - (id)objectAtIndex:(NSUInteger)index {
-    if (index < self.count) {
-        return [self.resultsController objectAtIndexPath:[NSIndexPath indexPathWithIndex:index]];
+    @synchronized (self) {
+        if (index < self.count) {
+            return self.objects[index];
+        }
+        
+        return nil;
     }
-    
-    return nil;
 }
 
 - (NSUInteger)indexOfObject:(id)object {
-    NSIndexPath *path = [self.resultsController indexPathForObject:object];
-    
-    return path.row;
-}
-- (id)objectAtIndexedSubscript:(NSUInteger)idx {
-    return [self objectAtIndex:idx];
+    @synchronized (self) {
+        return  [[self.resultsController indexPathForObject:object] row];
+    }
 }
 
 - (void)addObject:(NSManagedObject *)object {
-    if ([[self predicate] evaluateWithObject:object]) {
-        [object save];
+    @synchronized (self) {
+        [(NSManagedObject *)self.model addCustomValue:object inMutableSetForKey:self.keyPath];
+        //NEED TO BE REMOVED
+        NSLog(@"%ld", [[((ANSUser *)self.model) friends] count]);
     }
+//    if ([[self filterPredicate] evaluateWithObject:object]) {
+//    }
 }
 
 - (void)removeObject:(NSManagedObject *)object {
-    if ([self containsObject:object]) {
-        [object remove];
+    @synchronized (self) {
+        if ([self containsObject:object]) {
+            [(NSManagedObject *)self.model removeCustomValue:object inMutableSetForKey:self.keyPath];
+        }
     }
 }
 
-- (void)insertObject:(id)object atIndex:(NSUInteger)index {
-    return;
-}
-
 - (void)removeObjectAtIndex:(NSUInteger)index {
-    NSManagedObject *object = [self objectAtIndex:index];
-    if (object) {
-        [object remove];
+    @synchronized (self) {
+        @synchronized (self) {
+            NSManagedObject *object = [self objectAtIndex:index];
+            if (object) {
+                [object remove];
+            }
+        }
     }
 }
 
 - (void)addObjectsInRange:(NSArray *)objects {
-    for (id object in objects) {
-        [self addObject:object];
+    @synchronized (self) {
+        for (id object in objects) {
+            [self addObject:object];
+        }
     }
 }
 
 - (void)removeAllObjects {
-    NSArray *objects = self.resultsController.fetchedObjects;
-    for (id object in objects) {
-        [self removeObject:object];
+    @synchronized (self) {
+        NSArray *objects = self.resultsController.fetchedObjects;
+        for (id object in objects) {
+            [self removeObject:object];
+        }
     }
-}
-
-- (void)moveObjectFromIndex:(NSUInteger)index toIndex:(NSUInteger)toIndex {
-    return;
-}
-
-- (void)exchangeObjectAtIndex:(NSUInteger)indexOne
-            withObjectAtIndex:(NSUInteger)index2 {
-    return;
 }
 
 #pragma mark -
@@ -174,28 +196,30 @@
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
-    switch (type) {
-        case NSFetchedResultsChangeInsert: {
-            [self notifyOfChangeWithIndex:indexPath.row userInfo:nil state:ANSStateAddObject];
+    @synchronized (self) {
+        switch (type) {
+            case NSFetchedResultsChangeInsert: {
+                [self notifyOfChangeWithIndex:indexPath.row userInfo:nil state:ANSStateAddObject];
+            }
+            
+            case NSFetchedResultsChangeDelete: {
+                [self notifyOfChangeWithIndex:indexPath.row userInfo:nil state:ANSStateRemoveObject];
+            }
+            
+            case NSFetchedResultsChangeMove: {
+                [self notifyOfChangeWithIndex:indexPath.row
+                                       index2:newIndexPath.row
+                                     userInfo:nil
+                                        state:ANSStateMoveObject];
+            }
+                    
+            case NSFetchedResultsChangeUpdate: {
+                [self notifyOfChangeWithIndex:indexPath.row userInfo:nil state:ANSStateUpdateObject];
+            }
+               
+            default:
+                break;
         }
-        
-        case NSFetchedResultsChangeDelete: {
-            [self notifyOfChangeWithIndex:indexPath.row userInfo:nil state:ANSStateRemoveObject];
-        }
-        
-        case NSFetchedResultsChangeMove: {
-            [self notifyOfChangeWithIndex:indexPath.row
-                                   index2:newIndexPath.row
-                                 userInfo:nil
-                                    state:ANSStateMoveObject];
-        }
-                
-        case NSFetchedResultsChangeUpdate: {
-            [self notifyOfChangeWithIndex:indexPath.row userInfo:nil state:ANSStateUpdateObject];
-        }
-           
-        default:
-            break;
     }
 }
 

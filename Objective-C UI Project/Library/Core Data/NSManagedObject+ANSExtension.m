@@ -105,4 +105,49 @@
     return [[self context] save:nil];
 }
 
+- (void)setCustomValue:(id)value forKey:(NSString *)key {
+    [self willChangeValueForKey:key];
+    [self setPrimitiveValue:value forKey:key];
+    [self didChangeValueForKey:key];
+}
+
+- (id)customvalueForKey:(NSString *)key {
+    [self willChangeValueForKey:key];
+    id result = [self primitiveValueForKey:key];
+    [self didChangeValueForKey:key];
+    
+    return result;
+}
+
+- (void)addCustomValue:(id)value inMutableSetForKey:(NSString *)key {
+    NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
+    [self willChangeValueForKey:key withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
+    NSMutableSet *primitiveSet = [self primitiveValueForKey:key];
+    [primitiveSet unionSet:changedObjects];
+    [self didChangeValueForKey:key withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
+}
+
+- (void)removeCustomValue:(id)value inMutableSetForKey:(NSString *)key {
+    NSSet *changedObjects = [[NSSet alloc] initWithObjects:value, nil];
+    [self willChangeValueForKey:key withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
+    NSMutableSet *primitiveSet = [self primitiveValueForKey:key];
+    [primitiveSet minusSet:changedObjects];
+    [self didChangeValueForKey:key withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
+
+}
+
+- (void)addCustomValues:(NSSet *)values inMutableSetForKey:(NSString *)key {
+    [self willChangeValueForKey:key withSetMutation:NSKeyValueUnionSetMutation usingObjects:values];
+    NSMutableSet *primitiveSet = [self primitiveValueForKey:key];
+    [primitiveSet unionSet:values];
+    [self didChangeValueForKey:key withSetMutation:NSKeyValueUnionSetMutation usingObjects:values];
+}
+
+- (void)removeCustomValues:(NSSet *)values inMutableSetForKey:(NSString *)key {
+    [self willChangeValueForKey:key withSetMutation:NSKeyValueMinusSetMutation usingObjects:values];
+    NSMutableSet *primitiveSet = [self primitiveValueForKey:key];
+    [primitiveSet minusSet:values];
+    [self didChangeValueForKey:key withSetMutation:NSKeyValueMinusSetMutation usingObjects:values];
+}
+
 @end

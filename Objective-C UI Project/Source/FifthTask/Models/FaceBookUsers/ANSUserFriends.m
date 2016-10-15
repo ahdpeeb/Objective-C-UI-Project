@@ -8,6 +8,8 @@
 
 #import "ANSUserFriends.h"
 
+#import "ANSUser.h"
+
 @implementation ANSUserFriends
 
 - (NSArray<NSSortDescriptor *> *)sortDescriptors {
@@ -18,12 +20,9 @@
     return @[descriptor];
 }
 
-- (NSPredicate *)predicate {
-    return [NSPredicate predicateWithFormat:@"friends contains %@", self.model];
+- (NSPredicate *)fetchedPredicate {
+    return [NSPredicate predicateWithFormat:@"friends CONTAINS %@", self.model];
 }
 
-- (NSUInteger)batchCount {
-    return 0;
-}
 
 @end

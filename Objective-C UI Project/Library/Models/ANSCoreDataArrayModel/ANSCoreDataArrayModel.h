@@ -14,8 +14,10 @@
 @interface ANSCoreDataArrayModel : ANSArrayModel <NSFetchedResultsControllerDelegate>
 @property (nonatomic, readonly)   id <ANSObservableObject>   model;
 @property (nonatomic, readonly)   NSUInteger                 count;
+@property (nonatomic, readonly)   NSArray                    *objects;
 
-- (instancetype)initWithModel:(id <ANSObservableObject>)model;
+- (instancetype)initWithModel:(id <ANSObservableObject>)model
+                      keyPath:(NSString *)keyPath;
 
 #pragma mark - For child class reloading
 //You have to reload next methods in child classes
@@ -24,15 +26,21 @@
 - (NSArray<NSSortDescriptor *> *)sortDescriptors;
 
 //default value - nil;
-- (NSPredicate *)predicate;
+- (NSPredicate *)filterPredicate;
+
+//default value - nil;
+- (NSPredicate *)fetchedPredicate;
 
 //default value - 0;
 - (NSUInteger)batchCount;
 
 #pragma mark - next methods doesn't work here;
-- (void)insertObject:(id)object atIndex:(NSUInteger)index;
-- (void)moveObjectFromIndex:(NSUInteger)index toIndex:(NSUInteger)toIndex;
+- (void)insertObject:(id)object atIndex:(NSUInteger)index   NS_UNAVAILABLE;
+
+- (void)moveObjectFromIndex:(NSUInteger)index
+                    toIndex:(NSUInteger)toIndex             NS_UNAVAILABLE;
+
 - (void)exchangeObjectAtIndex:(NSUInteger)index
-            withObjectAtIndex:(NSUInteger)index2;
+            withObjectAtIndex:(NSUInteger)index2            NS_UNAVAILABLE;
 
 @end

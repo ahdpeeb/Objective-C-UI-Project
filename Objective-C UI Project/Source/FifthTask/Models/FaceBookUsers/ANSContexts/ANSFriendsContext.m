@@ -10,6 +10,7 @@
 
 #import "ANSUser.h"
 #import "ANSFBConstatns.h"
+#import "ANSUserFriends.h"
 
 #import "NSDictionary+ANSJSONRepresentation.h"
 #import "NSFileManager+ANSExtension.h"
@@ -18,12 +19,24 @@
 #import "ANSGCD.h"
 
 @interface ANSFriendsContext ()
+@property (nonatomic, strong) ANSUserFriends *userFriends;
 - (ANSUser *)userFromResult:(NSDictionary *)result;
-- (NSSet *)friendsFromResult:(NSDictionary <ANSJSONRepresentation> *)result;
+- (NSArray *)friendsFromResult:(NSDictionary <ANSJSONRepresentation> *)result;
 
 @end
 
 @implementation ANSFriendsContext
+
+- (instancetype)initWithUser:(ANSUser *)user
+                 userFriends:(ANSUserFriends *)userFriends
+{
+    self = [super initWithModel:user];
+    if (self) {
+        self.userFriends = userFriends;
+    }
+    
+    return self;
+}
 
 #pragma mark -
 #pragma mark Private Methods (reloaded)
@@ -61,12 +74,14 @@
 }
 
 - (void)fillModelFromResult:(NSDictionary <ANSJSONRepresentation> *)result {
-    ANSUser *user = self.model;
-    [user addFriends:[self friendsFromResult:result]];
-    
-    user.state = ANSUserDidLoadFriends;
-    
-    NSLog(@"%lu", user.friends.count);
+    ANSUserFriends *userFriends = self.userFriends;
+    NSArray *users = [self friendsFromResult:result];
+    NSLog(@"usersCount after loading %lu", users.count);
+    [userFriends performBlockWithoutNotification:^{
+        [userFriends addObjectsInRange:users];
+    }];
+
+    userFriends.state = ANSLoadableModelDidLoad;
 }
 
 #pragma mark -
@@ -86,15 +101,13 @@
     return user;
 }
 
-- (NSSet *)friendsFromResult:(NSDictionary <ANSJSONRepresentation> *)result {
-    NSMutableSet *mutableUsers = [NSMutableSet new];
+- (NSArray *)friendsFromResult:(NSDictionary <ANSJSONRepresentation> *)result {
+    NSMutableArray *mutableUsers = [NSMutableArray new];
     NSDictionary *parsedResult = [result JSONRepresentation];
     
     NSArray *dataUsers = parsedResult[kANSData];
     for (NSDictionary *dataUser in dataUsers) {
         ANSUser *user = [self userFromResult:dataUser];
-        [user save];
-        
         [mutableUsers addObject:user];
     }
     

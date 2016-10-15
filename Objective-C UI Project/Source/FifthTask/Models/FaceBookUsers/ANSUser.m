@@ -89,6 +89,10 @@
     }
 }
 
+- (BOOL)respondsToSelector:(SEL)aSelector {
+    return [super respondsToSelector:aSelector] || [self.userObservationTarget respondsToSelector:aSelector];
+}
+
 - (SEL)selectorForState:(NSUInteger)state {
     switch (state) {
         case ANSUserDidLoadID:

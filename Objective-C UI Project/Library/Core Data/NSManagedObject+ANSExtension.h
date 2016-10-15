@@ -46,4 +46,13 @@
 //remove MO from DB
 - (BOOL)remove;
 
+- (void)setCustomValue:(id)value forKey:(NSString *)key;
+- (id)customvalueForKey:(NSString *)key;
+
+- (void)addCustomValue:(id)value inMutableSetForKey:(NSString *)key;
+- (void)removeCustomValue:(id)value inMutableSetForKey:(NSString *)key;
+
+- (void)addCustomValues:(NSSet *)values inMutableSetForKey:(NSString *)key;
+- (void)removeCustomValues:(NSSet *)values inMutableSetForKey:(NSString *)key;
+
 @end

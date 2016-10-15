@@ -35,8 +35,6 @@
 ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView, friendListView);
 
 @interface ANSFriendListViewController ()
-@property (nonatomic, strong) ANSProtocolObservationController  *userController;
-
 @property (nonatomic, strong) ANSUserFriends                    *userFriends;
 @property (nonatomic, strong) ANSProtocolObservationController  *userFriendsController;
 
@@ -73,11 +71,12 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     if (_user != user) {
         _user = user;
         
-        ANSFriendsContext *context = [[ANSFriendsContext alloc] initWithModel:user];
+        ANSUserFriends *userFriends = [[ANSUserFriends alloc] initWithModel:user keyPath:@"friends"];
+        self.userFriends = userFriends;
+        
+        ANSFriendsContext *context = [[ANSFriendsContext alloc] initWithUser:user
+                                                                 userFriends:userFriends];
         self.friendsContext = context;
-        
-        self.userController = [user protocolControllerWithObserver:self];
-        
         [context execute];
     }
 }
@@ -118,9 +117,6 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 }
 
 #pragma mark -
-#pragma mark Private methods
-
-#pragma mark -
 #pragma mark UITableViewDataSource protocol
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -131,15 +127,14 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     numberOfRowsInSection:(NSInteger)section
 {
     return self.userFriends.count;
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ANSUserCell *cell = [tableView dequeueReusableCellWithClass:[ANSUserCell class]];
-    
-    ANSUser *user = [self.resultsController objectAtIndexPath:indexPath];
+    NSUInteger value = indexPath.row;
+    ANSUser *user = [self.userFriends objectAtIndex:value];
     [cell fillWithUser:user];
 
     return cell;
@@ -153,7 +148,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     
     ANSUserDetailsViewController *controller = nil;
     controller = [ANSUserDetailsViewController viewController];
-    ANSUser *user = [self.resultsController objectAtIndexPath:indexPath];
+    ANSUser *user = self.userFriends[indexPath.row];
     
     controller.user = user;
     [self.navigationController pushViewController:controller
@@ -192,10 +187,18 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 #pragma mark -
 #pragma mark ANSUserObserver protocol
 
-- (void)loadableModelDidLoad:(ANSLoadableModel *)model; {
+- (void)    arrayModel:(ANSArrayModel *)arrayModel
+    didChangeWithModel:(ANSChangeModel *)model
+{
+    ANSPerformAsyncOnMainQueue(^{
+        [model applyToTableView:self.friendListView.tableView];
+    });
+    
+}
+
+- (void)loadableModelDidLoad:(ANSLoadableModel *)model {
     ANSPerformAsyncOnMainQueue(^{
         [self.friendListView.tableView reloadData];
-        self.friendListView.loadingView.visible = NO;
     });
 }
 

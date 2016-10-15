@@ -35,15 +35,13 @@
 }
 
 - (instancetype)initWithTarget:(id <ANSObservableObject>)target  {
-    @synchronized (self) {
-        self = [super init];
-        self.controllerHashTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
-        self.shouldNotify = YES;
-        self.state = NSUIntegerMax;
-        self.target = target ? target : self;
-        
-        return self;
-    }
+    self = [super init];
+    self.controllerHashTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
+    self.shouldNotify = YES;
+    self.state = NSUIntegerMax;
+    self.target = target ? target : self;
+    
+    return self;
 }
 
 #pragma mark -

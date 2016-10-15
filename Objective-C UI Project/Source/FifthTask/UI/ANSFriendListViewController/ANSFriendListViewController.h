@@ -9,6 +9,7 @@
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
 #import "ANSCoreDataArrayModel.h"
+#import "ANSArrayModel.h"
 #import "ANSUser.h"
 
 @interface ANSFriendListViewController : UIViewController <
@@ -16,7 +17,6 @@
     UITableViewDelegate,
     UISearchBarDelegate,
     NSFetchedResultsControllerDelegate,
-    ANSUserObserver,
     ANSArrayModelObserver
 >
 
