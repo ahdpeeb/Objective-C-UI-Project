@@ -59,7 +59,7 @@
 
 - (NSArray *)objects {
     @synchronized (self) {
-        return self.resultsController.fetchedObjects;
+        return [self.resultsController.fetchedObjects copy];
     }
 }
 
@@ -105,13 +105,13 @@
     return nil;
 }
 
+- (NSPredicate *)fetchedPredicate {
+    return [NSPredicate predicateWithFormat:@"%K CONTAINS %@", self.keyPath, self.model];
+    return nil;
+}   
+
 - (NSPredicate *)filterPredicate {
     return nil;
-}
-
-- (NSPredicate *)fetchedPredicate {
-    return nil;
-//    return [NSPredicate predicateWithFormat:@"%@ CONTAINS %@", self.keyPath, self.model];
 }
 
 - (NSUInteger)batchCount {
@@ -145,12 +145,14 @@
 
 - (void)addObject:(NSManagedObject *)object {
     @synchronized (self) {
-        [(NSManagedObject *)self.model addCustomValue:object inMutableSetForKey:self.keyPath];
-        //NEED TO BE REMOVED
-        NSLog(@"%ld", [[((ANSUser *)self.model) friends] count]);
+        NSPredicate *filterPredicate = [self filterPredicate];
+        if (!filterPredicate || [filterPredicate evaluateWithObject:object]) {
+            [(NSManagedObject *)self.model addCustomValue:object inMutableSetForKey:self.keyPath];
+            //NEED TO BE REMOVED
+            NSLog(@"%ld", [[((ANSUser *)self.model) friends] count]);
+            NSLog(@"contains object %d", [self containsObject:object]);
+        }
     }
-//    if ([[self filterPredicate] evaluateWithObject:object]) {
-//    }
 }
 
 - (void)removeObject:(NSManagedObject *)object {
@@ -201,22 +203,22 @@
             case NSFetchedResultsChangeInsert: {
                 [self notifyOfChangeWithIndex:indexPath.row userInfo:nil state:ANSStateAddObject];
             }
-            
+                
             case NSFetchedResultsChangeDelete: {
                 [self notifyOfChangeWithIndex:indexPath.row userInfo:nil state:ANSStateRemoveObject];
             }
-            
+                
             case NSFetchedResultsChangeMove: {
                 [self notifyOfChangeWithIndex:indexPath.row
                                        index2:newIndexPath.row
                                      userInfo:nil
                                         state:ANSStateMoveObject];
             }
-                    
+                
             case NSFetchedResultsChangeUpdate: {
                 [self notifyOfChangeWithIndex:indexPath.row userInfo:nil state:ANSStateUpdateObject];
             }
-               
+                
             default:
                 break;
         }

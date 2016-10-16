@@ -77,9 +77,9 @@
     ANSUserFriends *userFriends = self.userFriends;
     NSArray *users = [self friendsFromResult:result];
     NSLog(@"usersCount after loading %lu", users.count);
-    [userFriends performBlockWithoutNotification:^{
+//    [userFriends performBlockWithoutNotification:^{
         [userFriends addObjectsInRange:users];
-    }];
+//    }];
 
     userFriends.state = ANSLoadableModelDidLoad;
 }

@@ -73,7 +73,6 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
         
         ANSUserFriends *userFriends = [[ANSUserFriends alloc] initWithModel:user keyPath:@"friends"];
         self.userFriends = userFriends;
-        
         ANSFriendsContext *context = [[ANSFriendsContext alloc] initWithUser:user
                                                                  userFriends:userFriends];
         self.friendsContext = context;
@@ -193,11 +192,13 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
     ANSPerformAsyncOnMainQueue(^{
         [model applyToTableView:self.friendListView.tableView];
     });
-    
 }
 
 - (void)loadableModelDidLoad:(ANSLoadableModel *)model {
     ANSPerformAsyncOnMainQueue(^{
+        ANSUser *user = self.user;
+        NSLog(@"user friends after loading - %ld", user.friends.count);
+        NSLog(@"fetched users after loading - %ld", self.userFriends.objects.count);
         [self.friendListView.tableView reloadData];
     });
 }

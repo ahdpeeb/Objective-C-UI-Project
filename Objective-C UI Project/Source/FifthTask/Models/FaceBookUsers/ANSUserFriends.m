@@ -20,9 +20,11 @@
     return @[descriptor];
 }
 
-- (NSPredicate *)fetchedPredicate {
-    return [NSPredicate predicateWithFormat:@"friends CONTAINS %@", self.model];
-}
-
+//- (NSPredicate *)fetchedPredicate {
+//    ANSUser *user = (ANSUser *)self.model;
+//////    @"SUBQUERY(tasks, $task, $task.completionDate != nil
+////    return [NSPredicate predicateWithFormat:@"SUBQUERY(friends, $user, $user.firstName == nil];
+//////    return [NSPredicate predicateWithFormat:@"friends CONTAINS[c] %@", user.firstName];
+//}
 
 @end

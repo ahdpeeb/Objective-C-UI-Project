@@ -83,10 +83,7 @@
 #pragma mark Private Methods
 
 - (id)forwardingTargetForSelector:(SEL)aSelector {
-    @synchronized (self) {
-        NSLog(@"to %@ sent %@ ",self.userObservationTarget, NSStringFromSelector(aSelector));
-        return self.userObservationTarget;
-    }
+    return self.userObservationTarget;
 }
 
 - (BOOL)respondsToSelector:(SEL)aSelector {
