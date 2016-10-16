@@ -78,7 +78,6 @@
             ANSWeakify(self);
             ANSPerformInAsyncQueue(ANSPriorityHigh, ^{
                 ANSStrongify(self);
-                
                 [self performLoading];
             });
         }

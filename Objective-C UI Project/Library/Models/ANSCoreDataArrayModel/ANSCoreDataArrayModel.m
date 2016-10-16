@@ -44,7 +44,6 @@
     self.model = model;
     self.keyPath = keyPath;
     [self initResultsController];
-//    [self filter];
     
     return self;
 }
@@ -92,16 +91,6 @@
                                                                             cacheName:@"Master"];
 }
 
-- (void)filter {
-    NSError *error = nil;
-    if (![self.resultsController performFetch:&error]) {
-        NSLog(@"%@", [error localizedDescription]);
-        abort();
-    }
-    
-    NSLog(@"fetched objects count - %lu",(unsigned long)self.objects.count);
-}
-
 #pragma mark -
 #pragma mark For subclass reloading
 
@@ -111,7 +100,6 @@
 
 - (NSPredicate *)fetchedPredicate {
     return [NSPredicate predicateWithFormat:@"%K CONTAINS %@", self.keyPath, self.model];
-//    return nil;
 }
 
 - (NSPredicate *)filterPredicate {
@@ -124,6 +112,15 @@
 
 #pragma mark -
 #pragma mark Public reloaded methods
+
+- (void)performLoading {
+    NSError *error = nil;
+    if (![self.resultsController performFetch:&error]) {
+        NSLog(@"%@", [error localizedDescription]);
+    }
+    
+    self.state = !error ? ANSLoadableModelDidLoad : ANSLoadableModelDidFailLoading;
+}
 
 - (BOOL)containsObject:(NSManagedObject *)object {
     @synchronized (self) {
@@ -152,9 +149,6 @@
         NSPredicate *filterPredicate = [self filterPredicate];
         if (!filterPredicate || [filterPredicate evaluateWithObject:object]) {
             [(NSManagedObject *)self.model addCustomValue:object inMutableSetForKey:self.keyPath];
-            //NEED TO BE REMOVED
-            NSLog(@"%ld", [[((ANSUser *)self.model) friends] count]);
-            NSLog(@"contains object %d", [self containsObject:object]);
         }
     }
 }

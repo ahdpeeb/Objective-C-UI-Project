@@ -19,6 +19,9 @@
 - (instancetype)initWithModel:(id <ANSObservableObject>)model
                       keyPath:(NSString *)keyPath;
 
+//You have to call this method, after your model will filled. 
+- (void)load;
+
 #pragma mark - For child class reloading
 //You have to reload next methods in child classes
 
@@ -42,7 +45,5 @@
 
 - (void)exchangeObjectAtIndex:(NSUInteger)index
             withObjectAtIndex:(NSUInteger)index2            NS_UNAVAILABLE;
-
-- (void)filter;
 
 @end

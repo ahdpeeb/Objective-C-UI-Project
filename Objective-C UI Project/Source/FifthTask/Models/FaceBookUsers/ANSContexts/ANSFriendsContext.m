@@ -57,13 +57,11 @@
 }
 
 - (BOOL)isModelLoadedWithState:(NSUInteger)state {
-    ANSUser *user = self.model;
-    NSLog(@"user state = %lu", (unsigned long)user.state);
-    if (user.state == state) {
-    //HAVE TO BE Changed
-//        [user notifyOfStateChange:state];
-//
-//        return YES;
+    ANSUserFriends *friends = self.userFriends;
+    if (friends.state == state) {
+        [friends notifyOfStateChange:state];
+
+        return YES;
     }
     
     return NO;
@@ -76,12 +74,11 @@
 - (void)fillModelFromResult:(NSDictionary <ANSJSONRepresentation> *)result {
     ANSUserFriends *userFriends = self.userFriends;
     NSArray *users = [self friendsFromResult:result];
-    NSLog(@"usersCount after loading %lu", users.count);
     [userFriends performBlockWithoutNotification:^{
         [userFriends addObjectsInRange:users];
     }];
 
-    userFriends.state = ANSLoadableModelDidLoad;
+    [userFriends load];
 }
 
 #pragma mark -
