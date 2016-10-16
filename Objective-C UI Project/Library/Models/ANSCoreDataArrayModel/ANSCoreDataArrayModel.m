@@ -44,6 +44,7 @@
     self.model = model;
     self.keyPath = keyPath;
     [self initResultsController];
+//    [self filter];
     
     return self;
 }
@@ -74,13 +75,6 @@
         _resultsController = resultsController;
     
         _resultsController.delegate = self;
-        NSError *error = nil;
-        if (![_resultsController performFetch:&error]) {
-            NSLog(@"%@", [error localizedDescription]);
-            abort();
-        }
-        
-        NSLog(@"fetched objects count - %lu",(unsigned long)self.objects.count);
     }
 }
 
@@ -98,6 +92,16 @@
                                                                             cacheName:@"Master"];
 }
 
+- (void)filter {
+    NSError *error = nil;
+    if (![self.resultsController performFetch:&error]) {
+        NSLog(@"%@", [error localizedDescription]);
+        abort();
+    }
+    
+    NSLog(@"fetched objects count - %lu",(unsigned long)self.objects.count);
+}
+
 #pragma mark -
 #pragma mark For subclass reloading
 
@@ -107,8 +111,8 @@
 
 - (NSPredicate *)fetchedPredicate {
     return [NSPredicate predicateWithFormat:@"%K CONTAINS %@", self.keyPath, self.model];
-    return nil;
-}   
+//    return nil;
+}
 
 - (NSPredicate *)filterPredicate {
     return nil;
@@ -189,6 +193,13 @@
             [self removeObject:object];
         }
     }
+}
+
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state
+                                  objects:(id __unsafe_unretained [])buffer
+                                    count:(NSUInteger)len {
+    
+    return [self.objects countByEnumeratingWithState:state objects:buffer count:len];
 }
 
 #pragma mark -

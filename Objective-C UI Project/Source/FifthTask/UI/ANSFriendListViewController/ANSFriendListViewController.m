@@ -196,6 +196,7 @@ ANSViewControllerBaseViewProperty(ANSFriendListViewController, ANSFriendListView
 
 - (void)loadableModelDidLoad:(ANSLoadableModel *)model {
     ANSPerformAsyncOnMainQueue(^{
+        [self.userFriends filter];
         ANSUser *user = self.user;
         NSLog(@"user friends after loading - %ld", user.friends.count);
         NSLog(@"fetched users after loading - %ld", self.userFriends.objects.count);

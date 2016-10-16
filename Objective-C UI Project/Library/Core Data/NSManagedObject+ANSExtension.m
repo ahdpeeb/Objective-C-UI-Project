@@ -98,9 +98,14 @@
     [[self context] refreshObject:self mergeChanges:YES];
 }
 
+- (void)dontSave {
+    NSManagedObjectContext *context = self.context;
+    [context deleteObject:self];
+}
+
 - (BOOL)remove {
-    ANSCoreDataManager *manager = [ANSCoreDataManager sharedManager];
-    [manager.managedObjectContext deleteObject:self];
+    NSManagedObjectContext *context = self.context;
+    [context deleteObject:self];
     
     return [[self context] save:nil];
 }

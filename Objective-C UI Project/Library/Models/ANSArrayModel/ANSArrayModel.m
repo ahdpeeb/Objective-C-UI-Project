@@ -237,17 +237,4 @@ static NSString * const kANSCollectionKey           = @"kANSCollectionKey";
     return self;
 }
 
-#pragma mark -
-#pragma mark NSCopying protocol
-
-- (id)copyWithZone:(NSZone *)zone {
-    ANSArrayModel *copy = [super copyWithZone:zone];
-    if (copy) {
-        id objects = [self.mutableObjects copyWithZone:zone];
-        copy.mutableObjects = [NSMutableArray arrayWithArray:objects];
-    }
-    
-    return copy;
-}
-
 @end

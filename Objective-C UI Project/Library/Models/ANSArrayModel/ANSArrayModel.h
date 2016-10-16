@@ -30,7 +30,6 @@ typedef NS_ENUM(NSUInteger, ANSArrayModelState) {
 
 @interface ANSArrayModel : ANSLoadableModel <
     NSCoding,
-    NSCopying,
     NSFastEnumeration
 >
 

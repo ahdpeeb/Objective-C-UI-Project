@@ -43,4 +43,6 @@
 - (void)exchangeObjectAtIndex:(NSUInteger)index
             withObjectAtIndex:(NSUInteger)index2            NS_UNAVAILABLE;
 
+- (void)filter;
+
 @end

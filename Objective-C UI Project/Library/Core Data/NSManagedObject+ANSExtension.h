@@ -43,6 +43,9 @@
 //refresh objects and merge changes
 - (void)refresh;
 
+//managedObjectContext 
+- (void)dontSave;
+
 //remove MO from DB
 - (BOOL)remove;
 
