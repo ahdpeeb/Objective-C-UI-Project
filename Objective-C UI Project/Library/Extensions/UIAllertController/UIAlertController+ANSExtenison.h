@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^ANSActionHandler)(UIAlertAction *);
+typedef void(^ANSActionHandler)(UIAlertAction *action);
 
 @interface UIAlertController (ANSExtenison)
 
