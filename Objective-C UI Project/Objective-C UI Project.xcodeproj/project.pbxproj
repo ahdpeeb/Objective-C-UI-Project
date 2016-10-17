@@ -42,6 +42,7 @@
 		934DB16E1DAF9E4B00588924 /* ANSUserFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 934DB16D1DAF9E4B00588924 /* ANSUserFriends.m */; };
 		934DB1731DAFABC300588924 /* NSIndexPath+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 934DB1721DAFABC300588924 /* NSIndexPath+ANSExtension.m */; };
 		934DB1771DB3B4E200588924 /* NSFetchedResultsController+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 934DB1761DB3B4E200588924 /* NSFetchedResultsController+ANSExtension.m */; };
+		934DB1861DB5099800588924 /* UIAlertController+ANSExtenison.m in Sources */ = {isa = PBXBuildFile; fileRef = 934DB1851DB5099800588924 /* UIAlertController+ANSExtenison.m */; };
 		935E5A0B1D6F4CA5005F6285 /* aaa.plist in Resources */ = {isa = PBXBuildFile; fileRef = 935E5A0A1D6F4CA5005F6285 /* aaa.plist */; };
 		9368188E1DA686F000B04C29 /* NSFileManager+ANSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E3E4741DA3AC1D00C2BBC1 /* NSFileManager+ANSExtension.m */; };
 		9382A6471DA5345E007E8D36 /* NSManagedObjectContext+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9382A6461DA5345E007E8D36 /* NSManagedObjectContext+Extension.m */; };
@@ -172,6 +173,8 @@
 		934DB1721DAFABC300588924 /* NSIndexPath+ANSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+ANSExtension.m"; sourceTree = "<group>"; };
 		934DB1751DB3B4E200588924 /* NSFetchedResultsController+ANSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFetchedResultsController+ANSExtension.h"; sourceTree = "<group>"; };
 		934DB1761DB3B4E200588924 /* NSFetchedResultsController+ANSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFetchedResultsController+ANSExtension.m"; sourceTree = "<group>"; };
+		934DB1841DB5099800588924 /* UIAlertController+ANSExtenison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+ANSExtenison.h"; sourceTree = "<group>"; };
+		934DB1851DB5099800588924 /* UIAlertController+ANSExtenison.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+ANSExtenison.m"; sourceTree = "<group>"; };
 		935E5A0A1D6F4CA5005F6285 /* aaa.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = aaa.plist; sourceTree = "<group>"; };
 		9382A6451DA5345E007E8D36 /* NSManagedObjectContext+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+Extension.h"; sourceTree = "<group>"; };
 		9382A6461DA5345E007E8D36 /* NSManagedObjectContext+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+Extension.m"; sourceTree = "<group>"; };
@@ -529,6 +532,15 @@
 			path = NSFetchedResultController;
 			sourceTree = "<group>";
 		};
+		934DB1831DB5098800588924 /* UIAllertController */ = {
+			isa = PBXGroup;
+			children = (
+				934DB1841DB5099800588924 /* UIAlertController+ANSExtenison.h */,
+				934DB1851DB5099800588924 /* UIAlertController+ANSExtenison.m */,
+			);
+			path = UIAllertController;
+			sourceTree = "<group>";
+		};
 		93C083FE1D3E367F0077A81C = {
 			isa = PBXGroup;
 			children = (
@@ -677,6 +689,7 @@
 		93E3E4611DA3AC1D00C2BBC1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				934DB1831DB5098800588924 /* UIAllertController */,
 				934DB1741DB3B4BC00588924 /* NSFetchedResultController */,
 				934DB16F1DAFAAE300588924 /* NSIndexPath */,
 				93E3E4621DA3AC1D00C2BBC1 /* ANSMutableDictionary */,
@@ -1254,6 +1267,7 @@
 				93E3E4E41DA3AC1D00C2BBC1 /* ANSTableViewCell.m in Sources */,
 				9302D7E61D992446003CD9B8 /* ANSUserDetailsView.m in Sources */,
 				93E3E4E51DA3AC1E00C2BBC1 /* ANSRootView.m in Sources */,
+				934DB1861DB5099800588924 /* UIAlertController+ANSExtenison.m in Sources */,
 				9382A6471DA5345E007E8D36 /* NSManagedObjectContext+Extension.m in Sources */,
 				93E3E5611DA3AF3100C2BBC1 /* ANSProtocolObservationController.m in Sources */,
 				934DB1731DAFABC300588924 /* NSIndexPath+ANSExtension.m in Sources */,
