@@ -19,8 +19,7 @@
 - (instancetype)initWithModel:(id <ANSObservableObject>)model
                       keyPath:(NSString *)keyPath;
 
-//You have to call this method, after your model will filled. 
-- (void)load;
+//You have to call "load" method, after your model will filled.
 
 #pragma mark - For child class reloading
 //You have to reload next methods in child classes
