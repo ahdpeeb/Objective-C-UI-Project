@@ -59,7 +59,7 @@
 
 - (NSArray *)objects {
     @synchronized (self) {
-        return [self.resultsController.fetchedObjects copy];
+        return self.resultsController.fetchedObjects;
     }
 }
 

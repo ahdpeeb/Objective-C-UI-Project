@@ -41,12 +41,13 @@
                                         message:massage
                                  preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction* leftAction = [UIAlertAction actionWithTitle:acitonTitle
-                                                         style:UIAlertActionStyleCancel
+    UIAlertAction* action = [UIAlertAction actionWithTitle:acitonTitle
+                                                         style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction *action) {
                                                            handler(action);
                                                        }];
-    [controller addAction:leftAction];
+    [controller addAction:action];
+    
     return controller;
 }
 

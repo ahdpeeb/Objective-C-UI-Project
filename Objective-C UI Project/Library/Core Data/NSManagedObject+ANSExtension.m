@@ -9,6 +9,8 @@
 
 #import "ANSCoreDataManager.h"
 
+typedef void(^ANSOperationHandler)(NSMutableSet *primitiveSet, NSSet *changedObjects);
+
 @interface NSManagedObject (ANSPrivate)
 
 + (NSManagedObjectContext *)context;
@@ -17,6 +19,35 @@
 @end
 
 @implementation NSManagedObject (ANSPrivate)
+
+#pragma mark -
+#pragma mark Private methods
+
+- (void)operationWithCustomValue:(id)value
+              inMutableSetForKey:(NSString *)key
+                 withSetMutation:(NSKeyValueSetMutationKind)setMutation
+                     withHandler:(ANSOperationHandler)handler
+{
+    NSSet *changedObjects = [[NSSet alloc] initWithObjects:value, nil];
+    [self willChangeValueForKey:key withSetMutation:setMutation usingObjects:changedObjects];
+    NSMutableSet *primitiveSet = [self primitiveValueForKey:key];
+    handler(primitiveSet, changedObjects);
+    [self didChangeValueForKey:key withSetMutation:setMutation usingObjects:changedObjects];
+}
+
+- (void)operationWithCustomValues:(NSSet *)values
+               inMutableSetForKey:(NSString *)key
+                  withSetMutation:(NSKeyValueSetMutationKind)setMutation
+                      withHandler:(ANSOperationHandler)handler
+{
+    [self willChangeValueForKey:key withSetMutation:setMutation usingObjects:values];
+    NSMutableSet *primitiveSet = [self primitiveValueForKey:key];
+    handler(primitiveSet, values);
+    [self didChangeValueForKey:key withSetMutation:setMutation usingObjects:values];
+}
+
+#pragma mark -
+#pragma mark Public Methods
 
 + (NSManagedObjectContext *)context {
     return [[ANSCoreDataManager sharedManager] managedObjectContext];
@@ -125,34 +156,27 @@
 }
 
 - (void)addCustomValue:(id)value inMutableSetForKey:(NSString *)key {
-    NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
-    [self willChangeValueForKey:key withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
-    NSMutableSet *primitiveSet = [self primitiveValueForKey:key];
-    [primitiveSet unionSet:changedObjects];
-    [self didChangeValueForKey:key withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
+    [self operationWithCustomValue:value inMutableSetForKey:key withSetMutation:NSKeyValueUnionSetMutation withHandler:^(NSMutableSet *primitiveSet, NSSet *changedObjects) {
+        [primitiveSet unionSet:changedObjects];
+    }];
 }
 
 - (void)removeCustomValue:(id)value inMutableSetForKey:(NSString *)key {
-    NSSet *changedObjects = [[NSSet alloc] initWithObjects:value, nil];
-    [self willChangeValueForKey:key withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
-    NSMutableSet *primitiveSet = [self primitiveValueForKey:key];
-    [primitiveSet minusSet:changedObjects];
-    [self didChangeValueForKey:key withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
-
+    [self operationWithCustomValue:value inMutableSetForKey:key withSetMutation:NSKeyValueMinusSetMutation withHandler:^(NSMutableSet *primitiveSet, NSSet *changedObjects) {
+        [primitiveSet minusSet:changedObjects];
+    }];
 }
 
 - (void)addCustomValues:(NSSet *)values inMutableSetForKey:(NSString *)key {
-    [self willChangeValueForKey:key withSetMutation:NSKeyValueUnionSetMutation usingObjects:values];
-    NSMutableSet *primitiveSet = [self primitiveValueForKey:key];
-    [primitiveSet unionSet:values];
-    [self didChangeValueForKey:key withSetMutation:NSKeyValueUnionSetMutation usingObjects:values];
+    [self operationWithCustomValues:values inMutableSetForKey:key withSetMutation:NSKeyValueUnionSetMutation withHandler:^(NSMutableSet *primitiveSet, NSSet *changedObjects) {
+        [primitiveSet unionSet:changedObjects];
+    }];
 }
 
 - (void)removeCustomValues:(NSSet *)values inMutableSetForKey:(NSString *)key {
-    [self willChangeValueForKey:key withSetMutation:NSKeyValueMinusSetMutation usingObjects:values];
-    NSMutableSet *primitiveSet = [self primitiveValueForKey:key];
-    [primitiveSet minusSet:values];
-    [self didChangeValueForKey:key withSetMutation:NSKeyValueMinusSetMutation usingObjects:values];
+    [self operationWithCustomValues:values inMutableSetForKey:key withSetMutation:NSKeyValueMinusSetMutation withHandler:^(NSMutableSet *primitiveSet, NSSet *changedObjects) {
+        [primitiveSet minusSet:changedObjects];
+    }];
 }
 
 @end
